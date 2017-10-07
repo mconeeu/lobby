@@ -1,0 +1,9 @@
+name: MCONE-Lobby
+author: TwinsterHD
+version: 2.5
+main: eu.mcone.lobby.Main
+commands:
+    set:
+         description: Setze die einzelnen Spielmodi
+    setholo:
+         description: Setze die einzelnen Hologramme
