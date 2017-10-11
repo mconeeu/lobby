@@ -7,9 +7,13 @@ package eu.mcone.lobby.hologram;
 
 import eu.mcone.lobby.Main;
 import eu.mcone.lobby.utils.Factory;
+import net.minecraft.server.v1_8_R3.WorldServer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.entity.Player;
+
+import static de.Dominik.BukkitCoreSystem.Main.Main.*;
 
 public class PlayerHoloListener {
 
@@ -23,9 +27,9 @@ public class PlayerHoloListener {
         final String[] Text = { "§7» §9§lSkyPvP",
                 "§7Stats von §f" + p.getName(),
                 "§r",
-                "§7Platz: §f" + StatsSkypvp.getUserRanking(p.getName()),
-                "§7Kills: §f" + StatsSkypvp.getKills(p.getUniqueId().toString(), p.getName()),
-                "§7Tode: §f" + StatsSkypvp.getDeaths(p.getUniqueId().toString(), p.getName())};
+                "§7Platz: §f" + statsSkypvp.getUserRanking(p.getName()),
+                "§7Kills: §f" + statsSkypvp.getKills(p.getUniqueId().toString(), p.getName()),
+                "§7Tode: §f" + statsSkypvp.getDeaths(p.getUniqueId().toString(), p.getName())};
         final PlayerHolograms holo = new PlayerHolograms(Text, loc);
         holo.showPlayer(p);
     }
@@ -40,12 +44,12 @@ public class PlayerHoloListener {
         final String[] Text = { "§7» §2§lMinewar",
                 "§7Stats von §f" + p.getName(),
                 "§r",
-                "§7Platz: §f" + StatsMinewar.getUserRanking(p.getName()),
-                "§7Kills: §f" + StatsMinewar.getKills(p.getUniqueId().toString(), p.getName()),
-                "§7Tode: §f" + StatsMinewar.getDeaths(p.getUniqueId().toString(), p.getName()),
+                "§7Platz: §f" + statsMinewar.getUserRanking(p.getName()),
+                "§7Kills: §f" + statsMinewar.getKills(p.getUniqueId().toString(), p.getName()),
+                "§7Tode: §f" + statsMinewar.getDeaths(p.getUniqueId().toString(), p.getName()),
                 "§r",
-                "§7Wins: §f" + StatsMinewar.getWins(p.getUniqueId().toString(), p.getName()),
-                "§7Lose: §f" + StatsMinewar.getLoses(p.getUniqueId().toString(), p.getName())};
+                "§7Wins: §f" + statsMinewar.getWins(p.getUniqueId().toString(), p.getName()),
+                "§7Lose: §f" + statsMinewar.getLoses(p.getUniqueId().toString(), p.getName())};
         final PlayerHolograms holo = new PlayerHolograms(Text, loc);
         holo.showPlayer(p);
     }
@@ -60,12 +64,12 @@ public class PlayerHoloListener {
         final String[] Text = { "§7» §c§lBedwars",
                 "§7Stats von §f" + p.getName(),
                 "§r",
-                "§7Platz: §f" + StatsBedwars.getUserRanking(p.getName()),
-                "§7Kills: §f" + StatsBedwars.getKills(p.getUniqueId().toString(), p.getName()),
-                "§7Tode: §f" + StatsBedwars.getDeaths(p.getUniqueId().toString(), p.getName()),
+                "§7Platz: §f" + statsBedwars.getUserRanking(p.getName()),
+                "§7Kills: §f" + statsBedwars.getKills(p.getUniqueId().toString(), p.getName()),
+                "§7Tode: §f" + statsBedwars.getDeaths(p.getUniqueId().toString(), p.getName()),
                 "§r",
-                "§7Wins: §f" + StatsBedwars.getWins(p.getUniqueId().toString(), p.getName()),
-                "§7Lose: §f" + StatsBedwars.getLoses(p.getUniqueId().toString(), p.getName())};
+                "§7Wins: §f" + statsBedwars.getWins(p.getUniqueId().toString(), p.getName()),
+                "§7Lose: §f" + statsBedwars.getLoses(p.getUniqueId().toString(), p.getName())};
         final PlayerHolograms holo = new PlayerHolograms(Text, loc);
         holo.showPlayer(p);
     }
@@ -80,9 +84,9 @@ public class PlayerHoloListener {
         final String[] Text = { "§7» §e§lKnockFFA",
                 "§7Stats von §f" + p.getName(),
                 "§r",
-                "§7Platz: §f" + StatsKnockFFA.getUserRanking(p.getName()),
-                "§7Kills: §f" + StatsKnockFFA.getKills(p.getUniqueId().toString(), p.getName()),
-                "§7Tode: §f" + StatsKnockFFA.getDeaths(p.getUniqueId().toString(), p.getName())};
+                "§7Platz: §f" + statsKnockbackffa.getUserRanking(p.getName()),
+                "§7Kills: §f" + statsKnockbackffa.getKills(p.getUniqueId().toString(), p.getName()),
+                "§7Tode: §f" + statsKnockbackffa.getDeaths(p.getUniqueId().toString(), p.getName())};
         final PlayerHolograms holo = new PlayerHolograms(Text, loc);
         holo.showPlayer(p);
     }

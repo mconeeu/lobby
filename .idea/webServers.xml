@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="586b76f0-d28f-42f9-ab13-027e374078d2" name="c.rmlk-verwaltung.de" url="http://c.rmlk-verwaltung.de">
+        <fileTransfer host="c.rmlk-verwaltung.de" port="22" rootFolder="/web" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

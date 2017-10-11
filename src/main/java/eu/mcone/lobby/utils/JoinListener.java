@@ -49,13 +49,13 @@ public class JoinListener implements Listener {
         p.getInventory().setArmorContents(null);
 
         if (p.hasPermission("lobby.higherrank")) {
-            p.getInventory().setItem(4, ItemManager.createItem(Material.COMPASS, 0, 0, "§3§lNavigator §8» §7§oWÃ¤hle einen Spielmodus"));
+            p.getInventory().setItem(4, ItemManager.createItem(Material.COMPASS, 0, 0, "§3§lNavigator §8» §7§oWähle einen Spielmodus"));
             p.getInventory().setItem(0, ItemManager.createItem(Material.BLAZE_ROD, 0, 0, "§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus"));
             p.getInventory().setItem(7, ItemManager.createItem(Material.NETHER_STAR, 0, 0, "§3§lStats §8» §7§oStatistiken zu allen Spielmodi"));
             //p.getInventory().setItem(1, ItemManager.createItem(Material.FISHING_ROD, 0, 0, "§3§lZauber-Angel §8» §7§oZiehe dich wohin du willst"));
             p.getInventory().setItem(8, ItemManager.createItem(Material.CHEST, 0, 0, "§3§lProfil §8» §7§oAussehen / Effekte / Gadgets"));
         }else{
-            p.getInventory().setItem(4, ItemManager.createItem(Material.COMPASS, 0, 0, "§3§lNavigator §8» §7§oWÃ¤hle einen Spielmodus"));
+            p.getInventory().setItem(4, ItemManager.createItem(Material.COMPASS, 0, 0, "§3§lNavigator §8» §7§oWähle einen Spielmodus"));
             p.getInventory().setItem(0, ItemManager.createItem(Material.BLAZE_ROD, 0, 0, "§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus"));
             p.getInventory().setItem(7, ItemManager.createItem(Material.NETHER_STAR, 0, 0, "§3§lStats §8» §7§oStatistiken zu allen Spielmodi"));
             //p.getInventory().setItem(1, ItemManager.createItem(Material.FISHING_ROD, 0, 0, "§3§lZauber-Angel §8» §7§oZiehe dich wohin du willst"));
@@ -82,7 +82,7 @@ public class JoinListener implements Listener {
         e.setQuitMessage(null);
         for (Player all : Bukkit.getOnlinePlayers()){
             ScoreboardManager.setScoreboard(all);
-            PlayerHoloListener.HoloSkypvp(all);
+//            PlayerHoloListener.HoloSkypvp(all);
         }
     }
 }

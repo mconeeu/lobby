@@ -31,14 +31,17 @@ import java.util.HashMap;
 public class Main extends JavaPlugin {
 
     MySQL mc1stats = new MySQL("mysql.mcone.eu", 3306, "mc1system_stats", "mc1system_stats", "qN8FQK.hj)_Lat?uK)-#6F-$3![t;2E6KZ$sb+Am3g!VHRDe&w$nQX)5}VKb@-@[}e");
+
     private static Main plugin;
+    public static Main instance;
+    public static World world;
+
     public static ArrayList<Player> HideShow = new ArrayList();
     public static ArrayList<Player> emerald = new ArrayList();
     public static ArrayList<Player> lava = new ArrayList();
     public static ArrayList<Player> cloud = new ArrayList();
     public static ArrayList<Player> water = new ArrayList();
-    public static Main instance;
-    public static World world;
+
     public static String prefix = "§8[§7§l!§8] §fLobby §8» §7 ";
     public static String noperm = prefix + "§cDu hast keine Rechte dafür§8.";
     public static File f = new File("plugins/McOne-Lobby", "config.yml");
@@ -47,7 +50,7 @@ public class Main extends JavaPlugin {
 
     
     public void onEnable() {
-        mc1stats.connect();
+//        mc1stats.connect();
         plugin = this;
         trail();
         ScoreboardManager.UpdateScoreboardScheduler();
