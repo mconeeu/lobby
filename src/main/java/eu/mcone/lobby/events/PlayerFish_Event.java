@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.inventar;
+package eu.mcone.lobby.events;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,7 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.util.Vector;
 
-public class onFishingRod implements Listener {
+public class PlayerFish_Event implements Listener {
 
     @EventHandler
     public void onPlayerFish(PlayerFishEvent e){
@@ -37,7 +37,7 @@ public class onFishingRod implements Listener {
                 p.getInventory().getItemInHand().setDurability((short)0);
             }
         } catch (Exception e1) {
-
+            e1.printStackTrace();
         }
     }
 

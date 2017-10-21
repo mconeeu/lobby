@@ -20,7 +20,7 @@ public class holo_CMD implements CommandExecutor{
             if(args.length == 1){
                 if(args[0].equalsIgnoreCase("skypvp") || args[0].equalsIgnoreCase("minewar") || args[0].equalsIgnoreCase("knockbackffa") || args[0].equalsIgnoreCase("bedwars")){
                     if(p.hasPermission("system.admin")){
-                        p.sendMessage(Main.prefix + "§7Du hast das Hologramm für denn Spielmodus §3" + args[0] + " §7gesetzt");
+                        p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§7Du hast das Hologramm für denn Spielmodus §3" + args[0] + " §7gesetzt");
                         Factory.createConfigLocation(p.getLocation(), "Holo." + args[0], Factory.cfgFile, Factory.cfg);
                     }
                 }

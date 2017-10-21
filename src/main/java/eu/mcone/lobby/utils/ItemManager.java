@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemManager {
 
@@ -30,6 +31,17 @@ public class ItemManager {
         lore.add(lore2);
         lore.add(lore3);
         lore.add(lore4);
+        mitem.setLore(lore);
+        mitem.setDisplayName(displayname);
+        item.setItemMeta(mitem);
+
+        return item;
+    }
+
+    public static ItemStack createItemLore(Material material, int subid, int i, String displayname, List lore){
+        ItemStack item = new ItemStack(material, 1, (short)subid);
+        ItemMeta mitem = item.getItemMeta();
+
         mitem.setLore(lore);
         mitem.setDisplayName(displayname);
         item.setItemMeta(mitem);

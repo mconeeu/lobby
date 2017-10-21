@@ -3,24 +3,15 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.block;
+package eu.mcone.lobby.events;
 
 import eu.mcone.lobby.utils.Factory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 
-public class DamageListener implements Listener {
-
-    @EventHandler
-    public void onAttack(EntityDamageByEntityEvent e){
-        if(e.getEntity() instanceof Player){
-            e.setCancelled(true);
-        }
-    }
+public class EntitiyDamageEvent implements Listener{
 
     @EventHandler
     public void onDamage(EntityDamageEvent e){
@@ -47,17 +38,6 @@ public class DamageListener implements Listener {
                     p.teleport(Factory.getConfigLocation("Navigator-1", Factory.cfg));
                 }
             }
-        }
-    }
-
-    @EventHandler
-    public void onDeath(PlayerDeathEvent e){
-        Player p = e.getEntity();
-        if ((e.getEntity() instanceof Player)) {
-            e.setKeepInventory(true);
-            e.setKeepLevel(true);
-            e.setDeathMessage("");
-            p.spigot().respawn();
         }
     }
 

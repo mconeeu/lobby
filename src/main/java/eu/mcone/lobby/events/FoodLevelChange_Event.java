@@ -3,21 +3,21 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.block;
+package eu.mcone.lobby.events;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 
-public class FeedListener implements Listener {
+public class FoodLevelChange_Event implements Listener{
 
     @EventHandler
     public void onFeed(FoodLevelChangeEvent e) {
         Player p = (Player)e.getEntity();
 
         if ((p instanceof Player)) {
-          e.setCancelled(true);
+            e.setCancelled(true);
         }
     }
 

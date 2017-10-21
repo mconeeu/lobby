@@ -3,29 +3,15 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.block;
+package eu.mcone.lobby.events;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
 
-public class ItemListener implements Listener {
-
-    @EventHandler
-    public void onPickUp(PlayerPickupItemEvent e) {
-        Player p = e.getPlayer();
-
-        if (p.getGameMode() == GameMode.CREATIVE) {
-            e.setCancelled(false);
-        } else {
-            e.setCancelled(true);
-
-        }
-    }
+public class InventoryDrag_Event implements Listener{
 
     @EventHandler
     public void onInventoryMove(InventoryDragEvent e){
@@ -44,18 +30,6 @@ public class ItemListener implements Listener {
             e.setCancelled(true);
         }
         */
-    }
-
-    @EventHandler
-    public void onDrop(PlayerDropItemEvent e){
-        Player p = e.getPlayer();
-
-        if (p.getGameMode() == GameMode.CREATIVE){
-            e.setCancelled(false);
-        } else {
-            e.setCancelled(true);
-
-        }
     }
 
 }

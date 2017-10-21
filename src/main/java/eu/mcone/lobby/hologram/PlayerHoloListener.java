@@ -22,7 +22,7 @@ public class PlayerHoloListener {
         double x = Factory.cfg.getDouble("Holo.skypvp" + ".X");
         double y = Factory.cfg.getDouble("Holo.skypvp" + ".y");
         double z = Factory.cfg.getDouble("Holo.skypvp" + ".Z");
-        final Location loc = new Location(Bukkit.getWorld(Main.cfg.getString("Lobby-WorldName")), x, y, z);
+        final Location loc = new Location(Bukkit.getWorld(Main.config.getConfigValue("System-WorldName")), x, y, z);
 
         final String[] Text = { "§7» §9§lSkyPvP",
                 "§7Stats von §f" + p.getName(),
@@ -39,7 +39,7 @@ public class PlayerHoloListener {
         double x = Factory.cfg.getDouble("Holo.minewar" + ".X");
         double y = Factory.cfg.getDouble("Holo.minewar" + ".y");
         double z = Factory.cfg.getDouble("Holo.minewar" + ".Z");
-        final Location loc = new Location(Bukkit.getWorld(Main.cfg.getString("Lobby-WorldName")), x, y, z);
+        final Location loc = new Location(Bukkit.getWorld(Main.config.getConfigValue("System-WorldName")), x, y, z);
 
         final String[] Text = { "§7» §2§lMinewar",
                 "§7Stats von §f" + p.getName(),
@@ -59,7 +59,7 @@ public class PlayerHoloListener {
         double x = Factory.cfg.getDouble("Holo.bedwars" + ".X");
         double y = Factory.cfg.getDouble("Holo.bedwars" + ".y");
         double z = Factory.cfg.getDouble("Holo.bedwars" + ".Z");
-        final Location loc = new Location(Bukkit.getWorld(Main.cfg.getString("Lobby-WorldName")), x, y, z);
+        final Location loc = new Location(Bukkit.getWorld(Main.config.getConfigValue("System-WorldName")), x, y, z);
 
         final String[] Text = { "§7» §c§lBedwars",
                 "§7Stats von §f" + p.getName(),
@@ -79,7 +79,7 @@ public class PlayerHoloListener {
         double x = Factory.cfg.getDouble("Holo.knockbackffa" + ".X");
         double y = Factory.cfg.getDouble("Holo.knockbackffa" + ".y");
         double z = Factory.cfg.getDouble("Holo.knockbackffa" + ".Z");
-        final Location loc = new Location(Bukkit.getWorld(Main.cfg.getString("Lobby-WorldName")), x, y, z);
+        final Location loc = new Location(Bukkit.getWorld(Main.config.getConfigValue("System-WorldName")), x, y, z);
 
         final String[] Text = { "§7» §e§lKnockFFA",
                 "§7Stats von §f" + p.getName(),

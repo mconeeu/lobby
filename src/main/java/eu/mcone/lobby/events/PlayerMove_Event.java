@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.utils;
+package eu.mcone.lobby.events;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -13,10 +13,20 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 
-public class JumpPad implements Listener{
+public class PlayerMove_Event implements Listener{
 
     @EventHandler
-    public void onMove(PlayerMoveEvent e) {
+    public void onDoubleJumpMove(PlayerMoveEvent e)
+    {
+        Player p = e.getPlayer();
+        if (!p.isOnGround()) {
+            return;
+        }
+        p.setAllowFlight(true);
+    }
+
+    @EventHandler
+    public void onJumpPadMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
 
         if ((p.getLocation().getBlock().getType() == Material.GOLD_PLATE) && (p.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() == Material.COAL_BLOCK)) {
@@ -25,6 +35,6 @@ public class JumpPad implements Listener{
             p.playEffect(p.getLocation(), org.bukkit.Effect.BLAZE_SHOOT, 10);
             p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 2.0F, 2.0F);
         }
-   }
+    }
 
 }

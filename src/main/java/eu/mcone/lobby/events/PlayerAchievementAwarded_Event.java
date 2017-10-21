@@ -3,13 +3,13 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.block;
+package eu.mcone.lobby.events;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAchievementAwardedEvent;
 
-public class AchievmentListener implements Listener {
+public class PlayerAchievementAwarded_Event implements Listener{
 
     @EventHandler
     public void onAchievment(PlayerAchievementAwardedEvent e) {

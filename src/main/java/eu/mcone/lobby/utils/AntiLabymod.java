@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.block;
+package eu.mcone.lobby.utils;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -38,7 +38,7 @@ public class AntiLabymod implements Listener {
         }
     }
 
-    private static enum DisabledLabyModFunctions {
+    private enum DisabledLabyModFunctions {
         POTIONS("POTIONS"),
         ARMOR("ARMOR"),
         DAMAGEINDICATOR("DAMAGEINDICATOR"),

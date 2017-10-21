@@ -19,37 +19,37 @@ public class set_CMD implements CommandExecutor {
 
         if (p.hasPermission("lobby.set")){
             if (args.length != 1) {
-                p.sendMessage(Main.prefix + "§cBitte benutze /set <1, 2, 3, 4, 5, 6, 7, 8, 9>");
+                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§cBitte benutze /set <1, 2, 3, 4, 5, 6, 7, 8, 9>");
             }else if (args[0].equalsIgnoreCase("1")){
-                p.sendMessage(Main.prefix + "§aDu hast den 1 Point gesetzt!");
+                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§aDu hast den 1 Point gesetzt!");
                 Factory.createConfigLocation(p.getLocation(), "Navigator-1", Factory.cfgFile, Factory.cfg);
             }else if (args[0].equalsIgnoreCase("2")){
-                p.sendMessage(Main.prefix + "§aDu hast den 2 Point gesetzt!");
+                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§aDu hast den 2 Point gesetzt!");
                 Factory.createConfigLocation(p.getLocation(), "Navigator-2", Factory.cfgFile, Factory.cfg);
             }else if (args[0].equalsIgnoreCase("3")){
-                p.sendMessage(Main.prefix + "§aDu hast den 3 Point gesetzt!");
+                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§aDu hast den 3 Point gesetzt!");
                 Factory.createConfigLocation(p.getLocation(), "Navigator-3", Factory.cfgFile, Factory.cfg);
             }else if (args[0].equalsIgnoreCase("4")){
-                p.sendMessage(Main.prefix + "§aDu hast den 4 Point gesetzt!");
+                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§aDu hast den 4 Point gesetzt!");
                 Factory.createConfigLocation(p.getLocation(), "Navigator-4", Factory.cfgFile, Factory.cfg);
             }else if (args[0].equalsIgnoreCase("5")){
-                p.sendMessage(Main.prefix + "§aDu hast den 5 Point gesetzt!");
+                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§aDu hast den 5 Point gesetzt!");
                 Factory.createConfigLocation(p.getLocation(), "Navigator-5", Factory.cfgFile, Factory.cfg);
             }else if (args[0].equalsIgnoreCase("6")){
-                p.sendMessage(Main.prefix + "§aDu hast den 6 Point gesetzt!");
+                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§aDu hast den 6 Point gesetzt!");
                 Factory.createConfigLocation(p.getLocation(), "Navigator-6", Factory.cfgFile, Factory.cfg);
             }else if (args[0].equalsIgnoreCase("7")){
-                p.sendMessage(Main.prefix + "§aDu hast den 7 Point gesetzt!");
+                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§aDu hast den 7 Point gesetzt!");
                 Factory.createConfigLocation(p.getLocation(), "Navigator-7", Factory.cfgFile, Factory.cfg);
             }else if (args[0].equalsIgnoreCase("8")){
-                p.sendMessage(Main.prefix + "§aDu hast den 8 Point gesetzt!");
+                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§aDu hast den 8 Point gesetzt!");
                 Factory.createConfigLocation(p.getLocation(), "Navigator-8", Factory.cfgFile, Factory.cfg);
             }else if (args[0].equalsIgnoreCase("9")){
-                p.sendMessage(Main.prefix + "§aDu hast den 9 Point gesetzt!");
+                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§aDu hast den 9 Point gesetzt!");
                 Factory.createConfigLocation(p.getLocation(), "Navigator-9", Factory.cfgFile, Factory.cfg);
             }
         } else {
-            p.sendMessage(Main.noperm);
+            p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§4Du hast keine Berechtigung für diesen Befehl!");
         }
         return false;
     }
