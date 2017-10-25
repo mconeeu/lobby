@@ -13,7 +13,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 
-public class Factory {
+public class LocationFactory {
 
     public static File cfgFile = new File("plugins//McOne-Lobby//spawns.yml");
     public static YamlConfiguration cfg = YamlConfiguration.loadConfiguration(cfgFile);

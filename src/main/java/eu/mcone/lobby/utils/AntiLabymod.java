@@ -21,7 +21,7 @@ public class AntiLabymod implements Listener {
 
     public static void setLabySettings(Player p){
         try{
-            HashMap<String, Boolean> dList = new HashMap<String, Boolean>();
+            HashMap<String, Boolean> dList = new HashMap<>();
             dList.put(DisabledLabyModFunctions.DAMAGEINDICATOR.getName(), false);
             dList.put(DisabledLabyModFunctions.ARMOR.getName(), false);
             dList.put(DisabledLabyModFunctions.MINIMAP_RADAR.getName(), false);

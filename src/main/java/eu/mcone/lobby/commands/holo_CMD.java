@@ -6,7 +6,7 @@
 package eu.mcone.lobby.commands;
 
 import eu.mcone.lobby.Main;
-import eu.mcone.lobby.utils.Factory;
+import eu.mcone.lobby.utils.LocationFactory;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,7 +21,7 @@ public class holo_CMD implements CommandExecutor{
                 if(args[0].equalsIgnoreCase("skypvp") || args[0].equalsIgnoreCase("minewar") || args[0].equalsIgnoreCase("knockbackffa") || args[0].equalsIgnoreCase("bedwars")){
                     if(p.hasPermission("system.admin")){
                         p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§7Du hast das Hologramm für denn Spielmodus §3" + args[0] + " §7gesetzt");
-                        Factory.createConfigLocation(p.getLocation(), "Holo." + args[0], Factory.cfgFile, Factory.cfg);
+                        LocationFactory.createConfigLocation(p.getLocation(), "Holo." + args[0], LocationFactory.cfgFile, LocationFactory.cfg);
                     }
                 }
             }

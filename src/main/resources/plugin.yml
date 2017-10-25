@@ -2,6 +2,7 @@ name: MCONE-Lobby
 author: TwinsterHD
 version: 2.5
 main: eu.mcone.lobby.Main
+depend: [McOne-BukkitCoreSystem]
 commands:
   set:
     description: Setze die einzelnen Spielmodi

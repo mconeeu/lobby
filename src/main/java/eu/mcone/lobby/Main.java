@@ -11,44 +11,26 @@ import eu.mcone.lobby.commands.npc_CMD;
 import eu.mcone.lobby.commands.set_CMD;
 import eu.mcone.lobby.events.*;
 import eu.mcone.lobby.scoreboard.ScoreboardManager;
-import eu.mcone.lobby.utils.*;
+import eu.mcone.lobby.trail.TrailManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Material;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Main extends JavaPlugin {
 
     private static Main instance;
-
     public static MySQL_Config config;
 
-    public static ArrayList<Player> HideShow = new ArrayList<>();
-    public static ArrayList<Player> emerald = new ArrayList<>();
-    public static ArrayList<Player> lava = new ArrayList<>();
-    public static ArrayList<Player> cloud = new ArrayList<>();
-    public static ArrayList<Player> water = new ArrayList<>();
-
-//    public static File f = new File("plugins/McOne-Lobby", "config.yml");
-//    public static FileConfiguration cfg = YamlConfiguration.loadConfiguration(f);
-    public static HashMap<Player, String> partikel = new HashMap<>();
-
+    public static TrailManager trail;
     
     public void onEnable() {
         instance = this;
-        new Trail();
+
         ScoreboardManager.updateScoreboardScheduler();
 
         config = new MySQL_Config(de.Dominik.BukkitCoreSystem.Main.Main.mysql3, "Lobby", 800);
-
         registerMySQLConfig();
+
+        trail = new TrailManager();
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryClick_Event(), this);
@@ -68,6 +50,7 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new BlockBreak_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new BlockPlace_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerAchievementAwarded_Event(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteractEntity_Event(), this);
 
         getCommand("set").setExecutor(new set_CMD());
         getCommand("npc").setExecutor(new npc_CMD());
@@ -90,40 +73,11 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().getConsoleSender().sendMessage("§7------------------------");
     }
 
-/*
-
-    private void setupConfig() {
-        if (!f.exists()) {
-            try{
-                f.createNewFile();
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-
-        getConfig().options().header(""
-                + "Plugin Entwickler: xXTwinsterHDXx"
-                + "\nPlugin Version: 2.0");
-        getConfig().options().copyDefaults(true);
-
-        getConfig().addDefault("key","value");
-
-        saveConfig();
-    }
-
-    public void loadConfig(){
-        FileConfiguration cfg = getConfig();
-        cfg.options().copyDefaults(true);
-
-        saveConfig();
-    }
-*/
-
     private void registerMySQLConfig(){
         //create table
         config.createTable();
 
-        //S
+        //System
         config.insertMySQLConfig("System-Prefix", "&8[&7&l!&8]&3 Lobby &8» &7");
         config.insertMySQLConfig("System-WorldName", "Lobby");
 

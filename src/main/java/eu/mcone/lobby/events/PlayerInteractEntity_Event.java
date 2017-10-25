@@ -5,22 +5,21 @@
 
 package eu.mcone.lobby.events;
 
+import eu.mcone.lobby.inventar.Interaction_Interact;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 
-public class PlayerQuit_Event implements Listener{
+public class PlayerInteractEntity_Event implements Listener {
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
+    public void onInteract(PlayerInteractEntityEvent e) {
         Player p = e.getPlayer();
-        e.setQuitMessage(null);
-/*
-        for (Player all : Bukkit.getOnlinePlayers()){
-            PlayerHoloListener.HoloSkypvp(all);
+
+        if (e.getRightClicked() instanceof Player) {
+            new Interaction_Interact(e, p);
         }
-*/
     }
 
 }
