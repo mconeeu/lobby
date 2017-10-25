@@ -37,71 +37,24 @@ public class Profil_Click {
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §6Trails")) {
             e.setCancelled(true);
             Inventory inv1 = Bukkit.createInventory(null, 18, "§8» §6Trails");
+
             inv1.setItem(0, ItemManager.createItem(Material.BARRIER, 0, 0, "§cTrail ablegen"));
             inv1.setItem(1, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-
-            if (Main.trail.hasPermissionForTail(p, Trails.COOKIES) || p.hasPermission("lobby.Premiumplus") || p.hasPermission("lobby.*")) {
-                inv1.setItem(2, ItemManager.createItemLore(Material.COOKIE, 0, 0, "§5CookieTrail", "§r", "§7Du besitzt dieses Item", "§aSchon œ”", ""));
-            } else {
-                inv1.setItem(2, ItemManager.createItemLore(Material.COOKIE, 0, 0, "§5CookieTrail", "§r", "§7Du besitzt dieses Item", "§cNicht œ˜", ""));
-            }
-
+            Main.trail.setInvItem(inv1, p, Trails.COOKIES, 2);
             inv1.setItem(3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-
-            if (Main.trail.hasPermissionForTail(p, Trails.GLOW) || p.hasPermission("lobby.Premiumplus") || p.hasPermission("lobby.*")) {
-                inv1.setItem(4, ItemManager.createItemLore(Material.GOLD_INGOT, 0, 0, "§6GlowTrail", "§r", "§7Du besitzt dieses Item", "§aSchon œ”", ""));
-            } else {
-                inv1.setItem(4, ItemManager.createItemLore(Material.GOLD_INGOT, 0, 0, "§6GlowTrail", "§r", "§7Du besitzt dieses Item", "§cNicht œ˜", ""));
-            }
-
+            Main.trail.setInvItem(inv1, p, Trails.GLOW, 4);
             inv1.setItem(5, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-
-            if (Main.trail.hasPermissionForTail(p, Trails.ENDER) || p.hasPermission("lobby.Premiumplus") || p.hasPermission("lobby.*")) {
-                inv1.setItem(6, ItemManager.createItemLore(Material.ENDER_PEARL, 0, 0, "§5EnderTrail", "§r", "§7Du besitzt dieses Item", "§aSchon œ”", ""));
-            } else {
-                inv1.setItem(6, ItemManager.createItemLore(Material.ENDER_PEARL, 0, 0, "§5EnderTrail", "§r", "§7Du besitzt dieses Item", "§cNicht œ˜", ""));
-            }
-
+            Main.trail.setInvItem(inv1, p, Trails.ENDER, 6);
             inv1.setItem(7, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-
-            if (Main.trail.hasPermissionForTail(p, Trails.MUSIC) || p.hasPermission("lobby.Premiumplus") || p.hasPermission("lobby.*")) {
-                inv1.setItem(8, ItemManager.createItemLore(Material.JUKEBOX, 0, 0, "§aMusikTrail", "§r", "§7Du besitzt dieses Item", "§aSchon œ”", ""));
-            } else {
-                inv1.setItem(8, ItemManager.createItemLore(Material.JUKEBOX, 0, 0, "§aMusikTrail", "§r", "§7Du besitzt dieses Item", "§cNicht œ˜", ""));
-            }
-
+            Main.trail.setInvItem(inv1, p, Trails.MUSIC, 8);
             inv1.setItem(9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-
-            if (Main.trail.hasPermissionForTail(p, Trails.LAVA) || p.hasPermission("lobby.Premiumplus") || p.hasPermission("lobby.*")) {
-                inv1.setItem(10, ItemManager.createItemLore(Material.LAVA_BUCKET, 0, 0, "§cLavaTrail", "§r", "§7Du besitzt dieses Item", "§aSchon œ”", ""));
-            } else {
-                inv1.setItem(10, ItemManager.createItemLore(Material.LAVA_BUCKET, 0, 0, "§cLavaTrail", "§r", "§7Du besitzt dieses Item", "§cNicht œ˜", ""));
-            }
-
+            Main.trail.setInvItem(inv1, p, Trails.LAVA, 10);
             inv1.setItem(11, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-
-            if (Main.trail.hasPermissionForTail(p, Trails.HEART) || p.hasPermission("lobby.Premiumplus") || p.hasPermission("lobby.*")) {
-                inv1.setItem(12, ItemManager.createItemLore(Material.REDSTONE, 0, 0, "§aHeartTrail", "§r", "§7Du besitzt dieses Item", "§aSchon œ”", ""));
-            } else {
-                inv1.setItem(12, ItemManager.createItemLore(Material.REDSTONE, 0, 0, "§aHeartTrail", "§r", "§7Du besitzt dieses Item", "§cNicht œ˜", ""));
-            }
-
+            Main.trail.setInvItem(inv1, p, Trails.HEART, 12);
             inv1.setItem(13, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-
-            if (Main.trail.hasPermissionForTail(p, Trails.WATER) || p.hasPermission("lobby.Premiumplus") || p.hasPermission("lobby.*")) {
-                inv1.setItem(14, ItemManager.createItemLore(Material.WATER_BUCKET, 0, 0, "§9WaterTrail", "§r", "§7Du besitzt dieses Item", "§aSchon œ”", ""));
-            } else {
-                inv1.setItem(14, ItemManager.createItemLore(Material.WATER_BUCKET, 0, 0, "§9WaterTrail", "§r", "§7Du besitzt dieses Item", "§cNicht œ˜", ""));
-            }
-
+            Main.trail.setInvItem(inv1, p, Trails.WATER, 14);
             inv1.setItem(15, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-
-            if (Main.trail.hasPermissionForTail(p, Trails.SNOW) || p.hasPermission("lobby.Premiumplus") || p.hasPermission("lobby.*")) {
-                inv1.setItem(16, ItemManager.createItemLore(Material.SNOW_BALL, 0, 0, "§fSnowTrail", "§r", "§7Du besitzt dieses Item", "§aSchon œ”", ""));
-            } else {
-                inv1.setItem(16, ItemManager.createItemLore(Material.SNOW_BALL, 0, 0, "§fSnowTrail", "§r", "§7Du besitzt dieses Item", "§cNicht œ˜", ""));
-            }
-
+            Main.trail.setInvItem(inv1, p, Trails.SNOW, 16);
             inv1.setItem(17, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
 
             p.openInventory(inv1);
@@ -110,6 +63,8 @@ public class Profil_Click {
             p.playSound(p.getLocation(), Sound.NOTE_BASS, 1.0F, 1.0F);
             p.closeInventory();
             p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§bGib uns Ideen für Gadgets! §7- §bTeamSpeak3-Server §7: §fMcOne.eu");
+        } else {
+            return;
         }
     }
 

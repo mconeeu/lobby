@@ -26,7 +26,7 @@ public class PlayerJoin_Event implements Listener {
         for (Player player : Bukkit.getOnlinePlayers()){
             ScoreboardManager.setScoreboard(player);
 
-            if (Hider_Interact.players.contains(player)) {
+            if (Hider_Interact.players.contains(p)) {
                 p.hidePlayer(player);
             }
         }

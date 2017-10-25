@@ -23,7 +23,7 @@ public class PlayerInteract_Event implements Listener{
         try{
             if (((e.getAction() == Action.RIGHT_CLICK_AIR) || (e.getAction() == Action.RIGHT_CLICK_BLOCK))) {
                 if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oAussehen / Effekte / Gadgets")) {
-                    new Profil_Interact(e, p);
+                    new Profil_Interact(p);
                 } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus")) {
                     Hider_Interact.hidePlayers(p);
                 } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an")) {

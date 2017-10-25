@@ -19,7 +19,6 @@ public class Main extends JavaPlugin {
 
     private static Main instance;
     public static MySQL_Config config;
-
     public static TrailManager trail;
     
     public void onEnable() {
@@ -30,7 +29,8 @@ public class Main extends JavaPlugin {
         config = new MySQL_Config(de.Dominik.BukkitCoreSystem.Main.Main.mysql3, "Lobby", 800);
         registerMySQLConfig();
 
-        trail = new TrailManager();
+        trail = new TrailManager(de.Dominik.BukkitCoreSystem.Main.Main.mysql1);
+        trail.createMySQLTable();
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryClick_Event(), this);

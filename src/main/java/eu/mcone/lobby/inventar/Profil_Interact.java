@@ -15,7 +15,7 @@ import org.bukkit.inventory.Inventory;
 
 public class Profil_Interact {
 
-    public Profil_Interact(PlayerInteractEvent e, Player p) {
+    public Profil_Interact(Player p) {
         Inventory inv = org.bukkit.Bukkit.createInventory(null, 9, "§8» §3Dein Profil");
 
         inv.setItem(0, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
