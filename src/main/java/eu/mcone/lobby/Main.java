@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Dominik L., BamDev, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -18,6 +18,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
+    public static String MainPrefix = "§8[§3Lobby§8] ";
+
     private static Main instance;
     public static MySQL_Config config;
     public static TrailManager trail;
@@ -27,9 +29,11 @@ public class Main extends JavaPlugin {
 
         ScoreboardManager.updateScoreboardScheduler();
 
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aMySQL Config wird initiiert");
         config = new MySQL_Config(de.Dominik.BukkitCoreSystem.Main.Main.mysql3, "Lobby", 800);
         registerMySQLConfig();
 
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aTrail-Scheduler werden gestartet");
         trail = new TrailManager(de.Dominik.BukkitCoreSystem.Main.Main.mysql1);
         trail.createMySQLTable();
 
@@ -58,21 +62,11 @@ public class Main extends JavaPlugin {
         getCommand("spawn").setExecutor(new spawn_CMD());
         getCommand("setholo").setExecutor(new holo_CMD());
 
-        Bukkit.getServer().getConsoleSender().sendMessage("§7------------------------");
-        Bukkit.getServer().getConsoleSender().sendMessage(config.getConfigValue("System-Prefix") + "§aPlugin wurde gestartet!");
-        Bukkit.getServer().getConsoleSender().sendMessage(config.getConfigValue("System-Prefix") + "§aPlugin developed by: BamDev");
-        Bukkit.getServer().getConsoleSender().sendMessage(config.getConfigValue("System-Prefix") + "§aFür: McOne.eu");
-        Bukkit.getServer().getConsoleSender().sendMessage(config.getConfigValue("System-Prefix") + "§aAlle Rechte liegen bei McOne.eu");
-        Bukkit.getServer().getConsoleSender().sendMessage("§7------------------------");
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
     }
 
     public void onDisable(){
-        Bukkit.getServer().getConsoleSender().sendMessage("§7------------------------");
-        Bukkit.getServer().getConsoleSender().sendMessage(config.getConfigValue("System-Prefix") + "§aPlugin wurde gestopt!");
-        Bukkit.getServer().getConsoleSender().sendMessage(config.getConfigValue("System-Prefix") + "§aPlugin developed by: BamDev");
-        Bukkit.getServer().getConsoleSender().sendMessage(config.getConfigValue("System-Prefix") + "§aFür: McOne.eu");
-        Bukkit.getServer().getConsoleSender().sendMessage(config.getConfigValue("System-Prefix") + "§aAlle Rechte liegen bei McOne.eu");
-        Bukkit.getServer().getConsoleSender().sendMessage("§7------------------------");
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aPlugin wurde deaktiviert!");
     }
 
     private void registerMySQLConfig(){

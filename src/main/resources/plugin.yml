@@ -1,8 +1,8 @@
 name: MCONE-Lobby
-author: TwinsterHD
+authors: TwinsterHD, Rufus Maiwald, BamDev
 version: 2.5
 main: eu.mcone.lobby.Main
-depend: [McOne-BukkitCoreSystem]
+depend: [MCONE-BukkitCoreSystem]
 commands:
   set:
     description: Setze die einzelnen Spielmodi

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Dominik L., BamDev, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -23,7 +23,7 @@ public class spawn_CMD implements CommandExecutor {
         Player p = (Player) commandSender;
 
         if (args.length == 0) {
-            File file = new File("plugins//Lobby//spawns.yml");
+            File file = new File("plugins//MCONE-Lobby//spawns.yml");
             if(file.exists() && !file.isDirectory()) {
                 YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
                 String w = cfg.getString("Spawn.WeltName");
