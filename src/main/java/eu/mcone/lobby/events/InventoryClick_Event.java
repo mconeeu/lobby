@@ -5,10 +5,7 @@
 
 package eu.mcone.lobby.events;
 
-import eu.mcone.lobby.inventar.Hüte_Click;
-import eu.mcone.lobby.inventar.Kompass_Click;
-import eu.mcone.lobby.inventar.Profil_Click;
-import eu.mcone.lobby.inventar.Trails_Click;
+import eu.mcone.lobby.inventar.*;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,24 +21,17 @@ public class InventoryClick_Event implements Listener{
             e.setCancelled(false);
         } else {
             e.setCancelled(true);
-        }
-
-        try{
-            //e.setCancelled(true);
             if (e.getInventory().getName().equals("§8» §5Hüte")) {
-                new Hüte_Click(e, p);
-            }
-            if (e.getInventory().getName().equals("§8» §3Dein Profil")) {
+                new Huete_Click(e, p);
+            } else if (e.getInventory().getName().equals("§8» §3Dein Profil")) {
                 new Profil_Click(e, p);
-            }
-            if (e.getInventory().getName().equals("§8» §6Trails")){
+            } else if (e.getInventory().getName().equals("§8» §3Trails")){
                 new Trails_Click(e, p);
-            }
-            if (e.getInventory().getName().equals("§8» §3Navigator")) {
+            } else if (e.getInventory().getName().equals("§8» §3Navigator")) {
                 new Kompass_Click(e, p);
+            } else if (e.getInventory().getName().equals("§8» §6Trail kaufen")) {
+                new Trails_Buy_Click(e, p);
             }
-        } catch (Exception e1) {
-            e1.printStackTrace();
         }
     }
 

@@ -7,17 +7,19 @@ package eu.mcone.lobby.inventar;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 
-public class Hüte_Click {
+public class Huete_Click {
 
-    public Hüte_Click(InventoryClickEvent e, Player p) {
-
-        if (e.getCurrentItem().getItemMeta().getDisplayName() != "§8» §4Hat entfernen") {
+    public Huete_Click(InventoryClickEvent e, Player p) {
+        if ((e.getCurrentItem() == null) || !e.getCurrentItem().hasItemMeta() || e.getSlotType() == InventoryType.SlotType.OUTSIDE) {
+            e.setCancelled(false);
+        } else if (!e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §4Hat entfernen")) {
             p.getInventory().setHelmet(e.getCurrentItem());
             p.playSound(p.getLocation(), org.bukkit.Sound.ARROW_HIT, 1.0F, 1.0F);
             p.closeInventory();
 
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName() == "§8» §4Hat entfernen") {
+        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §4Hat entfernen")) {
             p.getInventory().setHelmet(null);
             p.playSound(p.getLocation(), org.bukkit.Sound.ANVIL_BREAK, 1.0F, 1.0F);
             p.closeInventory();

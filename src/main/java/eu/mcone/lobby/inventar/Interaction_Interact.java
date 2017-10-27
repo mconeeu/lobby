@@ -30,34 +30,10 @@ public class Interaction_Interact {
 
         Inventory inv = org.bukkit.Bukkit.createInventory(null, 27, "§8» §3Interaktionsmenü");
 
-        inv.setItem(0, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(1, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
+        for (int i = 0; i <= 26; i++) {
+            inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§r"));
+        }
         inv.setItem(4, ItemManager.createSkullItem("§f§l" + e.getRightClicked().getName(), e.getRightClicked().getName(), new String[]{ScoreboardManager.getObjectiveRang((Player) e.getRightClicked()), "","§7Coins: §f" + coins , "§7Onlinetime: §f" + onlinetime + " Stunden"}));
-        inv.setItem(5, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(6, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(7, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(8, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(10, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(11, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(12, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(13, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(14, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(14, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(15, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(16, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(17, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(18, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(19, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(20, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(21, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(22, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(23, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(24, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(25, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(26, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
 
         p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
         p.openInventory(inv);

@@ -18,15 +18,12 @@ public class Profil_Interact {
     public Profil_Interact(Player p) {
         Inventory inv = org.bukkit.Bukkit.createInventory(null, 9, "§8» §3Dein Profil");
 
-        inv.setItem(0, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(1, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
+        for (int i = 0; i <= 8; i++) {
+            inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§r"));
+        }
         inv.setItem(2, ItemManager.createItem(Material.SKULL_ITEM, 0, 0, "§8» §5Hüte"));
-        inv.setItem(3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(4, ItemManager.createItem(Material.GOLD_BOOTS, 0, 0, "§8» §6Trails"));
-        inv.setItem(5, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
+        inv.setItem(4, ItemManager.createItem(Material.GOLD_BOOTS, 0, 0, "§8» §3Trails"));
         inv.setItem(6, ItemManager.createItem(Material.GOLD_INGOT, 0, 0, "§8» §bGadgets"));
-        inv.setItem(7, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-        inv.setItem(8, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
 
         p.playSound(p.getLocation(), Sound.CHEST_OPEN, 1.0F, 1.0F);
         p.openInventory(inv);

@@ -14,14 +14,16 @@ import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 
 import java.util.List;
 
 public class Kompass_Click {
 
     public Kompass_Click(InventoryClickEvent e, Player p) {
-        e.setCancelled(true);
-        if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-1"))) {
+        if ((e.getCurrentItem() == null) || !e.getCurrentItem().hasItemMeta() || e.getSlotType() == InventoryType.SlotType.OUTSIDE) {
+            e.setCancelled(false);
+        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-1"))) {
             p.teleport(LocationFactory.getConfigLocation("Navigator-1", LocationFactory.cfg));
             p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 1);

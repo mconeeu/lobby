@@ -96,6 +96,16 @@ public class Main extends JavaPlugin {
         config.insertMySQLConfig("Navigator-8","{\"name\":\"&f&lSpawn\",\"ItemID\":399,\"Lore\":[\"&7&oZurück zum Lobby Spawn.\",\"&7&oHier startet unser Lobby Rätsel\",\"\",\"&8>> &f&nRechtsklick&8 | &7&oTeleportieren\"]}");
         config.insertMySQLConfig("Navigator-9","{\"name\":\"&e&lBuild\",\"ItemID\":2,\"Lore\":[\"&7&oCreative Server. überzeuge uns von deinen Baukünsten\",\"&7&ound werde Builder im MC ONE Team!\",\"\",\"&8>> &f&nRechtsklick&8 | &7&oTeleportieren\"]}");
 
+        //Trails
+        config.insertMySQLConfig("Trail-Coins-Cookies", 10);
+        config.insertMySQLConfig("Trail-Coins-Glow", 10);
+        config.insertMySQLConfig("Trail-Coins-Ender", 10);
+        config.insertMySQLConfig("Trail-Coins-Music", 10);
+        config.insertMySQLConfig("Trail-Coins-Heart", 10);
+        config.insertMySQLConfig("Trail-Coins-Lava", 10);
+        config.insertMySQLConfig("Trail-Coins-Snow", 10);
+        config.insertMySQLConfig("Trail-Coins-Water", 10);
+
         //store
         config.store();
     }
