@@ -10,3 +10,5 @@ commands:
     description: Setze die einzelnen Hologramme
   npc:
     descirption: Spawnt einen NPC
+  spawn:
+    description: Teleportiert den Spieler zum Spawn

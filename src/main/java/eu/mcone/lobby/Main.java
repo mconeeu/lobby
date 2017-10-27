@@ -9,6 +9,7 @@ import de.Dominik.BukkitCoreSystem.MySQL.MySQL_Config;
 import eu.mcone.lobby.commands.holo_CMD;
 import eu.mcone.lobby.commands.npc_CMD;
 import eu.mcone.lobby.commands.set_CMD;
+import eu.mcone.lobby.commands.spawn_CMD;
 import eu.mcone.lobby.events.*;
 import eu.mcone.lobby.scoreboard.ScoreboardManager;
 import eu.mcone.lobby.trail.TrailManager;
@@ -54,6 +55,7 @@ public class Main extends JavaPlugin {
 
         getCommand("set").setExecutor(new set_CMD());
         getCommand("npc").setExecutor(new npc_CMD());
+        getCommand("spawn").setExecutor(new spawn_CMD());
         getCommand("setholo").setExecutor(new holo_CMD());
 
         Bukkit.getServer().getConsoleSender().sendMessage("§7------------------------");
