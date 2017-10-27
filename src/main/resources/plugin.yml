@@ -1,5 +1,5 @@
 name: MCONE-Lobby
-authors: TwinsterHD, Rufus Maiwald, BamDev
+authors: [TwinsterHD, Rufus Maiwald, BamDev]
 version: 2.5
 main: eu.mcone.lobby.Main
 depend: [MCONE-BukkitCoreSystem]
