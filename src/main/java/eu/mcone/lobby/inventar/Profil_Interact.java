@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.inventar;
 
-import eu.mcone.lobby.utils.ItemManager;
+import de.Dominik.BukkitCoreSystem.util.ItemManager;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -19,7 +19,7 @@ public class Profil_Interact {
         Inventory inv = org.bukkit.Bukkit.createInventory(null, 9, "§8» §3Dein Profil");
 
         for (int i = 0; i <= 8; i++) {
-            inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§r"));
+            inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§8//§oMCONE§8//"));
         }
         inv.setItem(2, ItemManager.createItem(Material.SKULL_ITEM, 0, 0, "§8» §5Hüte"));
         inv.setItem(4, ItemManager.createItem(Material.GOLD_BOOTS, 0, 0, "§8» §3Trails"));

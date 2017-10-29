@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.scoreboard;
 
-import de.Dominik.BukkitCoreSystem.API.CoinsAPI;
+import de.Dominik.BukkitCoreSystem.api.CoinsAPI;
 import eu.mcone.lobby.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

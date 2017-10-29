@@ -5,10 +5,10 @@
 
 package eu.mcone.lobby.trail;
 
-import de.Dominik.BukkitCoreSystem.API.CoinsAPI;
-import de.Dominik.BukkitCoreSystem.MySQL.MySQL;
+import de.Dominik.BukkitCoreSystem.api.CoinsAPI;
+import de.Dominik.BukkitCoreSystem.mysql.MySQL;
 import eu.mcone.lobby.Main;
-import eu.mcone.lobby.utils.ItemManager;
+import de.Dominik.BukkitCoreSystem.util.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;

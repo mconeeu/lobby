@@ -13,7 +13,7 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.entity.Player;
 
-import static de.Dominik.BukkitCoreSystem.Main.Main.*;
+import static de.Dominik.BukkitCoreSystem.main.Main.*;
 
 public class PlayerHoloListener {
 
@@ -30,7 +30,7 @@ public class PlayerHoloListener {
                 "§7Platz: §f" + statsSkypvp.getUserRanking(p.getName()),
                 "§7Kills: §f" + statsSkypvp.getKills(p.getUniqueId().toString(), p.getName()),
                 "§7Tode: §f" + statsSkypvp.getDeaths(p.getUniqueId().toString(), p.getName())};
-        final PlayerHolograms holo = new PlayerHolograms(Text, loc);
+        final Hologram holo = new Hologram(Text, loc);
         holo.showPlayer(p);
     }
 
@@ -50,7 +50,7 @@ public class PlayerHoloListener {
                 "§r",
                 "§7Wins: §f" + statsMinewar.getWins(p.getUniqueId().toString(), p.getName()),
                 "§7Lose: §f" + statsMinewar.getLoses(p.getUniqueId().toString(), p.getName())};
-        final PlayerHolograms holo = new PlayerHolograms(Text, loc);
+        final Hologram holo = new Hologram(Text, loc);
         holo.showPlayer(p);
     }
 
@@ -70,7 +70,7 @@ public class PlayerHoloListener {
                 "§r",
                 "§7Wins: §f" + statsBedwars.getWins(p.getUniqueId().toString(), p.getName()),
                 "§7Lose: §f" + statsBedwars.getLoses(p.getUniqueId().toString(), p.getName())};
-        final PlayerHolograms holo = new PlayerHolograms(Text, loc);
+        final Hologram holo = new Hologram(Text, loc);
         holo.showPlayer(p);
     }
 
@@ -87,7 +87,7 @@ public class PlayerHoloListener {
                 "§7Platz: §f" + statsKnockbackffa.getUserRanking(p.getName()),
                 "§7Kills: §f" + statsKnockbackffa.getKills(p.getUniqueId().toString(), p.getName()),
                 "§7Tode: §f" + statsKnockbackffa.getDeaths(p.getUniqueId().toString(), p.getName())};
-        final PlayerHolograms holo = new PlayerHolograms(Text, loc);
+        final Hologram holo = new Hologram(Text, loc);
         holo.showPlayer(p);
     }
 

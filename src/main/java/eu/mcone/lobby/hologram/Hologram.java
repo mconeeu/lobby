@@ -12,20 +12,19 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerHolograms {
+public class Hologram {
 
     private List<EntityArmorStand> entitylist;
     private String[] Text;
     private Location location;
     private double DISTANCE;
-    int count;
+    private int count;
 
-    public PlayerHolograms(final String[] Text, final Location location) {
+    public Hologram(final String[] Text, final Location location) {
         this.entitylist = new ArrayList<EntityArmorStand>();
         this.DISTANCE = 0.25;
         this.Text = Text;
@@ -35,22 +34,12 @@ public class PlayerHolograms {
 
     public void showPlayerTemp(final Player p, final int Time) {
         this.showPlayer(p);
-        Bukkit.getScheduler().runTaskLater((Plugin) Main.getInstance(), (Runnable)new Runnable() {
-            @Override
-            public void run() {
-                PlayerHolograms.this.hidePlayer(p);
-            }
-        }, (long)Time);
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> Hologram.this.hidePlayer(p), (long)Time);
     }
 
-    public void showAllTemp(final Player p, final int Time) {
+    public void showAllTemp(final int Time) {
         this.showAll();
-        Bukkit.getScheduler().runTaskLater((Plugin) Main.getInstance(), (Runnable)new Runnable() {
-            @Override
-            public void run() {
-                PlayerHolograms.this.hideAll();
-            }
-        }, (long)Time);
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), Hologram.this::hideAll, (long)Time);
     }
 
     public void showPlayer(final Player p) {
@@ -89,7 +78,7 @@ public class PlayerHolograms {
         String[] text;
         for (int length = (text = this.Text).length, j = 0; j < length; ++j) {
             final String Text = text[j];
-            final EntityArmorStand entity = new EntityArmorStand((World)((CraftWorld)this.location.getWorld()).getHandle(), this.location.getX(), this.location.getY(), this.location.getZ());
+            final EntityArmorStand entity = new EntityArmorStand(((CraftWorld) this.location.getWorld()).getHandle(), this.location.getX(), this.location.getY(), this.location.getZ());
             entity.setCustomName(Text);
             entity.setCustomNameVisible(true);
             entity.setInvisible(true);

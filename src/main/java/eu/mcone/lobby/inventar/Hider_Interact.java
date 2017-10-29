@@ -6,7 +6,7 @@
 package eu.mcone.lobby.inventar;
 
 import eu.mcone.lobby.Main;
-import eu.mcone.lobby.utils.ItemManager;
+import de.Dominik.BukkitCoreSystem.util.ItemManager;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;

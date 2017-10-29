@@ -13,14 +13,12 @@ import org.bukkit.entity.Player;
 
 public class npc_CMD implements CommandExecutor{
 
-    private NPC npc;
-
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
         Player p = (Player)sender;
         if(cmd.getName().equalsIgnoreCase("npc")){
             if (args.length == 2) {
                 if (args[0].equalsIgnoreCase("set")) {
-                    npc = new NPC(p.getLocation(), args[1]);
+                    new NPC(p.getLocation(), args[1]);
                     NPC.set(p, args[1]);
                     return true;
                 } else if (args[0].equalsIgnoreCase("unset")) {

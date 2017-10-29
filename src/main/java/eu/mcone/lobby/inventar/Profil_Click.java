@@ -7,7 +7,7 @@ package eu.mcone.lobby.inventar;
 
 import eu.mcone.lobby.Main;
 import eu.mcone.lobby.trail.Trail;
-import eu.mcone.lobby.utils.ItemManager;
+import de.Dominik.BukkitCoreSystem.util.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -23,15 +23,15 @@ public class Profil_Click {
             e.setCancelled(false);
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §5Hüte")) {
             Inventory inv = Bukkit.createInventory(null, 9, "§8» §5Hüte");
-            inv.setItem(0, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-            inv.setItem(1, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
+            inv.setItem(0, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§8//§oMCONE§8//"));
+            inv.setItem(1, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§8//§oMCONE§8//"));
             inv.setItem(2, ItemManager.createItem(Material.CHAINMAIL_HELMET, 0, 0, "§8» §8Ketten-Helm"));
             inv.setItem(3, ItemManager.createItem(Material.DIAMOND_HELMET, 0, 0, "§8» §bDiamant-Helm"));
             inv.setItem(4, ItemManager.createItem(Material.IRON_HELMET, 0, 0, "§8» §7Eisen-Helm"));
             inv.setItem(5, ItemManager.createItem(Material.GOLD_HELMET, 0, 0, "§8» §eGold-Helm"));
             inv.setItem(6, ItemManager.createItem(Material.BARRIER, 0, 0, "§8» §4Hat entfernen"));
-            inv.setItem(7, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
-            inv.setItem(8, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, ""));
+            inv.setItem(7, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§8//§oMCONE§8//"));
+            inv.setItem(8, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§8//§oMCONE§8//"));
 
             p.playSound(p.getLocation(), Sound.CLICK, 1.0F, 1.0F);
             p.openInventory(inv);
@@ -39,7 +39,7 @@ public class Profil_Click {
             Inventory inv = Bukkit.createInventory(null, 18, "§8» §3Trails");
 
             for (int i = 0; i <= 17; i++) {
-                inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§r"));
+                inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§8//§oMCONE§8//"));
             }
             
             inv.setItem(0, ItemManager.createItem(Material.BARRIER, 0, 0, "§cTrail ablegen"));

@@ -9,7 +9,7 @@ import eu.mcone.lobby.Main;
 import eu.mcone.lobby.inventar.Hider_Interact;
 import eu.mcone.lobby.utils.AntiLabymod;
 import eu.mcone.lobby.scoreboard.ScoreboardManager;
-import eu.mcone.lobby.utils.ItemManager;
+import de.Dominik.BukkitCoreSystem.util.ItemManager;
 import org.bukkit.*;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;

@@ -24,6 +24,7 @@ public class spawn_CMD implements CommandExecutor {
 
         if (args.length == 0) {
             File file = new File("plugins//MCONE-Lobby//spawns.yml");
+
             if(file.exists() && !file.isDirectory()) {
                 YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
                 String w = cfg.getString("Spawn.WeltName");
@@ -36,7 +37,7 @@ public class spawn_CMD implements CommandExecutor {
                 loc.setYaw((float) yaw);
                 loc.setPitch((float) pitch);
 
-                p.sendMessage(de.Dominik.BukkitCoreSystem.Main.Main.config.getConfigValue("Prefix") + "§2Du wirst zum Spawn teleportiert!");
+                p.sendMessage(Main.config.getConfigValue("Prefix") + "§2Du wirst zum Spawn teleportiert!");
                 p.teleport(loc);
             } else {
                 p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§4Du kannst gerade nicht zum Spawn teleportiert werden.");
@@ -45,7 +46,7 @@ public class spawn_CMD implements CommandExecutor {
             if (p.hasPermission("group.admin") || p.hasPermission("group.developer")) {
                 File file = new File("plugins//Lobby//spawns.yml");
                 YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
-                p.sendMessage(de.Dominik.BukkitCoreSystem.Main.Main.config.getConfigValue("Prefix") + "§7Der Spawn wurde gesetzt!");
+                p.sendMessage(Main.config.getConfigValue("Prefix") + "§7Der Spawn wurde gesetzt!");
                 cfg.set("Spawn.X", p.getLocation().getX());
                 cfg.set("Spawn.Y", p.getLocation().getY());
                 cfg.set("Spawn.Z", p.getLocation().getZ());

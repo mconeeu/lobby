@@ -7,7 +7,7 @@ package eu.mcone.lobby.inventar;
 
 import eu.mcone.lobby.Main;
 import eu.mcone.lobby.trail.Trail;
-import eu.mcone.lobby.utils.ItemManager;
+import de.Dominik.BukkitCoreSystem.util.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -82,7 +82,7 @@ public class Trails_Click {
         Inventory inv = Bukkit.createInventory(null, 27, "§8» §6Trail kaufen");
 
         for (int i = 0; i <= 26; i++) {
-            inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§r"));
+            inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§8//§oMCONE§8//"));
         }
         inv.setItem(4, ItemManager.createItemLore(trail.getItem(), 0, 0, trail.getName(), new ArrayList<>(Arrays.asList("", "§7§oKostet: §f§o" + trail.getCoins() + " Coins"))));
         inv.setItem(21, ItemManager.createItemLore(Material.STAINED_GLASS_PANE, 5, 0, "§a§lTrail kaufen", new ArrayList<>(Arrays.asList("", "§8» §a§nRechtsklick§8 | §7§oKaufen"))));
