@@ -3,9 +3,9 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.commands;
+package eu.mcone.lobby.command;
 
-import eu.mcone.lobby.utils.NPC;
+import eu.mcone.lobby.util.NPC;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

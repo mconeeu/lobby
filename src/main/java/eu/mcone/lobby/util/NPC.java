@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.utils;
+package eu.mcone.lobby.util;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;

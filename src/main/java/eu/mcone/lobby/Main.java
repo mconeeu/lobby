@@ -6,13 +6,13 @@
 package eu.mcone.lobby;
 
 import de.Dominik.BukkitCoreSystem.mysql.MySQL_Config;
-import eu.mcone.lobby.commands.holo_CMD;
-import eu.mcone.lobby.commands.npc_CMD;
-import eu.mcone.lobby.commands.set_CMD;
-import eu.mcone.lobby.commands.spawn_CMD;
-import eu.mcone.lobby.events.*;
+import eu.mcone.lobby.command.holo_CMD;
+import eu.mcone.lobby.command.npc_CMD;
+import eu.mcone.lobby.command.set_CMD;
+import eu.mcone.lobby.command.spawn_CMD;
+import eu.mcone.lobby.event.*;
 import eu.mcone.lobby.hologram.HologramManager;
-import eu.mcone.lobby.scoreboard.ScoreboardManager;
+import eu.mcone.lobby.util.ScoreboardManager;
 import eu.mcone.lobby.trail.TrailManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,14 +29,15 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        ScoreboardManager.updateScoreboardScheduler();
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aScoreboard-Manager wird gestartet");
+        new ScoreboardManager();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aMySQL Config wird initiiert");
-        config = new MySQL_Config(de.Dominik.BukkitCoreSystem.main.Main.mysql3, "Lobby", 800);
+        config = new MySQL_Config(de.Dominik.BukkitCoreSystem.Main.mysql3, "Lobby", 800);
         registerMySQLConfig();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aTrail-Scheduler werden gestartet");
-        trail = new TrailManager(de.Dominik.BukkitCoreSystem.main.Main.mysql1);
+        trail = new TrailManager(de.Dominik.BukkitCoreSystem.Main.mysql1);
         trail.createMySQLTable();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aHologram-Manager werden gestartet");
@@ -54,7 +55,7 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryDrag_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new WeatherChange_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new FoodLevelChange_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new EntitiyDamageEvent(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new EntitiyDamage_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new EntityDamageByEntity_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new BlockBreak_Event(), this);
@@ -82,11 +83,16 @@ public class Main extends JavaPlugin {
         config.insertMySQLConfig("System-WorldName", "Lobby");
 
         //Locations
-        config.insertMySQLConfig("Location-Spawn", "{[\"\",\"\",\"\",\"\",\"\",\"\"]}");
-
-        //TitleAPI
-        config.insertMySQLConfig("TitleAPI-Join-Title", "§fWillkommen auf §3§lMC ONE");
-        config.insertMySQLConfig("TitleAPI-Join-Subtitle", "§7§oDein Nummer 1 Minecraftnetzwerk");
+        config.insertMySQLConfig("Location-Spawn", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
+        config.insertMySQLConfig("Location-Navigator-1", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
+        config.insertMySQLConfig("Location-Navigator-2", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
+        config.insertMySQLConfig("Location-Navigator-3", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
+        config.insertMySQLConfig("Location-Navigator-4", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
+        config.insertMySQLConfig("Location-Navigator-5", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
+        config.insertMySQLConfig("Location-Navigator-6", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
+        config.insertMySQLConfig("Location-Navigator-7", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
+        config.insertMySQLConfig("Location-Navigator-8", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
+        config.insertMySQLConfig("Location-Navigator-9", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
 
         //Lobby compass
         config.insertMySQLConfig("Navigator-1","{\"name\":\"§8//§oMCONE§8//\",\"ItemID\":160,\"Lore\":[]}");

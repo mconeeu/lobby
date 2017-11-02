@@ -22,7 +22,7 @@ public enum Trail {
     private String name, perm;
     private Material item;
 
-    private Trail(int id, String name, String perm, int coins, Material item) {
+    Trail(int id, String name, String perm, int coins, Material item) {
         this.id = id;
         this.name = name;
         this.perm = perm;

@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.events;
+package eu.mcone.lobby.event;
 
 import eu.mcone.lobby.inventar.Interaction_Interact;
 import org.bukkit.entity.Player;
@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 public class PlayerInteractEntity_Event implements Listener {
 
     @EventHandler
-    public void onInteract(PlayerInteractEntityEvent e) {
+    public void on(PlayerInteractEntityEvent e) {
         Player p = e.getPlayer();
         Player clicked = (Player) e.getRightClicked();
 

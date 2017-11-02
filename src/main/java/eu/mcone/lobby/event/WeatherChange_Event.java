@@ -3,18 +3,17 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.events;
+package eu.mcone.lobby.event;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
 
-public class EntityDamageByEntity_Event implements Listener{
+public class WeatherChange_Event implements Listener{
 
     @EventHandler
-    public void onAttack(EntityDamageByEntityEvent e){
-        if(e.getEntity() instanceof Player){
+    public void on(WeatherChangeEvent e) {
+        if (e.toWeatherState()) {
             e.setCancelled(true);
         }
     }

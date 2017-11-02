@@ -3,18 +3,19 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.events;
+package eu.mcone.lobby.event;
 
-import eu.mcone.lobby.utils.LocationFactory;
+import eu.mcone.lobby.Main;
+import de.Dominik.BukkitCoreSystem.util.LocationFactory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class EntitiyDamageEvent implements Listener{
+public class EntitiyDamage_Event implements Listener{
 
     @EventHandler
-    public void onDamage(EntityDamageEvent e){
+    public void on(EntityDamageEvent e){
         Player p = (Player) e.getEntity();
         if(e.getEntity() instanceof Player){
             if(e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
@@ -35,7 +36,7 @@ public class EntitiyDamageEvent implements Listener{
 
             if(e.getEntity() instanceof Player){
                 if(e.getCause() == EntityDamageEvent.DamageCause.VOID){
-                    p.teleport(LocationFactory.getConfigLocation("Navigator-1", LocationFactory.cfg));
+                    p.teleport(LocationFactory.getConfigLocation(Main.config, "Location-Spawn"));
                 }
             }
         }

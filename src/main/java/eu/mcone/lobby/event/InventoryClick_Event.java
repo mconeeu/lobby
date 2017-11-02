@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.events;
+package eu.mcone.lobby.event;
 
 import eu.mcone.lobby.inventar.*;
 import org.bukkit.*;
@@ -15,7 +15,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 public class InventoryClick_Event implements Listener{
 
     @EventHandler
-    public void onClick(InventoryClickEvent e){
+    public void on(InventoryClickEvent e){
         Player p = (Player)e.getWhoClicked();
         if (p.getGameMode().equals(GameMode.CREATIVE)) {
             e.setCancelled(false);

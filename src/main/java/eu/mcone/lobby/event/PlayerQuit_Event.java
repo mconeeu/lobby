@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.events;
+package eu.mcone.lobby.event;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerQuit_Event implements Listener{
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
+    public void on(PlayerQuitEvent e) {
         Player p = e.getPlayer();
         e.setQuitMessage(null);
 /*

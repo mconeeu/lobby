@@ -24,7 +24,7 @@ public class Hologram {
     private double DISTANCE;
     private int count;
 
-    public Hologram(final String[] Text, final Location location) {
+    Hologram(final String[] Text, final Location location) {
         this.entitylist = new ArrayList<EntityArmorStand>();
         this.DISTANCE = 0.25;
         this.Text = Text;
@@ -42,34 +42,34 @@ public class Hologram {
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), Hologram.this::hideAll, (long)Time);
     }
 
-    public void showPlayer(final Player p) {
+    void showPlayer(final Player p) {
         for (final EntityArmorStand armor : this.entitylist) {
-            final PacketPlayOutSpawnEntityLiving packet = new PacketPlayOutSpawnEntityLiving((EntityLiving)armor);
-            ((CraftPlayer)p).getHandle().playerConnection.sendPacket((Packet)packet);
+            final PacketPlayOutSpawnEntityLiving packet = new PacketPlayOutSpawnEntityLiving(armor);
+            ((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
         }
     }
 
-    public void hidePlayer(final Player p) {
+    void hidePlayer(final Player p) {
         for (final EntityArmorStand armor : this.entitylist) {
-            final PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(new int[] { armor.getId() });
-            ((CraftPlayer)p).getHandle().playerConnection.sendPacket((Packet)packet);
+            final PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(armor.getId());
+            ((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
         }
     }
 
-    public void showAll() {
+    void showAll() {
         for (final Player player : Bukkit.getOnlinePlayers()) {
             for (final EntityArmorStand armor : this.entitylist) {
-                final PacketPlayOutSpawnEntityLiving packet = new PacketPlayOutSpawnEntityLiving((EntityLiving)armor);
-                ((CraftPlayer)player).getHandle().playerConnection.sendPacket((Packet)packet);
+                final PacketPlayOutSpawnEntityLiving packet = new PacketPlayOutSpawnEntityLiving(armor);
+                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(packet);
             }
         }
     }
 
-    public void hideAll() {
+    void hideAll() {
         for (final Player player : Bukkit.getOnlinePlayers()) {
             for (final EntityArmorStand armor : this.entitylist) {
-                final PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(new int[] { armor.getId() });
-                ((CraftPlayer)player).getHandle().playerConnection.sendPacket((Packet)packet);
+                final PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(armor.getId());
+                ((CraftPlayer)player).getHandle().playerConnection.sendPacket(packet);
             }
         }
     }

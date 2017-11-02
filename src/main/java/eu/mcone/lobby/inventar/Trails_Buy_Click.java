@@ -15,7 +15,7 @@ public class Trails_Buy_Click {
 
     public Trails_Buy_Click(InventoryClickEvent e, Player p) {
         if ((e.getCurrentItem() == null) || !e.getCurrentItem().hasItemMeta() || e.getSlotType() == InventoryType.SlotType.OUTSIDE) {
-            e.setCancelled(false);
+            e.setCancelled(true);
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§a§lTrail kaufen")){
             Main.trail.buyTrail(p, Trail.getTrailbyName(e.getInventory().getItem(4).getItemMeta().getDisplayName()));
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§c§lAbbrechen")){

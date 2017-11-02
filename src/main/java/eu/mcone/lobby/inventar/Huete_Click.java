@@ -13,7 +13,7 @@ public class Huete_Click {
 
     public Huete_Click(InventoryClickEvent e, Player p) {
         if ((e.getCurrentItem() == null) || !e.getCurrentItem().hasItemMeta() || e.getSlotType() == InventoryType.SlotType.OUTSIDE) {
-            e.setCancelled(false);
+            e.setCancelled(true);
         } else if (!e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §4Hat entfernen")) {
             p.getInventory().setHelmet(e.getCurrentItem());
             p.playSound(p.getLocation(), org.bukkit.Sound.ARROW_HIT, 1.0F, 1.0F);

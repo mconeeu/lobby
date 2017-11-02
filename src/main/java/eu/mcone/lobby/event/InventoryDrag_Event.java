@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.events;
+package eu.mcone.lobby.event;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -14,7 +14,7 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 public class InventoryDrag_Event implements Listener{
 
     @EventHandler
-    public void onInventoryMove(InventoryDragEvent e){
+    public void on(InventoryDragEvent e){
         Player p = (Player)e.getWhoClicked();
 
         if(p.getGameMode().equals(GameMode.CREATIVE)){

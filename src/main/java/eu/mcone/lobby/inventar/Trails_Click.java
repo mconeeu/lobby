@@ -24,7 +24,7 @@ public class Trails_Click {
 
     public Trails_Click(InventoryClickEvent e, Player p) {
         if ((e.getCurrentItem() == null) || !e.getCurrentItem().hasItemMeta() || e.getSlotType() == InventoryType.SlotType.OUTSIDE) {
-            e.setCancelled(false);
+            e.setCancelled(true);
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(Trail.COOKIES.getName())){
             if (Main.trail.hasTrail(p, Trail.COOKIES)) {
                 Main.trail.setTrail(p, Trail.COOKIES);
@@ -82,11 +82,11 @@ public class Trails_Click {
         Inventory inv = Bukkit.createInventory(null, 27, "§8» §6Trail kaufen");
 
         for (int i = 0; i <= 26; i++) {
-            inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§8//§oMCONE§8//"));
+            inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 0, "§8//§oMCONE§8//", true));
         }
-        inv.setItem(4, ItemManager.createItemLore(trail.getItem(), 0, 0, trail.getName(), new ArrayList<>(Arrays.asList("", "§7§oKostet: §f§o" + trail.getCoins() + " Coins"))));
-        inv.setItem(21, ItemManager.createItemLore(Material.STAINED_GLASS_PANE, 5, 0, "§a§lTrail kaufen", new ArrayList<>(Arrays.asList("", "§8» §a§nRechtsklick§8 | §7§oKaufen"))));
-        inv.setItem(23, ItemManager.createItemLore(Material.STAINED_GLASS_PANE, 14, 0, "§c§lAbbrechen", new ArrayList<>(Arrays.asList("", "§8» §c§nRechtsklick§8 | §7§oAbbrechen"))));
+        inv.setItem(4, ItemManager.createItem(trail.getItem(), 0, 0, trail.getName(), new ArrayList<>(Arrays.asList("", "§7§oKostet: §f§o" + trail.getCoins() + " Coins")), true));
+        inv.setItem(21, ItemManager.createItem(Material.STAINED_GLASS_PANE, 5, 0, "§a§lTrail kaufen", new ArrayList<>(Arrays.asList("", "§8» §a§nRechtsklick§8 | §7§oKaufen")), true));
+        inv.setItem(23, ItemManager.createItem(Material.STAINED_GLASS_PANE, 14, 0, "§c§lAbbrechen", new ArrayList<>(Arrays.asList("", "§8» §c§nRechtsklick§8 | §7§oAbbrechen")), true));
 
         p.openInventory(inv);
         p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);

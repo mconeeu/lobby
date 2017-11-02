@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.utils;
+package eu.mcone.lobby.util;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

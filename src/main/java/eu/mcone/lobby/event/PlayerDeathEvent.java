@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.events;
+package eu.mcone.lobby.event;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,7 +12,7 @@ import org.bukkit.event.Listener;
 public class PlayerDeathEvent implements Listener {
 
     @EventHandler
-    public void onDeath(org.bukkit.event.entity.PlayerDeathEvent e){
+    public void on(org.bukkit.event.entity.PlayerDeathEvent e){
         Player p = e.getEntity();
         if ((e.getEntity() instanceof Player)) {
             e.setKeepInventory(true);

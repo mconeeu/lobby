@@ -6,23 +6,16 @@
 package eu.mcone.lobby.hologram;
 
 import eu.mcone.lobby.Main;
-import eu.mcone.lobby.utils.LocationFactory;
-import net.minecraft.server.v1_8_R3.WorldServer;
-import org.bukkit.Bukkit;
+import de.Dominik.BukkitCoreSystem.util.LocationFactory;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.entity.Player;
 
-import static de.Dominik.BukkitCoreSystem.main.Main.*;
+import static de.Dominik.BukkitCoreSystem.Main.*;
 
 public class PlayerHoloListener {
 
     public static void HoloSkypvp(final Player p) {
-        WorldServer world = ((CraftWorld) Bukkit.getWorld("world")).getHandle();
-        double x = LocationFactory.cfg.getDouble("Holo.skypvp" + ".X");
-        double y = LocationFactory.cfg.getDouble("Holo.skypvp" + ".y");
-        double z = LocationFactory.cfg.getDouble("Holo.skypvp" + ".Z");
-        final Location loc = new Location(Bukkit.getWorld(Main.config.getConfigValue("System-WorldName")), x, y, z);
+        final Location loc = LocationFactory.getXYZConfigLocation(Main.config, "Location-Holo-Skypvp");
 
         final String[] Text = { "§7» §9§lSkyPvP",
                 "§7Stats von §f" + p.getName(),
@@ -35,11 +28,7 @@ public class PlayerHoloListener {
     }
 
     public static void HoloMinewar(final Player p) {
-        WorldServer world = ((CraftWorld) Bukkit.getWorld("world")).getHandle();
-        double x = LocationFactory.cfg.getDouble("Holo.minewar" + ".X");
-        double y = LocationFactory.cfg.getDouble("Holo.minewar" + ".y");
-        double z = LocationFactory.cfg.getDouble("Holo.minewar" + ".Z");
-        final Location loc = new Location(Bukkit.getWorld(Main.config.getConfigValue("System-WorldName")), x, y, z);
+        final Location loc = LocationFactory.getXYZConfigLocation(Main.config, "Location-Holo-Minewar");
 
         final String[] Text = { "§7» §2§lMinewar",
                 "§7Stats von §f" + p.getName(),
@@ -55,11 +44,7 @@ public class PlayerHoloListener {
     }
 
     public static void HoloBedwars(final Player p) {
-        WorldServer world = ((CraftWorld) Bukkit.getWorld("world")).getHandle();
-        double x = LocationFactory.cfg.getDouble("Holo.bedwars" + ".X");
-        double y = LocationFactory.cfg.getDouble("Holo.bedwars" + ".y");
-        double z = LocationFactory.cfg.getDouble("Holo.bedwars" + ".Z");
-        final Location loc = new Location(Bukkit.getWorld(Main.config.getConfigValue("System-WorldName")), x, y, z);
+        final Location loc = LocationFactory.getXYZConfigLocation(Main.config, "Location-Holo-Bedwars");
 
         final String[] Text = { "§7» §c§lBedwars",
                 "§7Stats von §f" + p.getName(),
@@ -75,11 +60,7 @@ public class PlayerHoloListener {
     }
 
     public static void HoloKnockbackFFA(final Player p) {
-        WorldServer world = ((CraftWorld) Bukkit.getWorld("world")).getHandle();
-        double x = LocationFactory.cfg.getDouble("Holo.knockbackffa" + ".X");
-        double y = LocationFactory.cfg.getDouble("Holo.knockbackffa" + ".y");
-        double z = LocationFactory.cfg.getDouble("Holo.knockbackffa" + ".Z");
-        final Location loc = new Location(Bukkit.getWorld(Main.config.getConfigValue("System-WorldName")), x, y, z);
+        final Location loc = LocationFactory.getXYZConfigLocation(Main.config, "Location-Holo-Knockbackffa");
 
         final String[] Text = { "§7» §e§lKnockFFA",
                 "§7Stats von §f" + p.getName(),

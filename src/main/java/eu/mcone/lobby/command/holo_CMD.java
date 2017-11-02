@@ -3,10 +3,10 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.commands;
+package eu.mcone.lobby.command;
 
 import eu.mcone.lobby.Main;
-import eu.mcone.lobby.utils.LocationFactory;
+import de.Dominik.BukkitCoreSystem.util.LocationFactory;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,7 +21,7 @@ public class holo_CMD implements CommandExecutor{
                 if(args[0].equalsIgnoreCase("skypvp") || args[0].equalsIgnoreCase("minewar") || args[0].equalsIgnoreCase("knockbackffa") || args[0].equalsIgnoreCase("bedwars")){
                     if(p.hasPermission("system.admin")){
                         p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§7Du hast das Hologramm für denn Spielmodus §3" + args[0] + " §7gesetzt");
-                        LocationFactory.createConfigLocation(p.getLocation(), "Holo." + args[0], LocationFactory.cfgFile, LocationFactory.cfg);
+                        LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Holo-" + args[0]);
                     }
                 }
             }

@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.events;
+package eu.mcone.lobby.event;
 
 import org.bukkit.Effect;
 import org.bukkit.GameMode;
@@ -17,7 +17,7 @@ import org.bukkit.util.Vector;
 public class PlayerToggleFlight_Event implements Listener{
 
     @EventHandler
-    public void onDoubleJump(PlayerToggleFlightEvent e)
+    public void on(PlayerToggleFlightEvent e)
     {
         Player p = e.getPlayer();
         if (!e.isFlying()) {

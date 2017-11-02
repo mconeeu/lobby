@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import eu.mcone.lobby.Main;
-import eu.mcone.lobby.utils.LocationFactory;
+import de.Dominik.BukkitCoreSystem.util.LocationFactory;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -22,49 +22,49 @@ public class Kompass_Click {
 
     public Kompass_Click(InventoryClickEvent e, Player p) {
         if ((e.getCurrentItem() == null) || !e.getCurrentItem().hasItemMeta() || e.getSlotType() == InventoryType.SlotType.OUTSIDE) {
-            e.setCancelled(false);
+            e.setCancelled(true);
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-1"))) {
-            p.teleport(LocationFactory.getConfigLocation("Navigator-1", LocationFactory.cfg));
+            p.teleport(LocationFactory.getConfigLocation(Main.config, "Location-Navigator-1"));
             p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 1);
 
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-2"))) {
-            p.teleport(LocationFactory.getConfigLocation("Navigator-2", LocationFactory.cfg));
+            p.teleport(LocationFactory.getConfigLocation(Main.config, "Location-Navigator-2"));
             p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 1);
 
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-3"))) {
-            p.teleport(LocationFactory.getConfigLocation("Navigator-3", LocationFactory.cfg));
+            p.teleport(LocationFactory.getConfigLocation(Main.config, "Location-Navigator-3"));
             p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 1);
 
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-4"))) {
-            p.teleport(LocationFactory.getConfigLocation("Navigator-4", LocationFactory.cfg));
+            p.teleport(LocationFactory.getConfigLocation(Main.config, "Location-Navigator-4"));
             p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 1);
 
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-5"))) {
-            p.teleport(LocationFactory.getConfigLocation("Navigator-5", LocationFactory.cfg));
+            p.teleport(LocationFactory.getConfigLocation(Main.config, "Location-Navigator-5"));
             p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 1);
 
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-6"))) {
-            p.teleport(LocationFactory.getConfigLocation("Navigator-6", LocationFactory.cfg));
+            p.teleport(LocationFactory.getConfigLocation(Main.config, "Location-Navigator-6"));
             p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 1);
 
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-7"))) {
-            p.teleport(LocationFactory.getConfigLocation("Navigator-7", LocationFactory.cfg));
+            p.teleport(LocationFactory.getConfigLocation(Main.config, "Location-Navigator-7"));
             p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 1);
 
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-8"))) {
-            p.teleport(LocationFactory.getConfigLocation("Navigator-8", LocationFactory.cfg));
+            p.teleport(LocationFactory.getConfigLocation(Main.config, "Location-Navigator-8"));
             p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 1);
 
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-9"))) {
-            p.teleport(LocationFactory.getConfigLocation("Navigator-9", LocationFactory.cfg));
+            p.teleport(LocationFactory.getConfigLocation(Main.config, "Location-Navigator-9"));
             p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 1);
 

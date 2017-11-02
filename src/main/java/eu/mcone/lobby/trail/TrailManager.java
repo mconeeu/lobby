@@ -118,9 +118,9 @@ public class TrailManager {
         ArrayList<Trail> allowedTrailList = getAllowedTrailsList(p);
 
         if (p.hasPermission(trail.getPerm()) || p.hasPermission("group.premium") || allowedTrailList.contains(trail)) {
-            inv.setItem(i, ItemManager.createItemLore(trail.getItem(), 0, 0, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§2§oDu besitzt dieses Item!", "§8» §f§nRechtsklick§8 | §7§oAktivieren"))));
+            inv.setItem(i, ItemManager.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§2§oDu besitzt dieses Item!", "§8» §f§nRechtsklick§8 | §7§oAktivieren")), true));
         } else {
-            inv.setItem(i, ItemManager.createItemLore(trail.getItem(), 0, 0, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§c§oDu besitzt dieses Item nicht!", "§7§oKostet: §f§o" + trail.getCoins() + " Coins"))));
+            inv.setItem(i, ItemManager.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§c§oDu besitzt dieses Item nicht!", "§7§oKostet: §f§o" + trail.getCoins() + " Coins")), true));
         }
     }
 

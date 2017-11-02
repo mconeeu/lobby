@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.events;
+package eu.mcone.lobby.event;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,7 +13,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 public class FoodLevelChange_Event implements Listener{
 
     @EventHandler
-    public void onFeed(FoodLevelChangeEvent e) {
+    public void on(FoodLevelChangeEvent e) {
         Player p = (Player)e.getEntity();
 
         if ((p instanceof Player)) {

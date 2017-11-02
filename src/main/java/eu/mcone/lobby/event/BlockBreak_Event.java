@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.events;
+package eu.mcone.lobby.event;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -14,7 +14,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 public class BlockBreak_Event implements Listener{
 
     @EventHandler
-    public void onBreak(BlockBreakEvent e){
+    public void on(BlockBreakEvent e){
         Player p = e.getPlayer();
         if(p.getGameMode() == GameMode.CREATIVE){
             e.setCancelled(false);
