@@ -52,7 +52,6 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerQuit_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new WeatherChange_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerPickupItem_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new InventoryDrag_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new WeatherChange_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new FoodLevelChange_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new EntitiyDamage_Event(), this);
@@ -71,7 +70,7 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable(){
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aPlugin wurde deaktiviert!");
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§cPlugin wurde deaktiviert!");
     }
 
     private void registerMySQLConfig(){
@@ -91,7 +90,7 @@ public class Main extends JavaPlugin {
         config.insertMySQLConfig("Location-Navigator-5", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
         config.insertMySQLConfig("Location-Navigator-6", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
         config.insertMySQLConfig("Location-Navigator-7", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
-        config.insertMySQLConfig("Location-Navigator-8", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
+        /*Location 8 ist der Spawn*/
         config.insertMySQLConfig("Location-Navigator-9", "[\"\",\"\",\"\",\"\",\"\",\"\"]");
 
         //Lobby compass

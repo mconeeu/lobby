@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.inventar;
+package eu.mcone.lobby.inventory;
 
 import de.Dominik.BukkitCoreSystem.api.CoinsAPI;
 import de.Dominik.BukkitCoreSystem.api.OnlineTimeAPI;
@@ -17,9 +17,9 @@ import org.bukkit.inventory.Inventory;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Interaction_Interact {
+public class InteractionInventory {
 
-    public Interaction_Interact(Player p, Player clicked) {
+    public InteractionInventory(Player p, Player clicked) {
 
         int coins = CoinsAPI.getCoins(clicked);
         double onlinetime = OnlineTimeAPI.getTime(clicked);

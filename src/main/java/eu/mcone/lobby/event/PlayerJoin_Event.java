@@ -6,7 +6,7 @@
 package eu.mcone.lobby.event;
 
 import eu.mcone.lobby.Main;
-import eu.mcone.lobby.inventar.Hider_Interact;
+import eu.mcone.lobby.util.PlayerHider;
 import eu.mcone.lobby.util.AntiLabymod;
 import de.Dominik.BukkitCoreSystem.util.LocationFactory;
 import eu.mcone.lobby.util.ScoreboardManager;
@@ -28,7 +28,7 @@ public class PlayerJoin_Event implements Listener {
         e.setJoinMessage(null);
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (Hider_Interact.players.contains(p)) {
+            if (PlayerHider.players.contains(p)) {
                 p.hidePlayer(player);
             }
         }

@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.inventar;
+package eu.mcone.lobby.util;
 
 import eu.mcone.lobby.Main;
 import de.Dominik.BukkitCoreSystem.util.ItemManager;
@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Hider_Interact {
+public class PlayerHider {
 
     public static ArrayList<Player> players = new ArrayList<>();
     private static HashMap<String, Long> zeit = new HashMap<>();

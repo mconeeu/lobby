@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.event;
 
-import eu.mcone.lobby.inventar.Interaction_Interact;
+import eu.mcone.lobby.inventory.InteractionInventory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +19,7 @@ public class PlayerInteractEntity_Event implements Listener {
         Player clicked = (Player) e.getRightClicked();
 
         if (e.getRightClicked() instanceof Player) {
-            new Interaction_Interact(p, clicked);
+            new InteractionInventory(p, clicked);
         }
     }
 

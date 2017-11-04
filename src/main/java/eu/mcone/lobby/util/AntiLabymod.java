@@ -46,7 +46,7 @@ public class AntiLabymod implements Listener {
 
         private String name;
 
-        private DisabledLabyModFunctions(String name) {
+        DisabledLabyModFunctions(String name) {
             this.name = name;
         }
 

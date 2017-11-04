@@ -5,32 +5,36 @@
 
 package eu.mcone.lobby.event;
 
-import eu.mcone.lobby.inventar.*;
+import eu.mcone.lobby.inventory.*;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 
 public class InventoryClick_Event implements Listener{
 
     @EventHandler
     public void on(InventoryClickEvent e){
         Player p = (Player)e.getWhoClicked();
+
         if (p.getGameMode().equals(GameMode.CREATIVE)) {
             e.setCancelled(false);
+        } else if ((e.getCurrentItem() == null) || !e.getCurrentItem().hasItemMeta() || e.getSlotType() == InventoryType.SlotType.OUTSIDE) {
+            e.setCancelled(true);
         } else {
             e.setCancelled(true);
             if (e.getInventory().getName().equals("§8» §5Hüte")) {
-                new Huete_Click(e, p);
+                HueteInventory.click(e, p);
             } else if (e.getInventory().getName().equals("§8» §3Dein Profil")) {
-                new Profil_Click(e, p);
+                ProfilInventory.click(e, p);
             } else if (e.getInventory().getName().equals("§8» §3Trails")){
-                new Trails_Click(e, p);
+                TrailsInventory.click(e, p);
             } else if (e.getInventory().getName().equals("§8» §3Navigator")) {
-                new Kompass_Click(e, p);
+                KompassInventory.click(e, p);
             } else if (e.getInventory().getName().equals("§8» §6Trail kaufen")) {
-                new Trails_Buy_Click(e, p);
+                TrailsBuyInventory.click(e, p);
             }
         }
     }

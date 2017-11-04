@@ -3,23 +3,28 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.inventar;
+package eu.mcone.lobby.inventory;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import de.Dominik.BukkitCoreSystem.util.LocationFactory;
 import eu.mcone.lobby.Main;
 import de.Dominik.BukkitCoreSystem.util.ItemManager;
+import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 
 import java.util.List;
 
-public class Kompass_Interact {
+public class KompassInventory {
 
-    public Kompass_Interact(PlayerInteractEvent e, Player p) {
+    public KompassInventory(Player p) {
         Inventory inv = org.bukkit.Bukkit.createInventory(null, 54, "§8» §3Navigator");
 
         //Hellblau inv.setItem(0, ItemManager.createItem(Material.STAINED_GLASS_PANE, 3, 1, ""));
@@ -104,19 +109,67 @@ public class Kompass_Interact {
         p.openInventory(inv);
     }
 
-    private String getItemname(String configKey) {
-        gsonResult rs = new Gson().fromJson(Main.config.getConfigValue(configKey), gsonResult.class);
-        return rs.name;
+    public static void click(InventoryClickEvent e, Player p) {
+        if ((e.getCurrentItem() == null) || !e.getCurrentItem().hasItemMeta() || e.getSlotType() == InventoryType.SlotType.OUTSIDE) {
+            e.setCancelled(true);
+        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-1"))) {
+            teleportToSpawn(p, "Location-Navigator-1");
+
+        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-2"))) {
+            teleportToSpawn(p, "Location-Navigator-2");
+
+        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-3"))) {
+            teleportToSpawn(p, "Location-Navigator-3");
+
+        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-4"))) {
+            teleportToSpawn(p, "Location-Navigator-4");
+
+        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-5"))) {
+            teleportToSpawn(p, "Location-Navigator-5");
+
+        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-6"))) {
+            teleportToSpawn(p, "Location-Navigator-6");
+
+        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-7"))) {
+            teleportToSpawn(p, "Location-Navigator-7");
+
+        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-8"))) {
+            teleportToSpawn(p, "Location-Spawn");
+
+        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-9"))) {
+            teleportToSpawn(p, "Location-Navigator-9");
+
+        } else {
+            e.setCancelled(true);
+        }
     }
 
-    private int getItemID(String configKey) {
-        gsonResult rs = new Gson().fromJson(Main.config.getConfigValue(configKey), gsonResult.class);
-        return rs.itemID;
+    private static void teleportToSpawn(Player p, String configKey) {
+        Location loc = LocationFactory.getConfigLocation(Main.config, configKey);
+
+        if (loc != null) {
+            p.teleport(loc);
+            p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
+            p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 1);
+        } else {
+            p.closeInventory();
+            p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§4Dieser Spawn existiert nicht!");
+        }
     }
 
-    private List<String> getItemLore(String configKey) {
+    private static String getItemname(String configKey) {
         gsonResult rs = new Gson().fromJson(Main.config.getConfigValue(configKey), gsonResult.class);
-        return rs.lore;
+        return rs.getName();
+    }
+
+    private static int getItemID(String configKey) {
+        gsonResult rs = new Gson().fromJson(Main.config.getConfigValue(configKey), gsonResult.class);
+        return rs.getItemID();
+    }
+
+    private static List<String> getItemLore(String configKey) {
+        gsonResult rs = new Gson().fromJson(Main.config.getConfigValue(configKey), gsonResult.class);
+        return rs.getLore();
     }
 
     private class gsonResult {

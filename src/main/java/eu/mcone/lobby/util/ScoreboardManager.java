@@ -22,6 +22,9 @@ public class ScoreboardManager {
 
     public ScoreboardManager() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
+            if (count == 4) {
+                count = 0;
+            }
             count++;
 
             for(Player p : Bukkit.getOnlinePlayers()) {
@@ -29,7 +32,9 @@ public class ScoreboardManager {
                 final Objective old = board.getObjective(DisplaySlot.SIDEBAR);
 
                 setScoreboard(p, count);
-                old.unregister();
+                if (old != null) {
+                    old.unregister();
+                }
             }
         }, 100, 100);
     }
@@ -61,9 +66,9 @@ public class ScoreboardManager {
         }else if(i == 4) {
             o.getScore("§cYouTube").setScore(1);
             o.getScore("§f§omcone.eu/yt").setScore(0);
-            count = 0;
         } else {
-            count = 0;
+            o.getScore("§7Teamspeak").setScore(1);
+            o.getScore("§f§omcone.eu").setScore(0);
         }
 
         p.setScoreboard(board);
