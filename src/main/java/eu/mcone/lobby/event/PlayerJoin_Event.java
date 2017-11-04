@@ -6,10 +6,11 @@
 package eu.mcone.lobby.event;
 
 import eu.mcone.lobby.Main;
+import eu.mcone.lobby.scoreboard.Scoreboard;
 import eu.mcone.lobby.util.PlayerHider;
 import eu.mcone.lobby.util.AntiLabymod;
 import de.Dominik.BukkitCoreSystem.util.LocationFactory;
-import eu.mcone.lobby.util.ScoreboardManager;
+import eu.mcone.lobby.scoreboard.ScoreboardManager;
 import de.Dominik.BukkitCoreSystem.util.ItemManager;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -54,7 +55,7 @@ public class PlayerJoin_Event implements Listener {
 
         AntiLabymod.setLabySettings(p);
 
-        ScoreboardManager.setScoreboard(p, 1);
+        new Scoreboard(p);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
