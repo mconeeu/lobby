@@ -33,14 +33,19 @@ public class Scoreboard {
         this.o = sb.registerNewObjective("Main", "Lobby");
 
         this.o.setDisplaySlot(DisplaySlot.SIDEBAR);
-        this.o.setDisplayName("§7» §3§lMCONE.EU");
+        this.o.setDisplayName("§f§l§n"+p.getName());
 
-        this.scores.put("§7Rang:", 7);
+        this.o.getScore("§1").setScore(12);
+        this.o.getScore("§8» §3§lMCONE.EU").setScore(11);
+        this.o.getScore("§7§oDein Nummer 1").setScore(10);
+        this.o.getScore("§7§oMinecraftnetzwerk").setScore(9);
+        this.o.getScore("§2").setScore(8);
+        this.o.getScore("§7Rang:").setScore(7);
         this.scores.put(getObjectiveRang(p), 6);
-        this.scores.put("§1", 5);
-        this.scores.put("§7Coins", 4);
+        this.o.getScore("§3").setScore(5);
+        this.o.getScore("§7Coins").setScore(4);
         this.scores.put("§o" + CoinsAPI.getCoins(p), 3);
-        this.scores.put("§2", 2);
+        this.o.getScore("§4").setScore(2);
         this.scores.put("§7Teamspeak", 1);
         this.scores.put("§f§omcone.eu", 0);
 
@@ -64,12 +69,8 @@ public class Scoreboard {
         }
         this.scores = new HashMap<>();
 
-        this.scores.put("§7Rang:", 7);
         this.scores.put(rang, 6);
-        this.scores.put("§1", 5);
-        this.scores.put("§7Coins", 4);
         this.scores.put("§o" + coins, 3);
-        this.scores.put("§2", 2);
 
         if(i == 1) {
             this.scores.put("§7Teamspeak", 1);
