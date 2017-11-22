@@ -12,6 +12,8 @@ import org.bukkit.scoreboard.Objective;
 
 import java.util.HashMap;
 
+import static de.Dominik.BukkitCoreSystem.util.ScoreboardManager.getObjectiveRang;
+
 public class Scoreboard {
 
     private Player p;
@@ -99,37 +101,4 @@ public class Scoreboard {
         this.p.setScoreboard(sb);
     }
 
-    public static String getObjectiveRang(Player p){
-        String rang;
-
-        if (p.hasPermission("group.Admin")) {
-            rang = "§c§oAdmin";
-        } else if (p.hasPermission("group.Developer")) {
-            rang = "§b§oDeveloper";
-        } else if (p.hasPermission("group.Builder")) {
-            rang = "§e§oBuilder";
-        } else if (p.hasPermission("group.JrSupporter")) {
-            rang = "§a§oJrSupporter";
-        } else if (p.hasPermission("group.SrModerator")) {
-            rang = "§2§oSrModerator";
-        } else if (p.hasPermission("group.Moderator")) {
-            rang = "§2§oModerator";
-        } else if (p.hasPermission("group.Supporter")) {
-            rang = "§a§oSupporter";
-        } else if (p.hasPermission("group.YouTuber")) {
-            rang = "§5§oYoutuber";
-        }else if (p.hasPermission("group.Premium+")) {
-            rang = "§6§oPremium+";
-        }else if (p.hasPermission("group.Premium")) {
-            rang = "§6§oPremium";
-        }else if (p.hasPermission("group.Spieler")) {
-            rang = "§f§oSpieler";
-        }else if (p.hasPermission("group.Spielverderber")) {
-            rang = "§8§oSpielverderber";
-        } else {
-            rang = "§4§oError";
-        }
-
-        return rang;
-    }
 }

@@ -5,6 +5,8 @@
 
 package eu.mcone.lobby.event;
 
+import eu.mcone.lobby.Main;
+import eu.mcone.lobby.trail.TrailManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,6 +18,8 @@ public class PlayerQuit_Event implements Listener{
     public void on(PlayerQuitEvent e) {
         Player p = e.getPlayer();
         e.setQuitMessage(null);
+
+        Main.trail.removeTrail(p);
 /*
         for (Player all : Bukkit.getOnlinePlayers()){
             PlayerHoloListener.HoloSkypvp(all);

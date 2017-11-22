@@ -27,8 +27,8 @@ public class InventoryClick_Event implements Listener{
             e.setCancelled(true);
             if (e.getInventory().getName().equals("§8» §5Hüte")) {
                 HueteInventory.click(e, p);
-            } else if (e.getInventory().getName().equals("§8» §3Dein Profil")) {
-                ProfilInventory.click(e, p);
+            } else if (e.getInventory().getName().equals("§8» §3Lobby Gadgets")) {
+                GadgetsInventory.click(e, p);
             } else if (e.getInventory().getName().equals("§8» §3Trails")){
                 TrailsInventory.click(e, p);
             } else if (e.getInventory().getName().equals("§8» §3Navigator")) {

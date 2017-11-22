@@ -13,15 +13,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
-public class ProfilInventory {
+public class GadgetsInventory {
 
-    public ProfilInventory(Player p) {
-        Inventory inv = org.bukkit.Bukkit.createInventory(null, 9, "§8» §3Dein Profil");
+    public GadgetsInventory(Player p) {
+        Inventory inv = org.bukkit.Bukkit.createInventory(null, 9, "§8» §3Lobby Gadgets");
 
         for (int i = 0; i <= 8; i++) {
             inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 1, "§8//§oMCONE§8//", true));
         }
-        inv.setItem(2, ItemManager.createItem(Material.SKULL_ITEM, 0, 1, "§8» §5Hüte", true));
+        inv.setItem(2, ItemManager.createItem(Material.GOLD_HELMET, 0, 1, "§8» §5Hüte", true));
         inv.setItem(4, ItemManager.createItem(Material.GOLD_BOOTS, 0, 1, "§8» §3Trails", true));
         inv.setItem(6, ItemManager.createItem(Material.GOLD_INGOT, 0, 1, "§8» §bGadgets", true));
 

@@ -1,14 +1,51 @@
 name: MCONE-Lobby
 authors: [TwinsterHD, Rufus Maiwald, BamDev]
-version: 2.5
+version: 3.1.0-SNAPSHOT
 main: eu.mcone.lobby.Main
 depend: [MCONE-BukkitCoreSystem]
+
 commands:
   set:
     description: Setze die einzelnen Spielmodi
+    permission: lobby.set.spawn
   setholo:
     description: Setze die einzelnen Hologramme
+    permission: lobby.set.holo
   npc:
     descirption: Spawnt einen NPC
+    permissions: lobby.set.npc
   spawn:
     description: Teleportiert den Spieler zum Spawn
+
+permissions:
+  lobby:
+    description: Lobby Main Permission
+    children:
+      lobby.set:
+        description: Allows to set several things
+        children:
+          lobby.set.spawn:
+            description: Allows to set the spawn
+          lobby.set.holo:
+            description: Allows to set the holograms
+          lobby.set.npc:
+            description: Allows to set npcs
+      lobby.trail:
+        description: Use all Trails
+        children:
+          lobby.trail.cookie:
+            description: Cookie Trail
+          lobby.trail.glow:
+            description: Glow Trail
+          lobby.trail.ender:
+            description: Ender Trail
+          lobby.trail.musik:
+            description: Musik Trail
+          lobby.trail.herzen:
+            description: Herzen Trail
+          lobby.trail.lava:
+            description: Lava Trail
+          lobby.trail.schnee:
+            description: Schnee Trail
+          lobby.trail.wasser:
+            description: Wasser Trail

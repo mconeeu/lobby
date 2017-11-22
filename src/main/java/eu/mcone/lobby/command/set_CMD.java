@@ -17,7 +17,7 @@ public class set_CMD implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
         Player p = (Player)sender;
 
-        if (p.hasPermission("lobby.set")){
+        if (p.hasPermission("lobby.set.spawn") || p.hasPermission("lobby.set.*") || p.hasPermission("lobby.*")) {
             if (args.length != 1) {
                 p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§cBitte benutze /set <1, 2, 3, 4, 5, 6, 7, 8, 9>");
             }else if (args[0].equalsIgnoreCase("1")){

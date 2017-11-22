@@ -69,13 +69,15 @@ public class PlayerJoin_Event implements Listener {
             p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§4Der Lobby Spawn ist noch nicht gesetzt!");
         }
 
+        setJoinItems(p);
+    }
 
-
-        p.getInventory().setItem(4, ItemManager.createItem(Material.COMPASS, 0, 1, "§3§lNavigator §8» §7§oWähle einen Spielmodus", true));
+    public static void setJoinItems(Player p) {
         p.getInventory().setItem(0, ItemManager.createItem(Material.INK_SACK, 10, 1, "§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus", true));
-        p.getInventory().setItem(7, ItemManager.createItem(Material.NETHER_STAR, 0, 1, "§3§lStats §8» §7§oStatistiken zu allen Spielmodi", true));
         p.getInventory().setItem(1, ItemManager.createItem(Material.FISHING_ROD, 0, 1, "§3§lZauber-Angel §8» §7§oZiehe dich wohin du willst", true));
-        p.getInventory().setItem(8, ItemManager.createSkullItem("§3§lProfil §8» §7§oAussehen / Effekte / Gadgets", p.getName(), 1, new ArrayList<>()));
+        p.getInventory().setItem(4, ItemManager.createItem(Material.COMPASS, 0, 1, "§3§lNavigator §8» §7§oWähle einen Spielmodus", true));
+        p.getInventory().setItem(7, ItemManager.createItem(Material.FIREWORK, 0, 1, "§3§lGadgets §8» §7§oTrails / Boots / Gadgets", true));
+        p.getInventory().setItem(8, ItemManager.createSkullItem("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde", p.getName(), 1, new ArrayList<>()));
     }
 
 }

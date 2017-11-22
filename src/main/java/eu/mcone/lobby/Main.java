@@ -75,6 +75,7 @@ public class Main extends JavaPlugin {
         for (Player p : Bukkit.getOnlinePlayers()) {
             //for Players who are already on server (reload)
             new Scoreboard(p);
+            PlayerJoin_Event.setJoinItems(p);
         }
     }
 

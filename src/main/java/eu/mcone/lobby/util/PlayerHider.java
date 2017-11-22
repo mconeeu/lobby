@@ -20,13 +20,12 @@ public class PlayerHider {
 
     public static ArrayList<Player> players = new ArrayList<>();
     private static HashMap<String, Long> zeit = new HashMap<>();
-    private static int Cooldown = 0;
 
     public static void hidePlayers(Player p) {
         if (zeit.containsKey(p.getName())){
             long diff = (System.currentTimeMillis() - (Long) zeit.get(p.getName())) / 10L / 60L;
-            Cooldown = (1);
-            if (diff < Cooldown){
+            int cooldown = 1;
+            if (diff < cooldown){
                 p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§7Du musst kurz warte um den Player hider wieder benutzen zu können");
                 return;
             }

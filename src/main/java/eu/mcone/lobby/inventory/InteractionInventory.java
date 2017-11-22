@@ -22,6 +22,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static de.Dominik.BukkitCoreSystem.util.ScoreboardManager.getObjectiveRang;
+
 public class InteractionInventory {
 
     public InteractionInventory(Player p, Player clicked) {
@@ -38,7 +40,7 @@ public class InteractionInventory {
                 for (int i = 0; i <= 26; i++) {
                     inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 1, "§8//§oMCONE§8//", true));
                 }
-                inv.setItem(4, ItemManager.createSkullItem("§f§l" + clicked.getName(), clicked.getName(), 1, new ArrayList<>(Arrays.asList(Scoreboard.getObjectiveRang(clicked), "","§7Coins: §f" + coins , "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + status))));
+                inv.setItem(4, ItemManager.createSkullItem("§f§l" + clicked.getName(), clicked.getName(), 1, new ArrayList<>(Arrays.asList(getObjectiveRang(clicked), "","§7Coins: §f" + coins , "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + status))));
 
                 p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
                 p.openInventory(inv);

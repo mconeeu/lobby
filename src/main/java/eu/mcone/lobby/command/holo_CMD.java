@@ -16,12 +16,15 @@ public class holo_CMD implements CommandExecutor{
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
         Player p = (Player)sender;
+
         if(cmd.getName().equalsIgnoreCase("setholo")){
-            if(args.length == 1){
-                if(args[0].equalsIgnoreCase("skypvp") || args[0].equalsIgnoreCase("minewar") || args[0].equalsIgnoreCase("knockbackffa") || args[0].equalsIgnoreCase("bedwars")){
-                    if(p.hasPermission("system.admin")){
-                        p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§7Du hast das Hologramm für denn Spielmodus §3" + args[0] + " §7gesetzt");
-                        LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Holo-" + args[0]);
+            if (p.hasPermission("lobby.set.npc") || p.hasPermission("lobby.set.*") || p.hasPermission("lobby.*")) {
+                if (args.length == 1) {
+                    if (args[0].equalsIgnoreCase("skypvp") || args[0].equalsIgnoreCase("minewar") || args[0].equalsIgnoreCase("knockbackffa") || args[0].equalsIgnoreCase("bedwars")) {
+                        if (p.hasPermission("system.admin")) {
+                            p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§7Du hast das Hologramm für denn Spielmodus §3" + args[0] + " §7gesetzt");
+                            LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Holo-" + args[0]);
+                        }
                     }
                 }
             }

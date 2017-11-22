@@ -110,7 +110,7 @@ public class TrailManager {
 
     public void removeTrail(Player p) {
         p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§7Trail entfernt!");
-        this.trails.remove(p);
+        if (this.trails.containsKey(p)) this.trails.remove(p);
         p.closeInventory();
     }
 
@@ -146,15 +146,6 @@ public class TrailManager {
 
     public void createMySQLTable() {
         this.mysql.update("CREATE TABLE IF NOT EXISTS lobby_items (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, `uuid` VARCHAR(100), `cat` VARCHAR(50) NOT NULL, `item` VARCHAR(100) NOT NULL, `timestamp` int(50)) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
-    }
-
-    private void addTrailToPlayer(Trail trail, UUID uuid) {
-        ArrayList<Trail> trailArrayList = this.allowedTrails.get(uuid) != null ? this.allowedTrails.get(uuid) : new ArrayList<>();
-
-        if (!trailArrayList.contains(trail)) {
-            trailArrayList.add(trail);
-            this.allowedTrails.put(uuid, trailArrayList);
-        }
     }
 
     private void updateAllowedTrails(){

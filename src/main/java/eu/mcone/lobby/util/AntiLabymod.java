@@ -22,14 +22,16 @@ public class AntiLabymod implements Listener {
     public static void setLabySettings(Player p){
         try{
             HashMap<String, Boolean> dList = new HashMap<>();
-            dList.put(DisabledLabyModFunctions.DAMAGEINDICATOR.getName(), false);
-            dList.put(DisabledLabyModFunctions.ARMOR.getName(), false);
-            dList.put(DisabledLabyModFunctions.MINIMAP_RADAR.getName(), false);
-            dList.put(DisabledLabyModFunctions.POTIONS.getName(), false);
+
+            for (DisabledLabyModFunctions d : DisabledLabyModFunctions.values()) {
+                dList.put(d.getName(), false);
+            }
+
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             ObjectOutputStream objOut = new ObjectOutputStream(out);
             objOut.writeObject(dList);
             ByteBuf bb = Unpooled.copiedBuffer(out.toByteArray());
+
             PacketDataSerializer serializer = new PacketDataSerializer(bb);
             PacketPlayOutCustomPayload packet = new PacketPlayOutCustomPayload("LABYMOD", serializer);
             ((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);

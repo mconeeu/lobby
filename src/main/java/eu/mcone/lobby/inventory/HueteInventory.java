@@ -15,7 +15,7 @@ import org.bukkit.inventory.Inventory;
 
 public class HueteInventory {
 
-    public HueteInventory(Player p) {
+    HueteInventory(Player p) {
         Inventory inv = Bukkit.createInventory(null, 9, "§8» §5Hüte");
 
         for (int i = 0; i <= 8; i++) {
@@ -37,12 +37,12 @@ public class HueteInventory {
     public static void click(InventoryClickEvent e, Player p) {
         if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§7§l↩ Zurück")) {
             p.playSound(p.getLocation(), Sound.NOTE_BASS, 1.0F, 1.0F);
-            new ProfilInventory(p);
-        } else if (!e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §4Hat entfernen")) {
+            new GadgetsInventory(p);
+        } else if (!e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §c§lHat entfernen")) {
             p.getInventory().setHelmet(e.getCurrentItem());
             p.playSound(p.getLocation(), org.bukkit.Sound.ARROW_HIT, 1.0F, 1.0F);
             p.closeInventory();
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §4Hat entfernen")) {
+        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §c§lHat entfernen")) {
             p.getInventory().setHelmet(null);
             p.playSound(p.getLocation(), org.bukkit.Sound.ANVIL_BREAK, 1.0F, 1.0F);
             p.closeInventory();

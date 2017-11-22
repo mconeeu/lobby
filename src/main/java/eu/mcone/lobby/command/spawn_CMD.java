@@ -29,7 +29,7 @@ public class spawn_CMD implements CommandExecutor {
                 p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§4Du kannst gerade nicht zum Spawn teleportiert werden.");
             }
         } else if ((args.length == 1) && args[0].equals("set")) {
-            if (p.hasPermission("group.admin") || p.hasPermission("group.developer")) {
+            if (p.hasPermission("lobby.set.spawn") || p.hasPermission("lobby.set.*") || p.hasPermission("lobby.*")) {
                 LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Spawn");
                 p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§2Der Spawn wurde erfolgreich gesetzt!");
             } else {
