@@ -22,22 +22,16 @@ public class EntitiyDamage_Event implements Listener{
                 e.setCancelled(true);
             }
 
-            if(e.getEntity() instanceof Player){
-                if(e.getCause() == EntityDamageEvent.DamageCause.DROWNING){
-                    e.setCancelled(true);
-                }
+            if(e.getCause() == EntityDamageEvent.DamageCause.DROWNING){
+                e.setCancelled(true);
             }
 
-            if(e.getEntity() instanceof Player){
-                if(e.getCause() == EntityDamageEvent.DamageCause.LAVA){
-                    e.setCancelled(true);
-                }
+            if(e.getCause() == EntityDamageEvent.DamageCause.LAVA){
+                e.setCancelled(true);
             }
 
-            if(e.getEntity() instanceof Player){
-                if(e.getCause() == EntityDamageEvent.DamageCause.VOID){
-                    p.teleport(LocationFactory.getConfigLocation(Main.config, "Location-Spawn"));
-                }
+            if(e.getCause() == EntityDamageEvent.DamageCause.VOID){
+                p.teleport(LocationFactory.getConfigLocation(Main.config, "Location-Spawn"));
             }
         }
     }

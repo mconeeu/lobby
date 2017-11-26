@@ -12,7 +12,7 @@ import org.bukkit.scoreboard.Objective;
 
 import java.util.HashMap;
 
-import static de.Dominik.BukkitCoreSystem.util.ScoreboardManager.getObjectiveRang;
+import static de.Dominik.BukkitCoreSystem.util.Scoreboard.getObjectiveRang;
 
 public class Scoreboard {
 

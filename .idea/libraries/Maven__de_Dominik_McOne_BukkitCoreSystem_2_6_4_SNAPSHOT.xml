@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: de.Dominik:McOne_BukkitCoreSystem:2.6.4-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/de/Dominik/McOne_BukkitCoreSystem/2.6.4-SNAPSHOT/McOne_BukkitCoreSystem-2.6.4-20171126.182634-2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/de/Dominik/McOne_BukkitCoreSystem/2.6.4-SNAPSHOT/McOne_BukkitCoreSystem-2.6.4-20171126.182634-2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/de/Dominik/McOne_BukkitCoreSystem/2.6.4-SNAPSHOT/McOne_BukkitCoreSystem-2.6.4-20171126.182634-2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

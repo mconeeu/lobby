@@ -24,7 +24,7 @@ import java.util.List;
 
 public class KompassInventory {
 
-    public KompassInventory(Player p) {
+    public static void open(Player p) {
         Inventory inv = org.bukkit.Bukkit.createInventory(null, 54, "§8» §3Navigator");
 
         //Hellblau inv.setItem(0, ItemManager.createItem(Material.STAINED_GLASS_PANE, 3, 1, ""));

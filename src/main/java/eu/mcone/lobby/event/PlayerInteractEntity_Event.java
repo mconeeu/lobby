@@ -19,7 +19,7 @@ public class PlayerInteractEntity_Event implements Listener {
         Player clicked = (Player) e.getRightClicked();
 
         if (e.getRightClicked() instanceof Player) {
-            new InteractionInventory(p, clicked);
+            InteractionInventory.open(p, clicked);
         }
     }
 

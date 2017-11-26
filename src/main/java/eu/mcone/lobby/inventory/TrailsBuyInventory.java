@@ -21,7 +21,7 @@ import java.util.Arrays;
 
 public class TrailsBuyInventory {
 
-    TrailsBuyInventory(Player p, Trail trail) {
+    static void open(Player p, Trail trail) {
         Inventory inv = Bukkit.createInventory(null, 27, "§8» §6Trail kaufen");
 
         for (int i = 0; i <= 26; i++) {

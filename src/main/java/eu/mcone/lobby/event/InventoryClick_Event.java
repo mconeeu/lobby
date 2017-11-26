@@ -35,6 +35,8 @@ public class InventoryClick_Event implements Listener{
                 KompassInventory.click(e, p);
             } else if (e.getInventory().getName().equals("§8» §6Trail kaufen")) {
                 TrailsBuyInventory.click(e, p);
+            } else if (e.getInventory().getName().equals("§8» §3Interaktionsmenü")) {
+                InteractionInventory.click(e, p);
             }
         }
     }

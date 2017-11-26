@@ -21,12 +21,13 @@ public class PlayerInteract_Event implements Listener{
     @EventHandler
     public void on(PlayerInteractEvent e){
         Player p = e.getPlayer();
-        e.setCancelled(true);
 
         ItemStack i = p.getItemInHand();
         if ((i == null) || (!i.hasItemMeta()) || (!i.getItemMeta().hasDisplayName())) {
             return;
-        } else if ((e.getAction() == Action.RIGHT_CLICK_AIR) || (e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+        }
+
+        if ((e.getAction() == Action.RIGHT_CLICK_AIR) || (e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
                 p.performCommand("profil");
             } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus")) {
@@ -34,12 +35,18 @@ public class PlayerInteract_Event implements Listener{
             } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an")) {
                 PlayerHider.showPlayers(p);
             } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lGadgets §8» §7§oTrails / Boots / Gadgets")) {
-                new GadgetsInventory(p);
+                GadgetsInventory.open(p);
                 p.playSound(p.getLocation(), Sound.CHEST_OPEN, 1.0F, 1.0F);
             } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lNavigator §8» §7§oWähle einen Spielmodus")) {
-                new KompassInventory(p);
+                KompassInventory.open(p);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
             }
+
+            e.setCancelled(true);
+        } else if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lZauber-Angel §8» §7§oZiehe dich wohin du willst")) {
+            e.setCancelled(false);
+        } else {
+            e.setCancelled(true);
         }
     }
 }
