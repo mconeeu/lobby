@@ -12,14 +12,11 @@ import eu.mcone.lobby.command.set_CMD;
 import eu.mcone.lobby.command.spawn_CMD;
 import eu.mcone.lobby.event.*;
 import eu.mcone.lobby.hologram.HologramManager;
-import eu.mcone.lobby.scoreboard.Scoreboard;
-import eu.mcone.lobby.scoreboard.ScoreboardManager;
+import eu.mcone.lobby.util.Scoreboard;
 import eu.mcone.lobby.trail.TrailManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
 
 public class Main extends JavaPlugin {
 
@@ -34,7 +31,7 @@ public class Main extends JavaPlugin {
         instance = this;
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aScoreboard-Manager wird gestartet");
-        new ScoreboardManager();
+        Scoreboard.startUpdateScoreboardScheduler();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aMySQL Config wird initiiert");
         config = new MySQL_Config(de.Dominik.BukkitCoreSystem.Main.mysql3, "Lobby", 800);
@@ -74,7 +71,7 @@ public class Main extends JavaPlugin {
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             //for Players who are already on server (reload)
-            new Scoreboard(p);
+            Scoreboard.setObjective(p);
             PlayerJoin_Event.setJoinItems(p);
         }
     }

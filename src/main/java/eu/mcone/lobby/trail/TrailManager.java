@@ -35,16 +35,16 @@ public class TrailManager {
     public TrailManager(MySQL mysql){
         this.mysql = mysql;
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskTimer(Main.getInstance(), () -> {
             for(Entity ent : Bukkit.getWorld(Bukkit.getWorld(Main.config.getConfigValue("System-WorldName")).getName()).getEntities()) {
                 if (!(ent instanceof Player) && !(ent.getType().equals(EntityType.FISHING_HOOK))) {
                     ent.remove();
                 }
             }
             updateAllowedTrails();
-        }, 20, 15);
+        }, 20L, 15L);
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskTimer(Main.getInstance(), () -> {
             for(HashMap.Entry<Player, Trail> trailEntry : trails.entrySet()){
                 Player p = trailEntry.getKey();
                 
@@ -85,7 +85,7 @@ public class TrailManager {
                     p.getWorld().playEffect(p.getLocation(), Effect.WATERDRIP, 5);
                 }
             }
-        }, 10, 2);
+        }, 10L, 5L);
     }
 
     public void setTrail(Player p, Trail trail) {
@@ -163,7 +163,6 @@ public class TrailManager {
                     this.allowedTrails.put(uuid, trailArrayList);
                 }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -180,6 +179,6 @@ public class TrailManager {
     public boolean hasTrail(Player p, Trail trail) {
         ArrayList<Trail> trailList = getAllowedTrailsList(p);
 
-        return p.hasPermission(trail.getPerm()) || p.hasPermission("group.premium") || trailList.contains(trail);
+        return p.hasPermission(trail.getPerm()) || p.hasPermission("mcone.premium") || trailList.contains(trail);
     }
 }
