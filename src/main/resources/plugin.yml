@@ -5,10 +5,7 @@ main: eu.mcone.lobby.Main
 depend: [MCONE-BukkitCoreSystem]
 
 commands:
-  set:
-    description: Setze die einzelnen Spielmodi
-    permission: lobby.set.spawn
-  setholo:
+  holo:
     description: Setze die einzelnen Hologramme
     permission: lobby.set.holo
   npc:
@@ -26,8 +23,9 @@ permissions:
         children:
           lobby.set.spawn:
             description: Allows to set the spawn
+            children:
           lobby.set.holo:
-            description: Allows to set the holograms
+            description: Allows to set the hologram
           lobby.set.npc:
             description: Allows to set npcs
       lobby.trail:

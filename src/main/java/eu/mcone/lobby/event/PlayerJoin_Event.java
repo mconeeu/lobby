@@ -53,8 +53,8 @@ public class PlayerJoin_Event implements Listener {
         p.setFoodLevel(20);
 
         AntiLabymod.setLabySettings(p);
-
         Scoreboard.setObjective(p);
+        Main.holo.setHolograms(p);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);

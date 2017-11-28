@@ -5,13 +5,12 @@
 
 package eu.mcone.lobby;
 
+import de.Dominik.BukkitCoreSystem.api.HologramAPI;
 import de.Dominik.BukkitCoreSystem.mysql.MySQL_Config;
 import eu.mcone.lobby.command.holo_CMD;
 import eu.mcone.lobby.command.npc_CMD;
-import eu.mcone.lobby.command.set_CMD;
 import eu.mcone.lobby.command.spawn_CMD;
 import eu.mcone.lobby.event.*;
-import eu.mcone.lobby.hologram.HologramManager;
 import eu.mcone.lobby.util.Scoreboard;
 import eu.mcone.lobby.trail.TrailManager;
 import org.bukkit.Bukkit;
@@ -20,12 +19,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-    private static String MainPrefix = "§8[§3Lobby§8] ";
+    public static String MainPrefix = "§8[§3Lobby§8] ";
 
     private static Main instance;
     public static MySQL_Config config;
     public static TrailManager trail;
-    public static HologramManager holo;
+    public static HologramAPI holo;
     
     public void onEnable() {
         instance = this;
@@ -33,7 +32,7 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aScoreboard-Manager wird gestartet");
         Scoreboard.startUpdateScoreboardScheduler();
 
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aMySQL Config wird initiiert");
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aMySQL Configs wird initiiert");
         config = new MySQL_Config(de.Dominik.BukkitCoreSystem.Main.mysql3, "Lobby", 800);
         registerMySQLConfig();
 
@@ -41,8 +40,8 @@ public class Main extends JavaPlugin {
         trail = new TrailManager(de.Dominik.BukkitCoreSystem.Main.mysql1);
         trail.createMySQLTable();
 
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aHologram-Manager werden gestartet");
-        holo = new HologramManager();
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aHologram-Manager wird gestartet");
+        holo = new HologramAPI(de.Dominik.BukkitCoreSystem.Main.mysql1, "Lobby");
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryClick_Event(), this);
@@ -62,10 +61,9 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new BlockPlace_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteractEntity_Event(), this);
 
-        getCommand("set").setExecutor(new set_CMD());
         getCommand("npc").setExecutor(new npc_CMD());
         getCommand("spawn").setExecutor(new spawn_CMD());
-        getCommand("setholo").setExecutor(new holo_CMD());
+        getCommand("holo").setExecutor(new holo_CMD());
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
 
@@ -77,6 +75,7 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable(){
+        holo.unsetHolograms();
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§cPlugin wurde deaktiviert!");
     }
 
