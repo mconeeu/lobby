@@ -14,6 +14,7 @@ import eu.mcone.lobby.event.*;
 import eu.mcone.lobby.util.Scoreboard;
 import eu.mcone.lobby.trail.TrailManager;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -64,6 +65,10 @@ public class Main extends JavaPlugin {
         getCommand("npc").setExecutor(new npc_CMD());
         getCommand("spawn").setExecutor(new spawn_CMD());
         getCommand("holo").setExecutor(new holo_CMD());
+
+        for (World w : Bukkit.getServer().getWorlds()) {
+            w.setAutoSave(false);
+        }
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
 

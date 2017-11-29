@@ -33,22 +33,12 @@ public class PlayerJoin_Event implements Listener {
             }
         }
 
-/*
-        for(Player all : Bukkit.getOnlinePlayers()){
-            PlayerHoloListener.HoloSkypvp(all);
-            PlayerHoloListener.HoloBedwars(all);
-            PlayerHoloListener.HoloKnockbackFFA(all);
-            PlayerHoloListener.HoloMinewar(all);
-        }
-*/
-
-        p.getInventory().clear();
-        p.setMaxHealth(20);
-        p.setGameMode(GameMode.ADVENTURE);
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
+        p.setGameMode(GameMode.ADVENTURE);
         p.getActivePotionEffects().clear();
 
+        p.setMaxHealth(20);
         p.setHealth(20);
         p.setFoodLevel(20);
 
@@ -58,7 +48,6 @@ public class PlayerJoin_Event implements Listener {
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
-
 
         Location loc = LocationFactory.getConfigLocation(Main.config, "Location-Spawn");
 

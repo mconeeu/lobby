@@ -13,6 +13,8 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Team;
 
+import java.util.Collection;
+
 import static de.Dominik.BukkitCoreSystem.util.Scoreboard.getObjectiveRang;
 
 public class Scoreboard {
@@ -76,35 +78,39 @@ public class Scoreboard {
             }
             i++;
 
-            for(Player p : Bukkit.getOnlinePlayers()) {
-                org.bukkit.scoreboard.Scoreboard sb = p.getScoreboard();
+            Collection<? extends Player> online = Bukkit.getOnlinePlayers();
 
-                sb.getTeam("rang").setPrefix(getObjectiveRang(p));
-                sb.getTeam("coins").setPrefix("§o"+CoinsAPI.getCoins(p));
+            Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+                for(Player p : online) {
+                    org.bukkit.scoreboard.Scoreboard sb = p.getScoreboard();
 
-                Team line1 = sb.getTeam("line1");
-                Team line2 = sb.getTeam("line2");
+                    sb.getTeam("rang").setPrefix(getObjectiveRang(p));
+                    sb.getTeam("coins").setPrefix("§o"+CoinsAPI.getCoins(p));
 
-                if(i == 1) {
-                    line1.setPrefix("§7Teamspeak");
-                    line2.setPrefix("§f§omcone.eu");
-                }else if(i == 2) {
-                    line1.setPrefix("§7Website");
-                    line2.setPrefix("§f§omcone.eu");
-                }else if(i == 3) {
-                    line1.setPrefix("§bTwitter");
-                    line2.setPrefix("§f§o@mconeeu");
-                }else if(i == 4) {
-                    line1.setPrefix("§cYouTube");
-                    line2.setPrefix("§f§omcone.eu/yt");
-                } else {
-                    line1.setPrefix("§7Teamspeak");
-                    line2.setPrefix("§f§omcone.eu");
+                    Team line1 = sb.getTeam("line1");
+                    Team line2 = sb.getTeam("line2");
+
+                    if(i == 1) {
+                        line1.setPrefix("§7Teamspeak");
+                        line2.setPrefix("§f§omcone.eu");
+                    }else if(i == 2) {
+                        line1.setPrefix("§7Website");
+                        line2.setPrefix("§f§omcone.eu");
+                    }else if(i == 3) {
+                        line1.setPrefix("§bTwitter");
+                        line2.setPrefix("§f§o@mconeeu");
+                    }else if(i == 4) {
+                        line1.setPrefix("§cYouTube");
+                        line2.setPrefix("§f§omcone.eu/yt");
+                    } else {
+                        line1.setPrefix("§7Teamspeak");
+                        line2.setPrefix("§f§omcone.eu");
+                    }
+
+                    p.setScoreboard(sb);
                 }
-
-                p.setScoreboard(sb);
-            }
-        }, 100L, 100L);
+            });
+        }, 50L, 100L);
     }
 
 }

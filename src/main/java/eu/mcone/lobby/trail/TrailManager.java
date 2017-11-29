@@ -42,7 +42,7 @@ public class TrailManager {
                 }
             }
             updateAllowedTrails();
-        }, 20L, 15L);
+        }, 100L, 15L);
 
         Bukkit.getScheduler().runTaskTimer(Main.getInstance(), () -> {
             for(HashMap.Entry<Player, Trail> trailEntry : trails.entrySet()){
@@ -85,7 +85,7 @@ public class TrailManager {
                     p.getWorld().playEffect(p.getLocation(), Effect.WATERDRIP, 5);
                 }
             }
-        }, 10L, 5L);
+        }, 100L, 5L);
     }
 
     public void setTrail(Player p, Trail trail) {
@@ -149,23 +149,25 @@ public class TrailManager {
     }
 
     private void updateAllowedTrails(){
-        ResultSet rs = this.mysql.getResult("SELECT `uuid`, `item` FROM `lobby_items` WHERE `cat`='trail';");
-        try {
-            while (rs.next()) {
-                UUID uuid = UUID.fromString(rs.getString("uuid"));
-                int item = rs.getInt("item");
-                Trail trail = Trail.getTrailbyID(item);
+        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+            ResultSet rs = this.mysql.getResult("SELECT `uuid`, `item` FROM `lobby_items` WHERE `cat`='trail';");
+            try {
+                while (rs.next()) {
+                    UUID uuid = UUID.fromString(rs.getString("uuid"));
+                    int item = rs.getInt("item");
+                    Trail trail = Trail.getTrailbyID(item);
 
-                ArrayList<Trail> trailArrayList = this.allowedTrails.get(uuid) != null ? this.allowedTrails.get(uuid) : new ArrayList<>();
+                    ArrayList<Trail> trailArrayList = this.allowedTrails.get(uuid) != null ? this.allowedTrails.get(uuid) : new ArrayList<>();
 
-                if (!trailArrayList.contains(trail)) {
-                    trailArrayList.add(trail);
-                    this.allowedTrails.put(uuid, trailArrayList);
+                    if (!trailArrayList.contains(trail)) {
+                        trailArrayList.add(trail);
+                        this.allowedTrails.put(uuid, trailArrayList);
+                    }
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        });
     }
 
     private ArrayList<Trail> getAllowedTrailsList(Player p) {
