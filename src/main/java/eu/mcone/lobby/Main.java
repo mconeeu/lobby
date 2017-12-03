@@ -5,9 +5,9 @@
 
 package eu.mcone.lobby;
 
-import de.Dominik.BukkitCoreSystem.api.HologramAPI;
-import de.Dominik.BukkitCoreSystem.mysql.MySQL_Config;
-import eu.mcone.lobby.command.holo_CMD;
+import eu.mcone.bukkitcoresystem.api.HologramAPI;
+import eu.mcone.bukkitcoresystem.command.holo_CMD;
+import eu.mcone.bukkitcoresystem.mysql.MySQL_Config;
 import eu.mcone.lobby.command.npc_CMD;
 import eu.mcone.lobby.command.spawn_CMD;
 import eu.mcone.lobby.event.*;
@@ -34,15 +34,15 @@ public class Main extends JavaPlugin {
         Scoreboard.startUpdateScoreboardScheduler();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aMySQL Configs wird initiiert");
-        config = new MySQL_Config(de.Dominik.BukkitCoreSystem.Main.mysql3, "Lobby", 800);
+        config = new MySQL_Config(eu.mcone.bukkitcoresystem.Main.mysql3, "Lobby", 800);
         registerMySQLConfig();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aTrail-Scheduler werden gestartet");
-        trail = new TrailManager(de.Dominik.BukkitCoreSystem.Main.mysql1);
+        trail = new TrailManager(eu.mcone.bukkitcoresystem.Main.mysql1);
         trail.createMySQLTable();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aHologram-Manager wird gestartet");
-        holo = new HologramAPI(de.Dominik.BukkitCoreSystem.Main.mysql1, "Lobby");
+        holo = new HologramAPI(eu.mcone.bukkitcoresystem.Main.mysql1, "Lobby");
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract_Event(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryClick_Event(), this);
@@ -64,7 +64,7 @@ public class Main extends JavaPlugin {
 
         getCommand("npc").setExecutor(new npc_CMD());
         getCommand("spawn").setExecutor(new spawn_CMD());
-        getCommand("holo").setExecutor(new holo_CMD());
+        getCommand("holo").setExecutor(new holo_CMD(holo));
 
         for (World w : Bukkit.getServer().getWorlds()) {
             w.setAutoSave(false);

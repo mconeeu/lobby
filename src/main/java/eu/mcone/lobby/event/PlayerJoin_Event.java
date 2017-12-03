@@ -5,12 +5,12 @@
 
 package eu.mcone.lobby.event;
 
+import eu.mcone.bukkitcoresystem.util.ItemManager;
+import eu.mcone.bukkitcoresystem.util.LocationFactory;
 import eu.mcone.lobby.Main;
 import eu.mcone.lobby.util.Scoreboard;
 import eu.mcone.lobby.util.PlayerHider;
 import eu.mcone.lobby.util.AntiLabymod;
-import de.Dominik.BukkitCoreSystem.util.LocationFactory;
-import de.Dominik.BukkitCoreSystem.util.ItemManager;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

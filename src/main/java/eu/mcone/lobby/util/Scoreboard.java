@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.util;
 
-import de.Dominik.BukkitCoreSystem.api.CoinsAPI;
+import eu.mcone.bukkitcoresystem.api.CoinsAPI;
 import eu.mcone.lobby.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -15,7 +15,7 @@ import org.bukkit.scoreboard.Team;
 
 import java.util.Collection;
 
-import static de.Dominik.BukkitCoreSystem.util.Scoreboard.getObjectiveRang;
+import static eu.mcone.bukkitcoresystem.util.Scoreboard.getObjectiveRang;
 
 public class Scoreboard {
 
@@ -42,7 +42,7 @@ public class Scoreboard {
 
         Team coins = sb.registerNewTeam("coins");
         coins.addEntry("§5");
-        coins.setPrefix("§o"+CoinsAPI.getCoins(p));
+        coins.setPrefix("§o"+ CoinsAPI.getCoins(p));
 
         Team line1 = sb.registerNewTeam("line1");
         line1.addEntry("§7");

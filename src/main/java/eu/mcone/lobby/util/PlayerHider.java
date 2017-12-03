@@ -5,11 +5,10 @@
 
 package eu.mcone.lobby.util;
 
+import eu.mcone.bukkitcoresystem.util.ItemManager;
 import eu.mcone.lobby.Main;
-import de.Dominik.BukkitCoreSystem.util.ItemManager;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 

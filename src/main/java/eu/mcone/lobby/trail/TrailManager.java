@@ -5,10 +5,10 @@
 
 package eu.mcone.lobby.trail;
 
-import de.Dominik.BukkitCoreSystem.api.CoinsAPI;
-import de.Dominik.BukkitCoreSystem.mysql.MySQL;
+import eu.mcone.bukkitcoresystem.api.CoinsAPI;
+import eu.mcone.bukkitcoresystem.mysql.MySQL;
+import eu.mcone.bukkitcoresystem.util.ItemManager;
 import eu.mcone.lobby.Main;
-import de.Dominik.BukkitCoreSystem.util.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -117,7 +117,7 @@ public class TrailManager {
     public void setInvItem(Inventory inv, Player p, Trail trail, int i) {
         ArrayList<Trail> allowedTrailList = getAllowedTrailsList(p);
 
-        if (p.hasPermission(trail.getPerm()) || p.hasPermission("group.premium") || allowedTrailList.contains(trail)) {
+        if (hasTrail(p, trail)) {
             inv.setItem(i, ItemManager.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§2§oDu besitzt dieses Item!", "§8» §f§nRechtsklick§8 | §7§oAktivieren")), true));
         } else {
             inv.setItem(i, ItemManager.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§c§oDu besitzt dieses Item nicht!", "§7§oKostet: §f§o" + trail.getCoins() + " Coins")), true));

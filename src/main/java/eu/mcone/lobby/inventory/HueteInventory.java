@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.inventory;
 
-import de.Dominik.BukkitCoreSystem.util.ItemManager;
+import eu.mcone.bukkitcoresystem.util.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;

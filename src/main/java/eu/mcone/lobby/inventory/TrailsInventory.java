@@ -5,9 +5,9 @@
 
 package eu.mcone.lobby.inventory;
 
+import eu.mcone.bukkitcoresystem.util.ItemManager;
 import eu.mcone.lobby.Main;
 import eu.mcone.lobby.trail.Trail;
-import de.Dominik.BukkitCoreSystem.util.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -41,55 +41,18 @@ public class TrailsInventory {
     }
 
     public static void click(InventoryClickEvent e, Player p) {
-        if (e.getCurrentItem().getItemMeta().getDisplayName().equals(Trail.COOKIES.getName())){
-            if (Main.trail.hasTrail(p, Trail.COOKIES)) {
-                Main.trail.setTrail(p, Trail.COOKIES);
-            } else {
-                TrailsBuyInventory.open(p, Trail.COOKIES);
+        for (Trail t : Trail.values()) {
+            if (e.getCurrentItem().getItemMeta().getDisplayName().equals(t.getName())) {
+                if (Main.trail.hasTrail(p, t)) {
+                    Main.trail.setTrail(p, t);
+                } else {
+                    TrailsBuyInventory.open(p, t);
+                }
+                return;
             }
-        }else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(Trail.GLOW.getName())){
-            if (Main.trail.hasTrail(p, Trail.GLOW)) {
-                Main.trail.setTrail(p, Trail.GLOW);
-            } else {
-                TrailsBuyInventory.open(p, Trail.GLOW);
-            }
-        }else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(Trail.ENDER.getName())){
-            if (Main.trail.hasTrail(p, Trail.ENDER)) {
-                Main.trail.setTrail(p, Trail.ENDER);
-            } else {
-                TrailsBuyInventory.open(p, Trail.ENDER);
-            }
-        }else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(Trail.MUSIC.getName())){
-            if (Main.trail.hasTrail(p, Trail.MUSIC)) {
-                Main.trail.setTrail(p, Trail.MUSIC);
-            } else {
-                TrailsBuyInventory.open(p, Trail.MUSIC);
-            }
-        }else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(Trail.HEART.getName())){
-            if (Main.trail.hasTrail(p, Trail.HEART)) {
-                Main.trail.setTrail(p, Trail.HEART);
-            } else {
-                TrailsBuyInventory.open(p, Trail.HEART);
-            }
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(Trail.LAVA.getName())){
-            if (Main.trail.hasTrail(p, Trail.LAVA)) {
-                Main.trail.setTrail(p, Trail.LAVA);
-            } else {
-                TrailsBuyInventory.open(p, Trail.LAVA);
-            }
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(Trail.SNOW.getName())){
-            if (Main.trail.hasTrail(p, Trail.SNOW)) {
-                Main.trail.setTrail(p, Trail.SNOW);
-            } else {
-                TrailsBuyInventory.open(p, Trail.SNOW);
-            }
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(Trail.WATER.getName())){
-            if (Main.trail.hasTrail(p, Trail.WATER)) {
-                Main.trail.setTrail(p, Trail.WATER);
-            } else {
-                TrailsBuyInventory.open(p, Trail.WATER);
-            }
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §c§lTrail ablegen")){
+        }
+
+        if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §c§lTrail ablegen")){
             Main.trail.removeTrail(p);
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§7§l↩ Zurück")) {
             GadgetsInventory.open(p);

@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.event;
 
-import de.Dominik.BukkitCoreSystem.messager.PluginMessage;
+import eu.mcone.bukkitcoresystem.messager.PluginMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

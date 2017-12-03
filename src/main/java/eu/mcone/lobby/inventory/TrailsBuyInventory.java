@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.inventory;
 
-import de.Dominik.BukkitCoreSystem.util.ItemManager;
+import eu.mcone.bukkitcoresystem.util.ItemManager;
 import eu.mcone.lobby.Main;
 import eu.mcone.lobby.trail.Trail;
 import org.bukkit.Bukkit;

@@ -5,8 +5,8 @@
 
 package eu.mcone.lobby.command;
 
+import eu.mcone.bukkitcoresystem.util.LocationFactory;
 import eu.mcone.lobby.Main;
-import de.Dominik.BukkitCoreSystem.util.LocationFactory;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

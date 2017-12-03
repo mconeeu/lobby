@@ -5,8 +5,8 @@
 
 package eu.mcone.lobby.event;
 
+import eu.mcone.bukkitcoresystem.util.LocationFactory;
 import eu.mcone.lobby.Main;
-import de.Dominik.BukkitCoreSystem.util.LocationFactory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

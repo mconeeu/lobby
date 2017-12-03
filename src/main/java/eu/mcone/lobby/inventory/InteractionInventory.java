@@ -5,10 +5,9 @@
 
 package eu.mcone.lobby.inventory;
 
-import de.Dominik.BukkitCoreSystem.Main;
-import de.Dominik.BukkitCoreSystem.inventory.FriendsInventory;
-import de.Dominik.BukkitCoreSystem.messager.PluginMessage;
-import de.Dominik.BukkitCoreSystem.util.ItemManager;
+import eu.mcone.bukkitcoresystem.Main;
+import eu.mcone.bukkitcoresystem.messager.PluginMessage;
+import eu.mcone.bukkitcoresystem.util.ItemManager;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -16,7 +15,6 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -28,7 +26,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static de.Dominik.BukkitCoreSystem.util.Scoreboard.getObjectiveRang;
+import static eu.mcone.bukkitcoresystem.util.Scoreboard.getObjectiveRang;
 
 public class InteractionInventory {
 
