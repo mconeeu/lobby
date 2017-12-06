@@ -3,16 +3,16 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.event;
+package eu.mcone.lobby.listener;
 
-import eu.mcone.bukkitcoresystem.messager.PluginMessage;
+import eu.mcone.bukkitcoresystem.channel.PluginMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class EntityDamageByEntity_Event implements Listener{
+public class EntityDamageByEntity implements Listener{
 
     @EventHandler
     public void on(EntityDamageByEntityEvent e){

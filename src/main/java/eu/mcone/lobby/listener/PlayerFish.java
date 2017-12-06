@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.event;
+package eu.mcone.lobby.listener;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,7 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.util.Vector;
 
-public class PlayerFish_Event implements Listener {
+public class PlayerFish implements Listener {
 
     @EventHandler
     public void on(PlayerFishEvent e){

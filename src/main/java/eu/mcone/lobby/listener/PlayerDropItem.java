@@ -3,21 +3,21 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.event;
+package eu.mcone.lobby.listener;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 
-public class PlayerPickupItem_Event implements Listener{
+public class PlayerDropItem implements Listener{
 
     @EventHandler
-    public void on(PlayerPickupItemEvent e) {
+    public void on(PlayerDropItemEvent e){
         Player p = e.getPlayer();
 
-        if (p.getGameMode() == GameMode.CREATIVE) {
+        if (p.getGameMode() == GameMode.CREATIVE){
             e.setCancelled(false);
         } else {
             e.setCancelled(true);

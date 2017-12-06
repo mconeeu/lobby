@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.event;
+package eu.mcone.lobby.listener;
 
 import eu.mcone.lobby.inventory.InteractionInventory;
 import org.bukkit.entity.Player;
@@ -11,7 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
-public class PlayerInteractEntity_Event implements Listener {
+public class PlayerInteractEntity implements Listener {
 
     @EventHandler
     public void on(PlayerInteractEntityEvent e) {

@@ -3,12 +3,13 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.event;
+package eu.mcone.lobby.listener;
 
+import eu.mcone.bukkitcoresystem.CoreSystem;
 import eu.mcone.bukkitcoresystem.util.ItemManager;
 import eu.mcone.bukkitcoresystem.util.LocationFactory;
 import eu.mcone.lobby.Main;
-import eu.mcone.lobby.util.Scoreboard;
+import eu.mcone.lobby.util.Objective;
 import eu.mcone.lobby.util.PlayerHider;
 import eu.mcone.lobby.util.AntiLabymod;
 import org.bukkit.*;
@@ -19,7 +20,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.ArrayList;
 
-public class PlayerJoin_Event implements Listener {
+public class PlayerJoin implements Listener {
 
     @EventHandler
     public void on(PlayerJoinEvent e) {
@@ -43,7 +44,7 @@ public class PlayerJoin_Event implements Listener {
         p.setFoodLevel(20);
 
         AntiLabymod.setLabySettings(p);
-        Scoreboard.setObjective(p);
+        new Objective(CoreSystem.getCorePlayer(p));
         Main.holo.setHolograms(p);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);

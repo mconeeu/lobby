@@ -3,14 +3,14 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.event;
+package eu.mcone.lobby.listener;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 
-public class FoodLevelChange_Event implements Listener{
+public class FoodLevelChange implements Listener{
 
     @EventHandler
     public void on(FoodLevelChangeEvent e) {

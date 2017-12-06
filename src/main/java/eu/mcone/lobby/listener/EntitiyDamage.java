@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.event;
+package eu.mcone.lobby.listener;
 
 import eu.mcone.bukkitcoresystem.util.LocationFactory;
 import eu.mcone.lobby.Main;
@@ -12,7 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class EntitiyDamage_Event implements Listener{
+public class EntitiyDamage implements Listener{
 
     @EventHandler
     public void on(EntityDamageEvent e){

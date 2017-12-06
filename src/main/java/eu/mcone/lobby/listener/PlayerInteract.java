@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.event;
+package eu.mcone.lobby.listener;
 
 import eu.mcone.lobby.util.PlayerHider;
 import eu.mcone.lobby.inventory.KompassInventory;
@@ -16,7 +16,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class PlayerInteract_Event implements Listener{
+public class PlayerInteract implements Listener{
 
     @EventHandler
     public void on(PlayerInteractEvent e){

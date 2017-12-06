@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.event;
+package eu.mcone.lobby.listener;
 
 import org.bukkit.Effect;
 import org.bukkit.GameMode;
@@ -14,7 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.util.Vector;
 
-public class PlayerToggleFlight_Event implements Listener{
+public class PlayerToggleFlight implements Listener{
 
     @EventHandler
     public void on(PlayerToggleFlightEvent e)

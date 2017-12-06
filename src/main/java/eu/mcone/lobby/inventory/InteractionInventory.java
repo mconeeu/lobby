@@ -5,8 +5,8 @@
 
 package eu.mcone.lobby.inventory;
 
-import eu.mcone.bukkitcoresystem.Main;
-import eu.mcone.bukkitcoresystem.messager.PluginMessage;
+import eu.mcone.bukkitcoresystem.CoreSystem;
+import eu.mcone.bukkitcoresystem.channel.PluginMessage;
 import eu.mcone.bukkitcoresystem.util.ItemManager;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -31,7 +31,7 @@ import static eu.mcone.bukkitcoresystem.util.Scoreboard.getObjectiveRang;
 public class InteractionInventory {
 
     public static void open(Player p, Player clicked) {
-        ResultSet rs = Main.mysql1.getResult("SELECT status, coins, onlinetime FROM userinfo WHERE uuid='" + clicked.getUniqueId().toString() + "'");
+        ResultSet rs = CoreSystem.mysql1.getResult("SELECT status, coins, onlinetime FROM userinfo WHERE uuid='" + clicked.getUniqueId().toString() + "'");
         try {
             if (rs.next()) {
                 double onlinetime = Math.floor((rs.getInt("onlinetime") / 60) * 100) / 100;
@@ -46,7 +46,7 @@ public class InteractionInventory {
                 inv.setItem(4, ItemManager.createSkullItem("§f§l" + clicked.getName(), clicked.getName(), 1, new ArrayList<>(Arrays.asList(getObjectiveRang(clicked), "","§7Coins: §f" + coins , "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + status))));
 
                 inv.setItem(20, ItemManager.createCustomSkullItem("§7Online-Profil Ansehen", "Globe", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjFkZDRmZTRhNDI5YWJkNjY1ZGZkYjNlMjEzMjFkNmVmYTZhNmI1ZTdiOTU2ZGI5YzVkNTljOWVmYWIyNSJ9fX0=", 1, new ArrayList<>()));
-                ResultSet rs1 = Main.mysql1.getResult("SELECT uuid FROM `bungeesystem_friends` WHERE `uuid`='"+p.getUniqueId()+"' AND `target`='"+clicked.getUniqueId()+"' AND `key`='friend';");
+                ResultSet rs1 = CoreSystem.mysql1.getResult("SELECT uuid FROM `bungeesystem_friends` WHERE `uuid`='"+p.getUniqueId()+"' AND `target`='"+clicked.getUniqueId()+"' AND `key`='friend';");
                 if (rs1.next()) {
                     inv.setItem(22, ItemManager.createItem(Material.BARRIER, 0, 1, "§4Freund entfernen", true));
                 } else {

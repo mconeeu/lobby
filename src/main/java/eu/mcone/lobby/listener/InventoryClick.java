@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.event;
+package eu.mcone.lobby.listener;
 
 import eu.mcone.lobby.inventory.*;
 import org.bukkit.*;
@@ -13,7 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 
-public class InventoryClick_Event implements Listener{
+public class InventoryClick implements Listener{
 
     @EventHandler
     public void on(InventoryClickEvent e){

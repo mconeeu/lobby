@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.event;
+package eu.mcone.lobby.listener;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -13,7 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 
-public class PlayerMove_Event implements Listener{
+public class PlayerMove implements Listener{
 
     @EventHandler
     public void on(PlayerMoveEvent e)

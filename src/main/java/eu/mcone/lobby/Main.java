@@ -5,22 +5,23 @@
 
 package eu.mcone.lobby;
 
+import eu.mcone.bukkitcoresystem.CoreSystem;
 import eu.mcone.bukkitcoresystem.api.HologramAPI;
-import eu.mcone.bukkitcoresystem.command.holo_CMD;
-import eu.mcone.bukkitcoresystem.mysql.MySQL_Config;
-import eu.mcone.lobby.command.npc_CMD;
-import eu.mcone.lobby.command.spawn_CMD;
-import eu.mcone.lobby.event.*;
-import eu.mcone.lobby.util.Scoreboard;
+import eu.mcone.bukkitcoresystem.command.HoloCMD;
+import eu.mcone.bukkitcoresystem.config.MySQL_Config;
+import eu.mcone.bukkitcoresystem.player.CorePlayer;
+import eu.mcone.lobby.command.npcCMD;
+import eu.mcone.lobby.command.spawnCMD;
+import eu.mcone.lobby.listener.*;
+import eu.mcone.lobby.util.Objective;
 import eu.mcone.lobby.trail.TrailManager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-    public static String MainPrefix = "§8[§3Lobby§8] ";
+    private static String MainPrefix = "§8[§3Lobby§8] ";
 
     private static Main instance;
     public static MySQL_Config config;
@@ -30,41 +31,42 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aScoreboard-Manager wird gestartet");
-        Scoreboard.startUpdateScoreboardScheduler();
-
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aMySQL Configs wird initiiert");
-        config = new MySQL_Config(eu.mcone.bukkitcoresystem.Main.mysql3, "Lobby", 800);
+        config = new MySQL_Config(eu.mcone.bukkitcoresystem.CoreSystem.mysql3, "Lobby", 800);
         registerMySQLConfig();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aTrail-Scheduler werden gestartet");
-        trail = new TrailManager(eu.mcone.bukkitcoresystem.Main.mysql1);
+        trail = new TrailManager(eu.mcone.bukkitcoresystem.CoreSystem.mysql1);
         trail.createMySQLTable();
 
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aScoreboard-Scheduler wird gestartet");
+        startScheduler();
+
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aHologram-Manager wird gestartet");
-        holo = new HologramAPI(eu.mcone.bukkitcoresystem.Main.mysql1, "Lobby");
+        holo = new HologramAPI(eu.mcone.bukkitcoresystem.CoreSystem.mysql1, "Lobby");
 
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new InventoryClick_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerFish_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerMove_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerToggleFlight_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoin_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerQuit_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new WeatherChange_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerPickupItem_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new WeatherChange_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new FoodLevelChange_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new EntitiyDamage_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new EntityDamageByEntity_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerDeathEvent(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new BlockBreak_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new BlockPlace_Event(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteractEntity_Event(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new InventoryClick(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new CoinsChange(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerFish(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerMove(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerToggleFlight(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerQuit(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new WeatherChange(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerPickupItem(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new WeatherChange(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new FoodLevelChange(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new EntitiyDamage(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new BlockBreak(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new BlockPlace(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteractEntity(), this);
 
-        getCommand("npc").setExecutor(new npc_CMD());
-        getCommand("spawn").setExecutor(new spawn_CMD());
-        getCommand("holo").setExecutor(new holo_CMD(holo));
+        getCommand("npc").setExecutor(new npcCMD());
+        getCommand("spawn").setExecutor(new spawnCMD());
+        getCommand("holo").setExecutor(new HoloCMD(holo));
 
         for (World w : Bukkit.getServer().getWorlds()) {
             w.setAutoSave(false);
@@ -72,10 +74,9 @@ public class Main extends JavaPlugin {
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
 
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            //for Players who are already on server (reload)
-            Scoreboard.setObjective(p);
-            PlayerJoin_Event.setJoinItems(p);
+        for (CorePlayer p : CoreSystem.getOnlineCorePlayers()) {
+            new Objective(p);
+            PlayerJoin.setJoinItems(p.bukkit());
         }
     }
 
@@ -127,6 +128,10 @@ public class Main extends JavaPlugin {
 
         //store
         config.store();
+    }
+
+    private void startScheduler() {
+        Bukkit.getScheduler().runTaskTimer(getInstance(), Objective::updateLines, 50L, 100L);
     }
 
     public static Main getInstance() {

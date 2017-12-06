@@ -5,8 +5,10 @@
 
 package eu.mcone.lobby.trail;
 
+import eu.mcone.bukkitcoresystem.CoreSystem;
 import eu.mcone.bukkitcoresystem.api.CoinsAPI;
 import eu.mcone.bukkitcoresystem.mysql.MySQL;
+import eu.mcone.bukkitcoresystem.player.CorePlayer;
 import eu.mcone.bukkitcoresystem.util.ItemManager;
 import eu.mcone.lobby.Main;
 import org.bukkit.Bukkit;
@@ -126,8 +128,10 @@ public class TrailManager {
 
     public void buyTrail(Player p, Trail trail) {
         if (!hasTrail(p, trail)) {
-            if ((CoinsAPI.getCoins(p) - trail.getCoins()) >= 0) {
-                CoinsAPI.removeCoins(p, trail.getCoins());
+            CorePlayer cp = CoreSystem.getCorePlayer(p);
+
+            if ((cp.getCoins() - trail.getCoins()) >= 0) {
+                cp.removeCoins(trail.getCoins());
                 this.mysql.update("INSERT INTO `lobby_items` (`id`, `uuid`, `cat`, `item`, `timestamp`) VALUES (NULL, '" + p.getUniqueId() + "', 'trail', '" + trail.getId() + "', " + (System.currentTimeMillis() / 1000L) + ");");
                 p.closeInventory();
                 p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§2Du hast erfolgreich den Trail " + trail.getName() + "§2 gekauft!");

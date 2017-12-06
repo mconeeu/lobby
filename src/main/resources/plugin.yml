@@ -1,6 +1,6 @@
 name: MCONE-Lobby
-authors: [TwinsterHD, Rufus Maiwald, BamDev]
-version: 3.1.0-SNAPSHOT
+authors: [Dominik Lippl, Rufus Maiwald, BamDev]
+version: 3.2.0-SNAPSHOT
 main: eu.mcone.lobby.Main
 depend: [MCONE-BukkitCoreSystem]
 
