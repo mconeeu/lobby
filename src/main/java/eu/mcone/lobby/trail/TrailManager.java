@@ -5,10 +5,8 @@
 
 package eu.mcone.lobby.trail;
 
-import eu.mcone.bukkitcoresystem.CoreSystem;
 import eu.mcone.bukkitcoresystem.api.CoinsAPI;
 import eu.mcone.bukkitcoresystem.mysql.MySQL;
-import eu.mcone.bukkitcoresystem.player.CorePlayer;
 import eu.mcone.bukkitcoresystem.util.ItemManager;
 import eu.mcone.lobby.Main;
 import org.bukkit.Bukkit;
@@ -38,7 +36,7 @@ public class TrailManager {
         this.mysql = mysql;
 
         Bukkit.getScheduler().runTaskTimer(Main.getInstance(), () -> {
-            for(Entity ent : Bukkit.getWorld(Bukkit.getWorld(Main.config.getConfigValue("System-WorldName")).getName()).getEntities()) {
+            for(final Entity ent : Bukkit.getWorld(Bukkit.getWorld(Main.config.getConfigValue("System-WorldName")).getName()).getEntities()) {
                 if (!(ent instanceof Player) && !(ent.getType().equals(EntityType.FISHING_HOOK))) {
                     ent.remove();
                 }
@@ -47,8 +45,8 @@ public class TrailManager {
         }, 100L, 15L);
 
         Bukkit.getScheduler().runTaskTimer(Main.getInstance(), () -> {
-            for(HashMap.Entry<Player, Trail> trailEntry : trails.entrySet()){
-                Player p = trailEntry.getKey();
+            for(final HashMap.Entry<Player, Trail> trailEntry : trails.entrySet()){
+                final Player p = trailEntry.getKey();
                 
                 if(trailEntry.getValue().equals(Trail.COOKIES)){
                     p.getWorld().dropItem(p.getLocation(), new ItemStack(Material.COOKIE));
@@ -128,10 +126,8 @@ public class TrailManager {
 
     public void buyTrail(Player p, Trail trail) {
         if (!hasTrail(p, trail)) {
-            CorePlayer cp = CoreSystem.getCorePlayer(p);
-
-            if ((cp.getCoins() - trail.getCoins()) >= 0) {
-                cp.removeCoins(trail.getCoins());
+            if ((CoinsAPI.getCoins(p.getUniqueId()) - trail.getCoins()) >= 0) {
+                CoinsAPI.removeCoins(p.getUniqueId(), trail.getCoins());
                 this.mysql.update("INSERT INTO `lobby_items` (`id`, `uuid`, `cat`, `item`, `timestamp`) VALUES (NULL, '" + p.getUniqueId() + "', 'trail', '" + trail.getId() + "', " + (System.currentTimeMillis() / 1000L) + ");");
                 p.closeInventory();
                 p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§2Du hast erfolgreich den Trail " + trail.getName() + "§2 gekauft!");
@@ -157,15 +153,11 @@ public class TrailManager {
             ResultSet rs = this.mysql.getResult("SELECT `uuid`, `item` FROM `lobby_items` WHERE `cat`='trail';");
             try {
                 while (rs.next()) {
-                    UUID uuid = UUID.fromString(rs.getString("uuid"));
-                    int item = rs.getInt("item");
-                    Trail trail = Trail.getTrailbyID(item);
+                    ArrayList<Trail> trailArrayList = this.allowedTrails.get(UUID.fromString(rs.getString("uuid"))) != null ? this.allowedTrails.get(UUID.fromString(rs.getString("uuid"))) : new ArrayList<>();
 
-                    ArrayList<Trail> trailArrayList = this.allowedTrails.get(uuid) != null ? this.allowedTrails.get(uuid) : new ArrayList<>();
-
-                    if (!trailArrayList.contains(trail)) {
-                        trailArrayList.add(trail);
-                        this.allowedTrails.put(uuid, trailArrayList);
+                    if (!trailArrayList.contains(Trail.getTrailbyID(rs.getInt("item")))) {
+                        trailArrayList.add(Trail.getTrailbyID(rs.getInt("item")));
+                        this.allowedTrails.put(UUID.fromString(rs.getString("uuid")), trailArrayList);
                     }
                 }
             } catch (SQLException e) {
@@ -187,4 +179,10 @@ public class TrailManager {
 
         return p.hasPermission(trail.getPerm()) || p.hasPermission("mcone.premium") || trailList.contains(trail);
     }
+
+    public void unregisterPlayer(Player p) {
+        if (trails.containsKey(p)) trails.remove(p);
+        if (allowedTrails.containsKey(p.getUniqueId())) allowedTrails.remove(p.getUniqueId());
+    }
+
 }

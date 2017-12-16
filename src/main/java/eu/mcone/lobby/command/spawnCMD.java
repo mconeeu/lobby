@@ -5,8 +5,10 @@
 
 package eu.mcone.lobby.command;
 
+import eu.mcone.bukkitcoresystem.CoreSystem;
 import eu.mcone.bukkitcoresystem.util.LocationFactory;
 import eu.mcone.lobby.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,6 +21,8 @@ public class spawnCMD implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
+            if (!CoreSystem.cooldown.canExecute(this.getClass(), p)) return true;
+            CoreSystem.cooldown.addPlayer(p.getUniqueId(), this.getClass());
 
             if (args.length == 0) {
                 Location loc = LocationFactory.getConfigLocation(Main.config, "Location-Spawn");
@@ -63,6 +67,8 @@ public class spawnCMD implements CommandExecutor {
             }
 
             p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§4Benutze §c/spawn §4um dich zum Spawn zu teleportieren");
+        } else {
+            Bukkit.getConsoleSender().sendMessage(Main.config.getConfigValue("System-Prefix") + "§4Dieser Befehl kann nur von einem Spieler ausgeführt werden!");
         }
         return true;
     }

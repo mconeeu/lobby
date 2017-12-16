@@ -31,7 +31,7 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aMySQL Configs wird initiiert");
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aMySQL Config wird initiiert");
         config = new MySQL_Config(eu.mcone.bukkitcoresystem.CoreSystem.mysql3, "Lobby", 800);
         registerMySQLConfig();
 

@@ -18,12 +18,7 @@ public class PlayerQuit implements Listener{
         Player p = e.getPlayer();
         e.setQuitMessage(null);
 
-        Main.trail.removeTrail(p);
-/*
-        for (Player all : Bukkit.getOnlinePlayers()){
-            PlayerHoloListener.HoloSkypvp(all);
-        }
-*/
+        Main.trail.unregisterPlayer(p);
     }
 
 }

@@ -8,10 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Lobby" />
+        <module name="MCONE-Lobby" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Lobby" target="1.8" />
+      <module name="MCONE-Lobby" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

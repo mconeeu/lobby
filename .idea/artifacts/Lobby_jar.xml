@@ -2,7 +2,7 @@
   <artifact type="jar" build-on-make="true" name="Lobby:jar">
     <output-path>$PROJECT_DIR$/../../../Minecraft/localhost - server/Lobby/plugins</output-path>
     <root id="archive" name="Lobby.jar">
-      <element id="module-output" name="Lobby" />
+      <element id="module-output" name="MCONE-Lobby" />
     </root>
   </artifact>
 </component>

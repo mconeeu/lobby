@@ -5,19 +5,19 @@
 
 package eu.mcone.lobby.listener;
 
-import eu.mcone.bukkitcoresystem.event.GroupChangeEvent;
+import eu.mcone.bukkitcoresystem.event.PermissionChangeEvent;
 import eu.mcone.bukkitcoresystem.player.CorePlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scoreboard.DisplaySlot;
 
-public class GroupChange implements Listener {
+public class PermissionChange implements Listener {
 
     @EventHandler
-    public void on(GroupChangeEvent e) {
+    public void on(PermissionChangeEvent e) {
         CorePlayer p = e.getPlayer();
 
-        if (p != null) {
+        if (e.getKind().equals(PermissionChangeEvent.Kind.GROUP_CHANGE) && p != null) {
             p.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
         }
     }

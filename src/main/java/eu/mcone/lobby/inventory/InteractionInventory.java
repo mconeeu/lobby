@@ -26,8 +26,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static eu.mcone.bukkitcoresystem.util.Scoreboard.getObjectiveRang;
-
 public class InteractionInventory {
 
     public static void open(Player p, Player clicked) {
@@ -43,7 +41,7 @@ public class InteractionInventory {
                 for (int i = 0; i <= 26; i++) {
                     inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 1, "§8//§oMCONE§8//", true));
                 }
-                inv.setItem(4, ItemManager.createSkullItem("§f§l" + clicked.getName(), clicked.getName(), 1, new ArrayList<>(Arrays.asList(getObjectiveRang(clicked), "","§7Coins: §f" + coins , "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + status))));
+                inv.setItem(4, ItemManager.createSkullItem("§f§l" + clicked.getName(), clicked.getName(), 1, new ArrayList<>(Arrays.asList(CoreSystem.getCorePlayer(clicked).getGroupName(), "","§7Coins: §f" + coins , "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + status))));
 
                 inv.setItem(20, ItemManager.createCustomSkullItem("§7Online-Profil Ansehen", "Globe", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjFkZDRmZTRhNDI5YWJkNjY1ZGZkYjNlMjEzMjFkNmVmYTZhNmI1ZTdiOTU2ZGI5YzVkNTljOWVmYWIyNSJ9fX0=", 1, new ArrayList<>()));
                 ResultSet rs1 = CoreSystem.mysql1.getResult("SELECT uuid FROM `bungeesystem_friends` WHERE `uuid`='"+p.getUniqueId()+"' AND `target`='"+clicked.getUniqueId()+"' AND `key`='friend';");

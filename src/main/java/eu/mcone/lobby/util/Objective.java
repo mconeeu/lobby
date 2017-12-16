@@ -18,8 +18,6 @@ public class Objective implements ObjectiveHandler {
     private static int i = 0;
     private Team rang;
     private Team coins;
-    private Team line1;
-    private Team line2;
 
     public Objective(CorePlayer p) {
         p.getScoreboard().setNewObjective(DisplaySlot.SIDEBAR, this, "Main", "Lobby");
@@ -43,11 +41,11 @@ public class Objective implements ObjectiveHandler {
         coins.addEntry("§5");
         coins.setPrefix("§o"+ CoinsAPI.getCoins(p.getUuid()));
 
-        line1 = sb.registerNewTeam("line1");
+        Team line1 = sb.registerNewTeam("line1");
         line1.addEntry("§7");
         line1.setPrefix("§7Teamspeak");
 
-        line2 = sb.registerNewTeam("line2");
+        Team line2 = sb.registerNewTeam("line2");
         line2.addEntry("§8");
         line2.setPrefix("§f§omcone.eu");
 
@@ -59,7 +57,7 @@ public class Objective implements ObjectiveHandler {
         o.getScore("§7Rang:").setScore(7);
         o.getScore("§3").setScore(6);
         o.getScore("§4").setScore(5);
-        o.getScore("§7Coins").setScore(4);
+        o.getScore("§7Coins:").setScore(4);
         o.getScore("§5").setScore(3);
         o.getScore("§6").setScore(2);
         o.getScore("§7").setScore(1);
@@ -83,20 +81,20 @@ public class Objective implements ObjectiveHandler {
         if (i >= 4) i=0;
         i++;
 
-        for (CorePlayer p : CoreSystem.getOnlineCorePlayers()) {
-            Scoreboard sb = p.bukkit().getScoreboard();
+        for (final CorePlayer p : CoreSystem.getOnlineCorePlayers()) {
+            final Scoreboard sb = p.bukkit().getScoreboard();
 
             if(i == 1) {
-                sb.getTeam("line1").setPrefix("§7Teamspeak");
+                sb.getTeam("line1").setPrefix("§7Teamspeak:");
                 sb.getTeam("line2").setPrefix("§f§omcone.eu");
             }else if(i == 2) {
-                sb.getTeam("line1").setPrefix("§7Website");
+                sb.getTeam("line1").setPrefix("§7Website:");
                 sb.getTeam("line2").setPrefix("§f§omcone.eu");
             }else if(i == 3) {
-                sb.getTeam("line1").setPrefix("§bTwitter");
+                sb.getTeam("line1").setPrefix("§bTwitter:");
                 sb.getTeam("line2").setPrefix("§f§o@mconeeu");
             }else if(i == 4) {
-                sb.getTeam("line1").setPrefix("§cYouTube");
+                sb.getTeam("line1").setPrefix("§cYouTube:");
                 sb.getTeam("line2").setPrefix("§f§omcone.eu/yt");
             } else {
                 sb.getTeam("line1").setPrefix("§7Teamspeak");
