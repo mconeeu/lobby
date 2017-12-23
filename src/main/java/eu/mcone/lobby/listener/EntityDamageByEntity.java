@@ -16,15 +16,12 @@ public class EntityDamageByEntity implements Listener{
 
     @EventHandler
     public void on(EntityDamageByEntityEvent e){
-        System.out.println("new EntityDamageByEntityEvent");
         if(e.getEntity() instanceof Player){
-            System.out.println("Entity instanceof Player");
             Player p = (Player) e.getEntity();
 
             if (e.getDamager() instanceof Player) {
                 Player d = (Player) e.getDamager();
 
-                System.out.println("Damager instanceof Player");
                 ItemMeta meta = d.getItemInHand().getItemMeta();
                 if (meta != null)
                     if (meta.getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) PluginMessage.send("CMD" ,"friend add "+p.getName(), d);

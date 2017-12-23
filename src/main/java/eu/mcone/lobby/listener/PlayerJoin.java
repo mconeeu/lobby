@@ -46,6 +46,7 @@ public class PlayerJoin implements Listener {
         AntiLabymod.setLabySettings(p);
         new Objective(CoreSystem.getCorePlayer(p));
         Main.holo.setHolograms(p);
+        Main.npc.setNPCs(p);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);

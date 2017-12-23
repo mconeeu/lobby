@@ -6,6 +6,7 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.lobby.inventory.InteractionInventory;
+import eu.mcone.lobby.inventory.ServerInventory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,10 +17,18 @@ public class PlayerInteractEntity implements Listener {
     @EventHandler
     public void on(PlayerInteractEntityEvent e) {
         Player p = e.getPlayer();
-        Player clicked = (Player) e.getRightClicked();
 
         if (e.getRightClicked() instanceof Player) {
-            InteractionInventory.open(p, clicked);
+            Player clicked = (Player) e.getRightClicked();
+
+            if (clicked.getDisplayName().contains("§")) {
+                ServerInventory.Spielmodus sm = ServerInventory.Spielmodus.getSpielmodusByNpcName(clicked.getDisplayName());
+                if (sm != null) {
+                    ServerInventory.open(p, sm);
+                }
+            } else {
+                InteractionInventory.open(p, clicked);
+            }
         }
     }
 

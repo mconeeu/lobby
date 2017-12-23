@@ -7,16 +7,16 @@ package eu.mcone.lobby;
 
 import eu.mcone.bukkitcoresystem.CoreSystem;
 import eu.mcone.bukkitcoresystem.api.HologramAPI;
+import eu.mcone.bukkitcoresystem.api.NpcAPI;
 import eu.mcone.bukkitcoresystem.command.HoloCMD;
+import eu.mcone.bukkitcoresystem.command.NpcCMD;
 import eu.mcone.bukkitcoresystem.config.MySQL_Config;
 import eu.mcone.bukkitcoresystem.player.CorePlayer;
-import eu.mcone.lobby.command.npcCMD;
 import eu.mcone.lobby.command.spawnCMD;
 import eu.mcone.lobby.listener.*;
 import eu.mcone.lobby.util.Objective;
 import eu.mcone.lobby.trail.TrailManager;
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -27,6 +27,7 @@ public class Main extends JavaPlugin {
     public static MySQL_Config config;
     public static TrailManager trail;
     public static HologramAPI holo;
+    public static NpcAPI npc;
     
     public void onEnable() {
         instance = this;
@@ -44,6 +45,9 @@ public class Main extends JavaPlugin {
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aHologram-Manager wird gestartet");
         holo = new HologramAPI(eu.mcone.bukkitcoresystem.CoreSystem.mysql1, "Lobby");
+
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aNPC-Manager wird gestartet");
+        npc = new NpcAPI(eu.mcone.bukkitcoresystem.CoreSystem.mysql1, "Lobby");
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryClick(), this);
@@ -64,13 +68,9 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new BlockPlace(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteractEntity(), this);
 
-        getCommand("npc").setExecutor(new npcCMD());
         getCommand("spawn").setExecutor(new spawnCMD());
         getCommand("holo").setExecutor(new HoloCMD(holo));
-
-        for (World w : Bukkit.getServer().getWorlds()) {
-            w.setAutoSave(false);
-        }
+        getCommand("npc").setExecutor(new NpcCMD(npc));
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
 
@@ -82,6 +82,7 @@ public class Main extends JavaPlugin {
 
     public void onDisable(){
         holo.unsetHolograms();
+        npc.unsetNPCs();
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§cPlugin wurde deaktiviert!");
     }
 
