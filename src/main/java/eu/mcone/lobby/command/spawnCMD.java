@@ -28,8 +28,8 @@ public class spawnCMD implements CommandExecutor {
                 Location loc = LocationFactory.getConfigLocation(Main.config, "Location-Spawn");
 
                 if (loc != null) {
+                    p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§2Du wirst zum Spawn teleportiert");
                     p.teleport(loc);
-                    p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§2Du wurdest zum Spawn teleportiert");
                 } else {
                     p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§4Du kannst gerade nicht zum Spawn teleportiert werden.");
                 }
@@ -38,23 +38,23 @@ public class spawnCMD implements CommandExecutor {
                 if (p.hasPermission("lobby.set.spawn")) {
                     if (args[1].equals("main")) {
                         LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Spawn");
-                    } else if (args[0].equalsIgnoreCase("1")) {
+                    } else if (args[1].equalsIgnoreCase("1")) {
                         LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Navigator-1");
-                    } else if (args[0].equalsIgnoreCase("2")) {
+                    } else if (args[1].equalsIgnoreCase("2")) {
                         LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Navigator-2");
-                    } else if (args[0].equalsIgnoreCase("3")) {
+                    } else if (args[1].equalsIgnoreCase("3")) {
                         LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Navigator-3");
-                    } else if (args[0].equalsIgnoreCase("4")) {
+                    } else if (args[1].equalsIgnoreCase("4")) {
                         LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Navigator-4");
-                    } else if (args[0].equalsIgnoreCase("5")) {
+                    } else if (args[1].equalsIgnoreCase("5")) {
                         LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Navigator-5");
-                    } else if (args[0].equalsIgnoreCase("6")) {
+                    } else if (args[1].equalsIgnoreCase("6")) {
                         LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Navigator-6");
-                    } else if (args[0].equalsIgnoreCase("7")) {
+                    } else if (args[1].equalsIgnoreCase("7")) {
                         LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Navigator-7");
-                    } else if (args[0].equalsIgnoreCase("8")) {
+                    } else if (args[1].equalsIgnoreCase("8")) {
                         LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Navigator-8");
-                    } else if (args[0].equalsIgnoreCase("9")) {
+                    } else if (args[1].equalsIgnoreCase("9")) {
                         LocationFactory.updateConfigLocation(p.getLocation(), Main.config, "Location-Navigator-9");
                     } else {
                         p.sendMessage("§4Bitte benutze: §c/spawn set <main | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9>");

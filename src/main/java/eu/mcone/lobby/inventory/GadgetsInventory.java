@@ -15,7 +15,7 @@ import org.bukkit.inventory.Inventory;
 
 public class GadgetsInventory {
 
-    public static void open(Player p) {
+    public GadgetsInventory(Player p) {
         Inventory inv = org.bukkit.Bukkit.createInventory(null, 9, "§8» §3Lobby Gadgets");
 
         for (int i = 0; i <= 8; i++) {
@@ -30,10 +30,10 @@ public class GadgetsInventory {
 
     public static void click(InventoryClickEvent e, Player p) {
         if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §5Hüte")) {
-            HueteInventory.open(p);
+            new HueteInventory(p);
             p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §3Trails")) {
-            TrailsInventory.open(p);
+            new TrailsInventory(p);
             p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §bGadgets")) {
             p.playSound(p.getLocation(), Sound.NOTE_BASS, 1.0F, 1.0F);

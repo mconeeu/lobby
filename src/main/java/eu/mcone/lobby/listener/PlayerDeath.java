@@ -14,12 +14,11 @@ public class PlayerDeath implements Listener {
     @EventHandler
     public void on(org.bukkit.event.entity.PlayerDeathEvent e){
         Player p = e.getEntity();
-        if ((e.getEntity() instanceof Player)) {
-            e.setKeepInventory(true);
-            e.setKeepLevel(true);
-            e.setDeathMessage("");
-            p.spigot().respawn();
-        }
+
+        e.setKeepInventory(true);
+        e.setKeepLevel(true);
+        e.setDeathMessage("");
+        p.spigot().respawn();
     }
 
 }

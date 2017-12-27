@@ -35,16 +35,17 @@ public class PlayerInteract implements Listener{
             } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an")) {
                 PlayerHider.showPlayers(p);
             } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lGadgets §8» §7§oTrails / Boots / Gadgets")) {
-                GadgetsInventory.open(p);
+                new GadgetsInventory(p);
                 p.playSound(p.getLocation(), Sound.CHEST_OPEN, 1.0F, 1.0F);
             } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lNavigator §8» §7§oWähle einen Spielmodus")) {
-                KompassInventory.open(p);
+                new KompassInventory(p);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+            } else if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lZauber-Angel §8» §7§oZiehe dich wohin du willst")) {
+                e.setCancelled(false);
+                return;
             }
 
             e.setCancelled(true);
-        } else if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lZauber-Angel §8» §7§oZiehe dich wohin du willst")) {
-            e.setCancelled(false);
         } else {
             e.setCancelled(true);
         }

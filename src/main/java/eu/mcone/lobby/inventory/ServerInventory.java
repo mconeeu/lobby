@@ -54,7 +54,7 @@ public class ServerInventory {
 
     }
 
-    public static void open(Player p, Spielmodus modus) {
+    public ServerInventory(Player p, Spielmodus modus) {
         Inventory inv = org.bukkit.Bukkit.createInventory(null, 36, "§8» "+modus.getName()+" §8| §7Server");
 
         for (int i = 0; i <= 35; i++) {

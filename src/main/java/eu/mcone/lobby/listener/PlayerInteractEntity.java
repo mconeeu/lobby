@@ -24,10 +24,10 @@ public class PlayerInteractEntity implements Listener {
             if (clicked.getDisplayName().contains("§")) {
                 ServerInventory.Spielmodus sm = ServerInventory.Spielmodus.getSpielmodusByNpcName(clicked.getDisplayName());
                 if (sm != null) {
-                    ServerInventory.open(p, sm);
+                    new ServerInventory(p, sm);
                 }
             } else {
-                InteractionInventory.open(p, clicked);
+                new InteractionInventory(p, clicked);
             }
         }
     }

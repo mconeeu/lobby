@@ -8,6 +8,7 @@ package eu.mcone.lobby.inventory;
 import eu.mcone.bukkitcoresystem.CoreSystem;
 import eu.mcone.bukkitcoresystem.channel.PluginMessage;
 import eu.mcone.bukkitcoresystem.util.ItemManager;
+import eu.mcone.lobby.Main;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -28,7 +29,7 @@ import java.util.Arrays;
 
 public class InteractionInventory {
 
-    public static void open(Player p, Player clicked) {
+    public InteractionInventory(Player p, Player clicked) {
         ResultSet rs = CoreSystem.mysql1.getResult("SELECT status, coins, onlinetime FROM userinfo WHERE uuid='" + clicked.getUniqueId().toString() + "'");
         try {
             if (rs.next()) {
@@ -43,7 +44,7 @@ public class InteractionInventory {
                 }
                 inv.setItem(4, ItemManager.createSkullItem("§f§l" + clicked.getName(), clicked.getName(), 1, new ArrayList<>(Arrays.asList(CoreSystem.getCorePlayer(clicked).getGroupName(), "","§7Coins: §f" + coins , "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + status))));
 
-                inv.setItem(20, ItemManager.createCustomSkullItem("§7Online-Profil Ansehen", "Globe", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjFkZDRmZTRhNDI5YWJkNjY1ZGZkYjNlMjEzMjFkNmVmYTZhNmI1ZTdiOTU2ZGI5YzVkNTljOWVmYWIyNSJ9fX0=", 1, new ArrayList<>()));
+                inv.setItem(20, ItemManager.createCustomSkullItem("§7Online-Profil Ansehen", "http://textures.minecraft.net/texture/6f74f58f541342393b3b16787dd051dfacec8cb5cd3229c61e5f73d63947ad", 1, new ArrayList<>()));
                 ResultSet rs1 = CoreSystem.mysql1.getResult("SELECT uuid FROM `bungeesystem_friends` WHERE `uuid`='"+p.getUniqueId()+"' AND `target`='"+clicked.getUniqueId()+"' AND `key`='friend';");
                 if (rs1.next()) {
                     inv.setItem(22, ItemManager.createItem(Material.BARRIER, 0, 1, "§4Freund entfernen", true));
@@ -68,37 +69,34 @@ public class InteractionInventory {
             SkullMeta meta = (SkullMeta) e.getClickedInventory().getItem(4).getItemMeta();
             String skullOwner = meta.getOwner();
 
+            TextComponent tc0 = new TextComponent(TextComponent.fromLegacyText(Main.config.getConfigValue("System-Prefix") + "§2Das Profil von "+skullOwner+" findest du "));
+
             TextComponent tc = new TextComponent();
-            tc.setText(ChatColor.WHITE+"Klicke hier");
-            tc.setUnderlined(true);
-            tc.setItalic(true);
             tc.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.mcone.eu/user.php?name="+skullOwner));
             tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY+"Browser öffnen").create()));
+            tc.setText(ChatColor.DARK_GREEN+"§f§l§nhier");
 
-            TextComponent tc2 = new TextComponent();
-            tc2.setText(ChatColor.DARK_GREEN+" um das Online-Profil von "+skullOwner+" anzuzeigen");
-
-            tc.addExtra(tc2);
-            p.spigot().sendMessage(tc);
+            tc0.addExtra(tc);
+            p.spigot().sendMessage(tc0);
             p.closeInventory();
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§4Freund entfernen")) {
             SkullMeta meta = (SkullMeta) e.getClickedInventory().getItem(4).getItemMeta();
             String skullOwner = meta.getOwner();
 
             p.closeInventory();
-            PluginMessage.send("CMD", "friend remove "+skullOwner, p);
+            new PluginMessage("CMD", "friend remove "+skullOwner, p);
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Freund hinzufügen")) {
             SkullMeta meta = (SkullMeta) e.getClickedInventory().getItem(4).getItemMeta();
             String skullOwner = meta.getOwner();
 
             p.closeInventory();
-            PluginMessage.send("CMD", "friend add "+skullOwner, p);
+            new PluginMessage("CMD", "friend add "+skullOwner, p);
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7In §5Party §7einladen")) {
             SkullMeta meta = (SkullMeta) e.getClickedInventory().getItem(4).getItemMeta();
             String skullOwner = meta.getOwner();
 
             p.closeInventory();
-            PluginMessage.send("CMD", "party invite "+skullOwner, p);
+            new PluginMessage("CMD", "party invite "+skullOwner, p);
         }
     }
 

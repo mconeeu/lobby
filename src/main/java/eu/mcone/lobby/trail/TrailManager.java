@@ -41,51 +41,48 @@ public class TrailManager {
                     ent.remove();
                 }
             }
-            updateAllowedTrails();
         }, 100L, 15L);
 
         Bukkit.getScheduler().runTaskTimer(Main.getInstance(), () -> {
             for(final HashMap.Entry<Player, Trail> trailEntry : trails.entrySet()){
-                final Player p = trailEntry.getKey();
-                
                 if(trailEntry.getValue().equals(Trail.COOKIES)){
-                    p.getWorld().dropItem(p.getLocation(), new ItemStack(Material.COOKIE));
+                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.COOKIE));
                 } else if(trailEntry.getValue().equals(Trail.GLOW)){
-                    p.getWorld().dropItem(p.getLocation(), new ItemStack(Material.GOLD_INGOT));
-                    p.getWorld().dropItem(p.getLocation(), new ItemStack(Material.BLAZE_ROD));
+                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.GOLD_INGOT));
+                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.BLAZE_ROD));
                 } else if(trailEntry.getValue().equals(Trail.ENDER)){
-                    p.getWorld().dropItem(p.getLocation(), new ItemStack(Material.ENDER_PEARL));
-                    p.getWorld().dropItem(p.getLocation(), new ItemStack(Material.EYE_OF_ENDER));
+                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.ENDER_PEARL));
+                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.EYE_OF_ENDER));
                 } else if (trailEntry.getValue().equals(Trail.MUSIC)) {
-                    p.getWorld().dropItem(p.getLocation(), new ItemStack(Material.JUKEBOX));
-                    p.getWorld().dropItem(p.getLocation(), new ItemStack(Material.RECORD_10));
-                    p.getWorld().dropItem(p.getLocation(), new ItemStack(Material.RECORD_6));
+                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.JUKEBOX));
+                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.RECORD_10));
+                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.RECORD_6));
                 } else if (trailEntry.getValue().equals(Trail.HEART)) {
-                    p.getWorld().playEffect(p.getLocation(), Effect.HEART, 5);
-                    p.getWorld().playEffect(p.getLocation(), Effect.HEART, 5);
-                    p.getWorld().playEffect(p.getLocation(), Effect.SPELL, 5);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.HEART, 5);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.HEART, 5);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SPELL, 5);
                 } else if (trailEntry.getValue().equals(Trail.LAVA)) {
-                    p.getWorld().playEffect(p.getLocation(), Effect.LAVA_POP, 5);
-                    p.getWorld().playEffect(p.getLocation(), Effect.LAVA_POP, 5);
-                    p.getWorld().playEffect(p.getLocation(), Effect.LARGE_SMOKE, 5);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.LAVA_POP, 5);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.LAVA_POP, 5);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.LARGE_SMOKE, 5);
                 } else if (trailEntry.getValue().equals(Trail.SNOW)) {
-                    p.getWorld().playEffect(p.getLocation(), Effect.SNOW_SHOVEL, 2);
-                    p.getWorld().playEffect(p.getLocation(), Effect.SNOW_SHOVEL, 2);
-                    p.getWorld().playEffect(p.getLocation(), Effect.SNOW_SHOVEL, 2);
-                    p.getWorld().playEffect(p.getLocation(), Effect.SNOWBALL_BREAK, 10);
-                    p.getWorld().playEffect(p.getLocation(), Effect.SNOWBALL_BREAK, 10);
-                    p.getWorld().playEffect(p.getLocation(), Effect.SNOWBALL_BREAK, 10);
-                    p.getWorld().playEffect(p.getLocation(), Effect.SNOWBALL_BREAK, 10);
-                    p.getWorld().playEffect(p.getLocation(), Effect.SNOWBALL_BREAK, 10);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOW_SHOVEL, 2);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOW_SHOVEL, 2);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOW_SHOVEL, 2);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOWBALL_BREAK, 10);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOWBALL_BREAK, 10);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOWBALL_BREAK, 10);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOWBALL_BREAK, 10);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOWBALL_BREAK, 10);
                 } else if (trailEntry.getValue().equals(Trail.WATER)) {
-                    p.getWorld().playEffect(p.getLocation(), Effect.SPLASH, 5);
-                    p.getWorld().playEffect(p.getLocation(), Effect.SPLASH, 5);
-                    p.getWorld().playEffect(p.getLocation(), Effect.WATERDRIP, 5);
-                    p.getWorld().playEffect(p.getLocation(), Effect.WATERDRIP, 5);
-                    p.getWorld().playEffect(p.getLocation(), Effect.WATERDRIP, 5);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SPLASH, 5);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SPLASH, 5);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.WATERDRIP, 5);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.WATERDRIP, 5);
+                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.WATERDRIP, 5);
                 }
             }
-        }, 100L, 5L);
+        }, 100L, 1);
     }
 
     public void setTrail(Player p, Trail trail) {
@@ -129,6 +126,14 @@ public class TrailManager {
             if ((CoinsAPI.getCoins(p.getUniqueId()) - trail.getCoins()) >= 0) {
                 CoinsAPI.removeCoins(p.getUniqueId(), trail.getCoins());
                 this.mysql.update("INSERT INTO `lobby_items` (`id`, `uuid`, `cat`, `item`, `timestamp`) VALUES (NULL, '" + p.getUniqueId() + "', 'trail', '" + trail.getId() + "', " + (System.currentTimeMillis() / 1000L) + ");");
+
+                ArrayList<Trail> trailArrayList = this.allowedTrails.get(p.getUniqueId()) != null ? this.allowedTrails.get(p.getUniqueId()) : new ArrayList<>();
+
+                if (!trailArrayList.contains(trail)) {
+                    trailArrayList.add(trail);
+                    this.allowedTrails.put(p.getUniqueId(), trailArrayList);
+                }
+
                 p.closeInventory();
                 p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§2Du hast erfolgreich den Trail " + trail.getName() + "§2 gekauft!");
                 p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
@@ -148,16 +153,16 @@ public class TrailManager {
         this.mysql.update("CREATE TABLE IF NOT EXISTS lobby_items (`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, `uuid` VARCHAR(100), `cat` VARCHAR(50) NOT NULL, `item` VARCHAR(100) NOT NULL, `timestamp` int(50)) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
     }
 
-    private void updateAllowedTrails(){
+    public void loadAllowedTrails(final UUID uuid){
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
-            ResultSet rs = this.mysql.getResult("SELECT `uuid`, `item` FROM `lobby_items` WHERE `cat`='trail';");
+            ResultSet rs = this.mysql.getResult("SELECT `cat`, `item` FROM `lobby_items` WHERE `uuid`='"+uuid+"' AND `cat`='trail'");
             try {
                 while (rs.next()) {
-                    ArrayList<Trail> trailArrayList = this.allowedTrails.get(UUID.fromString(rs.getString("uuid"))) != null ? this.allowedTrails.get(UUID.fromString(rs.getString("uuid"))) : new ArrayList<>();
+                    ArrayList<Trail> trailArrayList = this.allowedTrails.get(uuid) != null ? this.allowedTrails.get(uuid) : new ArrayList<>();
 
                     if (!trailArrayList.contains(Trail.getTrailbyID(rs.getInt("item")))) {
                         trailArrayList.add(Trail.getTrailbyID(rs.getInt("item")));
-                        this.allowedTrails.put(UUID.fromString(rs.getString("uuid")), trailArrayList);
+                        this.allowedTrails.put(uuid, trailArrayList);
                     }
                 }
             } catch (SQLException e) {

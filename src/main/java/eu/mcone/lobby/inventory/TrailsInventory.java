@@ -17,7 +17,7 @@ import org.bukkit.inventory.Inventory;
 
 public class TrailsInventory {
 
-    static void open(Player p) {
+    TrailsInventory(Player p) {
         Inventory inv = Bukkit.createInventory(null, 18, "§8» §3Trails");
 
         for (int i = 0; i <= 17; i++) {
@@ -46,7 +46,7 @@ public class TrailsInventory {
                 if (Main.trail.hasTrail(p, t)) {
                     Main.trail.setTrail(p, t);
                 } else {
-                    TrailsBuyInventory.open(p, t);
+                    new TrailsBuyInventory(p, t);
                 }
                 return;
             }
@@ -55,7 +55,7 @@ public class TrailsInventory {
         if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §c§lTrail ablegen")){
             Main.trail.removeTrail(p);
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§7§l↩ Zurück")) {
-            GadgetsInventory.open(p);
+            new GadgetsInventory(p);
             p.playSound(p.getLocation(), Sound.NOTE_BASS, 1.0F, 1.0F);
         }
     }
