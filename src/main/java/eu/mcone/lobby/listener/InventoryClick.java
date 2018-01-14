@@ -37,7 +37,7 @@ public class InventoryClick implements Listener{
                 TrailsBuyInventory.click(e, p);
             } else if (e.getInventory().getName().equals("§8» §3Interaktionsmenü")) {
                 InteractionInventory.click(e, p);
-            } else if (e.getInventory().getName().contains("§8| §7Server")) {
+            } else if (e.getInventory().getName().contains("§8| §8Server")) {
                 ServerInventory.click(e, p);
             }
         }

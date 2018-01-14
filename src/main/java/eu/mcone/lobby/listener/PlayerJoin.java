@@ -6,6 +6,7 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.bukkitcoresystem.CoreSystem;
+import eu.mcone.bukkitcoresystem.player.CorePlayer;
 import eu.mcone.bukkitcoresystem.util.ItemManager;
 import eu.mcone.bukkitcoresystem.util.LocationFactory;
 import eu.mcone.lobby.Main;
@@ -25,6 +26,7 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void on(PlayerJoinEvent e) {
         Player p = e.getPlayer();
+        CorePlayer cp = CoreSystem.getCorePlayer(p);
 
         e.setJoinMessage(null);
 
@@ -44,7 +46,7 @@ public class PlayerJoin implements Listener {
         p.setFoodLevel(20);
 
         AntiLabymod.setLabySettings(p);
-        new Objective(CoreSystem.getCorePlayer(p));
+        new Objective(cp);
         Main.holo.setHolograms(p);
         Main.trail.loadAllowedTrails(p.getUniqueId());
 

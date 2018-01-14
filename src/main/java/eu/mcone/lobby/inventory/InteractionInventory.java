@@ -30,36 +30,43 @@ import java.util.Arrays;
 public class InteractionInventory {
 
     public InteractionInventory(Player p, Player clicked) {
-        ResultSet rs = CoreSystem.mysql1.getResult("SELECT status, coins, onlinetime FROM userinfo WHERE uuid='" + clicked.getUniqueId().toString() + "'");
-        try {
-            if (rs.next()) {
-                double onlinetime = Math.floor((rs.getInt("onlinetime") / 60) * 100) / 100;
-                int coins = rs.getInt("coins");
-                String status = getStatus(rs.getString("status"));
+        CoreSystem.mysql1.select("SELECT status, coins, onlinetime FROM userinfo WHERE uuid='" + clicked.getUniqueId().toString() + "'", rs -> {
+            try {
+                if (rs.next()) {
+                    double onlinetime = Math.floor((rs.getInt("onlinetime") / 60) * 100) / 100;
+                    int coins = rs.getInt("coins");
+                    String status = getStatus(rs.getString("status"));
 
-                Inventory inv = org.bukkit.Bukkit.createInventory(null, 27, "§8» §3Interaktionsmenü");
+                    Inventory inv = org.bukkit.Bukkit.createInventory(null, 27, "§8» §3Interaktionsmenü");
 
-                for (int i = 0; i <= 26; i++) {
-                    inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 1, "§8//§oMCONE§8//", true));
+                    for (int i = 0; i <= 26; i++) {
+                        inv.setItem(i, ItemManager.createItem(Material.STAINED_GLASS_PANE, 7, 1, "§8//§oMCONE§8//", true));
+                    }
+                    inv.setItem(4, ItemManager.createSkullItem("§f§l" + clicked.getName(), clicked.getName(), 1, new ArrayList<>(Arrays.asList(CoreSystem.getCorePlayer(clicked).getGroupName(), "","§7Coins: §f" + coins , "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + status))));
+
+                    inv.setItem(20, ItemManager.createCustomSkullItem("§7Online-Profil Ansehen", "http://textures.minecraft.net/texture/6f74f58f541342393b3b16787dd051dfacec8cb5cd3229c61e5f73d63947ad", 1, new ArrayList<>()));
+                    CoreSystem.mysql1.select("SELECT uuid FROM `bungeesystem_friends` WHERE `uuid`='"+p.getUniqueId()+"' AND `target`='"+clicked.getUniqueId()+"' AND `key`='friend';", rs1 -> {
+                        try {
+                            if (rs1.next()) {
+                                inv.setItem(22, ItemManager.createItem(Material.BARRIER, 0, 1, "§4Freund entfernen", true));
+                            } else {
+                                inv.setItem(22, ItemManager.createItem(Material.SKULL_ITEM, 3, 1, "§7Freund hinzufügen", true));
+                            }
+
+                            inv.setItem(24, ItemManager.createItem(Material.CAKE, 0, 1, "§7In §5Party §7einladen", true));
+
+
+                            p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
+                            p.openInventory(inv);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
-                inv.setItem(4, ItemManager.createSkullItem("§f§l" + clicked.getName(), clicked.getName(), 1, new ArrayList<>(Arrays.asList(CoreSystem.getCorePlayer(clicked).getGroupName(), "","§7Coins: §f" + coins , "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + status))));
-
-                inv.setItem(20, ItemManager.createCustomSkullItem("§7Online-Profil Ansehen", "http://textures.minecraft.net/texture/6f74f58f541342393b3b16787dd051dfacec8cb5cd3229c61e5f73d63947ad", 1, new ArrayList<>()));
-                ResultSet rs1 = CoreSystem.mysql1.getResult("SELECT uuid FROM `bungeesystem_friends` WHERE `uuid`='"+p.getUniqueId()+"' AND `target`='"+clicked.getUniqueId()+"' AND `key`='friend';");
-                if (rs1.next()) {
-                    inv.setItem(22, ItemManager.createItem(Material.BARRIER, 0, 1, "§4Freund entfernen", true));
-                } else {
-                    inv.setItem(22, ItemManager.createItem(Material.SKULL_ITEM, 3, 1, "§7Freund hinzufügen", true));
-                }
-                inv.setItem(24, ItemManager.createItem(Material.CAKE, 0, 1, "§7In §5Party §7einladen", true));
-
-
-                p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
-                p.openInventory(inv);
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        });
     }
 
     public static void click(InventoryClickEvent e, Player p) {
@@ -84,19 +91,19 @@ public class InteractionInventory {
             String skullOwner = meta.getOwner();
 
             p.closeInventory();
-            new PluginMessage("CMD", "friend remove "+skullOwner, p);
+            new PluginMessage(p, "CMD", "friend remove "+skullOwner);
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7Freund hinzufügen")) {
             SkullMeta meta = (SkullMeta) e.getClickedInventory().getItem(4).getItemMeta();
             String skullOwner = meta.getOwner();
 
             p.closeInventory();
-            new PluginMessage("CMD", "friend add "+skullOwner, p);
+            new PluginMessage(p, "CMD", "friend add "+skullOwner);
         } else if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§7In §5Party §7einladen")) {
             SkullMeta meta = (SkullMeta) e.getClickedInventory().getItem(4).getItemMeta();
             String skullOwner = meta.getOwner();
 
             p.closeInventory();
-            new PluginMessage("CMD", "party invite "+skullOwner, p);
+            new PluginMessage(p, "CMD", "party invite "+skullOwner);
         }
     }
 

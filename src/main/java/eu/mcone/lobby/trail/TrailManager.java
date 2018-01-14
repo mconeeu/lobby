@@ -155,19 +155,20 @@ public class TrailManager {
 
     public void loadAllowedTrails(final UUID uuid){
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
-            ResultSet rs = this.mysql.getResult("SELECT `cat`, `item` FROM `lobby_items` WHERE `uuid`='"+uuid+"' AND `cat`='trail'");
-            try {
-                while (rs.next()) {
-                    ArrayList<Trail> trailArrayList = this.allowedTrails.get(uuid) != null ? this.allowedTrails.get(uuid) : new ArrayList<>();
+            this.mysql.select("SELECT `cat`, `item` FROM `lobby_items` WHERE `uuid`='"+uuid+"' AND `cat`='trail'", rs -> {
+                try {
+                    while (rs.next()) {
+                        ArrayList<Trail> trailArrayList = this.allowedTrails.get(uuid) != null ? this.allowedTrails.get(uuid) : new ArrayList<>();
 
-                    if (!trailArrayList.contains(Trail.getTrailbyID(rs.getInt("item")))) {
-                        trailArrayList.add(Trail.getTrailbyID(rs.getInt("item")));
-                        this.allowedTrails.put(uuid, trailArrayList);
+                        if (!trailArrayList.contains(Trail.getTrailbyID(rs.getInt("item")))) {
+                            trailArrayList.add(Trail.getTrailbyID(rs.getInt("item")));
+                            this.allowedTrails.put(uuid, trailArrayList);
+                        }
                     }
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            });
         });
     }
 

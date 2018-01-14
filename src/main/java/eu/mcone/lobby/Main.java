@@ -12,12 +12,15 @@ import eu.mcone.bukkitcoresystem.command.HoloCMD;
 import eu.mcone.bukkitcoresystem.command.NpcCMD;
 import eu.mcone.bukkitcoresystem.config.MySQL_Config;
 import eu.mcone.bukkitcoresystem.player.CorePlayer;
+import eu.mcone.lobby.channel.PluginChannelListener;
 import eu.mcone.lobby.command.spawnCMD;
 import eu.mcone.lobby.listener.*;
 import eu.mcone.lobby.util.Objective;
 import eu.mcone.lobby.trail.TrailManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import static org.bukkit.Bukkit.getMessenger;
 
 public class Main extends JavaPlugin {
 
@@ -49,6 +52,9 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aNPC-Manager wird gestartet");
         npc = new NpcAPI(eu.mcone.bukkitcoresystem.CoreSystem.mysql1, "Lobby");
 
+        getServer().getConsoleSender().sendMessage(MainPrefix + "§aBungeeCord Messaging Channel wird registriert...");
+        getMessenger().registerIncomingPluginChannel(this, "ReturnLobby", new PluginChannelListener());
+
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryClick(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new CoinsChange(), this);
@@ -56,6 +62,7 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerMove(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerToggleFlight(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerDropItem(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerQuit(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new WeatherChange(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerPickupItem(), this);

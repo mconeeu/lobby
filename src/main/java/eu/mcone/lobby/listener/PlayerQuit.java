@@ -19,6 +19,7 @@ public class PlayerQuit implements Listener{
         e.setQuitMessage(null);
 
         Main.trail.unregisterPlayer(p);
+        Main.npc.unsetNPCs(p);
     }
 
 }
