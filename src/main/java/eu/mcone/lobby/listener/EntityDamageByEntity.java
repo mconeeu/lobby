@@ -27,7 +27,7 @@ public class EntityDamageByEntity implements Listener{
                 if (!Main.npc.isNPC(p.getDisplayName())) {
                     ItemMeta meta = d.getItemInHand().getItemMeta();
                     if (meta != null && meta.getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde"))
-                        new PluginMessage("CMD", "friend add " + p.getName(), d);
+                        new PluginMessage(p, "CMD", "friend add " + p.getName());
                 }
             }
         }
