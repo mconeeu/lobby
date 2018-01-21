@@ -26,7 +26,7 @@ public class Objective implements ObjectiveHandler {
     @Override
     public void register(CorePlayer p, Scoreboard sb) {
         org.bukkit.scoreboard.Objective o = sb.getObjective(DisplaySlot.SIDEBAR);
-        o.setDisplayName("§f§l§n"+p.getName());
+        o.setDisplayName("§f§l§n"+p.bukkit().getDisplayName());
 
         if (sb.getTeam("rang") != null) sb.getTeam("rang").unregister();
         if (sb.getTeam("coins") != null) sb.getTeam("coins").unregister();
@@ -35,7 +35,7 @@ public class Objective implements ObjectiveHandler {
 
         rang = sb.registerNewTeam("rang");
         rang.addEntry("§3");
-        rang.setPrefix(p.getGroupName());
+        rang.setPrefix(p.getGroup().getLabel());
 
         coins = sb.registerNewTeam("coins");
         coins.addEntry("§5");
@@ -71,7 +71,7 @@ public class Objective implements ObjectiveHandler {
         if (i >= 4) i=0;
         i++;
 
-        rang.setPrefix(p.getGroupName());
+        rang.setPrefix(p.getGroup().getLabel());
         coins.setPrefix("§o"+CoinsAPI.getCoins(p.getUuid()));
 
         p.bukkit().setScoreboard(sb);
@@ -83,6 +83,7 @@ public class Objective implements ObjectiveHandler {
 
         for (final CorePlayer p : CoreSystem.getOnlineCorePlayers()) {
             final Scoreboard sb = p.bukkit().getScoreboard();
+            sb.getObjective(DisplaySlot.SIDEBAR).setDisplayName("§f§l§n"+p.bukkit().getDisplayName());
 
             if(i == 1) {
                 sb.getTeam("line1").setPrefix("§7Teamspeak:");
