@@ -15,14 +15,47 @@ import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class KompassInventory {
+
+    enum Gamemode {
+        SPAWN("spawn", "§f§lSpawn", new ArrayList<>(Arrays.asList("§7§oZurück zum Lobby Spawn.", "§7§oHier startet unser Lobby Rätsel", "", "§8» §f§nRechtsklick§8 | §7§oTeleportieren"))),
+        BEDWARS("bedwars", "§c§lBedwars", new ArrayList<>(Arrays.asList("§7§oTöte deine Gegner nachdem du ihre Betten abgebaut hast", "§7§oum zu gewinnen", "", "§8» §f§nRechtsklick§8 | §7§oTeleportieren"))),
+        SKYPVP("skypvp", "§9§lSkyPvP", new ArrayList<>(Arrays.asList("§7§oFinde deine Gegner auf einer Sky-Map und töte sie", "§7§oum Coins zu erhalten", "", "§8» §f§nRechtsklick§8 | §7§oTeleportieren"))),
+        KNOCKIT("knockit", "§2§lKnockIT", new ArrayList<>(Arrays.asList("§7§oSchlage die Gegner von der Plattform um Coins", "§7§ozu erhalten","","§8» §f§nRechtsklick§8 | §7§oTeleportieren"))),
+        MINEWAR("minewar", "§5§lMinewar", new ArrayList<>(Arrays.asList("§7§oGrabe dich unter der Erde zu deinen Gegner und rüste", "§7§odich aus um sie zu töten und zu gewinnen.", "", "§c§oBald wieder verfügbar"))),
+        BUILD("build", "§e§lBuild", new ArrayList<>(Arrays.asList("§7§oCreative Server. Überzeuge uns von deinen Baukünsten", "§7§ound werde Builder im MC ONE Team!", "", "§8» §f§nRechtsklick§8 | §7§oTeleportieren")));
+
+        String name;
+        String label;
+        List<String> lore;
+
+        Gamemode(String name, String label, List<String> lore) {
+            this.name = name;
+            this.label = label;
+            this.lore = lore;
+        }
+
+        public String getName() {
+            return name;
+        }
+        public String getLabel() {
+            return label;
+        }
+        public List<String> getLore() {
+            return lore;
+        }
+    }
 
     public KompassInventory(Player p) {
         Inventory inv = org.bukkit.Bukkit.createInventory(null, 54, "§8» §3Navigator");
@@ -38,28 +71,24 @@ public class KompassInventory {
         inv.setItem(8, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 3, 1, "§8//§oMCONE§8//", true));
         inv.setItem(9, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 11, 1, "§8//§oMCONE§8//", true));
         inv.setItem(10, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 11, 1, "§8//§oMCONE§8//", true));
-
-        inv.setItem(11, ItemFactory.createItem(Material.getMaterial(getItemID("Navigator-1")), 0, 1, getItemname("Navigator-1"), getItemLore("Navigator-1"), true));
-
+        inv.setItem(11, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 0, 1, "§8//§oMCONE§8//", true));
         inv.setItem(12, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 0, 1, "§8//§oMCONE§8//", true));
 
-        inv.setItem(13, ItemFactory.createItem(Material.getMaterial(getItemID("Navigator-2")), 0, 1, getItemname("Navigator-2"), getItemLore("Navigator-2"), true));
+        inv.setItem(13, ItemFactory.createItem(Material.BED, 0, 1, Gamemode.BEDWARS.getLabel(), Gamemode.BEDWARS.getLore(), true));
 
         inv.setItem(14, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 0, 1, "§8//§oMCONE§8//", true));
-
-        inv.setItem(15, ItemFactory.createItem(Material.getMaterial(getItemID("Navigator-3")), 0, 1, getItemname("Navigator-3"), getItemLore("Navigator-3"), true));
-
+        inv.setItem(15, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 0, 1, "§8//§oMCONE§8//", true));
         inv.setItem(16, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 11, 1, "§8//§oMCONE§8//", true));
         inv.setItem(17, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 11, 1, "§8//§oMCONE§8//", true));
         inv.setItem(18, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 7, 1, "§8//§oMCONE§8//", true));
         inv.setItem(19, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 3, 1, "§8//§oMCONE§8//", true));
         inv.setItem(20, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 0, 1, "§8//§oMCONE§8//", true));
 
-        inv.setItem(21, ItemFactory.createItem(Material.getMaterial(getItemID("Navigator-4")), 0, 1, getItemname("Navigator-4"), getItemLore("Navigator-4"), true));
+        inv.setItem(21, ItemFactory.createItem(Material.DIAMOND_SWORD, 0, 1, Gamemode.SKYPVP.getLabel(), Gamemode.SKYPVP.getLore(), true));
 
         inv.setItem(22, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 7, 1, "§8//§oMCONE§8//", true));
 
-        inv.setItem(23, ItemFactory.createItem(Material.getMaterial(getItemID("Navigator-5")), 0, 1, getItemname("Navigator-5"), getItemLore("Navigator-5"), true));
+        inv.setItem(23, ItemFactory.createEnchantedItem(Material.STICK, Enchantment.KNOCKBACK, 1, 0, 1, Gamemode.KNOCKIT.getLabel(), Gamemode.KNOCKIT.getLore(), true));
 
         inv.setItem(24, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 0, 1, "§8//§oMCONE§8//", true));
         inv.setItem(25, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 3, 1, "§8//§oMCONE§8//", true));
@@ -69,7 +98,7 @@ public class KompassInventory {
         inv.setItem(29, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 0, 1, "§8//§oMCONE§8//", true));
         inv.setItem(30, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 7, 1, "§8//§oMCONE§8//", true));
 
-        inv.setItem(31, ItemFactory.createItem(Material.getMaterial(getItemID("Navigator-6")), 0, 1, getItemname("Navigator-6"), getItemLore("Navigator-6"), true));
+        inv.setItem(31, ItemFactory.createItem(Material.IRON_PICKAXE, 0, 1, Gamemode.MINEWAR.getLabel(), Gamemode.MINEWAR.getLore(), true));
 
         inv.setItem(32, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 7, 1, "§8//§oMCONE§8//", true));
         inv.setItem(33, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 0, 1, "§8//§oMCONE§8//", true));
@@ -79,19 +108,18 @@ public class KompassInventory {
         inv.setItem(36, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 11, 1, "§8//§oMCONE§8//", true));
         inv.setItem(37, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 11, 1, "§8//§oMCONE§8//", true));
 
-        inv.setItem(38, ItemFactory.createItem(Material.getMaterial(getItemID("Navigator-7")), 0, 1, getItemname("Navigator-7"), getItemLore("Navigator-7"), true));
+        inv.setItem(38, ItemFactory.createItem(Material.BARRIER, 0, 1, "§7Comming Soon", new ArrayList<>(Collections.singletonList("§8§oAn diesem Spielmodus arbeiten wir noch...")), true));
 
         inv.setItem(39, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 0, 1, "§8//§oMCONE§8//", true));
 
-        inv.setItem(40, ItemFactory.createItem(Material.getMaterial(getItemID("Navigator-8")), 0, 1, getItemname("Navigator-8"), getItemLore("Navigator-8"), true));
+        inv.setItem(40, ItemFactory.createItem(Material.NETHER_STAR, 0, 1, Gamemode.SPAWN.getLabel(), Gamemode.SPAWN.getLore(), true));
 
         inv.setItem(41, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 0, 1, "§8//§oMCONE§8//", true));
 
-        inv.setItem(42, ItemFactory.createItem(Material.getMaterial(getItemID("Navigator-9")), 0, 1, getItemname("Navigator-9"), getItemLore("Navigator-9"), true));
+        inv.setItem(42, ItemFactory.createItem(Material.GRASS, 0, 1, Gamemode.BUILD.getLabel(), Gamemode.BUILD.getLore(), true));
 
         inv.setItem(43, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 11, 1, "§8//§oMCONE§8//", true));
         inv.setItem(44, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 11, 1, "§8//§oMCONE§8//", true));
-
         inv.setItem(45, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 3, 1, "§8//§oMCONE§8//", true));
         inv.setItem(46, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 11, 1, "§8//§oMCONE§8//", true));
         inv.setItem(47, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 7, 1, "§8//§oMCONE§8//", true));
@@ -107,101 +135,24 @@ public class KompassInventory {
     public static void click(InventoryClickEvent e, Player p) {
         if ((e.getCurrentItem() == null) || !e.getCurrentItem().hasItemMeta() || e.getSlotType() == InventoryType.SlotType.OUTSIDE) {
             e.setCancelled(true);
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-1"))) {
-            teleportToSpawn(p, "Location-Navigator-1");
-
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-2"))) {
-            teleportToSpawn(p, "Location-Navigator-2");
-
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-3"))) {
-            teleportToSpawn(p, "Location-Navigator-3");
-
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-4"))) {
-            teleportToSpawn(p, "Location-Navigator-4");
-
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-5"))) {
-            teleportToSpawn(p, "Location-Navigator-5");
-
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-6"))) {
-            teleportToSpawn(p, "Location-Navigator-6");
-
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-7"))) {
-            teleportToSpawn(p, "Location-Navigator-7");
-
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-8"))) {
-            teleportToSpawn(p, "Location-Spawn");
-
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals(getItemname("Navigator-9"))) {
-            teleportToSpawn(p, "Location-Navigator-9");
-
         } else {
-            e.setCancelled(true);
+            for (Gamemode gm : Gamemode.values()) {
+                if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(gm.getLabel())) {
+                    Location loc = LocationFactory.getConfigLocation(Lobby.config, "Location-"+gm.getName());
+
+                    if (loc != null) {
+                        p.teleport(loc);
+                        p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
+                        p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 1);
+                    } else {
+                        p.closeInventory();
+                        p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§4Dieser Spawn existiert nicht!");
+                    }
+                }
+            }
         }
+
+        e.setCancelled(true);
     }
 
-    private static void teleportToSpawn(Player p, String configKey) {
-        Location loc = LocationFactory.getConfigLocation(Lobby.config, configKey);
-
-        if (loc != null) {
-            p.teleport(loc);
-            p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
-            p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 1);
-        } else {
-            p.closeInventory();
-            p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§4Dieser Spawn existiert nicht!");
-        }
-    }
-
-    private static String getItemname(String configKey) {
-        gsonResult rs = new Gson().fromJson(Lobby.config.getConfigValue(configKey), gsonResult.class);
-        return rs.getName();
-    }
-
-    private static int getItemID(String configKey) {
-        gsonResult rs = new Gson().fromJson(Lobby.config.getConfigValue(configKey), gsonResult.class);
-        return rs.getItemID();
-    }
-
-    private static List<String> getItemLore(String configKey) {
-        gsonResult rs = new Gson().fromJson(Lobby.config.getConfigValue(configKey), gsonResult.class);
-        return rs.getLore();
-    }
-
-    private class gsonResult {
-
-        @SerializedName("name")
-        @Expose
-        private String name;
-        @SerializedName("ItemID")
-        @Expose
-        private Integer itemID;
-        @SerializedName("Lore")
-        @Expose
-        private List<String> lore = null;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Integer getItemID() {
-            return itemID;
-        }
-
-        public void setItemID(Integer itemID) {
-            this.itemID = itemID;
-        }
-
-        public List<String> getLore() {
-            return lore;
-        }
-
-        public void setLore(List<String> lore) {
-            this.lore = lore;
-        }
-
-    }
 }

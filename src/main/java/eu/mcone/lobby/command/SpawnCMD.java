@@ -36,28 +36,20 @@ public class SpawnCMD implements CommandExecutor {
                 return true;
             } else if (args.length == 2 && args[0].equalsIgnoreCase("set")) {
                 if (p.hasPermission("lobby.set.spawn")) {
-                    if (args[1].equals("main")) {
-                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-Spawn");
-                    } else if (args[1].equalsIgnoreCase("1")) {
-                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-Navigator-1");
-                    } else if (args[1].equalsIgnoreCase("2")) {
-                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-Navigator-2");
-                    } else if (args[1].equalsIgnoreCase("3")) {
-                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-Navigator-3");
-                    } else if (args[1].equalsIgnoreCase("4")) {
-                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-Navigator-4");
-                    } else if (args[1].equalsIgnoreCase("5")) {
-                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-Navigator-5");
-                    } else if (args[1].equalsIgnoreCase("6")) {
-                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-Navigator-6");
-                    } else if (args[1].equalsIgnoreCase("7")) {
-                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-Navigator-7");
-                    } else if (args[1].equalsIgnoreCase("8")) {
-                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-Navigator-8");
-                    } else if (args[1].equalsIgnoreCase("9")) {
-                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-Navigator-9");
+                    if (args[1].equalsIgnoreCase("spawn")) {
+                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-spawn");
+                    } else if (args[1].equalsIgnoreCase("bedwars")) {
+                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-bedwars");
+                    } else if (args[1].equalsIgnoreCase("skypvp")) {
+                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-skypvp");
+                    } else if (args[1].equalsIgnoreCase("knockit")) {
+                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-knockit");
+                    } else if (args[1].equalsIgnoreCase("minewar")) {
+                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-minewar");
+                    } else if (args[1].equalsIgnoreCase("build")) {
+                        LocationFactory.updateConfigLocation(p.getLocation(), Lobby.config, "Location-build");
                     } else {
-                        p.sendMessage("§4Bitte benutze: §c/spawn set <main | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9>");
+                        p.sendMessage("§4Bitte benutze: §c/spawn set <spawn | bedwars | skypvp | knockit | minewar | build>");
                         return true;
                     }
 
