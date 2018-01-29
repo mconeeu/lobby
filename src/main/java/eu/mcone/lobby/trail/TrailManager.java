@@ -7,8 +7,8 @@ package eu.mcone.lobby.trail;
 
 import eu.mcone.bukkitcoresystem.api.CoinsAPI;
 import eu.mcone.bukkitcoresystem.mysql.MySQL;
-import eu.mcone.bukkitcoresystem.util.ItemManager;
-import eu.mcone.lobby.Main;
+import eu.mcone.bukkitcoresystem.util.ItemFactory;
+import eu.mcone.lobby.Lobby;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -19,7 +19,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,15 +34,15 @@ public class TrailManager {
     public TrailManager(MySQL mysql){
         this.mysql = mysql;
 
-        Bukkit.getScheduler().runTaskTimer(Main.getInstance(), () -> {
-            for(final Entity ent : Bukkit.getWorld(Bukkit.getWorld(Main.config.getConfigValue("System-WorldName")).getName()).getEntities()) {
+        Bukkit.getScheduler().runTaskTimer(Lobby.getInstance(), () -> {
+            for(final Entity ent : Bukkit.getWorld(Bukkit.getWorld(Lobby.config.getConfigValue("System-WorldName")).getName()).getEntities()) {
                 if (!(ent instanceof Player) && !(ent.getType().equals(EntityType.FISHING_HOOK))) {
                     ent.remove();
                 }
             }
         }, 100L, 15L);
 
-        Bukkit.getScheduler().runTaskTimer(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskTimer(Lobby.getInstance(), () -> {
             for(final HashMap.Entry<Player, Trail> trailEntry : trails.entrySet()){
                 if(trailEntry.getValue().equals(Trail.COOKIES)){
                     trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.COOKIE));
@@ -87,37 +86,34 @@ public class TrailManager {
 
     public void setTrail(Player p, Trail trail) {
         Trail entry = this.trails.get(p);
-        ArrayList<Trail> allowedTrailList = getAllowedTrailsList(p);
 
-        if (p.hasPermission(trail.getPerm()) || p.hasPermission("group.premium") || allowedTrailList.contains(trail)) {
+        if (hasTrail(p, trail)) {
             if ((entry != null) && (entry == trail)) {
-                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§cDu hast diesen Trail schon aktiviert!");
+                p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§cDu hast diesen Trail schon aktiviert!");
                 p.closeInventory();
-            }else{
+            } else {
                 this.trails.put(p, trail);
-                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§f" + trail.getName() + " §7aktiviert!");
+                p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§f" + trail.getName() + " §7aktiviert!");
                 p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
                 p.closeInventory();
             }
         } else {
-            p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§4Du besitzt diesen Trail nicht!");
+            p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§4Du besitzt diesen Trail nicht!");
             p.closeInventory();
         }
     }
 
     public void removeTrail(Player p) {
-        p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§7Trail entfernt!");
+        p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§7Trail entfernt!");
         if (this.trails.containsKey(p)) this.trails.remove(p);
         p.closeInventory();
     }
 
     public void setInvItem(Inventory inv, Player p, Trail trail, int i) {
-        ArrayList<Trail> allowedTrailList = getAllowedTrailsList(p);
-
         if (hasTrail(p, trail)) {
-            inv.setItem(i, ItemManager.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§2§oDu besitzt dieses Item!", "§8» §f§nRechtsklick§8 | §7§oAktivieren")), true));
+            inv.setItem(i, ItemFactory.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§2§oDu besitzt dieses Item!", "§8» §f§nRechtsklick§8 | §7§oAktivieren")), true));
         } else {
-            inv.setItem(i, ItemManager.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§c§oDu besitzt dieses Item nicht!", "§7§oKostet: §f§o" + trail.getCoins() + " Coins")), true));
+            inv.setItem(i, ItemFactory.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§c§oDu besitzt dieses Item nicht!", "§7§oKostet: §f§o" + trail.getCoins() + " Coins")), true));
         }
     }
 
@@ -135,16 +131,16 @@ public class TrailManager {
                 }
 
                 p.closeInventory();
-                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§2Du hast erfolgreich den Trail " + trail.getName() + "§2 gekauft!");
+                p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§2Du hast erfolgreich den Trail " + trail.getName() + "§2 gekauft!");
                 p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
             } else {
                 p.closeInventory();
-                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§4Du hast nicht genügend Coins!");
+                p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§4Du hast nicht genügend Coins!");
                 p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
             }
         } else {
             p.closeInventory();
-            p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§4Du besitzt dieses Item bereits!");
+            p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§4Du besitzt dieses Item bereits!");
             p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
         }
     }
@@ -154,7 +150,7 @@ public class TrailManager {
     }
 
     public void loadAllowedTrails(final UUID uuid){
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(Lobby.getInstance(), () -> {
             this.mysql.select("SELECT `cat`, `item` FROM `lobby_items` WHERE `uuid`='"+uuid+"' AND `cat`='trail'", rs -> {
                 try {
                     while (rs.next()) {

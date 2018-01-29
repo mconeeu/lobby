@@ -34,7 +34,7 @@ public class PluginChannelListener implements PluginMessageListener {
                             String modus = in.readUTF();
                             String result = in.readUTF();
 
-                            ServerInventory.create(p, modus, result);
+                            ServerInventory.create(t, modus, result);
                         }
                     }
                     break;

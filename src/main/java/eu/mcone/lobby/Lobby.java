@@ -13,7 +13,7 @@ import eu.mcone.bukkitcoresystem.command.NpcCMD;
 import eu.mcone.bukkitcoresystem.config.MySQL_Config;
 import eu.mcone.bukkitcoresystem.player.CorePlayer;
 import eu.mcone.lobby.channel.PluginChannelListener;
-import eu.mcone.lobby.command.spawnCMD;
+import eu.mcone.lobby.command.SpawnCMD;
 import eu.mcone.lobby.listener.*;
 import eu.mcone.lobby.util.Objective;
 import eu.mcone.lobby.trail.TrailManager;
@@ -22,15 +22,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import static org.bukkit.Bukkit.getMessenger;
 
-public class Main extends JavaPlugin {
+public class Lobby extends JavaPlugin {
 
     private static String MainPrefix = "§8[§3Lobby§8] ";
 
-    private static Main instance;
+    private static Lobby instance;
     public static MySQL_Config config;
-    public static TrailManager trail;
-    public static HologramAPI holo;
-    public static NpcAPI npc;
+
+    private TrailManager trailManager;
+    private HologramAPI hologramAPI;
+    private NpcAPI npcAPI;
     
     public void onEnable() {
         instance = this;
@@ -40,21 +41,46 @@ public class Main extends JavaPlugin {
         registerMySQLConfig();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aTrail-Scheduler werden gestartet");
-        trail = new TrailManager(eu.mcone.bukkitcoresystem.CoreSystem.mysql1);
-        trail.createMySQLTable();
+        trailManager = new TrailManager(eu.mcone.bukkitcoresystem.CoreSystem.mysql1);
+        trailManager.createMySQLTable();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aScoreboard-Scheduler wird gestartet");
         startScheduler();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aHologram-Manager wird gestartet");
-        holo = new HologramAPI(eu.mcone.bukkitcoresystem.CoreSystem.mysql1, "Lobby");
+        hologramAPI = new HologramAPI(eu.mcone.bukkitcoresystem.CoreSystem.mysql1, "Lobby");
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aNPC-Manager wird gestartet");
-        npc = new NpcAPI(eu.mcone.bukkitcoresystem.CoreSystem.mysql1, "Lobby");
+        npcAPI = new NpcAPI(eu.mcone.bukkitcoresystem.CoreSystem.mysql1, "Lobby");
 
         getServer().getConsoleSender().sendMessage(MainPrefix + "§aBungeeCord Messaging Channel wird registriert...");
         getMessenger().registerIncomingPluginChannel(this, "ReturnLobby", new PluginChannelListener());
 
+        getServer().getConsoleSender().sendMessage(MainPrefix + "§aBefehle und Events werden registriert...");
+        registerCommands();
+        registerEvents();
+
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
+
+        for (CorePlayer p : CoreSystem.getOnlineCorePlayers()) {
+            p.getScoreboard().setNewObjective(new Objective(p));
+            PlayerJoin.setJoinItems(p.bukkit());
+        }
+    }
+
+    public void onDisable(){
+        hologramAPI.unsetHolograms();
+        npcAPI.unsetNPCs();
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§cPlugin wurde deaktiviert!");
+    }
+
+    private void registerCommands() {
+        getCommand("spawn").setExecutor(new SpawnCMD());
+        getCommand("holo").setExecutor(new HoloCMD(hologramAPI));
+        getCommand("npc").setExecutor(new NpcCMD(npcAPI));
+    }
+
+    private void registerEvents() {
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryClick(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new CoinsChange(), this);
@@ -74,23 +100,7 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new BlockBreak(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new BlockPlace(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteractEntity(), this);
-
-        getCommand("spawn").setExecutor(new spawnCMD());
-        getCommand("holo").setExecutor(new HoloCMD(holo));
-        getCommand("npc").setExecutor(new NpcCMD(npc));
-
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
-
-        for (CorePlayer p : CoreSystem.getOnlineCorePlayers()) {
-            new Objective(p);
-            PlayerJoin.setJoinItems(p.bukkit());
-        }
-    }
-
-    public void onDisable(){
-        holo.unsetHolograms();
-        npc.unsetNPCs();
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§cPlugin wurde deaktiviert!");
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerAchievementAwarded(), this);
     }
 
     private void registerMySQLConfig(){
@@ -142,7 +152,23 @@ public class Main extends JavaPlugin {
         Bukkit.getScheduler().runTaskTimer(getInstance(), Objective::updateLines, 50L, 100L);
     }
 
-    public static Main getInstance() {
-        return Main.instance;
+    public static Lobby getInstance() {
+        return Lobby.instance;
+    }
+
+    public TrailManager getTrailManager() {
+        return trailManager;
+    }
+
+    public HologramAPI getHologramAPI() {
+        return hologramAPI;
+    }
+
+    public void setHologramAPI(HologramAPI hologramAPI) {
+        this.hologramAPI = hologramAPI;
+    }
+
+    public NpcAPI getNpcAPI() {
+        return npcAPI;
     }
 }

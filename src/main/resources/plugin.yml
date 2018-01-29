@@ -1,7 +1,7 @@
 name: MCONE-Lobby
 authors: [Dominik Lippl, Rufus Maiwald, BamDev]
 version: 3.2.1-SNAPSHOT
-main: eu.mcone.lobby.Main
+main: eu.mcone.lobby.Lobby
 depend: [MCONE-BukkitCoreSystem]
 
 commands:

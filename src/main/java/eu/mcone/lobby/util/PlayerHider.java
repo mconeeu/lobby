@@ -5,8 +5,8 @@
 
 package eu.mcone.lobby.util;
 
-import eu.mcone.bukkitcoresystem.util.ItemManager;
-import eu.mcone.lobby.Main;
+import eu.mcone.bukkitcoresystem.util.ItemFactory;
+import eu.mcone.lobby.Lobby;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -25,7 +25,7 @@ public class PlayerHider {
             long diff = (System.currentTimeMillis() - (Long) zeit.get(p.getName())) / 10L / 60L;
             int cooldown = 1;
             if (diff < cooldown){
-                p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§7Du musst kurz warte um den Player hider wieder benutzen zu können");
+                p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§7Du musst kurz warte um den Player hider wieder benutzen zu können");
                 return;
             }
         }
@@ -39,8 +39,8 @@ public class PlayerHider {
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
-        p.getInventory().setItem(0, ItemManager.createItem(Material.INK_SACK, 2, 1, "§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an", true));
-        p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§7Du siehst nun §ckeine §7Spieler mehr.");
+        p.getInventory().setItem(0, ItemFactory.createItem(Material.INK_SACK, 2, 1, "§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an", true));
+        p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§7Du siehst nun §ckeine §7Spieler mehr.");
         zeit.put(p.getName(), System.currentTimeMillis());
     }
 
@@ -54,8 +54,8 @@ public class PlayerHider {
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
-        p.getInventory().setItem(0, ItemManager.createItem(Material.INK_SACK, 10, 1, "§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus", true));
-        p.sendMessage(Main.config.getConfigValue("System-Prefix") + "§7Du siehst nun §aalle §7Spieler wieder.");
+        p.getInventory().setItem(0, ItemFactory.createItem(Material.INK_SACK, 10, 1, "§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus", true));
+        p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§7Du siehst nun §aalle §7Spieler wieder.");
         zeit.put(p.getName(), System.currentTimeMillis());
     }
 }

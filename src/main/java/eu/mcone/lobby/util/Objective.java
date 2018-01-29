@@ -8,24 +8,24 @@ package eu.mcone.lobby.util;
 import eu.mcone.bukkitcoresystem.CoreSystem;
 import eu.mcone.bukkitcoresystem.api.CoinsAPI;
 import eu.mcone.bukkitcoresystem.player.CorePlayer;
-import eu.mcone.bukkitcoresystem.scoreboard.ObjectiveHandler;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
-public class Objective implements ObjectiveHandler {
+public class Objective extends eu.mcone.bukkitcoresystem.scoreboard.Objective {
 
     private static int i = 0;
-    private Team rang;
-    private Team coins;
 
     public Objective(CorePlayer p) {
-        p.getScoreboard().setNewObjective(DisplaySlot.SIDEBAR, this, "Main", "Lobby");
+        super(p, DisplaySlot.SIDEBAR, "Main", "Lobby");
     }
 
     @Override
-    public void register(CorePlayer p, Scoreboard sb) {
-        org.bukkit.scoreboard.Objective o = sb.getObjective(DisplaySlot.SIDEBAR);
+    public void register() {
+        org.bukkit.scoreboard.Objective o = bukkit();
+        Scoreboard sb = getScoreboard();
+        CorePlayer p = getPlayer();
+
         o.setDisplayName("§f§l§n"+p.bukkit().getDisplayName());
 
         if (sb.getTeam("rang") != null) sb.getTeam("rang").unregister();
@@ -33,11 +33,11 @@ public class Objective implements ObjectiveHandler {
         if (sb.getTeam("line1") != null) sb.getTeam("line1").unregister();
         if (sb.getTeam("line2") != null) sb.getTeam("line2").unregister();
 
-        rang = sb.registerNewTeam("rang");
+        Team rang = sb.registerNewTeam("rang");
         rang.addEntry("§3");
         rang.setPrefix(p.getGroup().getLabel());
 
-        coins = sb.registerNewTeam("coins");
+        Team coins = sb.registerNewTeam("coins");
         coins.addEntry("§5");
         coins.setPrefix("§o"+ CoinsAPI.getCoins(p.getUuid()));
 
@@ -67,12 +67,12 @@ public class Objective implements ObjectiveHandler {
     }
 
     @Override
-    public void reload(CorePlayer p, Scoreboard sb) {
-        if (i >= 4) i=0;
-        i++;
+    public void reload() {
+        Scoreboard sb = getScoreboard();
+        CorePlayer p = getPlayer();
 
-        rang.setPrefix(p.getGroup().getLabel());
-        coins.setPrefix("§o"+CoinsAPI.getCoins(p.getUuid()));
+        sb.getTeam("rang").setPrefix(p.getGroup().getLabel());
+        sb.getTeam("coins").setPrefix("§o"+CoinsAPI.getCoins(p.getUuid()));
 
         p.bukkit().setScoreboard(sb);
     }
@@ -85,16 +85,16 @@ public class Objective implements ObjectiveHandler {
             final Scoreboard sb = p.bukkit().getScoreboard();
             sb.getObjective(DisplaySlot.SIDEBAR).setDisplayName("§f§l§n"+p.bukkit().getDisplayName());
 
-            if(i == 1) {
+            if (i == 1) {
                 sb.getTeam("line1").setPrefix("§7Teamspeak:");
                 sb.getTeam("line2").setPrefix("§f§omcone.eu");
-            }else if(i == 2) {
+            } else if (i == 2) {
                 sb.getTeam("line1").setPrefix("§7Website:");
                 sb.getTeam("line2").setPrefix("§f§omcone.eu");
-            }else if(i == 3) {
+            } else if (i == 3) {
                 sb.getTeam("line1").setPrefix("§bTwitter:");
                 sb.getTeam("line2").setPrefix("§f§o@mconeeu");
-            }else if(i == 4) {
+            } else if (i == 4) {
                 sb.getTeam("line1").setPrefix("§cYouTube:");
                 sb.getTeam("line2").setPrefix("§f§omcone.eu/yt");
             } else {
