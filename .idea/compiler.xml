@@ -9,10 +9,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Lobby" />
         <module name="MCONE-Lobby" />
+        <module name="mcone-lobby" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Lobby" target="1.8" />
+      <module name="mcone-lobby" target="1.8" />
       <module name="MCONE-Lobby" target="1.8" />
     </bytecodeTargetLevel>
   </component>

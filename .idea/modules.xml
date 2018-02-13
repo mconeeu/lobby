@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MCONE-Lobby.iml" filepath="$PROJECT_DIR$/MCONE-Lobby.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mcone-lobby.iml" filepath="$PROJECT_DIR$/mcone-lobby.iml" />
     </modules>
   </component>
 </project>

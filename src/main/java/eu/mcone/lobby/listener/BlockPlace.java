@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2018 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -17,11 +17,8 @@ public class BlockPlace implements Listener{
     public void on(BlockPlaceEvent e){
         Player p = e.getPlayer();
 
-        if(p.getGameMode() == GameMode.CREATIVE){
-            e.setCancelled(false);
-        }else{
+        if (!p.getGameMode().equals(GameMode.CREATIVE)) {
             e.setCancelled(true);
-
         }
     }
 

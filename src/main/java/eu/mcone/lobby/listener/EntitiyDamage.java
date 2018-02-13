@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2017 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2018 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
 package eu.mcone.lobby.listener;
 
-import eu.mcone.bukkitcoresystem.util.LocationFactory;
+import eu.mcone.coresystem.bukkit.util.LocationFactory;
 import eu.mcone.lobby.Lobby;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

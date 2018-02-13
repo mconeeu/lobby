@@ -1,13 +1,13 @@
 /*
- * Copyright (c) 2017 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2018 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
 package eu.mcone.lobby.trail;
 
-import eu.mcone.bukkitcoresystem.api.CoinsAPI;
-import eu.mcone.bukkitcoresystem.mysql.MySQL;
-import eu.mcone.bukkitcoresystem.util.ItemFactory;
+import eu.mcone.coresystem.bukkit.api.CoinsAPI;
+import eu.mcone.coresystem.bukkit.util.ItemFactory;
+import eu.mcone.coresystem.lib.mysql.MySQL;
 import eu.mcone.lobby.Lobby;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;

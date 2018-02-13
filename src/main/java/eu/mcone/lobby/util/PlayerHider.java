@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2017 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2018 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
 package eu.mcone.lobby.util;
 
-import eu.mcone.bukkitcoresystem.util.ItemFactory;
+import eu.mcone.coresystem.bukkit.util.ItemFactory;
 import eu.mcone.lobby.Lobby;
 import org.bukkit.*;
 import org.bukkit.entity.Player;

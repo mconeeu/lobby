@@ -1,18 +1,18 @@
 /*
- * Copyright (c) 2017 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2018 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
 package eu.mcone.lobby.util;
 
-import eu.mcone.bukkitcoresystem.CoreSystem;
-import eu.mcone.bukkitcoresystem.api.CoinsAPI;
-import eu.mcone.bukkitcoresystem.player.CorePlayer;
+import eu.mcone.coresystem.bukkit.CoreSystem;
+import eu.mcone.coresystem.bukkit.api.CoinsAPI;
+import eu.mcone.coresystem.bukkit.player.CorePlayer;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
-public class Objective extends eu.mcone.bukkitcoresystem.scoreboard.Objective {
+public class Objective extends eu.mcone.coresystem.bukkit.scoreboard.Objective {
 
     private static int i = 0;
 

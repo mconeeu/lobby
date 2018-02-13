@@ -1,15 +1,12 @@
 /*
- * Copyright (c) 2017 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2018 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
 package eu.mcone.lobby.inventory;
 
-import com.google.gson.Gson;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-import eu.mcone.bukkitcoresystem.util.ItemFactory;
-import eu.mcone.bukkitcoresystem.util.LocationFactory;
+import eu.mcone.coresystem.bukkit.util.ItemFactory;
+import eu.mcone.coresystem.bukkit.util.LocationFactory;
 import eu.mcone.lobby.Lobby;
 import org.bukkit.Effect;
 import org.bukkit.Location;

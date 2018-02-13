@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2017 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2018 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
 package eu.mcone.lobby.command;
 
-import eu.mcone.bukkitcoresystem.CoreSystem;
-import eu.mcone.bukkitcoresystem.util.LocationFactory;
+import eu.mcone.coresystem.bukkit.CoreSystem;
+import eu.mcone.coresystem.bukkit.util.LocationFactory;
 import eu.mcone.lobby.Lobby;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -25,7 +25,7 @@ public class SpawnCMD implements CommandExecutor {
             CoreSystem.getInstance().getCooldownSystem().addPlayer(p.getUniqueId(), this.getClass());
 
             if (args.length == 0) {
-                Location loc = LocationFactory.getConfigLocation(Lobby.config, "Location-Spawn");
+                Location loc = LocationFactory.getConfigLocation(Lobby.config, "Location-spawn");
 
                 if (loc != null) {
                     p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§2Du wirst zum Spawn teleportiert");

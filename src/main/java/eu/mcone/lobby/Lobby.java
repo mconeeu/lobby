@@ -1,17 +1,17 @@
 /*
- * Copyright (c) 2017 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2018 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
 package eu.mcone.lobby;
 
-import eu.mcone.bukkitcoresystem.CoreSystem;
-import eu.mcone.bukkitcoresystem.api.HologramAPI;
-import eu.mcone.bukkitcoresystem.api.NpcAPI;
-import eu.mcone.bukkitcoresystem.command.HoloCMD;
-import eu.mcone.bukkitcoresystem.command.NpcCMD;
-import eu.mcone.bukkitcoresystem.config.MySQL_Config;
-import eu.mcone.bukkitcoresystem.player.CorePlayer;
+import eu.mcone.coresystem.bukkit.CoreSystem;
+import eu.mcone.coresystem.bukkit.command.HoloCMD;
+import eu.mcone.coresystem.bukkit.command.NpcCMD;
+import eu.mcone.coresystem.bukkit.hologram.HologramManager;
+import eu.mcone.coresystem.bukkit.npc.NpcManager;
+import eu.mcone.coresystem.bukkit.player.CorePlayer;
+import eu.mcone.coresystem.lib.mysql.MySQL_Config;
 import eu.mcone.lobby.channel.PluginChannelListener;
 import eu.mcone.lobby.command.SpawnCMD;
 import eu.mcone.lobby.listener.*;
@@ -30,28 +30,28 @@ public class Lobby extends JavaPlugin {
     public static MySQL_Config config;
 
     private TrailManager trailManager;
-    private HologramAPI hologramAPI;
-    private NpcAPI npcAPI;
+    private HologramManager hologramManager;
+    private NpcManager npcManager;
     
     public void onEnable() {
         instance = this;
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aMySQL Config wird initiiert");
-        config = new MySQL_Config(eu.mcone.bukkitcoresystem.CoreSystem.mysql3, "Lobby", 800);
+        config = new MySQL_Config(CoreSystem.mysql3, "Lobby", 800);
         registerMySQLConfig();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aTrail-Scheduler werden gestartet");
-        trailManager = new TrailManager(eu.mcone.bukkitcoresystem.CoreSystem.mysql1);
+        trailManager = new TrailManager(CoreSystem.mysql1);
         trailManager.createMySQLTable();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aScoreboard-Scheduler wird gestartet");
         startScheduler();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aHologram-Manager wird gestartet");
-        hologramAPI = new HologramAPI(eu.mcone.bukkitcoresystem.CoreSystem.mysql1, "Lobby");
+        hologramManager = new HologramManager(CoreSystem.mysql1, "Lobby");
 
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aNPC-Manager wird gestartet");
-        npcAPI = new NpcAPI(eu.mcone.bukkitcoresystem.CoreSystem.mysql1, "Lobby");
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aHologram-Manager wird gestartet");
+        npcManager = new NpcManager(CoreSystem.mysql1, "Lobby");
 
         getServer().getConsoleSender().sendMessage(MainPrefix + "§aBungeeCord Messaging Channel wird registriert...");
         getMessenger().registerIncomingPluginChannel(this, "ReturnLobby", new PluginChannelListener());
@@ -69,15 +69,15 @@ public class Lobby extends JavaPlugin {
     }
 
     public void onDisable(){
-        hologramAPI.unsetHolograms();
-        npcAPI.unsetNPCs();
+        hologramManager.unsetHolograms();
+        npcManager.unsetNPCs();
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§cPlugin wurde deaktiviert!");
     }
 
     private void registerCommands() {
         getCommand("spawn").setExecutor(new SpawnCMD());
-        getCommand("holo").setExecutor(new HoloCMD(hologramAPI));
-        getCommand("npc").setExecutor(new NpcCMD(npcAPI));
+        getCommand("holo").setExecutor(new HoloCMD(hologramManager));
+        getCommand("npc").setExecutor(new NpcCMD(npcManager));
     }
 
     private void registerEvents() {
@@ -160,15 +160,15 @@ public class Lobby extends JavaPlugin {
         return trailManager;
     }
 
-    public HologramAPI getHologramAPI() {
-        return hologramAPI;
+    public HologramManager getHologramManager() {
+        return hologramManager;
     }
 
-    public void setHologramAPI(HologramAPI hologramAPI) {
-        this.hologramAPI = hologramAPI;
+    public void setHologramManager(HologramManager hologramManager) {
+        this.hologramManager = hologramManager;
     }
 
-    public NpcAPI getNpcAPI() {
-        return npcAPI;
+    public NpcManager getNpcManager() {
+        return npcManager;
     }
 }

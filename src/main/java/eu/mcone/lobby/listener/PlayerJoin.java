@@ -1,14 +1,14 @@
 /*
- * Copyright (c) 2017 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2018 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
 package eu.mcone.lobby.listener;
 
-import eu.mcone.bukkitcoresystem.CoreSystem;
-import eu.mcone.bukkitcoresystem.player.CorePlayer;
-import eu.mcone.bukkitcoresystem.util.ItemFactory;
-import eu.mcone.bukkitcoresystem.util.LocationFactory;
+import eu.mcone.coresystem.bukkit.CoreSystem;
+import eu.mcone.coresystem.bukkit.player.CorePlayer;
+import eu.mcone.coresystem.bukkit.util.ItemFactory;
+import eu.mcone.coresystem.bukkit.util.LocationFactory;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.util.Objective;
 import eu.mcone.lobby.util.PlayerHider;
@@ -47,13 +47,13 @@ public class PlayerJoin implements Listener {
 
         AntiLabymod.setLabySettings(p);
         cp.getScoreboard().setNewObjective(new Objective(cp));
-        Lobby.getInstance().getHologramAPI().setHolograms(p);
+        Lobby.getInstance().getHologramManager().setHolograms(p);
         Lobby.getInstance().getTrailManager().loadAllowedTrails(p.getUniqueId());
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
 
-        Location loc = LocationFactory.getConfigLocation(Lobby.config, "Location-Spawn");
+        Location loc = LocationFactory.getConfigLocation(Lobby.config, "Location-spawn");
 
         if (loc != null) {
             p.teleport(loc);
