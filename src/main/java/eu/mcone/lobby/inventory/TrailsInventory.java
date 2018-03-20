@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.inventory;
 
+import eu.mcone.coresystem.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.bukkit.util.ItemFactory;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.trail.Trail;
@@ -15,48 +16,32 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
-public class TrailsInventory {
+import javax.swing.text.html.Option;
+
+class TrailsInventory extends CoreInventory {
 
     TrailsInventory(Player p) {
-        Inventory inv = Bukkit.createInventory(null, 18, "§8» §3Trails");
+        super("§8» §3Trails", p , 18, Option.FILL_EMPTY_SLOTS);
 
-        for (int i = 0; i <= 17; i++) {
-            inv.setItem(i, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 7, 1, "§8//§oMCONE§8//", true));
-        }
+        setItem(0, ItemFactory.createItem(Material.BARRIER, 0, 1, "§8» §c§lTrail ablegen", true),
+                () -> Lobby.getInstance().getTrailManager().removeTrail(p));
 
-        inv.setItem(0, ItemFactory.createItem(Material.BARRIER, 0, 1, "§8» §c§lTrail ablegen", true));
-        Lobby.getInstance().getTrailManager().setInvItem(inv, p, Trail.COOKIES, 2);
-        Lobby.getInstance().getTrailManager().setInvItem(inv, p, Trail.GLOW, 4);
-        Lobby.getInstance().getTrailManager().setInvItem(inv, p, Trail.ENDER, 6);
-        Lobby.getInstance().getTrailManager().setInvItem(inv, p, Trail.MUSIC, 8);
-        Lobby.getInstance().getTrailManager().setInvItem(inv, p, Trail.LAVA, 11);
-        Lobby.getInstance().getTrailManager().setInvItem(inv, p, Trail.HEART, 13);
-        Lobby.getInstance().getTrailManager().setInvItem(inv, p, Trail.WATER, 15);
-        Lobby.getInstance().getTrailManager().setInvItem(inv, p, Trail.SNOW, 17);
+        Lobby.getInstance().getTrailManager().setInvItem(this, player, Trail.COOKIES, 2);
+        Lobby.getInstance().getTrailManager().setInvItem(this, player, Trail.GLOW, 4);
+        Lobby.getInstance().getTrailManager().setInvItem(this, player, Trail.ENDER, 6);
+        Lobby.getInstance().getTrailManager().setInvItem(this, player, Trail.MUSIC, 8);
+        Lobby.getInstance().getTrailManager().setInvItem(this, player, Trail.LAVA, 11);
+        Lobby.getInstance().getTrailManager().setInvItem(this, player, Trail.HEART, 13);
+        Lobby.getInstance().getTrailManager().setInvItem(this, player, Trail.WATER, 15);
+        Lobby.getInstance().getTrailManager().setInvItem(this, player, Trail.SNOW, 17);
 
-        inv.setItem(9, ItemFactory.createItem(Material.IRON_DOOR, 0, 1, "§7§l↩ Zurück", true));
-
-        p.openInventory(inv);
-        p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-    }
-
-    public static void click(InventoryClickEvent e, Player p) {
-        for (Trail t : Trail.values()) {
-            if (e.getCurrentItem().getItemMeta().getDisplayName().equals(t.getName())) {
-                if (Lobby.getInstance().getTrailManager().hasTrail(p, t)) {
-                    Lobby.getInstance().getTrailManager().setTrail(p, t);
-                } else {
-                    new TrailsBuyInventory(p, t);
-                }
-                return;
-            }
-        }
-
-        if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §c§lTrail ablegen")){
-            Lobby.getInstance().getTrailManager().removeTrail(p);
-        } else if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§7§l↩ Zurück")) {
+        setItem(9, ItemFactory.createItem(Material.IRON_DOOR, 0, 1, "§7§l↩ Zurück", true), () -> {
             new GadgetsInventory(p);
             p.playSound(p.getLocation(), Sound.NOTE_BASS, 1.0F, 1.0F);
-        }
+        });
+
+        openInventory();
+        player.playSound(player.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
     }
+
 }

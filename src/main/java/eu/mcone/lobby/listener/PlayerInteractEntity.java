@@ -22,7 +22,7 @@ public class PlayerInteractEntity implements Listener {
             Player clicked = (Player) e.getRightClicked();
 
             if (clicked.getDisplayName().contains("§")) {
-                ServerInventory.Spielmodus sm = ServerInventory.Spielmodus.getSpielmodusByNpcName(clicked.getDisplayName());
+                ServerInventory.Gamemode sm = ServerInventory.Gamemode.getGamemodeByNpcName(clicked.getDisplayName());
                 if (sm != null) {
                     new ServerInventory(p, sm);
                 }

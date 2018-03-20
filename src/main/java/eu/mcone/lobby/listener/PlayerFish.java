@@ -20,6 +20,7 @@ public class PlayerFish implements Listener {
     public void on(PlayerFishEvent e){
         Player p = e.getPlayer();
         FishHook hook = e.getHook();
+
         try{
             if (hook.getLocation().subtract(0.0D, 1.0D, 0.0D).getBlock().getType() != Material.AIR) {
                 Location playerloc = p.getLocation();

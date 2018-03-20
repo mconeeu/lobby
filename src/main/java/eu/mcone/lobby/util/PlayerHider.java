@@ -18,11 +18,11 @@ import java.util.HashMap;
 public class PlayerHider {
 
     public static ArrayList<Player> players = new ArrayList<>();
-    private static HashMap<String, Long> zeit = new HashMap<>();
+    private static HashMap<String, Long> time = new HashMap<>();
 
     public static void hidePlayers(Player p) {
-        if (zeit.containsKey(p.getName())){
-            long diff = (System.currentTimeMillis() - (Long) zeit.get(p.getName())) / 10L / 60L;
+        if (time.containsKey(p.getName())){
+            long diff = (System.currentTimeMillis() - (Long) time.get(p.getName())) / 10L / 60L;
             int cooldown = 1;
             if (diff < cooldown){
                 p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§7Du musst kurz warte um den Player hider wieder benutzen zu können");
@@ -41,7 +41,7 @@ public class PlayerHider {
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
         p.getInventory().setItem(0, ItemFactory.createItem(Material.INK_SACK, 2, 1, "§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an", true));
         p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§7Du siehst nun §ckeine §7Spieler mehr.");
-        zeit.put(p.getName(), System.currentTimeMillis());
+        time.put(p.getName(), System.currentTimeMillis());
     }
 
     public static void showPlayers(Player p) {
@@ -56,6 +56,6 @@ public class PlayerHider {
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
         p.getInventory().setItem(0, ItemFactory.createItem(Material.INK_SACK, 10, 1, "§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus", true));
         p.sendMessage(Lobby.config.getConfigValue("System-Prefix") + "§7Du siehst nun §aalle §7Spieler wieder.");
-        zeit.put(p.getName(), System.currentTimeMillis());
+        time.put(p.getName(), System.currentTimeMillis());
     }
 }

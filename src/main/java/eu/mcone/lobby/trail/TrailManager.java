@@ -6,9 +6,12 @@
 package eu.mcone.lobby.trail;
 
 import eu.mcone.coresystem.bukkit.api.CoinsAPI;
+import eu.mcone.coresystem.bukkit.inventory.CoreInventory;
+import eu.mcone.coresystem.bukkit.inventory.CoreItemEvent;
 import eu.mcone.coresystem.bukkit.util.ItemFactory;
 import eu.mcone.coresystem.lib.mysql.MySQL;
 import eu.mcone.lobby.Lobby;
+import eu.mcone.lobby.inventory.TrailsBuyInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -109,11 +112,13 @@ public class TrailManager {
         p.closeInventory();
     }
 
-    public void setInvItem(Inventory inv, Player p, Trail trail, int i) {
+    public void setInvItem(CoreInventory inv, Player p, Trail trail, int i) {
         if (hasTrail(p, trail)) {
-            inv.setItem(i, ItemFactory.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§2§oDu besitzt dieses Item!", "§8» §f§nRechtsklick§8 | §7§oAktivieren")), true));
+            inv.setItem(i, ItemFactory.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§2§oDu besitzt dieses Item!", "§8» §f§nRechtsklick§8 | §7§oAktivieren")), true),
+                    () -> Lobby.getInstance().getTrailManager().setTrail(p, trail));
         } else {
-            inv.setItem(i, ItemFactory.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§c§oDu besitzt dieses Item nicht!", "§7§oKostet: §f§o" + trail.getCoins() + " Coins")), true));
+            inv.setItem(i, ItemFactory.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§c§oDu besitzt dieses Item nicht!", "§7§oKostet: §f§o" + trail.getCoins() + " Coins")), true),
+                    () -> new TrailsBuyInventory(p, trail));
         }
     }
 

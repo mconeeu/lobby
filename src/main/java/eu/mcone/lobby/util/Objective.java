@@ -16,8 +16,8 @@ public class Objective extends eu.mcone.coresystem.bukkit.scoreboard.Objective {
 
     private static int i = 0;
 
-    public Objective(CorePlayer p) {
-        super(p, DisplaySlot.SIDEBAR, "Main", "Lobby");
+    public Objective() {
+        super(DisplaySlot.SIDEBAR, "Main", "Lobby");
     }
 
     @Override

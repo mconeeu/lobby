@@ -8,6 +8,7 @@ package eu.mcone.lobby.listener;
 import eu.mcone.lobby.util.PlayerHider;
 import eu.mcone.lobby.inventory.KompassInventory;
 import eu.mcone.lobby.inventory.GadgetsInventory;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.BlockFace;
@@ -31,29 +32,25 @@ public class PlayerInteract implements Listener{
             }
 
             if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
+                e.setCancelled(true);
                 p.performCommand("profil");
             } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus")) {
+                e.setCancelled(true);
                 PlayerHider.hidePlayers(p);
             } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an")) {
+                e.setCancelled(true);
                 PlayerHider.showPlayers(p);
             } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lGadgets §8» §7§oTrails / Boots / Gadgets")) {
+                e.setCancelled(true);
                 new GadgetsInventory(p);
                 p.playSound(p.getLocation(), Sound.CHEST_OPEN, 1.0F, 1.0F);
             } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lNavigator §8» §7§oWähle einen Spielmodus")) {
+                e.setCancelled(true);
                 new KompassInventory(p);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
             } else if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lZauber-Angel §8» §7§oZiehe dich wohin du willst")) {
                 e.setCancelled(false);
-                return;
             }
-
-            e.setCancelled(true);
-        } else if ((e.getAction() == Action.PHYSICAL)) {
-            if (e.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.SOIL) {
-                e.setCancelled(true);
-            }
-        } else {
-            e.setCancelled(true);
         }
     }
 }

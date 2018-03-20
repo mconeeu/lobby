@@ -6,21 +6,17 @@
 package eu.mcone.lobby;
 
 import eu.mcone.coresystem.bukkit.CoreSystem;
-import eu.mcone.coresystem.bukkit.command.HoloCMD;
-import eu.mcone.coresystem.bukkit.command.NpcCMD;
 import eu.mcone.coresystem.bukkit.hologram.HologramManager;
 import eu.mcone.coresystem.bukkit.npc.NpcManager;
 import eu.mcone.coresystem.bukkit.player.CorePlayer;
+import eu.mcone.coresystem.bukkit.util.BuildSystem;
 import eu.mcone.coresystem.lib.mysql.MySQL_Config;
-import eu.mcone.lobby.channel.PluginChannelListener;
 import eu.mcone.lobby.command.SpawnCMD;
 import eu.mcone.lobby.listener.*;
-import eu.mcone.lobby.util.Objective;
 import eu.mcone.lobby.trail.TrailManager;
+import eu.mcone.lobby.util.Objective;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import static org.bukkit.Bukkit.getMessenger;
 
 public class Lobby extends JavaPlugin {
 
@@ -32,7 +28,8 @@ public class Lobby extends JavaPlugin {
     private TrailManager trailManager;
     private HologramManager hologramManager;
     private NpcManager npcManager;
-    
+    private BuildSystem buildSystem;
+
     public void onEnable() {
         instance = this;
 
@@ -50,11 +47,11 @@ public class Lobby extends JavaPlugin {
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aHologram-Manager wird gestartet");
         hologramManager = new HologramManager(CoreSystem.mysql1, "Lobby");
 
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aHologram-Manager wird gestartet");
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aNPC-Manager wird gestartet");
         npcManager = new NpcManager(CoreSystem.mysql1, "Lobby");
 
-        getServer().getConsoleSender().sendMessage(MainPrefix + "§aBungeeCord Messaging Channel wird registriert...");
-        getMessenger().registerIncomingPluginChannel(this, "ReturnLobby", new PluginChannelListener());
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aBuild-System witd initiiert");
+        buildSystem = new BuildSystem(false, BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE);
 
         getServer().getConsoleSender().sendMessage(MainPrefix + "§aBefehle und Events werden registriert...");
         registerCommands();
@@ -63,7 +60,7 @@ public class Lobby extends JavaPlugin {
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
 
         for (CorePlayer p : CoreSystem.getOnlineCorePlayers()) {
-            p.getScoreboard().setNewObjective(new Objective(p));
+            p.getScoreboard().setNewObjective(new Objective());
             PlayerJoin.setJoinItems(p.bukkit());
         }
     }
@@ -76,13 +73,10 @@ public class Lobby extends JavaPlugin {
 
     private void registerCommands() {
         getCommand("spawn").setExecutor(new SpawnCMD());
-        getCommand("holo").setExecutor(new HoloCMD(hologramManager));
-        getCommand("npc").setExecutor(new NpcCMD(npcManager));
     }
 
     private void registerEvents() {
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new InventoryClick(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new CoinsChange(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerFish(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerMove(), this);
@@ -97,8 +91,6 @@ public class Lobby extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new EntitiyDamage(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new BlockBreak(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new BlockPlace(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteractEntity(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerAchievementAwarded(), this);
     }
@@ -170,5 +162,9 @@ public class Lobby extends JavaPlugin {
 
     public NpcManager getNpcManager() {
         return npcManager;
+    }
+
+    public BuildSystem getBuildSystem() {
+        return buildSystem;
     }
 }

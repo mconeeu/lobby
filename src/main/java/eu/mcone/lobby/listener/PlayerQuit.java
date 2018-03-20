@@ -19,7 +19,6 @@ public class PlayerQuit implements Listener {
         e.setQuitMessage(null);
 
         Lobby.getInstance().getTrailManager().unregisterPlayer(p);
-        Lobby.getInstance().getNpcManager().unsetNPCs(p);
     }
 
 }

@@ -17,23 +17,27 @@ import org.bukkit.util.Vector;
 public class PlayerToggleFlight implements Listener{
 
     @EventHandler
-    public void on(PlayerToggleFlightEvent e)
-    {
+    public void on(PlayerToggleFlightEvent e) {
         Player p = e.getPlayer();
-        if (!e.isFlying()) {
-            return;
+
+        if (p.getGameMode().equals(GameMode.CREATIVE)) {
+            e.setCancelled(false);
+        } else if (p.hasPermission("mcone.premium")) {
+            e.setCancelled(true);
+
+            Vector vec = p.getLocation().getDirection().normalize();
+            vec = vec.setY(Math.max(0.4000000059604645D, vec.getY())).multiply(1.5F);
+            p.setVelocity(vec);
+            p.setFlying(false);
+            p.setAllowFlight(false);
+
+            p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 2.0F, 2.0F);
+            p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 10);
+        } else {
+            e.setCancelled(true);
+            p.setAllowFlight(false);
+            p.setFlying(false);
         }
-        if (p.getGameMode() == GameMode.CREATIVE) {
-            return;
-        }
-        e.setCancelled(true);
-        p.setAllowFlight(false);
-        Vector vec = p.getLocation().getDirection().normalize();
-        vec = vec.setY(Math.max(0.4000000059604645D, vec.getY())).multiply(1.5F);
-        p.setVelocity(vec);
-        p.setFlying(false);
-        p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 2.0F, 2.0F);
-        p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 10);
     }
 
 }

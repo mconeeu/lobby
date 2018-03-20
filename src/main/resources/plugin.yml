@@ -5,12 +5,6 @@ main: eu.mcone.lobby.Lobby
 depend: [MCONE-BukkitCoreSystem]
 
 commands:
-  holo:
-    description: Setze die einzelnen Hologramme
-    permission: system.bukkit.holo
-  npc:
-    descirption: Spawnt einen NPC
-    permissions: system.bukkit.npc
   spawn:
     description: Teleportiert den Spieler zum Spawn
 
