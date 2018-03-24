@@ -8,11 +8,12 @@ package eu.mcone.lobby.util;
 import eu.mcone.coresystem.bukkit.CoreSystem;
 import eu.mcone.coresystem.bukkit.api.CoinsAPI;
 import eu.mcone.coresystem.bukkit.player.CorePlayer;
+import eu.mcone.coresystem.bukkit.scoreboard.CoreObjective;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
-public class Objective extends eu.mcone.coresystem.bukkit.scoreboard.Objective {
+public class Objective extends CoreObjective {
 
     private static int i = 0;
 
@@ -22,59 +23,52 @@ public class Objective extends eu.mcone.coresystem.bukkit.scoreboard.Objective {
 
     @Override
     public void register() {
-        org.bukkit.scoreboard.Objective o = bukkit();
-        Scoreboard sb = getScoreboard();
-        CorePlayer p = getPlayer();
+        objective.setDisplayName("§f§l§n"+player.bukkit().getDisplayName());
 
-        o.setDisplayName("§f§l§n"+p.bukkit().getDisplayName());
+        if (scoreboard.getTeam("rang") != null) scoreboard.getTeam("rang").unregister();
+        if (scoreboard.getTeam("coins") != null) scoreboard.getTeam("coins").unregister();
+        if (scoreboard.getTeam("line1") != null) scoreboard.getTeam("line1").unregister();
+        if (scoreboard.getTeam("line2") != null) scoreboard.getTeam("line2").unregister();
 
-        if (sb.getTeam("rang") != null) sb.getTeam("rang").unregister();
-        if (sb.getTeam("coins") != null) sb.getTeam("coins").unregister();
-        if (sb.getTeam("line1") != null) sb.getTeam("line1").unregister();
-        if (sb.getTeam("line2") != null) sb.getTeam("line2").unregister();
-
-        Team rang = sb.registerNewTeam("rang");
+        Team rang = scoreboard.registerNewTeam("rang");
         rang.addEntry("§3");
-        rang.setPrefix(p.getGroup().getLabel());
+        rang.setPrefix(player.getMainGroup().getLabel());
 
-        Team coins = sb.registerNewTeam("coins");
+        Team coins = scoreboard.registerNewTeam("coins");
         coins.addEntry("§5");
-        coins.setPrefix("§o"+ CoinsAPI.getCoins(p.getUuid()));
+        coins.setPrefix("§o"+ CoinsAPI.getCoins(player.getUuid()));
 
-        Team line1 = sb.registerNewTeam("line1");
+        Team line1 = scoreboard.registerNewTeam("line1");
         line1.addEntry("§7");
         line1.setPrefix("§7Teamspeak");
 
-        Team line2 = sb.registerNewTeam("line2");
+        Team line2 = scoreboard.registerNewTeam("line2");
         line2.addEntry("§8");
         line2.setPrefix("§f§omcone.eu");
 
-        o.getScore("§1").setScore(12);
-        o.getScore("§8» §3§lMCONE.EU").setScore(11);
-        o.getScore("§7§oDein Nummer 1").setScore(10);
-        o.getScore("§7§oMinecraftnetzwerk").setScore(9);
-        o.getScore("§2").setScore(8);
-        o.getScore("§7Rang:").setScore(7);
-        o.getScore("§3").setScore(6);
-        o.getScore("§4").setScore(5);
-        o.getScore("§7Coins:").setScore(4);
-        o.getScore("§5").setScore(3);
-        o.getScore("§6").setScore(2);
-        o.getScore("§7").setScore(1);
-        o.getScore("§8").setScore(0);
+        objective.getScore("§1").setScore(12);
+        objective.getScore("§8» §3§lMCONE.EU").setScore(11);
+        objective.getScore("§7§oDein Nummer 1").setScore(10);
+        objective.getScore("§7§oMinecraftnetzwerk").setScore(9);
+        objective.getScore("§2").setScore(8);
+        objective.getScore("§7Rang:").setScore(7);
+        objective.getScore("§3").setScore(6);
+        objective.getScore("§4").setScore(5);
+        objective.getScore("§7Coins:").setScore(4);
+        objective.getScore("§5").setScore(3);
+        objective.getScore("§6").setScore(2);
+        objective.getScore("§7").setScore(1);
+        objective.getScore("§8").setScore(0);
 
-        p.bukkit().setScoreboard(sb);
+        player.bukkit().setScoreboard(scoreboard);
     }
 
     @Override
     public void reload() {
-        Scoreboard sb = getScoreboard();
-        CorePlayer p = getPlayer();
+        scoreboard.getTeam("rang").setPrefix(player.getMainGroup().getLabel());
+        scoreboard.getTeam("coins").setPrefix("§o"+CoinsAPI.getCoins(player.getUuid()));
 
-        sb.getTeam("rang").setPrefix(p.getGroup().getLabel());
-        sb.getTeam("coins").setPrefix("§o"+CoinsAPI.getCoins(p.getUuid()));
-
-        p.bukkit().setScoreboard(sb);
+        player.bukkit().setScoreboard(scoreboard);
     }
 
     public static void updateLines() {

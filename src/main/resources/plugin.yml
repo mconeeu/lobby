@@ -4,10 +4,6 @@ version: 3.2.1-SNAPSHOT
 main: eu.mcone.lobby.Lobby
 depend: [MCONE-BukkitCoreSystem]
 
-commands:
-  spawn:
-    description: Teleportiert den Spieler zum Spawn
-
 permissions:
   lobby:
     description: Lobby Main Permission

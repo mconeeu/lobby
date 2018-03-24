@@ -10,11 +10,12 @@ import eu.mcone.coresystem.bukkit.hologram.HologramManager;
 import eu.mcone.coresystem.bukkit.npc.NpcManager;
 import eu.mcone.coresystem.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.bukkit.util.BuildSystem;
+import eu.mcone.coresystem.bukkit.util.LocationManager;
 import eu.mcone.coresystem.lib.mysql.MySQL_Config;
-import eu.mcone.lobby.command.SpawnCMD;
 import eu.mcone.lobby.listener.*;
 import eu.mcone.lobby.trail.TrailManager;
 import eu.mcone.lobby.util.Objective;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,13 +23,20 @@ public class Lobby extends JavaPlugin {
 
     private static String MainPrefix = "§8[§3Lobby§8] ";
 
+    @Getter
     private static Lobby instance;
     public static MySQL_Config config;
 
+    @Getter
     private TrailManager trailManager;
+    @Getter
     private HologramManager hologramManager;
+    @Getter
     private NpcManager npcManager;
+    @Getter
     private BuildSystem buildSystem;
+    @Getter
+    private LocationManager locationManager;
 
     public void onEnable() {
         instance = this;
@@ -50,11 +58,19 @@ public class Lobby extends JavaPlugin {
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aNPC-Manager wird gestartet");
         npcManager = new NpcManager(CoreSystem.mysql1, "Lobby");
 
+        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aLocationManager witd initiiert");
+        locationManager = new LocationManager("Lobby")
+                .registerLocation("bedwars")
+                .registerLocation("skypvp")
+                .registerLocation("knockit")
+                .registerLocation("minewar")
+                .registerLocation("build")
+                .downloadLocations();
+
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aBuild-System witd initiiert");
         buildSystem = new BuildSystem(false, BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE);
 
         getServer().getConsoleSender().sendMessage(MainPrefix + "§aBefehle und Events werden registriert...");
-        registerCommands();
         registerEvents();
 
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
@@ -69,10 +85,6 @@ public class Lobby extends JavaPlugin {
         hologramManager.unsetHolograms();
         npcManager.unsetNPCs();
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§cPlugin wurde deaktiviert!");
-    }
-
-    private void registerCommands() {
-        getCommand("spawn").setExecutor(new SpawnCMD());
     }
 
     private void registerEvents() {
@@ -144,27 +156,4 @@ public class Lobby extends JavaPlugin {
         Bukkit.getScheduler().runTaskTimer(getInstance(), Objective::updateLines, 50L, 100L);
     }
 
-    public static Lobby getInstance() {
-        return Lobby.instance;
-    }
-
-    public TrailManager getTrailManager() {
-        return trailManager;
-    }
-
-    public HologramManager getHologramManager() {
-        return hologramManager;
-    }
-
-    public void setHologramManager(HologramManager hologramManager) {
-        this.hologramManager = hologramManager;
-    }
-
-    public NpcManager getNpcManager() {
-        return npcManager;
-    }
-
-    public BuildSystem getBuildSystem() {
-        return buildSystem;
-    }
 }

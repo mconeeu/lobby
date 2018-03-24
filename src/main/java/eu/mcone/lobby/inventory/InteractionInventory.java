@@ -8,7 +8,7 @@ package eu.mcone.lobby.inventory;
 import eu.mcone.coresystem.bukkit.CoreSystem;
 import eu.mcone.coresystem.bukkit.channel.PluginMessage;
 import eu.mcone.coresystem.bukkit.inventory.CoreInventory;
-import eu.mcone.coresystem.bukkit.util.ItemFactory;
+import eu.mcone.coresystem.bukkit.util.ItemBuilder;
 import eu.mcone.lobby.Lobby;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -18,14 +18,8 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.meta.SkullMeta;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class InteractionInventory extends CoreInventory {
 
@@ -39,8 +33,15 @@ public class InteractionInventory extends CoreInventory {
                     int coins = rs.getInt("coins");
                     String status = getStatus(rs.getString("status"));
 
-                    setItem(4, ItemFactory.createSkullItem("§f§l" + clicked.getName(), clicked.getName(), 1, new ArrayList<>(Arrays.asList(CoreSystem.getCorePlayer(clicked).getGroup().getLabel(), "","§7Coins: §f" + coins , "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + status))));
-                    setItem(20, ItemFactory.createCustomSkullItem("§7Online-Profil Ansehen", "http://textures.minecraft.net/texture/6f74f58f541342393b3b16787dd051dfacec8cb5cd3229c61e5f73d63947ad", 1, new ArrayList<>()), () -> {
+                    setItem(4, ItemBuilder.createSkullItem(clicked.getName(), 1).displayName("§f§l" + clicked.getName()).lore(
+                                CoreSystem.getCorePlayer(clicked).getMainGroup().getLabel(),
+                                "",
+                                "§7Coins: §f" + coins ,
+                                "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + status
+                            ).create()
+                    );
+
+                    setItem(20, ItemBuilder.createSkullItemFromURL("http://textures.minecraft.net/texture/6f74f58f541342393b3b16787dd051dfacec8cb5cd3229c61e5f73d63947ad", 1).displayName("§7Online-Profil Ansehen").create(), () -> {
                         TextComponent tc0 = new TextComponent(TextComponent.fromLegacyText(Lobby.config.getConfigValue("System-Prefix") + "§2Das Profil von " + clicked.getName() + " findest du "));
 
                         TextComponent tc = new TextComponent();
@@ -56,18 +57,18 @@ public class InteractionInventory extends CoreInventory {
                     CoreSystem.mysql1.select("SELECT uuid FROM `bungeesystem_friends` WHERE `uuid`='"+player.getUniqueId()+"' AND `target`='"+clicked.getUniqueId()+"' AND `key`='friend';", rs1 -> {
                         try {
                             if (rs1.next()) {
-                                setItem(22, ItemFactory.createItem(Material.BARRIER, 0, 1, "§4Freund entfernen", true), () -> {
+                                setItem(22, new ItemBuilder(Material.BARRIER, 1, 0).displayName("§4Freund entfernen").create(), () -> {
                                     p.closeInventory();
                                     new PluginMessage(p, "CMD", "friend remove " + clicked);
                                 });
                             } else {
-                                setItem(22, ItemFactory.createItem(Material.SKULL_ITEM, 3, 1, "§7Freund hinzufügen", true), () -> {
+                                setItem(22, new ItemBuilder(Material.SKULL_ITEM, 1, 3).displayName("§7Freund hinzufügen").create(), () -> {
                                     p.closeInventory();
                                     new PluginMessage(p, "CMD", "friend add " + clicked);
                                 });
                             }
 
-                            setItem(24, ItemFactory.createItem(Material.CAKE, 0, 1, "§7In §5Party §7einladen", true), () -> {
+                            setItem(24, new ItemBuilder(Material.CAKE, 1, 0).displayName("§7In §5Party §7einladen").create(), () -> {
                                 p.closeInventory();
                                 new PluginMessage(p, "CMD", "party invite " + clicked);
                             });

@@ -7,24 +7,18 @@ package eu.mcone.lobby.trail;
 
 import eu.mcone.coresystem.bukkit.api.CoinsAPI;
 import eu.mcone.coresystem.bukkit.inventory.CoreInventory;
-import eu.mcone.coresystem.bukkit.inventory.CoreItemEvent;
-import eu.mcone.coresystem.bukkit.util.ItemFactory;
+import eu.mcone.coresystem.bukkit.util.ItemBuilder;
 import eu.mcone.coresystem.lib.mysql.MySQL;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.inventory.TrailsBuyInventory;
 import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -47,42 +41,7 @@ public class TrailManager {
 
         Bukkit.getScheduler().runTaskTimer(Lobby.getInstance(), () -> {
             for(final HashMap.Entry<Player, Trail> trailEntry : trails.entrySet()){
-                if(trailEntry.getValue().equals(Trail.COOKIES)){
-                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.COOKIE));
-                } else if(trailEntry.getValue().equals(Trail.GLOW)){
-                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.GOLD_INGOT));
-                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.BLAZE_ROD));
-                } else if(trailEntry.getValue().equals(Trail.ENDER)){
-                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.ENDER_PEARL));
-                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.EYE_OF_ENDER));
-                } else if (trailEntry.getValue().equals(Trail.MUSIC)) {
-                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.JUKEBOX));
-                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.RECORD_10));
-                    trailEntry.getKey().getWorld().dropItem(trailEntry.getKey().getLocation(), new ItemStack(Material.RECORD_6));
-                } else if (trailEntry.getValue().equals(Trail.HEART)) {
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.HEART, 5);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.HEART, 5);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SPELL, 5);
-                } else if (trailEntry.getValue().equals(Trail.LAVA)) {
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.LAVA_POP, 5);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.LAVA_POP, 5);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.LARGE_SMOKE, 5);
-                } else if (trailEntry.getValue().equals(Trail.SNOW)) {
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOW_SHOVEL, 2);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOW_SHOVEL, 2);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOW_SHOVEL, 2);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOWBALL_BREAK, 10);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOWBALL_BREAK, 10);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOWBALL_BREAK, 10);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOWBALL_BREAK, 10);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOWBALL_BREAK, 10);
-                } else if (trailEntry.getValue().equals(Trail.WATER)) {
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SPLASH, 5);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SPLASH, 5);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.WATERDRIP, 5);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.WATERDRIP, 5);
-                    trailEntry.getKey().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.WATERDRIP, 5);
-                }
+                trailEntry.getValue().getEffect().playEffect(trailEntry.getKey().getLocation());
             }
         }, 100L, 1);
     }
@@ -114,10 +73,10 @@ public class TrailManager {
 
     public void setInvItem(CoreInventory inv, Player p, Trail trail, int i) {
         if (hasTrail(p, trail)) {
-            inv.setItem(i, ItemFactory.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§2§oDu besitzt dieses Item!", "§8» §f§nRechtsklick§8 | §7§oAktivieren")), true),
+            inv.setItem(i, new ItemBuilder(trail.getItem(), 1, 0).displayName(trail.getName()).lore("§r", "§2§oDu besitzt dieses Item!", "§8» §f§nRechtsklick§8 | §7§oAktivieren").create(),
                     () -> Lobby.getInstance().getTrailManager().setTrail(p, trail));
         } else {
-            inv.setItem(i, ItemFactory.createItem(trail.getItem(), 0, 1, trail.getName(), new ArrayList<>(Arrays.asList("§r", "§c§oDu besitzt dieses Item nicht!", "§7§oKostet: §f§o" + trail.getCoins() + " Coins")), true),
+            inv.setItem(i, new ItemBuilder(trail.getItem(), 1, 0).displayName(trail.getName()).lore("§r", "§c§oDu besitzt dieses Item nicht!", "§7§oKostet: §f§o" + trail.getCoins() + " Coins").create(),
                     () -> new TrailsBuyInventory(p, trail));
         }
     }

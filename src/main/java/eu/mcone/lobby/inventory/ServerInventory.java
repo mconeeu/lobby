@@ -7,14 +7,9 @@ package eu.mcone.lobby.inventory;
 
 import eu.mcone.coresystem.bukkit.channel.PluginMessage;
 import eu.mcone.coresystem.bukkit.inventory.CoreInventory;
-import eu.mcone.coresystem.bukkit.util.ItemFactory;
+import eu.mcone.coresystem.bukkit.util.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ServerInventory extends CoreInventory {
 
@@ -68,12 +63,12 @@ public class ServerInventory extends CoreInventory {
 
         new PluginMessage(player, servers -> {
             for (int i = 0; i <= 17; i++) {
-                setItem(i, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 7, 1, "§8//§oMCONE§8//", true));
+                setItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
             }
             for (int i = 45; i <= 53; i++) {
-                setItem(i, ItemFactory.createItem(Material.STAINED_GLASS_PANE, 7, 1, "§8//§oMCONE§8//", true));
+                setItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
             }
-            setItem(4, ItemFactory.createItem(modus.getItem(), 0, 1, modus.getName(), true));
+            setItem(4, new ItemBuilder(modus.getItem(), 1, 0).displayName(modus.getName()).create());
 
             int i = 17;
             for (String server : servers.split(";")) {
@@ -83,7 +78,7 @@ public class ServerInventory extends CoreInventory {
                 String[] data = server.split(":");
                 if (data.length < 2) continue;
 
-                setItem(i, ItemFactory.createItem(Material.EMERALD, 0, 1, "§f§l"+data[0], new ArrayList<>(Arrays.asList("§7"+data[1]+" Spieler online", "", "§8» §c§nRechtsklick§8 | §7§oJoinen")), true), () -> {
+                setItem(i, new ItemBuilder(Material.EMERALD, 1, 0).displayName("§f§l"+data[0]).lore("§7"+data[1]+" Spieler online", "", "§8» §c§nRechtsklick§8 | §7§oJoinen").create(), () -> {
                     new PluginMessage(p, "CONNECT", data[0]);
                     p.closeInventory();
                 });
