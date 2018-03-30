@@ -5,7 +5,6 @@
 
 package eu.mcone.lobby.listener;
 
-import eu.mcone.coresystem.bukkit.util.LocationFactory;
 import eu.mcone.lobby.Lobby;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,7 +30,7 @@ public class EntitiyDamage implements Listener{
             }
 
             if(e.getCause() == EntityDamageEvent.DamageCause.VOID){
-                p.teleport(LocationFactory.getConfigLocation(Lobby.config, "Location-Spawn"));
+                Lobby.getInstance().getLocationManager().teleport(p, "spawn");
             }
         }
     }
