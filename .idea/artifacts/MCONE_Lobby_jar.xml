@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="MCONE-Lobby:jar">
-    <output-path>$PROJECT_DIR$/../../../Minecraft/localhost - server/Lobby/plugins</output-path>
-    <root id="archive" name="MCONE-Lobby.jar">
-      <element id="module-output" name="mcone-lobby" />
-    </root>
-  </artifact>
-</component>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2017 - 2018 Dominik L., Rufus Maiwald, BamDev and the MC ONE Minecraftnetwork. All rights reserved
+  ~ Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
   ~ You are not allowed to decompile the code
   -->
 
@@ -11,51 +11,12 @@
 
     <groupId>eu.mcone.lobby</groupId>
     <artifactId>mcone-lobby</artifactId>
-    <version>3.2.1-SNAPSHOT</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <packaging>pom</packaging>
+    <version>3.3.1-SNAPSHOT</version>
 
-    <distributionManagement>
-        <repository>
-            <id>mcone-systems</id>
-            <name>MC ONE Repo</name>
-            <url>http://repo.mcone.eu/nexus/content/repositories/system/</url>
-        </repository>
-    </distributionManagement>
-
-    <repositories>
-        <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <id>mcone-systems</id>
-            <url>http://repo.mcone.eu/nexus/content/repositories/system/</url>
-        </repository>
-    </repositories>
-    <dependencies>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.8.8-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>eu.mcone.coresystem</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>5.1.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>lobby-api</module>
+        <module>lobby-plugin</module>
+    </modules>
 
 </project>

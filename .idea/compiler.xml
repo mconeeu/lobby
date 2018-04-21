@@ -2,17 +2,21 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Lobby" />
+        <module name="lobby-api" />
+        <module name="lobby-plugin" />
         <module name="MCONE-Lobby" />
-        <module name="mcone-lobby" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="mcone-lobby" target="1.8" />
+      <module name="lobby-api" target="1.8" />
+      <module name="lobby-plugin" target="1.8" />
+      <module name="mcone-lobby" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
