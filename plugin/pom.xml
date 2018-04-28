@@ -14,7 +14,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>lobby-plugin</artifactId>
+    <artifactId>plugin</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
 
     <build>
         <plugins>
@@ -80,7 +85,7 @@
     <dependencies>
         <dependency>
             <groupId>eu.mcone.lobby</groupId>
-            <artifactId>lobby-api</artifactId>
+            <artifactId>api</artifactId>
             <version>3.3.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

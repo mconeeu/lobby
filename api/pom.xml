@@ -14,7 +14,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>lobby-api</artifactId>
+    <artifactId>api</artifactId>
 
     <build>
         <plugins>

@@ -7,16 +7,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="api" />
         <module name="Lobby" />
         <module name="lobby-api" />
         <module name="lobby-plugin" />
         <module name="MCONE-Lobby" />
+        <module name="plugin" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="api" target="1.8" />
       <module name="lobby-api" target="1.8" />
       <module name="lobby-plugin" target="1.8" />
       <module name="mcone-lobby" target="1.5" />
+      <module name="plugin" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/lobby-api/lobby-api.iml" filepath="$PROJECT_DIR$/lobby-api/lobby-api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lobby-plugin/lobby-plugin.iml" filepath="$PROJECT_DIR$/lobby-plugin/lobby-plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
       <module fileurl="file://$PROJECT_DIR$/mcone-lobby.iml" filepath="$PROJECT_DIR$/mcone-lobby.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plugin/plugin.iml" filepath="$PROJECT_DIR$/plugin/plugin.iml" />
     </modules>
   </component>
 </project>
