@@ -6,7 +6,7 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.lobby.util.PlayerHider;
-import eu.mcone.lobby.inventory.KompassInventory;
+import eu.mcone.lobby.inventory.CompassInventory;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -38,7 +38,7 @@ public class PlayerInteract implements Listener{
                 PlayerHider.showPlayers(p);
             } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lNavigator §8» §7§oWähle einen Spielmodus")) {
                 e.setCancelled(true);
-                new KompassInventory(p);
+                new CompassInventory(p);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
             } else if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lZauber-Angel §8» §7§oZiehe dich wohin du willst")) {
                 e.setCancelled(false);

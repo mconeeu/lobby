@@ -9,7 +9,6 @@ import eu.mcone.coresystem.api.bukkit.hologram.HologramManager;
 import eu.mcone.coresystem.api.bukkit.npc.NpcManager;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.LocationManager;
-import eu.mcone.coresystem.api.core.mysql.MySQL_Config;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -35,7 +34,5 @@ public abstract class Lobby extends JavaPlugin {
     public abstract BuildSystem getBuildSystem();
 
     public abstract LocationManager getLocationManager();
-
-    public abstract MySQL_Config getConf();
 
 }

@@ -14,9 +14,9 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 
-public class KompassInventory extends CoreInventory {
+public class CompassInventory extends CoreInventory {
 
-    public KompassInventory(Player p) {
+    public CompassInventory(Player p) {
         super("§8» §3§lNavigator", p, 54);
 
         setItem(0, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
