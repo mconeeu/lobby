@@ -45,7 +45,6 @@ public class PlayerJoin implements Listener {
         p.setFoodLevel(20);
 
         cp.getScoreboard().setNewObjective(new Objective());
-        LobbyPlugin.getInstance().getHologramManager().setHolograms(p);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);

@@ -75,7 +75,6 @@ public class LobbyPlugin extends Lobby {
 
     @Override
     public void onDisable(){
-        hologramManager.unsetHolograms();
         npcManager.unsetNPCs();
         Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§cPlugin wurde deaktiviert!");
     }
@@ -103,7 +102,7 @@ public class LobbyPlugin extends Lobby {
     private void registerTranslations(){
         CoreSystem.getInstance().getTranslationManager().insertIfNotExists(
                 new HashMap<String, TranslationField>(){{
-                    put("lobby.prefix", new TranslationField("&8[&7&l!&8]&3 Lobby &8» &7"));
+                    put("lobby.prefix", new TranslationField("§8[§7§l!§8]§3 Lobby §8» §7"));
                 }}
         );
     }
