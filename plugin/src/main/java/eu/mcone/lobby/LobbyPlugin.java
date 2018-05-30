@@ -22,8 +22,6 @@ import java.util.HashMap;
 
 public class LobbyPlugin extends Lobby {
 
-    private static String MainPrefix = "§8[§3Lobby§8] ";
-
     @Getter
     private HologramManager hologramManager;
     @Getter
@@ -41,16 +39,16 @@ public class LobbyPlugin extends Lobby {
         Bukkit.getWorld("Lobby").setMonsterSpawnLimit(0);
         registerTranslations();
 
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aScoreboard-Scheduler wird gestartet");
+        sendConsoleMessage("§aScoreboard-Scheduler wird gestartet");
         startScheduler();
 
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aHologram-Manager wird gestartet");
+        sendConsoleMessage("§aHologram-Manager wird gestartet");
         hologramManager = CoreSystem.getInstance().inititaliseHologramManager("Lobby");
 
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aNPC-Manager wird gestartet");
+        sendConsoleMessage("§aNPC-Manager wird gestartet");
         npcManager = CoreSystem.getInstance().initialiseNpcManager("Lobby");
 
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aLocationManager witd initiiert");
+        sendConsoleMessage("§aLocationManager witd initiiert");
         locationManager = CoreSystem.getInstance().initialiseLocationManager("Lobby")
                 .registerLocation("bedwars")
                 .registerLocation("skypvp")
@@ -59,13 +57,13 @@ public class LobbyPlugin extends Lobby {
                 .registerLocation("build")
                 .downloadLocations();
 
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aBuild-System witd initiiert");
+        sendConsoleMessage("§aBuild-System witd initiiert");
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(true, BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE);
 
-        getServer().getConsoleSender().sendMessage(MainPrefix + "§aBefehle und Events werden registriert...");
+        sendConsoleMessage("§aBefehle und Events werden registriert...");
         registerEvents();
 
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
+        sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
 
         for (BukkitCorePlayer p : CoreSystem.getInstance().getOnlineCorePlayers()) {
             p.getScoreboard().setNewObjective(new Objective());
@@ -76,7 +74,7 @@ public class LobbyPlugin extends Lobby {
     @Override
     public void onDisable(){
         npcManager.unsetNPCs();
-        Bukkit.getServer().getConsoleSender().sendMessage(MainPrefix + "§cPlugin wurde deaktiviert!");
+        sendConsoleMessage("§cPlugin disabled!");
     }
 
     private void registerEvents() {

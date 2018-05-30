@@ -5,19 +5,22 @@
 
 package eu.mcone.lobby.api;
 
+import eu.mcone.coresystem.api.bukkit.CorePlugin;
 import eu.mcone.coresystem.api.bukkit.hologram.HologramManager;
 import eu.mcone.coresystem.api.bukkit.npc.NpcManager;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.LocationManager;
 import lombok.Getter;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.ChatColor;
 
-public abstract class Lobby extends JavaPlugin {
+public abstract class Lobby extends CorePlugin {
 
     @Getter
     private static Lobby instance;
 
-    public Lobby() {}
+    public Lobby() {
+        super("Lobby", ChatColor.DARK_AQUA, "lobby.prefix");
+    }
 
     protected void setInstance(Lobby instance) {
         if (Lobby.instance != null) {
