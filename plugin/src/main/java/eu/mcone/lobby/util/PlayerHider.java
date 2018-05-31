@@ -5,8 +5,8 @@
 
 package eu.mcone.lobby.util;
 
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import eu.mcone.lobby.api.Lobby;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -28,7 +28,7 @@ public class PlayerHider {
             long diff = (System.currentTimeMillis() - time.get(p.getName())) / 10L / 60L;
             int cooldown = 1;
             if (diff < cooldown){
-                p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§7Du musst kurz warte um den Player hider wieder benutzen zu können");
+                Lobby.getInstance().getMessager().send(p, "§7Du musst kurz warte um den Player hider wieder benutzen zu können");
                 return;
             }
         }
@@ -43,7 +43,7 @@ public class PlayerHider {
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
         p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an").create());
-        p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§7Du siehst nun §ckeine §7Spieler mehr.");
+        Lobby.getInstance().getMessager().send(p, "§7Du siehst nun §ckeine §7Spieler mehr.");
         time.put(p.getName(), System.currentTimeMillis());
     }
 
@@ -58,7 +58,7 @@ public class PlayerHider {
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
         p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
-        p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§7Du siehst nun §aalle §7Spieler wieder.");
+        Lobby.getInstance().getMessager().send(p, "§7Du siehst nun §aalle §7Spieler wieder.");
         time.put(p.getName(), System.currentTimeMillis());
     }
 }
