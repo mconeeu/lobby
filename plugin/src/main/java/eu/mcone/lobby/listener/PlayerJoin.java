@@ -49,7 +49,7 @@ public class PlayerJoin implements Listener {
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
 
-        LobbyPlugin.getInstance().getLocationManager().teleportSilently(p, "spawn");
+        LobbyPlugin.getInstance().getWorld().teleportSilently(p, "spawn");
 
         setJoinItems(p);
     }

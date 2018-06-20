@@ -10,7 +10,7 @@ import eu.mcone.coresystem.api.bukkit.hologram.HologramManager;
 import eu.mcone.coresystem.api.bukkit.npc.NpcManager;
 import eu.mcone.coresystem.api.bukkit.player.BukkitCorePlayer;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
-import eu.mcone.coresystem.api.bukkit.world.LocationManager;
+import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.coresystem.api.core.translation.TranslationField;
 import eu.mcone.lobby.api.Lobby;
 import eu.mcone.lobby.listener.*;
@@ -29,12 +29,13 @@ public class LobbyPlugin extends Lobby {
     @Getter
     private BuildSystem buildSystem;
     @Getter
-    private LocationManager locationManager;
+    private CoreWorld world;
 
     @Override
     public void onEnable() {
         setInstance(this);
 
+        world = CoreSystem.getInstance().getWorldManager().getWorld("Lobby");
         Bukkit.getWorld("Lobby").setAnimalSpawnLimit(0);
         Bukkit.getWorld("Lobby").setMonsterSpawnLimit(0);
         registerTranslations();
@@ -48,19 +49,11 @@ public class LobbyPlugin extends Lobby {
         sendConsoleMessage("§aNPC-Manager wird gestartet");
         npcManager = CoreSystem.getInstance().initialiseNpcManager("Lobby");
 
-        sendConsoleMessage("§aLocationManager witd initiiert");
-        locationManager = CoreSystem.getInstance().initialiseLocationManager("Lobby")
-                .registerLocation("bedwars")
-                .registerLocation("skypvp")
-                .registerLocation("knockit")
-                .registerLocation("minewar")
-                .registerLocation("build")
-                .downloadLocations();
-
         sendConsoleMessage("§aBuild-System witd initiiert");
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(true, BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE);
 
         sendConsoleMessage("§aBefehle und Events werden registriert...");
+        CoreSystem.getInstance().enableSpawnCommand(world);
         registerEvents();
 
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");

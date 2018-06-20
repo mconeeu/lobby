@@ -9,7 +9,7 @@ import eu.mcone.coresystem.api.bukkit.CorePlugin;
 import eu.mcone.coresystem.api.bukkit.hologram.HologramManager;
 import eu.mcone.coresystem.api.bukkit.npc.NpcManager;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
-import eu.mcone.coresystem.api.bukkit.world.LocationManager;
+import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 
@@ -36,6 +36,6 @@ public abstract class Lobby extends CorePlugin {
 
     public abstract BuildSystem getBuildSystem();
 
-    public abstract LocationManager getLocationManager();
+    public abstract CoreWorld getWorld();
 
 }

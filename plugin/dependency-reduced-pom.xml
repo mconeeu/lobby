@@ -77,6 +77,10 @@
           <artifactId>core-api</artifactId>
           <groupId>eu.mcone.coresystem</groupId>
         </exclusion>
+        <exclusion>
+          <artifactId>bukkit</artifactId>
+          <groupId>net.labymod.serverapi</groupId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
