@@ -44,10 +44,10 @@ public class LobbyPlugin extends Lobby {
         startScheduler();
 
         sendConsoleMessage("§aHologram-Manager wird gestartet");
-        hologramManager = CoreSystem.getInstance().inititaliseHologramManager("Lobby");
+        hologramManager = CoreSystem.getInstance().inititaliseHologramManager(this);
 
         sendConsoleMessage("§aNPC-Manager wird gestartet");
-        npcManager = CoreSystem.getInstance().initialiseNpcManager("Lobby");
+        npcManager = CoreSystem.getInstance().initialiseNpcManager(this);
 
         sendConsoleMessage("§aBuild-System witd initiiert");
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(true, BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE);
