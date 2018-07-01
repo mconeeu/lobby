@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="lobby-plugin:jar">
-    <output-path>$PROJECT_DIR$/../../../Minecraft/localhost - server/Lobby/plugins</output-path>
-    <root id="archive" name="lobby-plugin.jar">
-      <element id="module-output" name="lobby-plugin" />
-      <element id="module-output" name="lobby-api" />
-    </root>
-  </artifact>
-</component>

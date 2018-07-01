@@ -74,7 +74,6 @@ public class LobbyPlugin extends Lobby {
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new CoinsChange(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerFish(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerMove(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerToggleFlight(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerDropItem(), this);

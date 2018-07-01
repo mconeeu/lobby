@@ -44,6 +44,8 @@ public class PlayerJoin implements Listener {
         p.setHealth(20);
         p.setFoodLevel(20);
 
+        if (p.hasPermission("mcone.premium")) p.setAllowFlight(true);
+
         cp.getScoreboard().setNewObjective(new Objective());
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
