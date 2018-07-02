@@ -17,6 +17,7 @@ import eu.mcone.lobby.listener.*;
 import eu.mcone.lobby.util.Objective;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 
 import java.util.HashMap;
 
@@ -50,7 +51,8 @@ public class LobbyPlugin extends Lobby {
         npcManager = CoreSystem.getInstance().initialiseNpcManager(this);
 
         sendConsoleMessage("§aBuild-System witd initiiert");
-        buildSystem = CoreSystem.getInstance().initialiseBuildSystem(true, BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE);
+        buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
+        buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, Material.STONE_BUTTON, Material.WOOD_BUTTON);
 
         sendConsoleMessage("§aBefehle und Events werden registriert...");
         CoreSystem.getInstance().enableSpawnCommand(world);
