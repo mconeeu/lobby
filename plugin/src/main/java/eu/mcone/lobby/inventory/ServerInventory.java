@@ -78,7 +78,7 @@ public class ServerInventory extends CoreInventory {
                 String[] data = server.split(":");
                 if (data.length < 2) continue;
 
-                setItem(i, new ItemBuilder(Material.EMERALD, 1, 0).displayName("§f§l"+data[0]).lore("§7"+data[1]+" Spieler online", "", "§8» §c§nRechtsklick§8 | §7§oJoinen").create(), () -> {
+                setItem(i, new ItemBuilder(Material.EMERALD, 1, 0).displayName("§f§l"+data[0]).lore("§7"+data[1]+" Spieler online", "", "§8» §c§nRechtsklick§8 | §7§oJoinen").create(), e -> {
                     CoreSystem.getInstance().getChannelHandler().sendPluginMessage(p, "CONNECT", data[0]);
                     p.closeInventory();
                 });

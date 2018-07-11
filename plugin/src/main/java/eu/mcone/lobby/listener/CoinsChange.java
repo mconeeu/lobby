@@ -6,7 +6,7 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.event.CoinsChangeEvent;
-import eu.mcone.coresystem.api.bukkit.player.BukkitCorePlayer;
+import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -15,7 +15,7 @@ public class CoinsChange implements Listener {
 
     @EventHandler
     public void on(CoinsChangeEvent e) {
-        BukkitCorePlayer p = e.getPlayer();
+        CorePlayer p = e.getPlayer();
 
         if (p != null) {
             p.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();

@@ -6,7 +6,6 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.lobby.LobbyPlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,7 +22,7 @@ public class EntityDamageByEntity implements Listener{
             if (e.getDamager() instanceof Player) {
                 Player d = (Player) e.getDamager();
 
-                if (!LobbyPlugin.getInstance().getNpcManager().isNPC(p.getDisplayName())) {
+                if (!CoreSystem.getInstance().getNpcManager().isNPC(p.getDisplayName())) {
                     ItemMeta meta = d.getItemInHand().getItemMeta();
                     if (meta != null && meta.getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde"))
                         CoreSystem.getInstance().getChannelHandler().sendPluginMessage(p, "CMD", "friend add " + p.getName());

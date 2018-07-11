@@ -6,7 +6,7 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.player.BukkitCorePlayer;
+import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
 import eu.mcone.lobby.LobbyPlugin;
 import eu.mcone.lobby.util.Objective;
@@ -25,7 +25,7 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void on(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        BukkitCorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
+        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
 
         e.setJoinMessage(null);
 

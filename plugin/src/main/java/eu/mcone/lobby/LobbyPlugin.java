@@ -6,12 +6,9 @@
 package eu.mcone.lobby;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.hologram.HologramManager;
-import eu.mcone.coresystem.api.bukkit.npc.NpcManager;
-import eu.mcone.coresystem.api.bukkit.player.BukkitCorePlayer;
+import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
-import eu.mcone.coresystem.api.core.translation.TranslationField;
 import eu.mcone.lobby.api.Lobby;
 import eu.mcone.lobby.listener.*;
 import eu.mcone.lobby.util.Objective;
@@ -19,14 +16,8 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 
-import java.util.HashMap;
-
 public class LobbyPlugin extends Lobby {
 
-    @Getter
-    private HologramManager hologramManager;
-    @Getter
-    private NpcManager npcManager;
     @Getter
     private BuildSystem buildSystem;
     @Getter
@@ -39,16 +30,10 @@ public class LobbyPlugin extends Lobby {
         world = CoreSystem.getInstance().getWorldManager().getWorld("Lobby");
         Bukkit.getWorld("Lobby").setAnimalSpawnLimit(0);
         Bukkit.getWorld("Lobby").setMonsterSpawnLimit(0);
-        registerTranslations();
+        CoreSystem.getInstance().getTranslationManager().loadCategories(this);
 
         sendConsoleMessage("§aScoreboard-Scheduler wird gestartet");
         startScheduler();
-
-        sendConsoleMessage("§aHologram-Manager wird gestartet");
-        hologramManager = CoreSystem.getInstance().inititaliseHologramManager(this);
-
-        sendConsoleMessage("§aNPC-Manager wird gestartet");
-        npcManager = CoreSystem.getInstance().initialiseNpcManager(this);
 
         sendConsoleMessage("§aBuild-System witd initiiert");
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
@@ -60,7 +45,7 @@ public class LobbyPlugin extends Lobby {
 
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
 
-        for (BukkitCorePlayer p : CoreSystem.getInstance().getOnlineCorePlayers()) {
+        for (CorePlayer p : CoreSystem.getInstance().getOnlineCorePlayers()) {
             p.getScoreboard().setNewObjective(new Objective());
             PlayerJoin.setJoinItems(p.bukkit());
         }
@@ -68,7 +53,6 @@ public class LobbyPlugin extends Lobby {
 
     @Override
     public void onDisable(){
-        npcManager.unsetNPCs();
         sendConsoleMessage("§cPlugin disabled!");
     }
 
@@ -89,14 +73,6 @@ public class LobbyPlugin extends Lobby {
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteractEntity(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerAchievementAwarded(), this);
-    }
-
-    private void registerTranslations(){
-        CoreSystem.getInstance().getTranslationManager().insertIfNotExists(
-                new HashMap<String, TranslationField>(){{
-                    put("lobby.prefix", new TranslationField("§8[§7§l!§8]§3 Lobby §8» §7"));
-                }}
-        );
     }
 
     private void startScheduler() {

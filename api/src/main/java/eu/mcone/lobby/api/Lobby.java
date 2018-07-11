@@ -6,8 +6,6 @@
 package eu.mcone.lobby.api;
 
 import eu.mcone.coresystem.api.bukkit.CorePlugin;
-import eu.mcone.coresystem.api.bukkit.hologram.HologramManager;
-import eu.mcone.coresystem.api.bukkit.npc.NpcManager;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import lombok.Getter;
@@ -29,10 +27,6 @@ public abstract class Lobby extends CorePlugin {
             Lobby.instance = instance;
         }
     }
-
-    public abstract HologramManager getHologramManager();
-
-    public abstract NpcManager getNpcManager();
 
     public abstract BuildSystem getBuildSystem();
 

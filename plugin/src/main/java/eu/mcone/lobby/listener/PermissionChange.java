@@ -6,7 +6,7 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.event.PermissionChangeEvent;
-import eu.mcone.coresystem.api.bukkit.player.BukkitCorePlayer;
+import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -15,7 +15,7 @@ public class PermissionChange implements Listener {
 
     @EventHandler
     public void on(PermissionChangeEvent e) {
-        BukkitCorePlayer p = e.getPlayer();
+        CorePlayer p = e.getPlayer();
 
         if (e.getKind().equals(PermissionChangeEvent.Kind.GROUP_CHANGE) && p != null) {
             p.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
