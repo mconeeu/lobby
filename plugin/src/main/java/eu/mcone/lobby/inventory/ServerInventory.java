@@ -61,7 +61,7 @@ public class ServerInventory extends CoreInventory {
     public ServerInventory(Player p, Gamemode modus) {
         super(modus.getNpcName()+" §8| §8Server", p, 54);
 
-        CoreSystem.getInstance().getChannelHandler().sendPluginMessage(player, servers -> {
+        CoreSystem.getInstance().getChannelHandler().createGetRequest(player, servers -> {
             for (int i = 0; i <= 17; i++) {
                 setItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
             }
@@ -85,7 +85,7 @@ public class ServerInventory extends CoreInventory {
 
                 openInventory();
             }
-        }, "SERVERS", "list", modus.toString());
+        }, "SERVERS", modus.toString());
     }
 
 }
