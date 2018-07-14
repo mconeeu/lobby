@@ -9,7 +9,7 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
 import eu.mcone.lobby.LobbyPlugin;
-import eu.mcone.lobby.util.Objective;
+import eu.mcone.lobby.util.SidebarObjective;
 import eu.mcone.lobby.util.PlayerHider;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -46,7 +46,7 @@ public class PlayerJoin implements Listener {
 
         if (p.hasPermission("mcone.premium")) p.setAllowFlight(true);
 
-        cp.getScoreboard().setNewObjective(new Objective());
+        cp.getScoreboard().setNewObjective(new SidebarObjective());
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);

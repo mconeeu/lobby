@@ -7,15 +7,15 @@ package eu.mcone.lobby.util;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.coresystem.api.bukkit.scoreboard.CoreObjective;
+import eu.mcone.coresystem.api.bukkit.scoreboard.CoreSidebarObjective;
 import org.bukkit.scoreboard.DisplaySlot;
 
-public class Objective extends CoreObjective {
+public class SidebarObjective extends CoreSidebarObjective {
 
     private static int i = 0;
 
-    public Objective() {
-        super(DisplaySlot.SIDEBAR, "Main", "Lobby");
+    public SidebarObjective() {
+        super("Lobby-Main");
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Objective extends CoreObjective {
         i++;
 
         for (final CorePlayer p : CoreSystem.getInstance().getOnlineCorePlayers()) {
-            final CoreObjective o = p.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
+            final CoreSidebarObjective o = (SidebarObjective) p.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
             o.setDisplayName("§f§l§n"+p.bukkit().getDisplayName());
 
             if (i == 1) {

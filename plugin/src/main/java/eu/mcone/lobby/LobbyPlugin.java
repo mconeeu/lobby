@@ -11,7 +11,7 @@ import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.lobby.api.Lobby;
 import eu.mcone.lobby.listener.*;
-import eu.mcone.lobby.util.Objective;
+import eu.mcone.lobby.util.SidebarObjective;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -28,8 +28,6 @@ public class LobbyPlugin extends Lobby {
         setInstance(this);
 
         world = CoreSystem.getInstance().getWorldManager().getWorld("Lobby");
-        Bukkit.getWorld("Lobby").setAnimalSpawnLimit(0);
-        Bukkit.getWorld("Lobby").setMonsterSpawnLimit(0);
         CoreSystem.getInstance().getTranslationManager().loadCategories(this);
 
         sendConsoleMessage("§aScoreboard-Scheduler wird gestartet");
@@ -46,7 +44,7 @@ public class LobbyPlugin extends Lobby {
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
 
         for (CorePlayer p : CoreSystem.getInstance().getOnlineCorePlayers()) {
-            p.getScoreboard().setNewObjective(new Objective());
+            p.getScoreboard().setNewObjective(new SidebarObjective());
             PlayerJoin.setJoinItems(p.bukkit());
         }
     }
@@ -76,7 +74,7 @@ public class LobbyPlugin extends Lobby {
     }
 
     private void startScheduler() {
-        Bukkit.getScheduler().runTaskTimer(this, Objective::updateLines, 50L, 100L);
+        Bukkit.getScheduler().runTaskTimer(this, SidebarObjective::updateLines, 50L, 100L);
     }
 
 }
