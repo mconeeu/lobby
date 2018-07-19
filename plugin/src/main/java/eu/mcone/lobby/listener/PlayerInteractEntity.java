@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.listener;
 
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.lobby.inventory.InteractionInventory;
 import eu.mcone.lobby.inventory.ServerInventory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,7 +27,7 @@ public class PlayerInteractEntity implements Listener {
                     new ServerInventory(p, sm);
                 }
             } else {
-                CoreSystem.getInstance().getCorePlayer(p).openInteractionInventory(clicked);
+                new InteractionInventory(p, clicked);
             }
         }
     }
