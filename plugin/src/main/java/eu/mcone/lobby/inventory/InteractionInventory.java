@@ -70,7 +70,7 @@ public class InteractionInventory extends CoreInventory {
             });
 
             openInventory();
-            player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
+            getPlayer().playSound(getPlayer().getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
         }, "FRIENDS");
     }
 
