@@ -1,0 +1,5 @@
+.idea/
+api/src/test/
+api/target/
+plugin/src/test/
+plugin/target/
