@@ -24,12 +24,13 @@ public class InteractionInventory extends CoreInventory {
     public InteractionInventory(Player p, Player clicked) {
         super("§8» §3Interaktionsmenü", p, InventorySlot.ROW_3, CoreInventory.Option.FILL_EMPTY_SLOTS);
         CorePlayer c = CoreSystem.getInstance().getCorePlayer(clicked);
+        double onlinetime = Math.floor(((double) c.getOnlinetime() / 60 / 60) * 100) / 100;
 
         setItem(InventorySlot.ROW_1_SLOT_5, ItemBuilder.createSkullItem(clicked.getName(), 1).displayName("§f§l" + clicked.getName()).lore(
                 CoreSystem.getInstance().getCorePlayer(clicked).getMainGroup().getLabel(),
                 "",
                 "§7Coins: §f" + c.getCoins(),
-                "§7Onlinetime: §f" + c.getOnlinetime() + " Stunden", "§7Status: " + c.getState().getName()
+                "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + c.getState().getName()
                 ).create()
         );
 
@@ -53,7 +54,7 @@ public class InteractionInventory extends CoreInventory {
             }
 
             if (isFriend) {
-                setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.BARRIER, 1, 0).displayName("§4Freund entfernen").create(), e -> {
+                setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.BARRIER, 1, 0).displayName("§cFreund entfernen").create(), e -> {
                     p.closeInventory();
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "friend remove " + clicked.getName());
                 });

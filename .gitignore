@@ -1,5 +1,9 @@
 .idea/
+target/
 api/src/test/
-api/target/
 plugin/src/test/
-plugin/target/
+plugin/dependency-reduced-pom.xml
+gang/src/test/
+items/src/test/
+pets/src/test/
+story/src/test/

@@ -8,19 +8,28 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api" />
+        <module name="gang" />
+        <module name="items" />
         <module name="Lobby" />
         <module name="lobby-api" />
         <module name="lobby-plugin" />
         <module name="MCONE-Lobby" />
+        <module name="pets" />
         <module name="plugin" />
+        <module name="story" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="api" target="1.5" />
+      <module name="api" target="8" />
+      <module name="economy" target="1.5" />
+      <module name="gang" target="8" />
+      <module name="items" target="8" />
       <module name="lobby-api" target="1.8" />
       <module name="lobby-plugin" target="1.8" />
       <module name="mcone-lobby" target="1.5" />
+      <module name="pets" target="8" />
       <module name="plugin" target="1.8" />
+      <module name="story" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

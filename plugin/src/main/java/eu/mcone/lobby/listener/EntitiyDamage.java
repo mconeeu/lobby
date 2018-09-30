@@ -5,7 +5,8 @@
 
 package eu.mcone.lobby.listener;
 
-import eu.mcone.lobby.LobbyPlugin;
+import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.LobbyWorld;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,7 +32,7 @@ public class EntitiyDamage implements Listener{
             }
 
             if(e.getCause() == EntityDamageEvent.DamageCause.VOID){
-                LobbyPlugin.getInstance().getWorld().teleport(p, "spawn");
+                LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_1).teleport(p, "spawn");
             }
         }
     }

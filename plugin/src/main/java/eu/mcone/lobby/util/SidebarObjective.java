@@ -49,23 +49,26 @@ public class SidebarObjective extends CoreSidebarObjective {
 
         for (final CorePlayer p : CoreSystem.getInstance().getOnlineCorePlayers()) {
             final CoreSidebarObjective o = (SidebarObjective) p.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
-            o.setDisplayName("§f§l§n"+p.bukkit().getDisplayName());
 
-            if (i == 1) {
-                o.setScore(1, "§7Teamspeak:");
-                o.setScore(0, "§f§omcone.eu");
-            } else if (i == 2) {
-                o.setScore(1, "§7Website:");
-                o.setScore(0, "§f§omcone.eu");
-            } else if (i == 3) {
-                o.setScore(1, "§bTwitter:");
-                o.setScore(0, "§f§o@mconeeu");
-            } else if (i == 4) {
-                o.setScore(1, "§cYouTube:");
-                o.setScore(0, "§f§omcone.eu/yt");
-            } else {
-                o.setScore(1, "§7Teamspeak");
-                o.setScore(0, "§f§omcone.eu");
+            if (o != null) {
+                o.setDisplayName("§f§l§n" + p.bukkit().getName());
+
+                if (i == 1) {
+                    o.setScore(1, "§7Teamspeak:");
+                    o.setScore(0, "§f§omcone.eu");
+                } else if (i == 2) {
+                    o.setScore(1, "§7Website:");
+                    o.setScore(0, "§f§omcone.eu");
+                } else if (i == 3) {
+                    o.setScore(1, "§bTwitter:");
+                    o.setScore(0, "§f§o@mconeeu");
+                } else if (i == 4) {
+                    o.setScore(1, "§cYouTube:");
+                    o.setScore(0, "§f§omcone.eu/yt");
+                } else {
+                    o.setScore(1, "§7Teamspeak");
+                    o.setScore(0, "§f§omcone.eu");
+                }
             }
         }
     }

@@ -3,8 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gang/gang.iml" filepath="$PROJECT_DIR$/gang/gang.iml" />
+      <module fileurl="file://$PROJECT_DIR$/items/items.iml" filepath="$PROJECT_DIR$/items/items.iml" />
       <module fileurl="file://$PROJECT_DIR$/mcone-lobby.iml" filepath="$PROJECT_DIR$/mcone-lobby.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pets/pets.iml" filepath="$PROJECT_DIR$/pets/pets.iml" />
       <module fileurl="file://$PROJECT_DIR$/plugin/plugin.iml" filepath="$PROJECT_DIR$/plugin/plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/story/story.iml" filepath="$PROJECT_DIR$/story/story.iml" />
     </modules>
   </component>
 </project>

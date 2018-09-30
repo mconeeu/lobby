@@ -3,7 +3,11 @@
     <output-path>$PROJECT_DIR$/../../../Minecraft/localhost - server/Lobby/plugins</output-path>
     <root id="archive" name="plugin.jar">
       <element id="module-output" name="plugin" />
+      <element id="module-output" name="items" />
+      <element id="module-output" name="story" />
       <element id="module-output" name="api" />
+      <element id="module-output" name="gang" />
+      <element id="module-output" name="pets" />
     </root>
   </artifact>
 </component>
