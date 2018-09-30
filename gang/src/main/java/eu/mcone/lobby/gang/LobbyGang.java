@@ -11,6 +11,7 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.gang.GangSettings;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.gang.command.GangCMD;
+import eu.mcone.lobby.gang.listener.LobbyPlayerLoaded;
 import eu.mcone.lobby.gang.listener.NpcInteract;
 import lombok.Getter;
 import org.bson.Document;
@@ -35,7 +36,10 @@ public class LobbyGang extends LobbyAddon {
 
         this.gangs = new ArrayList<>();
         LobbyPlugin.getInstance().registerCommands(new GangCMD(this));
-        LobbyPlugin.getInstance().registerEvents(new NpcInteract());
+        LobbyPlugin.getInstance().registerEvents(
+                new LobbyPlayerLoaded(),
+                new NpcInteract()
+        );
 
         reload();
     }
@@ -108,6 +112,17 @@ public class LobbyGang extends LobbyAddon {
             return false;
         }
     }
+
+    public Gang getPlayersGang(UUID uuid) {
+        for (Gang gang : gangs) {
+            if (gang.getMembers().containsValue(uuid.toString())) {
+                return gang;
+            }
+        }
+
+        return null;
+    }
+
 
     public Gang getGang(UUID uuid) {
         for (Gang gang : gangs) {
