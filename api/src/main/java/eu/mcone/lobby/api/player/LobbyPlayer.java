@@ -5,7 +5,6 @@
 
 package eu.mcone.lobby.api.player;
 
-import com.mongodb.client.MongoCollection;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -38,7 +37,8 @@ public class LobbyPlayer {
     private List<Item> items;
     @Getter
     private int chests, progressId;
-    @Getter @Setter
+    @Getter
+    @Setter
     private LobbySettings settings;
 
     public LobbyPlayer(CorePlayer corePlayer) {
@@ -86,6 +86,9 @@ public class LobbyPlayer {
         if (!items.contains(item)) {
             items.add(item);
 
+            List<Integer> items = new ArrayList<>();
+            for (Item i : this.items) items.add(i.getId());
+
             Bukkit.getScheduler().runTaskAsynchronously(LobbyPlugin.getInstance(), () ->
                     CoreSystem.getInstance().getMongoDB().getCollection("lobby_profile").updateOne(
                             eq("uuid", corePlayer.getUuid().toString()),
@@ -98,6 +101,9 @@ public class LobbyPlayer {
     public void removeItem(Item item) {
         if (items.contains(item)) {
             items.remove(item);
+
+            List<Integer> items = new ArrayList<>();
+            for (Item i : this.items) items.add(i.getId());
 
             Bukkit.getScheduler().runTaskAsynchronously(LobbyPlugin.getInstance(), () ->
                     CoreSystem.getInstance().getMongoDB().getCollection("lobby_profile").updateOne(
@@ -134,14 +140,8 @@ public class LobbyPlayer {
     public void addChests(int amount) {
         chests += amount;
 
-        Bukkit.getScheduler().runTaskAsynchronously(LobbyPlugin.getInstance(), () -> {
-            MongoCollection<Document> chestsCollection = CoreSystem.getInstance().getMongoDB().getCollection("lobby_profile");
-            if (chestsCollection.find(eq("uuid", corePlayer.getUuid().toString())).first() != null) {
-                CoreSystem.getInstance().getMongoDB().getCollection("lobby_profile").updateOne(eq("uuid", corePlayer.getUuid().toString()), inc("chests", amount));
-            } else {
-                CoreSystem.getInstance().getMongoDB().getCollection("lobby_profile").insertOne(new Document("uuid", corePlayer.getUuid().toString()).append("chests", amount));
-            }
-        });
+        Bukkit.getScheduler().runTaskAsynchronously(LobbyPlugin.getInstance(), () ->
+                CoreSystem.getInstance().getMongoDB().getCollection("lobby_profile").updateOne(eq("uuid", corePlayer.getUuid().toString()), inc("chests", amount)));
     }
 
     public void removeChests(int preAmount) {
@@ -175,7 +175,7 @@ public class LobbyPlayer {
         this.progressId = progress.getId();
 
         Bukkit.getScheduler().runTaskAsynchronously(LobbyPlugin.getInstance(), () ->
-                CoreSystem.getInstance().getMongoDB().getCollection("lobby_profile").updateOne(eq("uuid", corePlayer.getUuid().toString()), set("progress", progress)));
+                CoreSystem.getInstance().getMongoDB().getCollection("lobby_profile").updateOne(eq("uuid", corePlayer.getUuid().toString()), set("progress", progress.getId())));
     }
 
     public void updateSettings() {
