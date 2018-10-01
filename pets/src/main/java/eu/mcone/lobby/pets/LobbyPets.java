@@ -16,6 +16,7 @@ import eu.mcone.lobby.pets.listener.PlayerInteractEntity;
 import eu.mcone.lobby.pets.listener.PlayerMove;
 import eu.mcone.lobby.pets.listener.ProjectileLaunch;
 import lombok.Getter;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftCreature;
 import org.bukkit.entity.Creature;
@@ -83,7 +84,7 @@ public class LobbyPets extends LobbyAddon {
             }
 
             Entity entity = p.getWorld().spawnEntity(p.getLocation(), type);
-            entity.setCustomName("§b§o " + p.getName() + "s "+ item.getName());
+            entity.setCustomName("§b§o" + p.getName() + "s "+ item.getName());
             entity.setCustomNameVisible(true);
 
             pets.put(p.getUniqueId(), entity);
@@ -104,7 +105,7 @@ public class LobbyPets extends LobbyAddon {
 
     public void renamePet(Player p, String name) {
         if (pets.containsKey(p.getUniqueId())) {
-            pets.get(p.getUniqueId()).setCustomName(name);
+            pets.get(p.getUniqueId()).setCustomName(ChatColor.translateAlternateColorCodes('&', name));
         }
     }
 
