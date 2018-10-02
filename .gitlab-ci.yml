@@ -1,7 +1,6 @@
 build:
   script:
   - mvn clean install --settings /home/gitlab-runner/settings.xml
-  - find .
   artifacts:
     paths:
     - $CI_PROJECT_DIR/*/target/*.jar
