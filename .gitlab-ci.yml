@@ -4,7 +4,7 @@ build:
   - find .
   artifacts:
     paths:
-    - */target/*.jar
+    - $CI_PROJECT_DIR/*/target/*.jar
   only:
   - master
   stage: build
