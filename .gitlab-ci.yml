@@ -1,0 +1,11 @@
+build:
+  script:
+  - mvn clean install --settings settings.xml
+  - ls
+  artifacts:
+    paths:
+    - target/*.jar
+  only:
+  - master
+  tags:
+  - runner1
