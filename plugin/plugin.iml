@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" version="4">
+  <component name="FacetManager">
+    <facet type="minecraft" name="Minecraft">
+      <configuration>
+        <autoDetectTypes>
+          <platformType>SPIGOT</platformType>
+        </autoDetectTypes>
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -18,8 +27,8 @@
     <orderEntry type="module" module-name="story" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.16.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: eu.mcone.coresystem:bukkit-api:10.1.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: eu.mcone.coresystem:core-api:10.1.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: eu.mcone.coresystem:bukkit-api:10.1.2-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: eu.mcone.coresystem:core-api:10.1.2-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: eu.mcone.networkmanager:core-api:0.1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.mongodb:mongodb-driver:3.8.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.mongodb:bson:3.8.0" level="project" />

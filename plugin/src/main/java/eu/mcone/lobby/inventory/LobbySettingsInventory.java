@@ -26,15 +26,15 @@ public class LobbySettingsInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.TNT, 1, 0).displayName("§f§lSpawne in deiner Privaten Lobby").create());
 
         if (settings.isSilentHubActivatedOnJoin()) {
-            setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke zum deaktivieren").create(), e -> {
+            setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um das Spawnen", "§7§oin der privaten Lobby", "§7§ozu aktivieren").create(), e -> {
                 settings.setSilentHubActivatedOnJoin(false);
-                setSettings(settings, p, lp);
+                setSettings(p, lp);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
             });
         } else {
-            setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke zum aktivieren").create(), e -> {
+            setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um das Spawnen", "§7§oin der privaten Lobby", "§7§ozu aktivieren").create(), e -> {
                 settings.setSilentHubActivatedOnJoin(true);
-                setSettings(settings, p, lp);
+                setSettings(p, lp);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
             });
         }
@@ -43,15 +43,15 @@ public class LobbySettingsInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.HARD_CLAY, 1, 0).displayName("§f§lTraiding").create());
 
         if (settings.isAllowTrading()) {
-            setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke zum deaktivieren").create(), e -> {
+            setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um das Handeln", "§7§omit anderen Spielern", "§7§ozu deaktivieren").create(), e -> {
                 settings.setAllowTrading(false);
-                setSettings(settings, p, lp);
+                setSettings(p, lp);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
             });
         } else {
-            setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke zum aktivieren").create(), e -> {
+            setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um das Handeln", "§7§omit anderen Spielern", "§7§ozu aktivieren").create(), e -> {
                 settings.setAllowTrading(true);
-                setSettings(settings, p, lp);
+                setSettings(p, lp);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
             });
         }
@@ -61,10 +61,8 @@ public class LobbySettingsInventory extends CoreInventory {
         openInventory();
     }
 
-    private void setSettings(LobbySettings settings, Player p, LobbyPlayer lp) {
-        lp.setSettings(settings);
+    private void setSettings(Player p, LobbyPlayer lp) {
         lp.updateSettings();
-
         new LobbySettingsInventory(p);
     }
 

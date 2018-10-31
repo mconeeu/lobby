@@ -19,7 +19,7 @@ public abstract class LobbyPlugin extends CorePlugin {
     private static LobbyPlugin instance;
 
     protected LobbyPlugin() {
-        super("Lobby", ChatColor.DARK_AQUA, "lobby.prefix");
+        super("lobby", ChatColor.DARK_AQUA, "lobby.prefix");
         setInstance(this);
     }
 

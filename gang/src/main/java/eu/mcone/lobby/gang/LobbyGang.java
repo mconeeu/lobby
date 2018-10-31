@@ -51,7 +51,7 @@ public class LobbyGang extends LobbyAddon {
     public void reload() {
         gangs.clear();
 
-        for (Document entry : CoreSystem.getInstance().getMongoDB().getDocumentsInCollection("lobby_gangs")) {
+        for (Document entry : CoreSystem.getInstance().getMongoDB().getCollection("lobby_gangs").find()) {
             gangs.add(new Gang(
                     UUID.fromString(entry.getString("uuid")),
                     entry.getString("name"),

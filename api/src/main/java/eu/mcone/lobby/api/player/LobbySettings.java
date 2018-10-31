@@ -5,9 +5,14 @@
 
 package eu.mcone.lobby.api.player;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@NoArgsConstructor
+@Getter @Setter
+@ToString
 public class LobbySettings {
 
     private boolean silentHubActivatedOnJoin, allowTrading;

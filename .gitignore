@@ -1,9 +1,21 @@
+# IntelliJ
 .idea/
+*.iml
+*.ipr
+*.ivs
+
+# Eclipse
+.settings/
+.classpath
+.project
+
+# Netbeans
+nbproject/
+nbactions.xml
+
+# maven
 target/
-api/src/test/
-plugin/src/test/
-plugin/dependency-reduced-pom.xml
-gang/src/test/
-items/src/test/
-pets/src/test/
-story/src/test/
+dependency-reduced-pom.xml
+
+# OS X
+.DS_Store

@@ -1,6 +1,6 @@
 name: MCONE-Lobby
 authors: [Rufus Maiwald, Marvin Hülsmann, Dominik Lippl, BamDev]
-version: 4.0.1-SNAPSHOT
+version: ${project.version}
 main: eu.mcone.lobby.Lobby
 depend: [MCONE-BukkitCoreSystem]
 
