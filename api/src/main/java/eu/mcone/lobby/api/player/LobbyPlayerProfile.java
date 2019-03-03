@@ -20,6 +20,10 @@ import java.util.List;
 @Getter @Setter
 public class LobbyPlayerProfile extends GameProfile {
 
+    private List<Integer> items = new ArrayList<>();
+    private int chests, progressId;
+    private LobbySettings settings = new LobbySettings();
+
     LobbyPlayerProfile(Player p) {
         super(p);
 
@@ -33,10 +37,6 @@ public class LobbyPlayerProfile extends GameProfile {
         progressId = lp.getProgressId();
         settings = lp.getSettings();
     }
-
-    private List<Integer> items = new ArrayList<>();
-    private int chests, progressId;
-    private LobbySettings settings = new LobbySettings();
 
     public List<Item> getItems() {
         List<Item> result = new ArrayList<>();

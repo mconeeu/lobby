@@ -30,6 +30,20 @@
         <project.build.targetEncoding>UTF-8</project.build.targetEncoding>
     </properties>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <show>public</show>
+                    <additionalJOption>-Xdoclint:none</additionalJOption>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <distributionManagement>
         <repository>
             <id>mcone-systems</id>
@@ -54,7 +68,7 @@
         <dependency>
             <groupId>eu.mcone.coresystem</groupId>
             <artifactId>bukkit-api</artifactId>
-            <version>10.1.2-SNAPSHOT</version>
+            <version>10.1.4-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
