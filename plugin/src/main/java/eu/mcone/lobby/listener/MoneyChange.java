@@ -5,16 +5,16 @@
 
 package eu.mcone.lobby.listener;
 
-import eu.mcone.coresystem.api.bukkit.event.CoinsChangeEvent;
+import eu.mcone.coresystem.api.bukkit.event.MoneyChangeEvent;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scoreboard.DisplaySlot;
 
-public class CoinsChange implements Listener {
+public class MoneyChange implements Listener {
 
     @EventHandler
-    public void on(CoinsChangeEvent e) {
+    public void on(MoneyChangeEvent e) {
         CorePlayer p = e.getPlayer();
 
         if (p != null) {

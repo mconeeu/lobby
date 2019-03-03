@@ -102,7 +102,7 @@ public class Lobby extends LobbyPlugin {
     private void registerEventsAndCommands() {
         registerEvents(
                 new PlayerInteract(),
-                new CoinsChange(),
+                new MoneyChange(),
                 new PlayerFish(),
                 new PlayerToggleFlight(),
                 new PlayerJoin(),
