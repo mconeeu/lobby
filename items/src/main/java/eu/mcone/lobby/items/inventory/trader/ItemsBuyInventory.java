@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -39,6 +39,7 @@ class ItemsBuyInventory extends CoreInventory {
                         if ((lp.getCorePlayer().getCoins() - item.getCoins()) >= 0) {
                             lp.getCorePlayer().removeCoins(item.getCoins());
                             lp.addItem(item);
+
                             p.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du hast das Item §a"+item.getName()+" §2für §f"+ item.getCoins() +" Coins §2erfolgreich gekauft!");
                         } else {
                             p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "Du hast nicht genügen §6§lCoins!");

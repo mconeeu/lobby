@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -44,7 +44,8 @@ class ChestItemInventory extends CoreInventory {
 
             for (Item i : Item.values()) {
                 if (i.getLevel().equals(level) && !lp.getItems().contains(i)) {
-                    if (i.hasCategory() && (i.getCategory().equals(Category.STORY_ITEMS) || i.getCategory().equals(Category.ARMOR) || i.getCategory().equals(Category.EXCLUSIVE))) continue;
+                    if (i.hasCategory() && (i.getCategory().equals(Category.STORY_ITEMS) || i.getCategory().equals(Category.ARMOR) || i.getCategory().equals(Category.EXCLUSIVE)))
+                        continue;
                     lvlItems.add(i);
                 }
             }
@@ -69,44 +70,42 @@ class ChestItemInventory extends CoreInventory {
         }
 
         setAnimation = Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
-            final int slot = slots.get(Random.randomInt(0, slots.size()-1));
+            final int slot = slots.get(Random.randomInt(0, slots.size() - 1));
             slots.remove((Integer) slot);
 
-            final Item item = items.get(Random.randomInt(0, items.size()-1));
+            final Item item = items.get(Random.randomInt(0, items.size() - 1));
             final InventoryView inv = p.getOpenInventory();
 
-            if (inv.getTitle().equals(getInventory().getTitle())) {
-                inv.setItem(slot, item.getItemStack());
-                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-                changedItems++;
+            if (!inv.getTitle().equals(getInventory().getTitle())) {
+                openInventory();
+            }
 
-                if (changedItems == 11) {
-                    fadeAnimation = Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
-                        if (fadeSlots.size() < 1) {
-                            Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> new ChestFinalInventory(p, item), 20);
-                            fadeAnimation.cancel();
-                            return;
-                        }
+            getInventory().setItem(slot, item.getItemStack());
+            p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+            changedItems++;
 
-                        final int index = Random.randomInt(0, fadeSlots.size() - 1);
-                        final int slotInt = fadeSlots.get(index);
-                        final InventoryView inv1 = p.getOpenInventory();
+            if (changedItems == 11) {
+                fadeAnimation = Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
+                    if (fadeSlots.size() < 1) {
+                        Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> new ChestFinalInventory(p, item), 20);
+                        fadeAnimation.cancel();
+                        return;
+                    }
 
-                        if (inv1.getTitle().equals(getInventory().getTitle())) {
-                            p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
-                            fadeSlots.remove(index);
+                    final int index = Random.randomInt(0, fadeSlots.size() - 1);
+                    final int slotInt = fadeSlots.get(index);
+                    final InventoryView inv1 = p.getOpenInventory();
 
-                            if (slotInt != slot)
-                                inv1.setItem(slotInt, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName(item.getLevel().getDisplayname()).create());
-                        } else {
-                            p.sendMessage("§8[§7§l!§8] §eChestOpening §8  §4Du hast das ChestOpening abgebrochen!");
-                            fadeAnimation.cancel();
-                        }
-                    }, 20, 1);
-                    setAnimation.cancel();
-                }
-            } else {
-                p.sendMessage("§8[§7§l!§8] §eChestOpening §8  §4Du hast das ChestOpening abgebrochen!");
+                    if (!inv1.getTitle().equals(getInventory().getTitle())) {
+                        openInventory();
+                    }
+
+                    p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
+                    fadeSlots.remove(index);
+
+                    if (slotInt != slot)
+                        getInventory().setItem(slotInt, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName(item.getLevel().getDisplayname()).create());
+                }, 20, 1);
                 setAnimation.cancel();
             }
         }, 10, 10);

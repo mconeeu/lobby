@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -14,7 +14,9 @@ import lombok.Setter;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @NoArgsConstructor
 @Getter @Setter
@@ -23,6 +25,7 @@ public class LobbyPlayerProfile extends GameProfile {
     private List<Integer> items = new ArrayList<>();
     private int chests, progressId;
     private LobbySettings settings = new LobbySettings();
+    private Map<String, Long> secrets = new HashMap<>();
 
     LobbyPlayerProfile(Player p) {
         super(p);
@@ -36,9 +39,10 @@ public class LobbyPlayerProfile extends GameProfile {
         chests = lp.getChests();
         progressId = lp.getProgressId();
         settings = lp.getSettings();
+        secrets = lp.getSecrets();
     }
 
-    public List<Item> getItems() {
+    public List<Item> getItemList() {
         List<Item> result = new ArrayList<>();
         for (int id : items) {
             result.add(Item.getItemByID(id));

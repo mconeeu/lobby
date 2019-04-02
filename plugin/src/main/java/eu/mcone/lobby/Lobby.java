@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -101,11 +101,13 @@ public class Lobby extends LobbyPlugin {
 
     private void registerEventsAndCommands() {
         registerEvents(
+                new AsyncPlayerChat(),
                 new PlayerInteract(),
                 new MoneyChange(),
                 new PlayerFish(),
                 new PlayerToggleFlight(),
                 new PlayerJoin(),
+                new PlayerMove(),
                 new PlayerDropItem(),
                 new WeatherChange(),
                 new InventoryClick(),
@@ -115,7 +117,8 @@ public class Lobby extends LobbyPlugin {
                 new EntityDamageByEntity(),
                 new PlayerDeath(),
                 new PlayerInteractEntity(),
-                new PlayerAchievementAwarded()
+                new PlayerAchievementAwarded(),
+                new LobbyPlayerLoaded()
         );
         registerCommands(
                 new LobbyCMD()

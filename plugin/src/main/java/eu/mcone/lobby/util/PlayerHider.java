@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -61,4 +61,13 @@ public class PlayerHider {
         LobbyPlugin.getInstance().getMessager().send(p, "§7Du siehst nun §aalle §7Spieler wieder.");
         time.put(p.getName(), System.currentTimeMillis());
     }
+
+    public static void playerJoined(Player j) {
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (PlayerHider.players.contains(j)) {
+                j.hidePlayer(p);
+            }
+        }
+    }
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -18,6 +18,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.Map;
 
 public class LobbyPlayer {
 
@@ -34,6 +35,9 @@ public class LobbyPlayer {
     @Getter
     @Setter
     private LobbySettings settings;
+    @Getter
+    @Setter
+    private Map<String, Long> secrets;
 
     public LobbyPlayer(CorePlayer corePlayer) {
         this.corePlayer = corePlayer;
@@ -42,10 +46,11 @@ public class LobbyPlayer {
 
     public void reload() {
         LobbyPlayerProfile profile = LobbyPlugin.getInstance().loadGameProfile(corePlayer.bukkit(), LobbyPlayerProfile.class);
-        this.items = profile.getItems();
+        this.items = profile.getItemList();
         this.chests = profile.getChests();
         this.progressId = profile.getProgressId();
         this.settings = profile.getSettings();
+        this.secrets = profile.getSecrets();
 
         LobbyPlugin.getInstance().registerLobbyPlayer(this);
     }
@@ -129,6 +134,16 @@ public class LobbyPlayer {
     public void setProgress(Progress progress) {
         this.progressId = progress.getId();
         saveData();
+    }
+
+    public boolean checkAndAddSecret(String name, long time) {
+        if (secrets.containsKey(name)) {
+            return false;
+        } else {
+            secrets.put(name, time);
+            saveData();
+            return true;
+        }
     }
 
     public void updateSettings() {

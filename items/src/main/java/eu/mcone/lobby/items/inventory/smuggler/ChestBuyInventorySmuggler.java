@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -25,7 +25,7 @@ class ChestBuyInventorySmuggler extends CoreInventory {
                 lp.getCorePlayer().removeCoins(237);
                 lp.addChests(3);
 
-                p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §aDu hast 3 Kiste gekauft!");
+                p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §aDu hast 3 Kisten gekauft!");
             } else {
                 p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §4Du hast nicht genügend Coins");
             }
@@ -35,7 +35,7 @@ class ChestBuyInventorySmuggler extends CoreInventory {
 
         setItem(15 - 1, new ItemBuilder(Material.CHEST, 7, 0).displayName("§c§l7 Kisten").lore("§7Kosten: §f§o462 Coins", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
             if ((lp.getCorePlayer().getCoins() - 462) >= 0) {
-                p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §aDu hast 7 Kiste gekauft!");
+                p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §aDu hast 7 Kisten gekauft!");
 
                 lp.getCorePlayer().removeCoins(462);
                 lp.addChests(7);

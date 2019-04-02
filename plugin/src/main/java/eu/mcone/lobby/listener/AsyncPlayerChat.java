@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.items.listener;
+package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.core.player.Group;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.items.manager.SilenthubUtils;
+import eu.mcone.lobby.util.SilentLobbyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -27,7 +27,7 @@ public class AsyncPlayerChat implements Listener {
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         String message;
 
-        if (SilenthubUtils.isActivatedSilentHub(p)) {
+        if (SilentLobbyUtils.isActivatedSilentHub(p)) {
             e.setCancelled(true);
             LobbyPlugin.getInstance().getMessager().send(p, "§cDu kannst in der Silent Lobby keine Chat Nachrichten senden oder empfangen.");
         } else {

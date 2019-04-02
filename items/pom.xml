@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+  ~ Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
   ~ You are not allowed to decompile the code
   -->
 
@@ -10,7 +10,7 @@
     <parent>
         <artifactId>mcone-lobby</artifactId>
         <groupId>eu.mcone.lobby</groupId>
-        <version>4.0.2-SNAPSHOT</version>
+        <version>4.0.3-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -28,7 +28,7 @@
         <dependency>
             <groupId>eu.mcone.lobby</groupId>
             <artifactId>api</artifactId>
-            <version>4.0.2-SNAPSHOT</version>
+            <version>4.0.3-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

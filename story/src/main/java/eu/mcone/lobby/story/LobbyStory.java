@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -32,11 +32,6 @@ public class LobbyStory extends LobbyAddon {
     @Override
     public void onEnable() {
         instance = this;
-
-        LobbyPlugin.getInstance().registerEvents(
-                new NpcInteract(),
-                new PlayerInteract()
-        );
 
         BackpackInventory.registerBackpackInventory(Category.STORY_ITEMS, StoryItemInventory.class);
 

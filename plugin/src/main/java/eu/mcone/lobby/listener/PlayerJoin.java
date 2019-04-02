@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -15,6 +15,7 @@ import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.util.SilentLobbyUtils;
 import eu.mcone.lobby.util.PlayerHider;
 import eu.mcone.lobby.util.SidebarObjective;
 import org.bukkit.Bukkit;
@@ -37,11 +38,8 @@ public class PlayerJoin implements Listener {
 
         e.setJoinMessage(null);
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (PlayerHider.players.contains(p)) {
-                p.hidePlayer(player);
-            }
-        }
+        PlayerHider.playerJoined(p);
+        SilentLobbyUtils.playerJoined(p);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
@@ -63,6 +61,7 @@ public class PlayerJoin implements Listener {
         p.setFoodLevel(20);
 
         if (p.hasPermission("mcone.premium")) p.setAllowFlight(true);
+        p.setFlying(false);
 
         p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
         p.getInventory().setItem(1, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());

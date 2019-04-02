@@ -1,12 +1,15 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
 package eu.mcone.lobby.listener;
 
+import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.inventory.CompassInventory;
 import eu.mcone.lobby.util.PlayerHider;
+import eu.mcone.lobby.util.SilentLobbyUtils;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -40,6 +43,16 @@ public class PlayerInteract implements Listener{
                 e.setCancelled(true);
                 new CompassInventory(p);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§6§lPrivate Lobby §8» §7§oBetrete deine eigene Private Lobby")) {
+                if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
+                    return;
+
+                if (SilentLobbyUtils.isActivatedSilentHub(p)) {
+                    SilentLobbyUtils.deactivateSilentLobby(p);
+                } else {
+                    LobbyPlugin.getInstance().getMessager().send(p, "§2Du bist nun in der §aPrivaten Lobby§2. Hier bist du vollkommen ungestört!");
+                    SilentLobbyUtils.activateSilentLobby(p);
+                }
             }
         }
     }

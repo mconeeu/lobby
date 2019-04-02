@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -36,7 +36,7 @@ class ChestBuyInventory extends CoreInventory {
 
         setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.CHEST, 5, 0).displayName("§c§l5 Kisten").lore("§7Kosten: §f§o475 Coins", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
             if (lp.getCorePlayer().getCoins() - 475 >= 0) {
-                p.sendMessage("§8[§7§l!§8] §eHändler §8» §aDu hast 5 Kiste gekauft!");
+                p.sendMessage("§8[§7§l!§8] §eHändler §8» §aDu hast 5 Kisten gekauft!");
 
                 lp.getCorePlayer().removeCoins(475);
                 lp.addChests(5);

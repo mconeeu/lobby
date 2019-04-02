@@ -1,11 +1,12 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.items.manager;
+package eu.mcone.lobby.util;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.entity.Player;
@@ -13,7 +14,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SilenthubUtils {
+public class SilentLobbyUtils {
 
     private static List<Player> silent = new ArrayList<>();
 
@@ -27,7 +28,7 @@ public class SilenthubUtils {
         }
 
         CoreSystem.getInstance().createTablistInfo().header("§f§lMC ONE §3Minecraftnetzwerk §8» §7Lobby").footer("§7§oPublic Beta 5.0").send(p);
-        p.sendMessage("§8[§7§l!§8] §cPrivate Lobby §8» §cDu bist nun nicht mehr in der Privaten Lobby");
+        LobbyPlugin.getInstance().getMessager().send(p, "§7Du bist nun nicht mehr in der Privaten Lobby!");
 
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
@@ -46,6 +47,13 @@ public class SilenthubUtils {
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.VOID_FOG, 10);
+    }
+
+    public static void playerJoined(Player j) {
+        for (Player p : silent) {
+            p.hidePlayer(j);
+            j.hidePlayer(p);
+        }
     }
 
     public static boolean isActivatedSilentHub(Player p) {

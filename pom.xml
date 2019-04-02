@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+  ~ Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
   ~ You are not allowed to decompile the code
   -->
 
@@ -12,7 +12,7 @@
     <groupId>eu.mcone.lobby</groupId>
     <artifactId>mcone-lobby</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.2-SNAPSHOT</version>
+    <version>4.0.3-SNAPSHOT</version>
 
     <modules>
         <module>plugin</module>
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>eu.mcone.coresystem</groupId>
             <artifactId>bukkit-api</artifactId>
-            <version>10.1.4-SNAPSHOT</version>
+            <version>10.1.6-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

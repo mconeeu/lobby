@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 - 2018 Dominik Lippl, Rufus Maiwald and the MC ONE Minecraftnetwork. All rights reserved
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
  * You are not allowed to decompile the code
  */
 
@@ -12,7 +12,6 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.inventory.trader.TraderInventory;
-import org.bson.Document;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -39,12 +38,8 @@ class ItemsBuyInventorySmuggler extends CoreInventory {
                     if (!lp.getItems().contains(item)) {
                         if ((lp.getCorePlayer().getCoins() - item.getCoins()) >= 0) {
                             lp.getCorePlayer().removeCoins(item.getCoins());
+                            lp.addItem(item);
 
-                            CoreSystem.getInstance().getMongoDB().getCollection("lobby_items").insertOne(
-                                    new Document("uuid", p.getUniqueId().toString())
-                                            .append("item", item.getId())
-                                            .append("timestamp", System.currentTimeMillis() / 1000)
-                            );
                             p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §2Du hast das Item §a"+item.getName()+" §2für §f"+ item.getCoins() +" Coins §2erfolgreich gekauft!");
                         } else {
                             p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "Du hast nicht genügen §6§lCoins!");

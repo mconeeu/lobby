@@ -3,12 +3,13 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.items.listener;
+package eu.mcone.lobby.listener;
 
-import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import org.bukkit.Material;
+import eu.mcone.lobby.util.SilentLobbyUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,10 +21,9 @@ public class LobbyPlayerLoaded implements Listener {
         LobbyPlayer p = e.getPlayer();
         Player bp = p.bukkit();
 
-        bp.getInventory().setItem(1, new ItemBuilder(Material.STORAGE_MINECART, 1, 0).displayName("§3§lRucksack §8» §7§oZeige deine gesammelten Items an").create());
-
-        if (bp.hasPermission("lobby.silenthub")) {
-            bp.getInventory().setItem(7, new ItemBuilder(Material.TNT, 1, 0).displayName("§6§lPrivate Lobby §8» §7§oBetrete deine eigene Private Lobby").create());
+        if (e.getReason().equals(LobbyPlayerLoadedEvent.Reason.JOINED) && p.getSettings().isSilentHubActivatedOnJoin()) {
+            Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> SilentLobbyUtils.activateSilentLobby(bp));
+            LobbyPlugin.getInstance().getMessager().send(bp, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
         }
     }
 
