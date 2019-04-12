@@ -12,9 +12,7 @@ import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.items.inventory.backpack.BackpackInventory;
 import eu.mcone.lobby.pets.inventory.backpack.AnimalInventory;
-import eu.mcone.lobby.pets.listener.PlayerInteractEntity;
-import eu.mcone.lobby.pets.listener.PlayerMove;
-import eu.mcone.lobby.pets.listener.ProjectileLaunch;
+import eu.mcone.lobby.pets.listener.EntityTrackListener;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -43,9 +41,7 @@ public class LobbyPets extends LobbyAddon {
         BackpackInventory.registerBackpackInventory(Category.ANIMAL, AnimalInventory.class);
 
         LobbyPlugin.getInstance().registerEvents(
-                new PlayerInteractEntity(),
-                new PlayerMove(),
-                new ProjectileLaunch()
+                new EntityTrackListener()
         );
     }
 

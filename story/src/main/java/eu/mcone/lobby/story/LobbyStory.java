@@ -16,10 +16,10 @@ import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.items.inventory.backpack.BackpackInventory;
 import eu.mcone.lobby.story.inventory.backpack.StoryItemInventory;
 import eu.mcone.lobby.story.inventory.story.ProgressInventory;
-import eu.mcone.lobby.story.listener.LobbyPlayerLoaded;
-import eu.mcone.lobby.story.listener.NpcInteract;
-import eu.mcone.lobby.story.listener.PlayerInteract;
-import eu.mcone.lobby.story.listener.SignChange;
+import eu.mcone.lobby.story.listener.LobbyPlayerLoadedListener;
+import eu.mcone.lobby.story.listener.NpcListener;
+import eu.mcone.lobby.story.listener.InventoryTriggerListener;
+import eu.mcone.lobby.story.listener.SecretSignsListener;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -36,10 +36,10 @@ public class LobbyStory extends LobbyAddon {
         BackpackInventory.registerBackpackInventory(Category.STORY_ITEMS, StoryItemInventory.class);
 
         LobbyPlugin.getInstance().registerEvents(
-                new LobbyPlayerLoaded(),
-                new NpcInteract(),
-                new PlayerInteract(),
-                new SignChange()
+                new LobbyPlayerLoadedListener(),
+                new NpcListener(),
+                new InventoryTriggerListener(),
+                new SecretSignsListener()
         );
 
         CoreSystem.getInstance().modifyProfileInventory(new ProfileInventoryModifier() {

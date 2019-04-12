@@ -31,7 +31,7 @@ public class ProgressInventory extends CoreInventory {
                 try {
                     setItem(i,
                             ItemBuilder.createSkullItem(
-                                    CoreSystem.getInstance().getDatabaseSkinManager().getSkin(progress.getSkinName()),
+                                    CoreSystem.getInstance().getPlayerUtils().getSkinFromSkinDatabase(progress.getSkinName()),
                                     1
                             ).displayName(progress.getName()).lore(progress.getDescription()).create()
                     );

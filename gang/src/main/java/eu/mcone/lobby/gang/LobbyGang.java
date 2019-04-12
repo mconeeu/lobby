@@ -11,8 +11,8 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.gang.GangSettings;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.gang.command.GangCMD;
-import eu.mcone.lobby.gang.listener.LobbyPlayerLoaded;
-import eu.mcone.lobby.gang.listener.NpcInteract;
+import eu.mcone.lobby.gang.listener.LobbyPlayerLoadedListener;
+import eu.mcone.lobby.gang.listener.NpcInteractListener;
 import lombok.Getter;
 import org.bson.Document;
 import org.bukkit.Bukkit;
@@ -37,8 +37,8 @@ public class LobbyGang extends LobbyAddon {
         this.gangs = new ArrayList<>();
         LobbyPlugin.getInstance().registerCommands(new GangCMD(this));
         LobbyPlugin.getInstance().registerEvents(
-                new LobbyPlayerLoaded(),
-                new NpcInteract()
+                new LobbyPlayerLoadedListener(),
+                new NpcInteractListener()
         );
 
         reload();

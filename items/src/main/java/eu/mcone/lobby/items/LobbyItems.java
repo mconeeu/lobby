@@ -10,9 +10,9 @@ import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.items.inventory.backpack.*;
-import eu.mcone.lobby.items.listener.LobbyPlayerLoaded;
-import eu.mcone.lobby.items.listener.NpcInteract;
-import eu.mcone.lobby.items.listener.PlayerInteract;
+import eu.mcone.lobby.items.listener.InventoryTriggerListener;
+import eu.mcone.lobby.items.listener.LobbyPlayerLoadedListener;
+import eu.mcone.lobby.items.listener.NpcInteractListener;
 import eu.mcone.lobby.items.listener.effects.*;
 import eu.mcone.lobby.items.manager.TrailManager;
 import lombok.Getter;
@@ -42,16 +42,16 @@ public class LobbyItems extends LobbyAddon {
         BackpackInventory.registerBackpackInventory(Category.EXCLUSIVE, ExclusiveInventory.class);
 
         LobbyPlugin.getInstance().registerEvents(
-                new Bomb(),
-                new CoinBomb(),
-                new EasterGun(),
-                new EnderGun(),
-                new LoveGun(),
-                new OneHitSword(),
-                new SnowGun(),
-                new LobbyPlayerLoaded(),
-                new NpcInteract(),
-                new PlayerInteract()
+                new BombListener(),
+                new CoinBombListener(),
+                new EasterGunListener(),
+                new EnderGunListener(),
+                new LoveGunListener(),
+                new OneHitSwordListener(),
+                new SnowGunListener(),
+                new InventoryTriggerListener(),
+                new LobbyPlayerLoadedListener(),
+                new NpcInteractListener()
         );
 
         CoreSystem.getInstance().setPlayerChatDisabled(true);

@@ -85,7 +85,7 @@ public class Lobby extends LobbyPlugin {
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
 
         for (Player p : Bukkit.getOnlinePlayers()) {
-            PlayerJoin.loadLobbyPlayer(p, LobbyPlayerLoadedEvent.Reason.RELOADED);
+            PlayerJoinListener.loadLobbyPlayer(p, LobbyPlayerLoadedEvent.Reason.RELOADED);
         }
     }
 
@@ -101,24 +101,16 @@ public class Lobby extends LobbyPlugin {
 
     private void registerEventsAndCommands() {
         registerEvents(
-                new AsyncPlayerChat(),
-                new PlayerInteract(),
-                new MoneyChange(),
-                new PlayerFish(),
-                new PlayerToggleFlight(),
-                new PlayerJoin(),
-                new PlayerMove(),
-                new PlayerDropItem(),
-                new WeatherChange(),
-                new InventoryClick(),
-                new PlayerPickupItem(),
-                new FoodLevelChange(),
-                new EntitiyDamage(),
-                new EntityDamageByEntity(),
-                new PlayerDeath(),
-                new PlayerInteractEntity(),
-                new PlayerAchievementAwarded(),
-                new LobbyPlayerLoaded()
+                new ChatListener(),
+                new InventoryTriggerListener(),
+                new PlayerUpdateListener(),
+                new FishingRodListener(),
+                new FishingRodListener(),
+                new PlayerJoinListener(),
+                new DoubleJumpListener(),
+                new WeatherChangeListener(),
+                new GeneralPlayerListener(),
+                new EntitiyDamageListener()
         );
         registerCommands(
                 new LobbyCMD()
