@@ -9,16 +9,19 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.inventory.ProfileInventoryModifier;
+import eu.mcone.coresystem.api.bukkit.npc.NPC;
+import eu.mcone.coresystem.api.bukkit.npc.enums.NpcVisibilityMode;
 import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Category;
+import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.items.inventory.backpack.BackpackInventory;
 import eu.mcone.lobby.story.inventory.backpack.StoryItemInventory;
 import eu.mcone.lobby.story.inventory.story.ProgressInventory;
+import eu.mcone.lobby.story.listener.InventoryTriggerListener;
 import eu.mcone.lobby.story.listener.LobbyPlayerLoadedListener;
 import eu.mcone.lobby.story.listener.NpcListener;
-import eu.mcone.lobby.story.listener.InventoryTriggerListener;
 import eu.mcone.lobby.story.listener.SecretSignsListener;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -54,7 +57,12 @@ public class LobbyStory extends LobbyAddon {
     }
 
     @Override
-    public void reload() {}
+    public void reload() {
+        for (Progress progress : Progress.values()) {
+            NPC npc = progress.getNpc();
+            npc.toggleNpcVisibility(NpcVisibilityMode.WHITELIST);
+        }
+    }
 
     @Override
     public void onDisable() {}

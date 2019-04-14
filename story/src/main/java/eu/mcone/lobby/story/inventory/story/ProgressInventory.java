@@ -5,11 +5,9 @@
 
 package eu.mcone.lobby.story.inventory.story;
 
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
-import eu.mcone.coresystem.api.core.exception.CoreException;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -28,16 +26,12 @@ public class ProgressInventory extends CoreInventory {
 
         for (Progress progress : Progress.values()) {
             if (progress.getId() <= progressId) {
-                try {
-                    setItem(i,
-                            ItemBuilder.createSkullItem(
-                                    CoreSystem.getInstance().getPlayerUtils().getSkinFromSkinDatabase(progress.getSkinName()),
-                                    1
-                            ).displayName(progress.getName()).lore(progress.getDescription()).create()
-                    );
-                } catch (CoreException e) {
-                    e.printStackTrace();
-                }
+                setItem(i,
+                        ItemBuilder.createSkullItem(
+                                progress.getNpc().getSkin(),
+                                1
+                        ).displayName(progress.getName()).lore(progress.getDescription()).create()
+                );
             } else {
                 setItem(i, new ItemBuilder(Material.SKULL_ITEM, 1, 0).displayName("§7§l???").create());
             }

@@ -8,31 +8,33 @@ package eu.mcone.lobby.inventory;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 public class ServerInventory extends CoreInventory {
 
     public enum Gamemode {
-        BEDWARS("BW", "§c§lBedwars", "§8» §c§lBedwars", Material.BED),
-        SKYPVP("SP", "§9§lSkyPvP", "§8» §9§lSkyPvP", Material.DIAMOND_SWORD),
-        KNOCKIT("KI", "§a§lKnockIT", "§8» §a§lKnockIT", Material.STICK),
-        BUILD("BU", "§e§lBuild", "§8» §e§lBuild", Material.GRASS),
-        MINEWAR("MW", "§5§lMinewar", "§8» §5§lMinewar", Material.IRON_PICKAXE);
+        BEDWARS("BW", "§c§lBedwars", Material.BED),
+        SKYPVP("SP", "§9§lSkyPvP", Material.DIAMOND_SWORD),
+        KNOCKIT("KI", "§a§lKnockIT", Material.STICK),
+        BUILD("BU", "§e§lBuild", Material.GRASS),
+        MINEWAR("MW", "§5§lMinewar", Material.IRON_PICKAXE);
 
-        private String id, name, npcName;
+        @Getter
+        private String id, name;
+        @Getter
         private Material item;
 
-        Gamemode(String id, String name, String npcName, Material item) {
+        Gamemode(String id, String name, Material item) {
             this.id = id;
             this.name = name;
-            this.npcName = npcName;
             this.item = item;
         }
 
         public static Gamemode getGamemodeByNpcName(String npcName) {
             for (Gamemode sm : values()) {
-                if (sm.getNpcName().equals(npcName)) {
+                if (sm.toString().toLowerCase().equals(npcName)) {
                     return sm;
                 }
             }
@@ -40,26 +42,10 @@ public class ServerInventory extends CoreInventory {
             return null;
         }
 
-        public String getNpcName() {
-            return npcName;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public Material getItem() {
-            return item;
-        }
-
     }
 
     public ServerInventory(Player p, Gamemode modus) {
-        super(modus.getNpcName()+" §8| §8Server", p, 54);
+        super("§8» "+modus.name+" §8| §8Server", p, 54);
 
         CoreSystem.getInstance().getChannelHandler().createGetRequest(getPlayer(), servers -> {
             for (int i = 0; i <= 17; i++) {

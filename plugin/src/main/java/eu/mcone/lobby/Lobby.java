@@ -102,19 +102,17 @@ public class Lobby extends LobbyPlugin {
     private void registerEventsAndCommands() {
         registerEvents(
                 new ChatListener(),
-                new InventoryTriggerListener(),
-                new PlayerUpdateListener(),
-                new FishingRodListener(),
-                new FishingRodListener(),
-                new PlayerJoinListener(),
                 new DoubleJumpListener(),
-                new WeatherChangeListener(),
+                new EntitiyDamageListener(),
+                new FishingRodListener(),
                 new GeneralPlayerListener(),
-                new EntitiyDamageListener()
+                new InventoryTriggerListener(),
+                new NpcListener(),
+                new PlayerJoinListener(),
+                new PlayerUpdateListener(),
+                new WeatherChangeListener()
         );
-        registerCommands(
-                new LobbyCMD()
-        );
+        registerCommands(new LobbyCMD());
     }
 
     @Override

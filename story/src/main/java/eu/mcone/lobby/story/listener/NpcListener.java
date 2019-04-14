@@ -7,10 +7,7 @@ package eu.mcone.lobby.story.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.NpcInteractEvent;
-import eu.mcone.coresystem.api.bukkit.npc.NpcData;
-import eu.mcone.coresystem.api.bukkit.npc.data.PlayerNpcData;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
-import eu.mcone.coresystem.api.bukkit.npc.enums.NpcVisibilityMode;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.coresystem.api.core.player.SkinInfo;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -29,25 +26,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.util.ArrayList;
-
 public class NpcListener implements Listener {
 
-    private static final PlayerNpc RUFI_HEALED = (PlayerNpc) CoreSystem.getInstance().getNpcManager().addNPC(new NpcData(
-            EntityType.PLAYER,
-            "rufiHealed",
-            "§erufi",
-            CoreSystem.getInstance().getNpcManager().getNPC(LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_1), "rufi").getData().getLocation(),
-            new PlayerNpcData(
-                    "rufi",
-                    "",
-                    SkinInfo.SkinType.PLAYER,
-                    false,
-                    false,
-                    false,
-                    new ArrayList<>()
-            )
-    ), NpcVisibilityMode.WHITELIST);
+    static final String RUFI_HEADLED_DISPLAY_NAME = "§erufi";
+    static final SkinInfo RUFI_HEADLED_SKIN = CoreSystem.getInstance().getPlayerUtils().getSkinInfo("rufi");
 
     @EventHandler
     public void on(NpcInteractEvent e) {
@@ -57,7 +39,7 @@ public class NpcListener implements Listener {
             LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
             CoreWorld w = CoreSystem.getInstance().getWorldManager().getWorld(npc.getData().getLocation().getWorld());
 
-            if (w.equals(LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_1))) {
+            if (w.equals(LobbyWorld.DIM_1.getWorld())) {
                 switch (npc.getData().getName()) {
                     case "researcher": {
                         new SearcherInventory(p);
@@ -85,8 +67,8 @@ public class NpcListener implements Listener {
                                 p.spigot().playEffect(npc.getData().getLocation().bukkit(), Effect.INSTANT_SPELL, 1, 1, 1, 1, 1, 5, 1000, 1);
 
                                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
-                                    npc.toggleVisibility(p, false);
-                                    RUFI_HEALED.toggleVisibility(p, true);
+                                    npc.setSkin(RUFI_HEADLED_SKIN, p);
+                                    npc.changeDisplayname(RUFI_HEADLED_DISPLAY_NAME, p);
                                 }, 2);
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fHeer Rufi §8|§7 Danke Danke du hast mich gerretet du kannst dir die belohnung in der Mitte von der Insel holen da ist eine Fackel und da neben ein Knopf den musst du betätigen dann hast du deine Belohnung");
                             } else {
@@ -123,13 +105,13 @@ public class NpcListener implements Listener {
                             if (lp.getProgressId() > 15) {
                                 lp.removeItem(Item.BOAT_PASS);
                                 p.getInventory().remove(p.getItemInHand());
-                                LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_3).teleportSilently(p, "dim3-spawn");
+                                LobbyWorld.DIM_3.getWorld().teleportSilently(p, "dim3-spawn");
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun im zerstörten Paradise Island");
                             } else {
                                 lp.removeItem(Item.BOAT_PASS);
                                 p.getInventory().remove(p.getItemInHand());
 
-                                LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_2).teleportSilently(p, "dim2-spawn");
+                                LobbyWorld.DIM_2.getWorld().teleportSilently(p, "dim2-spawn");
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in Paradise Island");
 
                                 if (lp.getProgressId() == 9) {
@@ -176,10 +158,10 @@ public class NpcListener implements Listener {
                         break;
                     }
                 }
-            } else if (w.equals(LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_2))) {
+            } else if (w.equals(LobbyWorld.DIM_2.getWorld())) {
                 switch (npc.getData().getName()) {
                     case "captain": {
-                        LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_1).teleportSilently(p, "dim1-spawn");
+                        LobbyWorld.DIM_1.getWorld().teleportSilently(p, "dim1-spawn");
                         p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in One Island");
                         break;
                     }
@@ -197,7 +179,7 @@ public class NpcListener implements Listener {
                         if (lp.getProgressId() == 13) {
                             p.sendMessage("§8[§7§l!§8] §cNPC §8» §fMarvin §8|§7 Arhh Orhh Hahaha du bist der der mich töten wollte richtig §4Peng");
                             lp.setProgress(Progress.MARVIN_2);
-                            LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_4).teleportSilently(p, "dim4-spawn");
+                            LobbyWorld.DIM_4.getWorld().teleportSilently(p, "dim4-spawn");
 
                             lp.removeItem(Item.RADIO_SET1);
                             lp.removeItem(Item.GPS);
@@ -207,10 +189,10 @@ public class NpcListener implements Listener {
                         break;
                     }
                 }
-            } else if (w.equals(LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_2))) {
+            } else if (w.equals(LobbyWorld.DIM_2.getWorld())) {
                 switch (npc.getData().getName()) {
                     case "descaptain": {
-                        LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_1).teleportSilently(p, "dim1-spawn");
+                        LobbyWorld.DIM_1.getWorld().teleportSilently(p, "dim1-spawn");
                         p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in One Island");
                         break;
                     }
@@ -224,25 +206,28 @@ public class NpcListener implements Listener {
                         break;
                     }
                 }
-            } else if (w.equals(LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_2))) {
+            } else if (w.equals(LobbyWorld.DIM_2.getWorld())) {
                 switch (npc.getData().getName()) {
                     case "marvin2dim4": {
-                        LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_3).teleportSilently(p, "dim3-spawn");
+                        LobbyWorld.DIM_3.getWorld().teleportSilently(p, "dim3-spawn");
                         break;
                     }
                 }
             }
 
             for (Progress progress : Progress.values()) {
-                if (e.getNpc().getData().getName().equals(progress.getNpcDatabaseName())) {
+                if (e.getNpc().getData().getName().equals(progress.getNpcName())) {
                     p.getWorld().playEffect(e.getNpc().getData().getLocation().bukkit(), Effect.LAVA_POP, 100);
 
                     if (progress.getId() >= lp.getProgressId()) {
                         if (progress.getId() <= lp.getProgressId() + 1) {
-                            if (progress.getMessage() != null) {
-                                p.sendMessage("\n" + progress.getMessage().replaceAll("%%player%%", p.getName()));
-                                lp.setProgress(progress);
+                            p.sendMessage("\n" + progress.getMessage().replaceAll("%%player%%", p.getName()));
+                            lp.setProgress(progress);
+
+                            if (progress.getId() > 1) {
+                                Progress.getProgressByID(progress.getId() - 1).getNpc().toggleVisibility(p, false);
                             }
+                            Progress.getProgressByID(progress.getId()+1).getNpc().toggleVisibility(p, true);
                         } else {
                             p.sendMessage("§8§l[§7§l!§8§l] §cSecrets§8 » §7Du bist noch nicht so weit!");
                         }

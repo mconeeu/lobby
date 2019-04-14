@@ -5,9 +5,12 @@
 
 package eu.mcone.lobby.story.listener;
 
-import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
+import eu.mcone.lobby.api.player.LobbyPlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -15,8 +18,28 @@ public class LobbyPlayerLoadedListener implements Listener {
 
     @EventHandler
     public void on(LobbyPlayerLoadedEvent e) {
-        if (e.getReason().equals(LobbyPlayerLoadedEvent.Reason.JOINED) && e.getPlayer().getProgressId() <= 1) {
-            LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_1).teleportSilently(e.getPlayer().bukkit(), "Storyspawn");
+        LobbyPlayer lp = e.getPlayer();
+        Player p = lp.bukkit();
+
+        if (e.getReason().equals(LobbyPlayerLoadedEvent.Reason.JOINED) && lp.getProgressId() <= 1) {
+            LobbyWorld.DIM_1.getWorld().teleportSilently(p, "storyspawn");
+        }
+
+        spawnStoryNpcs(p, lp.getProgressId());
+    }
+
+    public static void spawnStoryNpcs(Player p, int progressId) {
+        if (progressId > 0) {
+            Progress.getProgressByID(progressId).getNpc().toggleVisibility(p, true);
+        }
+
+        Progress.getProgressByID(progressId + 1).getNpc().toggleVisibility(p, true);
+
+        if (progressId == Progress.INFECTION.getId()) {
+            PlayerNpc infectionNpc = Progress.INFECTION.getNpc();
+
+            infectionNpc.setSkin(NpcListener.RUFI_HEADLED_SKIN, p);
+            infectionNpc.changeDisplayname(NpcListener.RUFI_HEADLED_DISPLAY_NAME, p);
         }
     }
 

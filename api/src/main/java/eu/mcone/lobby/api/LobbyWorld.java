@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.api;
 
+import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import lombok.Getter;
 
 public enum LobbyWorld {
@@ -19,6 +20,10 @@ public enum LobbyWorld {
 
     LobbyWorld(String name) {
         this.name = name;
+    }
+
+    public CoreWorld getWorld() {
+        return LobbyPlugin.getInstance().getLobbyWorld(this);
     }
 
 }

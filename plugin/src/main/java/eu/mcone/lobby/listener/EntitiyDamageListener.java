@@ -35,7 +35,7 @@ public class EntitiyDamageListener implements Listener{
             }
 
             if(e.getCause() == EntityDamageEvent.DamageCause.VOID){
-                LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_1).teleport(p, "spawn");
+                LobbyWorld.DIM_1.getWorld().teleport(p, "spawn");
             }
         }
     }

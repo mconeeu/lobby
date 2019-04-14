@@ -24,7 +24,7 @@ public class ChestInfoInventory extends CoreInventory {
 
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.ENDER_PORTAL_FRAME).displayName("§f§lZum Chestopening teleportieren").create(), e -> {
             p.closeInventory();
-            LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_1).teleport(p, "chest-opening");
+            LobbyWorld.DIM_1.getWorld().teleport(p, "chest-opening");
         });
 
         setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.CHEST, 1, 0).displayName("§7Du hast §e§l" + lp.getChests() + " Kisten").create());
@@ -32,7 +32,7 @@ public class ChestInfoInventory extends CoreInventory {
         try {
             setItem(InventorySlot.ROW_2_SLOT_7, ItemBuilder.createSkullItem(CoreSystem.getInstance().getPlayerUtils().getSkinFromSkinDatabase("merchant"), 1).displayName("§f§lZum Händler teleportieren").create(), e -> {
                 p.closeInventory();
-                LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DIM_1).teleport(p, "merchant");
+                LobbyWorld.DIM_1.getWorld().teleport(p, "merchant");
             });
         } catch (CoreException e) {
             e.printStackTrace();
