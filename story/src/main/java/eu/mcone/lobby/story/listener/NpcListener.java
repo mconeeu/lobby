@@ -52,7 +52,7 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "zoll": {
-                        if (lp.getProgressId() >= 2 && !lp.hasItem(Item.PASS)) {
+                        if (lp.getProgressId() >= 1 && !lp.hasItem(Item.PASS)) {
                             lp.addItem(Item.PASS);
                         }
                         break;

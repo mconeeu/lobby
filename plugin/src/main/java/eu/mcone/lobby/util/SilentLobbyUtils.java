@@ -42,18 +42,15 @@ public class SilentLobbyUtils {
             p.hidePlayer(all);
         }
 
-        CoreSystem.getInstance().createTablistInfo().header("§f§lMC ONE §3Minecraftnetzwerk §8» §7Private Lobby").footer("§7§oPublic Beta 5.0").send(p);
+        Bukkit.getScheduler().runTaskLater(
+                LobbyPlugin.getInstance(),
+                () -> CoreSystem.getInstance().createTablistInfo().header("§f§lMC ONE §3Minecraftnetzwerk §8» §7Private Lobby").footer("§7§oPublic Beta 5.0").send(p),
+                40L
+        );
 
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.VOID_FOG, 10);
-    }
-
-    public static void playerJoined(Player j) {
-        for (Player p : silent) {
-            p.hidePlayer(j);
-            j.hidePlayer(p);
-        }
     }
 
     public static boolean isActivatedSilentHub(Player p) {

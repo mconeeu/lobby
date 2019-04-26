@@ -22,14 +22,12 @@ public class ChestCMD extends CoreCommand {
 
     @Override
     public boolean onCommand(CommandSender sender, String[] args) {
-        if (args.length == 0) {
-            if (sender instanceof Player) {
-                Player p = (Player) sender;
+        if (args.length == 0 && sender instanceof Player) {
+            Player p = (Player) sender;
 
-                LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast momentan §d" + LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId()).getChests() + " Kisten§7!");
-                new ChestInfoInventory(p);
-                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-            }
+            LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast momentan §d" + LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId()).getChests() + " Kisten§7!");
+            new ChestInfoInventory(p);
+            p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
         } else if (sender.hasPermission("lobby.adventure.chests")) {
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("remove")) {
@@ -77,8 +75,8 @@ public class ChestCMD extends CoreCommand {
             }
 
             CoreSystem.getInstance().getMessager().send(sender, "§4Bitte benutze: §c/chest <add | remove> <name> <amount> §4oder §c/chests <name>");
-        } else {
-            sender.sendMessage("§8[§7§l!§8] §eKisten §8» §4Du hast keine Berechtigung!");
+        } else if (sender instanceof Player) {
+            CoreSystem.getInstance().getMessager().sendTransl((Player) sender, "system.command.noperm");
         }
 
         return true;

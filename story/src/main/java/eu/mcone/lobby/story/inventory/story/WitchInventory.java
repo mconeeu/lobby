@@ -20,17 +20,13 @@ public class WitchInventory extends CoreInventory {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
         setItem(InventorySlot.ROW_2_SLOT_5, Item.MAGICDRINK.getItemStack(), e -> {
-            if (lp.hasItem(Item.MAGICDRINK)) {
-                if ((lp.getCorePlayer().getCoins() - Item.MAGICDRINK.getCoins()) >= 0) {
-                    lp.getCorePlayer().removeCoins(Item.MAGICDRINK.getCoins());
-                    lp.addItem(Item.MAGICDRINK);
-                    p.sendMessage("§8[§7§l!§8] §cSecret §8» §7Du hast das Item §f" + Item.MAGICDRINK.getName() + " §7für §6§l" + Item.MAGICDRINK.getCoins() + " §6Coins §7erfolgreich gekauft!");
-                } else {
-                    p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "Du hast nicht genügen §6§lCoins!");
-                }
+            if (!lp.hasItem(Item.MAGICDRINK)) {
+                lp.addItem(Item.MAGICDRINK);
+                LobbyPlugin.getInstance().getMessager().send(p, "Du hast den Zaubertrank aufgenommen!");
             } else {
                 p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§4Du besitzt diese Item bereits!");
             }
+
             p.closeInventory();
         });
 

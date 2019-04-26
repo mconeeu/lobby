@@ -6,9 +6,7 @@
 package eu.mcone.lobby;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
-import eu.mcone.coresystem.api.bukkit.inventory.ProfileInventoryModifier;
 import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
@@ -54,35 +52,37 @@ public class Lobby extends LobbyPlugin {
 
         players = new ArrayList<>();
         worlds = new HashMap<>();
-        for (LobbyWorld w : LobbyWorld.values()) worlds.put(w, CoreSystem.getInstance().getWorldManager().getWorld(w.getName()));
+        for (LobbyWorld w : LobbyWorld.values())
+            worlds.put(w, CoreSystem.getInstance().getWorldManager().getWorld(w.getName()));
 
         CoreSystem.getInstance().getTranslationManager().loadCategories(this);
 
-        sendConsoleMessage("§aScoreboard-Scheduler wird gestartet");
+        sendConsoleMessage("§aStarting Scoreboard-Scheduler...");
         startScheduler();
 
-        sendConsoleMessage("§aBuild-System witd initiiert");
+        sendConsoleMessage("§aInitializing Build-System...");
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
         buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, Material.STONE_BUTTON, Material.WOOD_BUTTON);
 
-        sendConsoleMessage("§aBefehle und Events werden registriert...");
-        CoreSystem.getInstance().enableSpawnCommand(getLobbyWorld(LobbyWorld.DIM_1));
+        sendConsoleMessage("§aRegistering Events & Commands...");
+        CoreSystem.getInstance().enableSpawnCommand(this, getLobbyWorld(LobbyWorld.DIM_1), 0);
         registerEventsAndCommands();
 
         CoreSystem.getInstance().setProfileInventorySize(InventorySlot.ROW_6);
-        CoreSystem.getInstance().modifyProfileInventory(new ProfileInventoryModifier() {
-            @Override
-            public void onCreate(CoreInventory coreInventory, Player player) {
-                coreInventory.setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.CLAY_BALL, 1, 0).displayName("§fLobby Einstellungen").create(), e -> new LobbySettingsInventory(player));
-            }
-        });
+        CoreSystem.getInstance().modifyProfileInventory(
+                (coreInventory, player) -> coreInventory.setItem(
+                        InventorySlot.ROW_5_SLOT_5,
+                        new ItemBuilder(Material.CLAY_BALL, 1, 0).displayName("§3§lLobby Einstellungen").lore("§7§oVerwalte deine", "§7§oLobbyeinstellungen", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").create(),
+                        e -> new LobbySettingsInventory(player)
+                )
+        );
 
         sendConsoleMessage("§aActivating AddOns...");
         for (LobbyAddon addon : ADDONS) {
             addon.onEnable();
         }
 
-        sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a wurde aktiviert...");
+        sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             PlayerJoinListener.loadLobbyPlayer(p, LobbyPlayerLoadedEvent.Reason.RELOADED);
@@ -90,7 +90,7 @@ public class Lobby extends LobbyPlugin {
     }
 
     @Override
-    public void onDisable(){
+    public void onDisable() {
         sendConsoleMessage("§cDeactivating AddOns...");
         for (LobbyAddon addon : ADDONS) {
             addon.onDisable();

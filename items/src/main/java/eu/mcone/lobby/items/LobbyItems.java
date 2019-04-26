@@ -9,6 +9,7 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Category;
+import eu.mcone.lobby.items.command.ChestCMD;
 import eu.mcone.lobby.items.inventory.backpack.*;
 import eu.mcone.lobby.items.listener.InventoryTriggerListener;
 import eu.mcone.lobby.items.listener.LobbyPlayerLoadedListener;
@@ -53,8 +54,9 @@ public class LobbyItems extends LobbyAddon {
                 new LobbyPlayerLoadedListener(),
                 new NpcInteractListener()
         );
+        LobbyPlugin.getInstance().registerCommands(new ChestCMD());
 
-        CoreSystem.getInstance().setPlayerChatDisabled(true);
+        CoreSystem.getInstance().setPlayerChatEnabled(false);
 
         final Location rewardBlock = new Location(Bukkit.getWorld("Lobby"), 46.5, 102D, -33.5);
         Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
