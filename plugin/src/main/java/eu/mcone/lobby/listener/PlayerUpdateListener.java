@@ -27,7 +27,7 @@ public class PlayerUpdateListener implements Listener {
     public void on(PermissionChangeEvent e) {
         CorePlayer p = e.getPlayer();
 
-        if (e.getKind().equals(PermissionChangeEvent.Kind.GROUP_CHANGE) && p != null) {
+        if (e.getType().equals(PermissionChangeEvent.Type.GROUP_CHANGE) && p != null) {
             p.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
         }
     }

@@ -27,6 +27,8 @@ public class LobbyPlayerProfile extends GameProfile {
     private LobbySettings settings = new LobbySettings();
     private Map<String, Long> secrets = new HashMap<>();
 
+    private transient List<Item> itemList = new ArrayList<>();
+
     LobbyPlayerProfile(Player p) {
         super(p);
 
@@ -42,12 +44,11 @@ public class LobbyPlayerProfile extends GameProfile {
         secrets = lp.getSecrets();
     }
 
-    public List<Item> getItemList() {
-        List<Item> result = new ArrayList<>();
+    @Override
+    public void doSetData(Player player) {
         for (int id : items) {
-            result.add(Item.getItemByID(id));
+            itemList.add(Item.getItemByID(id));
         }
-        return result;
     }
 
 }

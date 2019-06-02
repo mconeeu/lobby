@@ -7,6 +7,7 @@ package eu.mcone.lobby.api.player;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.coresystem.api.bukkit.player.plugin.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.enums.Progress;
@@ -20,10 +21,7 @@ import org.bukkit.entity.Player;
 import java.util.List;
 import java.util.Map;
 
-public class LobbyPlayer {
-
-    @Getter
-    private final CorePlayer corePlayer;
+public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
 
     @Getter
     @Setter
@@ -40,22 +38,29 @@ public class LobbyPlayer {
     private Map<String, Long> secrets;
 
     public LobbyPlayer(CorePlayer corePlayer) {
-        this.corePlayer = corePlayer;
-        reload();
+        super(corePlayer);
     }
 
-    public void reload() {
-        LobbyPlayerProfile profile = LobbyPlugin.getInstance().loadGameProfile(corePlayer.bukkit(), LobbyPlayerProfile.class);
+    public LobbyPlayerProfile reload() {
+        LobbyPlayerProfile profile = super.reload();
+
         this.items = profile.getItemList();
         this.chests = profile.getChests();
         this.progressId = profile.getProgressId();
         this.settings = profile.getSettings();
         this.secrets = profile.getSecrets();
-
         LobbyPlugin.getInstance().registerLobbyPlayer(this);
+
+        return profile;
     }
 
-    private void saveData() {
+    @Override
+    protected LobbyPlayerProfile loadData() {
+        return LobbyPlugin.getInstance().loadGameProfile(corePlayer.bukkit(), LobbyPlayerProfile.class);
+    }
+
+    @Override
+    public void saveData() {
         Bukkit.getScheduler().runTaskAsynchronously(LobbyPlugin.getInstance(), () ->
                 LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit())));
     }
@@ -144,14 +149,6 @@ public class LobbyPlayer {
             saveData();
             return true;
         }
-    }
-
-    public void updateSettings() {
-        saveData();
-    }
-
-    public Player bukkit() {
-        return Bukkit.getPlayer(corePlayer.getUuid());
     }
 
 }

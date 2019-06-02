@@ -62,7 +62,7 @@ public class LobbySettingsInventory extends CoreInventory {
     }
 
     private void setSettings(Player p, LobbyPlayer lp) {
-        lp.updateSettings();
+        lp.saveData();
         new LobbySettingsInventory(p);
     }
 
