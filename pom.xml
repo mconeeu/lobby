@@ -68,7 +68,7 @@
         <dependency>
             <groupId>eu.mcone.coresystem</groupId>
             <artifactId>bukkit-api</artifactId>
-            <version>10.2.3-SNAPSHOT</version>
+            <version>10.2.4-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

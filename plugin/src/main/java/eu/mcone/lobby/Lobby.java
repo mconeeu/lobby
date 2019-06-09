@@ -62,7 +62,8 @@ public class Lobby extends LobbyPlugin {
 
         sendConsoleMessage("§aInitializing Build-System...");
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
-        buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, Material.STONE_BUTTON, Material.WOOD_BUTTON);
+        buildSystem.setNotifying(true);
+        buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, Material.STONE_BUTTON.getId(), Material.WOOD_BUTTON.getId());
 
         sendConsoleMessage("§aRegistering Events & Commands...");
         CoreSystem.getInstance().enableSpawnCommand(this, getLobbyWorld(LobbyWorld.DIM_1), 0);

@@ -8,7 +8,7 @@ package eu.mcone.lobby.story;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
-import eu.mcone.coresystem.api.bukkit.npc.enums.NpcVisibilityMode;
+import eu.mcone.coresystem.api.bukkit.spawnable.ListMode;
 import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -61,7 +61,7 @@ public class LobbyStory extends LobbyAddon {
     public void reload() {
         for (Progress progress : Progress.values()) {
             NPC npc = progress.getNpc();
-            npc.toggleNpcVisibility(NpcVisibilityMode.WHITELIST);
+            npc.togglePlayerVisibility(ListMode.WHITELIST);
         }
     }
 
