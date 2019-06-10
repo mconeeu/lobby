@@ -66,7 +66,7 @@ public class Lobby extends LobbyPlugin {
         buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, Material.STONE_BUTTON.getId(), Material.WOOD_BUTTON.getId());
 
         sendConsoleMessage("§aRegistering Events & Commands...");
-        CoreSystem.getInstance().enableSpawnCommand(this, getLobbyWorld(LobbyWorld.DIM_1), 0);
+        CoreSystem.getInstance().enableSpawnCommand(this, getLobbyWorld(LobbyWorld.ONE_ISLAND), 0);
         registerEventsAndCommands();
 
         CoreSystem.getInstance().setProfileInventorySize(InventorySlot.ROW_6);

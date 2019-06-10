@@ -22,10 +22,11 @@ public class LobbyPlayerLoadedListener implements Listener {
         Player p = lp.bukkit();
 
         if (e.getReason().equals(LobbyPlayerLoadedEvent.Reason.JOINED) && lp.getProgressId() <= 1) {
-            LobbyWorld.DIM_1.getWorld().teleportSilently(p, "storyspawn");
+            LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "storyspawn");
         }
 
         spawnStoryNpcs(p, lp.getProgressId());
+        spawnStoryHolograms(p, lp.getProgressId());
     }
 
     public static void spawnStoryNpcs(Player p, int progressId) {
@@ -33,13 +34,22 @@ public class LobbyPlayerLoadedListener implements Listener {
             Progress.getProgressByID(progressId).getNpc().toggleVisibility(p, true);
         }
 
-        Progress.getProgressByID(progressId + 1).getNpc().toggleVisibility(p, true);
+        Progress future = Progress.getProgressByID(progressId + 1);
+        if (future != null) {
+            future.getNpc().toggleVisibility(p, true);
+        }
 
         if (progressId == Progress.INFECTION.getId()) {
             PlayerNpc infectionNpc = Progress.INFECTION.getNpc();
 
             infectionNpc.setSkin(NpcListener.RUFI_HEADLED_SKIN, p);
             infectionNpc.changeDisplayname(NpcListener.RUFI_HEADLED_DISPLAY_NAME, p);
+        }
+    }
+
+    public static void spawnStoryHolograms(Player p, int progressId) {
+        if (progressId < 1) {
+            LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").toggleVisibility(p, true);
         }
     }
 

@@ -12,6 +12,7 @@ import eu.mcone.coresystem.api.bukkit.spawnable.ListMode;
 import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.items.inventory.backpack.BackpackInventory;
@@ -63,6 +64,7 @@ public class LobbyStory extends LobbyAddon {
             NPC npc = progress.getNpc();
             npc.togglePlayerVisibility(ListMode.WHITELIST);
         }
+        LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").togglePlayerVisibility(ListMode.WHITELIST);
     }
 
     @Override

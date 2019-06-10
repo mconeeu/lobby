@@ -30,7 +30,7 @@ public class NpcInteractListener implements Listener {
                 case "merchant":
                     new TraderInventory(p);
                     break;
-                case "Bank": {
+                case "bankman": {
                     if (!lp.hasItem(Item.BANKCARD)) {
                         new BankCreateCardInventory(p);
                     } else {

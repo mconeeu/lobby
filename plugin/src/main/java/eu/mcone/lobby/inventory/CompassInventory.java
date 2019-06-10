@@ -37,7 +37,7 @@ public class CompassInventory extends CoreInventory {
                         .displayName(Gamemode.BEDWARS.getLabel())
                         .lore("§7§oTöte deine Gegner nachdem du ihre Betten abgebaut hast", "§7§oum zu gewinnen", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .create(),
-                e -> LobbyWorld.DIM_1.getWorld().teleport(p, "bedwars")
+                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "bedwars")
         );
 
         setItem(14, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 0).displayName("§8//§oMCONE§8//").create());
@@ -53,7 +53,7 @@ public class CompassInventory extends CoreInventory {
                         .lore("§7§oFinde deine Gegner auf einer Sky-Map und töte sie", "§7§oum Coins zu erhalten", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .itemFlags(ItemFlag.HIDE_ATTRIBUTES)
                         .create(),
-                e -> LobbyWorld.DIM_1.getWorld().teleport(p, "skypvp")
+                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "skypvp")
         );
 
         setItem(22, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
@@ -64,7 +64,7 @@ public class CompassInventory extends CoreInventory {
                         .lore("§7§oSchlage die Gegner von der Plattform um Coins", "§7§ozu erhalten", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .itemFlags(ItemFlag.HIDE_ENCHANTS)
                         .create(),
-                e -> LobbyWorld.DIM_1.getWorld().teleport(p, "knockit")
+                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "knockit")
         );
 
         setItem(24, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 0).displayName("§8//§oMCONE§8//").create());
@@ -80,7 +80,7 @@ public class CompassInventory extends CoreInventory {
                         .lore("§7§oGrabe dich unter der Erde zu deinen Gegner und rüste", "§7§odich aus um sie zu töten und zu gewinnen.", "", "§c§oBald wieder verfügbar")
                         .itemFlags(ItemFlag.HIDE_ATTRIBUTES)
                         .create(),
-                e -> LobbyWorld.DIM_1.getWorld().teleport(p, "minewar")
+                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "minewar")
         );
 
         setItem(32, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
@@ -103,7 +103,7 @@ public class CompassInventory extends CoreInventory {
                         .displayName("§f§lSpawn")
                         .lore("§7§oZurück zum Lobby Spawn.", "§7§oHier startet unser Lobby Rätsel", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .create(),
-                e -> LobbyWorld.DIM_1.getWorld().teleport(p, "spawn")
+                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "spawn")
         );
 
         setItem(41, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 0).displayName("§8//§oMCONE§8//").create());
@@ -112,7 +112,7 @@ public class CompassInventory extends CoreInventory {
                         .displayName(Gamemode.BUILD.getLabel())
                         .lore("§7§oCreative Server. Überzeuge uns von deinen Baukünsten", "§7§ound werde Builder im MC ONE Team!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .create(),
-                e -> LobbyWorld.DIM_1.getWorld().teleport(p, "build")
+                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "build")
         );
 
         setItem(43, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 11).displayName("§8//§oMCONE§8//").create());
