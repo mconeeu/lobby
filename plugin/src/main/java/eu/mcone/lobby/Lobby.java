@@ -158,6 +158,11 @@ public class Lobby extends LobbyPlugin {
     }
 
     @Override
+    public void unregisterLobbyPlayer(LobbyPlayer lp) {
+        players.remove(lp);
+    }
+
+    @Override
     public CoreWorld getLobbyWorld(LobbyWorld world) {
         return worlds.get(world);
     }

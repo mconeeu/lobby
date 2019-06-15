@@ -26,6 +26,8 @@ public abstract class LobbyPlugin extends CorePlugin {
 
     public abstract void registerLobbyPlayer(LobbyPlayer lp);
 
+    public abstract void unregisterLobbyPlayer(LobbyPlayer lp);
+
     public abstract CoreWorld getLobbyWorld(LobbyWorld world);
 
     public abstract LobbyPlayer getLobbyPlayer(UUID uuid);

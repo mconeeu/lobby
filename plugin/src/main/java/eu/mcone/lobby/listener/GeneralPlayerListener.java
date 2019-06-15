@@ -19,10 +19,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerAchievementAwardedEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.player.*;
 
 public class GeneralPlayerListener implements Listener {
 
@@ -97,6 +94,15 @@ public class GeneralPlayerListener implements Listener {
     @EventHandler
     public void onAchievementAwarded(PlayerAchievementAwardedEvent e) {
         e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
+        e.setQuitMessage(null);
+
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().getUniqueId());
+        lp.saveData();
+        LobbyPlugin.getInstance().unregisterLobbyPlayer(lp);
     }
 
 }
