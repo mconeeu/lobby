@@ -8,8 +8,9 @@ package eu.mcone.lobby.gang.inventory;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
+import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.gang.Gang;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -120,9 +121,9 @@ public class GangInventory extends CoreInventory {
                 String name = members.get(x).getKey();
 
                 if (p.getUniqueId().toString().equals(uuid) || gang.getLeader().toString().equals(uuid)) {
-                    setItem(i, ItemBuilder.createSkullItem(name, 1).displayName(Gang.getPrefix(gang, uuid) + name).create());
+                    setItem(i, new Skull(name, 1).toItemBuilder().displayName(Gang.getPrefix(gang, uuid) + name).create());
                 } else {
-                    setItem(i, ItemBuilder.createSkullItem(name, 1).displayName(Gang.getPrefix(gang, uuid) + name).create(), e ->
+                    setItem(i, new Skull(name, 1).toItemBuilder().displayName(Gang.getPrefix(gang, uuid) + name).create(), e ->
                             new GangPlayerInventory(p, gang, name, uuid));
                 }
 

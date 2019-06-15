@@ -8,7 +8,8 @@ package eu.mcone.lobby.items.inventory.chest;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
-import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.enums.Level;
@@ -30,7 +31,7 @@ class ChestFinalInventory extends CoreInventory {
 
         lp.removeChests(1);
 
-        setItem(InventorySlot.ROW_1_SLOT_5, ItemBuilder.createSkullItemFromURL("http://textures.minecraft.net/texture/2dadd755d08537352bf7a93e3bb7dd4d733121d39f2fb67073cd471f561194dd", 1).displayName("§e§lDein Gewinn:").lore("§7§oDu hast ein Item mit dem", "§7§oLevel "+item.getLevel().getDisplayname()+"§7§o gewonnen!").create());
+        setItem(InventorySlot.ROW_1_SLOT_5, Skull.fromUrl("http://textures.minecraft.net/texture/2dadd755d08537352bf7a93e3bb7dd4d733121d39f2fb67073cd471f561194dd", 1).toItemBuilder().displayName("§e§lDein Gewinn:").lore("§7§oDu hast ein Item mit dem", "§7§oLevel "+item.getLevel().getDisplayname()+"§7§o gewonnen!").create());
 
         setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName(item.getLevel().getDisplayname()).create());
         setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName(item.getLevel().getDisplayname()).create());

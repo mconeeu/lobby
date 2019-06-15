@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.api.enums;
 
-import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;

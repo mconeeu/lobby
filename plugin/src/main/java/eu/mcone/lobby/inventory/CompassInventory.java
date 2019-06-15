@@ -7,7 +7,7 @@ package eu.mcone.lobby.inventory;
 
 import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
-import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyWorld;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

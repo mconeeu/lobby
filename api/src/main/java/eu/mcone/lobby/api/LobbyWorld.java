@@ -13,7 +13,7 @@ public enum LobbyWorld {
     ONE_ISLAND("Lobby-OneIsland"),
     PARADISE_ISLAND("Lobby-ParadiseIsland"),
     CAVE("Lobby-Cave"),
-    DESTROYED_PARADISE_ISLAND("Lobby-Destoryed-ParadiseIsland");
+    DESTROYED_PARADISE_ISLAND("Lobby-Destroyed-ParadiseIsland");
 
     @Getter
     private String name;
