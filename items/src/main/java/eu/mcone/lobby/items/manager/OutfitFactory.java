@@ -9,6 +9,7 @@ import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
 import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.api.enums.Item;
 import org.bukkit.Color;
+import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 

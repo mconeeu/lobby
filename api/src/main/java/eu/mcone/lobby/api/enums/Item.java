@@ -136,8 +136,8 @@ public enum Item {
     MODERATOR_BOOTS(192, "Moderator Schuhe", Category.EXCLUSIVE, Level.EPIC, 0, ItemBuilder.createLeatherArmorItem(Material.LEATHER_BOOTS, Color.OLIVE).displayName("§5§lModerator Schuhe").lore("§7Kategorie: §bExklusives Item", "§7Seltenheit: §5Episch", "", "§7Moderator Boots").create()),
     SR_MODERATOR_BOOTS(193, "Senior Moderator Schuhe", Category.EXCLUSIVE, Level.EPIC, 0, ItemBuilder.createLeatherArmorItem(Material.LEATHER_BOOTS, Color.OLIVE).displayName("§5§lSenior Moderator Schuhe").lore("§7Kategorie: §bExklusives Item", "§7Seltenheit: §5Episch", "", "§7Senior Moderator Boots").create()),
     BUILDER_BOOTS(194, "Builder Schuhe", Category.EXCLUSIVE, Level.LEGENDARY, 0, ItemBuilder.createLeatherArmorItem(Material.LEATHER_BOOTS, Color.YELLOW).displayName("§6§lBuilder Schuhe").lore("§7Kategorie: §bExklusives Item", "§7Seltenheit: §6Legendär", "", "§7Builder Boots").create()),
-    DEVELOPER_BOOTS(195, "Developer Schuhe", Category.EXCLUSIVE, Level.LEGENDARY, 0, ItemBuilder.createLeatherArmorItem(Material.LEATHER_BOOTS, Color.AQUA).displayName("§6§lDeveloper Schuhe").lore("§7Kategorie: §bExklusives Item", "§7Seltenheit: §6Legendär", "", "§7Developer Boots").create()),
-    ADMIN_BOOTS(196, "Admin Schuhe", Category.EXCLUSIVE, Level.LEGENDARY, 0, ItemBuilder.createLeatherArmorItem(Material.LEATHER_BOOTS, Color.RED).displayName("§6§lAdminstrator Schuhe").lore("§7Kategorie: §bExklusives Item", "§7Seltenheit: §6Legendär", "", "§7ADMIN BOOTS ICH BIN DER BOSS").create()),
+    DEVELOPER_BOOTS(195, "Developer Schuhe", Category.EXCLUSIVE, Level.LEGENDARY, 0, ItemBuilder.createLeatherArmorItem(Material.LEATHER_BOOTS, Color.AQUA).displayName("§6§lDeveloper Schuhe").lore("§7Kategorie: §bExklusives Item", "§7Seltenheit: §6Legendär", "", "§7Nike Developer Ultra Boost").create()),
+    ADMIN_BOOTS(196, "Admin Schuhe", Category.EXCLUSIVE, Level.LEGENDARY, 0, ItemBuilder.createLeatherArmorItem(Material.LEATHER_BOOTS, Color.RED).displayName("§6§lAdminstrator Schuhe").lore("§7Kategorie: §bExklusives Item", "§7Seltenheit: §6Legendär", "", "§7ADMIN SCHUHE ICH BIN DER BOSS").create()),
 
 
     //Armor

@@ -18,7 +18,7 @@ public class ExclusiveInventory extends BackpackInventory {
     @Override
     public void setItems(Player p) {
         for (Item item : Item.values()) {
-            if (item.hasCategory() && item.getCategory().equals(Category.HAT) && playerHasItem(item)) {
+            if (item.hasCategory()) {
                 addItem(item.getItemStack(), e -> {
                     if (playerHasItem(item)) {
                         p.getInventory().setItem(6, item.getItemStack());

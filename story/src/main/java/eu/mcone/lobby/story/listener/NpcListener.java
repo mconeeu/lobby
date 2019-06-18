@@ -170,7 +170,7 @@ public class NpcListener implements Listener {
                             p.sendMessage("§8[§7§l!§8] §cNPC §8» §fRezepzion §8|§7 Hi bist du der Marvin töten wollte ? er wurde schon gefangen nur zu Info er wollte sich hier ein Ticket holen hat es nicht geschaft , weil Angela Merkel und Donald Trump da sind oke mehr kann ich dir auch nicht verraten außer das Marvin im Knast sitzt kannst ja mal hingehen.");
                             lp.setProgress(Progress.STAFF);
                         } else {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fRezepzion §8|§7 Hi ähm Neu ? leider kannst du kein Ticket bekommen hier ist Prominenz");
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fRezepzion §8|§7 Herzlich Willkommen auf der  ? leider kannst du kein Ticket bekommen hier ist Prominenz");
 
                         }
                         return;

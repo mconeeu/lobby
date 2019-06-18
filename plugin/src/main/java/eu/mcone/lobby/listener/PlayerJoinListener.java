@@ -44,6 +44,7 @@ public class PlayerJoinListener implements Listener {
 
         Lobby.getInstance().getLobbyWorld(LobbyWorld.DIM_1).teleportSilently(p, "spawn");
         loadLobbyPlayer(p, LobbyPlayerLoadedEvent.Reason.JOINED);
+
     }
 
     public static void loadLobbyPlayer(Player p, LobbyPlayerLoadedEvent.Reason reson) {

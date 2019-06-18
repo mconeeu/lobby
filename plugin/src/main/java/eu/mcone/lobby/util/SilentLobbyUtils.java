@@ -32,6 +32,7 @@ public class SilentLobbyUtils {
 
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
+        p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
     }
 
 
@@ -49,6 +50,7 @@ public class SilentLobbyUtils {
         );
 
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
+        p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.VOID_FOG, 10);
     }
