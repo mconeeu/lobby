@@ -93,7 +93,7 @@ public class CompassInventory extends CoreInventory {
 
         setItem(38, new ItemBuilder(Material.BARRIER, 1, 0)
                 .displayName("§7Comming Soon")
-                .lore("§8§oAn diesem Spielmodus arbeiten wir noch...")
+                .lore("§8§oAn diesem Spielmodus arbeiten wir noch..")
                 .create()
         );
 
