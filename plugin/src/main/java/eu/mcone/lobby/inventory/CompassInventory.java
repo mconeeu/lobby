@@ -117,7 +117,17 @@ public class CompassInventory extends CoreInventory {
 
         setItem(43, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 11).displayName("§8//§oMCONE§8//").create());
         setItem(44, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 11).displayName("§8//§oMCONE§8//").create());
-        setItem(45, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
+
+
+        setItem(45, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3)
+                .displayName("§eChest-Opening")
+                .lore("§7§oÖffne Kisten und gewinne coole Items", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                .create(),
+            e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "chest")
+
+                );
+
+
         setItem(46, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 11).displayName("§8//§oMCONE§8//").create());
         setItem(47, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
         setItem(48, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
@@ -125,7 +135,15 @@ public class CompassInventory extends CoreInventory {
         setItem(50, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
         setItem(51, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
         setItem(52, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 11).displayName("§8//§oMCONE§8//").create());
-        setItem(53, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
+
+
+        setItem(53, new ItemBuilder(Material.SKULL, 1, 3)
+                .displayName("§3Die MCONE Story").lore("§7§oSpiele die Story")
+                .lore("§7§ound kassiere coole Items und viele Coins!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                .create(),
+        e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "storyspawn")
+
+                );
 
         openInventory();
     }

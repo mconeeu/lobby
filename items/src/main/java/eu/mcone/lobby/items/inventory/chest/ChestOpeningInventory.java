@@ -19,16 +19,27 @@ public class ChestOpeningInventory extends CoreInventory {
         super("§8» §e§lChestOpening §8| §fGewinne Items", p, InventorySlot.ROW_3, Option.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
-        setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.CHEST, 1, 0).displayName("§a§lEine Kiste öffnen").lore("§7§oDu hast noch §f§o" + lp.getChests() + "§7§o Kisten", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").create(), e -> {
-            if (lp.getChests() > 0) {
-                new ChestItemInventory(p);
-            } else {
-                p.sendMessage("§8[§7§l!§8] §eChestOpening §8»§7 Du hast nicht genügend Kisten!");
-                p.closeInventory();
-            }
-        });
+        if (lp.getChests() == 0) {
+            setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.CHEST, 1, 0).displayName("§a§lEine Kiste öffnen").lore("§7§oDu hast keine Kisten besorge dir welche beim Händler").create(), e -> {
+                if (lp.getChests() > 0) {
+                    new ChestItemInventory(p);
+                } else {
+                    p.sendMessage("§8[§7§l!§8] §eChestOpening §8»§7 Du hast nicht genügend Kisten, besorge dir welche beim Händler!");
+                    p.closeInventory();
+                }
+            });
+            setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.CHEST, 1, 0).displayName("§a§lEine Kiste öffnen").lore("§7§oDu hast noch §f§o" + lp.getChests() + "§7§o Kisten", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").create(), e -> {
+                if (lp.getChests() > 0) {
+                    new ChestItemInventory(p);
+                } else {
+                    p.sendMessage("§8[§7§l!§8] §eChestOpening §8»§7 Du hast nicht genügend Kisten!");
+                    p.closeInventory();
+                }
+            });
 
-        openInventory();
+            openInventory();
+        }
+
     }
 
 }

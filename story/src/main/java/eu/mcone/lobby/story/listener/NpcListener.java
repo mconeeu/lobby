@@ -88,11 +88,7 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "merchant-boatticket": {
-                        if (lp.getProgressId() >= Progress.ONEHIT_SWORD.getId()) {
-                            new CustomerInventory(p);
-                        } else {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §bVerkäufer §8|§7 Du bekommst noch kein Ticket!");
-                        }
+                        new CustomerInventory(p);
                         break;
                     }
                     case "captain": {
@@ -162,7 +158,7 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "marvin": {
-                        if (lp.getProgressId()+1 == Progress.MARVIN.getId() || lp.getProgressId() == Progress.MARVIN.getId()) {
+                        if (lp.getProgressId() + 1 == Progress.MARVIN.getId() || lp.getProgressId() == Progress.MARVIN.getId()) {
                             LobbyWorld.CAVE.getWorld().teleportSilently(p, "spawn");
 
                             lp.removeItem(Item.RADIO_SET1);
@@ -195,7 +191,7 @@ public class NpcListener implements Listener {
                         Bukkit.getScheduler().runTaskLater(
                                 LobbyPlugin.getInstance(),
                                 () -> LobbyWorld.DESTROYED_PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn"),
-                                2*20
+                                2 * 20
                         );
                         return;
                     }
@@ -215,7 +211,7 @@ public class NpcListener implements Listener {
                                 Progress.getProgressByID(progress.getId() - 1).getNpc().toggleVisibility(p, false);
                             }
 
-                            Progress future = Progress.getProgressByID(progress.getId()+1);
+                            Progress future = Progress.getProgressByID(progress.getId() + 1);
                             if (future != null) {
                                 future.getNpc().toggleVisibility(p, true);
                             }
