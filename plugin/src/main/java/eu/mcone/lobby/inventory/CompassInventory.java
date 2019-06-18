@@ -119,7 +119,7 @@ public class CompassInventory extends CoreInventory {
         setItem(44, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 11).displayName("§8//§oMCONE§8//").create());
 
 
-        setItem(45, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3)
+        setItem(45, new ItemBuilder(Material.CHEST, 1, 3)
                 .displayName("§eChest-Opening")
                 .lore("§7§oÖffne Kisten und gewinne coole Items", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                 .create(),
@@ -137,7 +137,7 @@ public class CompassInventory extends CoreInventory {
         setItem(52, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 11).displayName("§8//§oMCONE§8//").create());
 
 
-        setItem(53, new ItemBuilder(Material.SKULL, 1, 3)
+        setItem(53, new ItemBuilder(Material.BOOK, 1, 3)
                 .displayName("§3Die MCONE Story").lore("§7§oSpiele die Story")
                 .lore("§7§ound kassiere coole Items und viele Coins!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                 .create(),
