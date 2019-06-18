@@ -31,7 +31,7 @@ public class SidebarObjective extends CoreSidebarObjective {
         setScore(6, player.getMainGroup().getLabel());
         setScore(5, "");
         setScore(4, "§7Coins:");
-        setScore(3, "§o"+ player.getCoins());
+        setScore(3, "§o"+ player.getFormattedCoins());
         setScore(2, "");
         setScore(1, "§7Teamspeak");
         setScore(0, "§f§omcone.eu");
