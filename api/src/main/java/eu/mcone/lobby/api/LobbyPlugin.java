@@ -11,6 +11,7 @@ import eu.mcone.lobby.api.player.LobbyPlayer;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 
+import java.util.Collection;
 import java.util.UUID;
 
 public abstract class LobbyPlugin extends CorePlugin {
@@ -25,11 +26,15 @@ public abstract class LobbyPlugin extends CorePlugin {
 
     public abstract void registerLobbyPlayer(LobbyPlayer lp);
 
+    public abstract void unregisterLobbyPlayer(LobbyPlayer lp);
+
     public abstract CoreWorld getLobbyWorld(LobbyWorld world);
 
     public abstract LobbyPlayer getLobbyPlayer(UUID uuid);
 
     public abstract LobbyPlayer getLobbyPlayer(String name);
+
+    public abstract Collection<LobbyPlayer> getLobbyPlayers();
 
     private static void setInstance(LobbyPlugin plugin) {
         if (instance == null) {

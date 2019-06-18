@@ -6,9 +6,15 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.event.LabyModPlayerJoinEvent;
+import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.Skull;
+import eu.mcone.coresystem.api.bukkit.npc.NPC;
+import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.CoreActionBar;
-import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -42,7 +48,7 @@ public class PlayerJoinListener implements Listener {
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
 
-        Lobby.getInstance().getLobbyWorld(LobbyWorld.DIM_1).teleportSilently(p, "spawn");
+        Lobby.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(p, "spawn");
         loadLobbyPlayer(p, LobbyPlayerLoadedEvent.Reason.JOINED);
 
     }
@@ -107,8 +113,19 @@ public class PlayerJoinListener implements Listener {
             Bukkit.getPluginManager().callEvent(new LobbyPlayerLoadedEvent(lp, reson));
             LOADING_SUCCESS_MSG.send(p);
 
-            p.getInventory().setItem(8, ItemBuilder.createSkullItem(p.getName(), 1).displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
+            p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
         });
+    }
+
+    @EventHandler
+    public void on(LabyModPlayerJoinEvent e) {
+        for (Gamemode gm : Gamemode.values()) {
+            NPC npc = LobbyWorld.ONE_ISLAND.getWorld().getNPC(gm.getName().toLowerCase());
+
+            if (npc != null) {
+                ((PlayerNpc) npc).playLabymodEmote(LabyModEmote.DAB, e.getPlayer());
+            }
+        }
     }
 
 }

@@ -6,10 +6,14 @@
 package eu.mcone.lobby;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
-import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.npc.NPC;
+import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
+import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -62,10 +66,10 @@ public class Lobby extends LobbyPlugin {
 
         sendConsoleMessage("§aInitializing Build-System...");
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
-        buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, Material.STONE_BUTTON, Material.WOOD_BUTTON);
+        buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, Material.STONE_BUTTON.getId(), Material.WOOD_BUTTON.getId());
 
         sendConsoleMessage("§aRegistering Events & Commands...");
-        CoreSystem.getInstance().enableSpawnCommand(this, getLobbyWorld(LobbyWorld.DIM_1), 0);
+        CoreSystem.getInstance().enableSpawnCommand(this, getLobbyWorld(LobbyWorld.ONE_ISLAND), 0);
         registerEventsAndCommands();
 
         CoreSystem.getInstance().setProfileInventorySize(InventorySlot.ROW_6);
@@ -86,6 +90,15 @@ public class Lobby extends LobbyPlugin {
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             PlayerJoinListener.loadLobbyPlayer(p, LobbyPlayerLoadedEvent.Reason.RELOADED);
+        }
+        if (Bukkit.getOnlinePlayers().size() > 0) {
+            for (Gamemode gm : Gamemode.values()) {
+                NPC npc = LobbyWorld.ONE_ISLAND.getWorld().getNPC(gm.getName().toLowerCase());
+
+                if (npc != null) {
+                    ((PlayerNpc) npc).playLabymodEmote(LabyModEmote.DAB);
+                }
+            }
         }
     }
 
@@ -142,6 +155,11 @@ public class Lobby extends LobbyPlugin {
     @Override
     public void registerLobbyPlayer(LobbyPlayer lp) {
         players.add(lp);
+    }
+
+    @Override
+    public void unregisterLobbyPlayer(LobbyPlayer lp) {
+        players.remove(lp);
     }
 
     @Override

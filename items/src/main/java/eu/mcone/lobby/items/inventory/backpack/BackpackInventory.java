@@ -9,7 +9,8 @@ package eu.mcone.lobby.items.inventory.backpack;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreItemEvent;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
-import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.api.enums.Item;
@@ -52,10 +53,10 @@ public abstract class BackpackInventory extends CoreInventory {
             start = 5;
             end = 11;
 
-            setItem(InventorySlot.ROW_6_SLOT_1, ItemBuilder.createSkullItemFromURL("http://textures.minecraft.net/texture/a156b31cbf8f774547dc3f9713a770ecc5c727d967cb0093f26546b920457387", 1).displayName("§f§lHoch").create(), e ->
+            setItem(InventorySlot.ROW_6_SLOT_1, Skull.fromUrl("http://textures.minecraft.net/texture/a156b31cbf8f774547dc3f9713a770ecc5c727d967cb0093f26546b920457387", 1).toItemBuilder().displayName("§f§lHoch").create(), e ->
                     openNewInventory(Category.STORY_ITEMS, p));
         } else {
-            setItem(InventorySlot.ROW_6_SLOT_1, ItemBuilder.createSkullItemFromURL("http://textures.minecraft.net/texture/fe3d755cecbb13a39e8e9354823a9a02a01dce0aca68ffd42e3ea9a9d29e2df2", 1).displayName("§f§lRunter").create(), e ->
+            setItem(InventorySlot.ROW_6_SLOT_1, Skull.fromUrl("http://textures.minecraft.net/texture/fe3d755cecbb13a39e8e9354823a9a02a01dce0aca68ffd42e3ea9a9d29e2df2", 1).toItemBuilder().displayName("§f§lRunter").create(), e ->
                     openNewInventory(Category.ANIMAL, p));
         }
         if (end > categories.size()) end = categories.size();
@@ -110,7 +111,7 @@ public abstract class BackpackInventory extends CoreInventory {
         setItem(46, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
         setItem(47, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
         setItem(48, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
-        setItem(49, ItemBuilder.createSkullItemFromURL("http://textures.minecraft.net/texture/3ebf907494a935e955bfcadab81beafb90fb9be49c7026ba97d798d5f1a23", 1).displayName("§7Vorherige Seite").create(), e -> {
+        setItem(49, Skull.fromUrl("http://textures.minecraft.net/texture/3ebf907494a935e955bfcadab81beafb90fb9be49c7026ba97d798d5f1a23", 1).toItemBuilder().displayName("§7Vorherige Seite").create(), e -> {
             if (site-1 < 0) {
                 p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
             } else {
@@ -121,7 +122,7 @@ public abstract class BackpackInventory extends CoreInventory {
                 }
             }
         });
-        setItem(50, ItemBuilder.createSkullItemFromURL("http://textures.minecraft.net/texture/1b6f1a25b6bc199946472aedb370522584ff6f4e83221e5946bd2e41b5ca13b", 1).displayName("§7Nächste Seite").create(), e -> {
+        setItem(50, Skull.fromUrl("http://textures.minecraft.net/texture/1b6f1a25b6bc199946472aedb370522584ff6f4e83221e5946bd2e41b5ca13b", 1).toItemBuilder().displayName("§7Nächste Seite").create(), e -> {
             if ((items.size()/18) < (site+1)) {
                 p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
             } else {

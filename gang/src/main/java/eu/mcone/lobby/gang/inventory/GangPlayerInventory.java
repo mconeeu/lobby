@@ -7,7 +7,8 @@ package eu.mcone.lobby.gang.inventory;
 
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
-import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.gang.Gang;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -17,7 +18,7 @@ class GangPlayerInventory extends CoreInventory {
     GangPlayerInventory(Player p, Gang gang, String name, String uuid) {
         super(Gang.getPrefix(gang, uuid) + name + "§7 Einsttelungen", p, InventorySlot.ROW_3);
 
-        setItem(InventorySlot.ROW_1_SLOT_5, ItemBuilder.createSkullItem(name, 1).displayName(Gang.getPrefix(gang, uuid) + name).create());
+        setItem(InventorySlot.ROW_1_SLOT_5, new Skull(name, 1).toItemBuilder().displayName(Gang.getPrefix(gang, uuid) + name).create());
 
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.BARRIER, 1, 0).displayName("§6Spieler rauswerfen").create(),
                 e -> {

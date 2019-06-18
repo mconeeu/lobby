@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.items.chestopening;
 
-import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.core.util.Random;
 import eu.mcone.lobby.api.enums.Item;
 import org.bukkit.inventory.ItemStack;

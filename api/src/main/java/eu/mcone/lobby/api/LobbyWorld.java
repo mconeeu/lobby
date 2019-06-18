@@ -10,10 +10,10 @@ import lombok.Getter;
 
 public enum LobbyWorld {
 
-    DIM_1("Lobby"),
-    DIM_2("Lobby-Dimension2"),
-    DIM_3("Lobby-Dimension3"),
-    DIM_4("Lobby-Dimension4");
+    ONE_ISLAND("Lobby-OneIsland"),
+    PARADISE_ISLAND("Lobby-ParadiseIsland"),
+    CAVE("Lobby-Cave"),
+    DESTROYED_PARADISE_ISLAND("Lobby-Destroyed-ParadiseIsland");
 
     @Getter
     private String name;

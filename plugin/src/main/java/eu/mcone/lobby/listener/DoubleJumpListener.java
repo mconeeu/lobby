@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.listener;
 
+import eu.mcone.lobby.api.LobbyPlugin;
 import fr.neatmonster.nocheatplus.checks.CheckType;
 import fr.neatmonster.nocheatplus.hooks.NCPExemptionManager;
 import org.bukkit.*;
@@ -33,8 +34,10 @@ public class DoubleJumpListener implements Listener {
         } else if (p.getGameMode().equals(GameMode.ADVENTURE) && p.hasPermission("mcone.premium")) {
             e.setCancelled(true);
 
-            if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null)
-                NCPExemptionManager.exemptPermanently(p.getUniqueId(), CheckType.MOVING_SURVIVALFLY);
+            if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
+                NCPExemptionManager.exemptPermanently(p, CheckType.MOVING_SURVIVALFLY);
+                Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> NCPExemptionManager.unexempt(p), 3*20);
+            }
             djPlayers.add(p.getUniqueId());
 
             p.setAllowFlight(false);
@@ -61,7 +64,7 @@ public class DoubleJumpListener implements Listener {
                 p.setFlying(false);
 
                 if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null)
-                    NCPExemptionManager.unexempt(p.getUniqueId());
+                    NCPExemptionManager.unexempt(p);
                 djPlayers.remove(p.getUniqueId());
             }
         }

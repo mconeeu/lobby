@@ -8,8 +8,9 @@ package eu.mcone.lobby.inventory;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
+import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -26,7 +27,7 @@ public class InteractionInventory extends CoreInventory {
         CorePlayer c = CoreSystem.getInstance().getCorePlayer(clicked);
         double onlinetime = Math.floor(((double) c.getOnlinetime() / 60 / 60) * 100) / 100;
 
-        setItem(InventorySlot.ROW_1_SLOT_5, ItemBuilder.createSkullItem(clicked.getName(), 1).displayName("§f§l" + clicked.getName()).lore(
+        setItem(InventorySlot.ROW_1_SLOT_5, new Skull(clicked.getName(), 1).toItemBuilder().displayName("§f§l" + clicked.getName()).lore(
                 CoreSystem.getInstance().getCorePlayer(clicked).getMainGroup().getLabel(),
                 "",
                 "§7Coins: §f" + c.getCoins(),
@@ -34,7 +35,7 @@ public class InteractionInventory extends CoreInventory {
                 ).create()
         );
 
-        setItem(InventorySlot.ROW_3_SLOT_3, ItemBuilder.createSkullItemFromURL("http://textures.minecraft.net/texture/6f74f58f541342393b3b16787dd051dfacec8cb5cd3229c61e5f73d63947ad", 1).displayName("§7Online-Profil Ansehen").create(), e -> {
+        setItem(InventorySlot.ROW_3_SLOT_3, new Skull("http://textures.minecraft.net/texture/6f74f58f541342393b3b16787dd051dfacec8cb5cd3229c61e5f73d63947ad", 1).toItemBuilder().displayName("§7Online-Profil Ansehen").create(), e -> {
             TextComponent tc0 = new TextComponent(TextComponent.fromLegacyText(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§2Das Profil von " + clicked.getName() + " findest du "));
 
             TextComponent tc = new TextComponent();

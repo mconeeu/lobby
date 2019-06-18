@@ -8,7 +8,8 @@ package eu.mcone.lobby.items.inventory.chest;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
-import eu.mcone.coresystem.api.bukkit.util.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.core.exception.CoreException;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -24,15 +25,15 @@ public class ChestInfoInventory extends CoreInventory {
 
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.ENDER_PORTAL_FRAME).displayName("§f§lZum Chestopening teleportieren").create(), e -> {
             p.closeInventory();
-            LobbyWorld.DIM_1.getWorld().teleport(p, "chest-opening");
+            LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "chest-opening");
         });
 
         setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.CHEST, 1, 0).displayName("§7Du hast §e§l" + lp.getChests() + " Kisten").create());
 
         try {
-            setItem(InventorySlot.ROW_2_SLOT_7, ItemBuilder.createSkullItem(CoreSystem.getInstance().getPlayerUtils().getSkinFromSkinDatabase("merchant"), 1).displayName("§f§lZum Händler teleportieren").create(), e -> {
+            setItem(InventorySlot.ROW_2_SLOT_7, new Skull(CoreSystem.getInstance().getPlayerUtils().getSkinFromSkinDatabase("merchant"), 1).toItemBuilder().displayName("§f§lZum Händler teleportieren").create(), e -> {
                 p.closeInventory();
-                LobbyWorld.DIM_1.getWorld().teleport(p, "merchant");
+                LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "merchant");
             });
         } catch (CoreException e) {
             e.printStackTrace();

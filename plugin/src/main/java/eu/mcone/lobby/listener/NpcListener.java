@@ -6,6 +6,7 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.event.NpcInteractEvent;
+import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.lobby.inventory.ServerInventory;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
 import org.bukkit.entity.EntityType;
@@ -17,9 +18,16 @@ public class NpcListener implements Listener {
     @EventHandler
     public void onNpcInteract(NpcInteractEvent e) {
         if (e.getNpc().getData().getType().equals(EntityType.PLAYER) && e.getAction().equals(PacketPlayInUseEntity.EnumEntityUseAction.INTERACT)) {
-            ServerInventory.Gamemode gm = ServerInventory.Gamemode.getGamemodeByNpcName(e.getNpc().getData().getName());
-            if (gm != null) {
-                new ServerInventory(e.getPlayer(), gm);
+            Gamemode gamemode = null;
+
+            for (Gamemode gm : Gamemode.values()) {
+                if (gm.getName().equalsIgnoreCase(e.getNpc().getData().getName())) {
+                    gamemode = gm;
+                }
+            }
+
+            if (gamemode != null) {
+                new ServerInventory(e.getPlayer(), gamemode);
             }
         }
     }

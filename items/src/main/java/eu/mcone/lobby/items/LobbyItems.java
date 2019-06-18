@@ -31,8 +31,7 @@ public class LobbyItems extends LobbyAddon {
     @Override
     public void onEnable() {
         instance = this;
-
-        this.trailManager = new TrailManager();
+        trailManager = new TrailManager();
 
         BackpackInventory.registerBackpackInventory(Category.TRAIL, TrailInventory.class);
         BackpackInventory.registerBackpackInventory(Category.GADGET, GadgetInventory.class);
@@ -58,14 +57,14 @@ public class LobbyItems extends LobbyAddon {
 
         CoreSystem.getInstance().setPlayerChatEnabled(false);
 
-        final Location rewardBlock = new Location(Bukkit.getWorld("Lobby"), 46.5, 102D, -33.5);
+        final Location rewardBlock = new Location(Bukkit.getWorld("Lobby-OneIsland"), 46.5, 102D, -33.5);
         Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
-            Bukkit.getWorld("Lobby").playEffect(rewardBlock, Effect.LAVA_POP, 20);
-            Bukkit.getWorld("Lobby").playEffect(rewardBlock, Effect.LAVA_POP, 20);
-            Bukkit.getWorld("Lobby").playEffect(rewardBlock, Effect.LAVA_POP, 20);
-            Bukkit.getWorld("Lobby").playEffect(rewardBlock, Effect.LAVA_POP, 20);
-            Bukkit.getWorld("Lobby").playEffect(rewardBlock, Effect.LAVA_POP, 20);
-            Bukkit.getWorld("Lobby").playEffect(rewardBlock, Effect.LAVA_POP, 20);
+            Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
+            Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
+            Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
+            Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
+            Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
+            Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
         }, 24, 24);
 
         reload();
