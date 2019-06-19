@@ -21,10 +21,6 @@ public class LobbyPlayerLoadedListener implements Listener {
         LobbyPlayer lp = e.getPlayer();
         Player p = lp.bukkit();
 
-        if (e.getReason().equals(LobbyPlayerLoadedEvent.Reason.JOINED) && lp.getProgressId() <= 1) {
-            LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "storyspawn");
-        }
-
         spawnStoryNpcs(p, lp.getProgressId());
         spawnStoryHolograms(p, lp.getProgressId());
     }

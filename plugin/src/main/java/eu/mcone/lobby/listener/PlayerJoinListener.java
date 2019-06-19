@@ -48,9 +48,7 @@ public class PlayerJoinListener implements Listener {
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
 
-        Lobby.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(p, "spawn");
         loadLobbyPlayer(p, LobbyPlayerLoadedEvent.Reason.JOINED);
-
     }
 
     public static void loadLobbyPlayer(Player p, LobbyPlayerLoadedEvent.Reason reson) {

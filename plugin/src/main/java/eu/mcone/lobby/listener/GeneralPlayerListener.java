@@ -7,6 +7,7 @@ package eu.mcone.lobby.listener;
 
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.inventory.InteractionInventory;
@@ -31,6 +32,10 @@ public class GeneralPlayerListener implements Listener {
         if (e.getReason().equals(LobbyPlayerLoadedEvent.Reason.JOINED) && p.getSettings().isSilentHubActivatedOnJoin()) {
             Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> SilentLobbyUtils.activateSilentLobby(bp));
             LobbyPlugin.getInstance().getMessager().send(bp, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
+        }
+        
+        if (p.getSettings().isTeleportOnJoin()) {
+            Lobby.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(bp, "spawn");
         }
     }
 

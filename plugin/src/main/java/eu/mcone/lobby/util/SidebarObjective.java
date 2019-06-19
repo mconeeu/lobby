@@ -24,14 +24,14 @@ public class SidebarObjective extends CoreSidebarObjective {
 
         setScore(12, "");
         setScore(11, "§8» §3§lMCONE.EU");
-        setScore(10, "§7§oDein Nummer 1");
-        setScore(9, "§7§oMinecraftnetzwerk");
+        setScore(10, "§f§oDein Nummer 1");
+        setScore(9, "§f§oNetzwerk");
         setScore(8, "");
-        setScore(7, "§7Rang:");
+        setScore(7, "§8»§7 Rang:");
         setScore(6, player.getMainGroup().getLabel());
         setScore(5, "");
-        setScore(4, "§7Coins:");
-        setScore(3, "§o"+ player.getFormattedCoins());
+        setScore(4, "§8»§7 Coins:");
+        setScore(3, "§a§o"+ player.getFormattedCoins());
         setScore(2, "");
         setScore(1, "§7Teamspeak");
         setScore(0, "§f§omcone.eu");
@@ -40,7 +40,7 @@ public class SidebarObjective extends CoreSidebarObjective {
     @Override
     public void onReload(CorePlayer player) {
         setScore(6, player.getMainGroup().getLabel());
-        setScore(3, "§o"+player.getCoins());
+        setScore(3, "§o"+player.getFormattedCoins());
     }
 
     public static void updateLines() {
@@ -60,11 +60,11 @@ public class SidebarObjective extends CoreSidebarObjective {
                     o.setScore(1, "§7Website:");
                     o.setScore(0, "§f§omcone.eu");
                 } else if (i == 3) {
-                    o.setScore(1, "§bTwitter:");
-                    o.setScore(0, "§f§o@mconeeu");
+                    o.setScore(1, "§7Twitter:");
+                    o.setScore(0, "§b§o@mconeeu");
                 } else if (i == 4) {
-                    o.setScore(1, "§cYouTube:");
-                    o.setScore(0, "§f§omcone.eu/yt");
+                    o.setScore(1, "§7YouTube:");
+                    o.setScore(0, "§c§oyt.mcone.eu");
                 } else {
                     o.setScore(1, "§7Teamspeak");
                     o.setScore(0, "§f§omcone.eu");

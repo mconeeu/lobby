@@ -15,6 +15,6 @@ import lombok.ToString;
 @ToString
 public class LobbySettings {
 
-    private boolean silentHubActivatedOnJoin, allowTrading;
+    private boolean silentHubActivatedOnJoin, allowTrading, teleportOnJoin = true;
 
 }

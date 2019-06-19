@@ -37,3 +37,5 @@ permissions:
             description: Reload all Gang-Data
       lobby.chests:
         description: Manage all chests
+      lobby.silenthub:
+        description: Allows to join to the SilenLobby
