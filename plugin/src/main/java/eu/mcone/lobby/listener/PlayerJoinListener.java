@@ -71,7 +71,15 @@ public class PlayerJoinListener implements Listener {
         p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
         p.getInventory().setItem(1, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());
         p.getInventory().setItem(4, new ItemBuilder(Material.COMPASS, 1, 0).displayName("§3§lNavigator §8» §7§oWähle einen Spielmodus").create());
+        p.getInventory().setItem(1, new ItemBuilder(Material.NETHER_STAR, 1, 0).displayName("§3§lLobby-Wechsler §8» §7§oWähle deine Lobby").create());
         p.getInventory().setItem(8, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());
+
+        if (p.hasPermission("system.bukkit.nick")) {
+
+            p.getInventory().setItem(2, new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§3§lAutomatischer Nick §8» §7§oAktiviere den automatischen Nick").create());
+
+        }
+
 
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         cp.getScoreboard().setNewObjective(new SidebarObjective());

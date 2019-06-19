@@ -20,10 +20,10 @@ public class LobbyPlayerLoadedListener implements Listener {
         LobbyPlayer p = e.getPlayer();
         Player bp = p.bukkit();
 
-        bp.getInventory().setItem(1, new ItemBuilder(Material.STORAGE_MINECART, 1, 0).displayName("§3§lRucksack §8» §7§oZeige deine gesammelten Items an").create());
+        bp.getInventory().setItem(7, new ItemBuilder(Material.STORAGE_MINECART, 1, 0).displayName("§3§lRucksack §8» §7§oZeige deine gesammelten Items an").create());
 
         if (bp.hasPermission("lobby.silenthub")) {
-            bp.getInventory().setItem(7, new ItemBuilder(Material.TNT, 1, 0).displayName("§6§lPrivate Lobby §8» §7§oBetrete deine eigene Private Lobby").create());
+            bp.getInventory().setItem(2, new ItemBuilder(Material.TNT, 1, 0).displayName("§6§lPrivate Lobby §8» §7§oBetrete deine eigene Private Lobby").create());
         }
     }
 
