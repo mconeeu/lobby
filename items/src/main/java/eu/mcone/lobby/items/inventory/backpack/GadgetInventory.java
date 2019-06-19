@@ -21,10 +21,10 @@ public class GadgetInventory extends BackpackInventory {
     @Override
     protected void setItems(Player p) {
         for (Item item : Item.values()) {
-            if (new HashSet<>(Arrays.asList(Item.LOVEGUN, Item.ENDERGUN, Item.SNOWGUN, Item.EASTERGUN, Item.ENDERGUN, Item.COINBOMB, Item.BOMB)).contains(item) && playerHasItem(item)) {
+            if (new HashSet<>(Arrays.asList(Item.LOVEGUN, Item.ENDERGUN, Item.SNOWGUN, Item.EASTERGUN, Item.ENDERGUN, Item.COINBOMB, Item.BOMB, Item.GRAPPLING_HOOK)).contains(item) && playerHasItem(item)) {
                 addItem(item.getItemStack(), e -> {
                     if (playerHasItem(item)) {
-                        p.getInventory().setItem(2, item.getItemStack());
+                        p.getInventory().setItem(3, item.getItemStack());
                     }
                 });
             }

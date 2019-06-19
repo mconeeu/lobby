@@ -20,7 +20,7 @@ public class StoryItemInventory extends BackpackInventory {
     public void setItems(Player p) {
         for (Item item : Item.values()) {
             if (item.hasCategory() && item.getCategory().equals(Category.STORY_ITEMS) && playerHasItem(item)) {
-                addItem(item.getItemStack(), e -> p.getInventory().setItem(2, item.getItemStack()));
+                addItem(item.getItemStack(), e -> p.getInventory().setItem(3, item.getItemStack()));
             }
         }
     }

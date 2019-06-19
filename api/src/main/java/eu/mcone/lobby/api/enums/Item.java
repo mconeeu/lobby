@@ -19,11 +19,11 @@ public enum Item {
     //Gadgets
     LOVEGUN(1, "LoveGun", Category.GADGET, Level.USUAL, 40, new ItemBuilder(Material.REDSTONE, 1, 0).displayName("§7§lLove Gun").lore("§7Kategorie: §bGadget", "§7Seltenheit: §7Gewöhnlich", "", "", "§7Herze über Herze").create()),
     EASTERGUN(2, "OsterGun", Category.GADGET, Level.UNUSUAL, 70, new ItemBuilder(Material.FIREWORK_CHARGE, 1, 0).displayName("§3§lOster Gun").lore("§7Kategorie: §bGadget", "§7Seltenheit: §3Ungewöhnlich", "", "", "§7Schieße das Osterfieber dürch die Lobby!").create()),
-    SNOWGUN(3, "SnowGun", Category.GADGET, Level.UNUSUAL, 70, new ItemBuilder(Material.WOOD_HOE, 1, 0).displayName("§3§lSnowGun").lore("§7Kategorie: §bGadget", "§7Seltenheit: §3Ungewöhnlich", "", "", "§7Schieße das Weinachtfieber dürch die Lobby!").create()),
+    SNOWGUN(3, "SnowGun", Category.GADGET, Level.EPIC, 70, new ItemBuilder(Material.WOOD_HOE, 1, 0).displayName("§3§lSnowGun").lore("§7Kategorie: §bGadget", "§7Seltenheit: §3Ungewöhnlich", "", "", "§7Schieße das Weinachtfieber dürch die Lobby!").create()),
     ENDERGUN(4, "EnderGun", Category.GADGET, Level.USUAL, 40, new ItemBuilder(Material.EYE_OF_ENDER, 1, 0).displayName("§7§lEnder Gun").lore("§7Kategorie: §bGadget", "§7Seltenheit: §7Gewöhnlich", "", "", "§7Grusselig").create()),
     COINBOMB(5, "CoinBombe", Category.GADGET, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_INGOT, 1, 0).displayName("§3§lCoin Bombe").lore("§7Kategorie: §bGadget", "§7Seltenheit: §3Ungewöhnlich", "", "", "§7COIIIIIINSSS FÜR ALLE").create()),
     BOMB(6, "Bombe", Category.GADGET, Level.UNUSUAL, 0, new ItemBuilder(Material.TNT, 1, 0).displayName("§3§lBombe").lore("§7Kategorie: §bGadget", "§7Seltenheit: §3Ungewöhnlich", "", "", "§7Achtung Sprengung!").create()),
-
+    GRAPPLING_HOOK(7, "Enterhacken", Category.GADGET, Level.UNUSUAL, 0, new ItemBuilder(Material.FISHING_ROD, 1, 0).displayName("§3§lEnterhacken").lore("§7Kategorie: §bGadget", "§7Seltenheit: §3Ungewöhnlich", "", "", "§7Fühle dich wie Spiderman!").create()),
 
     //Story items
     MAGICDRINK(11, "ZauberTrank", Category.STORY_ITEMS, Level.EPIC, 15, new ItemBuilder(Material.POTION, 1, 0).displayName("§5§lZauber Trank").lore("§7Kategorie: §bItem", "§7Seltenheit: §5Episch", "", "§7Helfe den Bürgermeister Rufi!").create()),
