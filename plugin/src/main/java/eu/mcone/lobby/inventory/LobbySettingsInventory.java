@@ -41,7 +41,7 @@ public class LobbySettingsInventory extends CoreInventory {
                     p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
                 });
 
-                setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.HARD_CLAY, 1, 0).displayName("§f§lTraiding").create());
+                setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.CHEST, 1, 0).displayName("§f§lTraiding").create());
 
                 if (settings.isAllowTrading()) {
                     setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um das Handeln", "§7§omit anderen Spielern", "§7§ozu deaktivieren").create(), e -> {
@@ -58,7 +58,7 @@ public class LobbySettingsInventory extends CoreInventory {
                 }
 
 
-                setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.HARD_CLAY, 1, 0).displayName("§f§lBeim Joinen zum Spawn teleportieren").create());
+                setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.GRASS, 1, 0).displayName("§f§lBeim Joinen zum Spawn teleportieren").create());
 
                 if (settings.isTeleportOnJoin()) {
                     setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um beim joinen nicht", "§7§ozum Spawn teleportiert zu", "§7§owerden").create(), e -> {
@@ -77,7 +77,7 @@ public class LobbySettingsInventory extends CoreInventory {
         }
 
 
-        setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.HARD_CLAY, 1, 0).displayName("§f§lTraiding").create());
+        setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.CHEST, 1, 0).displayName("§f§lTraiding").create());
 
         if (settings.isAllowTrading()) {
             setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um das Handeln", "§7§omit anderen Spielern", "§7§ozu deaktivieren").create(), e -> {
@@ -94,7 +94,7 @@ public class LobbySettingsInventory extends CoreInventory {
         }
 
 
-        setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.HARD_CLAY, 1, 0).displayName("§f§lBeim Joinen zum Spawn teleportieren").create());
+        setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.GRASS, 1, 0).displayName("§f§lBeim Joinen zum Spawn teleportieren").create());
 
         if (settings.isTeleportOnJoin()) {
             setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um beim joinen nicht", "§7§ozum Spawn teleportiert zu", "§7§owerden").create(), e -> {
