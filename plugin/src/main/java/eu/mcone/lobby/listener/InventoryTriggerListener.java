@@ -8,6 +8,7 @@ package eu.mcone.lobby.listener;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.inventory.CompassInventory;
+import eu.mcone.lobby.inventory.LobbyInventory;
 import eu.mcone.lobby.util.PlayerHider;
 import eu.mcone.lobby.util.SilentLobbyUtils;
 import org.bukkit.Sound;
@@ -53,6 +54,9 @@ public class InventoryTriggerListener implements Listener{
                     LobbyPlugin.getInstance().getMessager().send(p, "§2Du bist nun in der §aPrivaten Lobby§2. Hier bist du vollkommen ungestört!");
                     SilentLobbyUtils.activateSilentLobby(p);
                 }
+            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lLobby-Wechsler §8» §7§oWähle deine Lobby")) {
+                e.setCancelled(true);
+                new LobbyInventory(p);
             }
         }
     }

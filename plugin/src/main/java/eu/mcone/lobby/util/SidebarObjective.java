@@ -33,14 +33,14 @@ public class SidebarObjective extends CoreSidebarObjective {
         setScore(4, "§8»§7 Coins:");
         setScore(3, "§a§o"+ player.getFormattedCoins());
         setScore(2, "");
-        setScore(1, "§7Teamspeak");
+        setScore(1, "§9Teamspeak");
         setScore(0, "§f§omcone.eu");
     }
 
     @Override
     public void onReload(CorePlayer player) {
         setScore(6, player.getMainGroup().getLabel());
-        setScore(3, "§o"+player.getFormattedCoins());
+        setScore(3, "§a§o"+player.getFormattedCoins());
     }
 
     public static void updateLines() {
@@ -54,10 +54,10 @@ public class SidebarObjective extends CoreSidebarObjective {
                 o.setDisplayName("§f§l§n" + p.bukkit().getName());
 
                 if (i == 1) {
-                    o.setScore(1, "§7Teamspeak:");
+                    o.setScore(1, "§9Teamspeak:");
                     o.setScore(0, "§f§omcone.eu");
                 } else if (i == 2) {
-                    o.setScore(1, "§7Website:");
+                    o.setScore(1, "§eWebsite:");
                     o.setScore(0, "§f§omcone.eu");
                 } else if (i == 3) {
                     o.setScore(1, "§7Twitter:");
@@ -66,7 +66,7 @@ public class SidebarObjective extends CoreSidebarObjective {
                     o.setScore(1, "§7YouTube:");
                     o.setScore(0, "§c§oyt.mcone.eu");
                 } else {
-                    o.setScore(1, "§7Teamspeak");
+                    o.setScore(1, "§9Teamspeak");
                     o.setScore(0, "§f§omcone.eu");
                 }
             }

@@ -74,7 +74,7 @@ public class PlayerJoinListener implements Listener {
 
         if (p.hasPermission("system.bukkit.nick")) {
 
-            p.getInventory().setItem(2, new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§3§lAutomatischer Nick §8» §7§oAktiviere den automatischen Nick").create());
+            p.getInventory().setItem(2, new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§3§lAutomatischer Nick §8» §a§oAktivierT").create());
 
         }
 
