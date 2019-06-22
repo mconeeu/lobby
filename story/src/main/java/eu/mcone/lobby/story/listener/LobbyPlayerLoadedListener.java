@@ -26,20 +26,22 @@ public class LobbyPlayerLoadedListener implements Listener {
     }
 
     public static void spawnStoryNpcs(Player p, int progressId) {
-        if (progressId > 0) {
-            Progress.getProgressByID(progressId).getNpc().toggleVisibility(p, true);
-        }
+        if (progressId <= 15) {
+            if (progressId > 0) {
+                Progress.getProgressByID(progressId).getNpc().toggleVisibility(p, true);
 
-        Progress future = Progress.getProgressByID(progressId + 1);
-        if (future != null) {
-            future.getNpc().toggleVisibility(p, true);
-        }
+                if (progressId == Progress.INFECTION.getId()) {
+                    PlayerNpc infectionNpc = Progress.INFECTION.getNpc();
 
-        if (progressId == Progress.INFECTION.getId()) {
-            PlayerNpc infectionNpc = Progress.INFECTION.getNpc();
+                    infectionNpc.setSkin(NpcListener.RUFI_HEADLED_SKIN, p);
+                    infectionNpc.changeDisplayname(NpcListener.RUFI_HEADLED_DISPLAY_NAME, p);
+                }
+            }
 
-            infectionNpc.setSkin(NpcListener.RUFI_HEADLED_SKIN, p);
-            infectionNpc.changeDisplayname(NpcListener.RUFI_HEADLED_DISPLAY_NAME, p);
+            Progress future = Progress.getProgressByID(progressId + 1);
+            if (future != null) {
+                future.getNpc().toggleVisibility(p, true);
+            }
         }
     }
 

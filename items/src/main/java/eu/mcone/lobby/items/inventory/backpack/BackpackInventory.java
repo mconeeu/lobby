@@ -22,6 +22,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -159,7 +160,7 @@ public abstract class BackpackInventory extends CoreInventory {
     }
 
     @Override
-    public void openInventory() {
+    public Inventory openInventory() {
         int i = 11;
         for (int itemId = site*18; itemId < site*18+18; itemId++) {
             if (i == 17) i = 20;
@@ -175,7 +176,7 @@ public abstract class BackpackInventory extends CoreInventory {
             }
         }
 
-        getPlayer().openInventory(getInventory());
+        return super.openInventory();
     }
 
     @AllArgsConstructor

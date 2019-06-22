@@ -7,6 +7,7 @@ package eu.mcone.lobby.items.inventory.chest;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
+import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
@@ -26,7 +27,7 @@ import java.util.HashSet;
 class ChestFinalInventory extends CoreInventory {
 
     ChestFinalInventory(Player p, Item item) {
-        super("§8» §e§lChestOpening §8| §fDein Gewinn", p, InventorySlot.ROW_6, Option.FILL_EMPTY_SLOTS);
+        super("§8» §e§lChestOpening §8| §fDein Gewinn", p, InventorySlot.ROW_6, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
         lp.removeChests(1);

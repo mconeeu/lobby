@@ -80,70 +80,69 @@ public class CompassInventory extends CoreInventory {
         setItem(InventorySlot.ROW_4_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
 
 
-        setItem(InventorySlot.ROW_3_SLOT_1, new ItemBuilder(Material.EMERALD, 1, 0)
-                        .displayName("§eHändler")
-                        .lore("§7§oKaufe dir coole Items oder", "§7seltene Truhen für", "das Chest-Opening")
+        setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.NETHER_STAR, 1, 0)
+                        .displayName("§f§lSpawn")
+                        .lore("§7§oZurück zum Lobby Spawn.", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .create(),
-                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "merchant")
+                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "spawn")
         );
 
-        setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.DIAMOND_SWORD, 1, 0)
+        setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Gamemode.SKYPVP.getItem(), 1, 0)
                         .displayName(Gamemode.SKYPVP.getLabel())
-                        .lore("§7§oFinde deine Gegner auf einer Sky-Map und töte sie", "§7§oum Coins zu erhalten", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                        .lore("§7§oFinde deine Gegner auf einer Sky-Map", "§7§ound töte sie, um Coins zu erhalten!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .create(),
                 e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "skypvp")
         );
 
-        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.IRON_PICKAXE, 1, 0)
-                        .displayName("§bCitybuild")
-                        .lore("§7§oCitybuild Server. Erbaue dein eigenes Grundstück", "§7§ound werde einer der Reichsten Spieler", "§7§oauf dem Server!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Gamemode.CITYBUILD.getItem(), 1, 0)
+                        .displayName(Gamemode.CITYBUILD.getLabel())
+                        .lore("§7§oErbaue dein eigenes Grundstück", "§7§ound werde einer der Reichsten Spieler", "§7§oauf dem Server!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .create(),
                 e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "build")
         );
 
-        setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.IRON_AXE, 1, 0)
+        setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Gamemode.BUILD.getItem(), 1, 0)
                         .displayName(Gamemode.BUILD.getLabel())
                         .lore("§7§oBuild Server. Überzeuge uns von deinen Baukünsten", "§7§ound werde Builder im MC ONE Team!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .create(),
                 e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "build")
         );
 
-
-        setItem(InventorySlot.ROW_4_SLOT_4, new ItemBuilder(Material.CHEST, 1, 0)
-                        .displayName("§eChest-Opening")
-                        .lore("§7§oÖffne Kisten und gewinne coole Items", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
-                        .create(),
-                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "chest-opening")
-        );
-
-        setItem(InventorySlot.ROW_4_SLOT_6, new ItemBuilder(Material.GOLD_INGOT, 1, 0)
-                        .displayName("§aBank")
-                        .lore("§7§oEröffne ein Konto", "§7§ound hole dir jeden Tag", "§7§ocoole Belohnungen ab", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
-                        .create(),
-                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "bank")
-        );
-
-        setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.NETHER_STAR, 1, 0)
-                        .displayName("§f§lSpawn")
-                        .lore("§7§oZurück zum Lobby Spawn.", "§7§oHier startet unser Lobby Rätsel", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
-                        .create(),
-                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "spawn")
-        );
-
-
-        setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.STICK, 1, 0)
+        setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Gamemode.KNOCKIT.getItem(), 1, 0)
                         .displayName(Gamemode.KNOCKIT.getLabel())
                         .enchantment(Enchantment.KNOCKBACK, 1)
-                        .lore("§7§oSchlage die Gegner von der Plattform um Coins", "§7§ozu erhalten", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                        .lore("§7§oSchlage die Gegner von der Plattform um Coins", "§7§ozu erhalten!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .itemFlags(ItemFlag.HIDE_ENCHANTS)
                         .create(),
                 e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "knockit")
         );
 
 
+
+        setItem(InventorySlot.ROW_3_SLOT_1, new ItemBuilder(Material.EMERALD, 1, 0)
+                        .displayName("§eHändler")
+                        .lore("§7§oKaufe dir coole Items oder seltene Truhen", "§7§ofür das Chest-Opening", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                        .create(),
+                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "merchant")
+        );
+
+        setItem(InventorySlot.ROW_4_SLOT_4, new ItemBuilder(Material.CHEST, 1, 0)
+                        .displayName("§eChest-Opening")
+                        .lore("§7§oÖffne Kisten und gewinne coole Items!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                        .create(),
+                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "chest-opening")
+        );
+
+        setItem(InventorySlot.ROW_4_SLOT_6, new ItemBuilder(Material.GOLD_INGOT, 1, 0)
+                        .displayName("§aBank")
+                        .lore("§7§oEröffne ein Konto und hole Dir", "§7§ojeden Tag coole Belohnungen ab!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                        .create(),
+                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "bank")
+        );
+
         setItem(InventorySlot.ROW_3_SLOT_9, new ItemBuilder(Material.BOOK, 1, 0)
                         .displayName("§3Die Story")
-                        .lore("§7§oSpiele die Story","§7§ound kassiere coole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                        .lore("§7§oSpiele die Story und erhalte","§7§ocoole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .create(),
                 e -> {
                     LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());

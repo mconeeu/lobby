@@ -66,20 +66,25 @@ public class Lobby extends LobbyPlugin {
 
         sendConsoleMessage("§aInitializing Build-System...");
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
-        buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, Material.STONE_BUTTON.getId(), Material.WOOD_BUTTON.getId());
+        buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, Material.STONE_BUTTON.getId(), Material.WOOD_BUTTON.getId(), Material.ENDER_PORTAL_FRAME.getId());
 
         sendConsoleMessage("§aRegistering Events & Commands...");
         CoreSystem.getInstance().enableSpawnCommand(this, getLobbyWorld(LobbyWorld.ONE_ISLAND), 0);
         registerEventsAndCommands();
 
         CoreSystem.getInstance().setProfileInventorySize(InventorySlot.ROW_6);
-        CoreSystem.getInstance().modifyProfileInventory(
-                (coreInventory, player) -> coreInventory.setItem(
-                        InventorySlot.ROW_5_SLOT_5,
-                        new ItemBuilder(Material.CLAY_BALL, 1, 0).displayName("§3§lLobby Einstellungen").lore("§7§oVerwalte deine", "§7§oLobbyeinstellungen", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").create(),
-                        e -> new LobbySettingsInventory(player)
-                )
-        );
+        CoreSystem.getInstance().modifyProfileInventory((coreInventory, player) -> {
+            coreInventory.setItem(
+                    InventorySlot.ROW_5_SLOT_8,
+                    new ItemBuilder(Material.CLAY_BALL, 1, 0).displayName("§3§lLobby Einstellungen").lore("§7§oVerwalte deine", "§7§oLobbyeinstellungen", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").create(),
+                    e -> new LobbySettingsInventory(player)
+            );
+            coreInventory.setItem(
+                    InventorySlot.ROW_5_SLOT_6,
+                    new ItemBuilder(Material.CHEST, 1, 0).displayName("§e§lModifizierte Inventare").lore("§7§oModifiziere Shop-Inventare aus", "§7§oallen Spielmodi", "", "§8» §f§nLinksklick§8 | §7§oAnzeigen").create(),
+                    e -> getInventoryModificationManager().openGamemodeModificationInventory(player)
+            );
+        });
 
         sendConsoleMessage("§aActivating AddOns...");
         for (LobbyAddon addon : ADDONS) {

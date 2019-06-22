@@ -7,6 +7,7 @@ package eu.mcone.lobby.pets.inventory;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
+import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.inventory.anvil.AnvilSlot;
 import eu.mcone.coresystem.api.bukkit.inventory.anvil.CoreAnvilInventory;
@@ -42,7 +43,7 @@ public class PetInteractInventory extends CoreInventory {
     });
 
     public PetInteractInventory(Player p, Entity entity) {
-        super("§8» §b§l" + entity.getCustomName(), p, InventorySlot.ROW_3, Option.FILL_EMPTY_SLOTS);
+        super("§8» §b§l" + entity.getCustomName(), p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
 
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.BARRIER, 1, 0).displayName("§c§lTier in den Stall schicken").lore("§7§oDein Tier verschindet. Du kannst", "§7§oes jederzeit wieder über", "§7§odeinen Rucksack zurückholen.", "", "§8» §f§nLinksklick§8 | §7§oAusblenden").create(), e -> {
             LobbyPets.getInstance().despawnPet(p);

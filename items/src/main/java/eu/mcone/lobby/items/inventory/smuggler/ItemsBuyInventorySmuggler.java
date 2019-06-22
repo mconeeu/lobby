@@ -7,6 +7,7 @@ package eu.mcone.lobby.items.inventory.smuggler;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
+import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Item;
@@ -21,7 +22,7 @@ import java.util.HashSet;
 class ItemsBuyInventorySmuggler extends CoreInventory {
 
     ItemsBuyInventorySmuggler(Player p) {
-        super("§8» §7§lSchmuggler §8| §fItems kaufen", p, 9 * 6, Option.FILL_EMPTY_SLOTS);
+        super("§8» §7§lSchmuggler §8| §fItems kaufen", p, 9 * 6, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
         setItem(2, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e -> new TraderInventory(p));

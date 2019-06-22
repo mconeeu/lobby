@@ -43,13 +43,13 @@ public class LobbyStory extends LobbyAddon {
 
         CoreSystem.getInstance().modifyProfileInventory((coreInventory, player) -> {
             coreInventory.setItem(
-                    InventorySlot.ROW_5_SLOT_3,
+                    InventorySlot.ROW_5_SLOT_2,
                     new ItemBuilder(Material.BOOK, 1, 0).displayName("§c§lStory Fortschritt").lore("§7§oHier siehst Du welche Kapitel", "§7§oDu bereits bestanden hast", "", "§8» §f§nLinksklick§8 | §7§oAnsehen").create(),
                     e -> new ProgressInventory(player)
             );
             coreInventory.setItem(
-                    InventorySlot.ROW_5_SLOT_7,
-                    new ItemBuilder(Material.SIGN, 1, 0).displayName("§6§lSecrets").lore("§7§oHier siehst du alle Secrets,", "§7§odie Du bereits gefunden hast", "", "§4Comming Soon").create()
+                    InventorySlot.ROW_5_SLOT_4,
+                    new ItemBuilder(Material.SIGN, 1, 0).displayName("§6§lSecrets").lore("§7§oHier siehst du alle Secrets,", "§7§odie Du bereits gefunden hast", "", "§4§oComming Soon").create()
             );
         });
 

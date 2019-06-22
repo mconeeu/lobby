@@ -6,6 +6,7 @@
 package eu.mcone.lobby.items.inventory.smuggler;
 
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
+import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -17,7 +18,7 @@ import org.bukkit.entity.Player;
 class MaterialBuyInventorySmuggler extends CoreInventory {
 
     MaterialBuyInventorySmuggler(Player p) {
-        super("§8» §7§lSchmugler §8| §7Materialen kaufen", p, InventorySlot.ROW_4, Option.FILL_EMPTY_SLOTS);
+        super("§8» §7§lSchmugler §8| §7Materialen kaufen", p, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
         setItem(InventorySlot.ROW_1_SLOT_3, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e -> new SmugglerInventory(p));

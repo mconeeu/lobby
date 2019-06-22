@@ -6,6 +6,7 @@
 package eu.mcone.lobby.items.inventory.smuggler;
 
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
+import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -15,7 +16,7 @@ import org.bukkit.entity.Player;
 class ChestBuyInventorySmuggler extends CoreInventory {
 
     ChestBuyInventorySmuggler(Player p) {
-        super("§8» §7§lSchmuggler §8| §fKisten kaufen", p, 9 * 3, Option.FILL_EMPTY_SLOTS);
+        super("§8» §7§lSchmuggler §8| §fKisten kaufen", p, 9 * 3, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
         setItem(11 - 1, new ItemBuilder(Material.PAPER, 1, 0).displayName("§8» §7Du besitzt §f" + lp.getChests() + "§7 Kisten").create());
