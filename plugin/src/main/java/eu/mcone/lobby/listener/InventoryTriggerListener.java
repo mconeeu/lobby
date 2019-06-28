@@ -55,7 +55,6 @@ public class InventoryTriggerListener implements Listener{
                     SilentLobbyUtils.activateSilentLobby(p);
                 }
             } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lLobby-Wechsler §8» §7§oWähle deine Lobby")) {
-                e.setCancelled(true);
                 new LobbyInventory(p);
             }
         }

@@ -13,10 +13,14 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class CompassInventory extends CoreInventory {
 
@@ -91,8 +95,11 @@ public class CompassInventory extends CoreInventory {
                         .displayName(Gamemode.SKYPVP.getLabel())
                         .lore("§7§oFinde deine Gegner auf einer Sky-Map und töte sie", "§7§oum Coins zu erhalten", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .create(),
-                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "skypvp")
-        );
+                e -> {
+                    LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "skypvp");
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1, 1));
+                    p.getWorld().playEffect(p.getLocation(), Effect.FLYING_GLYPH, 10);
+                });
 
         setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.IRON_PICKAXE, 1, 0)
                         .displayName("§bCitybuild")
@@ -143,7 +150,7 @@ public class CompassInventory extends CoreInventory {
 
         setItem(InventorySlot.ROW_3_SLOT_9, new ItemBuilder(Material.BOOK, 1, 0)
                         .displayName("§3Die Story")
-                        .lore("§7§oSpiele die Story","§7§ound kassiere coole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                        .lore("§7§oSpiele die Story", "§7§ound kassiere coole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .create(),
                 e -> {
                     LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());

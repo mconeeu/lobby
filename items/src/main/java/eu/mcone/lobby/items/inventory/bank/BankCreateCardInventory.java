@@ -34,11 +34,11 @@ public class BankCreateCardInventory extends CoreInventory {
                 InventorySlot.ROW_2_SLOT_5,
                 new ItemBuilder(Material.PAINTING, 1, 0)
                         .displayName("§cKonto erstellen")
-                        .lore("§7Erstelle dir ein Konto für §6100Coins§7.")
+                        .lore("§7Erstelle dir ein Konto für §61000Coins§7.")
                         .create(),
                 e -> {
-                    if ((lp.getCorePlayer().getCoins() - 100) >= 0) {
-                        lp.getCorePlayer().removeCoins(100);
+                    if ((lp.getCorePlayer().getCoins() - 1000) >= 0) {
+                        lp.getCorePlayer().removeCoins(1000);
 
                         if (!lp.hasItem(Item.BANKCARD)) {
                             lp.addItem(Item.BANKCARD);

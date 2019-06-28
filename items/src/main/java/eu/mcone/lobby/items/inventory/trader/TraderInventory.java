@@ -12,7 +12,7 @@ import eu.mcone.coresystem.api.bukkit.item.Skull;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-public class TraderInventory extends CoreInventory {
+public class  TraderInventory extends CoreInventory {
 
     public TraderInventory(Player p) {
         super("§8» §e§lHändler §8| §fMit Coins kaufen", p, InventorySlot.ROW_3, Option.FILL_EMPTY_SLOTS);
