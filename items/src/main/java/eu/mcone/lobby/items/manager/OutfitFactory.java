@@ -36,6 +36,10 @@ public class OutfitFactory {
                     p.getInventory().setHelmet(Skull.fromUrl("http://textures.minecraft.net/texture/d582ce1d9f6f34c087b4fbec5bdb758732dc0658b86e275a9b46bacd58ae899", 1).getItemStack());
                     break;
                 }
+
+                case OUTFIT_SANTA: {
+
+                }
             }
         }
     }
