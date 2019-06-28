@@ -22,16 +22,19 @@ public class SidebarObjective extends CoreSidebarObjective {
     public void onRegister(CorePlayer player) {
         setDisplayName("§f§l§n"+player.bukkit().getDisplayName());
 
-        setScore(12, "");
-        setScore(11, "§8» §3§lMCONE.EU");
-        setScore(10, "§f§oDein Nummer 1");
-        setScore(9, "§f§oNetzwerk");
+        setScore(15, "");
+        setScore(14, "§8» §3§lMCONE.EU");
+        setScore(13, "§f§oDein Nummer 1");
+        setScore(12, "§f§oNetzwerk");
+        setScore(11, "");
+        setScore(10, "§8»§7 Rang:");
+        setScore(9, " "+player.getMainGroup().getLabel());
         setScore(8, "");
-        setScore(7, "§8»§7 Rang:");
-        setScore(6, " "+player.getMainGroup().getLabel());
+        setScore(7, "§8»§7 Coins:");
+        setScore(6, " §a§o"+ player.getFormattedCoins());
         setScore(5, "");
-        setScore(4, "§8»§7 Coins:");
-        setScore(3, " §a§o"+ player.getFormattedCoins());
+        setScore(4, "§8»§7 Emeralds:");
+        setScore(3, " §2§o"+ player.getEmeralds());
         setScore(2, "");
         setScore(1, "§8»§7 Teamspeak:");
         setScore(0, " §f§omcone.eu");
