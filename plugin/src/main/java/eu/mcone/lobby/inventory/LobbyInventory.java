@@ -1,10 +1,9 @@
 package eu.mcone.lobby.inventory;
 
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
+import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.lobby.Lobby;
-import eu.mcone.lobby.api.LobbyWorld;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -13,7 +12,7 @@ public class LobbyInventory extends CoreInventory {
 
 
     public LobbyInventory(Player p) {
-        super("§8» §3§lLobby wechseln", p, InventorySlot.ROW_4, Option.FILL_EMPTY_SLOTS);
+        super("§8» §3§lLobby wechseln", p, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
 
         setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§f§lPremium Lobby-1").create());
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§f§lPremium Lobby-2").create());

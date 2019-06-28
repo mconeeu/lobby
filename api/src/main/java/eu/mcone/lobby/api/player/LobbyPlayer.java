@@ -14,7 +14,6 @@ import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.gang.Gang;
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -61,8 +60,7 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
 
     @Override
     public void saveData() {
-        Bukkit.getScheduler().runTaskAsynchronously(LobbyPlugin.getInstance(), () ->
-                LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit())));
+        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit()));
     }
 
     public boolean isInGang() {

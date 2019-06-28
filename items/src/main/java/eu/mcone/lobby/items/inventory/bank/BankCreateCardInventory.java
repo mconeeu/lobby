@@ -6,6 +6,7 @@
 package eu.mcone.lobby.items.inventory.bank;
 
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
+import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
@@ -18,7 +19,7 @@ import org.bukkit.entity.Player;
 public class BankCreateCardInventory extends CoreInventory {
 
     public BankCreateCardInventory(Player p) {
-        super("§8» §d§lBänker §8| §fKonto erstellen", p, InventorySlot.ROW_3, Option.FILL_EMPTY_SLOTS);
+        super("§8» §d§lBänker §8| §fKonto erstellen", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
         setItem(

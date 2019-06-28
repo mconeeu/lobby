@@ -7,6 +7,7 @@ package eu.mcone.lobby.items.inventory.trader;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
+import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
@@ -22,7 +23,8 @@ import java.util.HashSet;
 class ItemsBuyInventory extends CoreInventory {
 
     ItemsBuyInventory(Player p) {
-        super("§8» §e§lHändler §8| §fItems kaufen", p, InventorySlot.ROW_4, Option.FILL_EMPTY_SLOTS);
+        super("§8» §e§lHändler §8| §fItems kaufen", p, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
+        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
 
@@ -38,8 +40,8 @@ class ItemsBuyInventory extends CoreInventory {
             if (new HashSet<>(Arrays.asList(Item.LOVEGUN, Item.EASTERGUN, Item.SNOWGUN, Item.ENDERGUN, Item.HEAD_GERMAN, Item.HEAD_MELON, Item.TRAIL_MUSIC)).contains(item)) {
                 setItem(i, item.getItemStack(), e -> {
                     if (!lp.getItems().contains(item)) {
-                        if ((lp.getCorePlayer().getCoins() - item.getCoins()) >= 0) {
-                            lp.getCorePlayer().removeCoins(item.getCoins());
+                        if ((cp.getCoins() - item.getCoins()) >= 0) {
+                            cp.removeCoins(item.getCoins());
                             lp.addItem(item);
 
                             p.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du hast das Item §a"+item.getName()+" §2für §f"+ item.getCoins() +" Coins §2erfolgreich gekauft!");

@@ -16,11 +16,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.potion.PotionEffectType;
 
 public class GeneralPlayerListener implements Listener {
 
@@ -29,14 +31,19 @@ public class GeneralPlayerListener implements Listener {
         LobbyPlayer p = e.getPlayer();
         Player bp = p.bukkit();
 
-        if (e.getReason().equals(LobbyPlayerLoadedEvent.Reason.JOINED) && p.getSettings().isSilentHubActivatedOnJoin()) {
-            Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> SilentLobbyUtils.activateSilentLobby(bp));
-            LobbyPlugin.getInstance().getMessager().send(bp, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
+        bp.removePotionEffect(PotionEffectType.BLINDNESS);
+
+        if (e.getReason().equals(LobbyPlayerLoadedEvent.Reason.JOINED)) {
+            if (p.getSettings().isSilentHubActivatedOnJoin()) {
+                Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> SilentLobbyUtils.activateSilentLobby(bp));
+                LobbyPlugin.getInstance().getMessager().send(bp, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
+            }
+
+            if (p.getSettings().isTeleportOnJoin()) {
+                Lobby.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(bp, "spawn");
+            }
         }
-        
-        if (p.getSettings().isTeleportOnJoin()) {
-            Lobby.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(bp, "spawn");
-        }
+
     }
 
     @EventHandler
@@ -76,10 +83,10 @@ public class GeneralPlayerListener implements Listener {
     }
 
     @EventHandler
-    public void onDropItem(PlayerDropItemEvent e){
+    public void onDropItem(PlayerDropItemEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getGameMode() == GameMode.CREATIVE){
+        if (p.getGameMode() == GameMode.CREATIVE) {
             e.setCancelled(false);
         } else {
             e.setCancelled(true);
@@ -87,7 +94,7 @@ public class GeneralPlayerListener implements Listener {
     }
 
     @EventHandler
-    public void onDeath(PlayerDeathEvent e){
+    public void onDeath(PlayerDeathEvent e) {
         Player p = e.getEntity();
 
         e.setKeepInventory(true);
@@ -101,12 +108,13 @@ public class GeneralPlayerListener implements Listener {
         e.setCancelled(true);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onQuit(PlayerQuitEvent e) {
         e.setQuitMessage(null);
 
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().getUniqueId());
         lp.saveData();
+
         LobbyPlugin.getInstance().unregisterLobbyPlayer(lp);
     }
 

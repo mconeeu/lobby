@@ -28,13 +28,13 @@ public class SidebarObjective extends CoreSidebarObjective {
         setScore(9, "§f§oNetzwerk");
         setScore(8, "");
         setScore(7, "§8»§7 Rang:");
-        setScore(6, player.getMainGroup().getLabel());
+        setScore(6, " "+player.getMainGroup().getLabel());
         setScore(5, "");
         setScore(4, "§8»§7 Coins:");
-        setScore(3, "§a§o"+ player.getFormattedCoins());
+        setScore(3, " §a§o"+ player.getFormattedCoins());
         setScore(2, "");
-        setScore(1, "§9wTeamspeak");
-        setScore(0, "§f§omcone.eu");
+        setScore(1, "§8»§7 Teamspeak:");
+        setScore(0, " §f§omcone.eu");
     }
 
     @Override
@@ -54,39 +54,20 @@ public class SidebarObjective extends CoreSidebarObjective {
                 o.setDisplayName("§f§l§n" + p.bukkit().getName());
 
                 if (i == 1) {
-                    o.setScore(1, "§9Teamspeak:");
-                    o.setScore(0, "§f§omcone.eu");
-
-                    o.setScore(4, "§8»§7 Coins:");
-                    o.setScore(3, "§a§o"+ p.getFormattedCoins());
+                    o.setScore(1, "§8»§7 Teamspeak:");
+                    o.setScore(0, " §f§omcone.eu");
                 } else if (i == 2) {
-                    o.setScore(1, "§eWebsite:");
-                    o.setScore(0, "§f§omcone.eu");
-
-                    o.setScore(4, "§8»§7 Emeralds:");
-                    o.setScore(3, "§a§o"+ p.getEmeralds());
-
+                    o.setScore(1, "§8»§7 Website:");
+                    o.setScore(0, " §f§omcone.eu");
                 } else if (i == 3) {
-                    o.setScore(1, "§7Twitter:");
-                    o.setScore(0, "§b§o@mconeeu");
-
-                    o.setScore(4, "§8»§7 Coins:");
-                    o.setScore(3, "§a§o"+ p.getFormattedCoins());
-
+                    o.setScore(1, "§8»§7 Twitter:");
+                    o.setScore(0, " §b§o@mconeeu");
                 } else if (i == 4) {
-                    o.setScore(1, "§7YouTube:");
-                    o.setScore(0, "§c§oyt.mcone.eu");
-
-                    o.setScore(4, "§8»§7 Emeralds:");
-                    o.setScore(3, "§a§o"+ p.getEmeralds());
+                    o.setScore(1, "§8»§7 YouTube:");
+                    o.setScore(0, " §c§oyt.mcone.eu");
                 } else {
-                    o.setScore(1, "§9Teamspeak");
-                    o.setScore(0, "§f§omcone.eu");
-
-                    o.setScore(4, "§8»§7 Coins:");
-                    o.setScore(3, "§a§o"+ p.getFormattedCoins());
-
-
+                    o.setScore(1, "§8»§7 Teamspeak:");
+                    o.setScore(0, " §f§omcone.eu");
                 }
             }
         }

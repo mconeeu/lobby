@@ -7,10 +7,11 @@ package eu.mcone.lobby.inventory;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
+import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -23,7 +24,7 @@ import org.bukkit.entity.Player;
 public class InteractionInventory extends CoreInventory {
 
     public InteractionInventory(Player p, Player clicked) {
-        super("§8» §3Interaktionsmenü", p, InventorySlot.ROW_3, CoreInventory.Option.FILL_EMPTY_SLOTS);
+        super("§8» §3Interaktionsmenü", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer c = CoreSystem.getInstance().getCorePlayer(clicked);
         double onlinetime = Math.floor(((double) c.getOnlinetime() / 60 / 60) * 100) / 100;
 

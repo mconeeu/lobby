@@ -15,7 +15,6 @@ import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.CoreActionBar;
 import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
-import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Item;
@@ -31,6 +30,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class PlayerJoinListener implements Listener {
 
@@ -52,6 +53,7 @@ public class PlayerJoinListener implements Listener {
     }
 
     public static void loadLobbyPlayer(Player p, LobbyPlayerLoadedEvent.Reason reson) {
+        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         LOADING_MSG.send(p);
 
         p.getInventory().clear();
@@ -63,23 +65,29 @@ public class PlayerJoinListener implements Listener {
         p.setHealth(20);
         p.setFoodLevel(20);
 
+        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
+
         if (p.hasPermission("mcone.premium")) p.setAllowFlight(true);
         p.setFlying(false);
 
         p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
-        p.getInventory().setItem(1, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());
-        p.getInventory().setItem(4, new ItemBuilder(Material.COMPASS, 1, 0).displayName("§3§lNavigator §8» §7§oWähle einen Spielmodus").create());
         p.getInventory().setItem(1, new ItemBuilder(Material.NETHER_STAR, 1, 0).displayName("§3§lLobby-Wechsler §8» §7§oWähle deine Lobby").create());
-        p.getInventory().setItem(8, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());
-
-        if (p.hasPermission("system.bukkit.nick")) {
-
-            p.getInventory().setItem(2, new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§3§lAutomatischer Nick §8» §a§oAktivierT").create());
-
+        if (p.hasPermission("lobby.silenthub")) {
+            p.getInventory().setItem(7, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());
         }
 
+        p.getInventory().setItem(4, new ItemBuilder(Material.COMPASS, 1, 0).displayName("§3§lNavigator §8» §7§oWähle einen Spielmodus").create());
 
-        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
+        if (p.hasPermission("system.bungee.nick")) {
+            p.getInventory().setItem(6, cp.isNicked() ?
+                    new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§a§lNicken §8» §7§oAktiviert").lore("§7§oKlicke zum deaktivieren").create() :
+                    new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§c§lNicken §8» §7§oDeaktiviert").lore("§7§oKlicke zum aktivieren").create()
+            );
+        }
+        p.getInventory().setItem(7, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());
+        p.getInventory().setItem(8, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());
+
+
         cp.getScoreboard().setNewObjective(new SidebarObjective());
         switch (cp.getMainGroup()) {
             case PREMIUM:
