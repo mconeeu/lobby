@@ -36,7 +36,7 @@ class ItemsBuyInventory extends CoreInventory {
             if (i == 26) i = 28;
             else if (i == 35) i = 37;
 
-            if (new HashSet<>(Arrays.asList(Item.LOVEGUN, Item.EASTERGUN, Item.SNOWGUN, Item.ENDERGUN, Item.HEAD_GERMAN, Item.HEAD_MELON, Item.TRAIL_MUSIC)).contains(item)) {
+            if (new HashSet<>(Arrays.asList(Item.LOVEGUN, Item.EASTERGUN, Item.SNOWGUN, Item.BOMB, Item.HEAD_GERMAN, Item.HEAD_MELON, Item.TRAIL_MUSIC)).contains(item)) {
                 setItem(i, item.getItemStack(), e -> {
                     if (!lp.getItems().contains(item)) {
                         if ((cp.getCoins() - item.getCoins()) >= 0) {

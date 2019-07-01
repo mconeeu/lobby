@@ -5,7 +5,6 @@
 
 package eu.mcone.lobby.items.inventory.smuggler;
 
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
@@ -34,7 +33,7 @@ class ItemsBuyInventorySmuggler extends CoreInventory {
             if (i == 26) i = 28;
             else if (i == 35) i = 37;
 
-            if (new HashSet<>(Arrays.asList(Item.LOVEGUN, Item.EASTERGUN, Item.SNOWGUN, Item.ENDERGUN, Item.HEAD_GERMAN, Item.HEAD_MELON, Item.TRAIL_MUSIC)).contains(item)) {
+            if (new HashSet<>(Arrays.asList(Item.LOVEGUN, Item.EASTERGUN, Item.SNOWGUN, Item.BOMB, Item.HEAD_GERMAN, Item.HEAD_MELON, Item.TRAIL_MUSIC)).contains(item)) {
                 setItem(i, item.getItemStack(), e -> {
                     if (!lp.getItems().contains(item)) {
                         if ((lp.getCorePlayer().getCoins() - item.getCoins()) >= 0) {
