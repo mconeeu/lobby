@@ -20,7 +20,7 @@ public class LoveGunListener implements Listener {
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
-        if (e.hasItem() && e.getItem().equals(Item.LOVEGUN.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
+        if (e.hasItem() && e.getItem().equals(Item.LOVEGUN.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
             Player p = e.getPlayer();
 
             World w = p.getWorld();

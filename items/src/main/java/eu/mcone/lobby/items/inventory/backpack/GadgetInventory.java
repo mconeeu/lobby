@@ -14,12 +14,9 @@ import java.util.HashSet;
 
 public class GadgetInventory extends BackpackInventory {
 
-    public GadgetInventory(Player p, Integer site) {
-        super(Category.GADGET, site, p);
-    }
+    public GadgetInventory(Player p) {
+        super(Category.GADGET, p);
 
-    @Override
-    protected void setItems(Player p) {
         for (Item item : Item.values()) {
             if (new HashSet<>(Arrays.asList(Item.LOVEGUN, Item.ENDERGUN, Item.SNOWGUN, Item.EASTERGUN, Item.ENDERGUN, Item.COINBOMB, Item.BOMB, Item.GRAPPLING_HOOK)).contains(item) && playerHasItem(item)) {
                 addItem(item.getItemStack(), e -> {

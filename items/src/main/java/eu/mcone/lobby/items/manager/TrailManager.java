@@ -96,7 +96,7 @@ public class TrailManager {
 
     public void removeTrail(Player p) {
         if (this.trails.get(p) != null) {
-            p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§7Trail entfernt!");
+            LobbyPlugin.getInstance().getMessager().send(p, "§7Trail entfernt!");
             this.trails.remove(p);
             p.closeInventory();
         }

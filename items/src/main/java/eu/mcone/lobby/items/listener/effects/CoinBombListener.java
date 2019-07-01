@@ -22,7 +22,7 @@ public class CoinBombListener implements Listener {
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
-        if (e.hasItem() && e.getItem().equals(Item.COINBOMB.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
+        if (e.hasItem() && e.getItem().equals(Item.COINBOMB.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
             Player p = e.getPlayer();
             LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 

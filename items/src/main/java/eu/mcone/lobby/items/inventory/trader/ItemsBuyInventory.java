@@ -26,7 +26,6 @@ class ItemsBuyInventory extends CoreInventory {
         super("§8» §e§lHändler §8| §fItems kaufen", p, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
-        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
 
         setItem(InventorySlot.ROW_1_SLOT_3, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e -> new TraderInventory(p));
         setItem(InventorySlot.ROW_1_SLOT_5, new ItemBuilder(Material.PAPER, 1, 0).displayName("§c§lItems kaufen").lore("§7§oKaufe hier Items mit Coins.", "§7§oDie Items stehen dir danach in", "§7§odeinem Rucksack zur Verfügung.").create());
@@ -46,11 +45,11 @@ class ItemsBuyInventory extends CoreInventory {
 
                             p.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du hast das Item §a"+item.getName()+" §2für §f"+ item.getCoins() +" Coins §2erfolgreich gekauft!");
                         } else {
-                            p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "Du hast nicht genügen §6§lCoins!");
+                            LobbyPlugin.getInstance().getMessager().send(p, "Du hast nicht genügen §6§lCoins!");
                         }
                         p.closeInventory();
                     } else {
-                        p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§4Du besitzt diese Item bereits!");
+                        LobbyPlugin.getInstance().getMessager().send(p, "§4Du besitzt diese Item bereits!");
                     }
                 });
                 i++;

@@ -6,7 +6,6 @@
 package eu.mcone.lobby.api.player;
 
 import eu.mcone.coresystem.api.bukkit.player.profile.GameProfile;
-import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Item;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,19 +28,17 @@ public class LobbyPlayerProfile extends GameProfile {
 
     private transient List<Item> itemList = new ArrayList<>();
 
-    LobbyPlayerProfile(Player p) {
+    LobbyPlayerProfile(Player p, List<Item> items, int chests, int progressId, LobbySettings settings, Map<String, Long> secrets) {
         super(p);
 
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
-
-        items = new ArrayList<>();
-        for (Item item : lp.getItems()) {
-            items.add(item.getId());
+        this.items = new ArrayList<>();
+        for (Item item : items) {
+            this.items.add(item.getId());
         }
-        chests = lp.getChests();
-        progressId = lp.getProgressId();
-        settings = lp.getSettings();
-        secrets = lp.getSecrets();
+        this.chests = chests;
+        this.progressId = progressId;
+        this.settings = settings;
+        this.secrets = secrets;
     }
 
     @Override

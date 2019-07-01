@@ -13,12 +13,8 @@ import org.bukkit.entity.Player;
 
 public class MaterialInventory extends BackpackInventory {
 
-    MaterialInventory(Player p, Integer site) {
-        super(Category.MATERIAL, site, p);
-    }
-
-    @Override
-    protected void setItems(Player p) {
+    public MaterialInventory(Player p) {
+        super(Category.MATERIAL, p);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
         if (!lp.hasItem(Item.MATERIAL_IRON_6)) {
@@ -64,7 +60,6 @@ public class MaterialInventory extends BackpackInventory {
                 }
             }
         }
-
-        openInventory();
     }
+
 }

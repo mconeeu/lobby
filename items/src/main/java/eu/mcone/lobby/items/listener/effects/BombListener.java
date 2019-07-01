@@ -17,7 +17,7 @@ public class BombListener implements Listener {
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
-        if (e.hasItem() && e.getItem().equals(Item.BOMB.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
+        if (e.hasItem() && e.getItem().equals(Item.BOMB.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
             Player p = e.getPlayer();
 
             p.getWorld().playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);

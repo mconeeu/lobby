@@ -13,22 +13,17 @@ import org.bukkit.entity.Player;
 
 public class ArmorInventory extends BackpackInventory {
 
-    ArmorInventory(Player p, Integer site) {
-        super(Category.ARMOR, site, p);
-    }
-
-    @Override
-    protected void setItems(Player p) {
+    public ArmorInventory(Player p) {
+        super(Category.ARMOR, p);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
         for (Item item : Item.values()) {
             if (item.hasCategory() && item.getCategory().equals(Category.ARMOR)) {
                 if (lp.hasItem(item)) {
-                    addItem(item.getItemStack(), e -> {
-
-                    });
+                    addItem(item.getItemStack());
                 }
             }
         }
     }
+
 }

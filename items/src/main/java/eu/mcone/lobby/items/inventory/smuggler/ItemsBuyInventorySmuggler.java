@@ -43,11 +43,11 @@ class ItemsBuyInventorySmuggler extends CoreInventory {
 
                             p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §2Du hast das Item §a"+item.getName()+" §2für §f"+ item.getCoins() +" Coins §2erfolgreich gekauft!");
                         } else {
-                            p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "Du hast nicht genügen §6§lCoins!");
+                            LobbyPlugin.getInstance().getMessager().send(p, "Du hast nicht genügen §6§lCoins!");
                         }
                         p.closeInventory();
                     } else {
-                        p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§4Du besitzt diese Item bereits!");
+                        LobbyPlugin.getInstance().getMessager().send(p, "§4Du besitzt diese Item bereits!");
                     }
                 });
                 i++;
