@@ -60,7 +60,7 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
 
     @Override
     public void saveData() {
-        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit()));
+        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), items, chests, progressId, settings, secrets));
     }
 
     public boolean isInGang() {
@@ -90,16 +90,16 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
                 addItem(item);
 
                 p.closeInventory();
-                p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§2Du hast erfolgreich das Item " + item.getName() + "§2 gekauft!");
+                LobbyPlugin.getInstance().getMessager().send(p, "§2Du hast erfolgreich das Item " + item.getName() + "§2 gekauft!");
                 p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
             } else {
                 p.closeInventory();
-                p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§4Du hast nicht genügend Coins!");
+                LobbyPlugin.getInstance().getMessager().send(p, "§4Du hast nicht genügend Coins!");
                 p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
             }
         } else {
             p.closeInventory();
-            p.sendMessage(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§4Du besitzt dieses Item bereits!");
+            LobbyPlugin.getInstance().getMessager().send(p, "§4Du besitzt dieses Item bereits!");
             p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
         }
     }

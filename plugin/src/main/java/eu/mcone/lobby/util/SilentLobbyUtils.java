@@ -5,7 +5,6 @@
 
 package eu.mcone.lobby.util;
 
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -27,7 +26,6 @@ public class SilentLobbyUtils {
             }
         }
 
-        CoreSystem.getInstance().createTablistInfo().header("§f§lMC ONE §3Minecraftnetzwerk §8» §7Lobby").footer("§7§oPublic Beta 5.0").send(p);
         LobbyPlugin.getInstance().getMessager().send(p, "§7Du bist nun nicht mehr in der Privaten Lobby!");
 
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
@@ -42,12 +40,6 @@ public class SilentLobbyUtils {
             all.hidePlayer(p);
             p.hidePlayer(all);
         }
-
-        Bukkit.getScheduler().runTaskLater(
-                LobbyPlugin.getInstance(),
-                () -> CoreSystem.getInstance().createTablistInfo().header("§f§lMC ONE §3Minecraftnetzwerk §8» §7Private Lobby").footer("§7§oPublic Beta 5.0").send(p),
-                40L
-        );
 
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);

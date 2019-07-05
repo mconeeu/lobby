@@ -12,12 +12,9 @@ import org.bukkit.entity.Player;
 
 public class StoryItemInventory extends BackpackInventory {
 
-    public StoryItemInventory(Player p, Integer site) {
-        super(Category.STORY_ITEMS, site, p);
-    }
+    public StoryItemInventory(Player p) {
+        super(Category.STORY_ITEMS, p);
 
-    @Override
-    public void setItems(Player p) {
         for (Item item : Item.values()) {
             if (item.hasCategory() && item.getCategory().equals(Category.STORY_ITEMS) && playerHasItem(item)) {
                 addItem(item.getItemStack(), e -> p.getInventory().setItem(3, item.getItemStack()));

@@ -58,7 +58,7 @@ public class PlayerJoinListener implements Listener {
 
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
-        p.setGameMode(GameMode.ADVENTURE);
+        p.setGameMode(GameMode.SURVIVAL);
         p.getActivePotionEffects().clear();
 
         p.setMaxHealth(20);
@@ -137,7 +137,7 @@ public class PlayerJoinListener implements Listener {
             NPC npc = LobbyWorld.ONE_ISLAND.getWorld().getNPC(gm.getName().toLowerCase());
 
             if (npc != null) {
-                ((PlayerNpc) npc).playLabymodEmote(LabyModEmote.DAB, e.getPlayer());
+                ((PlayerNpc) npc).playLabymodEmote(LabyModEmote.INFINITY_DAB, e.getPlayer());
             }
         }
     }

@@ -20,7 +20,7 @@ public class EasterGunListener implements Listener {
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
-        if (e.hasItem() && e.getItem().equals(Item.EASTERGUN.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
+        if (e.hasItem() && e.getItem().equals(Item.EASTERGUN.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
             Player p = e.getPlayer();
 
             Egg egg = p.getWorld().spawn(p.getEyeLocation(), Egg.class);

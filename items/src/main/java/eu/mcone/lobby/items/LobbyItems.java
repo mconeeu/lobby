@@ -5,7 +5,6 @@
 
 package eu.mcone.lobby.items;
 
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Category;
@@ -45,7 +44,7 @@ public class LobbyItems extends LobbyAddon {
                 new BombListener(),
                 new CoinBombListener(),
                 new EasterGunListener(),
-                new EnderGunListener(),
+                //new EnderGunListener(),
                 new LoveGunListener(),
                 new OneHitSwordListener(),
                 new SnowGunListener(),
@@ -55,16 +54,11 @@ public class LobbyItems extends LobbyAddon {
         );
         LobbyPlugin.getInstance().registerCommands(new ChestCMD());
 
-        CoreSystem.getInstance().setPlayerChatEnabled(false);
-
         final Location rewardBlock = new Location(Bukkit.getWorld("Lobby-OneIsland"), 46.5, 102D, -33.5);
         Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
-            Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
-            Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
-            Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
-            Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
-            Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
-            Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
+            for (int i = 0; i < 6; i++) {
+                Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
+            }
         }, 24, 24);
 
         reload();

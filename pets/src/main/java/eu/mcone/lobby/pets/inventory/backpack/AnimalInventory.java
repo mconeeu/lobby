@@ -16,12 +16,9 @@ import org.bukkit.entity.Player;
 
 public class AnimalInventory extends BackpackInventory {
 
-    public AnimalInventory(Player p, Integer site) {
-        super(Category.ANIMAL, site, p);
-    }
+    public AnimalInventory(Player p) {
+        super(Category.ANIMAL, p);
 
-    @Override
-    protected void setItems(Player p) {
         for (Item item : Item.values()) {
             if (item.hasCategory() && item.getCategory().equals(Category.ANIMAL) && playerHasItem(item)) {
                 addItem(item.getItemStack(), e -> {

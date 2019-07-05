@@ -11,12 +11,9 @@ import org.bukkit.entity.Player;
 
 public class ExclusiveInventory extends BackpackInventory {
 
-    public ExclusiveInventory(Player p, Integer site) {
-        super(Category.EXCLUSIVE, site, p);
-    }
+    public ExclusiveInventory(Player p) {
+        super(Category.EXCLUSIVE, p);
 
-    @Override
-    public void setItems(Player p) {
         for (Item item : Item.values()) {
             if (item.hasCategory()) {
                 addItem(item.getItemStack(), e -> {

@@ -28,7 +28,6 @@ public class InventoryTriggerListener implements Listener {
 
                 switch (clicked) {
                     case ENDER_PORTAL_FRAME: {
-                        p.sendMessage("opening chestopening");
                         new ChestOpeningInventory(p);
                         return;
                     }

@@ -14,34 +14,27 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class EntitiyDamageListener implements Listener{
+public class EntitiyDamageListener implements Listener {
 
     @EventHandler
-    public void onEntityDamage(EntityDamageEvent e){
-        if(e.getEntity() instanceof Player){
+    public void onEntityDamage(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
+            e.setCancelled(true);
 
-            if(e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
-                e.setCancelled(true);
-            }
-
-            if(e.getCause() == EntityDamageEvent.DamageCause.DROWNING){
-                e.setCancelled(true);
-            }
-
-            if(e.getCause() == EntityDamageEvent.DamageCause.LAVA){
-                e.setCancelled(true);
-            }
-
-            if(e.getCause() == EntityDamageEvent.DamageCause.VOID){
+            if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
                 LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "spawn");
+            } else if (e.getCause().equals(EntityDamageEvent.DamageCause.FIRE) || e.getCause().equals(EntityDamageEvent.DamageCause.FIRE_TICK)) {
+                p.setFireTicks(0);
             }
         }
     }
 
     @EventHandler
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent e){
-        if(e.getEntity() instanceof Player){
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
+        e.setCancelled(true);
+
+        if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
 
             if (e.getDamager() instanceof Player) {
@@ -50,8 +43,6 @@ public class EntitiyDamageListener implements Listener{
                     CoreSystem.getInstance().getChannelHandler().sendPluginMessage(p, "CMD", "friend add " + p.getName());
             }
         }
-
-        e.setCancelled(true);
     }
 
 }

@@ -17,12 +17,9 @@ import org.bukkit.entity.Player;
 
 public class TrailInventory extends BackpackInventory {
 
-    public TrailInventory(Player p, Integer site) {
-        super(Category.TRAIL, site, p);
-    }
+    public TrailInventory(Player p) {
+        super(Category.TRAIL, p);
 
-    @Override
-    protected void setItems(Player p) {
         for (Item item : Item.values()) {
             if (item.hasCategory() && item.getCategory().equals(Category.TRAIL)) {
                 if (playerHasItem(item)) {

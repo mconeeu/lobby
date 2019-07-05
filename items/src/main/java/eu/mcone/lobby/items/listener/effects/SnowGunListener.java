@@ -20,10 +20,10 @@ public class SnowGunListener implements Listener {
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
-        if (e.hasItem() && e.getItem().equals(Item.SNOWGUN.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_BLOCK))) {
+        if (e.hasItem() && e.getItem().equals(Item.SNOWGUN.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
             Player p = e.getPlayer();
 
-            Snowball snowball = p.getWorld().spawn(p.getLocation(), Snowball.class);
+            Snowball snowball = p.getWorld().spawn(p.getEyeLocation(), Snowball.class);
             snowball.setVelocity(p.getPlayer().getLocation().getDirection());
             snowball.setShooter(p);
 

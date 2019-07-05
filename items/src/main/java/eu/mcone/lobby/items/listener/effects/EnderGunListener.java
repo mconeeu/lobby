@@ -6,10 +6,12 @@
 package eu.mcone.lobby.items.listener.effects;
 
 import org.bukkit.Effect;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
@@ -17,7 +19,15 @@ public class EnderGunListener implements Listener {
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
-        Player p = e.getPlayer();
+        if (e.hasItem()/* && e.getItem().equals(Item.ENDERGUN.getItemStack())*/ && (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR))) {
+            Player p = e.getPlayer();
+
+            EnderPearl pearl = p.getWorld().spawn(p.getEyeLocation(), EnderPearl.class);
+            pearl.setVelocity(p.getPlayer().getLocation().getDirection());
+            pearl.setShooter(p);
+
+            p.getWorld().playEffect(pearl.getLocation(), Effect.LARGE_SMOKE, 10);
+        }
     }
 
     @EventHandler

@@ -15,11 +15,9 @@ import org.bukkit.entity.Player;
 
 public class HatsInventory extends BackpackInventory {
 
-    public HatsInventory(Player p, Integer site) {
-        super(Category.HAT, site, p);
-    }
+    public HatsInventory(Player p) {
+        super(Category.HAT, p);
 
-    protected void setItems(Player p) {
         for (Item item : Item.values()) {
             if (item.hasCategory() && item.getCategory().equals(Category.HAT) && playerHasItem(item)) {
                 addItem(item.getItemStack(), e -> {

@@ -22,28 +22,26 @@ public class SidebarObjective extends CoreSidebarObjective {
     public void onRegister(CorePlayer player) {
         setDisplayName("§f§l§n"+player.bukkit().getDisplayName());
 
-        setScore(15, "");
-        setScore(14, "§8» §3§lMCONE.EU");
-        setScore(13, "§f§oDein Nummer 1");
-        setScore(12, "§f§oNetzwerk");
-        setScore(11, "");
-        setScore(10, "§8»§7 Rang:");
-        setScore(9, " "+player.getMainGroup().getLabel());
+        setScore(12, "");
+        setScore(11, "§8» §3§lMCONE.EU");
+        setScore(10, "§f§oDein Nummer 1");
+        setScore(9, "§f§oNetzwerk");
         setScore(8, "");
         setScore(7, "§8»§7 Coins:");
-        setScore(6, " §a§o"+ player.getFormattedCoins());
+        setScore(6, " §b§o"+ player.getFormattedCoins());
         setScore(5, "");
         setScore(4, "§8»§7 Emeralds:");
-        setScore(3, " §2§o"+ player.getEmeralds());
+        setScore(3, " §a§o"+ player.getEmeralds());
         setScore(2, "");
         setScore(1, "§8»§7 Teamspeak:");
-        setScore(0, " §f§omcone.eu");
+        setScore(0, " §f§ots.mcone.eu");
     }
 
     @Override
     public void onReload(CorePlayer player) {
-        setScore(6, player.getMainGroup().getLabel());
-        setScore(3, "§a§o"+player.getFormattedCoins());
+        setDisplayName("§f§l§n" + player.bukkit().getDisplayName());
+        setScore(6, " §b§o"+ player.getFormattedCoins());
+        setScore(3, " §a§o"+ player.getEmeralds());
     }
 
     public static void updateLines() {
@@ -58,7 +56,7 @@ public class SidebarObjective extends CoreSidebarObjective {
 
                 if (i == 1) {
                     o.setScore(1, "§8»§7 Teamspeak:");
-                    o.setScore(0, " §f§omcone.eu");
+                    o.setScore(0, " §f§ots.mcone.eu");
                 } else if (i == 2) {
                     o.setScore(1, "§8»§7 Website:");
                     o.setScore(0, " §f§omcone.eu");
@@ -70,7 +68,7 @@ public class SidebarObjective extends CoreSidebarObjective {
                     o.setScore(0, " §c§oyt.mcone.eu");
                 } else {
                     o.setScore(1, "§8»§7 Teamspeak:");
-                    o.setScore(0, " §f§omcone.eu");
+                    o.setScore(0, " §f§ots.mcone.eu");
                 }
             }
         }

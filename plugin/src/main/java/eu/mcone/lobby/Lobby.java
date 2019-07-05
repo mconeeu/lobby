@@ -101,7 +101,7 @@ public class Lobby extends LobbyPlugin {
                 NPC npc = LobbyWorld.ONE_ISLAND.getWorld().getNPC(gm.getName().toLowerCase());
 
                 if (npc != null) {
-                    ((PlayerNpc) npc).playLabymodEmote(LabyModEmote.DAB);
+                    ((PlayerNpc) npc).playLabymodEmote(LabyModEmote.INFINITY_DAB);
                 }
             }
         }
