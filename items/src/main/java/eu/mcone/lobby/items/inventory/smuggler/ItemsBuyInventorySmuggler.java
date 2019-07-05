@@ -36,11 +36,11 @@ class ItemsBuyInventorySmuggler extends CoreInventory {
             if (new HashSet<>(Arrays.asList(Item.LOVEGUN, Item.EASTERGUN, Item.SNOWGUN, Item.BOMB, Item.HEAD_GERMAN, Item.HEAD_MELON, Item.TRAIL_MUSIC)).contains(item)) {
                 setItem(i, item.getItemStack(), e -> {
                     if (!lp.getItems().contains(item)) {
-                        if ((lp.getCorePlayer().getCoins() - item.getCoins()) >= 0) {
-                            lp.getCorePlayer().removeCoins(item.getCoins());
+                        if ((lp.getCorePlayer().getCoins() - item.getEmeralds()) >= 0) {
+                            lp.getCorePlayer().removeCoins(item.getEmeralds());
                             lp.addItem(item);
 
-                            p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §2Du hast das Item §a"+item.getName()+" §2für §f"+ item.getCoins() +" Coins §2erfolgreich gekauft!");
+                            p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §2Du hast das Item §a"+item.getName()+" §2für §f"+ item.getEmeralds() +" Coins §2erfolgreich gekauft!");
                         } else {
                             LobbyPlugin.getInstance().getMessager().send(p, "Du hast nicht genügen §6§lCoins!");
                         }

@@ -85,8 +85,8 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
         if (!hasItem(item)) {
             CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
 
-            if ((cp.getCoins() - item.getCoins()) >= 0) {
-                cp.removeCoins(item.getCoins());
+            if ((cp.getCoins() - item.getEmeralds()) >= 0) {
+                cp.removeCoins(item.getEmeralds());
                 addItem(item);
 
                 p.closeInventory();

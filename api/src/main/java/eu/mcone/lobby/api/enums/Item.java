@@ -150,7 +150,7 @@ public enum Item {
 
 
     @Getter
-    private int id, coins;
+    private int id, emeralds;
     @Getter
     private Category category;
     @Getter
@@ -160,9 +160,9 @@ public enum Item {
     @Getter
     private ItemStack itemStack;
 
-    Item(int id, String name, Category category, Level level, int coins, ItemStack itemStack) {
+    Item(int id, String name, Category category, Level level, int emeralds, ItemStack itemStack) {
         this.id = id;
-        this.coins = coins;
+        this.emeralds = emeralds;
 
         this.category = category;
         this.level = level;

@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.items;
 
+import eu.mcone.coresystem.api.bukkit.config.CoreJsonConfig;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Category;
