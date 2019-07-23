@@ -13,9 +13,9 @@ import org.bukkit.entity.Player;
 class BankChangeCoins extends CoreInventory {
 
     /*
-     * 100 Emeralds -> 10$
-     * 280 Emeralds -> 25$
-     * 450 Emeralds -> 40$
+     * 100 Emeralds -> 5$
+     * 280 Emeralds -> 15$
+     * 450 Emeralds -> 25$
      */
 
     BankChangeCoins(Player p) {

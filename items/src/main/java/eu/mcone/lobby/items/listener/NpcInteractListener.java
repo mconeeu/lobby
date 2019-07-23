@@ -11,6 +11,7 @@ import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.inventory.bank.BankCreateCardInventory;
 import eu.mcone.lobby.items.inventory.bank.BankMenInventory;
+import eu.mcone.lobby.items.inventory.office.OfficeTraderInventory;
 import eu.mcone.lobby.items.inventory.trader.TraderInventory;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
 import org.bukkit.entity.EntityType;
@@ -37,6 +38,12 @@ public class NpcInteractListener implements Listener {
                         new BankMenInventory(p);
                     }
                     break;
+                }
+                case "officetrader": {
+                    new TraderInventory(p);
+                }
+                case "officeseller": {
+                    new OfficeTraderInventory(p);
                 }
             }
         }

@@ -26,27 +26,27 @@ public class CoinBombListener implements Listener {
             Player p = e.getPlayer();
             LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
-            p.sendMessage("§7Du hast die Coin Bombe erfolgreich gezündet");
+            p.sendMessage("§aDu hast die Coin Bombe erfolgreich gezündet");
             lp.removeItem(Item.COINBOMB);
             p.getInventory().remove(p.getItemInHand());
 
             Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
-                    p.sendMessage("§8[§7§l!§8] §fServer §8» §eEine Coin Bombe wurde von " + p.getName() + " gezündet sie startet in §43 Sekunden"), 20L);
+                    p.sendMessage("§8[§7§l!§8] §fServer §8» §aEine Coin Bombe wurde von§c " + p.getName() + "§a gezündet sie startet in §c3 Sekunden"), 20L);
 
             Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
-                    p.sendMessage("§8[§7§l!§8] §fServer §8» §eEine Coin Bombe wurde von " + p.getName() + " gezündet sie startet in §42 Sekunden"), 40L);
+                    p.sendMessage("§8[§7§l!§8] §fServer §8» §aEine Coin Bombe wurde von§c " + p.getName() + " §agezündet sie startet in §c2 Sekunden"), 40L);
 
             Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
-                    p.sendMessage("§8[§7§l!§8] §fServer §8» §eEine Coin Bombe wurde von " + p.getName() + " gezündet sie startet in §41 Sekunden"), 60L);
+                    p.sendMessage("§8[§7§l!§8] §fServer §8» §aEine Coin Bombe wurde von §c" + p.getName() + " §agezündet sie startet in §c1 Sekunden"), 60L);
 
             Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     player.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
                     player.playEffect(p.getLocation(), Effect.LAVA_POP, 1);
                     player.playEffect(p.getLocation(), Effect.LAVA_POP, 2);
-                    player.sendMessage("§8[§7§l!§8] §fServer §8» §eDie Coinbome ist explodiert jeder bekommnt §5§l70 Coins");
+                    player.sendMessage("§8[§7§l!§8] §fServer §8» §cDie Coin Bombe ist explodiert jeder bekommnt §a§l500 Coins");
 
-                    CoreSystem.getInstance().getCorePlayer(player).addCoins(70);
+                    CoreSystem.getInstance().getCorePlayer(player).addCoins(500);
 
                     lp.removeItem(Item.COINBOMB);
                     p.getInventory().remove(p.getItemInHand());
