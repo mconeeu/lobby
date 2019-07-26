@@ -11,6 +11,7 @@ import lombok.Getter;
 public enum LobbyWorld {
 
     ONE_ISLAND("Lobby-OneIsland"),
+    OFFICE("Office"),
     PARADISE_ISLAND("Lobby-ParadiseIsland"),
     CAVE("Lobby-Cave"),
     DESTROYED_PARADISE_ISLAND("Lobby-Destroyed-ParadiseIsland");

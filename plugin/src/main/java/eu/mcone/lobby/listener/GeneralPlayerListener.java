@@ -8,9 +8,11 @@ package eu.mcone.lobby.listener;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.inventory.InteractionInventory;
+import eu.mcone.lobby.util.PlayerSpawnLocation;
 import eu.mcone.lobby.util.SilentLobbyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -39,11 +41,18 @@ public class GeneralPlayerListener implements Listener {
                 LobbyPlugin.getInstance().getMessager().send(bp, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
             }
 
-            if (p.getSettings().isTeleportOnJoin()) {
-                Lobby.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(bp, "spawn");
+            if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.SPAWN.toString())) {
+                PlayerSpawnLocation.SPAWN.getWorld().teleportSilently(bp, "spawn");
+            } else if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.OFFICE.toString())) {
+                if (p.hasItem(Item.OFFICE_CARD_BRONZE)) {
+                    LobbyWorld.OFFICE.getWorld().teleportSilently(bp, "office1");
+                } else if (p.hasItem(Item.OFFICE_CARD_SILVER)) {
+                    LobbyWorld.OFFICE.getWorld().teleportSilently(bp, "office2");
+                } else if (p.hasItem(Item.OFFICE_CARD_GOLD)) {
+                    LobbyWorld.OFFICE.getWorld().teleportSilently(bp, "office3");
+                }
             }
         }
-
     }
 
     @EventHandler

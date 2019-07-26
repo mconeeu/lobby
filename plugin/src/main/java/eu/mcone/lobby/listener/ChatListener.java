@@ -21,7 +21,7 @@ public class ChatListener implements Listener {
 
         if (SilentLobbyUtils.isActivatedSilentHub(p)) {
             e.setCancelled(true);
-            LobbyPlugin.getInstance().getMessager().send(p, "§cDu kannst in der Silent Lobby keine Chat Nachrichten senden oder empfangen.");
+            LobbyPlugin.getInstance().getMessager().send(p, "§cDu kannst in der Privaten Lobby keine Chat Nachrichten senden oder empfangen.");
         }
     }
 

@@ -15,6 +15,7 @@ import eu.mcone.lobby.items.listener.InventoryTriggerListener;
 import eu.mcone.lobby.items.listener.LobbyPlayerLoadedListener;
 import eu.mcone.lobby.items.listener.NpcInteractListener;
 import eu.mcone.lobby.items.listener.effects.*;
+import eu.mcone.lobby.items.manager.DailyShopManager;
 import eu.mcone.lobby.items.manager.TrailManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -27,11 +28,14 @@ public class LobbyItems extends LobbyAddon {
     private static LobbyItems instance;
     @Getter
     private TrailManager trailManager;
+    @Getter
+    private DailyShopManager dailyShopManager;
 
     @Override
     public void onEnable() {
         instance = this;
         trailManager = new TrailManager();
+        dailyShopManager = new DailyShopManager();
 
         BackpackInventory.registerBackpackInventory(Category.TRAIL, TrailInventory.class);
         BackpackInventory.registerBackpackInventory(Category.GADGET, GadgetInventory.class);

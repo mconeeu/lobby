@@ -6,7 +6,9 @@
 package eu.mcone.lobby.api;
 
 import eu.mcone.coresystem.api.bukkit.CorePlugin;
+import eu.mcone.coresystem.api.bukkit.config.CoreJsonConfig;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
+import eu.mcone.lobby.api.config.LobbyConfig;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import lombok.Getter;
 import org.bukkit.ChatColor;
@@ -23,6 +25,8 @@ public abstract class LobbyPlugin extends CorePlugin {
         super("lobby", ChatColor.DARK_AQUA, "lobby.prefix");
         setInstance(this);
     }
+
+    public abstract CoreJsonConfig<LobbyConfig> getLobbyConfig();
 
     public abstract void registerLobbyPlayer(LobbyPlayer lp);
 

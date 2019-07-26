@@ -20,14 +20,13 @@ public class BronzeOfficeInventory extends CoreInventory {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
 
-        setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 5).displayName("§aBüro kaufen").lore("§a§lBüro kosten 150 Emeralds").create(),
+        setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.CLAY_BRICK, 1, 5).displayName("§aBüro kaufen").lore("§a§lBüro kosten 150 Emeralds").create(),
                 e -> {
 
                     if (cp.getEmeralds() - 150 >= 0) {
                         cp.removeEmeralds(150);
-                        lp.removeItem(Item.OFFICE_CARD_2);
                         
-                        lp.addItem(Item.OFFICE_CARD_1);
+                        lp.addItem(Item.OFFICE_CARD_BRONZE);
                     } else {
 
                         p.closeInventory();
@@ -36,7 +35,7 @@ public class BronzeOfficeInventory extends CoreInventory {
 
                     p.closeInventory();
 
-                    p.sendMessage("§8[§7§l!§8] §cNPC §8» §fVerkäufer §8|§7 Bitte sehr ihre Büro Schlüsselkarte gehen sie zu mein Kollegen er bringt sie dann zu ihr Büro!");
+                    p.sendMessage("§8[§7§l!§8] §cNPC §8» §fVerkäufer §8|§7 Bitte sehr ihre Büro Schlüsselkarte gehen sie zu mein Kolegen er bringt sie dann zu ihr Büro!");
                 });
 
 

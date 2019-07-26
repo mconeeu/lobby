@@ -7,12 +7,16 @@ package eu.mcone.lobby.items.listener;
 
 import eu.mcone.coresystem.api.bukkit.event.NpcInteractEvent;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.inventory.bank.BankCreateCardInventory;
 import eu.mcone.lobby.items.inventory.bank.BankMenInventory;
 import eu.mcone.lobby.items.inventory.office.OfficeTraderInventory;
+import eu.mcone.lobby.items.inventory.office.SecretaryInventory;
+import eu.mcone.lobby.items.inventory.office.UpgradeOfficeTrader;
 import eu.mcone.lobby.items.inventory.trader.TraderInventory;
+import eu.mcone.lobby.items.manager.OfficeManager;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -31,20 +35,31 @@ public class NpcInteractListener implements Listener {
                 case "merchant":
                     new TraderInventory(p);
                     break;
-                case "bankman": {
+                case "bankman":
                     if (!lp.hasItem(Item.BANKCARD)) {
                         new BankCreateCardInventory(p);
                     } else {
                         new BankMenInventory(p);
                     }
                     break;
-                }
-                case "officetrader": {
+                case "officetrader":
                     new TraderInventory(p);
-                }
-                case "officeseller": {
+                    break;
+                case "officeseller":
                     new OfficeTraderInventory(p);
-                }
+                    break;
+                case "officepage":
+                    OfficeManager.getOffice(p);
+                    break;
+                case "assistantin1":
+                    new SecretaryInventory(p);
+                    break;
+                case "assistantin2":
+                    new SecretaryInventory(p);
+                    break;
+                case "assistantin3":
+                    new SecretaryInventory(p);
+                    break;
             }
         }
     }

@@ -19,27 +19,26 @@ public class OfficeTraderInventory extends CoreInventory {
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
-        if (lp.hasItem(Item.OFFICE_CARD_1)) {
+        if (lp.hasItem(Item.OFFICE_CARD_BRONZE) || lp.hasItem(Item.OFFICE_CARD_SILVER)) {
             new UpgradeOfficeTrader(p);
         }
-        if (lp.hasItem(Item.OFFICE_CARD_2)) {
-            new UpgradeOfficeTrader(p);
+        if (lp.hasItem(Item.OFFICE_CARD_GOLD)) {
+            p.closeInventory();
         }
 
-
-        setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.BED, 1, 0).displayName("§6§lBronze Büro")
+        setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.CLAY_BRICK, 1, 0).displayName("§6§lBronze Büro")
                 .lore("§fWelche Ihnhalte dieses Büro hat", "§ferfahren sie wenn sie klicken", "", "§a§LDie Kosten liegen bei 150 Emeralds")
                 .create(), e -> {
             new BronzeOfficeInventory(p);
         });
 
-        setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.BED, 1, 0).displayName("§6§lSilver Büro")
+        setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.IRON_INGOT, 1, 0).displayName("§6§lSilver Büro")
                 .lore("§fWelche Ihnhalte dieses Büro hat", "§ferfahren sie wenn sie klicken", "", "§a§LDie Kosten liegen bei 250 Emeralds")
                 .create(), e -> {
             new SilverOfficeInventory(p);
         });
 
-        setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.BED, 1, 0).displayName("§6§lGold Büro")
+        setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§6§lGold Büro")
                 .lore("§fWelche Ihnhalte dieses Büro hat", "§ferfahren sie wenn sie klicken", "", "§a§LDie Kosten liegen bei 500 Emeralds")
                 .create(), e -> {
             new GoldOfficeInventory(p);

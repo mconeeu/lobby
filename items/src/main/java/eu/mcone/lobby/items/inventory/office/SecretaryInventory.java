@@ -19,7 +19,7 @@ public class SecretaryInventory extends CoreInventory {
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
-        if (lp.hasItem(Item.OFFICE_CARD_1)) {
+        if (lp.hasItem(Item.OFFICE_CARD_BRONZE)) {
 
 
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.SKULL, 1, 0).displayName("§f§lFreunde einladen")
@@ -29,14 +29,9 @@ public class SecretaryInventory extends CoreInventory {
             });
 
 
-
-        } else {
-            p.sendMessage("§cIch rede nur mit mein Boss");
-            p.closeInventory();
         }
 
-        if (lp.hasItem(Item.OFFICE_CARD_2)) {
-
+        if (lp.hasItem(Item.OFFICE_CARD_SILVER)) {
 
 
             setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.SKULL, 1, 0).displayName("§f§lFreunde einladen")
@@ -52,15 +47,9 @@ public class SecretaryInventory extends CoreInventory {
             });
 
 
-
-        } else {
-            p.sendMessage("§cIch rede nur mit mein Boss");
-            p.closeInventory();
         }
 
-        if (lp.hasItem(Item.OFFICE_CARD_3)) {
-
-
+        if (lp.hasItem(Item.OFFICE_CARD_GOLD)) {
 
 
             setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.SKULL, 1, 0).displayName("§f§lFreunde einladen")
@@ -82,10 +71,6 @@ public class SecretaryInventory extends CoreInventory {
             });
 
 
-
-        } else {
-            p.sendMessage("§cIch rede nur mit mein Boss");
-            p.closeInventory();
         }
 
 

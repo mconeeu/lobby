@@ -20,12 +20,12 @@ public class GoldOfficeInventory extends CoreInventory {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
 
-        setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 5).displayName("§aBüro kaufen").lore("§a§lBüro kosten 500 Emeralds").create(),
+        setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.GOLD_INGOT, 1, 5).displayName("§aBüro kaufen").lore("§a§lBüro kosten 500 Emeralds").create(),
                 e -> {
 
                     if (cp.getEmeralds() - 500 >= 0) {
                         cp.removeEmeralds(500);
-                        lp.addItem(Item.OFFICE_CARD_3);
+                        lp.addItem(Item.OFFICE_CARD_GOLD);
                     }
 
                     p.closeInventory();

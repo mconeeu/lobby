@@ -20,8 +20,8 @@ public class  TraderInventory extends CoreInventory {
 
         setItem(InventorySlot.ROW_1_SLOT_5, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder().displayName("§e§lHändler").lore("§7§oBeim Händler kannst ausgewählte", "§7§oItems für deinen Rucksack kaufen.", "§7§oDie meisten Items erhälst du", "§7§onur durch das Öffnen von Kisten!").create());
 
-        setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.ANVIL, 1, 0).displayName("§cItems kaufen").create(),
-                e -> new ItemsBuyInventory(p));
+        setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.ANVIL, 1, 0).displayName("§cTäglicher Shop").create(),
+                e -> new DailyItemsInventory(p));
 
         setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.BOOK, 1, 0).displayName("§bFähre Tickets kaufen").create(),
                 e -> new TicketBuyInventory(p));

@@ -23,7 +23,7 @@ public class WitchInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_5, Item.MAGICDRINK.getItemStack(), e -> {
             if (!lp.hasItem(Item.MAGICDRINK)) {
                 lp.addItem(Item.MAGICDRINK);
-                LobbyPlugin.getInstance().getMessager().send(p, "Du hast den Zaubertrank aufgenommen!");
+                LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast den Zaubertrank aufgenommen!");
             } else {
                 LobbyPlugin.getInstance().getMessager().send(p, "§4Du besitzt diese Item bereits!");
             }

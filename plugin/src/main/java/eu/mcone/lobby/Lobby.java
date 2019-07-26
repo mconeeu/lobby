@@ -6,6 +6,7 @@
 package eu.mcone.lobby;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.config.CoreJsonConfig;
 import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
@@ -17,6 +18,7 @@ import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.config.LobbyConfig;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.command.LobbyCMD;
@@ -46,6 +48,8 @@ public class Lobby extends LobbyPlugin {
     @Getter
     private Map<LobbyWorld, CoreWorld> worlds;
 
+    private CoreJsonConfig<LobbyConfig> lobbyConfig;
+
     public final static List<LobbyAddon> ADDONS = new ArrayList<>(Arrays.asList(
             new LobbyGang(), new LobbyItems(), new LobbyPets(), new LobbyStory()
     ));
@@ -56,6 +60,10 @@ public class Lobby extends LobbyPlugin {
 
         players = new ArrayList<>();
         worlds = new HashMap<>();
+
+        lobbyConfig = new CoreJsonConfig<>(this, LobbyConfig.class, "lobby.json");
+        lobbyConfig.save();
+
         for (LobbyWorld w : LobbyWorld.values())
             worlds.put(w, CoreSystem.getInstance().getWorldManager().getWorld(w.getName()));
 
@@ -155,6 +163,11 @@ public class Lobby extends LobbyPlugin {
 
     public Collection<LobbyPlayer> getLobbyPlayers() {
         return players;
+    }
+
+    @Override
+    public CoreJsonConfig<LobbyConfig> getLobbyConfig() {
+        return lobbyConfig;
     }
 
     @Override

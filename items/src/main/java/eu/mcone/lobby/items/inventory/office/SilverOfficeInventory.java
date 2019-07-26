@@ -20,12 +20,16 @@ public class SilverOfficeInventory extends CoreInventory {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
 
-        setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 5).displayName("§aBüro kaufen").lore("§a§lBüro kosten 250 Emeralds").create(),
+        setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.IRON_INGOT, 1, 5).displayName("§aBüro kaufen").lore("§a§lBüro kosten 250 Emeralds").create(),
                 e -> {
 
                     if (cp.getEmeralds() - 250 >= 0) {
                         cp.removeEmeralds(250);
-                        lp.addItem(Item.OFFICE_CARD_2);
+                        lp.addItem(Item.OFFICE_CARD_SILVER);
+
+                        if (lp.hasItem(Item.OFFICE_CARD_BRONZE)) {
+                            lp.removeItem(Item.OFFICE_CARD_BRONZE);
+                        }
                     }
 
                     p.closeInventory();
