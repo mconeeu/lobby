@@ -19,7 +19,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public class InventoryTriggerListener implements Listener {
+public class  InventoryTriggerListener implements Listener {
 
     @EventHandler
     public void on(PlayerInteractEvent e) {

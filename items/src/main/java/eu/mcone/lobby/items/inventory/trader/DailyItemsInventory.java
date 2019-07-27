@@ -28,7 +28,7 @@ class DailyItemsInventory extends CoreInventory {
         setItem(InventorySlot.ROW_1_SLOT_2, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e -> new TraderInventory(p));
         setItem(InventorySlot.ROW_1_SLOT_7, new ItemBuilder(Material.PAPER, 1, 0).displayName("§c§lItems kaufen").lore("§7§oKaufe hier Items mit Coins.", "§7§oDie Items stehen dir danach in", "§7§odeinem Rucksack zur Verfügung.").create());
         setItem(InventorySlot.ROW_1_SLOT_3, new ItemBuilder(Material.EMERALD, 1, 0).displayName("§a§lDein Kontostand").lore("§7§oDein Kontostand beträgt:", "§f§o" + lp.getCorePlayer().getCoins() + "§7§o Coins").create());
-        setItem(InventorySlot.ROW_1_SLOT_5, new ItemBuilder(Material.WATCH, 1, 0).displayName("§f§lAktuallisierung").lore("§7§oDer Shop aktuallisiert", "§7§osich in: " + getUpdateDate()).create(), e -> updateInventory());
+        setItem(InventorySlot.ROW_1_SLOT_5, new ItemBuilder(Material.WATCH, 1, 0).displayName("§f§lAktuallisierung").lore("§7§oDer Shop aktuallisiert", "§7§osich in: §f" + getUpdateDate()).create(), e -> updateInventory());
 
         int i = 19;
         for (Item item : LobbyItems.getInstance().getDailyShopManager().getDailyItems()) {
@@ -68,7 +68,7 @@ class DailyItemsInventory extends CoreInventory {
     }
 
     private void updateInventory() {
-        setItem(InventorySlot.ROW_1_SLOT_5, new ItemBuilder(Material.WATCH, 1, 0).displayName("§f§lAktuallisierung").lore("§7§oDer Shop aktuallisiert", "§7§osich in:  " + getUpdateDate()).create(), e -> getPlayer().updateInventory());
+        setItem(InventorySlot.ROW_1_SLOT_5, new ItemBuilder(Material.WATCH, 1, 0).displayName("§f§lAktuallisierung").lore("§7§oDer Shop aktuallisiert", "§7§osich in: §f" + getUpdateDate()).create(), e -> getPlayer().updateInventory());
         getPlayer().updateInventory();
     }
 }

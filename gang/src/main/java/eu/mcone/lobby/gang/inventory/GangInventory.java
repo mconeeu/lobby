@@ -91,13 +91,13 @@ public class GangInventory extends CoreInventory {
                     "§7§ogegen andere Gangs kämpfen und Coins",
                     "§7§overdienen",
                     "",
-                    "§c§oDas Gründen einer Gang kostet 100 Coins!"
+                    "§c§oDas Gründen einer Gang kostet 10.000 Coins!"
             ).enchantment(Enchantment.DURABILITY, 1).itemFlags(ItemFlag.HIDE_ENCHANTS).create(), e -> {
                 if ((cp.getCoins()-100) >= 0) {
                     LobbyGang.getInstance().createGang(p);
                     p.sendMessage(Gang.GANG_PREFIX + "§2Du hast erfolgreich eine neue Gang erstellt! Sprich mit Sorn um deine Gang zu verwalten.");
                 } else {
-                    p.sendMessage(Gang.GANG_PREFIX + "§4Dir fehlen §c"+(100-cp.getCoins())+" Coins§4 um eine Gang zu gründen!");
+                    p.sendMessage(Gang.GANG_PREFIX + "§4Dir fehlen §c"+(10000-cp.getCoins())+" Coins§4 um eine Gang zu gründen!");
                 }
 
                 p.closeInventory();

@@ -12,6 +12,7 @@ import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.inventory.bank.BankCreateCardInventory;
 import eu.mcone.lobby.items.inventory.bank.BankMenInventory;
+import eu.mcone.lobby.items.inventory.office.ChauffeurInventory;
 import eu.mcone.lobby.items.inventory.office.OfficeTraderInventory;
 import eu.mcone.lobby.items.inventory.office.SecretaryInventory;
 import eu.mcone.lobby.items.inventory.office.UpgradeOfficeTrader;
@@ -59,6 +60,15 @@ public class NpcInteractListener implements Listener {
                     break;
                 case "assistantin3":
                     new SecretaryInventory(p);
+                    break;
+                case "chauffeur":
+                    new ChauffeurInventory(p);
+                    break;
+                case "chauffeur1":
+                    new ChauffeurInventory(p);
+                    break;
+                case "chauffeur2":
+                    new ChauffeurInventory(p);
                     break;
             }
         }
