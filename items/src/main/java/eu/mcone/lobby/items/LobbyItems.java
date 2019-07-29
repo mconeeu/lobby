@@ -34,7 +34,7 @@ public class LobbyItems extends LobbyAddon {
     public void onEnable() {
         instance = this;
         trailManager = new TrailManager();
-//        dailyShopManager = new DailyShopManager();
+        dailyShopManager = new DailyShopManager();
 
         BackpackInventory.registerBackpackInventory(Category.TRAIL, TrailInventory.class);
         BackpackInventory.registerBackpackInventory(Category.GADGET, GadgetInventory.class);

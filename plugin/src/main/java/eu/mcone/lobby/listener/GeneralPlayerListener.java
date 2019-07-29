@@ -12,6 +12,7 @@ import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.inventory.InteractionInventory;
+import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.util.PlayerSpawnLocation;
 import eu.mcone.lobby.util.SilentLobbyUtils;
 import org.bukkit.Bukkit;
@@ -36,21 +37,23 @@ public class GeneralPlayerListener implements Listener {
         bp.removePotionEffect(PotionEffectType.BLINDNESS);
 
         if (e.getReason().equals(LobbyPlayerLoadedEvent.Reason.JOINED)) {
-            if (p.getSettings().isSilentHubActivatedOnJoin()) {
-                Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> SilentLobbyUtils.activateSilentLobby(bp));
-                LobbyPlugin.getInstance().getMessager().send(bp, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
-            }
-
-            if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.SPAWN.toString())) {
-                PlayerSpawnLocation.SPAWN.getWorld().teleportSilently(bp, "spawn");
-            } else if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.OFFICE.toString())) {
-                if (p.hasItem(Item.OFFICE_CARD_BRONZE)) {
-                    LobbyWorld.OFFICE.getWorld().teleportSilently(bp, "office1");
-                } else if (p.hasItem(Item.OFFICE_CARD_SILVER)) {
-                    LobbyWorld.OFFICE.getWorld().teleportSilently(bp, "office2");
-                } else if (p.hasItem(Item.OFFICE_CARD_GOLD)) {
-                    LobbyWorld.OFFICE.getWorld().teleportSilently(bp, "office3");
-                }
+            if (!p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.LAST_LOGIN.toString())) {
+                Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> {
+                    if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.SILENT_LOBBY.toString())) {
+                        SilentLobbyUtils.activateSilentLobby(bp);
+                        LobbyPlugin.getInstance().getMessager().send(bp, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
+                    } else if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.SPAWN.toString())) {
+                        PlayerSpawnLocation.SPAWN.getWorld().teleportSilently(bp, "spawn");
+                    } else if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.OFFICE.toString())) {
+                        if (p.hasItem(Item.OFFICE_CARD_BRONZE)) {
+                            LobbyWorld.OFFICE.getWorld().teleportSilently(bp, OfficeManager.OfficeType.BRONZE_OFFICE.getSpawnLocation());
+                        } else if (p.hasItem(Item.OFFICE_CARD_SILVER)) {
+                            LobbyWorld.OFFICE.getWorld().teleportSilently(bp, OfficeManager.OfficeType.SILVER_OFFICE.getSpawnLocation());
+                        } else if (p.hasItem(Item.OFFICE_CARD_GOLD)) {
+                            LobbyWorld.OFFICE.getWorld().teleportSilently(bp, OfficeManager.OfficeType.GOLD_OFFICE.getSpawnLocation());
+                        }
+                    }
+                });
             }
         }
     }

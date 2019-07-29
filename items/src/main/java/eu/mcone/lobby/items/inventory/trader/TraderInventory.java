@@ -13,12 +13,17 @@ import eu.mcone.coresystem.api.bukkit.item.Skull;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-public class  TraderInventory extends CoreInventory {
+public class TraderInventory extends CoreInventory {
 
     public TraderInventory(Player p) {
-        super("§8» §e§lHändler §8| §fMit Coins kaufen", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
+        super("§8» §e§lHändler", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
 
-        setItem(InventorySlot.ROW_1_SLOT_5, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder().displayName("§e§lHändler").lore("§7§oBeim Händler kannst ausgewählte", "§7§oItems für deinen Rucksack kaufen.", "§7§oDie meisten Items erhälst du", "§7§onur durch das Öffnen von Kisten!").create());
+        setItem(InventorySlot.ROW_1_SLOT_5, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder().displayName("§e§lHändler")
+                .lore("§7§oBeim Händler kannst ausgewählte",
+                        "§7§oItems für deinen Rucksack kaufen.",
+                        "§7§oDie meisten Items erhälst du",
+                        "§7§onur durch das Öffnen von Kisten!"
+                ).create());
 
         setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.ANVIL, 1, 0).displayName("§cTäglicher Shop").create(),
                 e -> new DailyItemsInventory(p));
@@ -27,7 +32,7 @@ public class  TraderInventory extends CoreInventory {
                 e -> new TicketBuyInventory(p));
 
         setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.CHEST, 1, 0).displayName("§6Kisten kaufen").create(),
-                e-> new ChestBuyInventory(p));
+                e -> new ChestBuyInventory(p));
 
         openInventory();
     }

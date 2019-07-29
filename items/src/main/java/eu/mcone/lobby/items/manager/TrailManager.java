@@ -6,7 +6,6 @@
 
 package eu.mcone.lobby.items.manager;
 
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Item;
 import org.bukkit.Bukkit;
@@ -22,39 +21,31 @@ public class TrailManager {
     private BukkitTask task;
     private HashMap<Player, Item> trails = new HashMap<>();
 
-    public TrailManager(){
+    public TrailManager() {
         task = Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
-            for(final HashMap.Entry<Player, Item> trailEntry : trails.entrySet()){
+            for (final HashMap.Entry<Player, Item> trailEntry : trails.entrySet()) {
                 switch (trailEntry.getValue()) {
                     case TRAIL_COOKIES: {
 
                         break;
                     }
-                    case TRAIL_GLOW: {
-
+                    case TRAIL_GLOW:
                         break;
-                    }
-                    case TRAIL_ENDER: {
-
+                    case TRAIL_ENDER:
                         break;
-                    }
-                    case TRAIL_MUSIC: {
-
+                    case TRAIL_MUSIC:
                         break;
-                    }
-                    case TRAIL_HEART: {
+                    case TRAIL_HEART:
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.HEART, 5);
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.HEART, 5);
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SPELL, 5);
                         break;
-                    }
-                    case TRAIL_LAVA: {
+                    case TRAIL_LAVA:
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.LAVA_POP, 5);
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.LAVA_POP, 5);
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.LARGE_SMOKE, 5);
                         break;
-                    }
-                    case TRAIL_SNOW: {
+                    case TRAIL_SNOW:
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOW_SHOVEL, 2);
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOW_SHOVEL, 2);
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOW_SHOVEL, 2);
@@ -64,15 +55,13 @@ public class TrailManager {
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOWBALL_BREAK, 10);
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SNOWBALL_BREAK, 10);
                         break;
-                    }
-                    case TRAIL_WATER: {
+                    case TRAIL_WATER:
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SPLASH, 5);
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.SPLASH, 5);
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.WATERDRIP, 5);
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.WATERDRIP, 5);
                         trailEntry.getKey().getLocation().getWorld().playEffect(trailEntry.getKey().getLocation(), Effect.WATERDRIP, 5);
                         break;
-                    }
                 }
             }
         }, 100L, 3);

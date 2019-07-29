@@ -18,6 +18,7 @@ import eu.mcone.lobby.items.inventory.office.SecretaryInventory;
 import eu.mcone.lobby.items.inventory.office.UpgradeOfficeTrader;
 import eu.mcone.lobby.items.inventory.trader.TraderInventory;
 import eu.mcone.lobby.items.manager.OfficeManager;
+import lombok.Getter;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -32,46 +33,51 @@ public class NpcInteractListener implements Listener {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
         if (e.getNpc().getData().getType().equals(EntityType.PLAYER) && e.getAction().equals(PacketPlayInUseEntity.EnumEntityUseAction.INTERACT)) {
-            switch (e.getNpc().getData().getName()) {
-                case "merchant":
-                    new TraderInventory(p);
-                    break;
-                case "bankman":
-                    if (!lp.hasItem(Item.BANKCARD)) {
-                        new BankCreateCardInventory(p);
-                    } else {
-                        new BankMenInventory(p);
-                    }
-                    break;
-                case "officetrader":
-                    new TraderInventory(p);
-                    break;
-                case "officeseller":
-                    new OfficeTraderInventory(p);
-                    break;
-                case "officepage":
-                    OfficeManager.getOffice(p);
-                    break;
-                case "assistantin1":
-                    new SecretaryInventory(p);
-                    break;
-                case "assistantin2":
-                    new SecretaryInventory(p);
-                    break;
-                case "assistantin3":
-                    new SecretaryInventory(p);
-                    break;
-                case "chauffeur":
-                    new ChauffeurInventory(p);
-                    break;
-                case "chauffeur1":
-                    new ChauffeurInventory(p);
-                    break;
-                case "chauffeur2":
-                    new ChauffeurInventory(p);
-                    break;
+            String npcName = e.getNpc().getData().getName();
+
+            if (npcName.equalsIgnoreCase(StoryNPC.MERCHANT.getNpcName())
+                    || npcName.equalsIgnoreCase(StoryNPC.OFFICE_TRADER.getNpcName())) {
+                new TraderInventory(p);
+            } else if (npcName.equalsIgnoreCase(StoryNPC.BANKMAN.getNpcName())) {
+                if (!lp.hasItem(Item.BANKCARD)) {
+                    new BankCreateCardInventory(p);
+                } else {
+                    new BankMenInventory(p);
+                }
+            } else if (npcName.equalsIgnoreCase(StoryNPC.OFFICE_SELLER.getNpcName())) {
+                new OfficeTraderInventory(p);
+            } else if (npcName.equalsIgnoreCase(StoryNPC.OFFICE_PAGE.getNpcName())) {
+                OfficeManager.getOffice(p);
+            } else if (npcName.equalsIgnoreCase(StoryNPC.ASSISTANT_1.getNpcName())
+                    || npcName.equalsIgnoreCase(StoryNPC.ASSISTANT_2.getNpcName())
+                    || npcName.equalsIgnoreCase(StoryNPC.ASSISTANT_3.getNpcName())) {
+                new SecretaryInventory(p);
+            } else if (npcName.equalsIgnoreCase(StoryNPC.CHAUFFEUR_1.getNpcName())
+                    || npcName.equalsIgnoreCase(StoryNPC.CHAUFFEUR_2.getNpcName())
+                    || npcName.equalsIgnoreCase(StoryNPC.CHAUFFEUR_3.getNpcName())) {
+                new ChauffeurInventory(p);
             }
         }
     }
 
+    public enum StoryNPC {
+        MERCHANT("merchant"),
+        BANKMAN("bankman"),
+        OFFICE_TRADER("officeTrader"),
+        OFFICE_SELLER("officeSeller"),
+        OFFICE_PAGE("officePage"),
+        ASSISTANT_1("assistant1"),
+        ASSISTANT_2("assistant2"),
+        ASSISTANT_3("assistant3"),
+        CHAUFFEUR_1("chauffeur1"),
+        CHAUFFEUR_2("chauffeur2"),
+        CHAUFFEUR_3("chauffeur3");
+
+        @Getter
+        private String npcName;
+
+        StoryNPC(final String npcName) {
+            this.npcName = npcName;
+        }
+    }
 }

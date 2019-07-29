@@ -11,19 +11,24 @@ import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
 
 public class DailyItemsBuyInventory extends CoreInventory {
 
-    public DailyItemsBuyInventory(Player player, Item toBuy) {
-        super("§8» §e§lHändler §8| §7" + toBuy.getName(), player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
+    DailyItemsBuyInventory(Player player, Item toBuy) {
+        super("§8» §e§lHändler §8| §fkaufen", player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
         CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(player.getUniqueId());
 
         setItem(InventorySlot.ROW_1_SLOT_5, toBuy.getItemStack());
-        setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.STAINED_GLASS, 13).displayName("§aKaufen").lore("§7Kaufe das Item " + toBuy.getName()).lore("§7für §a§l" + toBuy.getEmeralds()).create(), e -> {
+        setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.STAINED_GLASS, 1, 13).displayName("§aKaufen")
+                .lore("§7Kaufe das Item " + toBuy.getName(),
+                        "§7für §a§l" + toBuy.getEmeralds() + " §aEmeralds"
+                ).create(), e -> {
             if (!lobbyPlayer.getItems().contains(toBuy)) {
                 if ((corePlayer.getEmeralds() - toBuy.getEmeralds()) >= 0) {
                     corePlayer.removeEmeralds(toBuy.getEmeralds());
+                    corePlayer.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                     lobbyPlayer.addItem(toBuy);
 
                     player.closeInventory();
@@ -37,6 +42,8 @@ public class DailyItemsBuyInventory extends CoreInventory {
             }
         });
 
-        setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.STAINED_GLASS, 14).displayName("§cAbbrechen").create(), e -> new DailyItemsInventory(player));
+        setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.STAINED_GLASS, 1, 14).displayName("§cAbbrechen").create(), e -> new DailyItemsInventory(player));
+
+        openInventory();
     }
 }

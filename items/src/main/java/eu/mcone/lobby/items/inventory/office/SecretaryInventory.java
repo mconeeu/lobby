@@ -20,20 +20,14 @@ public class SecretaryInventory extends CoreInventory {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
         if (lp.hasItem(Item.OFFICE_CARD_BRONZE)) {
-
-
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.SKULL, 1, 0).displayName("§f§lFreunde einladen")
                     .lore("§7Lade deine Freunde in das Büro ein", "§7und plane deine nächsten Missionen")
                     .create(), e -> {
 
             });
-
-
         }
 
         if (lp.hasItem(Item.OFFICE_CARD_SILVER)) {
-
-
             setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.SKULL, 1, 0).displayName("§f§lFreunde einladen")
                     .lore("§7Lade deine Freunde in das Büro ein", "§7und plane deine nächsten Missionen")
                     .create(), e -> {
@@ -45,13 +39,9 @@ public class SecretaryInventory extends CoreInventory {
                     .create(), e -> {
 
             });
-
-
         }
 
         if (lp.hasItem(Item.OFFICE_CARD_GOLD)) {
-
-
             setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.SKULL, 1, 0).displayName("§f§lFreunde einladen")
                     .lore("§7Lade deine Freunde in das Büro ein", "§7und plane deine nächsten Missionen")
                     .create(), e -> {
@@ -69,8 +59,6 @@ public class SecretaryInventory extends CoreInventory {
                     .create(), e -> {
 
             });
-
-
         }
 
 

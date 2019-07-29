@@ -14,7 +14,7 @@ public enum Level {
     UNUSUAL("§3§lUngewöhnlich", ChatColor.DARK_AQUA, 24, 3),
     EPIC("§5§lEpisch", ChatColor.LIGHT_PURPLE, 12, 10),
     LEGENDARY("§6§lLegendär", ChatColor.GOLD, 3, 11),
-    MYTHISCH("§c§lMythisch", ChatColor.RED,1,14);
+    MYSTICAL("§c§lMystisch", ChatColor.RED,1,14);
 
     @Getter
     private String displayname;

@@ -41,43 +41,7 @@ public class LobbySettingsInventory extends CoreInventory {
             });
         }
 
-
-        if (p.hasPermission("lobby.silenthub")) {
-            setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.TNT, 1, 0).displayName("§f§lSpawne in deiner Privaten Lobby").create());
-
-            if (settings.isSilentHubActivatedOnJoin()) {
-                setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um das Spawnen", "§7§oin der privaten Lobby", "§7§ozu aktivieren").create(), e -> {
-                    settings.setSilentHubActivatedOnJoin(false);
-                    setSettings(p, lp);
-                    p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-                });
-            } else {
-                setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um das Spawnen", "§7§oin der privaten Lobby", "§7§ozu aktivieren").create(), e -> {
-                    settings.setSilentHubActivatedOnJoin(true);
-                    setSettings(p, lp);
-                    p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-                });
-            }
-        }
-
-        //TODO: Update Design
         setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.NETHER_STAR, 1, 0).displayName("§f§lSpawnlocation wählen").create(), e -> new PlayerSpawnLocationInventory(p));
-//
-//
-//        if (settings.isTeleportOnJoin()) {
-//            setItem(InventorySlot.ROW_3_SLOT_6, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um beim joinen nicht", "§7§ozum Spawn teleportiert zu", "§7§owerden").create(), e -> {
-//                settings.setTeleportOnJoin(false);
-//                setSettings(p, lp);
-//                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-//            });
-//        } else {
-//            setItem(InventorySlot.ROW_3_SLOT_6, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um beim joinen", "§7§ozum Spawn teleportiert zu", "§7§owerden").create(), e -> {
-//                settings.setTeleportOnJoin(true);
-//                setSettings(p, lp);
-//                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-//            });
-//        }
-
 
         setItem(InventorySlot.ROW_4_SLOT_9, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e -> Bukkit.dispatchCommand(p, "profile"));
 
@@ -88,6 +52,5 @@ public class LobbySettingsInventory extends CoreInventory {
         lp.saveData();
         new LobbySettingsInventory(p);
     }
-
 }
 

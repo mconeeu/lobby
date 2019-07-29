@@ -22,7 +22,7 @@ public abstract class BackpackInventory extends StaticClassCategoryInventory {
     private final List<Item> ownItems;
 
     public BackpackInventory(Category category, Player p) {
-        super("§8» §3§lRucksack §8| §f"+category.getName(), p);
+        super("§8» §3§lRucksack §8| §f", p);
         this.ownItems = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId()).getItems();
 
         for (Category cat : Category.values()) {
@@ -31,7 +31,11 @@ public abstract class BackpackInventory extends StaticClassCategoryInventory {
     }
 
     protected boolean playerHasItem(Item item) {
-        return ownItems.contains(item) || getPlayer().hasPermission("group.admin");
+        if (item.getCategory().equals(Category.STORY_ITEMS)) {
+            return ownItems.contains(item);
+        } else {
+            return ownItems.contains(item) || getPlayer().hasPermission("group.admin");
+        }
     }
 
     public static void registerBackpackInventory(Category category, Class<? extends BackpackInventory> inventory) {

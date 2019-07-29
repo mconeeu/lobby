@@ -7,6 +7,7 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -23,13 +24,13 @@ public class OfficeManager {
 
         if (lp.hasItem(Item.OFFICE_CARD_BRONZE)) {
             vanishPlayer(player);
-            LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.BRONZE_OFFICE.spawnLocation);
+            LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.BRONZE_OFFICE.getSpawnLocation());
         } else if (lp.hasItem(Item.OFFICE_CARD_SILVER)) {
             vanishPlayer(player);
-            LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.SILVER_OFFICE.spawnLocation);
+            LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.SILVER_OFFICE.getSpawnLocation());
         } else if (lp.hasItem(Item.OFFICE_CARD_GOLD)) {
             vanishPlayer(player);
-            LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.GOLD_OFFICE.spawnLocation);
+            LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.GOLD_OFFICE.getSpawnLocation());
         }
     }
 
@@ -65,12 +66,12 @@ public class OfficeManager {
         }
     }
 
-    //TODO Umändern!!
-    enum OfficeType {
-        BRONZE_OFFICE("office1"),
-        SILVER_OFFICE("office2"),
-        GOLD_OFFICE("office3");
+    public enum OfficeType {
+        BRONZE_OFFICE("bronzeOffice"),
+        SILVER_OFFICE("silverOffice"),
+        GOLD_OFFICE("goldOffice");
 
+        @Getter
         private String spawnLocation;
 
         OfficeType(final String spawnLocation) {

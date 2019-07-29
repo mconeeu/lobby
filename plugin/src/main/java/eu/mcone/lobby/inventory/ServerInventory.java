@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 public class ServerInventory extends CoreInventory {
 
     public ServerInventory(Player p, Gamemode modus) {
-        super("§8» "+modus.getLabel()+" §8| §8Server", p, 54);
+        super("§8» " + modus.getLabel() + " §8| §8Server", p, 54);
 
         CoreSystem.getInstance().getChannelHandler().createGetRequest(getPlayer(), servers -> {
             for (int i = 0; i <= 17; i++) {
@@ -34,7 +34,7 @@ public class ServerInventory extends CoreInventory {
                 String[] data = server.split(":");
                 if (data.length < 2) continue;
 
-                setItem(i, new ItemBuilder(Material.EMERALD, 1, 0).displayName("§f§l"+data[0]).lore("§7"+data[1]+" Spieler online", "", "§8» §c§nRechtsklick§8 | §7§oJoinen").create(), e -> {
+                setItem(i, new ItemBuilder(Material.EMERALD, 1, 0).displayName("§f§l" + data[0]).lore("§7" + data[1] + " Spieler online", "", "§8» §c§nRechtsklick§8 | §7§oJoinen").create(), e -> {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CONNECT", data[0]);
                     p.closeInventory();
                 });
