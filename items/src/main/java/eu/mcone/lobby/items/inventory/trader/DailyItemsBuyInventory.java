@@ -32,7 +32,7 @@ public class DailyItemsBuyInventory extends CoreInventory {
                     lobbyPlayer.addItem(toBuy);
 
                     player.closeInventory();
-                    player.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du hast das Item §a" + toBuy.getName() + " §2für §f" + toBuy.getEmeralds() + " Coins §2erfolgreich gekauft!");
+                    player.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du hast das Item §a" + toBuy.getName() + " §2für §f" + toBuy.getEmeralds() + " Emeralds §2erfolgreich gekauft!");
                 } else {
                     LobbyPlugin.getInstance().getMessager().send(player, "Du hast nicht genügen §a§lEmeralds!");
                 }
