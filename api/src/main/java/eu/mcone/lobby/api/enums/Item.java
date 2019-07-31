@@ -28,7 +28,7 @@ public enum Item {
     //Story items
     MAGICDRINK(11, "ZauberTrank", Category.STORY_ITEMS, Level.EPIC, 0, new ItemBuilder(Material.POTION, 1, 0).displayName("§5§lZauber Trank").lore("§7Kategorie: §bItem", "§7Seltenheit: §5Episch", "", "§7Helfe den Bürgermeister Rufi!").create()),
     MAGICWAND(12, "ZauberStab", Category.STORY_ITEMS, Level.EPIC, 0, new ItemBuilder(Material.STICK, 1, 0).displayName("§5§lZauber Stab").lore("§7Kategorie: §bItem", "§7Seltenheit: §5Episch", "", "§7Zauber wie ein Profi!").create()),
-    ONE_HIT_SWORD(13, "One Hit Schwerdt", Category.STORY_ITEMS, Level.LEGENDARY, 0, new ItemBuilder(Material.DIAMOND_SWORD, 1, 0).displayName("§6§lOne Hit Sword").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§7Schieße Blitze duch die Lobby").enchantment(Enchantment.DAMAGE_ALL, 5).unbreakable(true).itemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE).create()),
+    ONE_HIT_SWORD(13, "One Hit Schwerdt", Category.STORY_ITEMS, Level.LEGENDARY, 0, new ItemBuilder(Material.DIAMOND_SWORD, 1, 0).displayName("§6§lOne Hit Sword").lore("§7Kategorie: §bItem", "§7Seltenheit: §cMythisch", "", "§7Schieße Blitze duch die Lobby").enchantment(Enchantment.DAMAGE_ALL, 5).unbreakable(true).itemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE).create()),
     PASS(14, "Ausweiss", Category.STORY_ITEMS, Level.EPIC, 0, new ItemBuilder(Material.BOOK, 1, 0).displayName("§5§lPersonalausweis").lore("§7Kategorie: §bItem", "§7Seltenheit: §5Episch", "", "§7Dein Pass").enchantment(Enchantment.DAMAGE_ALL, 5).unbreakable(true).itemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE).create()),
     BOAT_PASS(15, "Fahrkarte", Category.STORY_ITEMS, Level.EPIC, 0, new ItemBuilder(Material.PAPER, 1, 0).displayName("§5§lFahrkarte").lore("§7Kategorie: §bItem", "§7Seltenheit: §5Episch", "§720 Coins", "§7Deine Fahrkarte zu Paradise Island").enchantment(Enchantment.DAMAGE_ALL, 5).unbreakable(true).itemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE).create()),
     RADIO_SET1(16, "Funkgerät1", Category.STORY_ITEMS, Level.EPIC, 0, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§5§lFunkgerät").lore("§7Kategorie: §bItem", "§7Seltenheit: §5Episch", "", "§7Funk verbunden mit Edward").create()),
@@ -148,7 +148,17 @@ public enum Item {
     IRON_HEAD(227, "iron head", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_HELMET, 1, 0).displayName("§3§lEisen Helm").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§72 Eisen", "§7Mit dem Eisen Helm in den Krieg").create()),
     IRON_CHESTPLATE(228, "iron panzer", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_CHESTPLATE, 1, 0).displayName("§3§lEisen Brustpanzer").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§76 Eisen", "§7Mit der Eisen Platte in den Krieg").create()),
     IRON_LEGGINS(229, "iron hose", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_LEGGINGS, 1, 0).displayName("§3§lEisen Hose").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§74 Eisen", "§7Mit der Eisen Hose in den Krieg").create()),
-    IRON_BOOTS(230, "iron stiefel", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_BOOTS, 1, 0).displayName("§3§lEisen Schuhe").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§74 Eisen", "§7Mit den Eisen Schuhe in den Krieg").create());
+    IRON_BOOTS(230, "iron stiefel", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_BOOTS, 1, 0).displayName("§3§lEisen Schuhe").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§74 Eisen", "§7Mit den Eisen Schuhe in den Krieg").create()),
+
+
+    //Ingame Items
+    BEDROCK_CB(245, "Bedrock-block", Category.INGAME, Level.LEGENDARY, 0, new ItemBuilder(Material.BEDROCK, 1, 0).displayName("§6§lBedrock").lore("§7Kategorie: §bIngame Item", "§7Seltenheit: §6Legendär", "", "§7Ich baue ab und er zerbricht nicht!").create()),
+    ENDSTONE_CB(246, "End-stone-block", Category.INGAME, Level.EPIC, 0, new ItemBuilder(Material.ENDER_STONE, 1, 0).displayName("§6§lBedrock").lore("§7Kategorie: §bIngame Item", "§7Seltenheit: §6Legendär", "", "§7Ich baue ab und er zerbricht nicht!").create()),
+    SPAWNER_CB(247, "Mob-spawner-block", Category.INGAME, Level.LEGENDARY, 0, new ItemBuilder(Material.MOB_SPAWNER, 1, 0).displayName("§6§Mob Spawner").lore("§7Kategorie: §bIngame Item", "§7Seltenheit: §6Legendär", "", "§7Ohh da ist was gespawnt!").create()),
+    DRAGON_EGG_CB(248, "Drachen-ei-block", Category.INGAME, Level.LEGENDARY, 0, new ItemBuilder(Material.DRAGON_EGG, 1, 0).displayName("§6§lDrachen Ei").lore("§7Kategorie: §bIngame Item", "§7Seltenheit: §6Legendär", "", "§7Das Ei ist wunderschön!").create()),
+    BEACON_CB(249, "Beacon-block", Category.INGAME, Level.EPIC, 0, new ItemBuilder(Material.ENDER_STONE, 1, 0).displayName("§6§Mob Spawner").lore("§7Kategorie: §bIngame Item", "§7Seltenheit: §6Legendär", "", "§7Ich baue ab und er zerbricht nicht!").create()),
+    BARRIERE_CB(247, "Barriere-block", Category.INGAME, Level.LEGENDARY, 0, new ItemBuilder(Material.BARRIER, 1, 0).displayName("§6§lBarriere").lore("§7Kategorie: §bIngame Item", "§7Seltenheit: §6Legendär", "", "§7Ich sehe den Block garnicht!").create()),
+    END_PORTAL_CB(251, "End-portal-block", Category.INGAME, Level.LEGENDARY, 0, new ItemBuilder(Material.ENDER_PORTAL_FRAME, 1, 0).displayName("§6§lEnd Portal Rahmen").lore("§7Kategorie: §bIngame Item", "§7Seltenheit: §6Legendär", "", "§7Ohh wie cool ein Rahmen!").create());
 
 
     @Getter

@@ -21,7 +21,8 @@ public enum Category {
     ANIMAL(5, "Tiere", new ItemBuilder(Material.MONSTER_EGG, 1, 55).displayName("§a§lTiere").lore("§7§oHaustiere folgen Dir wohin", "§7§oDu gehst", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").create()),
     ARMOR(6, "Rüstung", new ItemBuilder(Material.DIAMOND_CHESTPLATE, 1, 0).displayName("§d§lRüstung").lore("§7§oHier befindet sich deine Rüstung", "§7§ofür deine Gang Kämpfe", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").unbreakable(true).itemFlags(ItemFlag.HIDE_ATTRIBUTES).create()),
     MATERIAL(7, "Materialien", new ItemBuilder(Material.DIAMOND, 1, 0).displayName("§9§lMaterial").lore("§7§oHier befindet sich deine Materialien", "§7§ozum Items herstellen", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").create()),
-    EXCLUSIVE(8, "Exklusive Items", new ItemBuilder(Material.GOLD_HOE, 1, 0).displayName("§9§lExklusive Items").lore("§7§oHier befindet sich deine Exklusiven Items", "§7§owie Event oder Rang Items", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").create());
+    EXCLUSIVE(8, "Exklusive Items", new ItemBuilder(Material.GOLD_HOE, 1, 0).displayName("§c§lExklusive Items").lore("§7§oHier befindet sich deine Exklusiven Items", "§7§owie Event oder Rang Items", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").create()),
+    INGAME(9, "Ingame Items", new ItemBuilder(Material.IRON_SWORD, 1, 0).displayName("§b§lIngame Items").lore("§7§oHier befinden sich deine gewonnen Ingame Items", "§7§ofür jeden SpielModi", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").create());
 
     @Getter
     private int id;
