@@ -103,7 +103,6 @@ public enum Item {
     TRAIL_SNOW(127, "Schnee-Trail", Category.TRAIL, Level.USUAL, 40, new ItemBuilder(Material.SNOW_BALL, 1, 0).displayName("§7§lSchnee-Trail").lore("§7Kategorie: §bTrails", "§7Seltenheit: §7Gewöhnlich", "", "§7Ist schon Weinachten?").create()),
     TRAIL_WATER(128, "Wasser-Trail", Category.TRAIL, Level.USUAL, 40, new ItemBuilder(Material.WATER_BUCKET, 1, 0).displayName("§7§lWasser-Trail").lore("§7Kategorie: §bTrails", "§7Seltenheit: §7Gewöhnlich", "", "§7Huu ist das kalt").create()),
 
-
     //Animals
     ANIMAL_PIG(150, "Schwein", Category.ANIMAL, Level.UNUSUAL, 110, Skull.fromUrl("http://textures.minecraft.net/texture/621668ef7cb79dd9c22ce3d1f3f4cb6e2559893b6df4a469514e667c16aa4", 1).toItemBuilder().displayName("§3§lSchwein").lore("§7Kategorie: §bTiere", "§7Seltenheit: §3Ungewöhnlich", "", "§7Nehme dein Schwein mit auf reisen").create()),
     ANIMAL_WITHER(151, "Wither", Category.ANIMAL, Level.LEGENDARY, 160, new ItemBuilder(Material.SKULL_ITEM, 1, 1).displayName("§6§lWither").lore("§7Kategorie: §bTiere", "§7Seltenheit: §6Legendär", "", "§7Buhh").create()),
@@ -114,13 +113,11 @@ public enum Item {
     ANIMAL_SPIDER(156, "Spinne", Category.ANIMAL, Level.UNUSUAL, 110, Skull.fromUrl("http://textures.minecraft.net/texture/cd541541daaff50896cd258bdbdd4cf80c3ba816735726078bfe393927e57f1", 1).toItemBuilder().displayName("§3§lSpinne").lore("§7Kategorie: §bTiere", "§7Seltenheit: §3Ungewöhnlich", "", "§7Nehme deine Spinne mit auf reisen").create()),
     ANIMAL_RABBIT(157, "Hase", Category.ANIMAL, Level.UNUSUAL, 100, Skull.fromUrl("http://textures.minecraft.net/texture/dc7a317ec5c1ed7788f89e7f1a6af3d2eeb92d1e9879c05343c57f9d863de130", 1).toItemBuilder().displayName("§3§lHase").lore("§7Kategorie: §bTiere", "§7Seltenheit: §3Ungewöhnlich", "", "§7Nehme dein Hase mit auf reisen").create()),
 
-
     //Coin items (Chest opening)
     COINS_20(171, "20+ Coins", null, Level.USUAL, 0, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§7§lCoin-Loot ").lore("§7Kategorie: §bCoins", "§7Seltenheit: §7Gewöhnlich").create()),
     COINS_100(171, "100+ Coins", null, Level.UNUSUAL, 0, new ItemBuilder(Material.GOLD_BLOCK, 1, 0).displayName("§3§lCoin-Loot ").lore("§7Kategorie: §bCoins", "§7Seltenheit: §3Ungewöhnlich").create()),
     COINS_250(171, "250+ Coins", null, Level.EPIC, 0, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName("§5§lCoin-Loot ").lore("§7Kategorie: §bCoins", "§7Seltenheit: §5Episch").create()),
     COINS_400(171, "400+ Coins", null, Level.LEGENDARY, 0, new ItemBuilder(Material.EMERALD_BLOCK, 1, 0).displayName("§6§lCoin-Loot ").lore("§7Kategorie: §bCoins", "§7Seltenheit: §6Legendär").create()),
-
 
     //Coin material items
     MATERIAL_DIAMOND_4(180, "Material_dia_4", Category.MATERIAL, Level.UNUSUAL, 30, new ItemBuilder(Material.DIAMOND, 4, 0).displayName("§5§l4 Diamanten").lore("§7Kategorie: §9Material", "§7Seltenheit: §5Episch", "", "§730 Coins", "", "§7Diamante zum bauen").create()),
@@ -129,7 +126,6 @@ public enum Item {
     MATERIAL_IRON_6(183, "Material_iron_6", Category.MATERIAL, Level.UNUSUAL, 35, new ItemBuilder(Material.IRON_INGOT, 6, 0).displayName("§3§l6 Eisen").lore("§7Kategorie: §9Material", "§7Seltenheit: §3Ungewöhnlich", "", "§735 Coins", "", "§7Eisen zum bauen").create()),
     MATERIAL_IRON_8(184, "Material_iron_8", Category.MATERIAL, Level.UNUSUAL, 45, new ItemBuilder(Material.IRON_INGOT, 8, 0).displayName("§3§l8 Eisen").lore("§7Kategorie: §9Material", "§7Seltenheit: §3Ungewöhnlich", "", "§745 Coins", "", "§7Eisen zum bauen").create()),
     MATERIAL_IRON_10(185, "Material_iron_10", Category.MATERIAL, Level.EPIC, 55, new ItemBuilder(Material.IRON_INGOT, 10, 0).displayName("§5§l10 Eisen").lore("§7Kategorie: §9Material", "§7Seltenheit: §5Episch", "", "§755 Coins", "", "§7Eisen zum bauen").create()),
-
 
     //Boots
     PREMIUM_BOOTS(187, "Premium Schuhe", Category.EXCLUSIVE, Level.USUAL, 0, ItemBuilder.createLeatherArmorItem(Material.LEATHER_BOOTS, Color.ORANGE).displayName("§7§lPremium Schuhe").lore("§7Kategorie: §bExklusives Item", "§7Seltenheit: §7Gewöhnlich", "", "§7Premium Boots").create()),
@@ -143,14 +139,12 @@ public enum Item {
     DEVELOPER_BOOTS(195, "Developer Schuhe", Category.EXCLUSIVE, Level.MYSTICAL, 0, ItemBuilder.createLeatherArmorItem(Material.LEATHER_BOOTS, Color.AQUA).displayName("§6§lDeveloper Schuhe").lore("§7Kategorie: §bExklusives Item", "§7Seltenheit: §cMythisch", "", "§7Nike Developer Ultra Boost").create()),
     ADMIN_BOOTS(196, "Admin Schuhe", Category.EXCLUSIVE, Level.MYSTICAL, 0, ItemBuilder.createLeatherArmorItem(Material.LEATHER_BOOTS, Color.RED).displayName("§6§lAdminstrator Schuhe").lore("§7Kategorie: §bExklusives Item", "§7Seltenheit: §cMythisch", "", "§7ADMIN SCHUHE ICH BIN DER BOSS").create()),
 
-
     //Armor
     IRON_SWORD(226, "iron schwerdt", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_SWORD, 1, 0).displayName("§3§lEisen Schwerdt").lore("§7Kategorie: §bSchwerter", "§7Seltenheit: §3Ungewöhnlich", "§74 Eisen", "§7Mit dem Eisen Schwerdt in den Krieg").create()),
     IRON_HEAD(227, "iron head", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_HELMET, 1, 0).displayName("§3§lEisen Helm").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§72 Eisen", "§7Mit dem Eisen Helm in den Krieg").create()),
     IRON_CHESTPLATE(228, "iron panzer", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_CHESTPLATE, 1, 0).displayName("§3§lEisen Brustpanzer").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§76 Eisen", "§7Mit der Eisen Platte in den Krieg").create()),
     IRON_LEGGINS(229, "iron hose", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_LEGGINGS, 1, 0).displayName("§3§lEisen Hose").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§74 Eisen", "§7Mit der Eisen Hose in den Krieg").create()),
     IRON_BOOTS(230, "iron stiefel", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_BOOTS, 1, 0).displayName("§3§lEisen Schuhe").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§74 Eisen", "§7Mit den Eisen Schuhe in den Krieg").create()),
-
 
     //Ingame Items
     BEDROCK_CB(245, "Bedrock-block", Category.INGAME, Level.LEGENDARY, 0, new ItemBuilder(Material.BEDROCK, 1, 0).displayName("§6§lBedrock").lore("§7Kategorie: §bIngame Item", "§7Seltenheit: §6Legendär", "", "§7Ich baue ab und er zerbricht nicht!").create()),
@@ -160,7 +154,6 @@ public enum Item {
     BEACON_CB(249, "Beacon-block", Category.INGAME, Level.EPIC, 0, new ItemBuilder(Material.ENDER_STONE, 1, 0).displayName("§6§Mob Spawner").lore("§7Kategorie: §bIngame Item", "§7Seltenheit: §6Legendär", "", "§7Ich baue ab und er zerbricht nicht!").create()),
     BARRIERE_CB(247, "Barriere-block", Category.INGAME, Level.LEGENDARY, 0, new ItemBuilder(Material.BARRIER, 1, 0).displayName("§6§lBarriere").lore("§7Kategorie: §bIngame Item", "§7Seltenheit: §6Legendär", "", "§7Ich sehe den Block garnicht!").create()),
     END_PORTAL_CB(251, "End-portal-block", Category.INGAME, Level.LEGENDARY, 0, new ItemBuilder(Material.ENDER_PORTAL_FRAME, 1, 0).displayName("§6§lEnd Portal Rahmen").lore("§7Kategorie: §bIngame Item", "§7Seltenheit: §6Legendär", "", "§7Ohh wie cool ein Rahmen!").create());
-
 
     @Getter
     private int id, emeralds;

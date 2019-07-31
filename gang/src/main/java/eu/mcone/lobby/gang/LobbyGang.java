@@ -123,7 +123,6 @@ public class LobbyGang extends LobbyAddon {
         return null;
     }
 
-
     public Gang getGang(UUID uuid) {
         for (Gang gang : gangs) {
             if (gang.getUuid().equals(uuid)) {
@@ -133,5 +132,4 @@ public class LobbyGang extends LobbyAddon {
 
         return null;
     }
-
 }

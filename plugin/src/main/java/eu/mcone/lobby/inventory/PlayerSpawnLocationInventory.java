@@ -24,26 +24,27 @@ public class PlayerSpawnLocationInventory extends CoreInventory {
         LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
         PlayerSpawnLocation playerSpawnLocation = PlayerSpawnLocation.valueOf(lobbyPlayer.getSettings().getSpawnLocation());
 
-        for (PlayerSpawnLocation spawns : PlayerSpawnLocation.values()) {
-            if (spawns.equals(PlayerSpawnLocation.SILENT_LOBBY)) {
-                if (player.hasPermission("lobby.silenthub")) {
-                    setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.TNT, 1, 0).displayName("§f§lSpawne in deiner Privaten Lobby").create());
+        if (player.hasPermission("lobby.silenthub")) {
+            setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.TNT, 1, 0).displayName("§f§lSpawne in deiner Privaten Lobby").create());
 
-                    if (playerSpawnLocation.equals(spawns)) {
-                        setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um das Spawnen", "§7§oin der privaten Lobby", "§7§ozu aktivieren").create(), e -> {
-                            setData(lobbyPlayer, PlayerSpawnLocation.LAST_LOGIN);
-                            player.playSound(player.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-                        });
-                    } else {
-                        setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um das Spawnen", "§7§oin der privaten Lobby", "§7§ozu aktivieren").create(), e -> {
-                            setData(lobbyPlayer, PlayerSpawnLocation.SILENT_LOBBY);
-                            player.playSound(player.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-                        });
-                    }
-                } else {
-                    setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.TNT, 0, 0).displayName("§6§lKaufe Premium und die Silentlobby benutzen zu könenn.").create());
-                }
-            } else if (spawns.equals(PlayerSpawnLocation.OFFICE)) {
+            if (lobbyPlayer.getSettings().isSpawnInSilentLobby()) {
+                setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um das Spawnen", "§7§oin der privaten Lobby", "§7§ozu aktivieren").create(), e -> {
+                    setSilentData(lobbyPlayer, false);
+                    player.playSound(player.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+                });
+            } else {
+                setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um das Spawnen", "§7§oin der privaten Lobby", "§7§ozu aktivieren").create(), e -> {
+                    setSilentData(lobbyPlayer, true);
+
+                    player.playSound(player.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+                });
+            }
+        } else {
+            setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.TNT, 0, 0).displayName("§6§lKaufe Premium und die Silentlobby benutzen zu könenn.").create());
+        }
+
+        for (PlayerSpawnLocation spawns : PlayerSpawnLocation.values()) {
+            if (spawns.equals(PlayerSpawnLocation.OFFICE)) {
                 if (lobbyPlayer.hasItem(Item.OFFICE_CARD_BRONZE)
                         || lobbyPlayer.hasItem(Item.OFFICE_CARD_SILVER)
                         || lobbyPlayer.hasItem(Item.OFFICE_CARD_GOLD)) {
@@ -101,6 +102,12 @@ public class PlayerSpawnLocationInventory extends CoreInventory {
 
     private void setData(LobbyPlayer lobbyPlayer, PlayerSpawnLocation playerSpawnLocation) {
         lobbyPlayer.getSettings().setSpawnLocation(playerSpawnLocation.toString());
+        lobbyPlayer.saveData();
+        new PlayerSpawnLocationInventory(lobbyPlayer.bukkit());
+    }
+
+    private void setSilentData(LobbyPlayer lobbyPlayer, boolean spawnInSilentLobby) {
+        lobbyPlayer.getSettings().setSpawnInSilentLobby(spawnInSilentLobby);
         lobbyPlayer.saveData();
         new PlayerSpawnLocationInventory(lobbyPlayer.bukkit());
     }

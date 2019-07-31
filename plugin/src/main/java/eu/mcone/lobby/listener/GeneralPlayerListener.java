@@ -39,10 +39,12 @@ public class GeneralPlayerListener implements Listener {
         if (e.getReason().equals(LobbyPlayerLoadedEvent.Reason.JOINED)) {
             if (!p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.LAST_LOGIN.toString())) {
                 Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> {
-                    if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.SILENT_LOBBY.toString())) {
+                    if (p.getSettings().isSpawnInSilentLobby()) {
                         SilentLobbyUtils.activateSilentLobby(bp);
                         LobbyPlugin.getInstance().getMessager().send(bp, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
-                    } else if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.SPAWN.toString())) {
+                    }
+
+                    if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.SPAWN.toString())) {
                         PlayerSpawnLocation.SPAWN.getWorld().teleportSilently(bp, "spawn");
                     } else if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.OFFICE.toString())) {
                         if (p.hasItem(Item.OFFICE_CARD_BRONZE)) {

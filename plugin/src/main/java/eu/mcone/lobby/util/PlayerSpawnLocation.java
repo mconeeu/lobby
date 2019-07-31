@@ -8,7 +8,6 @@ import org.bukkit.Material;
 @Getter
 public enum PlayerSpawnLocation {
     LAST_LOGIN("§f§lZuletzt eingelogt", Material.GRASS, null, null),
-    SILENT_LOBBY("§f§lSilentlobby", Material.TNT, LobbyWorld.ONE_ISLAND.getWorld(), "spawn"),
     SPAWN("§f§lSpawn", Material.NETHER_STAR, LobbyWorld.ONE_ISLAND.getWorld(), "spawn"),
     OFFICE("§f§lBüro", Material.BOOK_AND_QUILL, LobbyWorld.OFFICE.getWorld(), null);
 

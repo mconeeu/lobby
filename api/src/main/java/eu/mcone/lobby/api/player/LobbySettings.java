@@ -9,14 +9,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 @NoArgsConstructor
 @Getter @Setter
 @ToString
 public class LobbySettings {
 
-    private boolean allowTrading;
+    private boolean allowTrading, spawnInSilentLobby;
     private String spawnLocation = "SPAWN";
 
 }
