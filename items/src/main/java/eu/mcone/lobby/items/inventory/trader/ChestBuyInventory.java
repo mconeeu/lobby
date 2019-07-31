@@ -25,40 +25,40 @@ class ChestBuyInventory extends CoreInventory {
 
         setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.PAPER, 1, 0).displayName("§8» §7Du besitzt §f" +lp.getChests() + "§7 Kisten").create());
 
-        setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.CHEST, 1, 0).displayName("§c§l1 Kiste").lore("§7Kosten: §f§o100 Coins", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
-            if (cp.getCoins() - 100 >= 0) {
-                cp.removeCoins(100);
+        setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.CHEST, 1, 0).displayName("§c§l1 Kiste").lore("§7Kosten: §f§o50 Emeralds", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
+            if (cp.getEmeralds() - 50 >= 0) {
+                cp.removeEmeralds(50);
                 lp.addChests(1);
 
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §aDu hast 1 Kiste gekauft!");
             } else {
-                p.sendMessage("§8[§7§l!§8] §eHändler §8» §4Du hast nicht genügend Coins");
+                p.sendMessage("§8[§7§l!§8] §eHändler §8» §4Du hast nicht genügend Emeralds!");
             }
             p.closeInventory();
         });
 
 
-        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.CHEST, 5, 0).displayName("§c§l5 Kisten").lore("§7Kosten: §f§o475 Coins", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
-            if (cp.getCoins() - 475 >= 0) {
-                cp.removeCoins(475);
+        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.CHEST, 5, 0).displayName("§c§l5 Kisten").lore("§7Kosten: §f§o250 Emeralds!", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
+            if (cp.getEmeralds() - 250 >= 0) {
+                cp.removeEmeralds(250);
                 lp.addChests(5);
 
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §aDu hast 5 Kisten gekauft!");
             } else {
-                p.sendMessage("§8[§7§l!§8] §eHändler §8» §4Du hast nicht genügend Coins");
+                p.sendMessage("§8[§7§l!§8] §eHändler §8» §4Du hast nicht genügend Emeralds!");
             }
             p.closeInventory();
         });
 
 
-        setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.CHEST, 10, 0).displayName("§c§l10 Kisten").lore("§7Kosten: §f§o950 Coins", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
-            if (cp.getCoins() - 950 >= 0) {
-                cp.removeCoins(950);
+        setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.CHEST, 10, 0).displayName("§c§l10 Kisten").lore("§7Kosten: §f§o500 Emeralds", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
+            if (cp.getCoins() - 500 >= 0) {
+                cp.removeCoins(500);
                 lp.addChests(10);
 
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §aDu hast 10 Kisten gekauft!");
             } else {
-                p.sendMessage("§8[§7§l!§8] §eHändler §8» §4Du hast nicht genügend Coins");
+                p.sendMessage("§8[§7§l!§8] §eHändler §8» §4Du hast nicht genügend Emeralds");
             }
             p.closeInventory();
         });

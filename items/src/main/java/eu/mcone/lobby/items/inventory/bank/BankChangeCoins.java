@@ -27,16 +27,16 @@ class BankChangeCoins extends CoreInventory {
                 new ItemBuilder(Material.EMERALD, 1, 0)
                         .displayName("§a§l100 Emeralds")
                         .lore(
-                                "§f§n10.000 Coinss§f entsprechen §n100 Emeralds",
+                                "§f§n25.000 Coinss§f entsprechen §n100 Emeralds",
                                 "",
                                 "§8» §f§nLinksklick§8 | §7§oBestätigen")
                         .create(), e -> {
-                    if (cp.getCoins() - 10000 >= 0) {
-                        cp.removeCoins(10000);
+                    if (cp.getCoins() - 25000 >= 0) {
+                        cp.removeCoins(25000);
                         cp.addEmeralds(100);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
-                        LobbyPlugin.getInstance().getMessager().send(p, "Du has erfolgreich §f10.000 Coins§7 in §f100 Emeralds §fumgetauscht");
+                        LobbyPlugin.getInstance().getMessager().send(p, "Du has erfolgreich §f25.000 Coins§7 in §f100 Emeralds §fumgetauscht");
                         new BankMenInventory(p);
                     } else {
                         LobbyPlugin.getInstance().getMessager().send(p, "§cDu hast nicht genügend Coins!");
@@ -49,16 +49,16 @@ class BankChangeCoins extends CoreInventory {
                 new ItemBuilder(Material.EMERALD, 1, 0)
                         .displayName("§a§l280 Emeralds")
                         .lore(
-                                "§f§n25.000 Coins§f entsprechen §n280 Emeralds",
+                                "§f§n75.000 Coins§f entsprechen §n280 Emeralds",
                                 "",
                                 "§8» §f§nLinksklick§8 | §7§oBestätigen")
                         .create(), e -> {
-                    if (cp.getCoins() - 25000 >= 0) {
-                        cp.removeCoins(25000);
+                    if (cp.getCoins() - 75000 >= 0) {
+                        cp.removeCoins(75000);
                         cp.addEmeralds(280);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
-                        LobbyPlugin.getInstance().getMessager().send(p, "Du has erfolgreich §f25.000 Coins§7 in §f280 Emeralds §fumgetauscht");
+                        LobbyPlugin.getInstance().getMessager().send(p, "Du has erfolgreich §f75.000 Coins§7 in §f280 Emeralds §fumgetauscht");
                         new BankMenInventory(p);
                     } else {
                         LobbyPlugin.getInstance().getMessager().send(p, "§cDu hast nicht genügend Coins!");
@@ -71,16 +71,16 @@ class BankChangeCoins extends CoreInventory {
                 new ItemBuilder(Material.EMERALD, 1, 0)
                         .displayName("§a§l450 Emeralds")
                         .lore(
-                                "§f§n60.000 Coins§f entsprechen §n450 Emeralds",
+                                "§f§n165.000 Coins§f entsprechen §n450 Emeralds",
                                 "",
                                 "§8» §f§nLinksklick§8 | §7§oBestätigen")
                         .create(), e -> {
-                    if (cp.getCoins() - 60000 >= 0) {
-                        cp.removeCoins(60000);
+                    if (cp.getCoins() - 165000 >= 0) {
+                        cp.removeCoins(165000);
                         cp.addEmeralds(450);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
-                        LobbyPlugin.getInstance().getMessager().send(p, "Du has erfolgreich §f60.000 Coins§7 in §f450 Emeralds §fumgetauscht");
+                        LobbyPlugin.getInstance().getMessager().send(p, "Du has erfolgreich §f165.000 Coins§7 in §f450 Emeralds §fumgetauscht");
                         new BankMenInventory(p);
                     } else {
                         LobbyPlugin.getInstance().getMessager().send(p, "§cDu hast nicht genügend Coins!");

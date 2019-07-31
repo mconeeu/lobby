@@ -84,6 +84,7 @@ public class BankMenInventory extends CoreInventory {
 
         }
 
+
         openInventory();
     }
 }
