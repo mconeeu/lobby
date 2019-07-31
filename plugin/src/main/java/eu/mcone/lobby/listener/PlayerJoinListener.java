@@ -121,10 +121,18 @@ public class PlayerJoinListener implements Listener {
                 p.getInventory().setBoots(Item.ADMIN_BOOTS.getItemStack());
                 break;
         }
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
+        if (!lp.hasItem(Item.BANKCARD_PREMIUM)) {
+            if (p.hasPermission("mcone.premium")) {
+                lp.addItem(Item.BANKCARD_PREMIUM);
+            }
+        }
+
+
 
         Bukkit.getScheduler().runTaskAsynchronously(LobbyPlugin.getInstance(), () -> {
-            LobbyPlayer lp = new LobbyPlayer(cp);
-            Bukkit.getPluginManager().callEvent(new LobbyPlayerLoadedEvent(lp, reson));
+            LobbyPlayer lobbyplayer = new LobbyPlayer(cp);
+            Bukkit.getPluginManager().callEvent(new LobbyPlayerLoadedEvent(lobbyplayer, reson));
             LOADING_SUCCESS_MSG.send(p);
 
             p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());

@@ -20,7 +20,6 @@ import org.bukkit.scoreboard.DisplaySlot;
 public class BankCreateCardInventory extends CoreInventory {
 
     public BankCreateCardInventory(Player p) {
-//        super("§8» §d§lBänker §8| §fKonto erstellen", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         super("§8» §d§lBänker", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 

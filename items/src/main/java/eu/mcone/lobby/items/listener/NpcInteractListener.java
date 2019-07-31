@@ -39,7 +39,7 @@ public class NpcInteractListener implements Listener {
                     || npcName.equalsIgnoreCase(StoryNPC.OFFICE_TRADER.getNpcName())) {
                 new TraderInventory(p);
             } else if (npcName.equalsIgnoreCase(StoryNPC.BANKMAN.getNpcName())) {
-                if (!lp.hasItem(Item.BANKCARD)) {
+                if (!lp.hasItem(Item.BANKCARD) || !lp.hasItem(Item.BANKCARD_PREMIUM)) {
                     new BankCreateCardInventory(p);
                 } else {
                     new BankMenInventory(p);
