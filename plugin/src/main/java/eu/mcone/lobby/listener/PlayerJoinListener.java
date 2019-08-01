@@ -124,7 +124,13 @@ public class PlayerJoinListener implements Listener {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
         if (!lp.hasItem(Item.BANKCARD_PREMIUM)) {
             if (p.hasPermission("mcone.premium")) {
-                lp.addItem(Item.BANKCARD_PREMIUM);
+                if (!lp.hasItem(Item.BANKCARD)) {
+                    lp.addItem(Item.BANKCARD_PREMIUM);
+                } else {
+                    lp.removeItem(Item.BANKCARD);
+                    lp.addItem(Item.BANKCARD_PREMIUM);
+                }
+
             }
         }
 
