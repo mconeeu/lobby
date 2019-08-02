@@ -121,25 +121,26 @@ public class PlayerJoinListener implements Listener {
                 p.getInventory().setBoots(Item.ADMIN_BOOTS.getItemStack());
                 break;
         }
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
-        if (!lp.hasItem(Item.BANKCARD_PREMIUM)) {
-            if (p.hasPermission("mcone.premium")) {
-                if (!lp.hasItem(Item.BANKCARD)) {
-                    lp.addItem(Item.BANKCARD_PREMIUM);
-                } else {
-                    lp.removeItem(Item.BANKCARD);
-                    lp.addItem(Item.BANKCARD_PREMIUM);
-                }
 
-            }
-        }
 
 
 
         Bukkit.getScheduler().runTaskAsynchronously(LobbyPlugin.getInstance(), () -> {
-            LobbyPlayer lobbyplayer = new LobbyPlayer(cp);
-            Bukkit.getPluginManager().callEvent(new LobbyPlayerLoadedEvent(lobbyplayer, reson));
+            LobbyPlayer lp = new LobbyPlayer(cp);
+            Bukkit.getPluginManager().callEvent(new LobbyPlayerLoadedEvent(lp, reson));
             LOADING_SUCCESS_MSG.send(p);
+
+            if (!lp.hasItem(Item.BANKCARD_PREMIUM)) {
+                if (p.hasPermission("mcone.premium")) {
+                    if (!lp.hasItem(Item.BANKCARD)) {
+                        lp.addItem(Item.BANKCARD_PREMIUM);
+                    } else {
+                        lp.removeItem(Item.BANKCARD);
+                        lp.addItem(Item.BANKCARD_PREMIUM);
+                    }
+
+                }
+            }
 
             p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
         });
@@ -151,7 +152,7 @@ public class PlayerJoinListener implements Listener {
             NPC npc = LobbyWorld.ONE_ISLAND.getWorld().getNPC(gm.getName().toLowerCase());
 
             if (npc != null) {
-                ((PlayerNpc) npc).playLabymodEmote(LabyModEmote.INFINITY_DAB, e.getPlayer());
+                ((PlayerNpc) npc).playLabymodEmote(LabyModEmote.T_POSE, e.getPlayer());
             }
         }
     }

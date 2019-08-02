@@ -7,6 +7,7 @@ package eu.mcone.lobby.story.listener;
 
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -21,16 +22,19 @@ public class LobbyPlayerLoadedListener implements Listener {
         LobbyPlayer lp = e.getPlayer();
         Player p = lp.bukkit();
 
-        spawnStoryNpcs(p, lp.getProgressId());
+        spawnStoryNpcs(lp);
         spawnStoryHolograms(p, lp.getProgressId());
+
     }
 
-    public static void spawnStoryNpcs(Player p, int progressId) {
-        if (progressId <= 15) {
-            if (progressId > 0) {
-                Progress.getProgressByID(progressId).getNpc().toggleVisibility(p, true);
+    public static void spawnStoryNpcs(LobbyPlayer lp) {
+        Player p = lp.bukkit();
 
-                if (progressId == Progress.INFECTION.getId()) {
+        if (lp.getProgressId() <= 15) {
+            if (lp.getProgressId() > 0) {
+                Progress.getProgressByID(lp.getProgressId()).getNpc().toggleVisibility(p, true);
+
+                if (lp.getProgressId() == Progress.INFECTION.getId()) {
                     PlayerNpc infectionNpc = Progress.INFECTION.getNpc();
 
                     infectionNpc.setSkin(NpcListener.RUFI_HEADLED_SKIN, p);
@@ -38,10 +42,14 @@ public class LobbyPlayerLoadedListener implements Listener {
                 }
             }
 
-            Progress future = Progress.getProgressByID(progressId + 1);
+            Progress future = Progress.getProgressByID(lp.getProgressId() + 1);
             if (future != null) {
                 future.getNpc().toggleVisibility(p, true);
             }
+        }
+
+        if (lp.getBankprogressId() != BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
+            LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, false);
         }
     }
 

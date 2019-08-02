@@ -25,8 +25,10 @@ public class CoreManagerReloadListener implements Listener {
             npc.togglePlayerVisibility(ListMode.WHITELIST);
         }
 
+
         for (LobbyPlayer lp : LobbyPlugin.getInstance().getLobbyPlayers()) {
-            LobbyPlayerLoadedListener.spawnStoryNpcs(lp.bukkit(), lp.getProgressId());
+            LobbyPlayerLoadedListener.spawnStoryNpcs(lp);
+            LobbyPlayerLoadedListener.spawnStoryNpcs(lp);
         }
     }
 

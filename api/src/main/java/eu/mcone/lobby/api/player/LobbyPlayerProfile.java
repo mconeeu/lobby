@@ -22,13 +22,13 @@ import java.util.Map;
 public class LobbyPlayerProfile extends GameProfile {
 
     private List<Integer> items = new ArrayList<>();
-    private int chests, progressId;
+    private int chests, progressId, bankprogressId;
     private LobbySettings settings = new LobbySettings();
     private Map<String, Long> secrets = new HashMap<>();
 
     private transient List<Item> itemList = new ArrayList<>();
 
-    LobbyPlayerProfile(Player p, List<Item> items, int chests, int progressId, LobbySettings settings, Map<String, Long> secrets) {
+    LobbyPlayerProfile(Player p, List<Item> items, int chests, int progressId, int bankprogressId, LobbySettings settings, Map<String, Long> secrets) {
         super(p);
 
         this.items = new ArrayList<>();
@@ -37,6 +37,7 @@ public class LobbyPlayerProfile extends GameProfile {
         }
         this.chests = chests;
         this.progressId = progressId;
+        this.bankprogressId = bankprogressId;
         this.settings = settings;
         this.secrets = secrets;
     }

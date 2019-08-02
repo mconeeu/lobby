@@ -9,6 +9,7 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.player.plugin.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.gang.Gang;
@@ -28,7 +29,7 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
     @Getter
     private List<Item> items;
     @Getter
-    private int chests, progressId;
+    private int chests, progressId, bankprogressId;
     @Getter
     @Setter
     private LobbySettings settings;
@@ -46,6 +47,7 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
         this.items = profile.getItemList();
         this.chests = profile.getChests();
         this.progressId = profile.getProgressId();
+        this.bankprogressId = profile.getBankprogressId();
         this.settings = profile.getSettings();
         this.secrets = profile.getSecrets();
         LobbyPlugin.getInstance().registerLobbyPlayer(this);
@@ -60,7 +62,7 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
 
     @Override
     public void saveData() {
-        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), items, chests, progressId, settings, secrets));
+        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), items, chests, progressId, bankprogressId, settings, secrets));
     }
 
     public boolean isInGang() {
@@ -136,6 +138,11 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
 
     public void setProgress(Progress progress) {
         this.progressId = progress.getId();
+        saveData();
+    }
+
+    public void setBankProgress(BankProgress bankprogress) {
+        this.progressId = bankprogress.getId();
         saveData();
     }
 

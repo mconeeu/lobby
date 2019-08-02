@@ -43,6 +43,8 @@ public class LobbyItems extends LobbyAddon {
         BackpackInventory.registerBackpackInventory(Category.ARMOR, ArmorInventory.class);
         BackpackInventory.registerBackpackInventory(Category.MATERIAL, MaterialInventory.class);
         BackpackInventory.registerBackpackInventory(Category.EXCLUSIVE, ExclusiveInventory.class);
+        BackpackInventory.registerBackpackInventory(Category.INGAME, IngameInventory.class);
+
 
         LobbyPlugin.getInstance().registerEvents(
                 new BombListener(),
