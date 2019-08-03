@@ -115,10 +115,10 @@ public class NpcListener implements Listener {
                         return;
                     }
                     case "smuggler": {
-                        if (lp.getProgressId() > Progress.DUTY.getId()) {
+                        if (lp.getProgressId() > Progress.DUTY.getId() || lp.getBankprogressId() == BankProgress.SMUGGLER.getId()) {
                             new SmugglerInventory(p);
                         } else {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fSchmuggler §8|§7 Wer bist du ? Kenn ich dich.");
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fSchmuggler §8|§7 Ich handel nur mit Leuten die ich kenne hol dir ein Ausweis!");
                         }
                         break;
                     }

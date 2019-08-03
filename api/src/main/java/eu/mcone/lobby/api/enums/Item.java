@@ -43,12 +43,12 @@ public enum Item {
 
     //bank robbery
 
-    GOLD_BARDING(24, "Gold Barren", Category.STORY_ITEMS, Level.LEGENDARY, 0, new ItemBuilder(Material.GOLD_BARDING, 64, 0).displayName("§6§lGold Barren").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§724 Karat Barren").create()),
+    GOLD_BARDING(24, "Gold Barren", Category.STORY_ITEMS, Level.LEGENDARY, 0, new ItemBuilder(Material.GOLD_INGOT, 0).displayName("§6§lGold Barren").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§724 Karat Barren").create()),
     BUTTON(25, "Knopf im Ohr", Category.STORY_ITEMS, Level.LEGENDARY, 0, new ItemBuilder(Material.STONE_BUTTON, 1, 0).displayName("§6§lKnopf im Ohr").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§7Verbunden mit John").create()),
     BANK_MAP(26, "Bank Plan", Category.STORY_ITEMS, Level.LEGENDARY, 0, new ItemBuilder(Material.EMPTY_MAP, 1, 0).displayName("§6§lPlan der Bank").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§7Ach dahinten ist der Tresor").create()),
     WHITE_WOOL(27, "Bank Plan", Category.STORY_ITEMS, Level.UNUSUAL, 0, new ItemBuilder(Material.WOOL, 37, 0).displayName("§3§lWeiße Wolle").lore("§7Kategorie: §bItem", "§7Seltenheit: §3Ungewöhnlich", "", "§7Zum nähen geeignet").create()),
-    BANK_OUTFIT(28, "Bank Outfit", Category.STORY_ITEMS, Level.MYSTICAL, 0, new ItemBuilder(Material.CHEST, 1, 0).displayName("§3§lBank Outfit im Paket").lore("§7Kategorie: §bItem", "§7Seltenheit: §cMythisch", "", "§7Sehe aus wie ein Bänker").create()),
-    GOLD_NUGGET(29, "Gold Münze", Category.STORY_ITEMS, Level.MYSTICAL, 0, new ItemBuilder(Material.GOLD_NUGGET, 1, 0).displayName("§3§lGold Münze").lore("§7Kategorie: §bItem", "§7Seltenheit: §cMythisch", "", "§7Ein kleines Geschenk von John").create()),
+    BANK_OUTFIT(28, "Bank Outfit", Category.STORY_ITEMS, Level.UNUSUAL, 0, new ItemBuilder(Material.CHEST, 1, 0).displayName("§3§lBank Outfit im Packet").lore("§7Kategorie: §bItem", "§7Seltenheit: §3Ungewöhnlich", "", "§7Sehe aus wie ein Bänker").create()),
+    GOLD_NUGGET(29, "Gold Münze", Category.STORY_ITEMS, Level.MYSTICAL, 0, new ItemBuilder(Material.GOLD_NUGGET, 1, 0).displayName("§c§lGold Münze").lore("§7Kategorie: §bItem", "§7Seltenheit: §cMythisch", "", "§7Ein kleines Geschenk von John").create()),
 
 
     //Heads
