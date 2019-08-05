@@ -8,6 +8,7 @@ package eu.mcone.lobby.api.player;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.player.plugin.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.gang.Gang;
 import lombok.Getter;
@@ -53,7 +54,7 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
 
     @Override
     public void saveData() {
-        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, settings, secrets));
+        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, bankprogressId, settings, secrets));
     }
 
     public boolean isInGang() {
