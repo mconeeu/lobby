@@ -6,11 +6,11 @@
 package eu.mcone.lobby.pets;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.gamesystem.api.lobby.backpack.BackpackInventory;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.api.enums.Item;
-import eu.mcone.lobby.items.inventory.backpack.BackpackInventory;
 import eu.mcone.lobby.pets.inventory.backpack.AnimalInventory;
 import eu.mcone.lobby.pets.listener.EntityTrackListener;
 import lombok.Getter;

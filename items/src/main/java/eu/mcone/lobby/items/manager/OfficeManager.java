@@ -3,6 +3,7 @@ package eu.mcone.lobby.items.manager;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.scoreboard.CoreScoreboard;
 import eu.mcone.coresystem.api.bukkit.scoreboard.MainScoreboard;
+import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Item;
@@ -20,7 +21,7 @@ public class OfficeManager {
     private static List<Player> VANISHED = new ArrayList<>();
 
     public static void getOffice(Player player) {
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
+        GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(player.getUniqueId());
 
         if (lp.hasItem(Item.OFFICE_CARD_BRONZE)) {
             vanishPlayer(player);

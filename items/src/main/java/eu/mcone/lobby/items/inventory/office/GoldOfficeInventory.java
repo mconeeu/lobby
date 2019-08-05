@@ -6,6 +6,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -18,7 +19,7 @@ public class GoldOfficeInventory extends CoreInventory {
     GoldOfficeInventory(Player p) {
         super("§8» §d§lBüro §8| §fGold", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
+        GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
 
         setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§aBüro kaufen").lore("§a§lBüro kosten 500 Emeralds").create(),
                 e -> {

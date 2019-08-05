@@ -7,15 +7,12 @@ package eu.mcone.lobby.items;
 
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.items.command.ChestCMD;
-import eu.mcone.lobby.items.inventory.backpack.*;
 import eu.mcone.lobby.items.listener.InventoryTriggerListener;
 import eu.mcone.lobby.items.listener.LobbyPlayerLoadedListener;
 import eu.mcone.lobby.items.listener.NpcInteractListener;
 import eu.mcone.lobby.items.listener.effects.*;
 import eu.mcone.lobby.items.manager.DailyShopManager;
-import eu.mcone.lobby.items.manager.TrailManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -26,23 +23,12 @@ public class LobbyItems extends LobbyAddon {
     @Getter
     private static LobbyItems instance;
     @Getter
-    private TrailManager trailManager;
-    @Getter
     private DailyShopManager dailyShopManager;
 
     @Override
     public void onEnable() {
         instance = this;
-        trailManager = new TrailManager();
         dailyShopManager = new DailyShopManager();
-
-        BackpackInventory.registerBackpackInventory(Category.TRAIL, TrailInventory.class);
-        BackpackInventory.registerBackpackInventory(Category.GADGET, GadgetInventory.class);
-        BackpackInventory.registerBackpackInventory(Category.HAT, HatsInventory.class);
-        BackpackInventory.registerBackpackInventory(Category.OUTFITS, OutfitInventory.class);
-        BackpackInventory.registerBackpackInventory(Category.ARMOR, ArmorInventory.class);
-        BackpackInventory.registerBackpackInventory(Category.MATERIAL, MaterialInventory.class);
-        BackpackInventory.registerBackpackInventory(Category.EXCLUSIVE, ExclusiveInventory.class);
 
         LobbyPlugin.getInstance().registerEvents(
                 new BombListener(),
@@ -69,9 +55,7 @@ public class LobbyItems extends LobbyAddon {
     }
 
     @Override
-    public void onDisable() {
-        trailManager.shutdown();
-    }
+    public void onDisable() {}
 
     @Override
     public void reload() {}

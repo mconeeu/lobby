@@ -19,7 +19,7 @@ import org.bukkit.entity.Player;
 class ChestBuyInventory extends CoreInventory {
 
     ChestBuyInventory(Player p) {
-        super("§8» §e§lHändler §8| §fKisten kaufen", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
+        super("§8» §e§lHändler §8| §fKisten", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 

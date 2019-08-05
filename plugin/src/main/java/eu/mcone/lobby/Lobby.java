@@ -51,7 +51,7 @@ public class Lobby extends LobbyPlugin {
     ));
 
     @Override
-    public void onEnable() {
+    public void onGameEnable() {
         instance = this;
 
         players = new ArrayList<>();
@@ -97,6 +97,7 @@ public class Lobby extends LobbyPlugin {
         for (Player p : Bukkit.getOnlinePlayers()) {
             PlayerJoinListener.loadLobbyPlayer(p, LobbyPlayerLoadedEvent.Reason.RELOADED);
         }
+
         if (Bukkit.getOnlinePlayers().size() > 0) {
             for (Gamemode gm : Gamemode.values()) {
                 NPC npc = LobbyWorld.ONE_ISLAND.getWorld().getNPC(gm.getName().toLowerCase());
@@ -109,7 +110,7 @@ public class Lobby extends LobbyPlugin {
     }
 
     @Override
-    public void onDisable() {
+    public void onGameDisable() {
         sendConsoleMessage("§cDeactivating AddOns...");
         for (LobbyAddon addon : ADDONS) {
             addon.onDisable();

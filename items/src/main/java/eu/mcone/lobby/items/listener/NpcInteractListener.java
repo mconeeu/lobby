@@ -6,6 +6,7 @@
 package eu.mcone.lobby.items.listener;
 
 import eu.mcone.coresystem.api.bukkit.event.NpcInteractEvent;
+import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Item;
@@ -30,7 +31,7 @@ public class NpcInteractListener implements Listener {
     @EventHandler
     public void onNpcInteract(NpcInteractEvent e) {
         Player p = e.getPlayer();
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
+        GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
 
         if (e.getNpc().getData().getType().equals(EntityType.PLAYER) && e.getAction().equals(PacketPlayInUseEntity.EnumEntityUseAction.INTERACT)) {
             String npcName = e.getNpc().getData().getName();

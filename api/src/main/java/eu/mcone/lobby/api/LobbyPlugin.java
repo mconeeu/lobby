@@ -5,8 +5,9 @@
 
 package eu.mcone.lobby.api;
 
-import eu.mcone.coresystem.api.bukkit.CorePlugin;
+import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
+import eu.mcone.gamesystem.api.GameTemplate;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import lombok.Getter;
 import org.bukkit.ChatColor;
@@ -14,13 +15,13 @@ import org.bukkit.ChatColor;
 import java.util.Collection;
 import java.util.UUID;
 
-public abstract class LobbyPlugin extends CorePlugin {
+public abstract class LobbyPlugin extends GameTemplate {
 
     @Getter
     private static LobbyPlugin instance;
 
     protected LobbyPlugin() {
-        super("lobby", ChatColor.DARK_AQUA, "lobby.prefix");
+        super("lobby", Gamemode.UNDEFINED, ChatColor.DARK_AQUA, "lobby.prefix", GameSystemOptions.USE_BACKPACK, GameSystemOptions.USE_ITEM_CARDS);
         setInstance(this);
     }
 

@@ -5,10 +5,10 @@
 
 package eu.mcone.lobby.pets.inventory.backpack;
 
+import eu.mcone.gamesystem.api.lobby.backpack.BackpackInventory;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.api.enums.Item;
-import eu.mcone.lobby.items.inventory.backpack.BackpackInventory;
 import eu.mcone.lobby.pets.LobbyPets;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 public class AnimalInventory extends BackpackInventory {
 
     public AnimalInventory(Player p) {
-        super(Category.ANIMAL, p);
+        super(p);
 
         for (Item item : Item.values()) {
             if (item.hasCategory() && item.getCategory().equals(Category.ANIMAL) && playerHasItem(item)) {

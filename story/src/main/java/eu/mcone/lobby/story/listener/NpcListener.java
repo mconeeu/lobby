@@ -10,6 +10,7 @@ import eu.mcone.coresystem.api.bukkit.event.NpcInteractEvent;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.coresystem.api.core.player.SkinInfo;
+import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Item;
@@ -37,6 +38,7 @@ public class NpcListener implements Listener {
             Player p = e.getPlayer();
             PlayerNpc npc = (PlayerNpc) e.getNpc();
             LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
+            GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
             CoreWorld w = CoreSystem.getInstance().getWorldManager().getWorld(npc.getData().getLocation().getWorld());
 
             if (w.equals(LobbyWorld.ONE_ISLAND.getWorld())) {
@@ -46,14 +48,14 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "robert": {
-                        if (lp.getProgressId() >= Progress.SALIA.getId() && !lp.hasItem(Item.MAGICWAND)) {
-                            lp.addItem(Item.MAGICWAND);
+                        if (lp.getProgressId() >= Progress.SALIA.getId() && !gamePlayer.hasItem(Item.MAGICWAND)) {
+                            gamePlayer.addItem(Item.MAGICWAND);
                         }
                         break;
                     }
                     case "duty": {
-                        if (lp.getProgressId() >= Progress.DUTY.getId() && !lp.hasItem(Item.PASS)) {
-                            lp.addItem(Item.PASS);
+                        if (lp.getProgressId() >= Progress.DUTY.getId() && !gamePlayer.hasItem(Item.PASS)) {
+                            gamePlayer.addItem(Item.PASS);
                         }
                         break;
                     }
@@ -61,7 +63,7 @@ public class NpcListener implements Listener {
                         if (lp.getProgressId() == Progress.EDWARD_CITYHALL.getId()) {
                             if (p.getItemInHand().equals(Item.MAGICDRINK.getItemStack())) {
                                 p.getInventory().remove(p.getItemInHand());
-                                lp.removeItem(Item.MAGICDRINK);
+                                gamePlayer.removeItem(Item.MAGICDRINK);
                                 lp.setProgress(Progress.INFECTION);
 
                                 p.spigot().playEffect(npc.getData().getLocation().bukkit(), Effect.INSTANT_SPELL, 1, 1, 1, 1, 1, 5, 1000, 1);
@@ -94,12 +96,12 @@ public class NpcListener implements Listener {
                     case "captain": {
                         if (p.getItemInHand().equals(Item.BOAT_PASS.getItemStack())) {
                             if (lp.getProgressId() > Progress.MARVIN_KILL.getId()) {
-                                lp.removeItem(Item.BOAT_PASS);
+                                gamePlayer.removeItem(Item.BOAT_PASS);
                                 p.getInventory().remove(p.getItemInHand());
                                 LobbyWorld.DESTROYED_PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn");
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun im zerstörten Paradise Island");
                             } else {
-                                lp.removeItem(Item.BOAT_PASS);
+                                gamePlayer.removeItem(Item.BOAT_PASS);
                                 p.getInventory().remove(p.getItemInHand());
 
                                 LobbyWorld.PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn");
@@ -116,11 +118,11 @@ public class NpcListener implements Listener {
                     }
                     case "edward-cave": {
                         if (lp.getProgressId() == Progress.INFECTION.getId()) {
-                            if (!lp.hasItem(Item.RADIO_SET1)) {
-                                lp.addItem(Item.RADIO_SET1);
+                            if (!gamePlayer.hasItem(Item.RADIO_SET1)) {
+                                gamePlayer.addItem(Item.RADIO_SET1);
                             }
-                            if (!lp.hasItem(Item.GPS)) {
-                                lp.addItem(Item.GPS);
+                            if (!gamePlayer.hasItem(Item.GPS)) {
+                                gamePlayer.addItem(Item.GPS);
                             }
                         }
                         break;
@@ -161,8 +163,8 @@ public class NpcListener implements Listener {
                         if (lp.getProgressId() + 1 == Progress.MARVIN.getId() || lp.getProgressId() == Progress.MARVIN.getId()) {
                             LobbyWorld.CAVE.getWorld().teleportSilently(p, "spawn");
 
-                            lp.removeItem(Item.RADIO_SET1);
-                            lp.removeItem(Item.GPS);
+                            gamePlayer.removeItem(Item.RADIO_SET1);
+                            gamePlayer.removeItem(Item.GPS);
                         }
                         break;
                     }
@@ -176,8 +178,8 @@ public class NpcListener implements Listener {
                     }
                     case "sparow": {
                         if (lp.getProgressId() > Progress.MARVIN_KILL.getId()) {
-                            if (!lp.hasItem(Item.RADIO_SET_2)) {
-                                lp.addItem(Item.RADIO_SET_2);
+                            if (!gamePlayer.hasItem(Item.RADIO_SET_2)) {
+                                gamePlayer.addItem(Item.RADIO_SET_2);
                                 p.sendMessage("sd");
                             }
                         }

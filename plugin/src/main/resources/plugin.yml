@@ -2,7 +2,7 @@ name: MCONE-Lobby
 authors: [Rufus Maiwald, Marvin Hülsmann, Dominik Lippl, BamDev]
 version: ${project.version}
 main: eu.mcone.lobby.Lobby
-depend: [MCONE-BukkitCoreSystem]
+depend: [MCONE-BukkitCoreSystem, MCONE-GameSystem]
 softdepend: [NoCheatPlus]
 
 permissions:

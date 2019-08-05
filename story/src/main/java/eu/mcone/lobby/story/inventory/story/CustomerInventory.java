@@ -8,6 +8,7 @@ package eu.mcone.lobby.story.inventory.story;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
+import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -17,7 +18,7 @@ public class CustomerInventory extends CoreInventory {
 
     public CustomerInventory(Player p) {
         super("§fVerkäufer", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
+        GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
 
         setItem(InventorySlot.ROW_2_SLOT_5, Item.BOAT_PASS.getItemStack(), e ->{
             if(!lp.hasItem(Item.BOAT_PASS)) {

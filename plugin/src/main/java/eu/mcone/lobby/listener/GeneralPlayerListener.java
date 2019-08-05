@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.listener;
 
+import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -33,8 +34,21 @@ public class GeneralPlayerListener implements Listener {
     public void onLobbyPlayerLoaded(LobbyPlayerLoadedEvent e) {
         LobbyPlayer p = e.getPlayer();
         Player bp = p.bukkit();
+        GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(bp.getUniqueId());
 
         bp.removePotionEffect(PotionEffectType.BLINDNESS);
+
+//        if (!gamePlayer.hasItem(Item.BANKCARD_PREMIUM)) {
+//            if (bp.hasPermission("mcone.premium")) {
+//                if (!gamePlayer.hasItem(Item.BANKCARD)) {
+//                    gamePlayer.addItem(Item.BANKCARD_PREMIUM);
+//                } else {
+//                    gamePlayer.removeItem(Item.BANKCARD);
+//                    gamePlayer.addItem(Item.BANKCARD_PREMIUM);
+//                }
+//
+//            }
+//        }
 
         if (e.getReason().equals(LobbyPlayerLoadedEvent.Reason.JOINED)) {
             if (!p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.LAST_LOGIN.toString())) {
@@ -47,11 +61,11 @@ public class GeneralPlayerListener implements Listener {
                     if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.SPAWN.toString())) {
                         PlayerSpawnLocation.SPAWN.getWorld().teleportSilently(bp, "spawn");
                     } else if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.OFFICE.toString())) {
-                        if (p.hasItem(Item.OFFICE_CARD_BRONZE)) {
+                        if (gamePlayer.hasItem(Item.OFFICE_CARD_BRONZE)) {
                             LobbyWorld.OFFICE.getWorld().teleportSilently(bp, OfficeManager.OfficeType.BRONZE_OFFICE.getSpawnLocation());
-                        } else if (p.hasItem(Item.OFFICE_CARD_SILVER)) {
+                        } else if (gamePlayer.hasItem(Item.OFFICE_CARD_SILVER)) {
                             LobbyWorld.OFFICE.getWorld().teleportSilently(bp, OfficeManager.OfficeType.SILVER_OFFICE.getSpawnLocation());
-                        } else if (p.hasItem(Item.OFFICE_CARD_GOLD)) {
+                        } else if (gamePlayer.hasItem(Item.OFFICE_CARD_GOLD)) {
                             LobbyWorld.OFFICE.getWorld().teleportSilently(bp, OfficeManager.OfficeType.GOLD_OFFICE.getSpawnLocation());
                         }
                     }

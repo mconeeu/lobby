@@ -6,6 +6,7 @@
 package eu.mcone.lobby.items.listener.effects;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -24,7 +25,7 @@ public class CoinBombListener implements Listener {
     public void on(PlayerInteractEvent e) {
         if (e.hasItem() && e.getItem().equals(Item.COINBOMB.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
             Player p = e.getPlayer();
-            LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
+            GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
 
 
             p.sendMessage("§aDu hast die Coin Bombe erfolgreich gezündet");

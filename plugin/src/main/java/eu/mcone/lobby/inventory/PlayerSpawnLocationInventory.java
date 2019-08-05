@@ -4,6 +4,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -22,6 +23,8 @@ public class PlayerSpawnLocationInventory extends CoreInventory {
         super("§8» §c§lLobby Einstellung", player, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
 
         LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
+        GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(player.getUniqueId());
+
         PlayerSpawnLocation playerSpawnLocation = PlayerSpawnLocation.valueOf(lobbyPlayer.getSettings().getSpawnLocation());
 
         if (player.hasPermission("lobby.silenthub")) {
@@ -45,9 +48,9 @@ public class PlayerSpawnLocationInventory extends CoreInventory {
 
         for (PlayerSpawnLocation spawns : PlayerSpawnLocation.values()) {
             if (spawns.equals(PlayerSpawnLocation.OFFICE)) {
-                if (lobbyPlayer.hasItem(Item.OFFICE_CARD_BRONZE)
-                        || lobbyPlayer.hasItem(Item.OFFICE_CARD_SILVER)
-                        || lobbyPlayer.hasItem(Item.OFFICE_CARD_GOLD)) {
+                if (gamePlayer.hasItem(Item.OFFICE_CARD_BRONZE)
+                        || gamePlayer.hasItem(Item.OFFICE_CARD_SILVER)
+                        || gamePlayer.hasItem(Item.OFFICE_CARD_GOLD)) {
 
                     setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(spawns.getMaterial()).displayName(spawns.getDisplayname()).create());
 

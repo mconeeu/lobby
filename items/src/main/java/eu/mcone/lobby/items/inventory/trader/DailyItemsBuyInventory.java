@@ -6,6 +6,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -16,8 +17,8 @@ import org.bukkit.scoreboard.DisplaySlot;
 public class DailyItemsBuyInventory extends CoreInventory {
 
     DailyItemsBuyInventory(Player player, Item toBuy) {
-        super("§8» §e§lHändler §8| §fkaufen", player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
+        super("§8» §e§lHändler §8| §fKisten", player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
+        GamePlayer lobbyPlayer = LobbyPlugin.getInstance().getGamePlayer(player.getUniqueId());
         CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(player.getUniqueId());
 
         setItem(InventorySlot.ROW_1_SLOT_5, toBuy.getItemStack());

@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 class ChestBuyInventorySmuggler extends CoreInventory {
 
     ChestBuyInventorySmuggler(Player p) {
-        super("§8» §7§lSchmuggler §8| §fKisten kaufen", p, 9 * 3, InventoryOption.FILL_EMPTY_SLOTS);
+        super("§8» §7§lSchmuggler §8| §fKisten", p, 9 * 3, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
         setItem(11 - 1, new ItemBuilder(Material.PAPER, 1, 0).displayName("§8» §7Du besitzt §f" + lp.getChests() + "§7 Kisten").create());

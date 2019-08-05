@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 public class ChestOpeningInventory extends CoreInventory {
 
     public ChestOpeningInventory(Player p) {
-        super("§8» §e§lChestOpening §8| §fGewinne Items", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
+        super("§8» §e§lChestOpening", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
         if (lp.getChests() < 1) {

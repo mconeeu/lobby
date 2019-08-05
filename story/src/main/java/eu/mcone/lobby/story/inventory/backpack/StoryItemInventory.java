@@ -5,15 +5,15 @@
 
 package eu.mcone.lobby.story.inventory.backpack;
 
+import eu.mcone.gamesystem.api.lobby.backpack.BackpackInventory;
 import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.api.enums.Item;
-import eu.mcone.lobby.items.inventory.backpack.BackpackInventory;
 import org.bukkit.entity.Player;
 
 public class StoryItemInventory extends BackpackInventory {
 
     public StoryItemInventory(Player p) {
-        super(Category.STORY_ITEMS, p);
+        super(p);
 
         for (Item item : Item.values()) {
             if (item.hasCategory() && item.getCategory().equals(Category.STORY_ITEMS) && playerHasItem(item)) {

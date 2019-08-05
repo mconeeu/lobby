@@ -15,6 +15,7 @@ import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.CoreActionBar;
 import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
+import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Item;
@@ -52,7 +53,7 @@ public class PlayerJoinListener implements Listener {
         loadLobbyPlayer(p, LobbyPlayerLoadedEvent.Reason.JOINED);
     }
 
-    public static void loadLobbyPlayer(Player p, LobbyPlayerLoadedEvent.Reason reson) {
+    public static void loadLobbyPlayer(Player p, LobbyPlayerLoadedEvent.Reason reason) {
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         LOADING_MSG.send(p);
 
@@ -121,24 +122,10 @@ public class PlayerJoinListener implements Listener {
                 p.getInventory().setBoots(Item.ADMIN_BOOTS.getItemStack());
                 break;
         }
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
-        if (!lp.hasItem(Item.BANKCARD_PREMIUM)) {
-            if (p.hasPermission("mcone.premium")) {
-                if (!lp.hasItem(Item.BANKCARD)) {
-                    lp.addItem(Item.BANKCARD_PREMIUM);
-                } else {
-                    lp.removeItem(Item.BANKCARD);
-                    lp.addItem(Item.BANKCARD_PREMIUM);
-                }
 
-            }
-        }
-
-
-
-        Bukkit.getScheduler().runTaskAsynchronously(LobbyPlugin.getInstance(), () -> {
+        Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> {
             LobbyPlayer lobbyplayer = new LobbyPlayer(cp);
-            Bukkit.getPluginManager().callEvent(new LobbyPlayerLoadedEvent(lobbyplayer, reson));
+            Bukkit.getPluginManager().callEvent(new LobbyPlayerLoadedEvent(lobbyplayer, reason));
             LOADING_SUCCESS_MSG.send(p);
 
             p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());

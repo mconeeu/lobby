@@ -10,6 +10,11 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.core.util.Random;
+import eu.mcone.gamesystem.api.GameSystemAPI;
+import eu.mcone.gamesystem.api.GameTemplate;
+import eu.mcone.gamesystem.api.game.player.GamePlayer;
+import eu.mcone.gamesystem.api.lobby.cards.ItemCard;
+import eu.mcone.gamesystem.api.lobby.cards.ItemCardCollection;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.api.enums.Item;
@@ -20,10 +25,10 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 class ChestItemInventory extends CoreInventory {
 
@@ -32,22 +37,37 @@ class ChestItemInventory extends CoreInventory {
     private BukkitTask setAnimation;
     private BukkitTask fadeAnimation;
 
+    public static Map<UUID, Item> items = new HashMap<>();
+    public static Map<UUID, ItemCard> itemCards = new HashMap<>();
+
     ChestItemInventory(Player p) {
         super("§8Der Zufall entscheidet...", p, InventorySlot.ROW_6);
         this.slots = new ArrayList<>();
         this.fadeSlots = new ArrayList<>();
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
+        GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
 
-        List<Item> items = new ArrayList<>();
+        List<UUID> uuid = new ArrayList<>();
+        List<UUID> selectedItems = new ArrayList<>();
 
         for (Level level : Level.values()) {
-            List<Item> lvlItems = new ArrayList<>();
-
             for (Item i : Item.values()) {
                 if (i.getLevel().equals(level) && !lp.getItems().contains(i)) {
                     if (i.hasCategory() && (i.getCategory().equals(Category.STORY_ITEMS) || i.getCategory().equals(Category.ARMOR) || i.getCategory().equals(Category.EXCLUSIVE)))
                         continue;
-                    lvlItems.add(i);
+                    UUID randomUUID = UUID.randomUUID();
+                    items.put(randomUUID, i);
+                    uuid.add(randomUUID);
+                }
+            }
+
+            ItemCardCollection collection = LobbyPlugin.getInstance().getItemCardManager().getItemCardCollection();
+            if (collection != null) {
+                for (ItemCard itemCard : collection.getItemCards()) {
+                    if (itemCard.getLevel().equals(level) && !lp.hasItemCard(itemCard)) {
+                        UUID randomUUID = UUID.randomUUID();
+                        itemCards.put(randomUUID, itemCard);
+                        uuid.add(randomUUID);
+                    }
                 }
             }
 
@@ -55,11 +75,12 @@ class ChestItemInventory extends CoreInventory {
                 int itemAmount = 54;
 
                 for (int i = 0; i < itemAmount; i++) {
-                    items.add(lvlItems.get(Random.randomInt(0, lvlItems.size() - 1)));
+                    UUID randomUUID = uuid.get(Random.randomInt(0, uuid.size() - 1));
+                    selectedItems.add(randomUUID);
                 }
             } else {
                 for (int i = 0; i < level.getItemAmount(); i++) {
-                    items.set(Random.randomInt(0, 53), lvlItems.get(Random.randomInt(0, lvlItems.size() - 1)));
+                    selectedItems.set(Random.randomInt(0, 53), uuid.get(Random.randomInt(0, uuid.size() - 1)));
                 }
             }
         }
@@ -70,18 +91,26 @@ class ChestItemInventory extends CoreInventory {
             setItem(i, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder().displayName("§7§l???").create());
         }
 
-        setAnimation = Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
-            final int slot = slots.get(Random.randomInt(0, slots.size() - 1));
-            slots.remove((Integer) slot);
 
-            final Item item = items.get(Random.randomInt(0, items.size() - 1));
+        setAnimation = Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
+            final int randomIndex = Random.randomInt(0, slots.size() - 1);
+            final int slot = slots.get(randomIndex);
+            slots.remove(randomIndex);
+
+            final UUID item = selectedItems.get(Random.randomInt(0, selectedItems.size() - 1));
             final InventoryView inv = p.getOpenInventory();
 
             if (!inv.getTitle().equals(getInventory().getTitle())) {
                 openInventory();
             }
 
-            getInventory().setItem(slot, item.getItemStack());
+
+            if (items.containsKey(item)) {
+                getInventory().setItem(slot, items.get(item).getItemStack());
+            } else if (itemCards.containsKey(item)) {
+                getInventory().setItem(slot, itemCards.get(item).getItemCardBuilder().createStack());
+            }
+
             p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
             changedItems++;
 
@@ -105,7 +134,7 @@ class ChestItemInventory extends CoreInventory {
                     fadeSlots.remove(index);
 
                     if (slotInt != slot)
-                        getInventory().setItem(slotInt, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName(item.getLevel().getDisplayname()).create());
+                        getInventory().setItem(slotInt, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).create());
                 }, 20, 1);
                 setAnimation.cancel();
             }
@@ -113,5 +142,4 @@ class ChestItemInventory extends CoreInventory {
 
         openInventory();
     }
-
 }

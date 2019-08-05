@@ -140,11 +140,11 @@ public enum Item {
     ADMIN_BOOTS(196, "Admin Schuhe", Category.EXCLUSIVE, Level.MYSTICAL, 0, ItemBuilder.createLeatherArmorItem(Material.LEATHER_BOOTS, Color.RED).displayName("§6§lAdminstrator Schuhe").lore("§7Kategorie: §bExklusives Item", "§7Seltenheit: §cMythisch", "", "§7ADMIN SCHUHE ICH BIN DER BOSS").create()),
 
     //Armor
-    IRON_SWORD(226, "iron schwerdt", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_SWORD, 1, 0).displayName("§3§lEisen Schwerdt").lore("§7Kategorie: §bSchwerter", "§7Seltenheit: §3Ungewöhnlich", "§74 Eisen", "§7Mit dem Eisen Schwerdt in den Krieg").create()),
-    IRON_HEAD(227, "iron head", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_HELMET, 1, 0).displayName("§3§lEisen Helm").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§72 Eisen", "§7Mit dem Eisen Helm in den Krieg").create()),
-    IRON_CHESTPLATE(228, "iron panzer", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_CHESTPLATE, 1, 0).displayName("§3§lEisen Brustpanzer").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§76 Eisen", "§7Mit der Eisen Platte in den Krieg").create()),
-    IRON_LEGGINS(229, "iron hose", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_LEGGINGS, 1, 0).displayName("§3§lEisen Hose").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§74 Eisen", "§7Mit der Eisen Hose in den Krieg").create()),
-    IRON_BOOTS(230, "iron stiefel", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_BOOTS, 1, 0).displayName("§3§lEisen Schuhe").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§74 Eisen", "§7Mit den Eisen Schuhe in den Krieg").create()),
+    IRON_SWORD(226, "eisenschwert", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_SWORD, 1, 0).displayName("§3§lEisen Schwerdt").lore("§7Kategorie: §bSchwerter", "§7Seltenheit: §3Ungewöhnlich", "§74 Eisen", "§7Mit dem Eisen Schwerdt in den Krieg").create()),
+    IRON_HEAD(227, "eisenhelm", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_HELMET, 1, 0).displayName("§3§lEisen Helm").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§72 Eisen", "§7Mit dem Eisen Helm in den Krieg").create()),
+    IRON_CHESTPLATE(228, "eisenbrustpanzer", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_CHESTPLATE, 1, 0).displayName("§3§lEisen Brustpanzer").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§76 Eisen", "§7Mit der Eisen Platte in den Krieg").create()),
+    IRON_LEGGINS(229, "eisenhose", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_LEGGINGS, 1, 0).displayName("§3§lEisen Hose").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§74 Eisen", "§7Mit der Eisen Hose in den Krieg").create()),
+    IRON_BOOTS(230, "eisenstiefel", Category.ARMOR, Level.UNUSUAL, 0, new ItemBuilder(Material.IRON_BOOTS, 1, 0).displayName("§3§lEisen Schuhe").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§74 Eisen", "§7Mit den Eisen Schuhe in den Krieg").create()),
 
     //Ingame Items
     BEDROCK_CB(245, "Bedrock-block", Category.INGAME, Level.LEGENDARY, 0, new ItemBuilder(Material.BEDROCK, 1, 0).displayName("§6§lBedrock").lore("§7Kategorie: §bIngame Item", "§7Seltenheit: §6Legendär", "", "§7Ich baue ab und er zerbricht nicht!").create()),
