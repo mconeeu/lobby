@@ -7,11 +7,13 @@ package eu.mcone.lobby.story.listener;
 
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.story.inventory.story.EndInventory;
-import eu.mcone.lobby.story.inventory.story.WitchInventory;
+import eu.mcone.lobby.story.inventory.story.*;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -20,7 +22,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public class  InventoryTriggerListener implements Listener {
+public class InventoryTriggerListener implements Listener {
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
@@ -44,6 +46,12 @@ public class  InventoryTriggerListener implements Listener {
                     case ENDER_CHEST: {
                         if (lobbyPlayer.getProgressId() >= 6) {
                             new EndInventory(p);
+                        } else if (lp.getBankprogressId() == BankProgress.CUTTER.getId()) {
+                            new WoolInventory(p);
+                        } else if (lp.getBankprogressId() == BankProgress.SWORD.getId()) {
+                            new SwordInventory(p);
+                        } else if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
+                            new BankSaveInventory(p);
                         }
                         return;
                     }
@@ -64,6 +72,40 @@ public class  InventoryTriggerListener implements Listener {
                         }
                         return;
                     }
+                    case WOOD_BUTTON: {
+                        Location loc = e.getClickedBlock().getLocation();
+                        if (loc.getX() == 10 && loc.getY() == 104 && loc.getZ() == 1) {
+                            if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
+
+                                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Du bist drin jetzt drück auf der linken Seite ganz links unten denn Knopf");
+
+                            }
+                        } else if (loc.getX() == 13 && loc.getY() == 103 && loc.getZ() == -8) {
+                            if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
+
+                                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7Perfekt du bist drin jetzt klau die Goldbarren in der Truhe!");
+                            } else {
+                                e.setCancelled(true);
+                            }
+                        }
+
+                        break;
+                    }
+                    case STONE_BUTTON: {
+                        Location loc = e.getClickedBlock().getLocation();
+                        if (loc.getX() == 25 && loc.getY() == 104 && loc.getZ() == 3) {
+                            if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
+
+                                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Drücke jetzt gleich bei den Bücher Regalen ein Holz Knopf dann öffnet sich eine Geheime Tür links!");
+
+                            }
+                        } else {
+                            e.setCancelled(true);
+                        }
+                        break;
+                    }
+
+
                     default:
                         e.setCancelled(false);
                 }

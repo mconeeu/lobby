@@ -42,5 +42,7 @@ public class LobbyInventory extends CoreInventory {
         setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lServer offline").create());
 
         setItem(InventorySlot.ROW_3_SLOT_8, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lServer offline").create());
+
+        openInventory();
     }
 }

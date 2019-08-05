@@ -85,8 +85,13 @@ public class CompassInventory extends CoreInventory {
                         .displayName("§f§lSpawn")
                         .lore("§7§oZurück zum Lobby Spawn.", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                         .create(),
-                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "spawn")
+                e ->
+                    LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "spawn")
+
         );
+
+
+
 
         setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Gamemode.SKYPVP.getItem(), 1, 0)
                         .displayName(Gamemode.SKYPVP.getLabel())

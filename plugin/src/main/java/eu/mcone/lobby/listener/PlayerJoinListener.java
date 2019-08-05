@@ -138,7 +138,7 @@ public class PlayerJoinListener implements Listener {
             NPC npc = LobbyWorld.ONE_ISLAND.getWorld().getNPC(gm.getName().toLowerCase());
 
             if (npc != null) {
-                ((PlayerNpc) npc).playLabymodEmote(LabyModEmote.INFINITY_DAB, e.getPlayer());
+                ((PlayerNpc) npc).playLabymodEmote(LabyModEmote.T_POSE, e.getPlayer());
             }
         }
     }

@@ -14,6 +14,7 @@ import eu.mcone.gamesystem.api.lobby.backpack.BackpackInventory;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.story.inventory.backpack.StoryItemInventory;
@@ -62,10 +63,13 @@ public class LobbyStory extends LobbyAddon {
             NPC npc = progress.getNpc();
             npc.togglePlayerVisibility(ListMode.WHITELIST);
         }
+
         LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").togglePlayerVisibility(ListMode.WHITELIST);
+
     }
 
     @Override
-    public void onDisable() {}
+    public void onDisable() {
+    }
 
 }

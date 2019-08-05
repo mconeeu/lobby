@@ -13,10 +13,13 @@ import eu.mcone.coresystem.api.core.player.SkinInfo;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.inventory.smuggler.SmugglerInventory;
+import eu.mcone.lobby.items.manager.OfficeManager;
+import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import eu.mcone.lobby.story.inventory.searcher.SearcherInventory;
 import eu.mcone.lobby.story.inventory.story.CustomerInventory;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
@@ -53,6 +56,38 @@ public class NpcListener implements Listener {
                         }
                         break;
                     }
+                    case "JohnEnd": {
+
+                        LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, false);
+                        JohnBankRobberyInventory.currentlyInBank = null;
+                        OfficeManager.getOffice(p);
+                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Wir haben es geschafft ich überlasse dir 25.000 Coins und ein kleines Geschenk im Rucksack");
+                        lp.getCorePlayer().addCoins(25000);
+                        lp.removeItem(Item.GOLD_BARDING);
+                        lp.removeItem(Item.BANK_MAP);
+                        lp.removeItem(Item.IRON_SWORD);
+                        lp.removeItem(Item.BUTTON);
+                        lp.addItem(Item.GOLD_NUGGET);
+                        break;
+                    }
+                    case "cutter": {
+                        if (lp.getBankprogressId() == BankProgress.CUTTER.getId()) {
+                            if (lp.hasItem(Item.WHITE_WOOL)) {
+
+                                lp.removeItem(Item.WHITE_WOOL);
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Perfekt die Wolle war es. Hier bitte das bestellte Outfit!");
+                                lp.setBankProgress(BankProgress.SWORD);
+                                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Ok du hast das Packet komm zurück ins Büro damit wir die Letzte Mission besprechen können!");
+
+                            } else {
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ah du musst " + p.getName() + "ich konnte deine Bestellung leider nicht bearbeiten ,weil ich keine Wolle da hab du kannst sie aber doch besorgen sie liegt warscheinlich noch in einer Kiste im Boot!");
+                            }
+
+                        } else {
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ich habe leider moemtan viel zu viel zu tun komm später wieder");
+                        }
+                    }
+
                     case "duty": {
                         if (lp.getProgressId() >= Progress.DUTY.getId() && !gamePlayer.hasItem(Item.PASS)) {
                             gamePlayer.addItem(Item.PASS);
@@ -82,10 +117,10 @@ public class NpcListener implements Listener {
                         return;
                     }
                     case "smuggler": {
-                        if (lp.getProgressId() > Progress.DUTY.getId()) {
+                        if (lp.getProgressId() > Progress.DUTY.getId() || lp.getBankprogressId() == BankProgress.SMUGGLER.getId()) {
                             new SmugglerInventory(p);
                         } else {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fSchmuggler §8|§7 Wer bist du ? Kenn ich dich.");
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fSchmuggler §8|§7 Ich handel nur mit Leuten die ich kenne hol dir ein Ausweis!");
                         }
                         break;
                     }
@@ -198,6 +233,23 @@ public class NpcListener implements Listener {
                         return;
                     }
                 }
+            } else if (w.equals(LobbyWorld.OFFICE.getWorld())) {
+                switch (npc.getData().getName()) {
+                    case "John1":
+                    case "John2":
+                    case "John3": {
+                        if (lp.getBankprogressId() == BankProgress.START.getId()) {
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + "schönes Büro aber leider gehört es bis jetzt noch mir aber du etwas für mich erledigen wo du das Büro und Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
+                            lp.setBankProgress(BankProgress.SMUGGLER);
+                            lp.addItem(Item.BUTTON);
+                        } else {
+                            new JohnBankRobberyInventory(p);
+
+                        }
+                        break;
+
+                    }
+                }
             }
 
             for (Progress progress : Progress.values()) {
@@ -218,14 +270,16 @@ public class NpcListener implements Listener {
                                 future.getNpc().toggleVisibility(p, true);
                             }
                         } else {
-                            p.sendMessage("§8§l[§7§l!§8§l] §cSecrets§8 » §7Du bist noch nicht so weit!");
+                            p.sendMessage("§8§l[§7§l!§8§l] §fLobby §8 » §7Du bist noch nicht so weit!");
                         }
                     } else {
-                        p.sendMessage("§8§l[§7§l!§8§l] §cSecrets§8 » §7Das hast du schon gemacht!");
+                        p.sendMessage("§8§l[§7§l!§8§l] §fLobby§8 » §7Das hast du schon gemacht!");
                     }
                     break;
                 }
             }
+
+
         }
     }
 

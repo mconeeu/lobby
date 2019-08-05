@@ -21,7 +21,7 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
     @Setter
     private Gang gang;
     @Getter
-    private int chests, progressId;
+    private int chests, progressId, bankprogressId;
     @Getter
     @Setter
     private LobbySettings settings;
@@ -38,6 +38,7 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
 
         this.chests = profile.getChests();
         this.progressId = profile.getProgressId();
+        this.bankprogressId = profile.getBankprogressId();
         this.settings = profile.getSettings();
         this.secrets = profile.getSecrets();
         LobbyPlugin.getInstance().registerLobbyPlayer(this);
@@ -77,6 +78,11 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
 
     public void setProgress(Progress progress) {
         this.progressId = progress.getId();
+        saveData();
+    }
+
+    public void setBankProgress(BankProgress bankprogress) {
+        this.progressId = bankprogress.getId();
         saveData();
     }
 
