@@ -6,17 +6,14 @@
 package eu.mcone.lobby.items.listener;
 
 import eu.mcone.coresystem.api.bukkit.event.NpcInteractEvent;
+import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.Item;
-import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.inventory.bank.BankCreateCardInventory;
 import eu.mcone.lobby.items.inventory.bank.BankMenInventory;
 import eu.mcone.lobby.items.inventory.office.ChauffeurInventory;
 import eu.mcone.lobby.items.inventory.office.OfficeTraderInventory;
 import eu.mcone.lobby.items.inventory.office.SecretaryInventory;
-import eu.mcone.lobby.items.inventory.office.UpgradeOfficeTrader;
 import eu.mcone.lobby.items.inventory.trader.TraderInventory;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import lombok.Getter;

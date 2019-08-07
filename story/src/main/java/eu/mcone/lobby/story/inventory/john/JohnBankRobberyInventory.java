@@ -8,7 +8,6 @@ import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.BankProgress;
-import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Color;
 import org.bukkit.Material;

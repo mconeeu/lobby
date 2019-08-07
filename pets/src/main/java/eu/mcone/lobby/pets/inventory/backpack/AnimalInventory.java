@@ -5,10 +5,10 @@
 
 package eu.mcone.lobby.pets.inventory.backpack;
 
+import eu.mcone.gamesystem.api.enums.Category;
+import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.lobby.backpack.BackpackInventory;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.Category;
-import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.pets.LobbyPets;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;

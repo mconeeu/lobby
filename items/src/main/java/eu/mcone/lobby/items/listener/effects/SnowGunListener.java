@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.items.listener.effects;
 
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.gamesystem.api.enums.Item;
 import org.bukkit.Effect;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;

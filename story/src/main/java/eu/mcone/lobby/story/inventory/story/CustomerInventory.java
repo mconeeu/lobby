@@ -8,10 +8,9 @@ package eu.mcone.lobby.story.inventory.story;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
+import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.Item;
-import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.entity.Player;
 
 public class CustomerInventory extends CoreInventory {

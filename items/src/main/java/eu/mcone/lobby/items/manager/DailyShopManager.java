@@ -1,9 +1,9 @@
 package eu.mcone.lobby.items.manager;
 
+import eu.mcone.gamesystem.api.enums.Category;
+import eu.mcone.gamesystem.api.enums.Item;
+import eu.mcone.gamesystem.api.enums.Level;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.Category;
-import eu.mcone.lobby.api.enums.Item;
-import eu.mcone.lobby.api.enums.Level;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 

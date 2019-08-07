@@ -5,8 +5,8 @@
 
 package eu.mcone.lobby.items.listener;
 
+import eu.mcone.gamesystem.api.enums.Category;
 import eu.mcone.gamesystem.api.lobby.backpack.BackpackInventory;
-import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.items.inventory.chest.ChestOpeningInventory;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

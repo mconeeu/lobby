@@ -9,17 +9,15 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.gamesystem.api.enums.Item;
+import eu.mcone.gamesystem.api.enums.Level;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.Item;
-import eu.mcone.lobby.api.enums.Level;
-import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.LobbyItems;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
 
 class DailyItemsInventory extends CoreInventory {

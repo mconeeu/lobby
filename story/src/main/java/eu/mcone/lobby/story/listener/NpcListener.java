@@ -10,11 +10,11 @@ import eu.mcone.coresystem.api.bukkit.event.NpcInteractEvent;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.coresystem.api.core.player.SkinInfo;
+import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.BankProgress;
-import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.inventory.smuggler.SmugglerInventory;
@@ -63,18 +63,18 @@ public class NpcListener implements Listener {
                         OfficeManager.getOffice(p);
                         p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Wir haben es geschafft ich überlasse dir 25.000 Coins und ein kleines Geschenk im Rucksack");
                         lp.getCorePlayer().addCoins(25000);
-                        lp.removeItem(Item.GOLD_BARDING);
-                        lp.removeItem(Item.BANK_MAP);
-                        lp.removeItem(Item.IRON_SWORD);
-                        lp.removeItem(Item.BUTTON);
-                        lp.addItem(Item.GOLD_NUGGET);
+                        gamePlayer.removeItem(Item.GOLD_BARDING);
+                        gamePlayer.removeItem(Item.BANK_MAP);
+                        gamePlayer.removeItem(Item.IRON_SWORD);
+                        gamePlayer.removeItem(Item.BUTTON);
+                        gamePlayer.addItem(Item.GOLD_NUGGET);
                         break;
                     }
                     case "cutter": {
                         if (lp.getBankprogressId() == BankProgress.CUTTER.getId()) {
-                            if (lp.hasItem(Item.WHITE_WOOL)) {
+                            if (gamePlayer.hasItem(Item.WHITE_WOOL)) {
 
-                                lp.removeItem(Item.WHITE_WOOL);
+                                gamePlayer.removeItem(Item.WHITE_WOOL);
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Perfekt die Wolle war es. Hier bitte das bestellte Outfit!");
                                 lp.setBankProgress(BankProgress.SWORD);
                                 p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Ok du hast das Packet komm zurück ins Büro damit wir die Letzte Mission besprechen können!");
@@ -241,7 +241,7 @@ public class NpcListener implements Listener {
                         if (lp.getBankprogressId() == BankProgress.START.getId()) {
                             p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + "schönes Büro aber leider gehört es bis jetzt noch mir aber du etwas für mich erledigen wo du das Büro und Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
                             lp.setBankProgress(BankProgress.SMUGGLER);
-                            lp.addItem(Item.BUTTON);
+                            gamePlayer.addItem(Item.BUTTON);
                         } else {
                             new JohnBankRobberyInventory(p);
 

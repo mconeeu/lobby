@@ -5,11 +5,11 @@
 
 package eu.mcone.lobby.listener;
 
+import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.inventory.InteractionInventory;
