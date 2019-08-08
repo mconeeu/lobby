@@ -73,9 +73,10 @@ class ChestFinalInventory extends CoreInventory {
         setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, level.getGlasSubId()).create());
 
         if (item != null) {
-            if (new HashSet<>(Arrays.asList(Item.COINS_20, Item.COINS_100, Item.COINS_250, Item.COINS_400)).contains(item)) {
+
+            if (new HashSet<>(Arrays.asList(Item.EMERALDS_20, Item.EMERALDS_100, Item.EMERALDS_250, Item.EMERALDS_400)).contains(item)) {
                 CoinsRandomizer randomizer = new CoinsRandomizer(item);
-                CoreSystem.getInstance().getCorePlayer(p).addCoins(randomizer.getCoins());
+                CoreSystem.getInstance().getCorePlayer(p).addEmeralds(randomizer.getEmeralds());
 
                 setItem(InventorySlot.ROW_4_SLOT_5, randomizer.getItem());
             } else {

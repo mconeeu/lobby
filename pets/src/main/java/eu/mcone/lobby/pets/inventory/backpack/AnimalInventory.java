@@ -26,7 +26,6 @@ public class AnimalInventory extends BackpackInventory {
                     p.closeInventory();
                     p.sendMessage("§8[§7§l!§8] §fRucksack §8» §2Du hast dein §a"+item.getName()+"§2 erfolgreich zu dir gerufen!");
 
-
                     Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> LobbyPets.getInstance().spawnPet(p, item));
                 });
             }

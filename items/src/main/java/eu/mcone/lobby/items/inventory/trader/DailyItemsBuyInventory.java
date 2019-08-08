@@ -16,23 +16,23 @@ import org.bukkit.scoreboard.DisplaySlot;
 public class DailyItemsBuyInventory extends CoreInventory {
 
     DailyItemsBuyInventory(Player player, Item toBuy) {
-        super("§8» §e§lHändler §8| §fKisten", player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
+        super("§8» §e§lHändler §8| §fShop", player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         GamePlayer lobbyPlayer = LobbyPlugin.getInstance().getGamePlayer(player.getUniqueId());
         CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(player.getUniqueId());
 
         setItem(InventorySlot.ROW_1_SLOT_5, toBuy.getItemStack());
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.STAINED_GLASS, 1, 13).displayName("§aKaufen")
                 .lore("§7Kaufe das Item " + toBuy.getName(),
-                        "§7für §a§l" + toBuy.getEmeralds() + " §aEmeralds"
+                        "§7für §a§l" + toBuy.getBuyemeralds() + " §aEmeralds"
                 ).create(), e -> {
             if (!lobbyPlayer.getItems().contains(toBuy)) {
-                if ((corePlayer.getEmeralds() - toBuy.getEmeralds()) >= 0) {
-                    corePlayer.removeEmeralds(toBuy.getEmeralds());
+                if ((corePlayer.getEmeralds() - toBuy.getBuyemeralds()) >= 0) {
+                    corePlayer.removeEmeralds(toBuy.getBuyemeralds());
                     corePlayer.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                     lobbyPlayer.addItem(toBuy);
 
                     player.closeInventory();
-                    player.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du hast das Item §a" + toBuy.getName() + " §2für §f" + toBuy.getEmeralds() + " Emeralds §2erfolgreich gekauft!");
+                    player.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du hast das Item §a" + toBuy.getName() + " §2für §f" + toBuy.getBuyemeralds() + " Emeralds §2erfolgreich gekauft!");
                 } else {
                     LobbyPlugin.getInstance().getMessager().send(player, "Du hast nicht genügen §a§lEmeralds!");
                 }

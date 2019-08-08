@@ -17,6 +17,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 public class CoinBombListener implements Listener {
 
@@ -31,28 +34,38 @@ public class CoinBombListener implements Listener {
             lp.removeItem(Item.COINBOMB);
             p.getInventory().remove(p.getItemInHand());
 
-            Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
-                    Bukkit.getServer().broadcastMessage("§8[§7§l!§8] §fServer §8» §aEine Coin Bombe wurde von §c" + p.getName() + " §agezündet sie startet in §c3 Sekunden"), 20L);
+            for (Player players : Bukkit.getOnlinePlayers()) {
 
-            Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
-                    Bukkit.getServer().broadcastMessage("§8[§7§l!§8] §fServer §8» §aEine Coin Bombe wurde von §c" + p.getName() + " §agezündet sie startet in §c2 Sekunden"), 40L);
+                Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
+                        players.sendMessage("§8[§7§l!§8] §fServer §8» §aEine Coin Bombe wurde von §e" + p.getName() + " §agezündet sie startet in §e3 Sekunden"), 20L);
+                players.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 80, 7));
 
-            Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
-                    Bukkit.getServer().broadcastMessage("§8[§7§l!§8] §fServer §8» §aEine Coin Bombe wurde von §c" + p.getName() + " §agezündet sie startet in §c1 Sekunden"), 60L);
+                Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
+                        players.sendMessage("§8[§7§l!§8] §fServer §8» §aEine Coin Bombe wurde von §e" + p.getName() + " §agezündet sie startet in §e2 Sekunden"), 40L);
 
-            Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
-                    player.playEffect(p.getLocation(), Effect.LAVA_POP, 1);
-                    player.playEffect(p.getLocation(), Effect.LAVA_POP, 2);
-                    Bukkit.getServer().broadcastMessage("§8[§7§l!§8] §fServer §8» §cDie Coin Bombe ist explodiert jeder bekommnt §a§l500 Coins");
+                Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
+                        players.sendMessage("§8[§7§l!§8] §fServer §8» §cEine Coin Bombe wurde von §e" + p.getName() + " §cgezündet sie startet in §e1 Sekunden"), 60L);
+
+                Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
+
+                    Vector v = new Vector(players.getLocation().getX(), players.getLocation().getY(), players.getLocation().getZ());
+                    v.normalize();
+                    v.setY(1.0D);
+                    v.multiply(1.5D);
+
+                    players.setVelocity(v);
+                    players.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
+                    players.playEffect(p.getLocation(), Effect.LAVA_POP, 1);
+                    players.playEffect(p.getLocation(), Effect.LAVA_POP, 2);
+
+                    Bukkit.getServer().broadcastMessage("§8[§7§l!§8] §fServer §8» §fDie Coin Bombe ist §lexplodiert§f jeder bekommnt §e§l1.200 Coins!");
 
                     lp.removeItem(Item.COINBOMB);
 
-                    CoreSystem.getInstance().getCorePlayer(player).addCoins(500);
+                    CoreSystem.getInstance().getCorePlayer(players).addCoins(1200);
 
-                }
-            }, 80L);
+                }, 80L);
+            }
         }
     }
 

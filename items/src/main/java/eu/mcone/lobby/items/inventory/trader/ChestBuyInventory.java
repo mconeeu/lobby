@@ -52,8 +52,8 @@ class ChestBuyInventory extends CoreInventory {
 
 
         setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.CHEST, 10, 0).displayName("§c§l10 Kisten").lore("§7Kosten: §f§o500 Emeralds", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
-            if (cp.getCoins() - 500 >= 0) {
-                cp.removeCoins(500);
+            if (cp.getEmeralds() - 500 >= 0) {
+                cp.removeEmeralds(500);
                 lp.addChests(10);
 
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §aDu hast 10 Kisten gekauft!");
