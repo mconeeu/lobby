@@ -115,8 +115,6 @@ public class JohnBankRobberyInventory extends CoreInventory {
         }
 
         if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_START.getId()) {
-
-
             setItem(InventorySlot.ROW_1_SLOT_1, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder()
                     .displayName("§d§lBank-Raub")
                     .lore("§7§oDu Raubst für John die One-Island Bank aus",

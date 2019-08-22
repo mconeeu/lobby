@@ -32,7 +32,6 @@ public class InventoryTriggerListener implements Listener {
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR)) {
             if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getClickedBlock() != null) {
                 Material clicked = e.getClickedBlock().getType();
-                e.setCancelled(true);
 
                 switch (clicked) {
                     case CAULDRON: {

@@ -182,16 +182,17 @@ public class NpcListener implements Listener {
 
                             p.sendMessage("§fDas war Teil 1 der MCONE Story der 2 Teil ist bereits in Planung und auch schon in Entwicklung");
 
-                          /*  if (!gamePlayer.hasItem(Item.RADIO_SET1)) {
+                            // TODO: CHAPTER 2
+                            /*if (!gamePlayer.hasItem(Item.RADIO_SET1)) {
                                 gamePlayer.addItem(Item.RADIO_SET1);
                             }
-                          if (!gamePlayer.hasItem(Item.GPS)) {
-                               gamePlayer.addItem(Item.GPS);
-                        */
+                            if (!gamePlayer.hasItem(Item.GPS)) {
+                                gamePlayer.addItem(Item.GPS);
+                            }*/
                         }
+
+                        break;
                     }
-                    break;
-                    //  }
                     case "edward-welcome": {
                         if (lp.getProgressId() < 1) {
                             p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
@@ -205,8 +206,9 @@ public class NpcListener implements Listener {
                                     .fadeIn(1)
                                     .fadeOut(1)
                                     .send(p);
-                            break;
                         }
+
+                        break;
                     }
                 }
             } else if (w.equals(LobbyWorld.PARADISE_ISLAND.getWorld())) {
@@ -262,16 +264,15 @@ public class NpcListener implements Listener {
                     case "John1":
                     case "John2":
                     case "John3": {
-                        if (lp.getBankprogressId() == BankProgress.START.getId()) {
+                        if (lp.getBankprogressId() == BankProgress.SMUGGLER.getId()) {
+                            new JohnBankRobberyInventory(p);
+                        } else {
                             p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + "schönes Büro aber leider gehört es bis jetzt noch mir aber du etwas für mich erledigen wo du das Büro und Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
                             lp.setBankProgress(BankProgress.SMUGGLER);
                             gamePlayer.addItem(Item.BUTTON);
-                        } else {
-                            new JohnBankRobberyInventory(p);
-
                         }
-                        break;
 
+                        break;
                     }
                 }
             }
