@@ -22,6 +22,7 @@ import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import eu.mcone.lobby.story.inventory.searcher.SearcherInventory;
 import eu.mcone.lobby.story.inventory.story.CustomerInventory;
+import eu.mcone.lobby.story.inventory.story.CorpseInventory;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -49,6 +50,9 @@ public class NpcListener implements Listener {
                     case "researcher": {
                         new SearcherInventory(p);
                         break;
+                    }
+                    case "Leiche": {
+                        new CorpseInventory(p);
                     }
                     case "robert": {
                         if (lp.getProgressId() >= Progress.SALIA.getId() && !gamePlayer.hasItem(Item.MAGICWAND)) {
@@ -107,12 +111,12 @@ public class NpcListener implements Listener {
                                     npc.setSkin(RUFI_HEADLED_SKIN, p);
                                     npc.changeDisplayname(RUFI_HEADLED_DISPLAY_NAME, p);
                                 }, 2);
-                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fHeer Rufi §8|§7 Danke Danke du hast mich gerretet du kannst dir die belohnung in der Mitte von der Insel holen da ist eine Fackel und da neben ein Knopf den musst du betätigen dann hast du deine Belohnung");
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fHeer Rufi §8|§7 Danke Danke du hast mich gerretet du kannst dir die belohnung in der Mitte von One-Island abholen, springe in ein großes Loch!");
                             } else {
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fHeer Rufi §8|§7 Das hilft mir nicht! Hast du eventuell einen Heiltrank, den du mir geben kannst?");
                             }
                         } else if (lp.getProgressId() == Progress.INFECTION.getId()) {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fHeer Rufi §8|§7 Hol dir deine belohnung ab!");
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fHeer Rufi §8|§7 Hol dir deine Belohnung in der Mitte von One-Island ab!");
                         }
                         return;
                     }
@@ -165,12 +169,14 @@ public class NpcListener implements Listener {
 
                             Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
                                     CoreSystem.getInstance().createTitle()
-                                            .title("§3§lTEIL 2 WIRD FOLGEN")
+                                            .title("§3§lTEIL 2 IN ENTWICKLUNG")
                                             .subTitle("§c§lENDE")
                                             .stay(5)
                                             .fadeIn(1)
                                             .fadeOut(1)
                                             .send(p), 140L);
+
+                            lp.setProgress(Progress.ONEHIT_SWORD);
 
                             CoreSystem.getInstance().createActionBar().message("§3Regie und Entwickelt von DrMarv").send(p);
 
@@ -185,39 +191,31 @@ public class NpcListener implements Listener {
                         }
                     }
                     break;
-              //  }
-                case "edward-welcome": {
-                    if (lp.getProgressId() < 1) {
-                        p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
-                        p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
+                    //  }
+                    case "edward-welcome": {
+                        if (lp.getProgressId() < 1) {
+                            p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
+                            p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
 
-                        LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").toggleVisibility(p, false);
-                        CoreSystem.getInstance().createTitle()
-                                .title("§3§lMCONE PRÄSENTIRT")
-                                .subTitle("§f§lDIE STORY VON ONE ISLAND")
-                                .stay(5)
-                                .fadeIn(1)
-                                .fadeOut(1)
-                                .send(p);
-                        Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
-                                CoreSystem.getInstance().createTitle()
-                                        .title("§e§lEDWARD WARTET")
-                                        .subTitle("§c§lER STEHT VOR DER YACHT")
-                                        .stay(5)
-                                        .fadeIn(1)
-                                        .fadeOut(1)
-                                        .send(p), 140L);
+                            LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").toggleVisibility(p, false);
+                            CoreSystem.getInstance().createTitle()
+                                    .title("§3§lMCONE PRÄSENTIRT")
+                                    .subTitle("§f§lDIE STORY VON ONE ISLAND")
+                                    .stay(5)
+                                    .fadeIn(1)
+                                    .fadeOut(1)
+                                    .send(p);
+                            break;
+                        }
                     }
-                    break;
                 }
-            }
-        } else if (w.equals(LobbyWorld.PARADISE_ISLAND.getWorld())) {
-            switch (npc.getData().getName()) {
-                case "captain": {
-                    LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
-                    p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in One Island");
-                    break;
-                }
+            } else if (w.equals(LobbyWorld.PARADISE_ISLAND.getWorld())) {
+                switch (npc.getData().getName()) {
+                    case "captain": {
+                        LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
+                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in One Island");
+                        break;
+                    }
                  /*   case "marvin": {
                         if (lp.getProgressId() + 1 == Progress.MARVIN.getId() || lp.getProgressId() == Progress.MARVIN.getId()) {
                             LobbyWorld.CAVE.getWorld().teleportSilently(p, "spawn");
@@ -228,14 +226,14 @@ public class NpcListener implements Listener {
                         break;
                     }
                 */
-            }
-        } else if (w.equals(LobbyWorld.DESTROYED_PARADISE_ISLAND.getWorld())) {
-            switch (npc.getData().getName()) {
-                case "captain": {
-                    LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
-                    p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in One Island");
-                    break;
                 }
+            } else if (w.equals(LobbyWorld.DESTROYED_PARADISE_ISLAND.getWorld())) {
+                switch (npc.getData().getName()) {
+                    case "captain": {
+                        LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
+                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in One Island");
+                        break;
+                    }
                   /*  case "sparow": {
                         if (lp.getProgressId() > Progress.MARVIN_KILL.getId()) {
                             if (!gamePlayer.hasItem(Item.RADIO_SET_2)) {
@@ -246,67 +244,67 @@ public class NpcListener implements Listener {
                         break;
                     }
                 */
-            }
-        } else if (w.equals(LobbyWorld.CAVE.getWorld())) {
-            switch (npc.getData().getName()) {
-                case "marvin-kill": {
-                    p.sendMessage("§8[§7§l!§8] §cNPC §8» §fMarvin §8|§e PENG");
-                    Bukkit.getScheduler().runTaskLater(
-                            LobbyPlugin.getInstance(),
-                            () -> LobbyWorld.DESTROYED_PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn"),
-                            2 * 20
-                    );
-                    return;
+                }
+            } else if (w.equals(LobbyWorld.CAVE.getWorld())) {
+                switch (npc.getData().getName()) {
+                    case "marvin-kill": {
+                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fMarvin §8|§e PENG");
+                        Bukkit.getScheduler().runTaskLater(
+                                LobbyPlugin.getInstance(),
+                                () -> LobbyWorld.DESTROYED_PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn"),
+                                2 * 20
+                        );
+                        return;
+                    }
+                }
+            } else if (w.equals(LobbyWorld.OFFICE.getWorld())) {
+                switch (npc.getData().getName()) {
+                    case "John1":
+                    case "John2":
+                    case "John3": {
+                        if (lp.getBankprogressId() == BankProgress.START.getId()) {
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + "schönes Büro aber leider gehört es bis jetzt noch mir aber du etwas für mich erledigen wo du das Büro und Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
+                            lp.setBankProgress(BankProgress.SMUGGLER);
+                            gamePlayer.addItem(Item.BUTTON);
+                        } else {
+                            new JohnBankRobberyInventory(p);
+
+                        }
+                        break;
+
+                    }
                 }
             }
-        } else if (w.equals(LobbyWorld.OFFICE.getWorld())) {
-            switch (npc.getData().getName()) {
-                case "John1":
-                case "John2":
-                case "John3": {
-                    if (lp.getBankprogressId() == BankProgress.START.getId()) {
-                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + "schönes Büro aber leider gehört es bis jetzt noch mir aber du etwas für mich erledigen wo du das Büro und Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
-                        lp.setBankProgress(BankProgress.SMUGGLER);
-                        gamePlayer.addItem(Item.BUTTON);
-                    } else {
-                        new JohnBankRobberyInventory(p);
 
+            for (Progress progress : Progress.values()) {
+                if (e.getNpc().getData().getName().equals(progress.getNpcName())) {
+                    p.getWorld().playEffect(e.getNpc().getData().getLocation().bukkit(), Effect.LAVA_POP, 100);
+
+                    if (progress.getId() >= lp.getProgressId()) {
+                        if (progress.getId() <= lp.getProgressId() + 1) {
+                            p.sendMessage("\n" + progress.getMessage().replaceAll("%%player%%", p.getName()));
+                            lp.setProgress(progress);
+
+                            if (progress.getId() > 1) {
+                                Progress.getProgressByID(progress.getId() - 1).getNpc().toggleVisibility(p, false);
+                            }
+
+                            Progress future = Progress.getProgressByID(progress.getId() + 1);
+                            if (future != null) {
+                                future.getNpc().toggleVisibility(p, true);
+                            }
+                        } else {
+                            p.sendMessage("§8§l[§7§l!§8§l] §fLobby §8 » §7Du bist noch nicht so weit!");
+                        }
+                    } else {
+                        p.sendMessage("§8§l[§7§l!§8§l] §fLobby§8 » §7Das hast du schon gemacht!");
                     }
                     break;
-
                 }
             }
+
+
         }
-
-        for (Progress progress : Progress.values()) {
-            if (e.getNpc().getData().getName().equals(progress.getNpcName())) {
-                p.getWorld().playEffect(e.getNpc().getData().getLocation().bukkit(), Effect.LAVA_POP, 100);
-
-                if (progress.getId() >= lp.getProgressId()) {
-                    if (progress.getId() <= lp.getProgressId() + 1) {
-                        p.sendMessage("\n" + progress.getMessage().replaceAll("%%player%%", p.getName()));
-                        lp.setProgress(progress);
-
-                        if (progress.getId() > 1) {
-                            Progress.getProgressByID(progress.getId() - 1).getNpc().toggleVisibility(p, false);
-                        }
-
-                        Progress future = Progress.getProgressByID(progress.getId() + 1);
-                        if (future != null) {
-                            future.getNpc().toggleVisibility(p, true);
-                        }
-                    } else {
-                        p.sendMessage("§8§l[§7§l!§8§l] §fLobby §8 » §7Du bist noch nicht so weit!");
-                    }
-                } else {
-                    p.sendMessage("§8§l[§7§l!§8§l] §fLobby§8 » §7Das hast du schon gemacht!");
-                }
-                break;
-            }
-        }
-
-
     }
-}
 
 }
