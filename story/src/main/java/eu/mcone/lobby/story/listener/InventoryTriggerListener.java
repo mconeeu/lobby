@@ -96,9 +96,9 @@ public class InventoryTriggerListener implements Listener {
 
                                 p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Drücke jetzt gleich bei den Bücher Regalen ein Holz Knopf dann öffnet sich eine Geheime Tür links!");
 
+                            } else {
+                                e.setCancelled(true);
                             }
-                        } else {
-                            e.setCancelled(true);
                         }
                         break;
                     }

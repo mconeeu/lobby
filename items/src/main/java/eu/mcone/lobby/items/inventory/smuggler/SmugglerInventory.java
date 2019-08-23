@@ -22,7 +22,7 @@ public class SmugglerInventory extends CoreInventory {
 
 
     public SmugglerInventory(Player p) {
-        super("§8» §7§lSchmugler",p,9*3,InventoryOption.FILL_EMPTY_SLOTS);
+        super("§8» §7§lSchmugler", p, 9 * 3, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
         GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(p);
 
@@ -40,10 +40,16 @@ public class SmugglerInventory extends CoreInventory {
                 p.closeInventory();
 
                 if (lobbyPlayer.getCorePlayer().getCoins() - 20 >= 0) {
-                    lobbyPlayer.getCorePlayer().removeCoins(20);
-                    gamePlayer.addItem(Item.BANK_MAP);
-                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Perfekt du hast die Karte komm wieder zum Büro dann kann ich dir denn nächsten Schritt sagen!");
-                    lobbyPlayer.setBankProgress(BankProgress.CUTTER);
+                    if (!gamePlayer.hasItem(Item.BANK_MAP)) {
+                        lobbyPlayer.getCorePlayer().removeCoins(20);
+                        gamePlayer.addItem(Item.BANK_MAP);
+                        p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Perfekt du hast die Karte komm wieder zum Büro dann kann ich dir denn nächsten Schritt sagen!");
+                        lobbyPlayer.setBankProgress(BankProgress.CUTTER);
+                    } else {
+                        p.sendMessage("§4Du hast das Item bereits!");
+                    }
+                } else {
+                    p.sendMessage("§cDu hast nicht genügend Coins!");
                 }
             });
         }

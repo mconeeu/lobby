@@ -83,7 +83,7 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
     }
 
     public void setBankProgress(BankProgress bankprogress) {
-        this.progressId = bankprogress.getId();
+        this.bankprogressId = bankprogress.getId();
         saveData();
     }
 

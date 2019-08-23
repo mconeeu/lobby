@@ -10,10 +10,12 @@ import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.inventory.InteractionInventory;
 import eu.mcone.lobby.items.manager.OfficeManager;
+import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import eu.mcone.lobby.util.PlayerSpawnLocation;
 import eu.mcone.lobby.util.SilentLobbyUtils;
 import org.bukkit.Bukkit;
@@ -141,8 +143,15 @@ public class GeneralPlayerListener implements Listener {
         e.setQuitMessage(null);
 
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().getUniqueId());
-        lp.saveData();
+        GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(e.getPlayer().getUniqueId());
 
+        if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
+            lp.setBankProgress(BankProgress.BANK_ROBBERY_START);
+            JohnBankRobberyInventory.currentlyInBank = null;
+            gamePlayer.removeItem(Item.GOLD_BARDING);
+
+        }
+        lp.saveData();
         LobbyPlugin.getInstance().unregisterLobbyPlayer(lp);
     }
 
