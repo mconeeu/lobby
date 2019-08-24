@@ -11,6 +11,7 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.story.inventory.story.*;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -75,13 +76,16 @@ public class InventoryTriggerListener implements Listener {
                         if (loc.getX() == 10 && loc.getY() == 104 && loc.getZ() == 1) {
                             if (lobbyPlayer.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
 
-                                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Du bist drin jetzt drück auf der linken Seite ganz links unten denn Knopf");
+                                Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
+                                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Du bist drin jetzt drück auf der linken Seite ganz links unten denn Knopf");
+                                }, 30L);
 
                             }
                         } else if (loc.getX() == 13 && loc.getY() == 103 && loc.getZ() == -8) {
                             if (lobbyPlayer.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
-
-                                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7Perfekt du bist drin jetzt klau die Goldbarren in der Truhe!");
+                                Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
+                                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7Perfekt du bist drin jetzt klau die Goldbarren in der Truhe!");
+                                }, 20L);
                             } else {
                                 e.setCancelled(true);
                             }

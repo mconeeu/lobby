@@ -50,6 +50,7 @@ public class PlayerJoinListener implements Listener {
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
 
         loadLobbyPlayer(p, LobbyPlayerLoadedEvent.Reason.JOINED);
+        p.setWalkSpeed(20);
     }
 
     public static void loadLobbyPlayer(Player p, LobbyPlayerLoadedEvent.Reason reason) {

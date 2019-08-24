@@ -6,7 +6,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.player.LobbyPlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class WoolInventory extends CoreInventory {
@@ -18,7 +18,9 @@ public class WoolInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_5, Item.WHITE_WOOL.getItemStack(), e -> {
             if (!gamePlayer.hasItem(Item.WHITE_WOOL)) {
                 gamePlayer.addItem(Item.WHITE_WOOL);
-                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Wieso hast du denn jetzt Wolle? Besorge das Bank Outfit!");
+                Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
+                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Wieso hast du denn jetzt Wolle? Besorge das Bank Outfit!");
+                }, 30L);
             } else {
                 LobbyPlugin.getInstance().getMessager().send(p, "§4Du besitzt diese Item bereits!");
             }

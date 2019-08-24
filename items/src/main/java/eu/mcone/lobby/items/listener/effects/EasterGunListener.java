@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
@@ -40,5 +41,13 @@ public class EasterGunListener implements Listener {
             p.spigot().playEffect(e.getEntity().getLocation(), Effect.LARGE_SMOKE, 1, 1, 1, 1, 1, 2, 100, 100);
         }
     }
+
+    @EventHandler
+    public void on(CreatureSpawnEvent e) {
+        if (e.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.EGG)) {
+            e.setCancelled(true);
+        }
+    }
+
 
 }

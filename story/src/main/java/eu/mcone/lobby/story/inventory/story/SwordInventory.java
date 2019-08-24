@@ -8,6 +8,7 @@ import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class SwordInventory extends CoreInventory {
@@ -22,7 +23,9 @@ public class SwordInventory extends CoreInventory {
             if (!gamePlayer.hasItem(Item.IRON_SWORD)) {
                 gamePlayer.addItem(Item.IRON_SWORD);
                 lp.setBankProgress(BankProgress.BANK_ROBBERY_START);
-                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Endlich hast du das Schwert jetzt komm schnell zurück ins Büro damit wir denn Bankraub starten können!");
+                Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
+                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Endlich hast du das Schwert jetzt komm schnell zurück ins Büro damit wir denn Bankraub starten können!");
+                }, 20L);
             } else {
                 LobbyPlugin.getInstance().getMessager().send(p, "§4Du besitzt diese Item bereits!");
             }

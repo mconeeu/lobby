@@ -29,7 +29,7 @@ public class CustomerInventory extends CoreInventory {
                     p.sendMessage("§8[§7§l!§8] §cNPC §8» §fVerkäufer §8|§7 Du hast zu wenig Coins!");
                 }
             } else {
-                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fVerkäufer §8|§7 Du hast doch schon eins!");
+                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fVerkäufer §8|§7 Du hast doch schon ein Ticket!");
             }
             p.closeInventory();
         });

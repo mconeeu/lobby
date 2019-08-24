@@ -23,6 +23,7 @@ public class ProgressInventory extends CoreInventory {
         super("§8» §3§lStory §8| §fFortschritt", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
+        //TODO Umändern zu den anderen Neben Storys -> In naher zukunft IRGENDWAN (Nicht machen!)
         int i = 0;
         int progressId = lp.getProgressId();
 

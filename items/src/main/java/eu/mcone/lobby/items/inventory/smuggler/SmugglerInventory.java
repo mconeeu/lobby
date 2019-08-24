@@ -36,7 +36,7 @@ public class SmugglerInventory extends CoreInventory {
 
 
         if (lobbyPlayer.getBankprogressId() == BankProgress.SMUGGLER.getId()) {
-            setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.EMPTY_MAP).displayName("§f§lPlan der Bank").lore("", "§6Kosten 20 Coins").create(), e -> {
+            setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.EMPTY_MAP).displayName("§f§lPlan der Bank").lore("", "§6Kosten 20 Coins").create(), e -> {
                 p.closeInventory();
 
                 if (lobbyPlayer.getCorePlayer().getCoins() - 20 >= 0) {

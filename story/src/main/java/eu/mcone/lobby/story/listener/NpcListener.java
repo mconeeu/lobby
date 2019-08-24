@@ -21,6 +21,7 @@ import eu.mcone.lobby.items.inventory.smuggler.SmugglerInventory;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import eu.mcone.lobby.story.inventory.searcher.SearcherInventory;
+import eu.mcone.lobby.story.inventory.story.CaptainInventory;
 import eu.mcone.lobby.story.inventory.story.CorpseInventory;
 import eu.mcone.lobby.story.inventory.story.CustomerInventory;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
@@ -88,16 +89,16 @@ public class NpcListener implements Listener {
                                 p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Ok du hast das Packet komm zurück ins Büro damit wir die Letzte Mission besprechen können!");
 
                             } else {
-                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ah du musst " + p.getName() + "ich konnte deine Bestellung leider nicht bearbeiten ,weil ich keine Wolle da hab du kannst sie aber doch besorgen sie liegt warscheinlich noch in einer Kiste im Boot!");
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ah du musst " + p.getName() + "i ch konnte deine Bestellung leider nicht bearbeiten ,weil ich keine Wolle da hab du kannst sie aber doch besorgen sie liegt warscheinlich noch in einer Kiste im Boot!");
                             }
 
                         } else {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ich habe leider moemtan viel zu viel zu tun komm später wieder");
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ich habe leider momentan viel zu viel zu tun komm später wieder!");
                         }
                     }
 
                     case "duty": {
-                        if (lp.getProgressId() >= Progress.DUTY.getId() && !gamePlayer.hasItem(Item.PASS)) {
+                        if (!gamePlayer.hasItem(Item.PASS)) {
                             gamePlayer.addItem(Item.PASS);
                         }
                         break;
@@ -137,28 +138,21 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "captain": {
-                        if (p.getItemInHand().equals(Item.BOAT_PASS.getItemStack())) {
-                            //   if (lp.getProgressId() > Progress.MARVIN_KILL.getId()) {
-                            gamePlayer.removeItem(Item.BOAT_PASS);
-                            p.getInventory().remove(p.getItemInHand());
-                            LobbyWorld.DESTROYED_PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn");
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun im zerstörten Paradise Island");
-                        } else {
-                            gamePlayer.removeItem(Item.BOAT_PASS);
-                            p.getInventory().remove(p.getItemInHand());
+                        if (gamePlayer.hasItem(Item.BOAT_PASS)) {
+                            if (p.getItemInHand().equals(Item.BOAT_PASS.getItemStack())) {
+                                p.getInventory().remove(p.getItemInHand());
+                                new CaptainInventory(p);
+                                return;
+                            } else {
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Ich brauche das Ticket du Landratte");
 
-                            LobbyWorld.PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn");
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in Paradise Island");
-
-                            if (lp.getProgressId() == 9) {
-                                p.sendMessage("§8[§7§l!§8] §fServer §8» §fFunkgerät §8|§7 Bringg Bringgg  Hallo " + p.getName() + "§7 ich sehe das du auf der Insel bist und wollte so mit fragen ob du Sparow gefunden hab? Ich schreib dir einfach in ein paar minuten zurück.");
                             }
-                        }
-                     /*   } else {
+                        } else if (!p.getItemInHand().equals(Item.BOAT_PASS.getItemStack())) {
                             p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Ich brauche das Ticket du Landratte");
+                        } else {
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Nimm das Ticket in die Hand!");
                         }
-                        return;
-                     */
+                        break;
                     }
                     case "edward-cave": {
                         if (lp.getProgressId() == Progress.INFECTION.getId()) {
@@ -166,7 +160,7 @@ public class NpcListener implements Listener {
                             CoreSystem.getInstance().createTitle()
                                     .title("§3§lDAS WAR DIE MCONE STORY")
                                     .subTitle("§f§lTEIL 1")
-                                    .stay(5)
+                                    .stay(3)
                                     .fadeIn(1)
                                     .fadeOut(1)
                                     .send(p);
@@ -174,15 +168,18 @@ public class NpcListener implements Listener {
                             Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
                                     CoreSystem.getInstance().createTitle()
                                             .title("§3§lTEIL 2 IN ENTWICKLUNG")
-                                            .subTitle("§c§lENDE")
-                                            .stay(5)
+                                            .stay(2)
                                             .fadeIn(1)
                                             .fadeOut(1)
-                                            .send(p), 140L);
+                                            .send(p), 70L);
 
                             lp.setProgress(Progress.ONEHIT_SWORD);
 
-                            CoreSystem.getInstance().createActionBar().message("§3Regie und Entwickelt von DrMarv").send(p);
+
+                            Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
+                                CoreSystem.getInstance().createActionBar().message("§3Regie und Entwickelt von DrMarv").send(p);
+                            }, 90);
+
 
                             p.sendMessage("§fDas war Teil 1 der MCONE Story der 2 Teil ist bereits in Planung und auch schon in Entwicklung");
 
@@ -222,16 +219,6 @@ public class NpcListener implements Listener {
                         p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in One Island");
                         break;
                     }
-                 /*   case "marvin": {
-                        if (lp.getProgressId() + 1 == Progress.MARVIN.getId() || lp.getProgressId() == Progress.MARVIN.getId()) {
-                            LobbyWorld.CAVE.getWorld().teleportSilently(p, "spawn");
-
-                            gamePlayer.removeItem(Item.RADIO_SET1);
-                            gamePlayer.removeItem(Item.GPS);
-                        }
-                        break;
-                    }
-                */
                 }
             } else if (w.equals(LobbyWorld.DESTROYED_PARADISE_ISLAND.getWorld())) {
                 switch (npc.getData().getName()) {
@@ -250,6 +237,18 @@ public class NpcListener implements Listener {
                         break;
                     }
                 */
+
+                            /*   case "marvin": {
+                        if (lp.getProgressId() + 1 == Progress.MARVIN.getId() || lp.getProgressId() == Progress.MARVIN.getId()) {
+                            LobbyWorld.CAVE.getWorld().teleportSilently(p, "spawn");
+
+                            gamePlayer.removeItem(Item.RADIO_SET1);
+                            gamePlayer.removeItem(Item.GPS);
+                        }
+                        break;
+                    }
+                */
+
                 }
             } else if (w.equals(LobbyWorld.CAVE.getWorld())) {
                 switch (npc.getData().getName()) {
@@ -271,8 +270,9 @@ public class NpcListener implements Listener {
                         if (lp.getBankprogressId() >= BankProgress.SMUGGLER.getId()) {
                             new JohnBankRobberyInventory(p);
                         } else {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + "schönes Büro aber leider gehört es bis jetzt noch mir aber du etwas für mich erledigen wo du das Büro und Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + " schönes Büro aber leider gehört es bis jetzt noch mir aber du etwas für mich erledigen wo du das Büro und Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
                             lp.setBankProgress(BankProgress.SMUGGLER);
+                            new JohnBankRobberyInventory(p);
                             gamePlayer.addItem(Item.BUTTON);
                         }
 

@@ -1,5 +1,5 @@
 name: MCONE-Lobby
-authors: [Rufus Maiwald, Marvin Hülsmann, Dominik Lippl, BamDev]
+authors: [Rufus Maiwald, Marvin Hülsmann, Dominik Lippl]
 version: ${project.version}
 main: eu.mcone.lobby.Lobby
 depend: [MCONE-BukkitCoreSystem, MCONE-GameSystem]
