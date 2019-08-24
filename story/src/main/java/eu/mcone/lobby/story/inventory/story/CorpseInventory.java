@@ -18,9 +18,9 @@ public class CorpseInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_5, Item.HEAD_SECRET_STRIPCLUB.getItemStack(), e -> {
             if (!lp.hasItem(Item.HEAD_SECRET_STRIPCLUB)) {
                 lp.addItem(Item.HEAD_SECRET_STRIPCLUB);
-                LobbyPlugin.getInstance().getMessager().send(p, "Du hast den Kopf aufgesammelt aufgenommen!");
+                LobbyPlugin.getInstance().getMessager().send(p, "§aDu hast den Kopf aufgenommen!");
             } else {
-                LobbyPlugin.getInstance().getMessager().send(p, "§4Du besitzt diese Item bereits!");
+                LobbyPlugin.getInstance().getMessager().send(p, "§cDu besitzt diese Item bereits!");
             }
             p.closeInventory();
         });
