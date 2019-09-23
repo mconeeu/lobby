@@ -77,14 +77,14 @@ public class InventoryTriggerListener implements Listener {
                             if (lobbyPlayer.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
 
                                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
-                                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Du bist drin jetzt drück auf der linken Seite ganz links unten denn Knopf");
+                                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Du bist drin jetzt drück auf der rechten Seite ganz links unten denn Knopf");
                                 }, 30L);
 
                             }
                         } else if (loc.getX() == 13 && loc.getY() == 103 && loc.getZ() == -8) {
                             if (lobbyPlayer.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
                                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
-                                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7Perfekt du bist drin jetzt klau die Goldbarren in der Truhe!");
+                                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Perfekt du bist drin jetzt klau die Goldbarren in der Truhe!");
                                 }, 20L);
                             } else {
                                 e.setCancelled(true);

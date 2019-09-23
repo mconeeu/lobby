@@ -39,6 +39,7 @@ public class EasterGunListener implements Listener {
 
             p.spigot().playEffect(e.getEntity().getLocation(), Effect.LAVA_POP, 1, 1, 1, 1, 1, 2, 100, 100);
             p.spigot().playEffect(e.getEntity().getLocation(), Effect.LARGE_SMOKE, 1, 1, 1, 1, 1, 2, 100, 100);
+            p.spigot().playEffect(e.getEntity().getLocation(), Effect.HEART, 1, 1, 1, 1, 1, 2, 10, 20);
         }
     }
 

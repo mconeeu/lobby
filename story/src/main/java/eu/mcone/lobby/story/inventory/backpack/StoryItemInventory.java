@@ -18,6 +18,11 @@ public class StoryItemInventory extends BackpackInventory {
         for (Item item : Item.values()) {
             if (item.hasCategory() && item.getCategory().equals(Category.STORY_ITEMS) && playerHasItem(item)) {
                 addItem(item.getItemStack(), e -> p.getInventory().setItem(3, item.getItemStack()));
+                if (p.hasPermission("lobby.silenthub")) {
+                    addItem(item.getItemStack(), e -> p.getInventory().setItem(3, item.getItemStack()));
+                } else {
+                    addItem(item.getItemStack(), e -> p.getInventory().setItem(2, item.getItemStack()));
+                }
             }
         }
     }

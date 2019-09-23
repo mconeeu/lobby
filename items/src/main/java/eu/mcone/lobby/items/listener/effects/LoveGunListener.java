@@ -26,9 +26,9 @@ public class LoveGunListener implements Listener {
             World w = p.getWorld();
 
             Bukkit.getScheduler().runTaskAsynchronously(LobbyPlugin.getInstance(), () -> {
-                w.playEffect(p.getLocation(), Effect.HEART, 100);
-                w.playEffect(p.getLocation(), Effect.LAVA_POP, 100);
-                w.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 100);
+                p.spigot().playEffect(p.getLocation(), Effect.HEART, 1, 1, 1, 1, 1, 2, 15, 80);
+                w.playEffect(p.getLocation(), Effect.LAVA_POP, 10);
+                w.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 10);
             });
         }
     }

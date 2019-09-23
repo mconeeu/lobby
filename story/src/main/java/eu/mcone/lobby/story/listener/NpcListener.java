@@ -140,11 +140,10 @@ public class NpcListener implements Listener {
                     case "captain": {
                         if (gamePlayer.hasItem(Item.BOAT_PASS)) {
                             if (p.getItemInHand().equals(Item.BOAT_PASS.getItemStack())) {
-                                p.getInventory().remove(p.getItemInHand());
                                 new CaptainInventory(p);
                                 return;
                             } else {
-                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Ich brauche das Ticket du Landratte");
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Ich brauche das Ticket du Fischgesicht!");
 
                             }
                         } else if (!p.getItemInHand().equals(Item.BOAT_PASS.getItemStack())) {
