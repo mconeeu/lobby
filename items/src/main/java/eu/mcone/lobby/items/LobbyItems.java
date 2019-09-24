@@ -9,9 +9,7 @@ import eu.mcone.gamesystem.api.enums.Category;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.items.command.ChestCMD;
-import eu.mcone.lobby.items.inventory.vendor.GadgetInventory;
-import eu.mcone.lobby.items.inventory.vendor.TrailInventory;
-import eu.mcone.lobby.items.inventory.vendor.VendorInventory;
+import eu.mcone.lobby.items.inventory.vendor.*;
 import eu.mcone.lobby.items.listener.InventoryTriggerListener;
 import eu.mcone.lobby.items.listener.LobbyPlayerLoadedListener;
 import eu.mcone.lobby.items.listener.NpcInteractListener;
@@ -49,10 +47,10 @@ public class LobbyItems extends LobbyAddon {
 
         VendorInventory.registerVendorInventory(Category.TRAIL, TrailInventory.class);
         VendorInventory.registerVendorInventory(Category.GADGET, GadgetInventory.class);
-        VendorInventory.registerVendorInventory(Category.OUTFITS, VendorInventory.class);
-        VendorInventory.registerVendorInventory(Category.ANIMAL, VendorInventory.class);
-        VendorInventory.registerVendorInventory(Category.INGAME, VendorInventory.class);
-        VendorInventory.registerVendorInventory(Category.HAT, VendorInventory.class);
+        VendorInventory.registerVendorInventory(Category.OUTFITS, OutfitInventory.class);
+        VendorInventory.registerVendorInventory(Category.ANIMAL, AnimalInventory.class);
+        VendorInventory.registerVendorInventory(Category.INGAME, IngameInventory.class);
+        VendorInventory.registerVendorInventory(Category.HAT, HatsInventory.class);
 
         LobbyPlugin.getInstance().registerCommands(new ChestCMD());
 
@@ -67,9 +65,11 @@ public class LobbyItems extends LobbyAddon {
     }
 
     @Override
-    public void onDisable() {}
+    public void onDisable() {
+    }
 
     @Override
-    public void reload() {}
+    public void reload() {
+    }
 
 }
