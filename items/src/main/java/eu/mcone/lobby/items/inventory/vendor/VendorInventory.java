@@ -39,11 +39,7 @@ public abstract class VendorInventory extends StaticClassCategoryInventory {
     }
 
     protected boolean playerHasItem(Item item) {
-        if (item.getCategory().equals(Category.STORY_ITEMS)) {
-            return ownItems.contains(item);
-        } else {
-            return ownItems.contains(item) || getPlayer().hasPermission("group.admin");
-        }
+        return ownItems.contains(item);
     }
 
     public static void registerVendorInventory(Category category, Class<? extends VendorInventory> inventory) {

@@ -9,7 +9,6 @@ import eu.mcone.coresystem.api.bukkit.event.NpcInteractEvent;
 import eu.mcone.gamesystem.api.enums.Category;
 import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
-import eu.mcone.gamesystem.api.lobby.backpack.BackpackInventory;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.items.inventory.bank.BankCreateCardInventory;
 import eu.mcone.lobby.items.inventory.bank.BankMenInventory;
@@ -17,6 +16,7 @@ import eu.mcone.lobby.items.inventory.office.ChauffeurInventory;
 import eu.mcone.lobby.items.inventory.office.OfficeTraderInventory;
 import eu.mcone.lobby.items.inventory.office.SecretaryInventory;
 import eu.mcone.lobby.items.inventory.trader.TraderInventory;
+import eu.mcone.lobby.items.inventory.vendor.VendorInventory;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import lombok.Getter;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
@@ -57,7 +57,7 @@ public class NpcInteractListener implements Listener {
                     || npcName.equalsIgnoreCase(StoryNPC.CHAUFFEUR_3.getNpcName())) {
                 new ChauffeurInventory(p);
             } else if (npcName.equalsIgnoreCase(StoryNPC.VENDOR.getNpcName())) {
-                BackpackInventory.openNewInventory(Category.TRAIL, p);
+                VendorInventory.openNewInventory(Category.TRAIL, p);
             }
         }
     }
