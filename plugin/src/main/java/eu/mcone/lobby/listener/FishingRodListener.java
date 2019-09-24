@@ -8,8 +8,8 @@ package eu.mcone.lobby.listener;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Fish;
-import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -41,6 +41,7 @@ public class FishingRodListener implements Listener {
                 lc.setY(lc.getY() + 0.5D);
                 p.teleport(lc);
 
+                p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 3);
                 double g = -0.08D;
                 double t = to.distance(lc);
                 double v_x = (1.0D + 0.07D * t) * (to.getX() - lc.getX()) / t;
