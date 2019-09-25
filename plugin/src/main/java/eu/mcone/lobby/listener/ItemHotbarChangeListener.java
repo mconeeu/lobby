@@ -9,6 +9,6 @@ public class ItemHotbarChangeListener implements Listener {
 
     @EventHandler
     public void on(PlayerItemHeldEvent e) {
-        e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.ITEM_PICKUP, 1, 1);
+        e.getPlayer().playSound(e.getPlayer().getLocation().add(0, 5, 0), Sound.ITEM_PICKUP, 1, 1);
     }
 }

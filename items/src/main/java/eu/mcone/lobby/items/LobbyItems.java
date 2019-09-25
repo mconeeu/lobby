@@ -8,7 +8,7 @@ package eu.mcone.lobby.items;
 import eu.mcone.gamesystem.api.enums.Category;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.items.command.ChestCMD;
+import eu.mcone.lobby.items.command.*;
 import eu.mcone.lobby.items.inventory.vendor.*;
 import eu.mcone.lobby.items.listener.InventoryTriggerListener;
 import eu.mcone.lobby.items.listener.LobbyPlayerLoadedListener;
@@ -52,7 +52,9 @@ public class LobbyItems extends LobbyAddon {
         VendorInventory.registerVendorInventory(Category.INGAME, IngameInventory.class);
         VendorInventory.registerVendorInventory(Category.HAT, HatsInventory.class);
 
+
         LobbyPlugin.getInstance().registerCommands(new ChestCMD());
+        LobbyPlugin.getInstance().registerCommands(new ItemCMD());
 
         final Location rewardBlock = new Location(Bukkit.getWorld("Lobby-OneIsland"), 46.5, 102D, -33.5);
         Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {

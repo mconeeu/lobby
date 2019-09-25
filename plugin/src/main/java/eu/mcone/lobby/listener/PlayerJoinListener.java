@@ -16,12 +16,16 @@ import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.CoreActionBar;
 import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.gamesystem.api.enums.Item;
+import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.util.PlayerHider;
+import eu.mcone.lobby.util.PlayerSpawnLocation;
 import eu.mcone.lobby.util.SidebarObjective;
+import eu.mcone.lobby.util.SilentLobbyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -124,9 +128,49 @@ public class PlayerJoinListener implements Listener {
         }
 
         Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> {
-            LobbyPlayer lobbyplayer = new LobbyPlayer(cp);
-            Bukkit.getPluginManager().callEvent(new LobbyPlayerLoadedEvent(lobbyplayer, reason));
+            LobbyPlayer lp = new LobbyPlayer(cp);
+            GamePlayer gp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
+            Bukkit.getPluginManager().callEvent(new LobbyPlayerLoadedEvent(lp, reason));
             LOADING_SUCCESS_MSG.send(p);
+
+            if (reason.equals(LobbyPlayerLoadedEvent.Reason.JOINED)) {
+                if (!lp.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.LAST_LOGIN.toString())) {
+                    if (lp.getSettings().isSpawnInSilentLobby()) {
+                        SilentLobbyUtils.activateSilentLobby(p);
+                        LobbyPlugin.getInstance().getMessager().send(p, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
+                    }
+
+                    if (lp.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.SPAWN.toString())) {
+                        PlayerSpawnLocation.SPAWN.getWorld().teleportSilently(p, "spawn");
+                    } else if (lp.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.OFFICE.toString())) {
+                        if (gp.hasItem(Item.OFFICE_CARD_BRONZE)) {
+                            LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.BRONZE_OFFICE.getSpawnLocation());
+                        } else if (gp.hasItem(Item.OFFICE_CARD_SILVER)) {
+                            LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.SILVER_OFFICE.getSpawnLocation());
+                        } else if (gp.hasItem(Item.OFFICE_CARD_GOLD)) {
+                            LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.GOLD_OFFICE.getSpawnLocation());
+                        }
+                    }
+                }
+            }
+
+            if (!gp.hasItem(Item.BANKCARD_PREMIUM)) {
+                if (p.hasPermission("mcone.premium")) {
+                    if (!gp.hasItem(Item.BANKCARD)) {
+                        gp.addItem(Item.BANKCARD_PREMIUM);
+                    } else {
+                        gp.removeItem(Item.BANKCARD);
+                        gp.addItem(Item.BANKCARD_PREMIUM);
+                    }
+
+                }
+            } else {
+                if (p.hasPermission("mcone.premium")) {
+                    if (gp.hasItem(Item.BANKCARD)) {
+                        gp.removeItem(Item.BANKCARD);
+                    }
+                }
+            }
 
             p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
         });

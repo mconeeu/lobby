@@ -9,16 +9,11 @@ import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.inventory.InteractionInventory;
-import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
-import eu.mcone.lobby.util.PlayerSpawnLocation;
-import eu.mcone.lobby.util.SilentLobbyUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,44 +31,8 @@ public class GeneralPlayerListener implements Listener {
     public void onLobbyPlayerLoaded(LobbyPlayerLoadedEvent e) {
         LobbyPlayer p = e.getPlayer();
         Player bp = p.bukkit();
-        GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(bp.getUniqueId());
 
         bp.removePotionEffect(PotionEffectType.BLINDNESS);
-
-//        if (!gamePlayer.hasItem(Item.BANKCARD_PREMIUM)) {
-//            if (bp.hasPermission("mcone.premium")) {
-//                if (!gamePlayer.hasItem(Item.BANKCARD)) {
-//                    gamePlayer.addItem(Item.BANKCARD_PREMIUM);
-//                } else {
-//                    gamePlayer.removeItem(Item.BANKCARD);
-//                    gamePlayer.addItem(Item.BANKCARD_PREMIUM);
-//                }
-//
-//            }
-//        }
-
-        if (e.getReason().equals(LobbyPlayerLoadedEvent.Reason.JOINED)) {
-            if (!p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.LAST_LOGIN.toString())) {
-                Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> {
-                    if (p.getSettings().isSpawnInSilentLobby()) {
-                        SilentLobbyUtils.activateSilentLobby(bp);
-                        LobbyPlugin.getInstance().getMessager().send(bp, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
-                    }
-
-                    if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.SPAWN.toString())) {
-                        PlayerSpawnLocation.SPAWN.getWorld().teleportSilently(bp, "spawn");
-                    } else if (p.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.OFFICE.toString())) {
-                        if (gamePlayer.hasItem(Item.OFFICE_CARD_BRONZE)) {
-                            LobbyWorld.OFFICE.getWorld().teleportSilently(bp, OfficeManager.OfficeType.BRONZE_OFFICE.getSpawnLocation());
-                        } else if (gamePlayer.hasItem(Item.OFFICE_CARD_SILVER)) {
-                            LobbyWorld.OFFICE.getWorld().teleportSilently(bp, OfficeManager.OfficeType.SILVER_OFFICE.getSpawnLocation());
-                        } else if (gamePlayer.hasItem(Item.OFFICE_CARD_GOLD)) {
-                            LobbyWorld.OFFICE.getWorld().teleportSilently(bp, OfficeManager.OfficeType.GOLD_OFFICE.getSpawnLocation());
-                        }
-                    }
-                });
-            }
-        }
     }
 
     @EventHandler
