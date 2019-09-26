@@ -39,7 +39,16 @@ public class BankCreateCardInventory extends CoreInventory {
                         lp.getCorePlayer().removeCoins(1000);
                         lp.getCorePlayer().getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
-                        if (!lp.hasItem(Item.BANKCARD)) {
+
+                        if (p.hasPermission("mcone.premium")) {
+                            if (!lp.hasItem(Item.BANKCARD_PREMIUM)) {
+                                lp.addItem(Item.BANKCARD_PREMIUM);
+                                new BankMenInventory(p);
+                            } else {
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fBänker §8|§7 Du hast doch schon ein Konto bei mir");
+                            }
+
+                        } else if (!lp.hasItem(Item.BANKCARD)) {
                             lp.addItem(Item.BANKCARD);
 
                             new BankMenInventory(p);

@@ -11,6 +11,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
+import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
@@ -30,7 +31,6 @@ import eu.mcone.lobby.util.SidebarObjective;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -94,8 +94,9 @@ public class Lobby extends LobbyPlugin {
 
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");
 
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            PlayerJoinListener.loadLobbyPlayer(p, LobbyPlayerLoadedEvent.Reason.RELOADED);
+        for (CorePlayer p : CoreSystem.getInstance().getOnlineCorePlayers()) {
+            PlayerJoinListener.preloadLobbyPlayer(p.bukkit(), p);
+            PlayerJoinListener.loadLobbyPlayer(p.bukkit(), p, LobbyPlayerLoadedEvent.Reason.RELOADED);
         }
 
         if (Bukkit.getOnlinePlayers().size() > 0) {

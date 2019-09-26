@@ -16,6 +16,7 @@ import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.CoreActionBar;
 import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.gamesystem.api.enums.Item;
+import eu.mcone.gamesystem.api.game.event.GamePlayerLoadedEvent;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -47,18 +48,24 @@ public class PlayerJoinListener implements Listener {
         Player p = e.getPlayer();
 
         e.setJoinMessage(null);
+        preloadLobbyPlayer(p, CoreSystem.getInstance().getCorePlayer(p.getUniqueId()));
+    }
+
+    @EventHandler
+    public void on(GamePlayerLoadedEvent e) {
+        CorePlayer cp = e.getPlayer().getCorePlayer();
+        Player p = cp.bukkit();
 
         PlayerHider.playerJoined(p);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
 
-        loadLobbyPlayer(p, LobbyPlayerLoadedEvent.Reason.JOINED);
+        loadLobbyPlayer(p, cp, LobbyPlayerLoadedEvent.Reason.JOINED);
         p.setWalkSpeed(0.2F);
     }
 
-    public static void loadLobbyPlayer(Player p, LobbyPlayerLoadedEvent.Reason reason) {
-        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
+    public static void preloadLobbyPlayer(Player p, CorePlayer cp) {
         LOADING_MSG.send(p);
 
         p.getInventory().clear();
@@ -91,7 +98,6 @@ public class PlayerJoinListener implements Listener {
         }
         p.getInventory().setItem(7, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());
         p.getInventory().setItem(8, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());
-
 
         cp.getScoreboard().setNewObjective(new SidebarObjective());
         switch (cp.getMainGroup()) {
@@ -126,7 +132,9 @@ public class PlayerJoinListener implements Listener {
                 p.getInventory().setBoots(Item.ADMIN_BOOTS.getItemStack());
                 break;
         }
+    }
 
+    public static void loadLobbyPlayer(Player p, CorePlayer cp, LobbyPlayerLoadedEvent.Reason reason) {
         Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> {
             LobbyPlayer lp = new LobbyPlayer(cp);
             GamePlayer gp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());

@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: Test this class !
+
 public class OfficeManager {
 
     private static List<Player> VANISHED = new ArrayList<>();

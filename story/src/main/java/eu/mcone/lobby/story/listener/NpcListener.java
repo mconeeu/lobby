@@ -110,6 +110,9 @@ public class NpcListener implements Listener {
                                 gamePlayer.removeItem(Item.MAGICDRINK);
                                 lp.setProgress(Progress.INFECTION);
 
+                                Progress.EDWARD_CITYHALL.getNpc().toggleVisibility(p, false);
+                                Progress.ONEHIT_SWORD.getNpc().toggleVisibility(p, true);
+
                                 p.spigot().playEffect(npc.getData().getLocation().bukkit(), Effect.INSTANT_SPELL, 1, 1, 1, 1, 1, 5, 1000, 1);
 
                                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
@@ -167,28 +170,27 @@ public class NpcListener implements Listener {
                             Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
                                     CoreSystem.getInstance().createTitle()
                                             .title("§3§lTEIL 2 IN ENTWICKLUNG")
+                                            .subTitle(null)
                                             .stay(2)
                                             .fadeIn(1)
                                             .fadeOut(1)
-                                            .send(p), 70L);
-
-                            lp.setProgress(Progress.ONEHIT_SWORD);
+                                            .send(p), 0L);
 
 
                             Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
                                 CoreSystem.getInstance().createActionBar().message("§3Regie und Entwickelt von DrMarv").send(p);
-                            }, 90);
+                            }, 160);
 
 
                             p.sendMessage("§fDas war Teil 1 der MCONE Story der 2 Teil ist bereits in Planung und auch schon in Entwicklung");
 
-                            // TODO: CHAPTER 2
-                            /*if (!gamePlayer.hasItem(Item.RADIO_SET1)) {
+
+                           if (!gamePlayer.hasItem(Item.RADIO_SET1)) {
                                 gamePlayer.addItem(Item.RADIO_SET1);
                             }
                             if (!gamePlayer.hasItem(Item.GPS)) {
                                 gamePlayer.addItem(Item.GPS);
-                            }*/
+                            }
                         }
 
                         break;
@@ -226,7 +228,7 @@ public class NpcListener implements Listener {
                         p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in One Island");
                         break;
                     }
-                  /*  case "sparow": {
+                  case "sparow": {
                         if (lp.getProgressId() > Progress.MARVIN_KILL.getId()) {
                             if (!gamePlayer.hasItem(Item.RADIO_SET_2)) {
                                 gamePlayer.addItem(Item.RADIO_SET_2);
@@ -235,9 +237,8 @@ public class NpcListener implements Listener {
                         }
                         break;
                     }
-                */
 
-                            /*   case "marvin": {
+                           case "marvin": {
                         if (lp.getProgressId() + 1 == Progress.MARVIN.getId() || lp.getProgressId() == Progress.MARVIN.getId()) {
                             LobbyWorld.CAVE.getWorld().teleportSilently(p, "spawn");
 
@@ -246,7 +247,7 @@ public class NpcListener implements Listener {
                         }
                         break;
                     }
-                */
+
 
                 }
             } else if (w.equals(LobbyWorld.CAVE.getWorld())) {
@@ -287,15 +288,19 @@ public class NpcListener implements Listener {
                     if (progress.getId() >= lp.getProgressId()) {
                         if (progress.getId() <= lp.getProgressId() + 1) {
                             p.sendMessage("\n" + progress.getMessage().replaceAll("%%player%%", p.getName()));
-                            lp.setProgress(progress);
 
-                            if (progress.getId() > 1) {
-                                Progress.getProgressByID(progress.getId() - 1).getNpc().toggleVisibility(p, false);
-                            }
+                            // TODO: folgende If Abfrage löschen wenn Teil 2 freigeschaltet werden soll!!
+                            if (!progress.equals(Progress.ONEHIT_SWORD)) {
+                                lp.setProgress(progress);
 
-                            Progress future = Progress.getProgressByID(progress.getId() + 1);
-                            if (future != null) {
-                                future.getNpc().toggleVisibility(p, true);
+                                if (progress.getId() > 1) {
+                                    Progress.getProgressByID(progress.getId() - 1).getNpc().toggleVisibility(p, false);
+                                }
+
+                                Progress future = Progress.getProgressByID(progress.getId() + 1);
+                                if (future != null) {
+                                    future.getNpc().toggleVisibility(p, true);
+                                }
                             }
                         } else {
                             p.sendMessage("§8§l[§7§l!§8§l] §fLobby §8 » §7Du bist noch nicht so weit!");
