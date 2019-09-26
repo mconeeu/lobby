@@ -10,7 +10,6 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
-import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,16 +25,13 @@ public class EnderPearlListener implements Listener {
         if (e.hasItem() && e.getItem().equals(Item.ENDERPEARL.getItemStack()) && (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR))) {
             Player p = e.getPlayer();
 
-            EnderPearl pearl = p.getWorld().spawn(p.getEyeLocation(), EnderPearl.class);
-            pearl.setVelocity(p.getPlayer().getLocation().getDirection());
-            pearl.setShooter(p);
             if (p.hasPermission("lobby.silenthub")) {
                 p.getInventory().setItem(3, null);
             } else {
                 p.getInventory().setItem(2, null);
             }
 
-            p.getWorld().playEffect(pearl.getLocation(), Effect.LARGE_SMOKE, 10);
+            p.getWorld().playEffect(p.getLocation(), Effect.LARGE_SMOKE, 10);
 
             p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
 
@@ -56,10 +52,24 @@ public class EnderPearlListener implements Listener {
                                 @Override
                                 public void run() {
                                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
-                                    p.getInventory().setItem(6, Item.ENDERPEARL.getItemStack());
+
+                                    if (p.hasPermission("lobby.silenthub")) {
+                                        p.getInventory().setItem(3, Item.ENDERPEARL.getItemStack());
+                                        p.getWorld().playEffect(p.getLocation(), Effect.LARGE_SMOKE, 10);
+                                        p.spigot().playEffect(p.getLocation(), Effect.FLAME, 1, 1, 1, 1, 1, 2, 100, 100);
+                                        p.spigot().playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 1, 1, 1, 1, 1, 2, 100, 100);
+
+                                    } else {
+                                        p.getInventory().setItem(2, Item.ENDERPEARL.getItemStack());
+                                        p.getWorld().playEffect(p.getLocation(), Effect.LARGE_SMOKE, 10);
+                                        p.spigot().playEffect(p.getLocation(), Effect.FLAME, 1, 1, 1, 1, 1, 2, 100, 100);
+                                        p.spigot().playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 1, 1, 1, 1, 1, 2, 100, 100);
+
+                                    }
+
 
                                 }
-                            }, 10);
+                            }, 15);
                         }
                     }, 10);
                 }
@@ -74,7 +84,7 @@ public class EnderPearlListener implements Listener {
 
 
             p.spigot().playEffect(e.getEntity().getLocation(), Effect.WITCH_MAGIC, 1, 1, 1, 1, 1, 2, 100, 100);
-            p.spigot().playEffect(e.getEntity().getLocation(), Effect.FLAME, 1, 1, 1, 1, 1, 2, 100, 100);
+            p.spigot().playEffect(e.getEntity().getLocation(), Effect.FLAME, 1, 1, 1, 1, 1, 4, 100, 100);
         }
     }
 
