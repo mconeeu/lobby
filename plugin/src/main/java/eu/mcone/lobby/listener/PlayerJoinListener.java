@@ -171,6 +171,10 @@ public class PlayerJoinListener implements Listener {
                         gp.addItem(Item.BANKCARD_PREMIUM);
                     }
 
+                } else {
+                    if (gp.hasItem(Item.BANKCARD_PREMIUM)) {
+                        gp.removeItem(Item.BANKCARD_PREMIUM);
+                    }
                 }
             } else {
                 if (p.hasPermission("mcone.premium")) {

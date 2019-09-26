@@ -1,11 +1,13 @@
 package eu.mcone.lobby.items.command;
 
 import eu.mcone.coresystem.api.bukkit.command.CoreCommand;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.gamesystem.api.enums.Category;
 import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -21,7 +23,7 @@ public class ItemCMD extends CoreCommand {
         Player p = (Player) commandSender;
 
         if (args.length == 0) {
-            LobbyPlugin.getInstance().getMessager().send(p, "cBitte benutze §4/item add | remove <Spieler> <item-name>");
+            LobbyPlugin.getInstance().getMessager().send(p, "§4Bitte benutze: §c/item add | remove <Spieler> <Item-name>");
         } else if (args.length == 3) {
             if (args[0].equalsIgnoreCase("add")) {
                 Player t = Bukkit.getServer().getPlayer(args[1]);
@@ -35,17 +37,12 @@ public class ItemCMD extends CoreCommand {
                                 if (!gp.hasItem(item)) {
                                     gp.addItem(item);
                                     if (p.getName().equalsIgnoreCase(t.getName())) {
-                                        LobbyPlugin.getInstance().getMessager().send(p, "§2Du hast das Item §a" + item.name() + " §2vom Spieler §a" + t.getName() + " §2hinzugefügt");
+                                        LobbyPlugin.getInstance().getMessager().send(p, "§2Du hast dir das Item §a" + item.name() + "§2 hinzugefügt");
                                     } else {
                                         LobbyPlugin.getInstance().getMessager().send(p, "§2Du hast das Item §a" + item.name() + " §2vom Spieler §a" + t.getName() + " §2hinzugefügt");
                                         LobbyPlugin.getInstance().getMessager().send(t, "§2Du hast das Item §a" + item.name() + " §2vom Spieler §a" + p.getName() + " §2bekommen!");
                                     }
                                     t.closeInventory();
-                                    if (p.hasPermission("lobby.silenthub")) {
-                                        p.getInventory().setItem(3, null);
-                                    } else {
-                                        p.getInventory().setItem(2, null);
-                                    }
                                 } else {
                                     LobbyPlugin.getInstance().getMessager().send(p, "§4Der Spieler besitzt dieses Item bereits!");
 
@@ -57,7 +54,7 @@ public class ItemCMD extends CoreCommand {
                         }
                     }
 
-                    LobbyPlugin.getInstance().getMessager().send(p, "§4Das Item mit dem Name §l" + args[2] + "§4existiert nicht!");
+                    LobbyPlugin.getInstance().getMessager().send(p, "§4Das Item mit dem Name §c" + args[2] + "§4 existiert nicht!");
                 }
             } else if (args[0].equalsIgnoreCase("remove")) {
                 Player t = Bukkit.getServer().getPlayer(args[1]);
@@ -70,17 +67,22 @@ public class ItemCMD extends CoreCommand {
                             if (gp.hasItem(item)) {
                                 gp.removeItem(item);
                                 if (t.getName().equalsIgnoreCase(p.getName())) {
-                                    LobbyPlugin.getInstance().getMessager().send(p, "§2Du hast das Item §a" + item.name() + " §2vom Spieler §a" + t.getName() + " §2entfernt");
+                                    LobbyPlugin.getInstance().getMessager().send(p, "§2Du hast dir das Item §a" + item.name() + "§2 entfernt");
+                                    if (p.hasPermission("lobby.silenthub")) {
+                                        t.getInventory().setItem(3, new ItemBuilder(Material.AIR).create());
+                                    } else {
+                                        t.getInventory().setItem(1, new ItemBuilder(Material.AIR).create());
+                                    }
                                 } else {
                                     LobbyPlugin.getInstance().getMessager().send(p, "§2Du hast das Item §a" + item.name() + " §2vom Spieler §a" + t.getName() + " §2entfernt");
-                                    LobbyPlugin.getInstance().getMessager().send(t, "§2Du hast das Item §a" + item.name() + " §2vom Spieler §a" + p.getName() + " §2entfernt bekommen*!");
+                                    LobbyPlugin.getInstance().getMessager().send(t, "§2Du hast das Item §a" + item.name() + " §2vom Spieler §a" + p.getName() + " §2entfernt bekommen!");
+                                    if (p.hasPermission("lobby.silenthub")) {
+                                        t.getInventory().setItem(2, new ItemBuilder(Material.AIR).create());
+                                    } else {
+                                        t.getInventory().setItem(1, new ItemBuilder(Material.AIR).create());
+                                    }
                                 }
                                 t.closeInventory();
-                                if (p.hasPermission("lobby.silenthub")) {
-                                    p.getInventory().setItem(3, null);
-                                } else {
-                                    p.getInventory().setItem(2, null);
-                                }
                             } else {
                                 LobbyPlugin.getInstance().getMessager().send(p, "§4Der Spieler hat das Item noch nicht!");
                             }
@@ -88,19 +90,19 @@ public class ItemCMD extends CoreCommand {
                         }
 
                     }
-                    LobbyPlugin.getInstance().getMessager().send(p, "§4Das Item mit dem Name §l" + args[2] + "§4existiert nicht!");
+                    LobbyPlugin.getInstance().getMessager().send(p, "§4Das Item mit dem Name §c" + args[2] + "§4 existiert nicht!");
                 } else {
-                    LobbyPlugin.getInstance().getMessager().send(p, "§4Der Spieler ist Offline!");
+                    LobbyPlugin.getInstance().getMessager().send(p, "§4Der Spieler ist §cOffline!");
                 }
             } else {
-                LobbyPlugin.getInstance().getMessager().send(p, "cBitte benutze §4/item add | remove <Spieler> <item-name>");
+                LobbyPlugin.getInstance().getMessager().send(p, "§4Bitte benutze: §c/item add | remove <Spieler> <Item-name>");
             }
         } else if (args.length == 1) {
             if (args[0].equalsIgnoreCase("list")) {
                 LobbyPlugin.getInstance().getMessager().send(p, "http://systems.gitlab.onegaming.group/gamesystem/eu/mcone/gamesystem/api/enums/Item.html");
             }
         } else {
-            LobbyPlugin.getInstance().getMessager().send(p, "cBitte benutze §4/item add | remove <Spieler> <item-name>");
+            LobbyPlugin.getInstance().getMessager().send(p, "§4Bitte benutze: §c/item add | remove <Spieler> <Item-name>");
         }
 
 

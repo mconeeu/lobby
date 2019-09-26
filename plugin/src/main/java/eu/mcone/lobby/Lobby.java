@@ -132,7 +132,8 @@ public class Lobby extends LobbyPlugin {
                 new PlayerJoinListener(),
                 new PlayerUpdateListener(),
                 new WeatherChangeListener(),
-                new ItemHotbarChangeListener()
+                new ItemHotbarChangeListener(),
+                new DropPickupListener()
         );
         registerCommands(new LobbyCMD());
     }

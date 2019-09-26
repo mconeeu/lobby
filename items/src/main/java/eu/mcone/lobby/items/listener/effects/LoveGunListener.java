@@ -6,9 +6,6 @@
 package eu.mcone.lobby.items.listener.effects;
 
 import eu.mcone.gamesystem.api.enums.Item;
-import eu.mcone.lobby.api.LobbyPlugin;
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,11 +22,8 @@ public class LoveGunListener implements Listener {
 
             World w = p.getWorld();
 
-            Bukkit.getScheduler().runTaskAsynchronously(LobbyPlugin.getInstance(), () -> {
-                p.spigot().playEffect(p.getLocation(), Effect.HEART, 1, 1, 1, 1, 1, 2, 15, 80);
-                w.playEffect(p.getLocation(), Effect.LAVA_POP, 10);
-                w.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 10);
-            });
+
+
         }
     }
 
