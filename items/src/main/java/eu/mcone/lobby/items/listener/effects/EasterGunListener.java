@@ -63,7 +63,7 @@ public class EasterGunListener implements Listener {
                                     }
 
                                 }
-                            }, 5);
+                            }, 10);
                         }
                     }, 10);
                 }
