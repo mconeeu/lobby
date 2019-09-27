@@ -6,6 +6,7 @@
 package eu.mcone.lobby.items.listener.effects;
 
 import eu.mcone.gamesystem.api.enums.Item;
+import org.bukkit.Effect;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,6 +22,9 @@ public class LoveGunListener implements Listener {
             Player p = e.getPlayer();
 
             World w = p.getWorld();
+
+            w.playEffect(p.getLocation(), Effect.FLAME,1);
+            w.playEffect(p.getLocation(),Effect.HEART,10);
 
 
 

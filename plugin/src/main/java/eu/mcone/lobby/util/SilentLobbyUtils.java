@@ -8,6 +8,7 @@ package eu.mcone.lobby.util;
 import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ public class SilentLobbyUtils {
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
+        p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
+        p.playSound(p.getLocation(), Sound.GLASS, 1, 1);
     }
 
 
@@ -40,7 +43,8 @@ public class SilentLobbyUtils {
             all.hidePlayer(p);
             p.hidePlayer(all);
         }
-
+        p.playSound(p.getLocation(), Sound.GLASS, 1, 1);
+        p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);

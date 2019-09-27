@@ -44,7 +44,8 @@ public class LobbyItems extends LobbyAddon {
                 new LobbyPlayerLoadedListener(),
                 new NpcInteractListener(),
                 new CobwebGub(),
-                new EnderPearlListener()
+                new EnderPearlListener(),
+                new SplashPotionListener()
         );
 
         VendorInventory.registerVendorInventory(Category.TRAIL, TrailInventory.class);

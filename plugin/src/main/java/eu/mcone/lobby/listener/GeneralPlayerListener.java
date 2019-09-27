@@ -13,8 +13,10 @@ import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.inventory.InteractionInventory;
+import eu.mcone.lobby.items.listener.effects.SplashPotionListener;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -23,6 +25,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
 public class GeneralPlayerListener implements Listener {
@@ -100,7 +103,11 @@ public class GeneralPlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onQuit(PlayerQuitEvent e) {
         e.setQuitMessage(null);
+        Player p = e.getPlayer();
 
+        if (SplashPotionListener.Splahpotioneffect.contains(p)) {
+            SplashPotionListener.Splahpotioneffect.remove(p);
+        }
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().getUniqueId());
         GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(e.getPlayer().getUniqueId());
 
@@ -114,4 +121,12 @@ public class GeneralPlayerListener implements Listener {
         LobbyPlugin.getInstance().unregisterLobbyPlayer(lp);
     }
 
+    @EventHandler
+    public void onItemConsume(PlayerItemConsumeEvent e) {
+        ItemStack consumed = e.getItem();
+        if (consumed.getType().equals(Material.POTION)) {
+            e.setCancelled(true);
+
+        }
+    }
 }

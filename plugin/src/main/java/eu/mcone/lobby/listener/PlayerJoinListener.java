@@ -71,6 +71,7 @@ public class PlayerJoinListener implements Listener {
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
         p.setGameMode(GameMode.SURVIVAL);
+        p.removePotionEffect(PotionEffectType.INVISIBILITY);
         p.getActivePotionEffects().clear();
 
         p.setMaxHealth(20);
