@@ -1,5 +1,7 @@
 package eu.mcone.lobby.items.listener.effects;
 
+import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Bukkit;
@@ -41,6 +43,8 @@ public class SplashPotionListener implements Listener {
                     p.getActivePotionEffects().clear();
                     p.removePotionEffect(PotionEffectType.INVISIBILITY);
                     p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 320, 1));
+                    p.getInventory().setBoots(null);
+
                     Splahpotioneffect.add(p);
 
                     World w = p.getWorld();
@@ -70,6 +74,39 @@ public class SplashPotionListener implements Listener {
 
                                     if (p.hasPermission("lobby.silenthub")) {
                                         p.getInventory().setItem(3, Item.SPLASH_POTION.getItemStack());
+                                        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
+                                        switch (cp.getMainGroup()) {
+                                            case PREMIUM:
+                                                p.getInventory().setBoots(Item.PREMIUM_BOOTS.getItemStack());
+                                                break;
+                                            case PREMIUMPLUS:
+                                                p.getInventory().setBoots(Item.PREMIUM_PLUS_BOOTS.getItemStack());
+                                                break;
+                                            case YOUTUBER:
+                                                p.getInventory().setBoots(Item.YOUTUBER_BOOTS.getItemStack());
+                                                break;
+                                            case JRSUPPORTER:
+                                                p.getInventory().setBoots(Item.JR_SUPPORTER_BOOTS.getItemStack());
+                                                break;
+                                            case SUPPORTER:
+                                                p.getInventory().setBoots(Item.SUPPORTER_BOOTS.getItemStack());
+                                                break;
+                                            case MODERATOR:
+                                                p.getInventory().setBoots(Item.MODERATOR_BOOTS.getItemStack());
+                                                break;
+                                            case SRMODERATOR:
+                                                p.getInventory().setBoots(Item.SR_MODERATOR_BOOTS.getItemStack());
+                                                break;
+                                            case BUILDER:
+                                                p.getInventory().setBoots(Item.BUILDER_BOOTS.getItemStack());
+                                                break;
+                                            case DEVELOPER:
+                                                p.getInventory().setBoots(Item.DEVELOPER_BOOTS.getItemStack());
+                                                break;
+                                            case ADMIN:
+                                                p.getInventory().setBoots(Item.ADMIN_BOOTS.getItemStack());
+                                                break;
+                                        }
 
                                         if (Splahpotioneffect.contains(p)) {
                                             Splahpotioneffect.remove(p);
