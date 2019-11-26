@@ -7,6 +7,7 @@ package eu.mcone.lobby.inventory;
 
 import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
+import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.Lobby;
@@ -25,8 +26,9 @@ import org.bukkit.inventory.ItemFlag;
 public class CompassInventory extends CoreInventory {
 
     public CompassInventory(Player p) {
-        super("§8» §3§lNavigator", p, InventorySlot.ROW_5);
+        super("§8» §3§lNavigator", p, InventorySlot.ROW_5, InventoryOption.FILL_EMPTY_SLOTS);
         Bukkit.getScheduler().runTaskLaterAsynchronously(Lobby.getInstance(), () -> {
+            p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
             p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
             setItem(InventorySlot.ROW_1_SLOT_1, CoreInventory.PLACEHOLDER_ITEM);
             setItem(InventorySlot.ROW_1_SLOT_2, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 11).displayName("§8//§oMCONE§8//").create());
@@ -45,7 +47,7 @@ public class CompassInventory extends CoreInventory {
             setItem(InventorySlot.ROW_5_SLOT_9, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 11).displayName("§8//§oMCONE§8//").create());
             setItem(InventorySlot.ROW_5_SLOT_8, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 11).displayName("§8//§oMCONE§8//").create());
             openInventory();
-        }, 8L);
+        }, 6L);
 
 
         Bukkit.getScheduler().runTaskLaterAsynchronously(Lobby.getInstance(), () -> {
@@ -65,7 +67,7 @@ public class CompassInventory extends CoreInventory {
             setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 0).displayName("§8//§oMCONE§8//").create());
 
             openInventory();
-        }, 10L);
+        }, 11L);
 
         Bukkit.getScheduler().runTaskLaterAsynchronously(Lobby.getInstance(), () -> {
             p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
@@ -74,7 +76,7 @@ public class CompassInventory extends CoreInventory {
             setItem(InventorySlot.ROW_4_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
             setItem(InventorySlot.ROW_3_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
             openInventory();
-        }, 12L);
+        }, 13L);
 
 
         Bukkit.getScheduler().runTaskLaterAsynchronously(Lobby.getInstance(), () -> {
@@ -97,7 +99,7 @@ public class CompassInventory extends CoreInventory {
             setItem(InventorySlot.ROW_3_SLOT_8, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
             setItem(InventorySlot.ROW_4_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
             openInventory();
-        }, 15L);
+        }, 14L);
 
 
         Bukkit.getScheduler().runTaskLaterAsynchronously(Lobby.getInstance(), () -> {
@@ -150,11 +152,18 @@ public class CompassInventory extends CoreInventory {
             );
 
 
-            setItem(InventorySlot.ROW_3_SLOT_1, new ItemBuilder(Material.EMERALD, 1, 0)
+            setItem(InventorySlot.ROW_4_SLOT_1, new ItemBuilder(Material.EMERALD, 1, 0)
                             .displayName("§eHändler")
                             .lore("§7§oKaufe dir coole Items oder seltene Truhen", "§7§ofür das Chest-Opening", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                             .create(),
                     e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "merchant")
+            );
+
+            setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.DIAMOND, 1, 0)
+                            .displayName("§eAnKäufer")
+                            .lore("§7§oVerkaufe deine gekauften coolen Items", "§7§oDu bekommst sogar ein paar Emeralds zurück!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                            .create(),
+                    e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "vendor")
             );
 
             setItem(InventorySlot.ROW_4_SLOT_4, new ItemBuilder(Material.CHEST, 1, 0)
@@ -173,7 +182,17 @@ public class CompassInventory extends CoreInventory {
 
             );
 
-            setItem(InventorySlot.ROW_3_SLOT_9, new ItemBuilder(Material.BOOK, 1, 0).displayName("§3Die Story").lore("§7§oSpiele die Story und erhalte", "§7§ocoole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren").create(), e -> {
+
+            setItem(InventorySlot.ROW_2_SLOT_9, new ItemBuilder(Material.REDSTONE, 1, 0)
+                            .displayName("§dBüro")
+                            .lore("§7§oKaufe dir ein tolles Büro", "§7§ooder Besuche dein Büro", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                            .create(),
+
+                    e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "office-entrancw")
+
+            );
+
+            setItem(InventorySlot.ROW_4_SLOT_9, new ItemBuilder(Material.BOOK, 1, 0).displayName("§3Die Story").lore("§7§oSpiele die Story und erhalte", "§7§ocoole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren").create(), e -> {
                 LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
                 if (lp.getProgressId() == 0) {

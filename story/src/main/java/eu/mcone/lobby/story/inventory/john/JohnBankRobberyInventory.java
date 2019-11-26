@@ -124,10 +124,15 @@ public class JohnBankRobberyInventory extends CoreInventory {
                             "§7§ound viele Coins!"
                     ).create());
 
-            setItem(InventorySlot.ROW_4_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§fBank Raub").create(), e -> {
+            setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 13).displayName("§a§r//MCONE//").create());
+            setItem(InventorySlot.ROW_4_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 13).displayName("§a§r//MCONE//").create());
+            setItem(InventorySlot.ROW_4_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 13).displayName("§a§r//MCONE//").create());
+            setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 13).displayName("§a§r//MCONE//").create());
+
+            setItem(InventorySlot.ROW_4_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§fBank Raub").lore("§aZum §lStarten §aklicken").create(), e -> {
                 if (currentlyInBank == null) {
                     p.closeInventory();
-                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7So jetzt geht es los begib dich zur Bank!");
+                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7So jetzt geht es los begib dich zur Bank. Die ist sofort links und dann gehe bis nach hinten durch und öffne die Eisen Tür!");
                     lp.setBankProgress(BankProgress.BANK_ROBBERY_MIDDLE);
                     LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, true);
 
@@ -140,7 +145,8 @@ public class JohnBankRobberyInventory extends CoreInventory {
 
                     currentlyInBank = p.getUniqueId();
                 } else {
-                    p.sendMessage("&cJemand macht bereits diese Mission, bitte warte kurz!");
+                    p.closeInventory();
+                    p.sendMessage("&cEs überfällt momentan schon einer die Bank, bitte warte kurz!");
                 }
             });
 

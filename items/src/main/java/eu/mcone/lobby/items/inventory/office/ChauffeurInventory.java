@@ -38,8 +38,8 @@ public class ChauffeurInventory extends CoreInventory {
         setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.CHEST, 1, 0).displayName("§f§lZum Händler reisen").create(),
                 e -> ChauffeurSpawnPoints.DEALER.getWorld().teleport(p, ChauffeurSpawnPoints.DEALER.getSpawnLocation()));
 
-        setItem(InventorySlot.ROW_4_SLOT_8, new ItemBuilder(Material.BOOK, 1, 0).displayName("§f§lZu den Gangs reisen").create(),
-                e -> ChauffeurSpawnPoints.GANG.getWorld().teleport(p, ChauffeurSpawnPoints.GANG.getSpawnLocation()));
+        setItem(InventorySlot.ROW_4_SLOT_8, new ItemBuilder(Material.BOOK, 1, 0).displayName("§f§lZu den Item Ankäufer reisen").create(),
+                e -> ChauffeurSpawnPoints.VENDOR.getWorld().teleport(p, ChauffeurSpawnPoints.VENDOR.getSpawnLocation()));
 
         openInventory();
     }
@@ -49,7 +49,7 @@ public class ChauffeurInventory extends CoreInventory {
         TOWN_HALL(LobbyWorld.ONE_ISLAND.getWorld(), "townHall"),
         OFFICE_ENTRANCE(LobbyWorld.ONE_ISLAND.getWorld(), "officeEntrance"),
         PORT(LobbyWorld.ONE_ISLAND.getWorld(), "port"),
-        BEACH(LobbyWorld.ONE_ISLAND.getWorld(), "beach"),
+        VENDOR(LobbyWorld.ONE_ISLAND.getWorld(), "vendor"),
         BANK(LobbyWorld.ONE_ISLAND.getWorld(), "bank"),
         DEALER(LobbyWorld.ONE_ISLAND.getWorld(), "dealer"),
         GANG(LobbyWorld.ONE_ISLAND.getWorld(), "gang");

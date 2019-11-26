@@ -13,11 +13,11 @@ import org.bukkit.entity.Player;
 public class UpgradeOfficeTrader extends CoreInventory {
 
     UpgradeOfficeTrader(Player p) {
-        super("§8» §d§lVerkäufer §8| §fBüro", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
+        super("§8» §d§lUpgrade §8| §fBüro", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
 
         if (lp.hasItem(Item.OFFICE_CARD_BRONZE)) {
-            setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.IRON_INGOT, 1, 0).displayName("§6§lSilver Büro")
+            setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.IRON_INGOT, 1, 0).displayName("§6§lSilver Büro")
                     .lore("§fWelche Ihnhalte dieses Büro hat", "§ferfahren sie wenn sie klicken", "", "§a§LDie Kosten liegen bei 250 Emeralds")
                     .create(), e -> new SilverOfficeInventory(p));
 

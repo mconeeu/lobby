@@ -40,6 +40,7 @@ public class LobbyItems extends LobbyAddon {
                 new LoveGunListener(),
                 new OneHitSwordListener(),
                 new SnowGunListener(),
+                new MagicWandListener(),
                 new InventoryTriggerListener(),
                 new LobbyPlayerLoadedListener(),
                 new NpcInteractListener(),

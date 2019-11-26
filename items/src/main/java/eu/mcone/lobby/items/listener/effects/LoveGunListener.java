@@ -6,6 +6,7 @@
 package eu.mcone.lobby.items.listener.effects;
 
 import eu.mcone.gamesystem.api.enums.Item;
+import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -21,7 +22,12 @@ public class LoveGunListener implements Listener {
         if (e.hasItem() && e.getItem().equals(Item.LOVEGUN.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
             Player p = e.getPlayer();
 
+            for (Player all : Bukkit.getOnlinePlayers()) {
+                all.spigot().playEffect(p.getLocation(), Effect.FLAME, 1, 1, 1, 1, 1, 2, 29, 25);
+                all.spigot().playEffect(p.getLocation(), Effect.HEART, 1, 1, 1, 1, 1, 3, 78, 42);
+            }
             World w = p.getWorld();
+
 
             w.playEffect(p.getLocation(), Effect.FLAME,1);
             w.playEffect(p.getLocation(),Effect.HEART,10);

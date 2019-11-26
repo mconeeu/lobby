@@ -73,10 +73,11 @@ public class SnowGunListener implements Listener {
     @EventHandler
     public void on(ProjectileHitEvent e) {
         if (e.getEntity().getShooter() instanceof Player && e.getEntityType().equals(EntityType.SNOWBALL)) {
-            Player p = (Player) e.getEntity().getShooter();
+            for (Player all : Bukkit.getOnlinePlayers()) {
 
-            p.spigot().playEffect(e.getEntity().getLocation(), Effect.LAVA_POP, 1, 1, 1, 1, 1, 2, 100, 100);
-            p.spigot().playEffect(e.getEntity().getLocation(), Effect.LARGE_SMOKE, 1, 1, 1, 1, 1, 2, 100, 100);
+                all.spigot().playEffect(e.getEntity().getLocation(), Effect.LAVA_POP, 1, 1, 1, 1, 1, 2, 50, 45);
+                all.spigot().playEffect(e.getEntity().getLocation(), Effect.LARGE_SMOKE, 1, 1, 1, 1, 1, 2, 90, 55);
+            }
         }
     }
 
