@@ -6,6 +6,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.story.listener.InventoryTriggerListener;
 import eu.mcone.lobby.story.utils.JumpAndRunManager;
 import org.bukkit.entity.Player;
@@ -21,8 +22,13 @@ public class CorpseInventory extends CoreInventory {
             if (!lp.hasItem(Item.HEAD_SECRET_STRIPCLUB)) {
                 lp.addItem(Item.HEAD_SECRET_STRIPCLUB);
                 LobbyPlugin.getInstance().getMessager().send(p, "§aDu hast den alten Kopf von §fKirpha aufgenommen!");
+                LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast das §fJump and Run Stripclub §aerfolgreich §7abgeschlossen!");
+                JumpAndRunManager.lobbyitems(p);
+                LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "spawn");
             } else {
                 LobbyPlugin.getInstance().getMessager().send(p, "§cDu besitzt diese Item bereits!");
+                LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "spawn");
+                JumpAndRunManager.lobbyitems(p);
             }
             p.closeInventory();
 

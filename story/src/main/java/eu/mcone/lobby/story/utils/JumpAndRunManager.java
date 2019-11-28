@@ -27,27 +27,27 @@ public class JumpAndRunManager {
     public static ArrayList<Player> playjumpandrun = new ArrayList<>();
 
 
-
-
-
-    public static void setPlayjumpandrun(Player p) {
+    public static void setPlayStripClubJumpAndRun(Player p) {
         GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
         if (!gamePlayer.hasItem(Item.HEAD_SECRET_STRIPCLUB)) {
             playjumpandrun.add(p);
             p.getInventory().clear();
             LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "jumpandrun_stripclub_spawn");
             p.sendMessage("§8[§7§l!§8] §fJump and Run §8» §7Du spielst nun das §eStrip Club§7 §fJump and Run§7. Zum §cbeenden §7die §fEisentür §7klicken!");
-            p.getInventory().setItem(8, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§fJump and Run").lore("§cbeenden").create());
+            p.getInventory().setItem(1, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§fJump and Run").lore("§cbeenden").create());
+            p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
         } else {
+            p.getInventory().clear();
+            playjumpandrun.add(p);
             LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "jumpandrun_stripclub_spawn");
             p.sendMessage("§8[§7§l!§8] §fJump and Run §8» §cDu hast dieses Jump and Run bereits gespielt. Du kannst es aber trotzdem wiederholen!");
-            p.getInventory().setItem(8, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§fJump and Run").lore("§cbeenden").create());
+            p.getInventory().setItem(1, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§fJump and Run").lore("§cbeenden").create());
+            p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
         }
     }
 
     public enum JumpAndRunList {
         STIPCLUB_KIRPHA("jumpandrun_stripclub_warp");
-
 
 
         @Getter
@@ -57,9 +57,6 @@ public class JumpAndRunManager {
             this.spawnLocation = spawnLocation;
         }
     }
-
-
-
 
 
     public static void lobbyitems(Player p) {

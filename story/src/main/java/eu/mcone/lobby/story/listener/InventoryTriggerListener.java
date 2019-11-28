@@ -80,7 +80,7 @@ public class InventoryTriggerListener implements Listener {
                         } else if (sign.getLine(1).equals("§7»§5§l Stripclub§7 «")) {
                             String name = ChatColor.stripColor(sign.getLine(1)).replace("»", "").replace("«", "").trim();
                             LobbyWorld.ONE_ISLAND.getWorld().teleport(p, JumpAndRunManager.JumpAndRunList.STIPCLUB_KIRPHA.getSpawnLocation());
-                            LobbyPlugin.getInstance().getMessager().send(e.getPlayer(),"Du hast dich zum §fStripclub Jump and Run telepotiert");
+                            LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "Du hast dich zum §fStripclub Jump and Run telepotiert");
                         }
                         return;
                     }
@@ -133,6 +133,7 @@ public class InventoryTriggerListener implements Listener {
                     p.sendMessage("§8[§7§l!§8] §cFunkgerät §7» Du hast keine neue Nachricht");
                 }
             }
+
             if (e.hasItem() && e.getItem().getItemMeta().hasDisplayName()) {
                 if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§fJump and Run")) {
                     JumpAndRunManager.playjumpandrun.remove(p);
@@ -147,7 +148,7 @@ public class InventoryTriggerListener implements Listener {
 
             switch (clicked) {
                 case GOLD_PLATE: {
-                    JumpAndRunManager.setPlayjumpandrun(p);
+                    JumpAndRunManager.setPlayStripClubJumpAndRun(p);
                     break;
                 }
             }
