@@ -5,12 +5,18 @@
 
 package eu.mcone.lobby.story.listener;
 
+import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.gamesystem.api.enums.Category;
 import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
+import eu.mcone.gamesystem.api.lobby.backpack.BackpackInventory;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.story.inventory.story.*;
+import eu.mcone.lobby.story.utils.JumpAndRunManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -22,14 +28,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import java.util.ArrayList;
+
 public class InventoryTriggerListener implements Listener {
+
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
         GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
-
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR)) {
             if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getClickedBlock() != null) {
                 Material clicked = e.getClickedBlock().getType();
@@ -68,6 +76,11 @@ public class InventoryTriggerListener implements Listener {
                             } else {
                                 LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§4Du hast dieses §cSecret §4bereits gefunden!");
                             }
+
+                        } else if (sign.getLine(1).equals("§7»§5§l Stripclub§7 «")) {
+                            String name = ChatColor.stripColor(sign.getLine(1)).replace("»", "").replace("«", "").trim();
+                            LobbyWorld.ONE_ISLAND.getWorld().teleport(p, JumpAndRunManager.JumpAndRunList.STIPCLUB_KIRPHA.getSpawnLocation());
+                            LobbyPlugin.getInstance().getMessager().send(e.getPlayer(),"Du hast dich zum §fStripclub Jump and Run telepotiert");
                         }
                         return;
                     }
@@ -120,7 +133,27 @@ public class InventoryTriggerListener implements Listener {
                     p.sendMessage("§8[§7§l!§8] §cFunkgerät §7» Du hast keine neue Nachricht");
                 }
             }
+            if (e.hasItem() && e.getItem().getItemMeta().hasDisplayName()) {
+                if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§fJump and Run")) {
+                    JumpAndRunManager.playjumpandrun.remove(p);
+                    LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "spawn");
+                    p.sendMessage("§8[§7§l!§8] §fJump and Run §8» §cDu hast das Jump and Run beendet!");
+                    JumpAndRunManager.lobbyitems(p);
+                }
+            }
+
+        } else if (e.getAction().equals(Action.PHYSICAL) && e.getClickedBlock() != null) {
+            Material clicked = e.getClickedBlock().getType();
+
+            switch (clicked) {
+                case GOLD_PLATE: {
+                    JumpAndRunManager.setPlayjumpandrun(p);
+                    break;
+                }
+            }
         }
+
     }
+
 
 }

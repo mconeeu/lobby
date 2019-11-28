@@ -2,6 +2,7 @@ package eu.mcone.lobby.items.listener.effects;
 
 import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.LobbyWorld;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -61,7 +62,7 @@ public class MagicWandListener implements Listener {
                         }
                     }, 10);
                 }
-            }, 15);
+            }, 25);
         }
     }
 
@@ -71,6 +72,13 @@ public class MagicWandListener implements Listener {
             for (Player all : Bukkit.getOnlinePlayers()) {
                 all.spigot().playEffect(e.getEntity().getLocation(), Effect.SMALL_SMOKE, 1, 1, 1, 1, 1, 3, 25, 30);
                 all.spigot().playEffect(e.getEntity().getLocation(), Effect.MAGIC_CRIT, 1, 1, 1, 1, 1, 3, 78, 45);
+                all.spigot().playEffect(e.getEntity().getLocation(), Effect.MAGIC_CRIT, 1, 1, 1, 1, 1, 3, 78, 55);
+                all.getWorld().playEffect(e.getEntity().getLocation().add(0, 1, 1), Effect.LAVA_POP, 1);
+                for (Entity arrowdrop : LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).bukkit().getEntities()) {
+                    if (arrowdrop.getType().equals(EntityType.DROPPED_ITEM) || arrowdrop.getType().equals(EntityType.ARROW)) {
+                        arrowdrop.remove();
+                    }
+                }
             }
         }
     }

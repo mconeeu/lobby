@@ -23,7 +23,7 @@ public class CaptainInventory extends CoreInventory {
         GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
 
 
-        setItem(InventorySlot.ROW_2_SLOT_3, new Skull(p.getName(), 1).toItemBuilder().displayName("§5§lCommunity / Festival").lore("§7§oTreffe deine Freunde oder Yotuber\nauf dem Festival").create(), e -> {
+        setItem(InventorySlot.ROW_2_SLOT_3, new Skull(p.getName(), 1).toItemBuilder().displayName("§5§lCommunity / Festival").lore("§7§oTreffe deine Freunde oder Yotuber","auf dem Festival").create(), e -> {
             if (p.getItemInHand().equals(Item.BOAT_PASS.getItemStack())) {
                 p.getInventory().remove(p.getItemInHand());
                 gamePlayer.removeItem(Item.BOAT_PASS);
@@ -35,7 +35,7 @@ public class CaptainInventory extends CoreInventory {
             }
         });
 
-        setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.SAND).displayName("§f§lParadise-Island").lore("§7§oMache Urlaub und entspanne \nauf der schönen Insel \nmitten im Paradise!").create(), e -> {
+        setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.SAND).displayName("§f§lParadise-Island").lore("§7§oMache Urlaub und entspanne","auf der schönen Insel","mitten im Paradise!").create(), e -> {
 
             if (lobbyPlayer.getProgressId() < Progress.MARVIN_KILL.getId()) {
                 if (p.getItemInHand().equals(Item.BOAT_PASS.getItemStack())) {
@@ -48,6 +48,8 @@ public class CaptainInventory extends CoreInventory {
                     p.closeInventory();
                     p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Nimm das Ticket in die Hand, du Fisch Gesicht!");
                 }
+                //TODO: Umändern !!wenn!! Teil 2 eröffnet werden soll!!!!
+                //
                 //  if (lobbyPlayer.getProgressId() == 9) {
                 //   p.sendMessage("§8[§7§l!§8] §fServer §8» §fFunkgerät §8|§7 Bringg Bringgg  Hallo " + p.getName() + "§7 ich sehe das du auf der Insel bist und wollte so mit fragen ob du Sparow gefunden hab? Ich schreib dir einfach in ein paar minuten zurück.");
                 // }

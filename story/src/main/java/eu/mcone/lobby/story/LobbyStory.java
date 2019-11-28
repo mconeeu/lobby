@@ -39,7 +39,8 @@ public class LobbyStory extends LobbyAddon {
                 new NpcListener(),
                 new InventoryTriggerListener(),
                 new SecretSignsListener(),
-                new WorldChangeListener()
+                new WorldChangeListener(),
+                new PlayerCommandPreprocessEvent()
         );
 
         CoreSystem.getInstance().modifyProfileInventory((coreInventory, player) -> {

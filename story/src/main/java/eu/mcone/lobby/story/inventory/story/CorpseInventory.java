@@ -6,6 +6,8 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.story.listener.InventoryTriggerListener;
+import eu.mcone.lobby.story.utils.JumpAndRunManager;
 import org.bukkit.entity.Player;
 
 public class CorpseInventory extends CoreInventory {
@@ -18,12 +20,14 @@ public class CorpseInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_5, Item.HEAD_SECRET_STRIPCLUB.getItemStack(), e -> {
             if (!lp.hasItem(Item.HEAD_SECRET_STRIPCLUB)) {
                 lp.addItem(Item.HEAD_SECRET_STRIPCLUB);
-                LobbyPlugin.getInstance().getMessager().send(p, "§aDu hast den Kopf aufgenommen!");
+                LobbyPlugin.getInstance().getMessager().send(p, "§aDu hast den alten Kopf von §fKirpha aufgenommen!");
             } else {
                 LobbyPlugin.getInstance().getMessager().send(p, "§cDu besitzt diese Item bereits!");
             }
             p.closeInventory();
+
         });
+        JumpAndRunManager.playjumpandrun.remove(p);
 
         openInventory();
     }
