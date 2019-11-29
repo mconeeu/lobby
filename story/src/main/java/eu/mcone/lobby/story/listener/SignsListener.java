@@ -9,7 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 
-public class SecretSignsListener implements Listener {
+public class SignsListener implements Listener {
 
     @EventHandler
     public void on(SignChangeEvent e) {
@@ -24,8 +24,8 @@ public class SecretSignsListener implements Listener {
         if (e.getLine(0).equals("[jump]") && e.getLine(1) != null) {
             String name = e.getLine(1);
 
-            e.setLine(0, "§7»§fJump & Run");
-            e.setLine(1, "§7»§5§l " + name + "§7 «");
+            e.setLine(0, "§7»§c Jump'n'Run");
+            e.setLine(1, name);
             e.setLine(3, "§e§lSpielen!");
         }
     }

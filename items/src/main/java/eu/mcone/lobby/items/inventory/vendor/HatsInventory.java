@@ -15,13 +15,12 @@ public class HatsInventory extends VendorInventory {
         super(p);
 
         for (Item item : Item.values()) {
-            if (item.hasCategory() && item.getCategory().equals(Category.HAT) && playerHasItem(item)) {
-                    addItem(item.getItemStack(), e -> {
-                        new VendorSellInventory(p, item);
-                    });
+            if (item.hasCategory() && item.getCategory().equals(Category.HAT) && playerHasItem(item) && !item.equals(Item.HEAD_SECRET_STRIPCLUB)) {
+                addItem(item.getItemStack(), e -> {
+                    new VendorSellInventory(p, item);
+                });
             }
         }
     }
 
 }
-

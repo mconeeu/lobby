@@ -9,6 +9,7 @@ import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.player.plugin.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.BankProgress;
+import eu.mcone.lobby.api.enums.JumpNRun;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.gang.Gang;
 import lombok.Getter;
@@ -29,6 +30,8 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
     @Getter
     @Setter
     private Map<String, Long> secrets;
+    @Getter
+    private Map<JumpNRun, Long> jumpnruns;
 
     public LobbyPlayer(CorePlayer corePlayer) {
         super(corePlayer);
@@ -42,6 +45,7 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
         this.bankprogressId = profile.getBankprogressId();
         this.settings = profile.getSettings();
         this.secrets = profile.getSecrets();
+        this.jumpnruns = profile.getJumpnrunSet();
         LobbyPlugin.getInstance().registerLobbyPlayer(this);
 
         return profile;
@@ -54,7 +58,7 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
 
     @Override
     public void saveData() {
-        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, bankprogressId, settings, secrets));
+        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, bankprogressId, settings, secrets, jumpnruns));
     }
 
     public boolean isInGang() {
@@ -85,6 +89,23 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
     public void setBankProgress(BankProgress bankprogress) {
         this.bankprogressId = bankprogress.getId();
         saveData();
+    }
+
+    public void setJumpnrunBestTime(JumpNRun jumpnrun, Long time) {
+        jumpnruns.put(jumpnrun, time);
+        saveData();
+    }
+
+    public long getBestJumpNRunTime(JumpNRun jumpNRun) {
+        if (hasJumpnrunMade(jumpNRun)) {
+            return jumpnruns.get(jumpNRun);
+        } else {
+            return -1;
+        }
+    }
+
+    public boolean hasJumpnrunMade(JumpNRun jumpnrun) {
+        return jumpnruns.containsKey(jumpnrun);
     }
 
     public boolean checkAndAddSecret(String name, long time) {

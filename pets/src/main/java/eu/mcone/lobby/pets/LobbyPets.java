@@ -11,6 +11,7 @@ import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.lobby.backpack.BackpackInventory;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.items.LobbyItems;
 import eu.mcone.lobby.pets.inventory.backpack.AnimalInventory;
 import eu.mcone.lobby.pets.listener.EntityTrackListener;
 import lombok.Getter;
@@ -22,9 +23,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 public class LobbyPets extends LobbyAddon {
 
@@ -33,10 +32,12 @@ public class LobbyPets extends LobbyAddon {
 
     private HashMap<UUID, Entity> pets;
 
+
     @Override
     public void onEnable() {
         instance = this;
         this.pets = new HashMap<>();
+
 
         BackpackInventory.registerBackpackInventory(Category.ANIMAL, AnimalInventory.class);
 

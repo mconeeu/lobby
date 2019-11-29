@@ -5,18 +5,16 @@
 
 package eu.mcone.lobby.story.listener;
 
-import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
-import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.gamesystem.api.enums.Category;
 import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.gamesystem.api.game.player.GamePlayer;
-import eu.mcone.gamesystem.api.lobby.backpack.BackpackInventory;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.story.LobbyStory;
 import eu.mcone.lobby.story.inventory.story.*;
-import eu.mcone.lobby.story.utils.JumpAndRunManager;
+import eu.mcone.lobby.story.jumpnrun.JumpAndRunManager;
+import eu.mcone.lobby.api.enums.JumpNRun;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -27,8 +25,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-
-import java.util.ArrayList;
 
 public class InventoryTriggerListener implements Listener {
 
@@ -51,14 +47,21 @@ public class InventoryTriggerListener implements Listener {
                         return;
                     }
                     case ENDER_CHEST: {
+                        Location loc = e.getClickedBlock().getLocation();
                         if (lobbyPlayer.getProgressId() >= 6) {
-                            new EndInventory(p);
+                            if (loc.getX() == 80 && loc.getY() == 103 && loc.getZ() == -42) {
+                                new EndInventory(p);
+                            }
                         } else if (lobbyPlayer.getBankprogressId() == BankProgress.CUTTER.getId()) {
                             new WoolInventory(p);
                         } else if (lobbyPlayer.getBankprogressId() == BankProgress.SWORD.getId()) {
-                            new SwordInventory(p);
+                            if (loc.getX() == 12 && loc.getY() == 91 && loc.getZ() == 24) {
+                                new SwordInventory(p);
+                            }
                         } else if (lobbyPlayer.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
-                            new BankSaveInventory(p);
+                            if (loc.getX() == 11 && loc.getY() == 104 && loc.getZ() == -17) {
+                                new BankSaveInventory(p);
+                            }
                         }
                         return;
                     }
@@ -77,10 +80,16 @@ public class InventoryTriggerListener implements Listener {
                                 LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§4Du hast dieses §cSecret §4bereits gefunden!");
                             }
 
-                        } else if (sign.getLine(1).equals("§7»§5§l Stripclub§7 «")) {
-                            String name = ChatColor.stripColor(sign.getLine(1)).replace("»", "").replace("«", "").trim();
-                            LobbyWorld.ONE_ISLAND.getWorld().teleport(p, JumpAndRunManager.JumpAndRunList.STIPCLUB_KIRPHA.getSpawnLocation());
-                            LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "Du hast dich zum §fStripclub Jump and Run telepotiert");
+                            //JUMP AND RUNS
+                        } else if (sign.getLine(0).equals("§7»§c Jump'n'Run")) {
+                            for (JumpNRun jumpnrun : JumpNRun.values()) {
+                                if (sign.getLine(1).equals(jumpnrun.getJumpandrunname())) {
+                                    LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jumpnrun.getWarpLocation());
+                                    LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "Du hast dich zum §f" + jumpnrun.getJumpandrunname() + " §7Jump and Run telepotiert");
+                                } else {
+                                    LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§4Das §c" + sign.getLine(1) + "§4 Jump and Run ist momentan in §oWartungen§4!");
+                                }
+                            }
                         }
                         return;
                     }
@@ -134,12 +143,14 @@ public class InventoryTriggerListener implements Listener {
                 }
             }
 
+
+            //JUMPANDRUN
+
             if (e.hasItem() && e.getItem().getItemMeta().hasDisplayName()) {
                 if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§fJump and Run")) {
-                    JumpAndRunManager.playjumpandrun.remove(p);
-                    LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "spawn");
-                    p.sendMessage("§8[§7§l!§8] §fJump and Run §8» §cDu hast das Jump and Run beendet!");
-                    JumpAndRunManager.lobbyitems(p);
+                    LobbyStory.getInstance().getJumpAndRunManager().setCancel(p);
+                } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§c§lZurück zum Checkpoint")) {
+                    LobbyStory.getInstance().getJumpAndRunManager().tpToCheckpoint(p);
                 }
             }
 
@@ -148,7 +159,31 @@ public class InventoryTriggerListener implements Listener {
 
             switch (clicked) {
                 case GOLD_PLATE: {
-                    JumpAndRunManager.setPlayStripClubJumpAndRun(p);
+                    Location loc = e.getClickedBlock().getLocation();
+
+                    for (JumpNRun jumpnrun : JumpNRun.values()) {
+                        Location start = jumpnrun.getStartPlateLocation();
+                        Location end = jumpnrun.getEndPlateLocation();
+
+                        if (start != null && loc.equals(jumpnrun.getStartPlateLocation())) {
+                            LobbyStory.getInstance().getJumpAndRunManager().setStart(p, jumpnrun);
+                        } else if (end != null && loc.equals(jumpnrun.getEndPlateLocation())) {
+                            LobbyStory.getInstance().getJumpAndRunManager().setFinish(p);
+                        }
+                    }
+                    break;
+                }
+                case IRON_PLATE: {
+                    if (LobbyStory.getInstance().getJumpAndRunManager().isCurrentlyPlaying(p)) {
+                        for (JumpNRun jumpNRun : JumpNRun.values()) {
+                            for (int i = 0; i < jumpNRun.getCheckpoints().length; i++) {
+                                if (jumpNRun.getCheckpoints()[i].equals(e.getClickedBlock().getLocation())) {
+                                    LobbyStory.getInstance().getJumpAndRunManager().setCheckpoint(p, i + 1);
+                                    return;
+                                }
+                            }
+                        }
+                    }
                     break;
                 }
             }

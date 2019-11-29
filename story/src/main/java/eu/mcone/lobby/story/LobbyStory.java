@@ -16,20 +16,29 @@ import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Progress;
+import eu.mcone.lobby.items.LobbyItems;
 import eu.mcone.lobby.story.inventory.backpack.StoryItemInventory;
 import eu.mcone.lobby.story.inventory.story.ProgressInventory;
+import eu.mcone.lobby.story.jumpnrun.JumpAndRunManager;
 import eu.mcone.lobby.story.listener.*;
 import lombok.Getter;
 import org.bukkit.Material;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class LobbyStory extends LobbyAddon {
 
     @Getter
     private static LobbyStory instance;
+    @Getter
+    private JumpAndRunManager jumpAndRunManager;
 
     @Override
     public void onEnable() {
         instance = this;
+        this.jumpAndRunManager = new JumpAndRunManager(LobbyPlugin.getInstance());
 
         BackpackInventory.registerBackpackInventory(Category.STORY_ITEMS, StoryItemInventory.class);
 
@@ -38,9 +47,8 @@ public class LobbyStory extends LobbyAddon {
                 new LobbyPlayerLoadedListener(),
                 new NpcListener(),
                 new InventoryTriggerListener(),
-                new SecretSignsListener(),
-                new WorldChangeListener(),
-                new PlayerCommandPreprocessEvent()
+                new SignsListener(),
+                new WorldChangeListener()
         );
 
         CoreSystem.getInstance().modifyProfileInventory((coreInventory, player) -> {
