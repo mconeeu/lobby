@@ -39,6 +39,7 @@ public class JumpAndRunManager {
                 Calendar calendarTime = Calendar.getInstance(TimeZone.getTimeZone("CEST"));
                 calendarTime.setTimeInMillis(System.currentTimeMillis() - (jnrPlayer.getTime() * 1000));
 
+
                 CoreSystem.getInstance().createActionBar().message("§7§oDeine Zeit:§f"
                         + (calendarTime.get(Calendar.HOUR) > 0 ? " " + calendarTime.get(Calendar.HOUR) + "h" : "")
                         + (calendarTime.get(Calendar.MINUTE) > 0 ? " " + calendarTime.get(Calendar.MINUTE) + "m" : "")
@@ -78,12 +79,12 @@ public class JumpAndRunManager {
                     LobbyPlugin.getInstance().getMessager().send(p, "§2Du hast den §a" + checkpoint + ". Checkpoint§2 erreicht!");
                 }
             } else {
-                LobbyPlugin.getInstance().getMessager().send(p, "§4Du hast einen Checkpoint übersprungen und wurdest zu deinem letzten!");
+                LobbyPlugin.getInstance().getMessager().send(p, "§4Du hast einen Checkpoint übersprungen und wurdest zu deinem letzten Checkpoint telepotiert!");
                 title.send(p);
-                if (checkpoint == 0) {
+                if (jnrPlayer.getCheckpoint() <= 1) {
                     LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jnrPlayer.getJumpNRun().getStartLocation());
                 } else {
-                    p.teleport(jnrPlayer.getJumpNRun().getCheckpoints()[checkpoint - 1]);
+                    p.teleport(jnrPlayer.getJumpNRun().getCheckpoints()[jnrPlayer.getCheckpoint() - 1]);
                 }
             }
         }
