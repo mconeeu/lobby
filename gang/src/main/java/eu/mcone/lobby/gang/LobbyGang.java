@@ -65,7 +65,7 @@ public class LobbyGang extends LobbyAddon {
     }
 
     public void createGang(final Player leader) {
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(leader.getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(leader.getUniqueId());
 
         if (lp.isInGang()) {
             leader.sendMessage(Gang.GANG_PREFIX + "§4Du bist bereits in einer anderen Gang!");

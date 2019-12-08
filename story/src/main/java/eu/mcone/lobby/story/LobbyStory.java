@@ -10,23 +10,15 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.spawnable.ListMode;
-import eu.mcone.gamesystem.api.enums.Category;
-import eu.mcone.gamesystem.api.lobby.backpack.BackpackInventory;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Progress;
-import eu.mcone.lobby.items.LobbyItems;
-import eu.mcone.lobby.story.inventory.backpack.StoryItemInventory;
 import eu.mcone.lobby.story.inventory.story.ProgressInventory;
 import eu.mcone.lobby.story.jumpnrun.JumpAndRunManager;
 import eu.mcone.lobby.story.listener.*;
 import lombok.Getter;
 import org.bukkit.Material;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class LobbyStory extends LobbyAddon {
 
@@ -39,8 +31,6 @@ public class LobbyStory extends LobbyAddon {
     public void onEnable() {
         instance = this;
         this.jumpAndRunManager = new JumpAndRunManager(LobbyPlugin.getInstance());
-
-        BackpackInventory.registerBackpackInventory(Category.STORY_ITEMS, StoryItemInventory.class);
 
         LobbyPlugin.getInstance().registerEvents(
                 new CoreManagerReloadListener(),

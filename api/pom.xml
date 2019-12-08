@@ -18,4 +18,5 @@
     <build>
         <finalName>${project.parent.name}-${project.name}-${project.version}</finalName>
     </build>
+
 </project>

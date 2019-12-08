@@ -1,18 +1,20 @@
 package eu.mcone.lobby.items.listener.effects;
 
-import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.enums.Item;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.potion.Potion;
 
 public class MagicWandListener implements Listener {
 
@@ -35,33 +37,22 @@ public class MagicWandListener implements Listener {
             }
 
             p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(LobbyPlugin.getInstance(), new Runnable() {
+            Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
+                p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
 
-                @Override
-                public void run() {
+                Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                     p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(LobbyPlugin.getInstance(), new Runnable() {
 
-                        @Override
-                        public void run() {
-                            p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
-
-                            Bukkit.getScheduler().scheduleSyncDelayedTask(LobbyPlugin.getInstance(), new Runnable() {
-
-                                @Override
-                                public void run() {
-                                    p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
-                                    if (p.hasPermission("lobby.silenthub")) {
-                                        p.getInventory().setItem(3, Item.MAGICWAND.getItemStack());
-                                    } else {
-                                        p.getInventory().setItem(2, Item.MAGICWAND.getItemStack());
-                                    }
-
-                                }
-                            }, 21);
+                    Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
+                        p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
+                        if (p.hasPermission("lobby.silenthub")) {
+                            p.getInventory().setItem(3, Item.MAGICWAND.getItemStack());
+                        } else {
+                            p.getInventory().setItem(2, Item.MAGICWAND.getItemStack());
                         }
-                    }, 10);
-                }
+
+                    }, 21);
+                }, 10);
             }, 25);
         }
     }

@@ -6,9 +6,9 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.gamesystem.api.enums.Item;
-import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -18,14 +18,14 @@ public class BronzeOfficeInventory extends CoreInventory {
     BronzeOfficeInventory(Player p) {
         super("§8» §d§lBüro §8| §fBronze", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
-        GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 
         setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.CLAY_BRICK, 1, 0).displayName("§aBüro kaufen").lore("§a§lBüro kosten 150 Emeralds").create(),
                 e -> {
                     if (cp.getEmeralds() - 150 >= 0) {
                         cp.removeEmeralds(150);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
-                        lp.addItem(Item.OFFICE_CARD_BRONZE);
+                        Item.OFFICE_CARD_BRONZE.add(lp);
 
                         p.closeInventory();
                         p.sendMessage("§8[§7§l!§8] §cNPC §8» §fVerkäufer §8|§7 Bitte sehr ihre Büro Schlüsselkarte gehen sie zu mein Kolegen er bringt sie dann zu ihr Büro!");

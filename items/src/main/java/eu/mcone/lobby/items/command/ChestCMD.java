@@ -25,7 +25,7 @@ public class ChestCMD extends CoreCommand {
         if (args.length == 0 && sender instanceof Player) {
             Player p = (Player) sender;
 
-            LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast momentan §d" + LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId()).getChests() + " Kisten§7!");
+            LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast momentan §d" + LobbyPlugin.getInstance().getGamePlayer(p).getChests() + " Kisten§7!");
             new ChestInfoInventory(p);
             p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
         } else if (sender.hasPermission("lobby.chests")) {
@@ -37,7 +37,7 @@ public class ChestCMD extends CoreCommand {
                     Player t = Bukkit.getPlayer(args[0]);
 
                     if (t != null) {
-                        sender.sendMessage("§8[§7§l!§8] §eKisten §8» §7Der Spieler §d" + t.getName() + " §7hat §d" + LobbyPlugin.getInstance().getLobbyPlayer(t.getUniqueId()).getChests() + " §7Kisten!");
+                        sender.sendMessage("§8[§7§l!§8] §eKisten §8» §7Der Spieler §d" + t.getName() + " §7hat §d" + LobbyPlugin.getInstance().getGamePlayer(t.getUniqueId()).getChests() + " §7Kisten!");
                     } else {
                         sender.sendMessage("§8[§7§l!§8] §eKisten §8» §7Der Spieler ist nicht online!");
                     }
@@ -48,7 +48,7 @@ public class ChestCMD extends CoreCommand {
                     Player t = Bukkit.getPlayer(args[1]);
 
                     if (t != null) {
-                        LobbyPlugin.getInstance().getLobbyPlayer(t.getUniqueId()).addChests(Integer.valueOf(args[2]));
+                        LobbyPlugin.getInstance().getGamePlayer(t.getUniqueId()).addChests(Integer.valueOf(args[2]));
                         sender.sendMessage("§8[§7§l!§8] §eKisten §8» §7Du hast §d" + t.getName() + " §7erfolgreich §d" + args[2] + " §7Kisten hinzugefügt");
                     } else {
                         sender.sendMessage("§8[§7§l!§8] §eKisten §8» §7der Spieler ist nicht online!");
@@ -58,11 +58,11 @@ public class ChestCMD extends CoreCommand {
                     Player t = Bukkit.getPlayer(args[1]);
 
                     if (t != null) {
-                        int current = LobbyPlugin.getInstance().getLobbyPlayer(t.getUniqueId()).getChests();
+                        int current = LobbyPlugin.getInstance().getGamePlayer(t.getUniqueId()).getChests();
                         int amount = Integer.valueOf(args[2]);
 
                         if ((current - amount) >= 0) {
-                            LobbyPlugin.getInstance().getLobbyPlayer(t.getUniqueId()).removeChests(Integer.valueOf(args[2]));
+                            LobbyPlugin.getInstance().getGamePlayer(t.getUniqueId()).removeChests(Integer.valueOf(args[2]));
                             sender.sendMessage("§8[§7§l!§8] §eKisten §8» §7Du hast §d" + t.getName() + " §7erfolgreich §d" + args[2] + " §7Kisten entfernt");
                         } else {
                             sender.sendMessage("§8[§7§l!§8] §eKisten §8» §7Du kannst §d" + t.getName() + " §7nicht so viele Kisten entfernen! Er hat nur §d" + current + " §7Kisten!");

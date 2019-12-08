@@ -21,7 +21,7 @@ public class LobbySettingsInventory extends CoreInventory {
 
     public LobbySettingsInventory(Player p) {
         super("§8» §c§lLobby Einstellung", p, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
         LobbySettings settings = lp.getSettings();
 
 

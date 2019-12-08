@@ -5,16 +5,14 @@
 
 package eu.mcone.lobby.items.listener;
 
-import eu.mcone.gamesystem.api.enums.Category;
-import eu.mcone.gamesystem.api.lobby.backpack.BackpackInventory;
-import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.enums.Category;
 import eu.mcone.lobby.items.inventory.chest.ChestOpeningInventory;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -42,7 +40,7 @@ public class InventoryTriggerListener implements Listener {
             }
 
             if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lRucksack §8» §7§oZeige deine gesammelten Items an")) {
-                BackpackInventory.openNewInventory(Category.STORY_ITEMS, p);
+                LobbyPlugin.getInstance().getBackpackManager().openBackpackInventory(Category.STORY_ITEMS.name(), p);
             }
         }
     }

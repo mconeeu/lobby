@@ -13,7 +13,6 @@ import lombok.Setter;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @NoArgsConstructor
@@ -42,7 +41,7 @@ public class LobbyPlayerProfile extends GameProfile {
     }
 
     @Override
-    public void doSetData(Player p) {
+    public void doSetData(Player player) {
         for (Map.Entry<String, Long> entry : jumpnruns.entrySet()) {
             jumpnrunSet.put(JumpNRun.getJumpNRunById(Integer.parseInt(entry.getKey())), entry.getValue());
         }

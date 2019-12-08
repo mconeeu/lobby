@@ -9,10 +9,10 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.gamesystem.api.enums.Item;
-import eu.mcone.gamesystem.api.enums.Level;
-import eu.mcone.gamesystem.api.game.player.GamePlayer;
+import eu.mcone.gameapi.api.backpack.Level;
+import eu.mcone.gameapi.api.backpack.defaults.DefaultItem;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.LobbyItems;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -24,15 +24,15 @@ class DailyItemsInventory extends CoreInventory {
 
     DailyItemsInventory(Player p) {
         super("§8» §e§lHändler §8| §fShop", p, InventorySlot.ROW_6, InventoryOption.FILL_EMPTY_SLOTS);
-        GamePlayer lobbyPlayer = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 
         setItem(InventorySlot.ROW_1_SLOT_2, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e -> new TraderInventory(p));
         setItem(InventorySlot.ROW_1_SLOT_7, new ItemBuilder(Material.PAPER, 1, 0).displayName("§c§lItems kaufen").lore("§7§oKaufe hier Items mit Coins.", "§7§oDie Items stehen dir danach in", "§7§odeinem Rucksack zur Verfügung.").create());
-        setItem(InventorySlot.ROW_1_SLOT_3, new ItemBuilder(Material.EMERALD, 1, 0).displayName("§a§lDein Kontostand").lore("§7§oDein Kontostand beträgt:", "§f§o" + lobbyPlayer.getCorePlayer().getCoins() + "§7§o Coins").create());
+        setItem(InventorySlot.ROW_1_SLOT_3, new ItemBuilder(Material.EMERALD, 1, 0).displayName("§a§lDein Kontostand").lore("§7§oDein Kontostand beträgt:", "§f§o" + lp.getCorePlayer().getCoins() + "§7§o Coins").create());
         setItem(InventorySlot.ROW_1_SLOT_5, new ItemBuilder(Material.WATCH, 1, 0).displayName("§f§lAktuallisierung").lore("§7§oDer Shop aktuallisiert", "§7§osich in: §f" + getUpdateDate()).create(), e -> updateInventory());
 
         int i = 19;
-        for (Item item : LobbyItems.getInstance().getDailyShopManager().getDailyItems()) {
+        for (DefaultItem item : LobbyItems.getInstance().getDailyShopManager().getDailyItems()) {
             if (i == 22) {
                 i = 28;
             } else if (i == 31) {
@@ -43,15 +43,24 @@ class DailyItemsInventory extends CoreInventory {
 
             if (item.getLevel().equals(Level.UNUSUAL) || item.getLevel().equals(Level.USUAL)) {
                 setItem(i, item.getItemStack(), e -> {
-                    if (!lobbyPlayer.hasItem(item)) {
+                    if (!item.has(lp)) {
                         new DailyItemsBuyInventory(p, item);
                     } else {
                         player.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du besitzt das Item §e" + item.getName() + " §2bereits!");
                     }
                 });
             } else {
+                setItem(InventorySlot.ROW_3_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//§oMCONE§8//").create());
+                setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//§oMCONE§8//").create());
+                setItem(InventorySlot.ROW_3_SLOT_8, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//§oMCONE§8//").create());
+                setItem(InventorySlot.ROW_4_SLOT_8, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//§oMCONE§8//").create());
+                setItem(InventorySlot.ROW_5_SLOT_8, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//§oMCONE§8//").create());
+                setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//§oMCONE§8//").create());
+                setItem(InventorySlot.ROW_5_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//§oMCONE§8//").create());
+                setItem(InventorySlot.ROW_4_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//§oMCONE§8//").create());
+
                 setItem(i1, item.getItemStack(), e -> {
-                    if (!lobbyPlayer.hasItem(item)) {
+                    if (!item.has(lp)) {
                         new DailyItemsBuyInventory(p, item);
                     } else {
                         player.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du besitzt das Item §e" + item.getName() + " §2bereits!");

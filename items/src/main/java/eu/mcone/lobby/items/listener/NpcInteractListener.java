@@ -6,17 +6,16 @@
 package eu.mcone.lobby.items.listener;
 
 import eu.mcone.coresystem.api.bukkit.event.NpcInteractEvent;
-import eu.mcone.gamesystem.api.enums.Category;
-import eu.mcone.gamesystem.api.enums.Item;
-import eu.mcone.gamesystem.api.game.player.GamePlayer;
+import eu.mcone.gameapi.api.backpack.defaults.DefaultCategory;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.inventory.bank.BankCreateCardInventory;
 import eu.mcone.lobby.items.inventory.bank.BankMenInventory;
 import eu.mcone.lobby.items.inventory.office.ChauffeurInventory;
 import eu.mcone.lobby.items.inventory.office.OfficeTraderInventory;
 import eu.mcone.lobby.items.inventory.office.SecretaryInventory;
 import eu.mcone.lobby.items.inventory.trader.TraderInventory;
-import eu.mcone.lobby.items.inventory.vendor.VendorInventory;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import lombok.Getter;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
@@ -30,7 +29,7 @@ public class NpcInteractListener implements Listener {
     @EventHandler
     public void onNpcInteract(NpcInteractEvent e) {
         Player p = e.getPlayer();
-        GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 
         if (e.getNpc().getData().getType().equals(EntityType.PLAYER) && e.getAction().equals(PacketPlayInUseEntity.EnumEntityUseAction.INTERACT)) {
             String npcName = e.getNpc().getData().getName();
@@ -39,7 +38,7 @@ public class NpcInteractListener implements Listener {
                     || npcName.equalsIgnoreCase(StoryNPC.OFFICE_TRADER.getNpcName())) {
                 new TraderInventory(p);
             } else if (npcName.equalsIgnoreCase(StoryNPC.BANKMAN.getNpcName())) {
-                if (!lp.hasItem(Item.BANKCARD) && !lp.hasItem(Item.BANKCARD_PREMIUM)) {
+                if (!Item.BANKCARD.has(lp) && !Item.BANKCARD_PREMIUM.has(lp)) {
                     new BankCreateCardInventory(p);
                 } else {
                     new BankMenInventory(p);
@@ -57,7 +56,7 @@ public class NpcInteractListener implements Listener {
                     || npcName.equalsIgnoreCase(StoryNPC.CHAUFFEUR_3.getNpcName())) {
                 new ChauffeurInventory(p);
             } else if (npcName.equalsIgnoreCase(StoryNPC.VENDOR.getNpcName())) {
-                VendorInventory.openNewInventory(Category.TRAIL, p);
+                LobbyPlugin.getInstance().getBackpackManager().openBackpackSellInventory(DefaultCategory.PET.name(), p);
             }
         }
     }

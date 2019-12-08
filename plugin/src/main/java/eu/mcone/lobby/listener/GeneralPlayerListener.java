@@ -5,15 +5,13 @@
 
 package eu.mcone.lobby.listener;
 
-import eu.mcone.gamesystem.api.enums.Item;
-import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.BankProgress;
+import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.inventory.InteractionInventory;
-import eu.mcone.lobby.items.listener.effects.SplashPotionListener;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -103,22 +101,16 @@ public class GeneralPlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onQuit(PlayerQuitEvent e) {
         e.setQuitMessage(null);
-        Player p = e.getPlayer();
-
-        if (SplashPotionListener.Splahpotioneffect.contains(p)) {
-            SplashPotionListener.Splahpotioneffect.remove(p);
-        }
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().getUniqueId());
-        GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(e.getPlayer().getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(e.getPlayer().getUniqueId());
 
         if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
             lp.setBankProgress(BankProgress.BANK_ROBBERY_START);
             JohnBankRobberyInventory.currentlyInBank = null;
-            gamePlayer.removeItem(Item.GOLD_BARDING);
+            Item.GOLD_BARDING.remove(lp);
 
         }
         lp.saveData();
-        LobbyPlugin.getInstance().unregisterLobbyPlayer(lp);
+        LobbyPlugin.getInstance().unregisterGamePlayer(lp);
     }
 
     @EventHandler

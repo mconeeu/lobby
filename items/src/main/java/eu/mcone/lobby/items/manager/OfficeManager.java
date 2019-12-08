@@ -3,10 +3,10 @@ package eu.mcone.lobby.items.manager;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.scoreboard.CoreScoreboard;
 import eu.mcone.coresystem.api.bukkit.scoreboard.MainScoreboard;
-import eu.mcone.gamesystem.api.enums.Item;
-import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -20,15 +20,15 @@ public class OfficeManager {
     private static List<Player> VANISHED = new ArrayList<>();
 
     public static void getOffice(Player player) {
-        GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(player.getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(player.getUniqueId());
 
-        if (lp.hasItem(Item.OFFICE_CARD_BRONZE)) {
+        if (Item.OFFICE_CARD_BRONZE.has(lp)) {
             vanishPlayer(player);
             LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.BRONZE_OFFICE.getSpawnLocation());
-        } else if (lp.hasItem(Item.OFFICE_CARD_SILVER)) {
+        } else if (Item.OFFICE_CARD_SILVER.has(lp)) {
             vanishPlayer(player);
             LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.SILVER_OFFICE.getSpawnLocation());
-        } else if (lp.hasItem(Item.OFFICE_CARD_GOLD)) {
+        } else if (Item.OFFICE_CARD_GOLD.has(lp)) {
             vanishPlayer(player);
             LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.GOLD_OFFICE.getSpawnLocation());
         }

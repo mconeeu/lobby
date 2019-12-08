@@ -25,7 +25,6 @@ import eu.mcone.lobby.gang.LobbyGang;
 import eu.mcone.lobby.inventory.LobbySettingsInventory;
 import eu.mcone.lobby.items.LobbyItems;
 import eu.mcone.lobby.listener.*;
-import eu.mcone.lobby.pets.LobbyPets;
 import eu.mcone.lobby.story.LobbyStory;
 import eu.mcone.lobby.util.SidebarObjective;
 import lombok.Getter;
@@ -42,19 +41,16 @@ public class Lobby extends LobbyPlugin {
     @Getter
     private BuildSystem buildSystem;
     @Getter
-    private List<LobbyPlayer> players;
-    @Getter
     private Map<LobbyWorld, CoreWorld> worlds;
 
     public final static List<LobbyAddon> ADDONS = new ArrayList<>(Arrays.asList(
-            new LobbyGang(), new LobbyItems(), new LobbyPets(), new LobbyStory()
+            new LobbyGang(), new LobbyItems(), new LobbyStory()
     ));
 
     @Override
-    public void onGameEnable() {
+    public void onEnable() {
         instance = this;
 
-        players = new ArrayList<>();
         worlds = new HashMap<>();
 
         for (LobbyWorld w : LobbyWorld.values())
@@ -96,7 +92,9 @@ public class Lobby extends LobbyPlugin {
 
         for (CorePlayer p : CoreSystem.getInstance().getOnlineCorePlayers()) {
             PlayerJoinListener.preloadLobbyPlayer(p.bukkit(), p);
-            PlayerJoinListener.loadLobbyPlayer(p.bukkit(), p, LobbyPlayerLoadedEvent.Reason.RELOADED);
+            LobbyPlayer lp = new LobbyPlayer(p);
+            registerGamePlayer(lp);
+            PlayerJoinListener.loadLobbyPlayer(p.bukkit(), lp, p, LobbyPlayerLoadedEvent.Reason.RELOADED);
         }
 
         if (Bukkit.getOnlinePlayers().size() > 0) {
@@ -111,7 +109,7 @@ public class Lobby extends LobbyPlugin {
     }
 
     @Override
-    public void onGameDisable() {
+    public void onDisable() {
         sendConsoleMessage("§cDeactivating AddOns...");
         for (LobbyAddon addon : ADDONS) {
             addon.onDisable();
@@ -136,40 +134,6 @@ public class Lobby extends LobbyPlugin {
                 new DropPickupListener()
         );
         registerCommands(new LobbyCMD());
-    }
-
-    @Override
-    public LobbyPlayer getLobbyPlayer(UUID uuid) {
-        for (LobbyPlayer lp : players) {
-            if (lp.getCorePlayer().getUuid().equals(uuid)) {
-                return lp;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public LobbyPlayer getLobbyPlayer(String name) {
-        for (LobbyPlayer lp : players) {
-            if (lp.getCorePlayer().getName().equals(name)) {
-                return lp;
-            }
-        }
-        return null;
-    }
-
-    public Collection<LobbyPlayer> getLobbyPlayers() {
-        return players;
-    }
-
-    @Override
-    public void registerLobbyPlayer(LobbyPlayer lp) {
-        players.add(lp);
-    }
-
-    @Override
-    public void unregisterLobbyPlayer(LobbyPlayer lp) {
-        players.remove(lp);
     }
 
     @Override

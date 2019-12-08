@@ -15,11 +15,9 @@ import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.CoreActionBar;
 import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
-import eu.mcone.gamesystem.api.enums.Item;
-import eu.mcone.gamesystem.api.game.event.GamePlayerLoadedEvent;
-import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.manager.OfficeManager;
@@ -49,19 +47,16 @@ public class PlayerJoinListener implements Listener {
 
         e.setJoinMessage(null);
         preloadLobbyPlayer(p, CoreSystem.getInstance().getCorePlayer(p.getUniqueId()));
-    }
 
-    @EventHandler
-    public void on(GamePlayerLoadedEvent e) {
-        CorePlayer cp = e.getPlayer().getCorePlayer();
-        Player p = cp.bukkit();
+        LobbyPlayer lp = new LobbyPlayer(CoreSystem.getInstance().getCorePlayer(p));
+        LobbyPlugin.getInstance().registerGamePlayer(lp);
 
         PlayerHider.playerJoined(p);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
 
-        loadLobbyPlayer(p, cp, LobbyPlayerLoadedEvent.Reason.JOINED);
+        loadLobbyPlayer(p, lp, lp.getCorePlayer(), LobbyPlayerLoadedEvent.Reason.JOINED);
         p.setWalkSpeed(0.2F);
     }
 
@@ -101,44 +96,11 @@ public class PlayerJoinListener implements Listener {
         p.getInventory().setItem(8, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());
 
         cp.getScoreboard().setNewObjective(new SidebarObjective());
-        switch (cp.getMainGroup()) {
-            case PREMIUM:
-                p.getInventory().setBoots(Item.PREMIUM_BOOTS.getItemStack());
-                break;
-            case PREMIUMPLUS:
-                p.getInventory().setBoots(Item.PREMIUM_PLUS_BOOTS.getItemStack());
-                break;
-            case YOUTUBER:
-                p.getInventory().setBoots(Item.YOUTUBER_BOOTS.getItemStack());
-                break;
-            case JRSUPPORTER:
-                p.getInventory().setBoots(Item.JR_SUPPORTER_BOOTS.getItemStack());
-                break;
-            case SUPPORTER:
-                p.getInventory().setBoots(Item.SUPPORTER_BOOTS.getItemStack());
-                break;
-            case MODERATOR:
-                p.getInventory().setBoots(Item.MODERATOR_BOOTS.getItemStack());
-                break;
-            case SRMODERATOR:
-                p.getInventory().setBoots(Item.SR_MODERATOR_BOOTS.getItemStack());
-                break;
-            case BUILDER:
-                p.getInventory().setBoots(Item.BUILDER_BOOTS.getItemStack());
-                break;
-            case DEVELOPER:
-                p.getInventory().setBoots(Item.DEVELOPER_BOOTS.getItemStack());
-                break;
-            case ADMIN:
-                p.getInventory().setBoots(Item.ADMIN_BOOTS.getItemStack());
-                break;
-        }
+        LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
     }
 
-    public static void loadLobbyPlayer(Player p, CorePlayer cp, LobbyPlayerLoadedEvent.Reason reason) {
+    public static void loadLobbyPlayer(Player p, LobbyPlayer lp, CorePlayer cp, LobbyPlayerLoadedEvent.Reason reason) {
         Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> {
-            LobbyPlayer lp = new LobbyPlayer(cp);
-            GamePlayer gp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
             Bukkit.getPluginManager().callEvent(new LobbyPlayerLoadedEvent(lp, reason));
             LOADING_SUCCESS_MSG.send(p);
 
@@ -152,35 +114,35 @@ public class PlayerJoinListener implements Listener {
                     if (lp.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.SPAWN.toString())) {
                         PlayerSpawnLocation.SPAWN.getWorld().teleportSilently(p, "spawn");
                     } else if (lp.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.OFFICE.toString())) {
-                        if (gp.hasItem(Item.OFFICE_CARD_BRONZE)) {
+                        if (Item.OFFICE_CARD_BRONZE.has(lp)) {
                             LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.BRONZE_OFFICE.getSpawnLocation());
-                        } else if (gp.hasItem(Item.OFFICE_CARD_SILVER)) {
+                        } else if (Item.OFFICE_CARD_SILVER.has(lp)) {
                             LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.SILVER_OFFICE.getSpawnLocation());
-                        } else if (gp.hasItem(Item.OFFICE_CARD_GOLD)) {
+                        } else if (Item.OFFICE_CARD_GOLD.has(lp)) {
                             LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.GOLD_OFFICE.getSpawnLocation());
                         }
                     }
                 }
             }
 
-            if (!gp.hasItem(Item.BANKCARD_PREMIUM)) {
+            if (!Item.BANKCARD_PREMIUM.has(lp)) {
                 if (p.hasPermission("mcone.premium")) {
-                    if (!gp.hasItem(Item.BANKCARD)) {
-                        gp.addItem(Item.BANKCARD_PREMIUM);
+                    if (!Item.BANKCARD.has(lp)) {
+                        Item.BANKCARD_PREMIUM.add(lp);
                     } else {
-                        gp.removeItem(Item.BANKCARD);
-                        gp.addItem(Item.BANKCARD_PREMIUM);
+                        Item.BANKCARD.remove(lp);
+                        Item.BANKCARD_PREMIUM.add(lp);
                     }
 
                 } else {
-                    if (gp.hasItem(Item.BANKCARD_PREMIUM)) {
-                        gp.removeItem(Item.BANKCARD_PREMIUM);
+                    if (Item.BANKCARD_PREMIUM.has(lp)) {
+                        Item.BANKCARD_PREMIUM.remove(lp);
                     }
                 }
             } else {
                 if (p.hasPermission("mcone.premium")) {
-                    if (gp.hasItem(Item.BANKCARD)) {
-                        gp.removeItem(Item.BANKCARD);
+                    if (Item.BANKCARD.has(lp)) {
+                        Item.BANKCARD.remove(lp);
                     }
                 }
             }

@@ -89,12 +89,6 @@
         </dependency>
         <dependency>
             <groupId>eu.mcone.lobby</groupId>
-            <artifactId>pets</artifactId>
-            <version>4.2.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>eu.mcone.lobby</groupId>
             <artifactId>story</artifactId>
             <version>4.2.1-SNAPSHOT</version>
             <scope>compile</scope>

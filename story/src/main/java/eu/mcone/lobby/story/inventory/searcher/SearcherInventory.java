@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemFlag;
 
 public class SearcherInventory extends CoreInventory {
 
-        public SearcherInventory(Player p) {
+    public SearcherInventory(Player p) {
         super("§8» §f§lForscher §8| §fFinanz Forschung", p, InventorySlot.ROW_6);
 
 
@@ -54,21 +54,19 @@ public class SearcherInventory extends CoreInventory {
         setItem(53, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
 
 
-        setItem(InventorySlot.ROW_1_SLOT_1, new ItemBuilder(Material.PRISMARINE_CRYSTALS, 1, 0).displayName("§c§lFinanzen Forschungen").lore("§7§oForsche hier im Finatz Thema.", "§7§oDie Items stehen dir danach in", "§7§odeinem Rucksack zur Verfügung.").enchantment(Enchantment.DAMAGE_ALL, 5).unbreakable(true).itemFlags(ItemFlag.HIDE_ENCHANTS,ItemFlag.HIDE_UNBREAKABLE).create(),
-        e -> {
-            p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
+        setItem(InventorySlot.ROW_1_SLOT_1, new ItemBuilder(Material.PRISMARINE_CRYSTALS, 1, 0).displayName("§c§lFinanzen Forschungen").lore("§7§oForsche hier im Finatz Thema.", "§7§oDie Items stehen dir danach in", "§7§odeinem Rucksack zur Verfügung.").enchantment(Enchantment.DAMAGE_ALL, 5).unbreakable(true).itemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE).create(),
+                e -> {
+                    p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
 
-        });
+                });
 
         setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.DIAMOND_SWORD, 1, 0).displayName("§c§lKampf Forschungen").lore("§7§oForsche hier im PvP Thema.", "§7§oDie Items stehen dir danach in", "§7§odeinem Rucksack zur Verfügung.").create(),
-        e -> {
+                e -> {
 
-            p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-           new PvPSearcherInventory(p);
+                    p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+                    new PvPSearcherInventory(p);
 
-        });
-
-
+                });
 
 
         openInventory();

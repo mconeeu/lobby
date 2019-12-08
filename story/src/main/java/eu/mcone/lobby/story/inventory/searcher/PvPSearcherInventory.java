@@ -8,9 +8,9 @@ package eu.mcone.lobby.story.inventory.searcher;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.gamesystem.api.enums.Item;
-import eu.mcone.gamesystem.api.game.player.GamePlayer;
+import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -21,7 +21,7 @@ class PvPSearcherInventory extends CoreInventory {
 
     PvPSearcherInventory(Player p) {
         super("§8» §f§lForscher §8| §fKampf Forschung", p, InventorySlot.ROW_6);
-        GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
         
         setItem(1, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
         setItem(2, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
@@ -57,12 +57,11 @@ class PvPSearcherInventory extends CoreInventory {
         setItem(53, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
 
         //SWORD
-
-        if (!lp.hasItem(Item.IRON_SWORD)) {
+        if (!Item.IRON_SWORD.has(lp)) {
             setItem(InventorySlot.ROW_2_SLOT_4, Item.IRON_SWORD.getItemStack(), e -> {
-                if (lp.hasItem(Item.MATERIAL_IRON_4)) {
-                    lp.removeItem(Item.MATERIAL_IRON_4);
-                    lp.addItem(Item.IRON_SWORD);
+                if (Item.MATERIAL_IRON_4.has(lp)) {
+                    Item.MATERIAL_IRON_4.remove(lp);
+                    Item.IRON_SWORD.add(lp);
 
                     p.closeInventory();
                     p.sendMessage("§7Du hast das Item Iron Head gekauft");
@@ -85,15 +84,15 @@ class PvPSearcherInventory extends CoreInventory {
 
         //ARMOR
 
-        if (!lp.hasItem(Item.IRON_HEAD)) {
+        if (!Item.IRON_HEAD.has(lp)) {
 
             setItem(InventorySlot.ROW_2_SLOT_3, Item.IRON_HEAD.getItemStack(), e -> {
 
-                if (lp.hasItem(Item.MATERIAL_IRON_2)) {
+                if (Item.MATERIAL_IRON_2.has(lp)) {
 
-                    lp.removeItem(Item.MATERIAL_IRON_2);
+                    Item.MATERIAL_IRON_2.remove(lp);
 
-                    lp.addItem(Item.IRON_HEAD);
+                    Item.IRON_HEAD.add(lp);
 
                     p.closeInventory();
                     p.sendMessage("§7Du hast das Item Iron Head gekauft");
@@ -106,15 +105,15 @@ class PvPSearcherInventory extends CoreInventory {
         }
 
 
-        if (!lp.hasItem(Item.IRON_CHESTPLATE)) {
+        if (!Item.IRON_CHESTPLATE.has(lp)) {
 
             setItem(InventorySlot.ROW_3_SLOT_3, Item.IRON_CHESTPLATE.getItemStack(), e -> {
 
-                if (lp.hasItem(Item.MATERIAL_IRON_6)) {
+                if (Item.MATERIAL_IRON_6.has(lp)) {
 
-                    lp.removeItem(Item.MATERIAL_IRON_6);
+                    Item.MATERIAL_IRON_6.remove(lp);
 
-                    lp.addItem(Item.IRON_CHESTPLATE);
+                    Item.IRON_CHESTPLATE.add(lp);
 
                     p.closeInventory();
                     p.sendMessage("§7Du hast das Item Iron Chestplate gekauft");
@@ -126,16 +125,16 @@ class PvPSearcherInventory extends CoreInventory {
             });
         }
 
-        if (!lp.hasItem(Item.IRON_LEGGINS)) {
+        if (!Item.IRON_LEGGINS.has(lp)) {
 
             setItem(InventorySlot.ROW_4_SLOT_3, Item.IRON_LEGGINS.getItemStack(), e -> {
 
 
-                if (lp.hasItem(Item.MATERIAL_IRON_4)) {
+                if (Item.MATERIAL_IRON_4.has(lp)) {
 
-                    lp.removeItem(Item.MATERIAL_IRON_4);
+                    Item.MATERIAL_IRON_4.remove(lp);
 
-                    lp.addItem(Item.IRON_LEGGINS);
+                    Item.IRON_LEGGINS.add(lp);
 
                     p.closeInventory();
                     p.sendMessage("§7Du hast das Item Iron Hose gekauft");
@@ -147,15 +146,15 @@ class PvPSearcherInventory extends CoreInventory {
             });
         }
 
-        if (!lp.hasItem(Item.IRON_BOOTS)) {
+        if (!Item.IRON_BOOTS.has(lp)) {
 
             setItem(InventorySlot.ROW_5_SLOT_3, Item.IRON_BOOTS.getItemStack(), e -> {
 
-                if (lp.hasItem(Item.MATERIAL_IRON_4)) {
+                if (Item.MATERIAL_IRON_4.has(lp)) {
 
-                    lp.removeItem(Item.MATERIAL_IRON_4);
+                    Item.MATERIAL_IRON_4.remove(lp);
 
-                    lp.addItem(Item.IRON_BOOTS);
+                    Item.IRON_BOOTS.add(lp);
 
                     p.closeInventory();
                     p.sendMessage("§7Du hast das Item Iron Schuhe gekauft");

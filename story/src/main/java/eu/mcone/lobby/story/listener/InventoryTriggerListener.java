@@ -5,16 +5,14 @@
 
 package eu.mcone.lobby.story.listener;
 
-import eu.mcone.gamesystem.api.enums.Item;
-import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.BankProgress;
+import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.JumpNRun;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.story.LobbyStory;
 import eu.mcone.lobby.story.inventory.story.*;
-import eu.mcone.lobby.story.jumpnrun.JumpAndRunManager;
-import eu.mcone.lobby.api.enums.JumpNRun;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -32,33 +30,33 @@ public class InventoryTriggerListener implements Listener {
     @EventHandler
     public void on(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
-        GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR)) {
             if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getClickedBlock() != null) {
                 Material clicked = e.getClickedBlock().getType();
 
                 switch (clicked) {
                     case CAULDRON: {
-                        int progressID = lobbyPlayer.getProgressId();
-                        if (progressID >= 6 && progressID < 8 && !gamePlayer.hasItem(Item.MAGICDRINK)) {
+                        int progressID = lp.getProgressId();
+                        if (progressID >= 6 && progressID < 8 && !Item.MAGICDRINK.has(lp)) {
                             new WitchInventory(p);
                         }
                         return;
                     }
                     case ENDER_CHEST: {
                         Location loc = e.getClickedBlock().getLocation();
-                        if (lobbyPlayer.getProgressId() >= 6) {
+                        if (lp.getProgressId() >= 6) {
                             if (loc.getX() == 80 && loc.getY() == 103 && loc.getZ() == -42) {
                                 new EndInventory(p);
                             }
-                        } else if (lobbyPlayer.getBankprogressId() == BankProgress.CUTTER.getId()) {
+                        } else if (lp.getBankprogressId() == BankProgress.CUTTER.getId()) {
                             new WoolInventory(p);
-                        } else if (lobbyPlayer.getBankprogressId() == BankProgress.SWORD.getId()) {
+                        } else if (lp.getBankprogressId() == BankProgress.SWORD.getId()) {
                             if (loc.getX() == 12 && loc.getY() == 91 && loc.getZ() == 24) {
                                 new SwordInventory(p);
                             }
-                        } else if (lobbyPlayer.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
+                        } else if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
                             if (loc.getX() == 11 && loc.getY() == 104 && loc.getZ() == -17) {
                                 new BankSaveInventory(p);
                             }
@@ -73,9 +71,9 @@ public class InventoryTriggerListener implements Listener {
                         if (sign.getLine(0).equals("§7»§c Secrets")) {
                             String name = ChatColor.stripColor(sign.getLine(1)).replace("»", "").replace("«", "").trim();
 
-                            if (lobbyPlayer.checkAndAddSecret(name, System.currentTimeMillis() / 1000)) {
+                            if (lp.checkAndAddSecret(name, System.currentTimeMillis() / 1000)) {
                                 LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§7Du hast das Secret §f" + name + "§7 entdeckt! §8[§a+35 Coins§8]");
-                                lobbyPlayer.getCorePlayer().addCoins(35);
+                                lp.getCorePlayer().addCoins(35);
                             } else {
                                 LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§4Du hast dieses §cSecret §4bereits gefunden!");
                             }
@@ -96,7 +94,7 @@ public class InventoryTriggerListener implements Listener {
                     case WOOD_BUTTON: {
                         Location loc = e.getClickedBlock().getLocation();
                         if (loc.getX() == 10 && loc.getY() == 104 && loc.getZ() == 1) {
-                            if (lobbyPlayer.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
+                            if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
 
                                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
                                     p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Du bist drin jetzt drück auf der rechten Seite ganz links unten denn Knopf");
@@ -104,7 +102,7 @@ public class InventoryTriggerListener implements Listener {
 
                             }
                         } else if (loc.getX() == 13 && loc.getY() == 103 && loc.getZ() == -8) {
-                            if (lobbyPlayer.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
+                            if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
                                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
                                     p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Perfekt du bist drin jetzt klau die Goldbarren in der Truhe!");
                                 }, 20L);
@@ -118,7 +116,7 @@ public class InventoryTriggerListener implements Listener {
                     case STONE_BUTTON: {
                         Location loc = e.getClickedBlock().getLocation();
                         if (loc.getX() == 25 && loc.getY() == 104 && loc.getZ() == 3) {
-                            if (lobbyPlayer.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
+                            if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
 
                                 p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Drücke jetzt gleich bei den Bücher Regalen ein Holz Knopf dann öffnet sich eine Geheime Tür links!");
 
@@ -136,7 +134,7 @@ public class InventoryTriggerListener implements Listener {
             }
 
             if (e.hasItem() && e.getItem().equals(Item.RADIO_SET1.getItemStack())) {
-                if (lobbyPlayer.getProgressId() == 10) {
+                if (lp.getProgressId() == 10) {
                     p.sendMessage("§8[§7§l!§8] §cFunkgerät §8» §fEdward§8|§7 Du hast mit Sparow geredet richtig und du willst mir bestimmnt mitteilen das Marvin gefangen wurde richtig? Das stimmnt es ist ein riesen kracher in One Island aber am besten besorgst du uns ein paar mehr Informationen und dann funk mich wieder an");
                 } else {
                     p.sendMessage("§8[§7§l!§8] §cFunkgerät §7» Du hast keine neue Nachricht");

@@ -1,8 +1,8 @@
 package eu.mcone.lobby.items.manager;
 
-import eu.mcone.gamesystem.api.enums.Category;
-import eu.mcone.gamesystem.api.enums.Item;
-import eu.mcone.gamesystem.api.enums.Level;
+import eu.mcone.gameapi.api.backpack.Level;
+import eu.mcone.gameapi.api.backpack.defaults.DefaultCategory;
+import eu.mcone.gameapi.api.backpack.defaults.DefaultItem;
 import eu.mcone.lobby.api.LobbyPlugin;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -14,23 +14,18 @@ public class DailyShopManager implements Runnable {
     @Getter
     private long refill;
     @Getter
-    private List<Item> dailyItems;
+    private final List<DefaultItem> dailyItems;
 
-    private List<Item> availableItemsNormal, availableItemsEpic;
+    private final List<DefaultItem> availableItemsNormal, availableItemsEpic;
 
     public DailyShopManager() {
         dailyItems = new ArrayList<>();
         availableItemsNormal = new ArrayList<>();
         availableItemsEpic = new ArrayList<>();
 
-        for (Item item : Item.values()) {
+        for (DefaultItem item : DefaultItem.values()) {
             if (item.getCategory() != null) {
-                if (item.getCategory().equals(Category.TRAIL)
-                        || item.getCategory().equals(Category.ANIMAL)
-                        || item.getCategory().equals(Category.HAT)
-                        || item.getCategory().equals(Category.OUTFITS)
-                        || item.getCategory().equals(Category.GADGET)) {
-
+                if (!item.getCategory().equals(DefaultCategory.EXCLUSIVE)) {
                     if (item.getLevel().equals(Level.USUAL) || item.getLevel().equals(Level.UNUSUAL)) {
                         availableItemsNormal.add(item);
                     } else {
@@ -65,20 +60,16 @@ public class DailyShopManager implements Runnable {
     private void getRandomItems() {
         dailyItems.clear();
 
-        //Normal Items
-        Random normalRandom = new Random();
-
         int i = 1;
         while (i <= 9) {
-            Item randomItem = availableItemsNormal.get(normalRandom.nextInt(availableItemsNormal.size()));
+            DefaultItem randomItem = availableItemsNormal.get(new Random().nextInt(availableItemsNormal.size()));
+
             if (!dailyItems.contains(randomItem)) {
                 dailyItems.add(randomItem);
                 i++;
             }
         }
 
-        //Epic
-        Random epicRandom = new Random();
-        dailyItems.add(availableItemsEpic.get(epicRandom.nextInt(availableItemsEpic.size())));
+        dailyItems.add(availableItemsEpic.get(new Random().nextInt(availableItemsEpic.size())));
     }
 }

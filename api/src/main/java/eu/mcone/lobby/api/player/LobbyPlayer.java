@@ -6,7 +6,7 @@
 package eu.mcone.lobby.api.player;
 
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.coresystem.api.bukkit.player.plugin.GamePlayer;
+import eu.mcone.gameapi.api.player.GameAPIPlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.enums.JumpNRun;
@@ -17,15 +17,13 @@ import lombok.Setter;
 
 import java.util.Map;
 
-public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
+public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private Gang gang;
     @Getter
     private int chests, progressId, bankprogressId;
-    @Getter
-    @Setter
+    @Getter @Setter
     private LobbySettings settings;
     @Getter
     @Setter
@@ -34,7 +32,7 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
     private Map<JumpNRun, Long> jumpnruns;
 
     public LobbyPlayer(CorePlayer corePlayer) {
-        super(corePlayer);
+        super(LobbyPlugin.getPlugin(), corePlayer);
     }
 
     public LobbyPlayerProfile reload() {
@@ -46,7 +44,6 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
         this.settings = profile.getSettings();
         this.secrets = profile.getSecrets();
         this.jumpnruns = profile.getJumpnrunSet();
-        LobbyPlugin.getInstance().registerLobbyPlayer(this);
 
         return profile;
     }
@@ -58,6 +55,7 @@ public class LobbyPlayer extends GamePlayer<LobbyPlayerProfile> {
 
     @Override
     public void saveData() {
+        super.saveData();
         LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, bankprogressId, settings, secrets, jumpnruns));
     }
 

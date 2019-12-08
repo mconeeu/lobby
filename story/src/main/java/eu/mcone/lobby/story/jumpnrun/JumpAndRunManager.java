@@ -5,12 +5,10 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.CoreTitle;
-import eu.mcone.gamesystem.api.enums.Item;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.JumpNRun;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.pets.LobbyPets;
 import eu.mcone.lobby.story.LobbyStory;
 import eu.mcone.lobby.story.listener.PlayerCommandPreprocessEvent;
 import lombok.Getter;
@@ -20,7 +18,10 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TimeZone;
 
 public class JumpAndRunManager {
 
@@ -52,11 +53,11 @@ public class JumpAndRunManager {
     public void setStart(Player p, JumpNRun jumpNRun) {
         if (!isCurrentlyPlaying(p)) {
             CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
-            LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(corePlayer.getUuid());
+            LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(corePlayer.getUuid());
 
             currentlyPlaying.add(new JumpNRunPlayer(p, jumpNRun, System.currentTimeMillis() / 1000));
             jumpandrunItems(p);
-            LobbyPets.getInstance().despawnPet(p);
+            LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);
             LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jumpNRun.getStartLocation());
 
 
@@ -116,7 +117,7 @@ public class JumpAndRunManager {
 
     public void setFinish(Player p) {
         CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(corePlayer.getUuid());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(corePlayer.getUuid());
 
         if (isCurrentlyPlaying(p)) {
             JumpNRunPlayer jnrPlayer = getCurrentlyPlaying(p);
@@ -251,38 +252,7 @@ public class JumpAndRunManager {
 
         p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
 
-        switch (cp.getMainGroup()) {
-            case PREMIUM:
-                p.getInventory().setBoots(Item.PREMIUM_BOOTS.getItemStack());
-                break;
-            case PREMIUMPLUS:
-                p.getInventory().setBoots(Item.PREMIUM_PLUS_BOOTS.getItemStack());
-                break;
-            case YOUTUBER:
-                p.getInventory().setBoots(Item.YOUTUBER_BOOTS.getItemStack());
-                break;
-            case JRSUPPORTER:
-                p.getInventory().setBoots(Item.JR_SUPPORTER_BOOTS.getItemStack());
-                break;
-            case SUPPORTER:
-                p.getInventory().setBoots(Item.SUPPORTER_BOOTS.getItemStack());
-                break;
-            case MODERATOR:
-                p.getInventory().setBoots(Item.MODERATOR_BOOTS.getItemStack());
-                break;
-            case SRMODERATOR:
-                p.getInventory().setBoots(Item.SR_MODERATOR_BOOTS.getItemStack());
-                break;
-            case BUILDER:
-                p.getInventory().setBoots(Item.BUILDER_BOOTS.getItemStack());
-                break;
-            case DEVELOPER:
-                p.getInventory().setBoots(Item.DEVELOPER_BOOTS.getItemStack());
-                break;
-            case ADMIN:
-                p.getInventory().setBoots(Item.ADMIN_BOOTS.getItemStack());
-                break;
-        }
+        LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
     }
 }
 

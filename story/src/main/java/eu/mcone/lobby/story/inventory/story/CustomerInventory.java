@@ -8,22 +8,22 @@ package eu.mcone.lobby.story.inventory.story;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
-import eu.mcone.gamesystem.api.enums.Item;
-import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.entity.Player;
 
 public class CustomerInventory extends CoreInventory {
 
     public CustomerInventory(Player p) {
         super("§fVerkäufer", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 
         setItem(InventorySlot.ROW_2_SLOT_5, Item.BOAT_PASS.getItemStack(), e -> {
-            if (!lp.hasItem(Item.BOAT_PASS)) {
+            if (!Item.BOAT_PASS.has(lp)) {
                 if ((lp.getCorePlayer().getCoins() - 20) >= 0) {
                     lp.getCorePlayer().removeCoins(20);
-                    lp.addItem(Item.BOAT_PASS);
+                    Item.BOAT_PASS.add(lp);
                     if (p.hasPermission("lobby.silenthub")) {
                         p.getInventory().setItem(3, Item.BOAT_PASS.getItemStack());
                     } else {

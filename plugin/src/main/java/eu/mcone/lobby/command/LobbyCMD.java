@@ -20,7 +20,7 @@ public class LobbyCMD extends CoreCommand {
     @Override
     public boolean onCommand(CommandSender commandSender, String[] args) {
         if (args.length == 1 && (args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("rl"))) {
-            for (LobbyPlayer lp : Lobby.getInstance().getLobbyPlayers()) {
+            for (LobbyPlayer lp : Lobby.getInstance().getOnlineGamePlayers()) {
                 lp.reload();
             }
             for (LobbyAddon addon : Lobby.ADDONS) {

@@ -9,9 +9,9 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.gamesystem.api.enums.Item;
-import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -19,7 +19,7 @@ class TicketBuyInventory extends CoreInventory {
 
     TicketBuyInventory(Player p) {
         super("§8» §e§lHändler §8| §bTickets", p, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
-        GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 
         setItem(InventorySlot.ROW_1_SLOT_3, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e -> new TraderInventory(p));
         setItem(InventorySlot.ROW_1_SLOT_5, new ItemBuilder(Material.PAPER, 1, 0).displayName("§c§lItems kaufen").lore("§7§oKaufe hier Tickets mit Coins.", "§7§oDie Items stehen dir danach in", "§7§odeinem Rucksack zur Verfügung.").create());
@@ -27,8 +27,8 @@ class TicketBuyInventory extends CoreInventory {
 
 
         setItem(InventorySlot.ROW_3_SLOT_5, Item.BOAT_PASS.getItemStack(), e -> {
-            if (!lp.hasItem(Item.BOAT_PASS)) {
-                lp.addItem(Item.BOAT_PASS);
+            if (!Item.BOAT_PASS.has(lp)) {
+                Item.BOAT_PASS.add(lp);
                 p.sendMessage("§8[§7§l!§8] §fServer §8» §7Du hast ein Ticket bekommen");
             } else {
                 p.sendMessage( "§8[§7§l!§8] §fServer §8» §4Du besitzt diese Item bereits!");

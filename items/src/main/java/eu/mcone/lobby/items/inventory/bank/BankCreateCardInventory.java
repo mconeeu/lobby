@@ -10,9 +10,9 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
-import eu.mcone.gamesystem.api.enums.Item;
-import eu.mcone.gamesystem.api.game.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -21,7 +21,7 @@ public class BankCreateCardInventory extends CoreInventory {
 
     public BankCreateCardInventory(Player p) {
         super("§8» §d§lBänker", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        GamePlayer lp = LobbyPlugin.getInstance().getGamePlayer(p.getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 
         setItem(InventorySlot.ROW_1_SLOT_1,
                 Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1)
@@ -41,16 +41,15 @@ public class BankCreateCardInventory extends CoreInventory {
 
 
                         if (p.hasPermission("mcone.premium")) {
-                            if (!lp.hasItem(Item.BANKCARD_PREMIUM)) {
-                                lp.addItem(Item.BANKCARD_PREMIUM);
+                            if (!Item.BANKCARD_PREMIUM.has(lp)) {
+                                Item.BANKCARD_PREMIUM.add(lp);
                                 new BankMenInventory(p);
                             } else {
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fBänker §8|§7 Du hast doch schon ein Konto bei mir");
                             }
 
-                        } else if (!lp.hasItem(Item.BANKCARD)) {
-                            lp.addItem(Item.BANKCARD);
-
+                        } else if (!Item.BANKCARD.has(lp)) {
+                            Item.BANKCARD.add(lp);
                             new BankMenInventory(p);
                         } else {
                             p.sendMessage("§8[§7§l!§8] §cNPC §8» §fBänker §8|§7 Du hast doch schon ein Konto bei mir");
