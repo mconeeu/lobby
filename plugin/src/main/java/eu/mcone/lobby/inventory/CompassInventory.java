@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.inventory;
 
+import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
@@ -25,8 +26,16 @@ import org.bukkit.inventory.ItemFlag;
 
 public class CompassInventory extends CoreInventory {
 
+    static {
+        CoreSystem.getInstance().getCooldownSystem().setCustomCooldownFor(CompassInventory.class, 3);
+    }
+
     public CompassInventory(Player p) {
         super("§8» §3§lNavigator", p, InventorySlot.ROW_5, InventoryOption.FILL_EMPTY_SLOTS);
+
+        if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
+            return;
+
         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
 
         setItem(InventorySlot.ROW_1_SLOT_1, CoreInventory.PLACEHOLDER_ITEM);
@@ -49,7 +58,7 @@ public class CompassInventory extends CoreInventory {
         openInventory();
 
 
-        Bukkit.getScheduler().runTaskLaterAsynchronously(Lobby.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
             p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
 
             setItem(InventorySlot.ROW_1_SLOT_3, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 0).displayName("§8//§oMCONE§8//").create());
@@ -68,7 +77,7 @@ public class CompassInventory extends CoreInventory {
             openInventory();
 
 
-            Bukkit.getScheduler().runTask(Lobby.getInstance(), () -> Bukkit.getScheduler().runTaskLaterAsynchronously(Lobby.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
                 p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
 
                 setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
@@ -79,7 +88,7 @@ public class CompassInventory extends CoreInventory {
                 openInventory();
 
 
-                Bukkit.getScheduler().runTask(Lobby.getInstance(), () -> Bukkit.getScheduler().runTaskLaterAsynchronously(Lobby.getInstance(), () -> {
+                Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
                     setItem(InventorySlot.ROW_1_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
                     setItem(InventorySlot.ROW_1_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
@@ -102,7 +111,7 @@ public class CompassInventory extends CoreInventory {
                     openInventory();
 
 
-                    Bukkit.getScheduler().runTask(Lobby.getInstance(), () -> Bukkit.getScheduler().runTaskLaterAsynchronously(Lobby.getInstance(), () -> {
+                    Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
                         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
 
                         setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.NETHER_STAR, 1, 0)
@@ -193,7 +202,7 @@ public class CompassInventory extends CoreInventory {
                         );
 
                         setItem(InventorySlot.ROW_4_SLOT_9, new ItemBuilder(Material.BOOK, 1, 0).displayName("§3Die Story").lore("§7§oSpiele die Story und erhalte", "§7§ocoole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren").create(), e -> {
-                            LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+                            LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
 
                             if (lp.getProgressId() == 0) {
                                 LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "storyspawn");
@@ -204,9 +213,9 @@ public class CompassInventory extends CoreInventory {
                         });
 
                         openInventory();
-                    }, 2L));
-                }, 2L));
-            }, 2L));
+                    }, 2L);
+                }, 2L);
+            }, 2L);
         }, 2L);
     }
 
