@@ -202,7 +202,7 @@ public class CompassInventory extends CoreInventory {
                         );
 
                         setItem(InventorySlot.ROW_4_SLOT_9, new ItemBuilder(Material.BOOK, 1, 0).displayName("§3Die Story").lore("§7§oSpiele die Story und erhalte", "§7§ocoole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren").create(), e -> {
-                            LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p.getUniqueId());
+                            LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 
                             if (lp.getProgressId() == 0) {
                                 LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "storyspawn");
