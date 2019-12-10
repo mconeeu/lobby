@@ -11,12 +11,14 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.manager.OfficeManager;
+import eu.mcone.lobby.onehit.OneHitManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -165,8 +167,18 @@ public class CompassInventory extends CoreInventory {
                                         .displayName("§eHändler")
                                         .lore("§7§oKaufe dir coole Items oder seltene Truhen", "§7§ofür das Chest-Opening", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                                         .create(),
-                                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "merchant")
-                        );
+                                e -> {
+
+                                    PlayerNpc playernpc_vendor = ((PlayerNpc) CoreSystem.getInstance().getNpcManager().getNPC(CoreSystem.getInstance().getWorldManager().getWorld("Lobby-OneIsland"), "vendor"));
+
+                                    if (playernpc_vendor.getData().getTempLocation() != null) {
+                                        player.teleport(playernpc_vendor.getData().getTempLocation().bukkit());
+                                    } else {
+                                        player.teleport(playernpc_vendor.getData().getLocation().bukkit());
+                                    }
+
+
+                                });
 
                         setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.DIAMOND, 1, 0)
                                         .displayName("§eAnKäufer")
@@ -191,7 +203,6 @@ public class CompassInventory extends CoreInventory {
 
                         );
 
-
                         setItem(InventorySlot.ROW_2_SLOT_9, new ItemBuilder(Material.REDSTONE, 1, 0)
                                         .displayName("§dBüro")
                                         .lore("§7§oKaufe dir ein tolles Büro", "§7§ooder Besuche dein Büro", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
@@ -201,13 +212,34 @@ public class CompassInventory extends CoreInventory {
 
                         );
 
+                        setItem(InventorySlot.ROW_5_SLOT_3, new ItemBuilder(Material.DIAMOND_BOOTS, 1, 0)
+                                        .displayName("§bJumpAndRun")
+                                        .lore("§7§oBesuche die JumpAndRun Tafel", "§7§oUm alle Jump and Runs zu sehen", "§7§oUnd um sie zu starten", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                        .create(),
+
+                                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "jumpandrun-board")
+
+                        );
+
+                        setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.IRON_SWORD, 1, 0)
+                                        .displayName("§cOne-Hit §8| §fLobbygame")
+                                        .lore("§7§oSpiele ein bekannten Modi", "§7§omit deinen Freunden auf der Lobby", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                        .create(),
+
+                                e -> {
+
+
+                                    OneHitManager.setStart(p);
+
+                                });
+
                         setItem(InventorySlot.ROW_4_SLOT_9, new ItemBuilder(Material.BOOK, 1, 0).displayName("§3Die Story").lore("§7§oSpiele die Story und erhalte", "§7§ocoole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren").create(), e -> {
                             LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 
                             if (lp.getProgressId() == 0) {
                                 LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "storyspawn");
                             } else {
-                                LobbyPlugin.getInstance().getMessager().send(p, "§2Du wurdest zu dem Story NPC teleportiert, mit dem du zuletzt interagiert hast!");
+                                LobbyPlugin.getInstance().getMessager().send(p, "§2Du wurdest in der nähe des letzten Story-NPC teleportiert, mit dem du zuletzt interagiert hast!");
                                 p.teleport(Progress.getProgressByID(lp.getProgressId()).getNpc().getData().getLocation().bukkit());
                             }
                         });

@@ -6,6 +6,7 @@
 package eu.mcone.lobby;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.command.CoreCommand;
 import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
@@ -25,7 +26,9 @@ import eu.mcone.lobby.gang.LobbyGang;
 import eu.mcone.lobby.inventory.LobbySettingsInventory;
 import eu.mcone.lobby.items.LobbyItems;
 import eu.mcone.lobby.listener.*;
+import eu.mcone.lobby.onehit.OneHitManager;
 import eu.mcone.lobby.story.LobbyStory;
+import eu.mcone.lobby.story.jumpnrun.JumpAndRunManager;
 import eu.mcone.lobby.util.SidebarObjective;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -60,6 +63,33 @@ public class Lobby extends LobbyPlugin {
 
         sendConsoleMessage("§aStarting Scoreboard-Scheduler...");
         startScheduler();
+
+
+        PlayerNpc playernpc_vendor = ((PlayerNpc) CoreSystem.getInstance().getNpcManager().getNPC(CoreSystem.getInstance().getWorldManager().getWorld("Lobby-OneIsland"), "vendor"));
+        //  PlayerNpc playernpc_resident_1 = ((PlayerNpc) CoreSystem.getInstance().getNpcManager().getNPC(CoreSystem.getInstance().getWorldManager().getWorld("Lobby-OneIsland"), "resident-1"));
+
+        PlayerNpc playernpc_welcome = ((PlayerNpc) CoreSystem.getInstance().getNpcManager().getNPC(CoreSystem.getInstance().getWorldManager().getWorld("Lobby-OneIsland"), "edward-welcome"));
+        PlayerNpc playernpc_start = ((PlayerNpc) CoreSystem.getInstance().getNpcManager().getNPC(CoreSystem.getInstance().getWorldManager().getWorld("Lobby-OneIsland"), "edward-start"));
+        PlayerNpc playernpc_duty = ((PlayerNpc) CoreSystem.getInstance().getNpcManager().getNPC(CoreSystem.getInstance().getWorldManager().getWorld("Lobby-OneIsland"), "duty"));
+        PlayerNpc playernpc_salia = ((PlayerNpc) CoreSystem.getInstance().getNpcManager().getNPC(CoreSystem.getInstance().getWorldManager().getWorld("Lobby-OneIsland"), "salia"));
+        PlayerNpc playernpc_robert = ((PlayerNpc) CoreSystem.getInstance().getNpcManager().getNPC(CoreSystem.getInstance().getWorldManager().getWorld("Lobby-OneIsland"), "robert"));
+        PlayerNpc playernpc_edward_cityhall = ((PlayerNpc) CoreSystem.getInstance().getNpcManager().getNPC(CoreSystem.getInstance().getWorldManager().getWorld("Lobby-OneIsland"), "edward-cityhall"));
+
+
+
+        playernpc_vendor.playMotionCapture("capture-vendor");
+
+        playernpc_welcome.playMotionCapture("capture-welcome");
+        playernpc_start.playMotionCapture("capture-start");
+        playernpc_duty.playMotionCapture("capture-duty");
+        playernpc_salia.playMotionCapture("capture-salia");
+        playernpc_robert.playMotionCapture("capture-robert");
+        playernpc_edward_cityhall.playMotionCapture("capture-cityhall");
+
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpcs(
+                playernpc_welcome, playernpc_start, playernpc_duty, playernpc_salia, playernpc_vendor, playernpc_robert, playernpc_edward_cityhall
+        );
+
 
         sendConsoleMessage("§aInitializing Build-System...");
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
@@ -131,7 +161,8 @@ public class Lobby extends LobbyPlugin {
                 new PlayerUpdateListener(),
                 new WeatherChangeListener(),
                 new ItemHotbarChangeListener(),
-                new DropPickupListener()
+                new DropPickupListener(),
+                new PlayerCommandPreprocessEvent()
         );
         registerCommands(new LobbyCMD());
     }

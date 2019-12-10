@@ -13,6 +13,8 @@ import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.inventory.CompassInventory;
 import eu.mcone.lobby.inventory.LobbyInventory;
+import eu.mcone.lobby.onehit.OneHitManager;
+import eu.mcone.lobby.story.LobbyStory;
 import eu.mcone.lobby.util.PlayerHider;
 import eu.mcone.lobby.util.SilentLobbyUtils;
 import org.bukkit.Material;
@@ -24,10 +26,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class InventoryTriggerListener implements Listener{
+public class InventoryTriggerListener implements Listener {
 
     @EventHandler
-    public void on(PlayerInteractEvent e){
+    public void on(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
 
@@ -35,6 +37,9 @@ public class InventoryTriggerListener implements Listener{
             ItemStack i = p.getItemInHand();
             if ((i == null) || (!i.hasItemMeta()) || (!i.getItemMeta().hasDisplayName())) {
                 return;
+            }
+            if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§4Verlassen")) {
+                OneHitManager.cancelTask(p);
             }
 
             if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
