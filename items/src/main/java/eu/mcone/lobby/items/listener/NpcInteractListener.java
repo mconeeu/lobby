@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.items.listener;
 
-import eu.mcone.coresystem.api.bukkit.event.NpcInteractEvent;
+import eu.mcone.coresystem.api.bukkit.event.npc.NpcInteractEvent;
 import eu.mcone.gameapi.api.backpack.defaults.DefaultCategory;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Item;

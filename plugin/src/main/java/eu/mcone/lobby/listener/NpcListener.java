@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.listener;
 
-import eu.mcone.coresystem.api.bukkit.event.NpcInteractEvent;
+import eu.mcone.coresystem.api.bukkit.event.npc.NpcInteractEvent;
 import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.lobby.inventory.ServerInventory;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;

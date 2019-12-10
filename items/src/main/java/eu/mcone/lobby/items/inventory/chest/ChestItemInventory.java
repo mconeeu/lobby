@@ -19,7 +19,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
@@ -27,7 +26,7 @@ import java.util.*;
 class ChestItemInventory extends CoreInventory {
 
     private static final String[] ALLOWED_CATEGORIES = new String[]{
-            DefaultCategory.HAT.getName(), DefaultCategory.GADGET.getName(), DefaultCategory.OUTFIT.getName(), DefaultCategory.TRAIL.getName(), DefaultCategory.PET.getName()
+            DefaultCategory.HAT.name(), DefaultCategory.GADGET.name(), DefaultCategory.OUTFIT.name(), DefaultCategory.TRAIL.name(), DefaultCategory.PET.name()
     };
     private static final Map<Level, Integer> PROBABILITIES;
     private static final Map<BackpackItem, Category> ALLOWED_ITEMS;
@@ -57,8 +56,8 @@ class ChestItemInventory extends CoreInventory {
         PROBABILITIES = probabilities;
     }
 
-    private int changedItems = 0;
-    private List<Integer> slots, fadeSlots;
+    private final List<Integer> slots, fadeSlots;
+    private final Map<Integer, BackpackItem> changedItems;
     private BukkitTask setAnimation;
     private BukkitTask fadeAnimation;
 
@@ -66,6 +65,7 @@ class ChestItemInventory extends CoreInventory {
         super("§8Der Zufall entscheidet...", p, InventorySlot.ROW_6);
         this.slots = new ArrayList<>();
         this.fadeSlots = new ArrayList<>();
+        this.changedItems = new HashMap<>();
         LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 
         List<BackpackItem> items = new ArrayList<>();
@@ -98,46 +98,48 @@ class ChestItemInventory extends CoreInventory {
             final int slot = slots.get(randomIndex);
             slots.remove(randomIndex);
 
-            final InventoryView inv = p.getOpenInventory();
+            final int item = new Random().nextInt(items.size());
+            final BackpackItem backpackItem = items.get(item);
+            getInventory().setItem(slot, items.get(item).getItem());
+            items.remove(item);
 
-            if (!inv.getTitle().equals(getInventory().getTitle())) {
+            p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+            changedItems.put(slot, backpackItem);
+
+            if (!p.getOpenInventory().getTitle().equals(getInventory().getTitle())) {
                 openInventory();
             }
 
-            final int item = new Random().nextInt(items.size());
-            getInventory().setItem(slot, items.get(item).getItem());
+            if (changedItems.size() >= 11) {
+                final Map.Entry<Integer, BackpackItem> wonItem = getWonItem(changedItems);
 
-            p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-            changedItems++;
+                if (wonItem != null) {
+                    fadeSlots.remove(wonItem.getKey());
 
-            if (changedItems == 11) {
-                fadeAnimation = Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
-                    if (fadeSlots.size() < 1) {
-                        BackpackItem backpackItem = items.get(item);
+                    fadeAnimation = Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
+                        if (fadeSlots.size() < 1) {
+                            Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> new ChestFinalInventory(p, wonItem.getValue().getName().contains(" Emerald") ? ALLOWED_ITEMS.get(wonItem.getValue()) : null, wonItem.getValue()), 20);
+                            fadeAnimation.cancel();
+                            return;
+                        }
 
-                        Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> new ChestFinalInventory(p, backpackItem.getName().contains(" Emerald") ? ALLOWED_ITEMS.get(backpackItem) : null, backpackItem), 20);
-                        fadeAnimation.cancel();
-                        return;
-                    }
+                        final int index = fadeSlots.size() > 1 ? new Random().nextInt(fadeSlots.size() - 1) : 0;
+                        final int slotInt = fadeSlots.get(index);
 
-                    final int index = new Random().nextInt(fadeSlots.size() - 1);
-                    final int slotInt = fadeSlots.get(index);
-                    final InventoryView inv1 = p.getOpenInventory();
+                        if (!p.getOpenInventory().getTitle().equals(getInventory().getTitle())) {
+                            openInventory();
+                        }
 
-                    if (!inv1.getTitle().equals(getInventory().getTitle())) {
-                        openInventory();
-                    }
+                        p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
+                        fadeSlots.remove(index);
+                        getInventory().setItem(slotInt, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, wonItem.getValue().getLevel().getGlasSubId()).create());
+                    }, 20, 1);
 
-                    p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
-                    fadeSlots.remove(index);
-
-                    if (slotInt != slot)
-                        getInventory().setItem(slotInt, new ItemBuilder(Material.STAINED_GLASS_PANE, 1).create());
-                }, 20, 1);
-                setAnimation.cancel();
+                    setAnimation.cancel();
+                } else {
+                    throw new IllegalStateException("WonItem cannot be null!");
+                }
             }
-
-            items.remove(item);
         }, 10, 10);
 
         openInventory();
@@ -151,6 +153,21 @@ class ChestItemInventory extends CoreInventory {
             case EPIC: return new BackpackItem(-1, "100+ Emeralds", Level.USUAL, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §6Legendär").create(), true, false, true, 0,  eu.mcone.coresystem.api.core.util.Random.randomInt(100, 150));
             default: return null;
         }
+    }
+
+    private static Map.Entry<Integer, BackpackItem> getWonItem(Map<Integer, BackpackItem> changedItems) {
+        final int randomIndex = new Random().nextInt(changedItems.size() - 1);
+        Map.Entry<Integer, BackpackItem> wonItem = null;
+
+        int i = 0;
+        for (Map.Entry<Integer, BackpackItem> entry : changedItems.entrySet()) {
+            if (i == randomIndex) {
+                return entry;
+            }
+            i++;
+        }
+
+        return null;
     }
 
 }

@@ -6,7 +6,7 @@
 package eu.mcone.lobby.story.listener;
 
 import eu.mcone.coresystem.api.bukkit.event.HologramManagerReloadedEvent;
-import eu.mcone.coresystem.api.bukkit.event.NpcManagerReloadedEvent;
+import eu.mcone.coresystem.api.bukkit.event.npc.NpcManagerReloadedEvent;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.spawnable.ListMode;
 import eu.mcone.lobby.api.LobbyPlugin;

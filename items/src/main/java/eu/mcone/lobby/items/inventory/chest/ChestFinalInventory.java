@@ -51,11 +51,11 @@ class ChestFinalInventory extends CoreInventory {
                             "§7§ogewonnen!").create());
         }
 
-        setItem(InventorySlot.ROW_4_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).create());
-        setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).create());
-        setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).create());
-        setItem(InventorySlot.ROW_3_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).create());
-        setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).create());
+        setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//MCONE//").create());
+        setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//MCONE//").create());
+        setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//MCONE//").create());
+        setItem(InventorySlot.ROW_3_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//MCONE//").create());
+        setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//MCONE//").create());
 
         setItem(InventorySlot.ROW_4_SLOT_5, item.getItem());
         if (category == null) {
@@ -64,11 +64,11 @@ class ChestFinalInventory extends CoreInventory {
             lp.addBackpackItem(category.getName(), item);
         }
 
-        setItem(InventorySlot.ROW_5_SLOT_3, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).create());
-        setItem(InventorySlot.ROW_5_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).create());
-        setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).create());
-        setItem(InventorySlot.ROW_5_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).create());
-        setItem(InventorySlot.ROW_4_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).create());
+        setItem(InventorySlot.ROW_5_SLOT_3, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//MCONE//").create());
+        setItem(InventorySlot.ROW_5_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//MCONE//").create());
+        setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//MCONE//").create());
+        setItem(InventorySlot.ROW_5_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//MCONE//").create());
+        setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//MCONE//").create());
 
         setItem(InventorySlot.ROW_6_SLOT_1, new ItemBuilder(Material.CHEST, 1, 0).displayName("§aNoch eine Kiste öffnen").lore("§7§oDu hast noch " + lp.getChests() + " Kisten!").create(), e -> {
             if (lp.getChests() > 0) {
@@ -85,7 +85,7 @@ class ChestFinalInventory extends CoreInventory {
                     "\n§8§m------§r §8[§7§l!§8] §eChestOpening§r §8§m------" +
                             "\n§8» §f" + item.getLevel().getDisplayname() + "er§7 Gewinn!" +
                             "\n§8» §7Spieler: §f" + p.getName() +
-                            "\n§8» §7Item: §f" + "Test" +
+                            "\n§8» §7Item: §f" + item.getName() +
                             "\n§8§m------§r §8[§7§l!§8] §eChestOpening§r §8§m------"
             );
         }

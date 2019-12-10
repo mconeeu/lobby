@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.gang.listener;
 
-import eu.mcone.coresystem.api.bukkit.event.NpcInteractEvent;
+import eu.mcone.coresystem.api.bukkit.event.npc.NpcInteractEvent;
 import eu.mcone.lobby.gang.inventory.GangInventory;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
 import org.bukkit.entity.Player;
