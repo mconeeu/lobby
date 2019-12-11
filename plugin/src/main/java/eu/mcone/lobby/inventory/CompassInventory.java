@@ -25,6 +25,7 @@ import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.util.Vector;
 
 public class CompassInventory extends CoreInventory {
 
@@ -223,13 +224,42 @@ public class CompassInventory extends CoreInventory {
 
                         setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.IRON_SWORD, 1, 0)
                                         .displayName("§cOne-Hit §8| §fLobbygame")
-                                        .lore("§7§oSpiele ein bekannten Modi", "§7§omit deinen Freunden auf der Lobby", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                        .lore("§7§oSpiele ein bekannten Modi", "§7§omit deinen Freunden auf der Lobby", "", "§8» §f§nLinksklick§8 | §7§oSpielen")
                                         .create(),
 
                                 e -> {
 
+                                    p.closeInventory();
+                                    Vector v = new Vector(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());
+                                    v.normalize();
+                                    v.setY(1.3D);
+                                    v.multiply(1.4D);
+                                    p.setVelocity(v);
+                                    p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 1, 1);
+                                    CoreSystem.getInstance().createTitle().title("§c3")
+                                            .stay(2)
+                                            .fadeIn(1).fadeOut(2)
+                                            .send(p);
+                                    Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
+                                        CoreSystem.getInstance().createTitle().title("§f2")
+                                                .stay(2)
+                                                .fadeIn(1).fadeOut(2)
+                                                .send(p);
+                                    }, 25);
 
-                                    OneHitManager.setStart(p);
+                                    Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
+                                        CoreSystem.getInstance().createTitle().title("§e1")
+                                                .stay(1)
+                                                .fadeIn(1).fadeOut(1)
+                                                .send(p);
+                                    }, 41);
+                                    Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
+                                        OneHitManager.setStart(p);
+                                        CoreSystem.getInstance().createTitle().title("§cTöte alle Spieler").subTitle("§cdie ein Roten Helm haben")
+                                                .stay(1)
+                                                .fadeIn(1).fadeOut(1)
+                                                .send(p);
+                                    }, 60);
 
                                 });
 
@@ -238,6 +268,7 @@ public class CompassInventory extends CoreInventory {
 
                             if (lp.getProgressId() == 0) {
                                 LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "storyspawn");
+                                p.closeInventory();
                             } else {
                                 LobbyPlugin.getInstance().getMessager().send(p, "§2Du wurdest in der nähe des letzten Story-NPC teleportiert, mit dem du zuletzt interagiert hast!");
                                 p.teleport(Progress.getProgressByID(lp.getProgressId()).getNpc().getData().getLocation().bukkit());

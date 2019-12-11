@@ -86,9 +86,9 @@ public class Lobby extends LobbyPlugin {
         playernpc_robert.playMotionCapture("capture-robert");
         playernpc_edward_cityhall.playMotionCapture("capture-cityhall");
 
-        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpcs(
+        /*CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpcs(
                 playernpc_welcome, playernpc_start, playernpc_duty, playernpc_salia, playernpc_vendor, playernpc_robert, playernpc_edward_cityhall
-        );
+        );*/
 
 
         sendConsoleMessage("§aInitializing Build-System...");
