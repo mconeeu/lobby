@@ -168,6 +168,15 @@ public class CompassInventory extends CoreInventory {
                                         .displayName("§eHändler")
                                         .lore("§7§oKaufe dir coole Items oder seltene Truhen", "§7§ofür das Chest-Opening", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                                         .create(),
+                                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "merchant")
+
+
+                        );
+
+                        setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.DIAMOND, 1, 0)
+                                        .displayName("§eAnKäufer")
+                                        .lore("§7§oVerkaufe deine gekauften coolen Items", "§7§oDu bekommst sogar ein paar Emeralds zurück!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                        .create(),
                                 e -> {
 
                                     PlayerNpc playernpc_vendor = ((PlayerNpc) CoreSystem.getInstance().getNpcManager().getNPC(CoreSystem.getInstance().getWorldManager().getWorld("Lobby-OneIsland"), "vendor"));
@@ -180,13 +189,6 @@ public class CompassInventory extends CoreInventory {
 
 
                                 });
-
-                        setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.DIAMOND, 1, 0)
-                                        .displayName("§eAnKäufer")
-                                        .lore("§7§oVerkaufe deine gekauften coolen Items", "§7§oDu bekommst sogar ein paar Emeralds zurück!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
-                                        .create(),
-                                e -> LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "vendor")
-                        );
 
                         setItem(InventorySlot.ROW_4_SLOT_4, new ItemBuilder(Material.CHEST, 1, 0)
                                         .displayName("§eChest-Opening")
