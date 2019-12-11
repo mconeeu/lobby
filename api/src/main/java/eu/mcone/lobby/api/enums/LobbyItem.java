@@ -109,7 +109,7 @@ public enum LobbyItem {
     }
 
     public boolean has(GameAPIPlayer<?> gp) {
-        return gp.hasBackpackItem(category.name().toLowerCase(), id);
+        return gp.hasBackpackItem(category.name(), id);
     }
 
     public void add(GameAPIPlayer<?> gp) {

@@ -147,7 +147,6 @@ public class NpcListener implements Listener {
                                 return;
                             } else {
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Ich brauche das Ticket du Fischgesicht!");
-
                             }
                         } else if (!p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
                             p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Ich brauche das Ticket du Landratte");

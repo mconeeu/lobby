@@ -117,8 +117,9 @@ public class OneHitListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
         if (e.getEntity() instanceof Player) {
+            Player p = (Player) e.getEntity();
+
             if (e.getDamager() instanceof Player) {
-                Player p = (Player) e.getEntity();
                 Player k = (Player) e.getDamager();
 
                 if (manager.isFighting(p) && manager.isFighting(k)) {
@@ -131,6 +132,10 @@ public class OneHitListener implements Listener {
                         p.setHealth(0);
                         e.setCancelled(false);
                     }
+                }
+            } else if (e.getDamager() instanceof Arrow) {
+                if (manager.isFighting(p)) {
+                    e.setCancelled(false);
                 }
             }
         }

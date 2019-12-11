@@ -22,13 +22,13 @@ public class EntitiyDamageListener implements Listener {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
 
-            if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
-                e.setCancelled(true);
-            } else if (e.getCause().equals(EntityDamageEvent.DamageCause.VOID)) {
+            if (e.getCause().equals(EntityDamageEvent.DamageCause.VOID)) {
                 LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "spawn");
             } else if (e.getCause().equals(EntityDamageEvent.DamageCause.FIRE) || e.getCause().equals(EntityDamageEvent.DamageCause.FIRE_TICK)) {
                 p.setFireTicks(0);
             }
+
+            e.setCancelled(true);
         }
     }
 
@@ -41,10 +41,10 @@ public class EntitiyDamageListener implements Listener {
 
                 if (meta != null && meta.getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde"))
                     CoreSystem.getInstance().getChannelHandler().sendPluginMessage(p, "CMD", "friend add " + p.getName());
-
-                e.setCancelled(true);
             }
         }
+
+        e.setCancelled(true);
     }
 
 }
