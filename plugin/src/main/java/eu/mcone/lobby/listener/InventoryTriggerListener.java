@@ -11,10 +11,9 @@ import eu.mcone.coresystem.api.bukkit.event.UnnickEvent;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.inventory.CompassInventory;
 import eu.mcone.lobby.inventory.LobbyInventory;
-import eu.mcone.lobby.onehit.OneHitManager;
-import eu.mcone.lobby.story.LobbyStory;
 import eu.mcone.lobby.util.PlayerHider;
 import eu.mcone.lobby.util.SilentLobbyUtils;
 import org.bukkit.Material;
@@ -34,28 +33,25 @@ public class InventoryTriggerListener implements Listener {
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
 
         if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-            ItemStack i = p.getItemInHand();
+            ItemStack i = e.getItem();
             if ((i == null) || (!i.hasItemMeta()) || (!i.getItemMeta().hasDisplayName())) {
                 return;
             }
-            if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§4Verlassen")) {
-                OneHitManager.cancelTask(p);
-            }
 
-            if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
+            if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
                 e.setCancelled(true);
                 p.performCommand("profile");
-            } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus")) {
+            } else if (i.equals(HotbarItems.HIDE_PLAYERS)) {
                 e.setCancelled(true);
                 PlayerHider.hidePlayers(p);
-            } else if (p.getItemInHand().getItemMeta().getDisplayName().equals("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an")) {
+            } else if (i.equals(HotbarItems.SHOW_PLAYERS)) {
                 e.setCancelled(true);
                 PlayerHider.showPlayers(p);
-            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lNavigator §8» §7§oWähle einen Spielmodus")) {
+            } else if (i.equals(HotbarItems.COMPASS)) {
                 e.setCancelled(true);
                 new CompassInventory(p);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§6§lPrivate Lobby §8» §7§oBetrete deine eigene Private Lobby")) {
+            } else if (i.equals(HotbarItems.PRIVATE_LOBBY)) {
                 if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
                     return;
 
@@ -65,9 +61,9 @@ public class InventoryTriggerListener implements Listener {
                     LobbyPlugin.getInstance().getMessager().send(p, "§2Du bist nun in der §aPrivaten Lobby§2. Hier bist du vollkommen ungestört!");
                     SilentLobbyUtils.activateSilentLobby(p);
                 }
-            } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§3§lLobby-Wechsler §8» §7§oWähle deine Lobby")) {
+            } else if (i.equals(HotbarItems.LOBBY_CHANGER)) {
                 new LobbyInventory(p);
-            } else if (e.getItem().getItemMeta().getDisplayName().equals("§a§lNicken §8» §7§oAktiviert")) {
+            } else if (i.equals(HotbarItems.DEACTIVATE_NICK)) {
                 if (cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
                 }
@@ -76,7 +72,7 @@ public class InventoryTriggerListener implements Listener {
                         6,
                         new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§c§lNicken §8» §7§oDeaktiviert").lore("§7§oKlicke zum aktivieren").create()
                 );
-            } else if (e.getItem().getItemMeta().getDisplayName().equals("§c§lNicken §8» §7§oDeaktiviert")) {
+            } else if (i.equals(HotbarItems.ACTIVATE_NICK)) {
                 if (!cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
                 }

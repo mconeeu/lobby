@@ -5,7 +5,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,9 +16,9 @@ public class OfficeTraderInventory extends CoreInventory {
         super("§8» §d§lVerkäufer §8| §fBüro", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 
-        if (Item.OFFICE_CARD_BRONZE.has(lp) || Item.OFFICE_CARD_SILVER.has(lp)) {
+        if (LobbyItem.OFFICE_CARD_BRONZE.has(lp) || LobbyItem.OFFICE_CARD_SILVER.has(lp)) {
             new UpgradeOfficeTrader(p);
-        } else if (Item.OFFICE_CARD_GOLD.has(lp)) {
+        } else if (LobbyItem.OFFICE_CARD_GOLD.has(lp)) {
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.IRON_DOOR).displayName("§cDu kannst kein Büro mehr kaufen!").create());
             openInventory();
         } else {

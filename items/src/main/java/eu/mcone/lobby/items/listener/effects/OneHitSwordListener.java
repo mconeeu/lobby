@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.items.listener.effects;
 
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import net.minecraft.server.v1_8_R3.EntityLightning;
 import net.minecraft.server.v1_8_R3.PacketPlayOutNamedSoundEffect;
 import net.minecraft.server.v1_8_R3.PacketPlayOutSpawnEntityWeather;
@@ -25,7 +25,7 @@ public class OneHitSwordListener implements Listener {
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
-        if (e.hasItem() && e.getItem().equals(Item.ONE_HIT_SWORD.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
+        if (e.hasItem() && e.getItem().equals(LobbyItem.ONE_HIT_SWORD.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
             Player p = e.getPlayer();
 
             p.getWorld().playEffect(p.getLocation(), Effect.MAGIC_CRIT, 10);

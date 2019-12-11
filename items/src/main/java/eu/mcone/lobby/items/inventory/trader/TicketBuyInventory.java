@@ -10,7 +10,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -26,9 +26,9 @@ class TicketBuyInventory extends CoreInventory {
         setItem(InventorySlot.ROW_1_SLOT_7, new ItemBuilder(Material.EMERALD, 1, 0).displayName("§a§lDein Kontostand").lore("§7§oDein Kontostand beträgt:", "§f§o" + lp.getCorePlayer().getCoins() + "§7§o Coins").create());
 
 
-        setItem(InventorySlot.ROW_3_SLOT_5, Item.BOAT_PASS.getItemStack(), e -> {
-            if (!Item.BOAT_PASS.has(lp)) {
-                Item.BOAT_PASS.add(lp);
+        setItem(InventorySlot.ROW_3_SLOT_5, LobbyItem.BOAT_PASS.getItemStack(), e -> {
+            if (!LobbyItem.BOAT_PASS.has(lp)) {
+                LobbyItem.BOAT_PASS.add(lp);
                 p.sendMessage("§8[§7§l!§8] §fServer §8» §7Du hast ein Ticket bekommen");
             } else {
                 p.sendMessage( "§8[§7§l!§8] §fServer §8» §4Du besitzt diese Item bereits!");

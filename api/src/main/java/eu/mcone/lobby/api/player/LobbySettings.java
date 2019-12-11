@@ -16,6 +16,6 @@ import lombok.ToString;
 public class LobbySettings {
 
     private boolean allowTrading, spawnInSilentLobby;
-    private String spawnLocation = "SPAWN";
+    private SpawnPoint spawnPoint = SpawnPoint.SPAWN;
 
 }

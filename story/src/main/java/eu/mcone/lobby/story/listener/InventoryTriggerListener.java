@@ -8,10 +8,9 @@ package eu.mcone.lobby.story.listener;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.BankProgress;
-import eu.mcone.lobby.api.enums.Item;
 import eu.mcone.lobby.api.enums.JumpNRun;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.story.LobbyStory;
 import eu.mcone.lobby.story.inventory.story.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -39,7 +38,7 @@ public class InventoryTriggerListener implements Listener {
                 switch (clicked) {
                     case CAULDRON: {
                         int progressID = lp.getProgressId();
-                        if (progressID >= 6 && progressID < 8 && !Item.MAGICDRINK.has(lp)) {
+                        if (progressID >= 6 && progressID < 8 && !LobbyItem.MAGICDRINK.has(lp)) {
                             new WitchInventory(p);
                         }
                         return;
@@ -133,56 +132,11 @@ public class InventoryTriggerListener implements Listener {
                 }
             }
 
-            if (e.hasItem() && e.getItem().equals(Item.RADIO_SET1.getItemStack())) {
+            if (e.hasItem() && e.getItem().equals(LobbyItem.RADIO_SET1.getItemStack())) {
                 if (lp.getProgressId() == 10) {
                     p.sendMessage("§8[§7§l!§8] §cFunkgerät §8» §fEdward§8|§7 Du hast mit Sparow geredet richtig und du willst mir bestimmnt mitteilen das Marvin gefangen wurde richtig? Das stimmnt es ist ein riesen kracher in One Island aber am besten besorgst du uns ein paar mehr Informationen und dann funk mich wieder an");
                 } else {
                     p.sendMessage("§8[§7§l!§8] §cFunkgerät §7» Du hast keine neue Nachricht");
-                }
-            }
-
-
-            //JUMPANDRUN
-
-            if (e.hasItem() && e.getItem().getItemMeta().hasDisplayName()) {
-                if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§fJump and Run")) {
-                    LobbyStory.getInstance().getJumpAndRunManager().setCancel(p);
-                } else if (e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("§c§lZurück zum Checkpoint")) {
-                    LobbyStory.getInstance().getJumpAndRunManager().tpToCheckpoint(p);
-                }
-            }
-
-        } else if (e.getAction().equals(Action.PHYSICAL) && e.getClickedBlock() != null) {
-            Material clicked = e.getClickedBlock().getType();
-
-            switch (clicked) {
-                case GOLD_PLATE: {
-                    Location loc = e.getClickedBlock().getLocation();
-
-                    for (JumpNRun jumpnrun : JumpNRun.values()) {
-                        Location start = jumpnrun.getStartPlateLocation();
-                        Location end = jumpnrun.getEndPlateLocation();
-
-                        if (start != null && loc.equals(jumpnrun.getStartPlateLocation())) {
-                            LobbyStory.getInstance().getJumpAndRunManager().setStart(p, jumpnrun);
-                        } else if (end != null && loc.equals(jumpnrun.getEndPlateLocation())) {
-                            LobbyStory.getInstance().getJumpAndRunManager().setFinish(p);
-                        }
-                    }
-                    break;
-                }
-                case IRON_PLATE: {
-                    if (LobbyStory.getInstance().getJumpAndRunManager().isCurrentlyPlaying(p)) {
-                        for (JumpNRun jumpNRun : JumpNRun.values()) {
-                            for (int i = 0; i < jumpNRun.getCheckpoints().length; i++) {
-                                if (jumpNRun.getCheckpoints()[i].equals(e.getClickedBlock().getLocation())) {
-                                    LobbyStory.getInstance().getJumpAndRunManager().setCheckpoint(p, i + 1);
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                    break;
                 }
             }
         }

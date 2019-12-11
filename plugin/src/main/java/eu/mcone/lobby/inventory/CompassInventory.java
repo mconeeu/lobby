@@ -18,7 +18,6 @@ import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.manager.OfficeManager;
-import eu.mcone.lobby.onehit.OneHitManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -229,7 +228,7 @@ public class CompassInventory extends CoreInventory {
                                 e -> {
 
 
-                                    OneHitManager.setStart(p);
+                                    LobbyPlugin.getInstance().getOneHitManager().setStart(p);
 
                                 });
 

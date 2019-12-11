@@ -15,12 +15,12 @@ import org.bukkit.scoreboard.DisplaySlot;
 public class DailyItemsBuyInventory extends CoreInventory {
 
     DailyItemsBuyInventory(Player p, DefaultItem toBuy) {
-        super("§8» §e§lHändler §8| §fShop", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
+        super("§8» §e§lHändler §8| §fDailyShop Item kaufen", p, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
         CorePlayer cp = lp.getCorePlayer();
 
         setItem(InventorySlot.ROW_1_SLOT_5, toBuy.getItemStack());
-        setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.STAINED_GLASS, 1, 13).displayName("§aKaufen")
+        setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 13).displayName("§aKaufen")
                 .lore("§7Kaufe das Item " + toBuy.getName(),
                         "§7für §a§l" + toBuy.getBuyemeralds() + " §aEmeralds"
                 ).create(), e -> {
@@ -37,7 +37,7 @@ public class DailyItemsBuyInventory extends CoreInventory {
             p.closeInventory();
         });
 
-        setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.STAINED_GLASS, 1, 14).displayName("§cAbbrechen").create(), e -> new DailyItemsInventory(p));
+        setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 14).displayName("§cAbbrechen").create(), e -> new DailyItemsInventory(p));
 
         openInventory();
     }

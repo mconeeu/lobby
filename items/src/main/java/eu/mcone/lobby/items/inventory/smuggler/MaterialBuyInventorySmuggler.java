@@ -10,7 +10,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -27,9 +27,9 @@ class MaterialBuyInventorySmuggler extends CoreInventory {
 
 
         //DIAMOND
-        setItem(InventorySlot.ROW_3_SLOT_5, Item.MATERIAL_DIAMOND_4.getItemStack(), e -> {
-            if (!Item.MATERIAL_DIAMOND_4.has(lp)) {
-                Item.MATERIAL_DIAMOND_4.add(lp);
+        setItem(InventorySlot.ROW_3_SLOT_5, LobbyItem.MATERIAL_DIAMOND_4.getItemStack(), e -> {
+            if (!LobbyItem.MATERIAL_DIAMOND_4.has(lp)) {
+                LobbyItem.MATERIAL_DIAMOND_4.add(lp);
                 p.sendMessage("§8[§7§l!§8] §fServer §8» §7Du hast ein 4 Diamanten bekommen");
             } else {
                 p.sendMessage("§8[§7§l!§8] §fServer §8» §4Du besitzt dieses Item bereits!");
@@ -39,9 +39,9 @@ class MaterialBuyInventorySmuggler extends CoreInventory {
 
 
         //IRON
-        setItem(InventorySlot.ROW_3_SLOT_6, Item.MATERIAL_IRON_2.getItemStack(), e -> {
-            if (!Item.MATERIAL_IRON_2.has(lp)) {
-                Item.MATERIAL_IRON_2.add(lp);
+        setItem(InventorySlot.ROW_3_SLOT_6, LobbyItem.MATERIAL_IRON_2.getItemStack(), e -> {
+            if (!LobbyItem.MATERIAL_IRON_2.has(lp)) {
+                LobbyItem.MATERIAL_IRON_2.add(lp);
                 p.sendMessage("§8[§7§l!§8] §fServer §8» §7Du hast ein 2 Eisen bekommen");
             } else {
                 p.sendMessage("§8[§7§l!§8] §fServer §8» §4Du besitzt diese Item bereits!");
@@ -50,9 +50,9 @@ class MaterialBuyInventorySmuggler extends CoreInventory {
         });
 
 
-        setItem(InventorySlot.ROW_3_SLOT_7, Item.MATERIAL_IRON_4.getItemStack(), e -> {
-            if (!Item.MATERIAL_IRON_4.has(lp)) {
-                Item.MATERIAL_IRON_4.add(lp);
+        setItem(InventorySlot.ROW_3_SLOT_7, LobbyItem.MATERIAL_IRON_4.getItemStack(), e -> {
+            if (!LobbyItem.MATERIAL_IRON_4.has(lp)) {
+                LobbyItem.MATERIAL_IRON_4.add(lp);
                 p.sendMessage("§8[§7§l!§8] §fServer §8» §7Du hast ein 4 Eisen bekommen");
             } else {
                 p.sendMessage("§8[§7§l!§8] §fServer §8» §4Du besitzt diese Item bereits!");
@@ -61,9 +61,9 @@ class MaterialBuyInventorySmuggler extends CoreInventory {
         });
 
 
-        setItem(InventorySlot.ROW_3_SLOT_8, Item.MATERIAL_IRON_6.getItemStack(), e -> {
-            if (!Item.MATERIAL_IRON_6.has(lp)) {
-                Item.MATERIAL_IRON_6.add(lp);
+        setItem(InventorySlot.ROW_3_SLOT_8, LobbyItem.MATERIAL_IRON_6.getItemStack(), e -> {
+            if (!LobbyItem.MATERIAL_IRON_6.has(lp)) {
+                LobbyItem.MATERIAL_IRON_6.add(lp);
                 p.sendMessage("§8[§7§l!§8] §fServer §8» §7Du hast ein 6 Eisen bekommen");
             } else {
                 p.sendMessage("§8[§7§l!§8] §fServer §8» §4Du besitzt diese Item bereits!");

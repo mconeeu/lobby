@@ -8,7 +8,7 @@ package eu.mcone.lobby.story.inventory.searcher;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
@@ -57,11 +57,11 @@ class PvPSearcherInventory extends CoreInventory {
         setItem(53, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
 
         //SWORD
-        if (!Item.IRON_SWORD.has(lp)) {
-            setItem(InventorySlot.ROW_2_SLOT_4, Item.IRON_SWORD.getItemStack(), e -> {
-                if (Item.MATERIAL_IRON_4.has(lp)) {
-                    Item.MATERIAL_IRON_4.remove(lp);
-                    Item.IRON_SWORD.add(lp);
+        if (!LobbyItem.IRON_SWORD.has(lp)) {
+            setItem(InventorySlot.ROW_2_SLOT_4, LobbyItem.IRON_SWORD.getItemStack(), e -> {
+                if (LobbyItem.MATERIAL_IRON_4.has(lp)) {
+                    LobbyItem.MATERIAL_IRON_4.remove(lp);
+                    LobbyItem.IRON_SWORD.add(lp);
 
                     p.closeInventory();
                     p.sendMessage("§7Du hast das Item Iron Head gekauft");
@@ -84,15 +84,15 @@ class PvPSearcherInventory extends CoreInventory {
 
         //ARMOR
 
-        if (!Item.IRON_HEAD.has(lp)) {
+        if (!LobbyItem.IRON_HEAD.has(lp)) {
 
-            setItem(InventorySlot.ROW_2_SLOT_3, Item.IRON_HEAD.getItemStack(), e -> {
+            setItem(InventorySlot.ROW_2_SLOT_3, LobbyItem.IRON_HEAD.getItemStack(), e -> {
 
-                if (Item.MATERIAL_IRON_2.has(lp)) {
+                if (LobbyItem.MATERIAL_IRON_2.has(lp)) {
 
-                    Item.MATERIAL_IRON_2.remove(lp);
+                    LobbyItem.MATERIAL_IRON_2.remove(lp);
 
-                    Item.IRON_HEAD.add(lp);
+                    LobbyItem.IRON_HEAD.add(lp);
 
                     p.closeInventory();
                     p.sendMessage("§7Du hast das Item Iron Head gekauft");
@@ -105,15 +105,15 @@ class PvPSearcherInventory extends CoreInventory {
         }
 
 
-        if (!Item.IRON_CHESTPLATE.has(lp)) {
+        if (!LobbyItem.IRON_CHESTPLATE.has(lp)) {
 
-            setItem(InventorySlot.ROW_3_SLOT_3, Item.IRON_CHESTPLATE.getItemStack(), e -> {
+            setItem(InventorySlot.ROW_3_SLOT_3, LobbyItem.IRON_CHESTPLATE.getItemStack(), e -> {
 
-                if (Item.MATERIAL_IRON_6.has(lp)) {
+                if (LobbyItem.MATERIAL_IRON_6.has(lp)) {
 
-                    Item.MATERIAL_IRON_6.remove(lp);
+                    LobbyItem.MATERIAL_IRON_6.remove(lp);
 
-                    Item.IRON_CHESTPLATE.add(lp);
+                    LobbyItem.IRON_CHESTPLATE.add(lp);
 
                     p.closeInventory();
                     p.sendMessage("§7Du hast das Item Iron Chestplate gekauft");
@@ -125,16 +125,16 @@ class PvPSearcherInventory extends CoreInventory {
             });
         }
 
-        if (!Item.IRON_LEGGINS.has(lp)) {
+        if (!LobbyItem.IRON_LEGGINS.has(lp)) {
 
-            setItem(InventorySlot.ROW_4_SLOT_3, Item.IRON_LEGGINS.getItemStack(), e -> {
+            setItem(InventorySlot.ROW_4_SLOT_3, LobbyItem.IRON_LEGGINS.getItemStack(), e -> {
 
 
-                if (Item.MATERIAL_IRON_4.has(lp)) {
+                if (LobbyItem.MATERIAL_IRON_4.has(lp)) {
 
-                    Item.MATERIAL_IRON_4.remove(lp);
+                    LobbyItem.MATERIAL_IRON_4.remove(lp);
 
-                    Item.IRON_LEGGINS.add(lp);
+                    LobbyItem.IRON_LEGGINS.add(lp);
 
                     p.closeInventory();
                     p.sendMessage("§7Du hast das Item Iron Hose gekauft");
@@ -146,15 +146,15 @@ class PvPSearcherInventory extends CoreInventory {
             });
         }
 
-        if (!Item.IRON_BOOTS.has(lp)) {
+        if (!LobbyItem.IRON_BOOTS.has(lp)) {
 
-            setItem(InventorySlot.ROW_5_SLOT_3, Item.IRON_BOOTS.getItemStack(), e -> {
+            setItem(InventorySlot.ROW_5_SLOT_3, LobbyItem.IRON_BOOTS.getItemStack(), e -> {
 
-                if (Item.MATERIAL_IRON_4.has(lp)) {
+                if (LobbyItem.MATERIAL_IRON_4.has(lp)) {
 
-                    Item.MATERIAL_IRON_4.remove(lp);
+                    LobbyItem.MATERIAL_IRON_4.remove(lp);
 
-                    Item.IRON_BOOTS.add(lp);
+                    LobbyItem.IRON_BOOTS.add(lp);
 
                     p.closeInventory();
                     p.sendMessage("§7Du hast das Item Iron Schuhe gekauft");

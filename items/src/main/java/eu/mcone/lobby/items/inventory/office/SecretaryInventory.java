@@ -7,7 +7,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,7 +19,7 @@ public class SecretaryInventory extends CoreInventory {
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 
-        if (Item.OFFICE_CARD_BRONZE.has(lp)) {
+        if (LobbyItem.OFFICE_CARD_BRONZE.has(lp)) {
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.SKULL, 1, 0).displayName("§f§lFreunde einladen")
                     .lore("§7Lade deine Freunde in das Büro ein", "§7und plane deine nächsten Missionen")
                     .create(), e -> {
@@ -27,7 +27,7 @@ public class SecretaryInventory extends CoreInventory {
             });
         }
 
-        if (Item.OFFICE_CARD_SILVER.has(lp)) {
+        if (LobbyItem.OFFICE_CARD_SILVER.has(lp)) {
             setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.SKULL, 1, 0).displayName("§f§lFreunde einladen")
                     .lore("§7Lade deine Freunde in das Büro ein", "§7und plane deine nächsten Missionen")
                     .create(), e -> {
@@ -41,7 +41,7 @@ public class SecretaryInventory extends CoreInventory {
             });
         }
 
-        if (Item.OFFICE_CARD_GOLD.has(lp)) {
+        if (LobbyItem.OFFICE_CARD_GOLD.has(lp)) {
             setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.SKULL, 1, 0).displayName("§f§lFreunde einladen")
                     .lore("§7Lade deine Freunde in das Büro ein", "§7und plane deine nächsten Missionen")
                     .create(), e -> {

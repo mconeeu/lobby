@@ -8,7 +8,7 @@ package eu.mcone.lobby.items.listener;
 import eu.mcone.coresystem.api.bukkit.event.npc.NpcInteractEvent;
 import eu.mcone.gameapi.api.backpack.defaults.DefaultCategory;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.inventory.bank.BankCreateCardInventory;
 import eu.mcone.lobby.items.inventory.bank.BankMenInventory;
@@ -38,7 +38,7 @@ public class NpcInteractListener implements Listener {
                     || npcName.equalsIgnoreCase(StoryNPC.OFFICE_TRADER.getNpcName())) {
                 new TraderInventory(p);
             } else if (npcName.equalsIgnoreCase(StoryNPC.BANKMAN.getNpcName())) {
-                if (!Item.BANKCARD.has(lp) && !Item.BANKCARD_PREMIUM.has(lp)) {
+                if (!LobbyItem.BANKCARD.has(lp) && !LobbyItem.BANKCARD_PREMIUM.has(lp)) {
                     new BankCreateCardInventory(p);
                 } else {
                     new BankMenInventory(p);

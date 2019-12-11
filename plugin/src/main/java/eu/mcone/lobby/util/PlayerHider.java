@@ -5,11 +5,10 @@
 
 package eu.mcone.lobby.util;
 
-import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.player.HotbarItems;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -42,7 +41,7 @@ public class PlayerHider {
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
-        p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an").create());
+        p.getInventory().setItem(0, HotbarItems.SHOW_PLAYERS);
         LobbyPlugin.getInstance().getMessager().send(p, "§7Du siehst nun §ckeine §7Spieler mehr.");
         time.put(p.getName(), System.currentTimeMillis());
     }
@@ -57,7 +56,7 @@ public class PlayerHider {
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
-        p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
+        p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
         LobbyPlugin.getInstance().getMessager().send(p, "§7Du siehst nun §aalle §7Spieler wieder.");
         time.put(p.getName(), System.currentTimeMillis());
     }

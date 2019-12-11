@@ -12,7 +12,7 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.BankProgress;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -38,9 +38,9 @@ public class SmugglerInventory extends CoreInventory {
                 p.closeInventory();
 
                 if (lp.getCorePlayer().getCoins() - 20 >= 0) {
-                    if (!Item.BANK_MAP.has(lp)) {
+                    if (!LobbyItem.BANK_MAP.has(lp)) {
                         lp.getCorePlayer().removeCoins(20);
-                        Item.BANK_MAP.add(lp);
+                        LobbyItem.BANK_MAP.add(lp);
                         p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Perfekt du hast die Karte komm wieder zum Büro dann kann ich dir denn nächsten Schritt sagen!");
                         lp.setBankProgress(BankProgress.CUTTER);
                     } else {

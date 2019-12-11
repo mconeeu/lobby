@@ -7,6 +7,7 @@ package eu.mcone.lobby.util;
 
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.player.HotbarItems;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -33,7 +34,7 @@ public class SilentLobbyUtils {
 
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
-        p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
+        p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
         p.playSound(p.getLocation(), Sound.GLASS, 1, 1);

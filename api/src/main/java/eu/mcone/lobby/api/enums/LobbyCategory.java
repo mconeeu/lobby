@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 @Getter
-public enum Category {
+public enum LobbyCategory {
 
     STORY_ITEMS("Story-Items", "", 0, new ItemBuilder(Material.BOOK, 1, 0).displayName("§c§lStory-Items").lore("§7§oHier findest Du alle Items,", "§7§odie Du für die Story benötigst", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").create()),
     MATERIAL("Materialien", "", 20, new ItemBuilder(Material.DIAMOND, 1, 0).displayName("§9§lMaterial").lore("§7§oHier befindet sich deine Materialien", "§7§ozum Items herstellen", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").create()),
@@ -22,7 +22,7 @@ public enum Category {
     private int sorting;
     private ItemStack item;
 
-    Category(String name, String description, int sorting, ItemStack item) {
+    LobbyCategory(String name, String description, int sorting, ItemStack item) {
         this.name = name;
         this.description = description;
         this.sorting = sorting;

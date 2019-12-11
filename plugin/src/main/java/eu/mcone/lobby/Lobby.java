@@ -6,7 +6,6 @@
 package eu.mcone.lobby;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.command.CoreCommand;
 import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
@@ -25,10 +24,10 @@ import eu.mcone.lobby.command.LobbyCMD;
 import eu.mcone.lobby.gang.LobbyGang;
 import eu.mcone.lobby.inventory.LobbySettingsInventory;
 import eu.mcone.lobby.items.LobbyItems;
+import eu.mcone.lobby.jumpnrun.LobbyJumpNRunManager;
 import eu.mcone.lobby.listener.*;
-import eu.mcone.lobby.onehit.OneHitManager;
+import eu.mcone.lobby.onehit.LobbyOneHitManager;
 import eu.mcone.lobby.story.LobbyStory;
-import eu.mcone.lobby.story.jumpnrun.JumpAndRunManager;
 import eu.mcone.lobby.util.SidebarObjective;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -43,6 +42,10 @@ public class Lobby extends LobbyPlugin {
 
     @Getter
     private BuildSystem buildSystem;
+    @Getter
+    private LobbyOneHitManager oneHitManager;
+    @Getter
+    private LobbyJumpNRunManager jumpNRunManager;
     @Getter
     private Map<LobbyWorld, CoreWorld> worlds;
 
@@ -86,9 +89,9 @@ public class Lobby extends LobbyPlugin {
         playernpc_robert.playMotionCapture("capture-robert");
         playernpc_edward_cityhall.playMotionCapture("capture-cityhall");
 
-        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpcs(
+       /* CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpcs(
                 playernpc_welcome, playernpc_start, playernpc_duty, playernpc_salia, playernpc_vendor, playernpc_robert, playernpc_edward_cityhall
-        );
+        );*/
 
 
         sendConsoleMessage("§aInitializing Build-System...");
@@ -118,13 +121,19 @@ public class Lobby extends LobbyPlugin {
             addon.onEnable();
         }
 
+        sendConsoleMessage("§aLoading OneHitManager...");
+        oneHitManager = new LobbyOneHitManager(this);
+
+        sendConsoleMessage("§aLoading JmpNRunManager...");
+        jumpNRunManager = new LobbyJumpNRunManager(this);
+
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");
 
         for (CorePlayer p : CoreSystem.getInstance().getOnlineCorePlayers()) {
             PlayerJoinListener.preloadLobbyPlayer(p.bukkit(), p);
             LobbyPlayer lp = new LobbyPlayer(p);
             registerGamePlayer(lp);
-            PlayerJoinListener.loadLobbyPlayer(p.bukkit(), lp, p, LobbyPlayerLoadedEvent.Reason.RELOADED);
+            PlayerJoinListener.loadLobbyPlayer(p.bukkit(), lp, LobbyPlayerLoadedEvent.Reason.RELOADED);
         }
 
         if (Bukkit.getOnlinePlayers().size() > 0) {
@@ -161,8 +170,7 @@ public class Lobby extends LobbyPlugin {
                 new PlayerUpdateListener(),
                 new WeatherChangeListener(),
                 new ItemHotbarChangeListener(),
-                new DropPickupListener(),
-                new PlayerCommandPreprocessEvent()
+                new DropPickupListener()
         );
         registerCommands(new LobbyCMD());
     }

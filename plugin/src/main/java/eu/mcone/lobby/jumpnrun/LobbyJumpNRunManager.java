@@ -1,20 +1,24 @@
-package eu.mcone.lobby.story.jumpnrun;
+/*
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
+ * You are not allowed to decompile the code
+ */
+
+package eu.mcone.lobby.jumpnrun;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.CoreTitle;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.JumpNRun;
+import eu.mcone.lobby.api.jumpnrun.JumpNRunManager;
+import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.story.LobbyStory;
-import eu.mcone.lobby.story.listener.PlayerCommandPreprocessEvent;
+import eu.mcone.lobby.listener.JumpNRunListener;
+import eu.mcone.lobby.listener.PlayerJoinListener;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
@@ -23,17 +27,15 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TimeZone;
 
-public class JumpAndRunManager {
+public class LobbyJumpNRunManager implements JumpNRunManager {
 
     public static final CoreTitle title = CoreSystem.getInstance().createTitle().fadeIn(1).fadeOut(1).stay(3).title("§cNicht überspringen!").subTitle("§4Du wurdest zurück telepotiert");
 
     @Getter
     private Set<JumpNRunPlayer> currentlyPlaying = new HashSet<>();
 
-    public JumpAndRunManager(LobbyPlugin plugin) {
-        plugin.registerEvents(
-                new PlayerCommandPreprocessEvent()
-        );
+    public LobbyJumpNRunManager(LobbyPlugin plugin) {
+        plugin.registerEvents(new JumpNRunListener(this));
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
             for (JumpNRunPlayer jnrPlayer : currentlyPlaying) {
@@ -50,6 +52,7 @@ public class JumpAndRunManager {
         }, 80, 20);
     }
 
+    @Override
     public void setStart(Player p, JumpNRun jumpNRun) {
         if (!isCurrentlyPlaying(p)) {
             CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
@@ -69,7 +72,7 @@ public class JumpAndRunManager {
         }
     }
 
-
+    @Override
     public void setCheckpoint(Player p, int checkpoint) {
         JumpNRunPlayer jnrPlayer = getCurrentlyPlaying(p);
 
@@ -91,7 +94,6 @@ public class JumpAndRunManager {
         }
     }
 
-
     public void tpToCheckpoint(Player p) {
         JumpNRunPlayer jnrPlayer = getCurrentlyPlaying(p);
 
@@ -104,17 +106,17 @@ public class JumpAndRunManager {
         }
     }
 
-
+    @Override
     public void setCancel(Player p) {
         if (isCurrentlyPlaying(p)) {
             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
-            LobbyStory.getInstance().getJumpAndRunManager().lobbyitems(p);
+            PlayerJoinListener.setLobbyItems(p);
             removePlaying(p);
             LobbyPlugin.getInstance().getMessager().send(p, "§cDu hast das Jump and Run §oerfolgreich §cbeendet!");
         }
     }
 
-
+    @Override
     public void setFinish(Player p) {
         CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
         LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(corePlayer.getUuid());
@@ -163,7 +165,7 @@ public class JumpAndRunManager {
                             + "§2 gebraucht! §8[§a+100 Coins§8]");
                 }
 
-                LobbyStory.getInstance().getJumpAndRunManager().lobbyitems(p);
+                PlayerJoinListener.setLobbyItems(p);
                 LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
                 lp.setJumpnrunBestTime(jumpNRun, time < bestTime || bestTime == -1 ? time : bestTime);
                 removePlaying(p);
@@ -191,9 +193,9 @@ public class JumpAndRunManager {
         p.setHealth(20);
         p.setFoodLevel(20);
 
-        p.getInventory().setItem(1, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§fJump and Run").lore("§cbeenden").create());
-        p.getInventory().setItem(8, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lZurück zum Checkpoint").create());
-        p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
+        p.getInventory().setItem(1, HotbarItems.LEAVE_JUMPNRUN);
+        p.getInventory().setItem(8, HotbarItems.TO_CHECKPOINT);
+        p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
     }
 
     private JumpNRunPlayer getCurrentlyPlaying(Player p) {
@@ -215,44 +217,5 @@ public class JumpAndRunManager {
         }
     }
 
-    public void lobbyitems(Player p) {
-        p.getInventory().clear();
-
-
-        p.getInventory().clear();
-        p.getInventory().setArmorContents(null);
-        p.setGameMode(GameMode.SURVIVAL);
-        p.removePotionEffect(PotionEffectType.INVISIBILITY);
-        p.getActivePotionEffects().clear();
-
-        p.setMaxHealth(20);
-        p.setHealth(20);
-        p.setFoodLevel(20);
-
-
-        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
-
-        p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
-        p.getInventory().setItem(1, new ItemBuilder(Material.NETHER_STAR, 1, 0).displayName("§3§lLobby-Wechsler §8» §7§oWähle deine Lobby").create());
-
-        p.getInventory().setItem(4, new ItemBuilder(Material.COMPASS, 1, 0).displayName("§3§lNavigator §8» §7§oWähle einen Spielmodus").create());
-
-        if (p.hasPermission("system.bungee.nick")) {
-            p.getInventory().setItem(6, cp.isNicked() ?
-                    new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§a§lNicken §8» §7§oAktiviert").lore("§7§oKlicke zum deaktivieren").create() :
-                    new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§c§lNicken §8» §7§oDeaktiviert").lore("§7§oKlicke zum aktivieren").create()
-            );
-        }
-
-        p.getInventory().setItem(7, new ItemBuilder(Material.STORAGE_MINECART, 1, 0).displayName("§3§lRucksack §8» §7§oZeige deine gesammelten Items an").create());
-
-        if (p.hasPermission("lobby.silenthub")) {
-            p.getInventory().setItem(2, new ItemBuilder(Material.TNT, 1, 0).displayName("§6§lPrivate Lobby §8» §7§oBetrete deine eigene Private Lobby").create());
-        }
-
-        p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
-
-        LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
-    }
 }
 

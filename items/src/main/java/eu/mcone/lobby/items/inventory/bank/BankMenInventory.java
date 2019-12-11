@@ -12,7 +12,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
@@ -25,7 +25,7 @@ public class BankMenInventory extends CoreInventory {
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 
-        if (Item.BANKCARD.has(lp)) {
+        if (LobbyItem.BANKCARD.has(lp)) {
             setItem(InventorySlot.ROW_1_SLOT_1, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder()
                     .displayName("§d§lBänker")
                     .lore("§7§oBeim Bänker kannst du dein Bank Konto",
@@ -49,7 +49,7 @@ public class BankMenInventory extends CoreInventory {
 //
 //                });
 
-        } else if (Item.BANKCARD_PREMIUM.has(lp)) {
+        } else if (LobbyItem.BANKCARD_PREMIUM.has(lp)) {
 
             setItem(InventorySlot.ROW_1_SLOT_1, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder()
                     .displayName("§d§lBänker")

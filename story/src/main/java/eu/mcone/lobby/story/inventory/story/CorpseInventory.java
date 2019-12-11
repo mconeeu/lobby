@@ -6,7 +6,6 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.gameapi.api.backpack.defaults.DefaultItem;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.story.LobbyStory;
 import org.bukkit.entity.Player;
 
 public class CorpseInventory extends CoreInventory {
@@ -19,10 +18,10 @@ public class CorpseInventory extends CoreInventory {
             if (!DefaultItem.HEAD_SECRET_STRIPCLUB.has(lp)) {
                 DefaultItem.HEAD_SECRET_STRIPCLUB.add(lp);
                 LobbyPlugin.getInstance().getMessager().send(p, "§aDu hast den alten Kopf von §fKirpha aufgenommen!");
-                LobbyStory.getInstance().getJumpAndRunManager().setFinish(p);
+                LobbyPlugin.getInstance().getJumpNRunManager().setFinish(p);
             } else {
                 LobbyPlugin.getInstance().getMessager().send(p, "§cDu besitzt diese Item bereits!");
-                LobbyStory.getInstance().getJumpAndRunManager().setFinish(p);
+                LobbyPlugin.getInstance().getJumpNRunManager().setFinish(p);
             }
             p.closeInventory();
         });

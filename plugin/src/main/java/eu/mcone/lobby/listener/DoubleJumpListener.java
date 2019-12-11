@@ -31,7 +31,7 @@ public class DoubleJumpListener implements Listener {
 
         if (p.getGameMode().equals(GameMode.CREATIVE)) {
             e.setCancelled(false);
-        } else if (p.getGameMode().equals(GameMode.ADVENTURE) && p.hasPermission("mcone.premium")) {
+        } else if (p.getGameMode().equals(GameMode.SURVIVAL) && p.hasPermission("mcone.premium")) {
             e.setCancelled(true);
 
             if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
@@ -58,7 +58,7 @@ public class DoubleJumpListener implements Listener {
     public void on(PlayerMoveEvent e) {
         Player p = e.getPlayer();
 
-        if(p.getGameMode().equals(GameMode.ADVENTURE)) {
+        if(p.getGameMode().equals(GameMode.SURVIVAL)) {
             if(djPlayers.contains(p.getUniqueId()) && !p.getLocation().add(0,-1, 0).getBlock().getType().equals(Material.AIR)) {
                 p.setAllowFlight(true);
                 p.setFlying(false);

@@ -8,7 +8,7 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
@@ -22,9 +22,9 @@ public class CaptainInventory extends CoreInventory {
 
 
         setItem(InventorySlot.ROW_2_SLOT_3, new Skull(p.getName(), 1).toItemBuilder().displayName("§5§lCommunity / Festival").lore("§7§oTreffe deine Freunde oder Yotuber","auf dem Festival").create(), e -> {
-            if (p.getItemInHand().equals(Item.BOAT_PASS.getItemStack())) {
+            if (p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
                 p.getInventory().remove(p.getItemInHand());
-                Item.BOAT_PASS.remove(lp);
+                LobbyItem.BOAT_PASS.remove(lp);
                 CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CONNECT", "Community");
                 p.closeInventory();
             } else {
@@ -36,9 +36,9 @@ public class CaptainInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.SAND).displayName("§f§lParadise-Island").lore("§7§oMache Urlaub und entspanne","auf der schönen Insel","mitten im Paradise!").create(), e -> {
 
             if (lp.getProgressId() < Progress.MARVIN_KILL.getId()) {
-                if (p.getItemInHand().equals(Item.BOAT_PASS.getItemStack())) {
+                if (p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
                     p.getInventory().remove(p.getItemInHand());
-                    Item.BOAT_PASS.remove(lp);
+                    LobbyItem.BOAT_PASS.remove(lp);
                     LobbyWorld.PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn");
                     p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in Paradise Island");
                     p.closeInventory();

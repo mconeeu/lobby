@@ -15,7 +15,6 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.story.inventory.story.ProgressInventory;
-import eu.mcone.lobby.story.jumpnrun.JumpAndRunManager;
 import eu.mcone.lobby.story.listener.*;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -24,13 +23,10 @@ public class LobbyStory extends LobbyAddon {
 
     @Getter
     private static LobbyStory instance;
-    @Getter
-    private JumpAndRunManager jumpAndRunManager;
 
     @Override
     public void onEnable() {
         instance = this;
-        this.jumpAndRunManager = new JumpAndRunManager(LobbyPlugin.getInstance());
 
         LobbyPlugin.getInstance().registerEvents(
                 new CoreManagerReloadListener(),

@@ -8,7 +8,6 @@ package eu.mcone.lobby.listener;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.LabyModPlayerJoinEvent;
 import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
-import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
@@ -17,17 +16,16 @@ import eu.mcone.coresystem.api.bukkit.util.CoreActionBar;
 import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
+import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.util.PlayerHider;
-import eu.mcone.lobby.util.PlayerSpawnLocation;
 import eu.mcone.lobby.util.SidebarObjective;
 import eu.mcone.lobby.util.SilentLobbyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -56,93 +54,64 @@ public class PlayerJoinListener implements Listener {
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
 
-        loadLobbyPlayer(p, lp, lp.getCorePlayer(), LobbyPlayerLoadedEvent.Reason.JOINED);
+        loadLobbyPlayer(p, lp, LobbyPlayerLoadedEvent.Reason.JOINED);
         p.setWalkSpeed(0.2F);
     }
 
     public static void preloadLobbyPlayer(Player p, CorePlayer cp) {
         LOADING_MSG.send(p);
-
-        p.getInventory().clear();
-        p.getInventory().setArmorContents(null);
-        p.setGameMode(GameMode.SURVIVAL);
-        p.removePotionEffect(PotionEffectType.INVISIBILITY);
-        p.getActivePotionEffects().clear();
-
-        p.setMaxHealth(20);
-        p.setHealth(20);
-        p.setFoodLevel(20);
-
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
 
-        if (p.hasPermission("mcone.premium")) p.setAllowFlight(true);
-        p.setFlying(false);
-
-        p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus").create());
-        p.getInventory().setItem(1, new ItemBuilder(Material.NETHER_STAR, 1, 0).displayName("§3§lLobby-Wechsler §8» §7§oWähle deine Lobby").create());
-        if (p.hasPermission("lobby.silenthub")) {
-            p.getInventory().setItem(7, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());
-        }
-
-        p.getInventory().setItem(4, new ItemBuilder(Material.COMPASS, 1, 0).displayName("§3§lNavigator §8» §7§oWähle einen Spielmodus").create());
-
-        if (p.hasPermission("system.bungee.nick")) {
-            p.getInventory().setItem(6, cp.isNicked() ?
-                    new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§a§lNicken §8» §7§oAktiviert").lore("§7§oKlicke zum deaktivieren").create() :
-                    new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§c§lNicken §8» §7§oDeaktiviert").lore("§7§oKlicke zum aktivieren").create()
-            );
-        }
-        p.getInventory().setItem(7, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());
-        p.getInventory().setItem(8, new ItemBuilder(Material.INK_SACK, 1, 2).displayName("§7§oLädt...").create());
+        setLobbyItems(p);
 
         cp.getScoreboard().setNewObjective(new SidebarObjective());
-        LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
     }
 
-    public static void loadLobbyPlayer(Player p, LobbyPlayer lp, CorePlayer cp, LobbyPlayerLoadedEvent.Reason reason) {
+    public static void loadLobbyPlayer(Player p, LobbyPlayer lp, LobbyPlayerLoadedEvent.Reason reason) {
         Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> {
             Bukkit.getPluginManager().callEvent(new LobbyPlayerLoadedEvent(lp, reason));
             LOADING_SUCCESS_MSG.send(p);
 
             if (reason.equals(LobbyPlayerLoadedEvent.Reason.JOINED)) {
-                if (!lp.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.LAST_LOGIN.toString())) {
-                    if (lp.getSettings().isSpawnInSilentLobby()) {
+                switch (lp.getSettings().getSpawnPoint()) {
+                    case SILENT_LOBBY: {
                         SilentLobbyUtils.activateSilentLobby(p);
                         LobbyPlugin.getInstance().getMessager().send(p, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
                     }
-
-                    if (lp.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.SPAWN.toString())) {
-                        PlayerSpawnLocation.SPAWN.getWorld().teleportSilently(p, "spawn");
-                    } else if (lp.getSettings().getSpawnLocation().equalsIgnoreCase(PlayerSpawnLocation.OFFICE.toString())) {
-                        if (Item.OFFICE_CARD_BRONZE.has(lp)) {
+                    case SPAWN: {
+                        LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
+                        break;
+                    }
+                    case OFFICE: {
+                        if (LobbyItem.OFFICE_CARD_BRONZE.has(lp)) {
                             LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.BRONZE_OFFICE.getSpawnLocation());
-                        } else if (Item.OFFICE_CARD_SILVER.has(lp)) {
+                        } else if (LobbyItem.OFFICE_CARD_SILVER.has(lp)) {
                             LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.SILVER_OFFICE.getSpawnLocation());
-                        } else if (Item.OFFICE_CARD_GOLD.has(lp)) {
+                        } else if (LobbyItem.OFFICE_CARD_GOLD.has(lp)) {
                             LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.GOLD_OFFICE.getSpawnLocation());
                         }
                     }
                 }
             }
 
-            if (!Item.BANKCARD_PREMIUM.has(lp)) {
+            if (!LobbyItem.BANKCARD_PREMIUM.has(lp)) {
                 if (p.hasPermission("mcone.premium")) {
-                    if (!Item.BANKCARD.has(lp)) {
-                        Item.BANKCARD_PREMIUM.add(lp);
+                    if (!LobbyItem.BANKCARD.has(lp)) {
+                        LobbyItem.BANKCARD_PREMIUM.add(lp);
                     } else {
-                        Item.BANKCARD.remove(lp);
-                        Item.BANKCARD_PREMIUM.add(lp);
+                        LobbyItem.BANKCARD.remove(lp);
+                        LobbyItem.BANKCARD_PREMIUM.add(lp);
                     }
 
                 } else {
-                    if (Item.BANKCARD_PREMIUM.has(lp)) {
-                        Item.BANKCARD_PREMIUM.remove(lp);
+                    if (LobbyItem.BANKCARD_PREMIUM.has(lp)) {
+                        LobbyItem.BANKCARD_PREMIUM.remove(lp);
                     }
                 }
             } else {
                 if (p.hasPermission("mcone.premium")) {
-                    if (Item.BANKCARD.has(lp)) {
-                        Item.BANKCARD.remove(lp);
+                    if (LobbyItem.BANKCARD.has(lp)) {
+                        LobbyItem.BANKCARD.remove(lp);
                     }
                 }
             }
@@ -160,6 +129,41 @@ public class PlayerJoinListener implements Listener {
                 ((PlayerNpc) npc).playLabymodEmote(LabyModEmote.T_POSE, e.getPlayer());
             }
         }
+    }
+
+    public static void setLobbyItems(Player p) {
+        p.getInventory().clear();
+
+        p.getInventory().setArmorContents(null);
+        p.setGameMode(GameMode.SURVIVAL);
+        p.removePotionEffect(PotionEffectType.INVISIBILITY);
+        p.getActivePotionEffects().clear();
+
+        p.setMaxHealth(20);
+        p.setHealth(20);
+        p.setFoodLevel(20);
+
+        if (p.hasPermission("mcone.premium")) p.setAllowFlight(true);
+        p.setFlying(false);
+
+        p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
+        p.getInventory().setItem(1, HotbarItems.LOBBY_CHANGER);
+
+        p.getInventory().setItem(4, HotbarItems.COMPASS);
+
+        if (p.hasPermission("system.bungee.nick")) {
+            p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItems.DEACTIVATE_NICK : HotbarItems.ACTIVATE_NICK);
+        }
+
+        p.getInventory().setItem(7, HotbarItems.BACKPACK);
+
+        if (p.hasPermission("lobby.silenthub")) {
+            p.getInventory().setItem(2, HotbarItems.PRIVATE_LOBBY);
+        }
+
+        p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
+
+        LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
     }
 
 }

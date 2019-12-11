@@ -7,7 +7,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -25,12 +25,12 @@ public class GoldOfficeInventory extends CoreInventory {
                     if (cp.getEmeralds() - 500 >= 0) {
                         cp.removeEmeralds(500);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
-                        Item.OFFICE_CARD_GOLD.add(lp);
+                        LobbyItem.OFFICE_CARD_GOLD.add(lp);
 
-                        if (Item.OFFICE_CARD_BRONZE.has(lp)) {
-                            Item.OFFICE_CARD_BRONZE.remove(lp);
-                        } else if (Item.OFFICE_CARD_SILVER.has(lp)) {
-                            Item.OFFICE_CARD_SILVER.remove(lp);
+                        if (LobbyItem.OFFICE_CARD_BRONZE.has(lp)) {
+                            LobbyItem.OFFICE_CARD_BRONZE.remove(lp);
+                        } else if (LobbyItem.OFFICE_CARD_SILVER.has(lp)) {
+                            LobbyItem.OFFICE_CARD_SILVER.remove(lp);
                         }
 
                         p.closeInventory();

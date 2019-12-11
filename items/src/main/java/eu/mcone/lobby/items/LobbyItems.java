@@ -10,13 +10,12 @@ import eu.mcone.gameapi.api.backpack.BackpackInventoryListener;
 import eu.mcone.gameapi.api.backpack.BackpackItem;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.Category;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyCategory;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.items.backpack.MaterialBackpackInventoryListener;
 import eu.mcone.lobby.items.backpack.StoryBackpackInventoryListener;
 import eu.mcone.lobby.items.command.ChestCMD;
 import eu.mcone.lobby.items.listener.InventoryTriggerListener;
-import eu.mcone.lobby.items.listener.LobbyPlayerLoadedListener;
 import eu.mcone.lobby.items.listener.NpcInteractListener;
 import eu.mcone.lobby.items.listener.effects.MagicWandListener;
 import eu.mcone.lobby.items.listener.effects.OneHitSwordListener;
@@ -41,10 +40,10 @@ public class LobbyItems extends LobbyAddon {
         instance = this;
         dailyShopManager = new DailyShopManager();
 
-        for (Category category : Category.values()) {
+        for (LobbyCategory category : LobbyCategory.values()) {
             Set<BackpackItem> items = new HashSet<>();
 
-            for (Item item : Item.values()) {
+            for (LobbyItem item : LobbyItem.values()) {
                 if (item.getCategory() != null && item.getCategory().equals(category)) {
                     items.add(new eu.mcone.gameapi.api.backpack.BackpackItem(
                             item.getId(),
@@ -80,7 +79,6 @@ public class LobbyItems extends LobbyAddon {
                 new OneHitSwordListener(),
                 new MagicWandListener(),
                 new InventoryTriggerListener(),
-                new LobbyPlayerLoadedListener(),
                 new NpcInteractListener()
         );
 
@@ -102,7 +100,7 @@ public class LobbyItems extends LobbyAddon {
     @Override
     public void reload() {}
 
-    private static BackpackInventoryListener getInventoryListener(Category category) {
+    private static BackpackInventoryListener getInventoryListener(LobbyCategory category) {
         switch (category) {
             case MATERIAL: return new MaterialBackpackInventoryListener();
             case STORY_ITEMS: return new StoryBackpackInventoryListener();

@@ -10,7 +10,7 @@ import eu.mcone.gameapi.api.backpack.BackpackInventoryListener;
 import eu.mcone.gameapi.api.backpack.BackpackItem;
 import eu.mcone.gameapi.api.backpack.Category;
 import eu.mcone.gameapi.api.player.GameAPIPlayer;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import org.bukkit.entity.Player;
 
 import java.util.Set;
@@ -19,24 +19,24 @@ public class StoryBackpackInventoryListener extends BackpackInventoryListener {
 
     @Override
     public void setBackpackItems(CategoryInventory inv, Category category, Set<BackpackItem> categoryItems, GameAPIPlayer<?> gp, Player p) {
-        if (!Item.BANKCARD_PREMIUM.has(gp)) {
+        if (!LobbyItem.BANKCARD_PREMIUM.has(gp)) {
             if (p.hasPermission("mcone.premium")) {
-                if (!Item.BANKCARD.has(gp)) {
-                    Item.BANKCARD_PREMIUM.add(gp);
+                if (!LobbyItem.BANKCARD.has(gp)) {
+                    LobbyItem.BANKCARD_PREMIUM.add(gp);
                 } else {
-                    Item.BANKCARD.remove(gp);
-                    Item.BANKCARD_PREMIUM.add(gp);
+                    LobbyItem.BANKCARD.remove(gp);
+                    LobbyItem.BANKCARD_PREMIUM.add(gp);
                 }
 
             } else {
-                if (Item.BANKCARD_PREMIUM.has(gp)) {
-                    Item.BANKCARD_PREMIUM.remove(gp);
+                if (LobbyItem.BANKCARD_PREMIUM.has(gp)) {
+                    LobbyItem.BANKCARD_PREMIUM.remove(gp);
                 }
             }
         } else {
             if (p.hasPermission("mcone.premium")) {
-                if (Item.BANKCARD.has(gp)) {
-                    Item.BANKCARD.remove(gp);
+                if (LobbyItem.BANKCARD.has(gp)) {
+                    LobbyItem.BANKCARD.remove(gp);
                 }
             }
         }

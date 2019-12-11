@@ -2,7 +2,7 @@ package eu.mcone.lobby.items.listener.effects;
 
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.Item;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -20,7 +20,7 @@ public class MagicWandListener implements Listener {
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
-        if (e.hasItem() && e.getItem().equals(Item.MAGICWAND.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
+        if (e.hasItem() && e.getItem().equals(LobbyItem.MAGICWAND.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
             Player p = e.getPlayer();
 
             Arrow arrow = p.getWorld().spawn(p.getEyeLocation(), Arrow.class);
@@ -46,9 +46,9 @@ public class MagicWandListener implements Listener {
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
                         if (p.hasPermission("lobby.silenthub")) {
-                            p.getInventory().setItem(3, Item.MAGICWAND.getItemStack());
+                            p.getInventory().setItem(3, LobbyItem.MAGICWAND.getItemStack());
                         } else {
-                            p.getInventory().setItem(2, Item.MAGICWAND.getItemStack());
+                            p.getInventory().setItem(2, LobbyItem.MAGICWAND.getItemStack());
                         }
 
                     }, 21);
