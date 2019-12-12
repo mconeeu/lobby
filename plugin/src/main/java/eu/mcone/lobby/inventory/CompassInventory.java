@@ -19,11 +19,14 @@ import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 public class CompassInventory extends CoreInventory {
@@ -231,6 +234,8 @@ public class CompassInventory extends CoreInventory {
                                 e -> {
 
                                     p.closeInventory();
+
+                                    p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 80, 1));
                                     Vector v = new Vector(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());
                                     v.normalize();
                                     v.setY(1.3D);

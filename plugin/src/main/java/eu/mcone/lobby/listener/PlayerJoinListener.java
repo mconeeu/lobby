@@ -8,6 +8,7 @@ package eu.mcone.lobby.listener;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.LabyModPlayerJoinEvent;
 import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
@@ -26,6 +27,7 @@ import eu.mcone.lobby.util.SidebarObjective;
 import eu.mcone.lobby.util.SilentLobbyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -146,7 +148,13 @@ public class PlayerJoinListener implements Listener {
         if (p.hasPermission("mcone.premium")) p.setAllowFlight(true);
         p.setFlying(false);
 
-        p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
+        if (SilentLobbyUtils.isActivatedSilentHub(p)) {
+            p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 8).displayName("§7§lSpieler Verstecken §8» §7§oIn der Privaten Lobby deaktiviert").create());
+        } else if (PlayerHider.players.contains(p)) {
+            p.getInventory().setItem(0, HotbarItems.SHOW_PLAYERS);
+        } else {
+            p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
+        }
         p.getInventory().setItem(1, HotbarItems.LOBBY_CHANGER);
 
         p.getInventory().setItem(4, HotbarItems.COMPASS);

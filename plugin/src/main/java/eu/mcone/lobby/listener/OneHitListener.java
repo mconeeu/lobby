@@ -127,7 +127,8 @@ public class OneHitListener implements Listener {
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5, 4500, false, false));
                         p.setHealth(0);
                         e.setCancelled(false);
-                    } else if (k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.ONEHIT_SWORD)) {
+                    } else if (
+                            k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.ONEHIT_SWORD) || k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.STORY_ONEHIT_SWORD)) {
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5, 4500, false, false));
                         p.setHealth(0);
                         e.setCancelled(false);

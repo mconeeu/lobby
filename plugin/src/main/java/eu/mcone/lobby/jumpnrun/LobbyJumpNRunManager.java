@@ -6,6 +6,7 @@
 package eu.mcone.lobby.jumpnrun;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.CoreTitle;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -21,6 +22,7 @@ import eu.mcone.lobby.util.SilentLobbyUtils;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
@@ -35,6 +37,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
 
     @Getter
     private Set<JumpNRunPlayer> currentlyPlaying = new HashSet<>();
+
 
     public LobbyJumpNRunManager(LobbyPlugin plugin) {
         plugin.registerEvents(new JumpNRunListener(this));
@@ -57,15 +60,13 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
     @Override
     public void setStart(Player p, JumpNRun jumpNRun) {
         if (!isCurrentlyPlaying(p)) {
-            if (SilentLobbyUtils.isActivatedSilentHub(p)) {
-                SilentLobbyUtils.deactivateSilentLobby(p);
-                p.sendMessage("§8[§7§l!§8] §fJump and Run §8» §cDu bist nun nicht mehr in der Privaten Lobby");
-                PlayerHider.hidePlayers(p);
-            }
+
+            currentlyPlaying.add(new JumpNRunPlayer(p, jumpNRun, System.currentTimeMillis() / 1000));
+
+
             CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
             LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(corePlayer.getUuid());
 
-            currentlyPlaying.add(new JumpNRunPlayer(p, jumpNRun, System.currentTimeMillis() / 1000));
             jumpandrunItems(p);
             LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);
             LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jumpNRun.getStartLocation());
@@ -121,6 +122,11 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
             removePlaying(p);
             LobbyPlugin.getInstance().getMessager().send(p, "§cDu hast das Jump and Run §oerfolgreich §cbeendet!");
         }
+    }
+
+    @Override
+    public boolean isJumping(Player p) {
+        return currentlyPlaying.contains(p);
     }
 
     @Override
@@ -200,9 +206,25 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
         p.setHealth(20);
         p.setFoodLevel(20);
 
-        p.getInventory().setItem(1, HotbarItems.LEAVE_JUMPNRUN);
-        p.getInventory().setItem(8, HotbarItems.TO_CHECKPOINT);
-        p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
+        if (p.hasPermission("lobby.silenthub")) {
+            p.getInventory().setItem(1, HotbarItems.PRIVATE_LOBBY);
+        } else if (!PlayerHider.players.contains(p)) {
+            p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
+        } else {
+            p.getInventory().setItem(0, HotbarItems.SHOW_PLAYERS);
+        }
+
+        if (SilentLobbyUtils.isActivatedSilentHub(p)) {
+            p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 8).displayName("§7§lSpieler Verstecken §8» §7§oIn der Privaten Lobby deaktiviert").create());
+        } else if (PlayerHider.players.contains(p)) {
+            p.getInventory().setItem(0, HotbarItems.SHOW_PLAYERS);
+        } else {
+            p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
+        }
+
+        p.getInventory().setItem(8, HotbarItems.LEAVE_JUMPNRUN);
+        p.getInventory().setItem(7, HotbarItems.TO_CHECKPOINT);
+
     }
 
     private JumpNRunPlayer getCurrentlyPlaying(Player p) {

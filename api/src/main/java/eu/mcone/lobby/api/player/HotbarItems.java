@@ -7,10 +7,12 @@ package eu.mcone.lobby.api.player;
 
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 public class HotbarItems {
+
 
     public static final ItemStack HIDE_PLAYERS = new ItemBuilder(Material.INK_SACK, 1, 10)
             .displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus")
@@ -71,6 +73,13 @@ public class HotbarItems {
             .unbreakable(true)
             .itemFlags(ItemFlag.HIDE_UNBREAKABLE)
             .displayName("§fOneHit-Schwert")
+            .create();
+
+    public static final ItemStack STORY_ONEHIT_SWORD = new ItemBuilder(Material.DIAMOND_SWORD, 1, 0)
+            .unbreakable(true)
+            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
+            .displayName("§fOneHit-Schwert")
+            .enchantment(Enchantment.DAMAGE_ALL, 1)
             .create();
 
     public static final ItemStack ONEHIT_BOW = new ItemBuilder(Material.BOW, 1, 0)

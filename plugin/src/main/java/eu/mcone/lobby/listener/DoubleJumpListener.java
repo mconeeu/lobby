@@ -5,7 +5,9 @@
 
 package eu.mcone.lobby.listener;
 
+import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.jumpnrun.LobbyJumpNRunManager;
 import fr.neatmonster.nocheatplus.checks.CheckType;
 import fr.neatmonster.nocheatplus.hooks.NCPExemptionManager;
 import org.bukkit.*;
@@ -29,6 +31,10 @@ public class DoubleJumpListener implements Listener {
     public void on(PlayerToggleFlightEvent e) {
         Player p = e.getPlayer();
 
+        if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getJumpNRunManager().isJumping(p)) {
+            e.setCancelled(true);
+            return;
+        }
         if (p.getGameMode().equals(GameMode.CREATIVE)) {
             e.setCancelled(false);
         } else if (p.getGameMode().equals(GameMode.SURVIVAL) && p.hasPermission("mcone.premium")) {
@@ -36,7 +42,7 @@ public class DoubleJumpListener implements Listener {
 
             if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
                 NCPExemptionManager.exemptPermanently(p, CheckType.MOVING_SURVIVALFLY);
-                Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> NCPExemptionManager.unexempt(p), 3*20);
+                Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> NCPExemptionManager.unexempt(p), 3 * 20);
             }
             djPlayers.add(p.getUniqueId());
 
@@ -58,8 +64,8 @@ public class DoubleJumpListener implements Listener {
     public void on(PlayerMoveEvent e) {
         Player p = e.getPlayer();
 
-        if(p.getGameMode().equals(GameMode.SURVIVAL)) {
-            if(djPlayers.contains(p.getUniqueId()) && !p.getLocation().add(0,-1, 0).getBlock().getType().equals(Material.AIR)) {
+        if (p.getGameMode().equals(GameMode.SURVIVAL)) {
+            if (djPlayers.contains(p.getUniqueId()) && !p.getLocation().add(0, -1, 0).getBlock().getType().equals(Material.AIR)) {
                 p.setAllowFlight(true);
                 p.setFlying(false);
 

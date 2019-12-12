@@ -17,4 +17,6 @@ public interface JumpNRunManager {
     void setCancel(Player p);
 
     void setFinish(Player p);
+
+    boolean isJumping(Player p);
 }
