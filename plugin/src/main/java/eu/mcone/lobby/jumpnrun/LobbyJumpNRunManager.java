@@ -16,6 +16,8 @@ import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.listener.JumpNRunListener;
 import eu.mcone.lobby.listener.PlayerJoinListener;
+import eu.mcone.lobby.util.PlayerHider;
+import eu.mcone.lobby.util.SilentLobbyUtils;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -55,6 +57,11 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
     @Override
     public void setStart(Player p, JumpNRun jumpNRun) {
         if (!isCurrentlyPlaying(p)) {
+            if (SilentLobbyUtils.isActivatedSilentHub(p)) {
+                SilentLobbyUtils.deactivateSilentLobby(p);
+                p.sendMessage("§8[§7§l!§8] §fJump and Run §8» §cDu bist nun nicht mehr in der Privaten Lobby");
+                PlayerHider.hidePlayers(p);
+            }
             CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
             LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(corePlayer.getUuid());
 

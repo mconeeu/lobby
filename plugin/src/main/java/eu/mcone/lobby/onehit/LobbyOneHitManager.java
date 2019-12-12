@@ -8,6 +8,7 @@ import eu.mcone.lobby.api.onehit.OneHitManager;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.listener.OneHitListener;
 import eu.mcone.lobby.listener.PlayerJoinListener;
+import eu.mcone.lobby.util.PlayerHider;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -34,6 +35,7 @@ public class LobbyOneHitManager implements OneHitManager {
     @Override
     public void setStart(Player p) {
         if (!fighting.contains(p)) {
+            PlayerHider.showPlayers(p);
             setOneHitFightItems(p);
             fighting.add(p);
 
