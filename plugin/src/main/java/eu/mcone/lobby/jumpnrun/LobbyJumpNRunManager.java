@@ -6,7 +6,6 @@
 package eu.mcone.lobby.jumpnrun;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.CoreTitle;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -22,7 +21,6 @@ import eu.mcone.lobby.util.SilentLobbyUtils;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
@@ -215,7 +213,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
         }
 
         if (SilentLobbyUtils.isActivatedSilentHub(p)) {
-            p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 8).displayName("§7§lSpieler Verstecken §8» §7§oIn der Privaten Lobby deaktiviert").create());
+            p.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);
         } else if (PlayerHider.players.contains(p)) {
             p.getInventory().setItem(0, HotbarItems.SHOW_PLAYERS);
         } else {

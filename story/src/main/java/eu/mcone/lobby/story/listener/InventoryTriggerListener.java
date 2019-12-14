@@ -14,7 +14,6 @@ import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.story.inventory.story.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -44,20 +43,19 @@ public class InventoryTriggerListener implements Listener {
                         return;
                     }
                     case ENDER_CHEST: {
-                        Location loc = e.getClickedBlock().getLocation();
                         if (lp.getProgressId() >= 6) {
-                            if (loc.getX() == 80 && loc.getY() == 103 && loc.getZ() == -42) {
+                            if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("end-chest").equals(e.getClickedBlock().getLocation())) {
                                 new EndInventory(p);
                             }
                         } else if (lp.getBankprogressId() == BankProgress.CUTTER.getId()) {
                             new WoolInventory(p);
                         } else if (lp.getBankprogressId() == BankProgress.SWORD.getId()) {
-                            if (loc.getX() == 12 && loc.getY() == 91 && loc.getZ() == 24) {
+                            if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-sword-chest").equals(e.getClickedBlock().getLocation())) {
                                 new SwordInventory(p);
                             }
                         } else if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
-                            if (loc.getX() == 11 && loc.getY() == 104 && loc.getZ() == -17) {
-                                new BankSaveInventory(p);
+                            if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-safe-chest").equals(e.getClickedBlock().getLocation())) {
+                                new BankSafeInventory(p);
                             }
                         }
                         return;
@@ -91,8 +89,7 @@ public class InventoryTriggerListener implements Listener {
                         return;
                     }
                     case WOOD_BUTTON: {
-                        Location loc = e.getClickedBlock().getLocation();
-                        if (loc.getX() == 10 && loc.getY() == 104 && loc.getZ() == 1) {
+                        if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-entrance-button").equals(e.getClickedBlock().getLocation())) {
                             if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
 
                                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
@@ -100,7 +97,7 @@ public class InventoryTriggerListener implements Listener {
                                 }, 30L);
 
                             }
-                        } else if (loc.getX() == 13 && loc.getY() == 103 && loc.getZ() == -8) {
+                        } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-safe-entrance-button").equals(e.getClickedBlock().getLocation())) {
                             if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
                                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
                                     p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Perfekt du bist drin jetzt klau die Goldbarren in der Truhe!");
@@ -113,8 +110,7 @@ public class InventoryTriggerListener implements Listener {
                         break;
                     }
                     case STONE_BUTTON: {
-                        Location loc = e.getClickedBlock().getLocation();
-                        if (loc.getX() == 25 && loc.getY() == 104 && loc.getZ() == 3) {
+                        if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-main-entrance-button").equals(e.getClickedBlock().getLocation())) {
                             if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
 
                                 p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Drücke jetzt gleich bei den Bücher Regalen ein Holz Knopf dann öffnet sich eine Geheime Tür links!");

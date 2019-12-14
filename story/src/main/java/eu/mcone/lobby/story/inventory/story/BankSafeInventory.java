@@ -9,9 +9,9 @@ import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class BankSaveInventory extends CoreInventory {
+public class BankSafeInventory extends CoreInventory {
 
-    public BankSaveInventory(Player p) {
+    public BankSafeInventory(Player p) {
         super("§f§lTresorTruhe", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 

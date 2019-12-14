@@ -51,7 +51,7 @@ public class InventoryTriggerListener implements Listener {
                 e.setCancelled(true);
                 new CompassInventory(p);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-            } else if (i.equals(HotbarItems.PRIVATE_LOBBY)) {
+            } else if (i.equals(HotbarItems.PRIVATE_LOBBY) || i.equals(HotbarItems.LEAVE_PRIVATE_LOBBY)) {
                 if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
                     return;
 

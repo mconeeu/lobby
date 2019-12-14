@@ -11,15 +11,12 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
-import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
-import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.command.LobbyCMD;
 import eu.mcone.lobby.gang.LobbyGang;
 import eu.mcone.lobby.inventory.LobbySettingsInventory;
@@ -93,7 +90,6 @@ public class Lobby extends LobbyPlugin {
                 playernpc_welcome, playernpc_start, playernpc_duty, playernpc_salia, playernpc_vendor, playernpc_robert, playernpc_edward_cityhall
         );*/
 
-
         sendConsoleMessage("§aInitializing Build-System...");
         buildSystem = CoreSystem.getInstance().initialiseBuildSystem(BuildSystem.BuildEvent.BLOCK_BREAK, BuildSystem.BuildEvent.BLOCK_PLACE, BuildSystem.BuildEvent.INTERACT);
         buildSystem.addFilter(BuildSystem.BuildEvent.INTERACT, Material.STONE_BUTTON.getId(), Material.WOOD_BUTTON.getId(), Material.ENDER_PORTAL_FRAME.getId(), Material.IRON_PLATE.getId(), Material.GOLD_PLATE.getId());
@@ -128,13 +124,6 @@ public class Lobby extends LobbyPlugin {
         jumpNRunManager = new LobbyJumpNRunManager(this);
 
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");
-
-        for (CorePlayer p : CoreSystem.getInstance().getOnlineCorePlayers()) {
-            PlayerJoinListener.preloadLobbyPlayer(p.bukkit(), p);
-            LobbyPlayer lp = new LobbyPlayer(p);
-            registerGamePlayer(lp);
-            PlayerJoinListener.loadLobbyPlayer(p.bukkit(), lp, LobbyPlayerLoadedEvent.Reason.RELOADED);
-        }
 
         if (Bukkit.getOnlinePlayers().size() > 0) {
             for (Gamemode gm : Gamemode.values()) {

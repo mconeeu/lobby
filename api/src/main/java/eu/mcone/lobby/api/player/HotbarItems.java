@@ -13,15 +13,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class HotbarItems {
 
-
-    public static final ItemStack HIDE_PLAYERS = new ItemBuilder(Material.INK_SACK, 1, 10)
-            .displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus")
-            .create();
-
-    public static final ItemStack SHOW_PLAYERS = new ItemBuilder(Material.INK_SACK, 1, 2)
-            .displayName("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an")
-            .create();
-
     public static final ItemStack LOBBY_CHANGER = new ItemBuilder(Material.NETHER_STAR)
             .displayName("§3§lLobby-Wechsler §8» §7§oWähle deine Lobby")
             .create();
@@ -38,16 +29,42 @@ public class HotbarItems {
             .displayName("§a§lNicken §8» §7§oAktiviert").lore("§7§oKlicke zum deaktivieren")
             .create();
 
-    public static final ItemStack PRIVATE_LOBBY = new ItemBuilder(Material.TNT, 1, 0)
-            .displayName("§6§lPrivate Lobby §8» §7§oBetrete deine eigene Private Lobby")
-            .create();
-
     public static final ItemStack BACKPACK = new ItemBuilder(Material.STORAGE_MINECART, 1, 0)
             .displayName("§3§lRucksack §8» §7§oZeige deine gesammelten Items an")
             .create();
 
     public static final ItemStack LOADING = new ItemBuilder(Material.INK_SACK, 1, 2)
             .displayName("§7§oLädt...")
+            .create();
+
+
+    /*
+     * LobbyHider
+     */
+
+    public static final ItemStack HIDE_PLAYERS = new ItemBuilder(Material.INK_SACK, 1, 10)
+            .displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus")
+            .create();
+
+    public static final ItemStack LOBBY_HIDER_UNAVAILABLE = new ItemBuilder(Material.INK_SACK, 1, 8)
+            .displayName("§7§lSpieler Verstecken §8» §7§oIn der Privaten Lobby deaktiviert")
+            .create();
+
+    public static final ItemStack SHOW_PLAYERS = new ItemBuilder(Material.INK_SACK, 1, 2)
+            .displayName("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an")
+            .create();
+
+
+    /*
+     * Private Lobby
+     */
+
+    public static final ItemStack PRIVATE_LOBBY = new ItemBuilder(Material.TNT, 1, 0)
+            .displayName("§6§lPrivate Lobby §8» §7§oBetrete deine eigene Private Lobby")
+            .create();
+
+    public static final ItemStack LEAVE_PRIVATE_LOBBY = new ItemBuilder(Material.TNT, 1, 0)
+            .displayName("§6§lPrivate Lobby §8» §7§oVerlasse die Private Lobby")
             .create();
 
 

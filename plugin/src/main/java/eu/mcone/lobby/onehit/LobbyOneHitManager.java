@@ -1,8 +1,7 @@
 package eu.mcone.lobby.onehit;
 
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.coresystem.api.bukkit.world.CoreLocation;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -14,24 +13,19 @@ import eu.mcone.lobby.listener.OneHitListener;
 import eu.mcone.lobby.listener.PlayerJoinListener;
 import eu.mcone.lobby.util.PlayerHider;
 import eu.mcone.lobby.util.SilentLobbyUtils;
-import org.bukkit.Color;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.entity.Item;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
 
 public class LobbyOneHitManager implements OneHitManager {
 
-    private static final List<String> SPAWN_LOCATIONS = new ArrayList<>();
-
+    private static final Map<Location, Long> SPAWN_LOCATIONS = new HashMap<>();
     static {
-        for (int i = 1; i <= 6; i++) {
-            SPAWN_LOCATIONS.add("Onehit-" + i);
+        for (Map.Entry<String, CoreLocation> location : LobbyWorld.ONE_ISLAND.getWorld().getLocations().entrySet()) {
+            if (location.getKey().startsWith("Onehit-")) {
+                SPAWN_LOCATIONS.put(location.getValue().bukkit(), (System.currentTimeMillis() / 1000) - 5);
+            }
         }
     }
 
@@ -47,21 +41,21 @@ public class LobbyOneHitManager implements OneHitManager {
         if (!fighting.contains(p)) {
             if (SilentLobbyUtils.isActivatedSilentHub(p)) {
                 SilentLobbyUtils.deactivateSilentLobby(p);
-
             }
             if (PlayerHider.players.contains(p)) {
                 PlayerHider.showPlayers(p);
             }
+
             setOneHitFightItems(p);
             fighting.add(p);
+            p.setGameMode(GameMode.ADVENTURE);
+            p.setAllowFlight(false);
+            p.teleport(getRandomSpawn());
 
-
-            teleportToRandomSpawn(p);
-
-            if (fighting.size() == 1) {
-                LobbyPlugin.getInstance().getMessager().send(p, "§cDu bist der §feinzigster §cder §fOneHit §cspielt§c!");
+            if (fighting.size() <= 1) {
+                LobbyPlugin.getInstance().getMessager().send(p, "§7Du bist gerade der §f§oeinzigste§7, der §fOneHit§7 spielt!");
             } else {
-                LobbyPlugin.getInstance().getMessager().send(p, "§cEs spielen gerade §f" + fighting.size() + "§c Spieler §fOneHit§c!");
+                LobbyPlugin.getInstance().getMessager().send(p, "§7Es spielen gerade §f§o" + fighting.size() + "§7 Spieler §fOneHit§7!");
             }
             LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);
         }
@@ -83,8 +77,19 @@ public class LobbyOneHitManager implements OneHitManager {
         return fighting.contains(p);
     }
 
-    public void teleportToRandomSpawn(Player p) {
-        LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, SPAWN_LOCATIONS.get(new Random().nextInt(SPAWN_LOCATIONS.size() - 1)));
+    public Location getRandomSpawn() {
+        List<Location> locations = new ArrayList<>();
+
+        for (Map.Entry<Location, Long> location : SPAWN_LOCATIONS.entrySet()) {
+            if (((System.currentTimeMillis() / 1000) - location.getValue()) > 3) {
+                locations.add(location.getKey());
+            }
+        }
+
+        Location location = locations.get(new Random().nextInt(locations.size() - 1));
+        SPAWN_LOCATIONS.put(location, System.currentTimeMillis() / 1000);
+
+        return location;
     }
 
     public void setOneHitFightItems(Player p) {

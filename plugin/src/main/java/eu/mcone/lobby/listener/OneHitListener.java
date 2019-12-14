@@ -24,10 +24,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -60,14 +57,13 @@ public class OneHitListener implements Listener {
             if (k == null) {
                 LobbyPlugin.getInstance().getMessager().send(p, "§cDu bist gestorben");
             } else {
-                LobbyPlugin.getInstance().getMessager().send(k, "§7Du hast §f" + p.getDisplayName() + " §7getötet §8[§6+2 Coins§8]");
+                LobbyPlugin.getInstance().getMessager().send(k, "§7Du hast §f" + p.getDisplayName() + " §7getötet §8[§a+2 Coins§8]");
                 LobbyPlayer lk = LobbyPlugin.getInstance().getGamePlayer(k);
                 lk.getCorePlayer().addCoins(2);
                 k.getInventory().setItem(7, new ItemBuilder(Material.ARROW, 1, 0).displayName("§bOneHit-Pfeil").create());
                 k.getWorld().playSound(k.getLocation(), Sound.LEVEL_UP, 1, 1);
 
                 LobbyPlugin.getInstance().getMessager().send(p, "§7Du wurdest von §f" + k.getDisplayName() + " §7getötet!");
-
             }
         }
 
@@ -80,10 +76,8 @@ public class OneHitListener implements Listener {
         Player p = e.getPlayer();
 
         if (manager.isFighting(p)) {
-            Bukkit.getScheduler().runTask(Lobby.getInstance(), () -> {
-                manager.setOneHitFightItems(p);
-                manager.teleportToRandomSpawn(p);
-            });
+            e.setRespawnLocation(manager.getRandomSpawn());
+            Bukkit.getScheduler().runTask(Lobby.getInstance(), () -> manager.setOneHitFightItems(p));
         }
     }
 
@@ -104,7 +98,7 @@ public class OneHitListener implements Listener {
     }
 
     @EventHandler
-    public void onCommand(org.bukkit.event.player.PlayerCommandPreprocessEvent e) {
+    public void onCommand(PlayerCommandPreprocessEvent e) {
         Player p = e.getPlayer();
 
         if (e.getMessage().equalsIgnoreCase("/spawn")) {

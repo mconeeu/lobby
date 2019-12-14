@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.api.event;
 
+import eu.mcone.coresystem.api.bukkit.event.CorePlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,15 +20,11 @@ public final class LobbyPlayerLoadedEvent extends Event {
     private final static HandlerList handlerList = new HandlerList();
 
     private LobbyPlayer player;
-    private Reason reason;
+    private CorePlayerLoadedEvent.Reason reason;
 
     @Override
     public HandlerList getHandlers() {
         return handlerList;
-    }
-
-    public enum Reason {
-        JOINED, RELOADED
     }
 
 }

@@ -40,6 +40,21 @@ public class LobbySettingsInventory extends CoreInventory {
             });
         }
 
+        if (p.hasPermission("lobby.silenthub")) {
+            setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.TNT, 1, 0).displayName("§f§lIn privater Lobby joinen").create());
+            if (settings.isSpawnInSilentLobby()) {
+                setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um das Spawnen", "§7§oin der Privaten Lobby", "§7§ozu deaktivieren").create(), e -> {
+                    settings.setSpawnInSilentLobby(false);
+                    setSettings(p, lp);
+                });
+            } else {
+                setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um das Spawnen", "§7§oin der Privaten Lobby", "§7§ozu aktivieren").create(), e -> {
+                    settings.setSpawnInSilentLobby(true);
+                    setSettings(p, lp);
+                });
+            }
+        }
+
         setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.NETHER_STAR, 1, 0).displayName("§f§lSpawn Ort").create());
         setItem(InventorySlot.ROW_3_SLOT_6, settings.getSpawnPoint().getItem().create(), e -> {
             switch (settings.getSpawnPoint()) {
@@ -49,18 +64,6 @@ public class LobbySettingsInventory extends CoreInventory {
                     break;
                 }
                 case LAST_LOCATION: {
-                    if (p.hasPermission("lobby.silenthub")) {
-                        settings.setSpawnPoint(SpawnPoint.SILENT_LOBBY);
-                    } else if (LobbyItem.OFFICE_CARD_BRONZE.has(lp) || LobbyItem.OFFICE_CARD_SILVER.has(lp) || LobbyItem.OFFICE_CARD_GOLD.has(lp)) {
-                        settings.setSpawnPoint(SpawnPoint.OFFICE);
-                    } else {
-                        settings.setSpawnPoint(SpawnPoint.SPAWN);
-                    }
-
-                    setSettings(p, lp);
-                    break;
-                }
-                case SILENT_LOBBY: {
                     if (LobbyItem.OFFICE_CARD_BRONZE.has(lp) || LobbyItem.OFFICE_CARD_SILVER.has(lp) || LobbyItem.OFFICE_CARD_GOLD.has(lp)) {
                         settings.setSpawnPoint(SpawnPoint.OFFICE);
                     } else {

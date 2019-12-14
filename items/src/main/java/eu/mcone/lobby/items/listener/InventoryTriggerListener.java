@@ -6,6 +6,7 @@
 package eu.mcone.lobby.items.listener;
 
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.LobbyCategory;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.items.inventory.chest.ChestOpeningInventory;
@@ -29,8 +30,10 @@ public class InventoryTriggerListener implements Listener {
 
                 switch (clicked) {
                     case ENDER_PORTAL_FRAME: {
-                        new ChestOpeningInventory(p);
-                        return;
+                        if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("chestopening").equals(e.getClickedBlock().getLocation())) {
+                            new ChestOpeningInventory(p);
+                            return;
+                        }
                     }
                 }
             }

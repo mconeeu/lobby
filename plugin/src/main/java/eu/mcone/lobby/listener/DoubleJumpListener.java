@@ -7,7 +7,6 @@ package eu.mcone.lobby.listener;
 
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.jumpnrun.LobbyJumpNRunManager;
 import fr.neatmonster.nocheatplus.checks.CheckType;
 import fr.neatmonster.nocheatplus.hooks.NCPExemptionManager;
 import org.bukkit.*;
@@ -15,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.util.Vector;
@@ -28,13 +28,9 @@ public class DoubleJumpListener implements Listener {
     private static final List<UUID> djPlayers = new ArrayList<>();
 
     @EventHandler
-    public void on(PlayerToggleFlightEvent e) {
+    public void onToggleFlight(PlayerToggleFlightEvent e) {
         Player p = e.getPlayer();
 
-        if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getJumpNRunManager().isJumping(p)) {
-            e.setCancelled(true);
-            return;
-        }
         if (p.getGameMode().equals(GameMode.CREATIVE)) {
             e.setCancelled(false);
         } else if (p.getGameMode().equals(GameMode.SURVIVAL) && p.hasPermission("mcone.premium")) {
@@ -61,7 +57,7 @@ public class DoubleJumpListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void on(PlayerMoveEvent e) {
+    public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
 
         if (p.getGameMode().equals(GameMode.SURVIVAL)) {
@@ -73,6 +69,16 @@ public class DoubleJumpListener implements Listener {
                     NCPExemptionManager.unexempt(p);
                 djPlayers.remove(p.getUniqueId());
             }
+        }
+    }
+
+    @EventHandler
+    public void onGamemodeChange(PlayerGameModeChangeEvent e) {
+        Player p = e.getPlayer();
+
+        if ((p.getGameMode().equals(GameMode.CREATIVE) || p.getGameMode().equals(GameMode.SPECTATOR))
+                && !e.getNewGameMode().equals(GameMode.CREATIVE) || !e.getNewGameMode().equals(GameMode.SPECTATOR)) {
+            Bukkit.getScheduler().runTask(Lobby.getInstance(), () -> p.setAllowFlight(true));
         }
     }
 

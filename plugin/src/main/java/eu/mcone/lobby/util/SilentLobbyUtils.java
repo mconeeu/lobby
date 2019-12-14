@@ -5,12 +5,10 @@
 
 package eu.mcone.lobby.util;
 
-import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -34,6 +32,7 @@ public class SilentLobbyUtils {
 
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
+        p.getInventory().setItem(2, HotbarItems.PRIVATE_LOBBY);
         p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
@@ -49,7 +48,8 @@ public class SilentLobbyUtils {
         }
         p.playSound(p.getLocation(), Sound.GLASS, 1, 1);
         p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
-        p.getInventory().setItem(0, new ItemBuilder(Material.INK_SACK, 1, 8).displayName("§7§lSpieler Verstecken §8» §7§oIn der Privaten Lobby deaktiviert").create());
+        p.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);
+        p.getInventory().setItem(2, HotbarItems.LEAVE_PRIVATE_LOBBY);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);

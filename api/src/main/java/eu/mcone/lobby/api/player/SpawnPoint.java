@@ -14,7 +14,6 @@ public enum SpawnPoint {
 
     SPAWN(new ItemBuilder(Material.GRASS).displayName("§f§lSpawn").lore("§7§oSpawne am Lobby Spawn")),
     LAST_LOCATION(new ItemBuilder(Material.ENDER_PEARL).displayName("§a§lLetzter Ort").lore("§7§oSpawne bei deinem","§7§oletzten Logout Ort")),
-    SILENT_LOBBY(new ItemBuilder(Material.TNT, 1, 0).displayName("§6§lPrivate Lobby").lore("§7§oSpawne in deiner", "§7§o Privaten Lobby")),
     OFFICE(new ItemBuilder(Material.BOOK_AND_QUILL).displayName("§c§lBüro").lore("§7§oSpawne in deinem Büro"));
 
     private ItemBuilder item;
