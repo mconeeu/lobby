@@ -36,7 +36,7 @@ public class InteractionInventory extends CoreInventory {
                 ).create()
         );
 
-        setItem(InventorySlot.ROW_3_SLOT_3, Skull.fromUrl("http://textures.minecraft.net/texture/6f74f58f541342393b3b16787dd051dfacec8cb5cd3229c61e5f73d63947ad", 1).toItemBuilder().displayName("§7Online-Profil Ansehen").create(), e -> {
+        setItem(InventorySlot.ROW_3_SLOT_3, Skull.fromUrl("http://textures.minecraft.net/texture/6f74f58f541342393b3b16787dd051dfacec8cb5cd3229c61e5f73d63947ad", 1).toItemBuilder().displayName("§7Online-Profil Ansehen").create()), e -> {
             TextComponent tc0 = new TextComponent(TextComponent.fromLegacyText(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§2Das Profil von " + clicked.getName() + " findest du "));
 
             TextComponent tc = new TextComponent();
