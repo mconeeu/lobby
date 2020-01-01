@@ -77,7 +77,8 @@ public class DoubleJumpListener implements Listener {
         Player p = e.getPlayer();
 
         if ((p.getGameMode().equals(GameMode.CREATIVE) || p.getGameMode().equals(GameMode.SPECTATOR))
-                && !e.getNewGameMode().equals(GameMode.CREATIVE) || !e.getNewGameMode().equals(GameMode.SPECTATOR)) {
+                && (!e.getNewGameMode().equals(GameMode.CREATIVE) || !e.getNewGameMode().equals(GameMode.SPECTATOR))
+                && !Lobby.getInstance().getOneHitManager().isFighting(p)) {
             Bukkit.getScheduler().runTask(Lobby.getInstance(), () -> p.setAllowFlight(true));
         }
     }

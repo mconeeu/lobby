@@ -2,6 +2,7 @@ package eu.mcone.lobby.api.enums;
 
 import lombok.Getter;
 
+@Getter
 public enum BankProgress {
 
     SMUGGLER(1, "Schmuggler"),
@@ -11,19 +12,13 @@ public enum BankProgress {
     BANK_ROBBERY_MIDDLE(5,"Bank Raub mitte"),
     BANK_ROBBERY_END(6,"Bank Raub ende");
 
-
-    @Getter
     private int id;
-    @Getter
     private String name;
-
-
 
     BankProgress(int id, String name){
         this.id = id;
         this.name = name;
     }
-
 
     public static BankProgress getProgressByID(int id) {
         for (BankProgress bankprogress : values()) {

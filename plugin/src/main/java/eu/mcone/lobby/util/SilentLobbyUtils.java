@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.util;
 
+import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
 import org.bukkit.Bukkit;
@@ -32,7 +33,7 @@ public class SilentLobbyUtils {
 
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
-        p.getInventory().setItem(2, HotbarItems.PRIVATE_LOBBY);
+        p.getInventory().setItem(Lobby.getInstance().getJumpNRunManager().isCurrentlyPlaying(p) ? 1 : 2, HotbarItems.PRIVATE_LOBBY);
         p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
@@ -49,7 +50,7 @@ public class SilentLobbyUtils {
         p.playSound(p.getLocation(), Sound.GLASS, 1, 1);
         p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
         p.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);
-        p.getInventory().setItem(2, HotbarItems.LEAVE_PRIVATE_LOBBY);
+        p.getInventory().setItem(Lobby.getInstance().getJumpNRunManager().isCurrentlyPlaying(p) ? 1 : 2, HotbarItems.LEAVE_PRIVATE_LOBBY);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);

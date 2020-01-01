@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.listener;
 
+import eu.mcone.coresystem.api.bukkit.event.BuildModeChangeEvent;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -14,6 +15,7 @@ import eu.mcone.lobby.inventory.InteractionInventory;
 import eu.mcone.lobby.onehit.LobbyOneHitManager;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
@@ -133,6 +135,15 @@ public class OneHitListener implements Listener {
                     e.setCancelled(false);
                 }
             }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onBuildLeave(BuildModeChangeEvent e) {
+        Player p = e.getPlayer();
+
+        if (!e.isCanBuild() && manager.isFighting(p)) {
+            p.setGameMode(GameMode.ADVENTURE);
         }
     }
 

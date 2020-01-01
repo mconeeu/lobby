@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 
 public class SwordInventory extends CoreInventory {
 
-
     public SwordInventory(Player p) {
         super("§f§lSicherheitstruhe", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
@@ -32,4 +31,5 @@ public class SwordInventory extends CoreInventory {
 
         openInventory();
     }
+
 }
