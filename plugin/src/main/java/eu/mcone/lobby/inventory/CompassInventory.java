@@ -19,7 +19,6 @@ import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -43,7 +42,7 @@ public class CompassInventory extends CoreInventory {
 
         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
 
-        setItem(InventorySlot.ROW_1_SLOT_1, CoreInventory.PLACEHOLDER_ITEM);
+        setItem(InventorySlot.ROW_1_SLOT_1, CoreInventory.PLACEHOLDER_ITEM, e -> CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CONNECT", "Survival"));
         setItem(InventorySlot.ROW_1_SLOT_2, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 11).displayName("§8//§oMCONE§8//").create());
         setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 11).displayName("§8//§oMCONE§8//").create());
 
