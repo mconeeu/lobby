@@ -34,6 +34,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.util.Vector;
 
 @RequiredArgsConstructor
 public class OneHitListener implements Listener {
@@ -62,9 +63,9 @@ public class OneHitListener implements Listener {
                     CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                     player.getLocation().getWorld().playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
                     if (player != p) {
-                        LobbyPlugin.getInstance().getMessager().send(player, "§7Der Spieler §f" + p.getDisplayName() + " §7hat einen §e" + e.getNewLevel() + "§7er Killstreak!");
+                        LobbyPlugin.getInstance().getMessager().send(player, "§7Der Spieler §f" + p.getDisplayName() + " §7hat eine §e" + e.getNewLevel() + "§7er Killstreak!");
                     } else {
-                        LobbyPlugin.getInstance().getMessager().send(player, "§7Du hast einen §e" + e.getNewLevel() + "er Killstreak!");
+                        LobbyPlugin.getInstance().getMessager().send(player, "§7Du hast eine §e" + e.getNewLevel() + "er Killstreak!");
                     }
                 }
             }
@@ -91,7 +92,7 @@ public class OneHitListener implements Listener {
         Player k = p.getKiller();
 
         e.setKeepInventory(true);
-
+        p.setVelocity(new Vector(0, 0, 0));
 
         if (manager.isFighting(p) && manager.isFighting(k)) {
             p.setLevel(0);

@@ -1,5 +1,6 @@
 package eu.mcone.lobby.inventory;
 
+import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -11,6 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.DisplaySlot;
 
 public class OneHitGadgetInventory extends CoreInventory {
 
@@ -28,6 +30,7 @@ public class OneHitGadgetInventory extends CoreInventory {
                     if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p)) {
                         if (p.getLevel() >= 3) {
                             p.setLevel(p.getLevel() - 3);
+                            CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                             p.getInventory().setItem(6, HotbarItems.ONEHIT_ARROW);
                             LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast erfolgreich ein §fPfeil §7für §f3 Level gekauft!");
                             p.closeInventory();
@@ -49,6 +52,7 @@ public class OneHitGadgetInventory extends CoreInventory {
                     if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p)) {
                         if (p.getLevel() >= 2) {
                             p.setLevel(p.getLevel() - 2);
+                            CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
                             p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 220, 2));
                             LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast erfolgreich den §fJumpboost §7für §f2 Level gekauft!");
@@ -71,6 +75,7 @@ public class OneHitGadgetInventory extends CoreInventory {
                     if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p)) {
                         if (p.getLevel() >= 2) {
                             p.setLevel(p.getLevel() - 2);
+                            CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
                             p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 220, 1));
                             LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast erfolgreich den §fSpeedboost §7für §f2 Level gekauft!");

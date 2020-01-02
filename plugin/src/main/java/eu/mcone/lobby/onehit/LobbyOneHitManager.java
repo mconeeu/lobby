@@ -85,6 +85,7 @@ public class LobbyOneHitManager implements OneHitManager {
             p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
             PlayerJoinListener.setLobbyItems(p);
+            p.getActivePotionEffects().clear();
             p.setLevel(0);
             p.setExp(0);
 
