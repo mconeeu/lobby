@@ -105,6 +105,10 @@ public class HotbarItems {
             .displayName("§cOneHit-Bogen")
             .create();
 
+    public static final ItemStack ONEHIT_GADGET = new ItemBuilder(Material.CHEST, 1, 0)
+            .displayName("§eGadgets")
+            .create();
+
     public static final ItemStack ONEHIT_ARROW = new ItemBuilder(Material.ARROW, 1, 0)
             .displayName("§bOneHit-Pfeil")
             .create();

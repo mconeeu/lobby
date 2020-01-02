@@ -1,5 +1,6 @@
 package eu.mcone.lobby.onehit;
 
+import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.world.CoreLocation;
 import eu.mcone.lobby.Lobby;
@@ -11,16 +12,20 @@ import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.listener.OneHitListener;
 import eu.mcone.lobby.listener.PlayerJoinListener;
+import eu.mcone.lobby.scoreboard.OneHitObjective;
 import eu.mcone.lobby.util.PlayerHider;
 import eu.mcone.lobby.util.SilentLobbyUtils;
+import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
 
 import java.util.*;
 
 public class LobbyOneHitManager implements OneHitManager {
 
     private static final Map<Location, Long> SPAWN_LOCATIONS = new HashMap<>();
+
     static {
         for (Map.Entry<String, CoreLocation> location : LobbyWorld.ONE_ISLAND.getWorld().getLocations().entrySet()) {
             if (location.getKey().startsWith("Onehit-")) {
@@ -29,7 +34,8 @@ public class LobbyOneHitManager implements OneHitManager {
         }
     }
 
-    public final ArrayList<Player> fighting;
+    @Getter
+    private final ArrayList<Player> fighting;
 
     public LobbyOneHitManager(Lobby plugin) {
         plugin.registerEvents(new OneHitListener(this));
@@ -46,6 +52,10 @@ public class LobbyOneHitManager implements OneHitManager {
                 PlayerHider.showPlayers(p);
             }
 
+            CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new OneHitObjective(this));
+
+            p.setExp(1);
+            p.setLevel(0);
             setOneHitFightItems(p);
             fighting.add(p);
             p.setGameMode(GameMode.ADVENTURE);
@@ -54,8 +64,14 @@ public class LobbyOneHitManager implements OneHitManager {
 
             if (fighting.size() <= 1) {
                 LobbyPlugin.getInstance().getMessager().send(p, "§7Du bist gerade der §f§oeinzigste§7, der §fOneHit§7 spielt!");
+                CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
             } else {
                 LobbyPlugin.getInstance().getMessager().send(p, "§7Es spielen gerade §f§o" + fighting.size() + "§7 Spieler §fOneHit§7!");
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    if (fighting.contains(all))
+                        CoreSystem.getInstance().getCorePlayer(all).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                }
+
             }
             LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);
         }
@@ -69,6 +85,12 @@ public class LobbyOneHitManager implements OneHitManager {
             p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
             PlayerJoinListener.setLobbyItems(p);
+            p.setLevel(0);
+            p.setExp(0);
+
+            for (Player player : fighting) {
+                CoreSystem.getInstance().getCorePlayer(player).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+            }
         }
     }
 
@@ -108,8 +130,10 @@ public class LobbyOneHitManager implements OneHitManager {
         } else {
             p.getInventory().setItem(0, HotbarItems.ONEHIT_SWORD);
         }
+
+        p.getInventory().setItem(7, HotbarItems.ONEHIT_GADGET);
         p.getInventory().setItem(1, HotbarItems.ONEHIT_BOW);
-        p.getInventory().setItem(7, HotbarItems.ONEHIT_ARROW);
+        p.getInventory().setItem(6, HotbarItems.ONEHIT_ARROW);
         p.getInventory().setItem(8, HotbarItems.LEAVE_ONEHIT_FIGHTING);
     }
 

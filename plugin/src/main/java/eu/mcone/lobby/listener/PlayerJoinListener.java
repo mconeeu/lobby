@@ -22,7 +22,7 @@ import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.util.PlayerHider;
-import eu.mcone.lobby.util.SidebarObjective;
+import eu.mcone.lobby.scoreboard.SidebarObjective;
 import eu.mcone.lobby.util.SilentLobbyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -50,8 +50,8 @@ public class PlayerJoinListener implements Listener {
         Player p = e.getBukkitPlayer();
         CorePlayer cp = e.getPlayer();
 
+        if (e.getLoadReason().equals(CorePlayerLoadedEvent.Reason.RELOAD)) preloadLobbyPlayer(p);
         postloadLobbyPlayer(p);
-        cp.getScoreboard().setNewObjective(new SidebarObjective());
 
         LobbyPlayer lp = new LobbyPlayer(cp);
         LobbyPlugin.getInstance().registerGamePlayer(lp);
@@ -132,6 +132,8 @@ public class PlayerJoinListener implements Listener {
         p.setGameMode(GameMode.SURVIVAL);
         p.setMaxHealth(20);
         p.setHealth(20);
+        p.setLevel(0);
+        p.setExp(0);
         p.setFoodLevel(20);
         p.setWalkSpeed(0.2F);
         p.setFlying(false);
@@ -166,6 +168,7 @@ public class PlayerJoinListener implements Listener {
         p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
 
         LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
+        CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new SidebarObjective());
     }
 
     public static void setLobbyItems(Player p) {

@@ -17,6 +17,7 @@ import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.onehit.OneHitManager;
 import eu.mcone.lobby.command.LobbyCMD;
 import eu.mcone.lobby.gang.LobbyGang;
 import eu.mcone.lobby.inventory.LobbySettingsInventory;
@@ -24,8 +25,9 @@ import eu.mcone.lobby.items.LobbyItems;
 import eu.mcone.lobby.jumpnrun.LobbyJumpNRunManager;
 import eu.mcone.lobby.listener.*;
 import eu.mcone.lobby.onehit.LobbyOneHitManager;
+import eu.mcone.lobby.scoreboard.OneHitObjective;
 import eu.mcone.lobby.story.LobbyStory;
-import eu.mcone.lobby.util.SidebarObjective;
+import eu.mcone.lobby.scoreboard.SidebarObjective;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -145,6 +147,7 @@ public class Lobby extends LobbyPlugin {
 
     private void startScheduler() {
         Bukkit.getScheduler().runTaskTimer(this, SidebarObjective::updateLines, 50L, 100L);
+        Bukkit.getScheduler().runTaskTimer(this, OneHitObjective::updateLines, 50L, 100L);
     }
 
 }

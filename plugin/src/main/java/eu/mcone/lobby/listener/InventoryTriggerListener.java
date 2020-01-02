@@ -14,6 +14,7 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.inventory.CompassInventory;
 import eu.mcone.lobby.inventory.LobbyInventory;
+import eu.mcone.lobby.inventory.OneHitGadgetInventory;
 import eu.mcone.lobby.util.PlayerHider;
 import eu.mcone.lobby.util.SilentLobbyUtils;
 import org.bukkit.Material;
@@ -63,6 +64,8 @@ public class InventoryTriggerListener implements Listener {
                 }
             } else if (i.equals(HotbarItems.LOBBY_CHANGER)) {
                 new LobbyInventory(p);
+            } else if (i.equals(HotbarItems.ONEHIT_GADGET)) {
+                new OneHitGadgetInventory(p);
             } else if (i.equals(HotbarItems.DEACTIVATE_NICK)) {
                 if (cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
