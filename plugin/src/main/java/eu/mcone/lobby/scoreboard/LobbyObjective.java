@@ -45,9 +45,4 @@ public abstract class LobbyObjective extends CoreSidebarObjective {
         }
     }
 
-    @Override
-    public void unregister() {
-        super.unregister();
-        objective.unregister();
-    }
 }
