@@ -237,7 +237,7 @@ public class CompassInventory extends CoreInventory {
                                 });
 
                         setItem(InventorySlot.ROW_5_SLOT_3, new ItemBuilder(Material.DIAMOND_BOOTS, 1, 0)
-                                        .displayName("§bJumpAndRun")
+                                        .displayName("§bJumpAndRun §8| §fLobbygame")
                                         .lore("§7§oBesuche die JumpAndRun Tafel", "§7§oUm alle Jump and Runs zu sehen", "§7§oUnd um sie zu starten", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                                         .create(),
 
