@@ -16,11 +16,16 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SilentLobbyUtils {
+public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobbyManager {
 
-    private static List<Player> silent = new ArrayList<>();
+    private List<Player> silent;
 
-    public static void deactivateSilentLobby(Player p) {
+    public SilentLobbyManager() {
+        this.silent = new ArrayList<>();
+    }
+
+    @Override
+    public void deactivateSilentLobby(Player p) {
         silent.remove(p);
         for (Player all : Bukkit.getOnlinePlayers()) {
             if (!silent.contains(all)) {
@@ -40,8 +45,8 @@ public class SilentLobbyUtils {
         p.playSound(p.getLocation(), Sound.GLASS, 1, 1);
     }
 
-
-    public static void activateSilentLobby(Player p) {
+    @Override
+    public void activateSilentLobby(Player p) {
         silent.add(p);
         for (Player all : Bukkit.getOnlinePlayers()) {
             all.hidePlayer(p);
@@ -57,7 +62,8 @@ public class SilentLobbyUtils {
         p.playEffect(p.getLocation(), Effect.VOID_FOG, 10);
     }
 
-    public static boolean isActivatedSilentHub(Player p) {
+    @Override
+    public boolean isActivatedSilentHub(Player p) {
         return silent.contains(p);
     }
 

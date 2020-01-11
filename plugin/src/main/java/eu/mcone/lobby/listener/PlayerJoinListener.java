@@ -21,9 +21,9 @@ import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.manager.OfficeManager;
-import eu.mcone.lobby.util.PlayerHider;
+import eu.mcone.lobby.util.PlayerHiderManager;
 import eu.mcone.lobby.scoreboard.SidebarObjective;
-import eu.mcone.lobby.util.SilentLobbyUtils;
+import eu.mcone.lobby.util.SilentLobbyManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -56,7 +56,7 @@ public class PlayerJoinListener implements Listener {
         LobbyPlayer lp = new LobbyPlayer(cp);
         LobbyPlugin.getInstance().registerGamePlayer(lp);
 
-        PlayerHider.playerJoined(p);
+        LobbyPlugin.getInstance().getPlayerHiderManager().playerJoined(p);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
@@ -70,7 +70,7 @@ public class PlayerJoinListener implements Listener {
         if (e.getLoadReason().equals(CorePlayerLoadedEvent.Reason.JOIN)) {
             if (p.hasPermission("lobby.silenthub") && lp.getSettings().isSpawnInSilentLobby()) {
                 e.setHidden(true);
-                SilentLobbyUtils.activateSilentLobby(p);
+                LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
                 LobbyPlugin.getInstance().getMessager().send(p, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
             }
 
@@ -147,9 +147,9 @@ public class PlayerJoinListener implements Listener {
 
         if (p.hasPermission("mcone.premium")) p.setAllowFlight(true);
 
-        if (SilentLobbyUtils.isActivatedSilentHub(p)) {
+        if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
             p.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);
-        } else if (PlayerHider.players.contains(p)) {
+        } else if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(p)) {
             p.getInventory().setItem(0, HotbarItems.SHOW_PLAYERS);
         } else {
             p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);

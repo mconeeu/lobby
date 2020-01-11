@@ -28,6 +28,8 @@ import eu.mcone.lobby.onehit.LobbyOneHitManager;
 import eu.mcone.lobby.scoreboard.OneHitObjective;
 import eu.mcone.lobby.story.LobbyStory;
 import eu.mcone.lobby.scoreboard.SidebarObjective;
+import eu.mcone.lobby.util.PlayerHiderManager;
+import eu.mcone.lobby.util.SilentLobbyManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -45,6 +47,10 @@ public class Lobby extends LobbyPlugin {
     private LobbyOneHitManager oneHitManager;
     @Getter
     private LobbyJumpNRunManager jumpNRunManager;
+    @Getter
+    private SilentLobbyManager silentLobbyManager;
+    @Getter
+    private PlayerHiderManager playerHiderManager;
     @Getter
     private Map<LobbyWorld, CoreWorld> worlds;
 
@@ -98,6 +104,9 @@ public class Lobby extends LobbyPlugin {
 
         sendConsoleMessage("§aLoading JmpNRunManager...");
         jumpNRunManager = new LobbyJumpNRunManager(this);
+
+        silentLobbyManager = new SilentLobbyManager();
+        playerHiderManager = new PlayerHiderManager();
 
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");
 

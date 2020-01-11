@@ -6,7 +6,7 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.util.SilentLobbyUtils;
+import eu.mcone.lobby.util.SilentLobbyManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -19,7 +19,7 @@ public class ChatListener implements Listener {
     public void onChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
 
-        if (SilentLobbyUtils.isActivatedSilentHub(p)) {
+        if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
             e.setCancelled(true);
             LobbyPlugin.getInstance().getMessager().send(p, "§cDu kannst in der Privaten Lobby keine Chat Nachrichten senden oder empfangen.");
         }

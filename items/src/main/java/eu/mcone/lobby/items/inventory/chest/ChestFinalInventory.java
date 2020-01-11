@@ -48,6 +48,7 @@ class ChestFinalInventory extends CoreInventory {
                     .displayName("§e§lDein Gewinn:")
                     .lore("§7§oDu hast ein Item mit dem",
                             "§7§oLevel " + item.getLevel().getDisplayname(),
+                            "§7§oLevel " + item.getLevel().getDisplayname(),
                             "§7§ogewonnen!").create());
         }
 

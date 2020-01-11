@@ -13,8 +13,6 @@ import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.listener.OneHitListener;
 import eu.mcone.lobby.listener.PlayerJoinListener;
 import eu.mcone.lobby.scoreboard.OneHitObjective;
-import eu.mcone.lobby.util.PlayerHider;
-import eu.mcone.lobby.util.SilentLobbyUtils;
 import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -45,12 +43,6 @@ public class LobbyOneHitManager implements OneHitManager {
     @Override
     public void setStart(Player p) {
         if (!fighting.contains(p)) {
-            if (SilentLobbyUtils.isActivatedSilentHub(p)) {
-                SilentLobbyUtils.deactivateSilentLobby(p);
-            }
-            if (PlayerHider.players.contains(p)) {
-                PlayerHider.showPlayers(p);
-            }
 
             CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new OneHitObjective(this));
 

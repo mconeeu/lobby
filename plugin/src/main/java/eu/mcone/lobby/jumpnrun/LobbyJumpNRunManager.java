@@ -16,8 +16,8 @@ import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.listener.JumpNRunListener;
 import eu.mcone.lobby.listener.PlayerJoinListener;
-import eu.mcone.lobby.util.PlayerHider;
-import eu.mcone.lobby.util.SilentLobbyUtils;
+import eu.mcone.lobby.util.PlayerHiderManager;
+import eu.mcone.lobby.util.SilentLobbyManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -206,15 +206,15 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
 
         if (p.hasPermission("lobby.silenthub")) {
             p.getInventory().setItem(1, HotbarItems.PRIVATE_LOBBY);
-        } else if (!PlayerHider.players.contains(p)) {
+        } else if (!LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(p)) {
             p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
         } else {
             p.getInventory().setItem(0, HotbarItems.SHOW_PLAYERS);
         }
 
-        if (SilentLobbyUtils.isActivatedSilentHub(p)) {
+        if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
             p.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);
-        } else if (PlayerHider.players.contains(p)) {
+        } else if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(p)) {
             p.getInventory().setItem(0, HotbarItems.SHOW_PLAYERS);
         } else {
             p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);

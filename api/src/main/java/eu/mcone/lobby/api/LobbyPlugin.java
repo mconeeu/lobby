@@ -11,6 +11,8 @@ import eu.mcone.gameapi.api.Option;
 import eu.mcone.lobby.api.jumpnrun.JumpNRunManager;
 import eu.mcone.lobby.api.onehit.OneHitManager;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.api.player.PlayerHiderManager;
+import eu.mcone.lobby.api.player.SilentLobbyManager;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 
@@ -37,5 +39,9 @@ public abstract class LobbyPlugin extends GamePlugin<LobbyPlayer> {
     public abstract OneHitManager getOneHitManager();
 
     public abstract JumpNRunManager getJumpNRunManager();
+
+    public abstract SilentLobbyManager getSilentLobbyManager();
+
+    public abstract PlayerHiderManager getPlayerHiderManager();
 
 }

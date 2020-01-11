@@ -17,12 +17,18 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PlayerHider {
+public class PlayerHiderManager implements eu.mcone.lobby.api.player.PlayerHiderManager {
 
-    public static ArrayList<Player> players = new ArrayList<>();
-    private static HashMap<String, Long> time = new HashMap<>();
+    public ArrayList<Player> players;
+    private HashMap<String, Long> time;
 
-    public static void hidePlayers(Player p) {
+    public PlayerHiderManager() {
+        this.players = new ArrayList<>();
+        this.time = new HashMap<>();
+    }
+
+    @Override
+    public void hidePlayers(Player p) {
         if (time.containsKey(p.getName())){
             long diff = (System.currentTimeMillis() - time.get(p.getName())) / 10L / 60L;
             int cooldown = 1;
@@ -46,7 +52,8 @@ public class PlayerHider {
         time.put(p.getName(), System.currentTimeMillis());
     }
 
-    public static void showPlayers(Player p) {
+    @Override
+    public void showPlayers(Player p) {
         for (Player all : Bukkit.getOnlinePlayers()){
             p.showPlayer(all);
         }
@@ -61,12 +68,18 @@ public class PlayerHider {
         time.put(p.getName(), System.currentTimeMillis());
     }
 
-    public static void playerJoined(Player j) {
+    @Override
+    public void playerJoined(Player j) {
         for (Player p : Bukkit.getOnlinePlayers()) {
-            if (PlayerHider.players.contains(j)) {
+            if (players.contains(j)) {
                 j.hidePlayer(p);
             }
         }
+    }
+
+    @Override
+    public boolean isHidden(Player p) {
+        return players.contains(p);
     }
 
 }
