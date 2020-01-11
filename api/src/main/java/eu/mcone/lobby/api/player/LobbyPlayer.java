@@ -122,7 +122,6 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
         Player player = corePlayer.bukkit();
 
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 24, 1));
         EntityLightning is = new EntityLightning(
                 ((CraftWorld) player.getWorld()).getHandle(), player.getLocation().getX(),
                 player.getLocation().getY() + 20, player.getLocation().getZ());
@@ -137,15 +136,16 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
         player.setGameMode(GameMode.SPECTATOR);
         player.playSound(player.getLocation(), Sound.GLASS, 3, 2);
 
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(sp);
+        // ((CraftPlayer) player).getHandle().playerConnection.sendPacket(sp);
         player.playSound(player.getLocation(), Sound.AMBIENCE_THUNDER, 3, 2);
 
 
         player.playSound(player.getLocation(), Sound.CLICK, 3, 2);
         player.removePotionEffect(PotionEffectType.CONFUSION);
-        player.removePotionEffect(PotionEffectType.SLOW);
         player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, 1));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 1));
+
+        player.teleport(new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
+                (float) (player.getLocation().getYaw() + 90.0)));
 
         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
             player.teleport(new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
@@ -166,7 +166,6 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
 
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                         player.removePotionEffect(PotionEffectType.CONFUSION);
-                        player.removePotionEffect(PotionEffectType.SLOW);
 
                         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                             player.setGameMode(GameMode.ADVENTURE);
@@ -185,9 +184,9 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
                     }, 8);
 
 
-                }, 7);
-            }, 8);
-        }, 13);
+                }, 13);
+            }, 12);
+        }, 1);
     }
 
     public boolean hasJumpnrunMade(JumpNRun jumpnrun) {
