@@ -121,6 +121,7 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
     public void teleportAnimation(Location location) {
         Player player = corePlayer.bukkit();
 
+
         player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 24, 1));
         EntityLightning is = new EntityLightning(
                 ((CraftWorld) player.getWorld()).getHandle(), player.getLocation().getX(),
@@ -138,7 +139,6 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
 
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(sp);
         player.playSound(player.getLocation(), Sound.AMBIENCE_THUNDER, 3, 2);
-        player.setPlayerTime(14000, true);
 
 
         player.playSound(player.getLocation(), Sound.CLICK, 3, 2);
@@ -167,7 +167,6 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                         player.removePotionEffect(PotionEffectType.CONFUSION);
                         player.removePotionEffect(PotionEffectType.SLOW);
-                        player.setPlayerTime(1000, true);
 
                         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                             player.setGameMode(GameMode.ADVENTURE);

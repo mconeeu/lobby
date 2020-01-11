@@ -14,6 +14,7 @@ import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.LobbySettings;
 import eu.mcone.lobby.api.player.SpawnPoint;
+import eu.mcone.lobby.util.RealTimeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -27,16 +28,18 @@ public class LobbySettingsInventory extends CoreInventory {
         LobbySettings settings = lp.getSettings();
 
 
-        setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.CHEST, 1, 0).displayName("§f§lTraiding").create());
-        if (settings.isAllowTrading()) {
-            setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um das Handeln", "§7§omit anderen Spielern", "§7§ozu deaktivieren").create(), e -> {
-                settings.setAllowTrading(false);
+        setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.WATCH, 1, 0).displayName("§f§lTag-Nacht Zyklus").create());
+        if (settings.isRealTime()) {
+            setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lEchtzeit").lore("§7§oKlicke um in der Lobby", "§7§oimmer Tag zu haben").create(), e -> {
+                settings.setRealTime(false);
                 setSettings(p, lp);
             });
         } else {
-            setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um das Handeln", "§7§omit anderen Spielern", "§7§ozu aktivieren").create(), e -> {
-                settings.setAllowTrading(true);
+            setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§e§lImmer Tag").lore("§7§oKlicke um die Zeit in der", "§7§oLobby an die echte Zeit", "§7§oanzupassen").create(), e -> {
+                settings.setRealTime(true);
                 setSettings(p, lp);
+
+                RealTimeUtil.setCurrentRealTime(lp);
             });
         }
 

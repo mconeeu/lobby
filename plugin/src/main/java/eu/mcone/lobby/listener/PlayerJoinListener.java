@@ -23,6 +23,7 @@ import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.util.PlayerHiderManager;
 import eu.mcone.lobby.scoreboard.SidebarObjective;
+import eu.mcone.lobby.util.RealTimeUtil;
 import eu.mcone.lobby.util.SilentLobbyManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -66,6 +67,7 @@ public class PlayerJoinListener implements Listener {
 
     public static void loadLobbyPlayer(Player p, LobbyPlayer lp, CorePlayerLoadedEvent e) {
         Bukkit.getPluginManager().callEvent(new LobbyPlayerLoadedEvent(lp, e.getLoadReason()));
+        RealTimeUtil.setCurrentRealTime(lp);
 
         if (e.getLoadReason().equals(CorePlayerLoadedEvent.Reason.JOIN)) {
             if (p.hasPermission("lobby.silenthub") && lp.getSettings().isSpawnInSilentLobby()) {

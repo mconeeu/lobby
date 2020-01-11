@@ -25,10 +25,12 @@ import eu.mcone.lobby.items.LobbyItems;
 import eu.mcone.lobby.jumpnrun.LobbyJumpNRunManager;
 import eu.mcone.lobby.listener.*;
 import eu.mcone.lobby.onehit.LobbyOneHitManager;
+import eu.mcone.lobby.scoreboard.LobbyObjective;
 import eu.mcone.lobby.scoreboard.OneHitObjective;
 import eu.mcone.lobby.story.LobbyStory;
 import eu.mcone.lobby.scoreboard.SidebarObjective;
 import eu.mcone.lobby.util.PlayerHiderManager;
+import eu.mcone.lobby.util.RealTimeUtil;
 import eu.mcone.lobby.util.SilentLobbyManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -155,8 +157,8 @@ public class Lobby extends LobbyPlugin {
     }
 
     private void startScheduler() {
-        Bukkit.getScheduler().runTaskTimer(this, SidebarObjective::updateLines, 50L, 100L);
-        Bukkit.getScheduler().runTaskTimer(this, OneHitObjective::updateLines, 50L, 100L);
+        Bukkit.getScheduler().runTaskTimer(this, LobbyObjective::updateLines, 50, 100);
+        Bukkit.getScheduler().runTaskTimer(this, new RealTimeUtil(), 50, 20 * 60);
     }
 
 }
