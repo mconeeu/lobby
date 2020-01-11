@@ -137,7 +137,7 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
         player.playSound(player.getLocation(), Sound.GLASS, 3, 2);
 
         // ((CraftPlayer) player).getHandle().playerConnection.sendPacket(sp);
-        player.playSound(player.getLocation(), Sound.AMBIENCE_THUNDER, 3, 2);
+        //   player.playSound(player.getLocation(), Sound.AMBIENCE_THUNDER, 3, 2);
 
 
         player.playSound(player.getLocation(), Sound.CLICK, 3, 2);
@@ -161,25 +161,60 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
 
                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                     player.teleport(new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
-                            (float) (player.getLocation().getYaw() + 100.0)).add(0, 19, 0));
+                            (float) (player.getLocation().getYaw() + 100.0)).add(0, 20, 0));
                     player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
 
+
+                    ///////////////////
+                    //BACK
+
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                        player.removePotionEffect(PotionEffectType.CONFUSION);
+                        player.teleport(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getPitch(),
+                                (float) (location.getYaw() + 90.0)).add(0, 65, 0));
+
+                        player.teleport(new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
+                                (float) (player.getLocation().getYaw() + 90.0)));
+                        player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 3);
 
                         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                            player.setGameMode(GameMode.ADVENTURE);
+                            player.teleport(new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
+                                    (float) (player.getLocation().getYaw() + 90.0)).subtract(0, 35, 0));
+                            player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
 
-                            for (Player all : Bukkit.getOnlinePlayers()) {
-                                if ((!LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(all) && !LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(player))
-                                        && (!LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(all) && !LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(player))) {
-                                    all.showPlayer(player);
-                                }
-                            }
-                            player.teleport(location);
-                            player.playSound(player.getLocation(), Sound.FIREWORK_TWINKLE, 3, 2);
-                        }, 3);
+                            player.teleport(new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
+                                    (float) (player.getLocation().getYaw() + 90.0)));
+                            player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
 
+                            Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
+                                player.teleport(new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
+                                        (float) (player.getLocation().getYaw() + 90)).subtract(0, 18, 0));
+
+                                player.teleport(new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
+                                        (float) (player.getLocation().getYaw() + 90.0)));
+                                player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
+
+
+                                Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
+                                    player.removePotionEffect(PotionEffectType.CONFUSION);
+
+                                    Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
+                                        player.setGameMode(GameMode.ADVENTURE);
+
+                                        for (Player all : Bukkit.getOnlinePlayers()) {
+                                            if ((!LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(all) && !LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(player))
+                                                    && (!LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(all) && !LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(player))) {
+                                                all.showPlayer(player);
+                                            }
+                                        }
+                                        player.teleport(location);
+                                        player.playSound(player.getLocation(), Sound.FIREWORK_TWINKLE, 3, 2);
+                                    }, 3);
+                                }, 8);
+
+                            }, 8);
+
+
+                        }, 7);
 
                     }, 8);
 
