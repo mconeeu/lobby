@@ -122,12 +122,6 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
         Player player = corePlayer.bukkit();
 
 
-        EntityLightning is = new EntityLightning(
-                ((CraftWorld) player.getWorld()).getHandle(), player.getLocation().getX(),
-                player.getLocation().getY() + 20, player.getLocation().getZ());
-        PacketPlayOutSpawnEntityWeather sp = new PacketPlayOutSpawnEntityWeather(is);
-
-
         player.setExp(1);
         for (Player all : Bukkit.getOnlinePlayers()) {
             all.spigot().playEffect(player.getLocation(), Effect.SMALL_SMOKE, 1, 1, 1, 1, 1, 3, 30, 15);
@@ -135,9 +129,6 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
 
         player.setGameMode(GameMode.SPECTATOR);
         player.playSound(player.getLocation(), Sound.GLASS, 3, 2);
-
-        // ((CraftPlayer) player).getHandle().playerConnection.sendPacket(sp);
-        //   player.playSound(player.getLocation(), Sound.AMBIENCE_THUNDER, 3, 2);
 
 
         player.playSound(player.getLocation(), Sound.CLICK, 3, 2);
@@ -195,30 +186,21 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
 
 
                                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                                    player.removePotionEffect(PotionEffectType.CONFUSION);
+                                    player.setGameMode(GameMode.SURVIVAL);
 
-                                    Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                                        player.setGameMode(GameMode.ADVENTURE);
-
-                                        for (Player all : Bukkit.getOnlinePlayers()) {
-                                            if ((!LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(all) && !LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(player))
-                                                    && (!LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(all) && !LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(player))) {
-                                                all.showPlayer(player);
-                                            }
+                                    for (Player all : Bukkit.getOnlinePlayers()) {
+                                        if ((!LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(all) && !LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(player))
+                                                && (!LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(all) && !LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(player))) {
+                                            all.showPlayer(player);
                                         }
-                                        player.teleport(location);
-                                        player.playSound(player.getLocation(), Sound.FIREWORK_TWINKLE, 3, 2);
-                                    }, 3);
-                                }, 8);
-
+                                    }
+                                    player.teleport(location);
+                                    player.removePotionEffect(PotionEffectType.CONFUSION);
+                                    player.playSound(player.getLocation(), Sound.FIREWORK_TWINKLE, 3, 2);
+                                }, 12);
                             }, 8);
-
-
                         }, 7);
-
                     }, 8);
-
-
                 }, 13);
             }, 12);
         }, 1);
