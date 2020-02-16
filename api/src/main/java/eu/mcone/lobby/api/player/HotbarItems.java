@@ -117,4 +117,53 @@ public class HotbarItems {
             .displayName("§4Verlassen")
             .create();
 
+
+    /*
+     * Lobby-PVP ITEMS
+     */
+
+    /*public static final ItemStack SWORD_BLUE = new ItemBuilder(Material.STONE_SWORD, 1, 0)
+            .unbreakable(true)
+            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
+            .displayName("§fBlaues-Schwert")
+            .enchantment(Enchantment.DAMAGE_ALL, 1)
+            .create();
+
+    public static final ItemStack SWORD_RED = new ItemBuilder(Material.STONE_SWORD, 1, 0)
+            .unbreakable(true)
+            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
+            .displayName("§fRotes-Schwert")
+            .enchantment(Enchantment.DAMAGE_ALL, 1)
+            .create();
+
+    public static final ItemStack ROD_RED = new ItemBuilder(Material.FISHING_ROD, 1, 0)
+            .unbreakable(true)
+            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
+            .displayName("§fRotes-ANgel")
+            .create();
+
+    public static final ItemStack ROD_BLUE = new ItemBuilder(Material.FISHING_ROD, 1, 0)
+            .unbreakable(true)
+            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
+            .displayName("§fBlaue-Angel")
+            .create();
+
+    public static final ItemStack BOW_BLUE = new ItemBuilder(Material.BOW, 1, 0)
+            .unbreakable(true)
+            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
+            .displayName("§fBlauer-Bogen")
+            .create();
+
+    public static final ItemStack BOW_RED = new ItemBuilder(Material.BOW, 1, 0)
+            .unbreakable(true)
+            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
+            .displayName("§fRoter-Bogen")
+            .create();
+
+    public static final ItemStack ARROWS = new ItemBuilder(Material.ARROW, 11, 0)
+            .unbreakable(true)
+            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
+            .displayName("§fPfeile")
+            .create();*/
+
 }

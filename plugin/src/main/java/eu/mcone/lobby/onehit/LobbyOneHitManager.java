@@ -52,7 +52,7 @@ public class LobbyOneHitManager implements OneHitManager {
             fighting.add(p);
             p.setGameMode(GameMode.ADVENTURE);
             p.setAllowFlight(false);
-            p.teleport(getRandomSpawn());
+            LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation(getRandomSpawn());
 
             if (fighting.size() <= 1) {
                 LobbyPlugin.getInstance().getMessager().send(p, "§7Du bist gerade der §f§oeinzigste§7, der §fOneHit§7 spielt!");
@@ -63,6 +63,8 @@ public class LobbyOneHitManager implements OneHitManager {
                     if (fighting.contains(all))
                         CoreSystem.getInstance().getCorePlayer(all).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                 }
+
+                LobbyPlugin.getInstance().getMessager().send(p,"§7Töte alle §fSpieler §7mit einem §fRoten Hut§7!");
 
             }
             LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);

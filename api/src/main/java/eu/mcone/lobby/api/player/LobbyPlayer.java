@@ -6,6 +6,7 @@
 package eu.mcone.lobby.api.player;
 
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.coresystem.api.bukkit.scoreboard.CoreObjective;
 import eu.mcone.gameapi.api.player.GameAPIPlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -23,6 +24,7 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.util.Vector;
 
 import java.util.Map;
@@ -125,6 +127,7 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
         player.setExp(1);
         for (Player all : Bukkit.getOnlinePlayers()) {
             all.spigot().playEffect(player.getLocation(), Effect.SMALL_SMOKE, 1, 1, 1, 1, 1, 3, 30, 15);
+            all.hidePlayer(player);
         }
 
         player.setGameMode(GameMode.SPECTATOR);
@@ -194,6 +197,7 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
                                             all.showPlayer(player);
                                         }
                                     }
+
                                     player.teleport(location);
                                     player.removePotionEffect(PotionEffectType.CONFUSION);
                                     player.playSound(player.getLocation(), Sound.FIREWORK_TWINKLE, 3, 2);

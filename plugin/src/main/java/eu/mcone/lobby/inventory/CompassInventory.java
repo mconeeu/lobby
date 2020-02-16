@@ -12,6 +12,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
+import eu.mcone.coresystem.api.bukkit.scoreboard.CoreObjective;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -24,6 +25,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -254,41 +256,11 @@ public class CompassInventory extends CoreInventory {
 
                                 e -> {
 
+
                                     p.closeInventory();
-
-                                    p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 80, 1));
-                                    Vector v = new Vector(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ());
-                                    v.normalize();
-                                    v.setY(1.3D);
-                                    v.multiply(1.4D);
-                                    p.setVelocity(v);
-                                    p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 1, 1);
-                                    CoreSystem.getInstance().createTitle().title("§c3")
-                                            .stay(2)
-                                            .fadeIn(1).fadeOut(2)
-                                            .send(p);
-                                    Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
-                                        CoreSystem.getInstance().createTitle().title("§f2")
-                                                .stay(2)
-                                                .fadeIn(1).fadeOut(2)
-                                                .send(p);
-                                    }, 25);
-
-                                    Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
-                                        CoreSystem.getInstance().createTitle().title("§e1")
-                                                .stay(1)
-                                                .fadeIn(1).fadeOut(1)
-                                                .send(p);
-                                    }, 41);
-                                    Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
-                                        LobbyPlugin.getInstance().getOneHitManager().setStart(p);
-                                        CoreSystem.getInstance().createTitle().title("§cTöte alle Spieler").subTitle("§cdie ein Roten Helm haben")
-                                                .stay(1)
-                                                .fadeIn(1).fadeOut(1)
-                                                .send(p);
-                                    }, 60);
-
+                                    LobbyPlugin.getInstance().getOneHitManager().setStart(p);
                                 });
+
 
                         setItem(InventorySlot.ROW_4_SLOT_9, new ItemBuilder(Material.BOOK, 1, 0).displayName("§3Die Story").lore("§7§oSpiele die Story und erhalte", "§7§ocoole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren").create(), e -> {
                             LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);

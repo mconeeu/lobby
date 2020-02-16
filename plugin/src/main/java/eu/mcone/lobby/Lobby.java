@@ -17,6 +17,7 @@ import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.lobbypvp.LobbyPvPManager;
 import eu.mcone.lobby.api.onehit.OneHitManager;
 import eu.mcone.lobby.command.LobbyCMD;
 import eu.mcone.lobby.gang.LobbyGang;
@@ -47,6 +48,8 @@ public class Lobby extends LobbyPlugin {
     private BuildSystem buildSystem;
     @Getter
     private LobbyOneHitManager oneHitManager;
+    @Getter
+    private LobbyPvPManager lobbyPvPManager;
     @Getter
     private LobbyJumpNRunManager jumpNRunManager;
     @Getter
@@ -155,6 +158,7 @@ public class Lobby extends LobbyPlugin {
     public CoreWorld getLobbyWorld(LobbyWorld world) {
         return worlds.get(world);
     }
+
 
     private void startScheduler() {
         Bukkit.getScheduler().runTaskTimer(this, LobbyObjective::updateLines, 50, 100);
