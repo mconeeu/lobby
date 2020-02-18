@@ -18,19 +18,19 @@ public class GoldOfficeInventory extends CoreInventory {
     GoldOfficeInventory(Player p) {
         super("§8» §d§lBüro §8| §fGold", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§aBüro kaufen").lore("§a§lBüro kosten 500 Emeralds").create(),
                 e -> {
                     if (cp.getEmeralds() - 500 >= 0) {
                         cp.removeEmeralds(500);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
-                        LobbyItem.OFFICE_CARD_GOLD.add(lp);
+                        lp.addLobbyItem(LobbyItem.OFFICE_CARD_GOLD);
 
-                        if (LobbyItem.OFFICE_CARD_BRONZE.has(lp)) {
-                            LobbyItem.OFFICE_CARD_BRONZE.remove(lp);
-                        } else if (LobbyItem.OFFICE_CARD_SILVER.has(lp)) {
-                            LobbyItem.OFFICE_CARD_SILVER.remove(lp);
+                        if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE)) {
+                            lp.removeLobbyItem(LobbyItem.OFFICE_CARD_BRONZE);
+                        } else if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER)) {
+                            lp.removeLobbyItem(LobbyItem.OFFICE_CARD_SILVER);
                         }
 
                         p.closeInventory();

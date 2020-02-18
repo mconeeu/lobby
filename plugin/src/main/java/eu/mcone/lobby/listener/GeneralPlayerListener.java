@@ -40,7 +40,7 @@ public class GeneralPlayerListener implements Listener {
     public void onInventoryClick(InventoryClickEvent e) {
         if (e.getWhoClicked() instanceof Player) {
             Player p = (Player) e.getWhoClicked();
-            if (!Lobby.getInstance().getBuildSystem().hasBuildModeEnabled(p)) e.setCancelled(true);
+            if (!Lobby.getSystem().getBuildSystem().hasBuildModeEnabled(p)) e.setCancelled(true);
         }
     }
 
@@ -81,16 +81,16 @@ public class GeneralPlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onQuit(PlayerQuitEvent e) {
         e.setQuitMessage(null);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(e.getPlayer().getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().getUniqueId());
 
         if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
             lp.setBankProgress(BankProgress.BANK_ROBBERY_START);
             JohnBankRobberyInventory.currentlyInBank = null;
-            LobbyItem.GOLD_BARDING.remove(lp);
+            lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
 
         }
         lp.saveData();
-        LobbyPlugin.getInstance().unregisterGamePlayer(lp);
+        Lobby.getSystem().unregisterLobbyPlayer(lp);
     }
 
     @EventHandler

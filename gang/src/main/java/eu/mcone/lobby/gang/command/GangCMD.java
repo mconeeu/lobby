@@ -25,7 +25,7 @@ public class GangCMD extends CorePlayerCommand {
 
     @Override
     public boolean onPlayerCommand(Player p, String[] args) {
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("msg") || args[0].equalsIgnoreCase("chat")) {

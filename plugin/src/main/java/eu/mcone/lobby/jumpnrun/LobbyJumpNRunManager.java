@@ -16,8 +16,6 @@ import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.listener.JumpNRunListener;
 import eu.mcone.lobby.listener.PlayerJoinListener;
-import eu.mcone.lobby.util.PlayerHiderManager;
-import eu.mcone.lobby.util.SilentLobbyManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -63,7 +61,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
 
 
             CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
-            LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(corePlayer.getUuid());
+            LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(corePlayer.getUuid());
 
             jumpandrunItems(p);
             LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);
@@ -130,7 +128,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
     @Override
     public void setFinish(Player p) {
         CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(corePlayer.getUuid());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(corePlayer.getUuid());
 
         if (isCurrentlyPlaying(p)) {
             JumpNRunPlayer jnrPlayer = getCurrentlyPlaying(p);

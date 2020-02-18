@@ -21,7 +21,7 @@ public class BankCreateCardInventory extends CoreInventory {
 
     public BankCreateCardInventory(Player p) {
         super("§8» §d§lBänker", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_1_SLOT_1,
                 Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1)
@@ -41,15 +41,15 @@ public class BankCreateCardInventory extends CoreInventory {
 
 
                         if (p.hasPermission("mcone.premium")) {
-                            if (!LobbyItem.BANKCARD_PREMIUM.has(lp)) {
-                                LobbyItem.BANKCARD_PREMIUM.add(lp);
+                            if (!lp.hasLobbyItem(LobbyItem.BANKCARD_PREMIUM)) {
+                                lp.addLobbyItem(LobbyItem.BANKCARD_PREMIUM);
                                 new BankMenInventory(p);
                             } else {
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fBänker §8|§7 Du hast doch schon ein Konto bei mir");
                             }
 
-                        } else if (!LobbyItem.BANKCARD.has(lp)) {
-                            LobbyItem.BANKCARD.add(lp);
+                        } else if (!lp.hasLobbyItem(LobbyItem.BANKCARD)) {
+                            lp.addLobbyItem(LobbyItem.BANKCARD);
                             new BankMenInventory(p);
                         } else {
                             p.sendMessage("§8[§7§l!§8] §cNPC §8» §fBänker §8|§7 Du hast doch schon ein Konto bei mir");

@@ -5,32 +5,27 @@
 
 package eu.mcone.lobby.api.player;
 
-import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.coresystem.api.bukkit.scoreboard.CoreObjective;
-import eu.mcone.gameapi.api.player.GameAPIPlayer;
+import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.enums.JumpNRun;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.gang.Gang;
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.server.v1_8_R3.EntityLightning;
-import net.minecraft.server.v1_8_R3.PacketPlayOutSpawnEntityWeather;
 import org.bukkit.*;
-import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.util.Vector;
 
-import javax.sound.sampled.SourceDataLine;
 import java.util.Map;
 
-public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
+public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.GamePlayer<LobbyPlayerProfile> {
+
+    @Getter
+    private final GamePlayer gamePlayer;
 
     @Getter
     @Setter
@@ -46,8 +41,9 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
     @Getter
     private Map<JumpNRun, Long> jumpnruns;
 
-    public LobbyPlayer(CorePlayer corePlayer) {
-        super(LobbyPlugin.getPlugin(), corePlayer);
+    public LobbyPlayer(GamePlayer gamePlayer) {
+        super(gamePlayer.getCorePlayer());
+        this.gamePlayer = gamePlayer;
     }
 
     public LobbyPlayerProfile reload() {
@@ -70,7 +66,6 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
 
     @Override
     public void saveData() {
-        super.saveData();
         LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, bankprogressId, settings, secrets, jumpnruns));
     }
 
@@ -92,6 +87,24 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
         final int amount = preAmount;
         this.chests -= amount;
         saveData();
+    }
+
+    public boolean hasLobbyItem(LobbyItem item) {
+        return gamePlayer.hasBackpackItem(item.getCategory().name(), item.getId());
+    }
+
+    public void addLobbyItem(LobbyItem item) {
+        gamePlayer.addBackpackItem(
+                item.getCategory().name(),
+                LobbyPlugin.getInstance().getBackpackManager().getBackpackItem(item.getCategory().name(), item.getId())
+        );
+    }
+
+    public void removeLobbyItem(LobbyItem item) {
+        gamePlayer.removeBackpackItem(
+                item.getCategory().name(),
+                LobbyPlugin.getInstance().getBackpackManager().getBackpackItem(item.getCategory().name(), item.getId())
+        );
     }
 
     public void setProgress(Progress progress) {
@@ -123,7 +136,7 @@ public class LobbyPlayer extends GameAPIPlayer<LobbyPlayerProfile> {
 
     public void teleportAnimation(Location location) {
         Player player = corePlayer.bukkit();
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(player);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
         LobbySettings settings = lp.getSettings();
 
         if (settings.isAllowAnimation()) {

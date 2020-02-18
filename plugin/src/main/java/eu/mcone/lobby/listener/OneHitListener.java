@@ -104,7 +104,7 @@ public class OneHitListener implements Listener {
                 LobbyPlugin.getInstance().getMessager().send(k, "§7Du hast §f" + p.getDisplayName() + " §7getötet §8[§a+2 Coins§8]");
                 CoreSystem.getInstance().getCorePlayer(k).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                 CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
-                LobbyPlayer lk = LobbyPlugin.getInstance().getGamePlayer(k);
+                LobbyPlayer lk = LobbyPlugin.getInstance().getLobbyPlayer(k);
                 lk.getCorePlayer().addCoins(2);
                 k.getInventory().setItem(6, new ItemBuilder(Material.ARROW, 1, 0).displayName("§bOneHit-Pfeil").create());
                 k.getWorld().playSound(k.getLocation(), Sound.LEVEL_UP, 1, 1);
@@ -126,7 +126,7 @@ public class OneHitListener implements Listener {
         if (manager.isFighting(p)) {
             p.setExp(1);
             e.setRespawnLocation(manager.getRandomSpawn());
-            Bukkit.getScheduler().runTask(Lobby.getInstance(), () -> manager.setOneHitFightItems(p));
+            Bukkit.getScheduler().runTask(Lobby.getSystem(), () -> manager.setOneHitFightItems(p));
         }
     }
 

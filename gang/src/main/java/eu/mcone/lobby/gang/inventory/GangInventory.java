@@ -27,9 +27,9 @@ import java.util.List;
 public class GangInventory extends CoreInventory {
 
     public GangInventory(Player p) {
-        super(LobbyPlugin.getInstance().getGamePlayer(p).isInGang() ? "§2§l"+LobbyPlugin.getInstance().getGamePlayer(p).getGang().getName() : "§2§lGang gründen", p, InventorySlot.ROW_6);
+        super(LobbyPlugin.getInstance().getLobbyPlayer(p).isInGang() ? "§2§l"+LobbyPlugin.getInstance().getLobbyPlayer(p).getGang().getName() : "§2§lGang gründen", p, InventorySlot.ROW_6);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         if (lp.isInGang()) {
             Gang gang = lp.getGang();

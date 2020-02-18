@@ -17,11 +17,11 @@ public class EndInventory extends CoreInventory {
 
     public EndInventory(Player p) {
         super("§5§lEnde", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_2_SLOT_5, LobbyItem.ONE_HIT_SWORD.getItemStack(), e -> {
-            if (!LobbyItem.ONE_HIT_SWORD.has(lp)) {
-                LobbyItem.ONE_HIT_SWORD.add(lp);
+            if (!lp.hasLobbyItem(LobbyItem.ONE_HIT_SWORD)) {
+                lp.addLobbyItem(LobbyItem.ONE_HIT_SWORD);
                 LobbyPlugin.getInstance().getMessager().send(p, "Du hast das One Hit Sword aufgenommen!");
             } else {
                 LobbyPlugin.getInstance().getMessager().send(p, "§4Du besitzt diese Item bereits!");

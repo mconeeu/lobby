@@ -66,7 +66,7 @@ class ChestItemInventory extends CoreInventory {
         this.slots = new ArrayList<>();
         this.fadeSlots = new ArrayList<>();
         this.changedItems = new HashMap<>();
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         List<BackpackItem> items = new ArrayList<>();
 
@@ -74,7 +74,7 @@ class ChestItemInventory extends CoreInventory {
             List<BackpackItem> levelItems = new ArrayList<>();
 
             for (Map.Entry<BackpackItem, Category> categoryItem : ALLOWED_ITEMS.entrySet()) {
-                if (categoryItem.getKey().getLevel().equals(level) && !lp.hasBackpackItem(categoryItem.getValue().getName(), categoryItem.getKey())) {
+                if (categoryItem.getKey().getLevel().equals(level) && !lp.getGamePlayer().hasBackpackItem(categoryItem.getValue().getName(), categoryItem.getKey())) {
                     levelItems.add(categoryItem.getKey());
                 }
             }

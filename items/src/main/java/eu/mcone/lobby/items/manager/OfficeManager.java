@@ -20,15 +20,15 @@ public class OfficeManager {
     private static List<Player> VANISHED = new ArrayList<>();
 
     public static void getOffice(Player player) {
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(player.getUniqueId());
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
 
-        if (LobbyItem.OFFICE_CARD_BRONZE.has(lp)) {
+        if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE)) {
             vanishPlayer(player);
             LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.BRONZE_OFFICE.getSpawnLocation());
-        } else if (LobbyItem.OFFICE_CARD_SILVER.has(lp)) {
+        } else if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER)) {
             vanishPlayer(player);
             LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.SILVER_OFFICE.getSpawnLocation());
-        } else if (LobbyItem.OFFICE_CARD_GOLD.has(lp)) {
+        } else if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_GOLD)) {
             vanishPlayer(player);
             LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.GOLD_OFFICE.getSpawnLocation());
         }

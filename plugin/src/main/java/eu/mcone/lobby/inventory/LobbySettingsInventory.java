@@ -24,7 +24,7 @@ public class LobbySettingsInventory extends CoreInventory {
 
     public LobbySettingsInventory(Player p) {
         super("§8» §c§lLobby Einstellung", p, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
         LobbySettings settings = lp.getSettings();
 
 
@@ -132,7 +132,7 @@ public class LobbySettingsInventory extends CoreInventory {
                     break;
                 }
                 case LAST_LOCATION: {
-                    if (LobbyItem.OFFICE_CARD_BRONZE.has(lp) || LobbyItem.OFFICE_CARD_SILVER.has(lp) || LobbyItem.OFFICE_CARD_GOLD.has(lp)) {
+                    if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE) || lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER) || lp.hasLobbyItem(LobbyItem.OFFICE_CARD_GOLD)) {
                         settings.setSpawnPoint(SpawnPoint.OFFICE);
                     } else {
                         settings.setSpawnPoint(SpawnPoint.SPAWN);

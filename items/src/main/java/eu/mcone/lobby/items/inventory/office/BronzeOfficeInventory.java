@@ -18,14 +18,14 @@ public class BronzeOfficeInventory extends CoreInventory {
     BronzeOfficeInventory(Player p) {
         super("§8» §d§lBüro §8| §fBronze", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.CLAY_BRICK, 1, 0).displayName("§aBüro kaufen").lore("§a§lBüro kosten 150 Emeralds").create(),
                 e -> {
                     if (cp.getEmeralds() - 150 >= 0) {
                         cp.removeEmeralds(150);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
-                        LobbyItem.OFFICE_CARD_BRONZE.add(lp);
+                        lp.addLobbyItem(LobbyItem.OFFICE_CARD_BRONZE);
 
                         p.closeInventory();
                         p.sendMessage("§8[§7§l!§8] §cNPC §8» §fVerkäufer §8|§7 Bitte sehr ihre Büro Schlüsselkarte gehen sie zu mein Kolegen er bringt sie dann zu ihr Büro!");

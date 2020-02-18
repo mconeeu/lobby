@@ -25,8 +25,7 @@ public class CoreManagerReloadListener implements Listener {
             npc.togglePlayerVisibility(ListMode.WHITELIST);
         }
 
-
-        for (LobbyPlayer lp : LobbyPlugin.getInstance().getOnlineGamePlayers()) {
+        for (LobbyPlayer lp : LobbyPlugin.getInstance().getOnlineLobbyPlayers()) {
             LobbyPlayerLoadedListener.spawnStoryNpcs(lp);
             LobbyPlayerLoadedListener.spawnStoryNpcs(lp);
         }
@@ -36,7 +35,7 @@ public class CoreManagerReloadListener implements Listener {
     public void on(HologramManagerReloadedEvent e) {
         LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").togglePlayerVisibility(ListMode.WHITELIST);
 
-        for (LobbyPlayer lp : LobbyPlugin.getInstance().getOnlineGamePlayers()) {
+        for (LobbyPlayer lp : LobbyPlugin.getInstance().getOnlineLobbyPlayers()) {
             if (lp.getProgressId() < 1) {
                 LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").toggleVisibility(lp.bukkit(), true);
             }

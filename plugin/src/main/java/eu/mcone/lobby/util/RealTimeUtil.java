@@ -4,13 +4,12 @@ import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class RealTimeUtil implements Runnable {
 
     @Override
     public void run() {
-        for (LobbyPlayer lp : Lobby.getInstance().getOnlineGamePlayers()) {
+        for (LobbyPlayer lp : Lobby.getSystem().getOnlineLobbyPlayers()) {
             setCurrentRealTime(lp);
         }
     }

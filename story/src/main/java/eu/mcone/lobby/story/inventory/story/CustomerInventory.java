@@ -17,13 +17,13 @@ public class CustomerInventory extends CoreInventory {
 
     public CustomerInventory(Player p) {
         super("§fVerkäufer", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_2_SLOT_5, LobbyItem.BOAT_PASS.getItemStack(), e -> {
-            if (!LobbyItem.BOAT_PASS.has(lp)) {
+            if (!lp.hasLobbyItem(LobbyItem.BOAT_PASS)) {
                 if ((lp.getCorePlayer().getCoins() - 20) >= 0) {
                     lp.getCorePlayer().removeCoins(20);
-                    LobbyItem.BOAT_PASS.add(lp);
+                    lp.addLobbyItem(LobbyItem.BOAT_PASS);
                     if (p.hasPermission("lobby.silenthub")) {
                         p.getInventory().setItem(3, LobbyItem.BOAT_PASS.getItemStack());
                     } else {

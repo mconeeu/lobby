@@ -29,7 +29,7 @@ public class NpcInteractListener implements Listener {
     @EventHandler
     public void onNpcInteract(NpcInteractEvent e) {
         Player p = e.getPlayer();
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         if (e.getNpc().getData().getType().equals(EntityType.PLAYER) && e.getAction().equals(PacketPlayInUseEntity.EnumEntityUseAction.INTERACT)) {
             String npcName = e.getNpc().getData().getName();
@@ -38,7 +38,7 @@ public class NpcInteractListener implements Listener {
                     || npcName.equalsIgnoreCase(StoryNPC.OFFICE_TRADER.getNpcName())) {
                 new TraderInventory(p);
             } else if (npcName.equalsIgnoreCase(StoryNPC.BANKMAN.getNpcName())) {
-                if (!LobbyItem.BANKCARD.has(lp) && !LobbyItem.BANKCARD_PREMIUM.has(lp)) {
+                if (!lp.hasLobbyItem(LobbyItem.BANKCARD) && !lp.hasLobbyItem(LobbyItem.BANKCARD_PREMIUM)) {
                     new BankCreateCardInventory(p);
                 } else {
                     new BankMenInventory(p);

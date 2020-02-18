@@ -14,11 +14,11 @@ public class SwordInventory extends CoreInventory {
 
     public SwordInventory(Player p) {
         super("§f§lSicherheitstruhe", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_2_SLOT_5, LobbyItem.IRON_SWORD.getItemStack(), e -> {
-            if (!LobbyItem.IRON_SWORD.has(lp)) {
-                LobbyItem.IRON_SWORD.add(lp);
+            if (!lp.hasLobbyItem(LobbyItem.IRON_SWORD)) {
+                lp.addLobbyItem(LobbyItem.IRON_SWORD);
                 lp.setBankProgress(BankProgress.BANK_ROBBERY_START);
                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
                     p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Endlich hast du das Schwert jetzt komm schnell zurück ins Büro damit wir denn Bankraub starten können!");

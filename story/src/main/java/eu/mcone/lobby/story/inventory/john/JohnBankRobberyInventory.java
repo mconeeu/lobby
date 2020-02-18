@@ -21,7 +21,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
 
     public JohnBankRobberyInventory(Player p) {
         super("§fJohn | Bank-Raub", p, InventorySlot.ROW_6, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         if (lp.getBankprogressId() == BankProgress.SMUGGLER.getId()) {
 

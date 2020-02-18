@@ -12,24 +12,17 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
-import eu.mcone.coresystem.api.bukkit.scoreboard.CoreObjective;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
 
 public class CompassInventory extends CoreInventory {
 
@@ -65,7 +58,7 @@ public class CompassInventory extends CoreInventory {
         openInventory();
 
 
-        Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
             p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
 
             setItem(InventorySlot.ROW_1_SLOT_3, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 0).displayName("§8//§oMCONE§8//").create());
@@ -84,7 +77,7 @@ public class CompassInventory extends CoreInventory {
             openInventory();
 
 
-            Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
                 p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
 
                 setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
@@ -95,7 +88,7 @@ public class CompassInventory extends CoreInventory {
                 openInventory();
 
 
-                Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
+                Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
                     setItem(InventorySlot.ROW_1_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
                     setItem(InventorySlot.ROW_1_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
@@ -118,7 +111,7 @@ public class CompassInventory extends CoreInventory {
                     openInventory();
 
 
-                    Bukkit.getScheduler().runTaskLater(Lobby.getInstance(), () -> {
+                    Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
                         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
 
                         setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.NETHER_STAR, 1, 0)
@@ -127,7 +120,7 @@ public class CompassInventory extends CoreInventory {
                                         .create(),
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation("Spawn");
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("Spawn");
 
                                 });
 
@@ -138,7 +131,7 @@ public class CompassInventory extends CoreInventory {
                                         .create(),
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation("skypvp");
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("skypvp");
 
                                 });
 
@@ -148,7 +141,7 @@ public class CompassInventory extends CoreInventory {
                                         .create(),
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation("build");
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("build");
 
                                     if (p.getWorld().getName().equalsIgnoreCase("Office")) {
                                         OfficeManager.unVanishPlayer(p);
@@ -162,7 +155,7 @@ public class CompassInventory extends CoreInventory {
                                         .create(),
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation("build");
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("build");
 
                                 });
 
@@ -174,7 +167,7 @@ public class CompassInventory extends CoreInventory {
                                         .create(),
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation("knockit");
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("knockit");
 
                                 });
 
@@ -185,7 +178,7 @@ public class CompassInventory extends CoreInventory {
                                         .create(),
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation("merchant");
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("merchant");
 
                                 });
 
@@ -199,9 +192,9 @@ public class CompassInventory extends CoreInventory {
                                     PlayerNpc playernpc_vendor = ((PlayerNpc) CoreSystem.getInstance().getNpcManager().getNPC(CoreSystem.getInstance().getWorldManager().getWorld("Lobby-OneIsland"), "vendor"));
 
                                     if (playernpc_vendor.getData().getTempLocation() != null) {
-                                        LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation(playernpc_vendor.getData().getTempLocation().bukkit());
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(playernpc_vendor.getData().getTempLocation().bukkit());
                                     } else {
-                                        LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation(playernpc_vendor.getData().getTempLocation().bukkit());
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(playernpc_vendor.getData().getTempLocation().bukkit());
                                     }
 
 
@@ -213,7 +206,7 @@ public class CompassInventory extends CoreInventory {
                                         .create(),
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation("chest-opening");
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("chest-opening");
 
                                 });
 
@@ -224,7 +217,7 @@ public class CompassInventory extends CoreInventory {
 
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation("bank");
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("bank");
 
                                 });
                         setItem(InventorySlot.ROW_2_SLOT_9, new ItemBuilder(Material.REDSTONE, 1, 0)
@@ -234,7 +227,7 @@ public class CompassInventory extends CoreInventory {
 
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation("office-entrance");
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("office-entrance");
 
                                 });
 
@@ -245,7 +238,7 @@ public class CompassInventory extends CoreInventory {
 
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation("jumpandrun-board");
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("jumpandrun-board");
 
                                 });
 
@@ -263,14 +256,14 @@ public class CompassInventory extends CoreInventory {
 
 
                         setItem(InventorySlot.ROW_4_SLOT_9, new ItemBuilder(Material.BOOK, 1, 0).displayName("§3Die Story").lore("§7§oSpiele die Story und erhalte", "§7§ocoole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren").create(), e -> {
-                            LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+                            LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
                             if (lp.getProgressId() == 0) {
-                                LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation("storyspawn");
+                                LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("storyspawn");
                                 p.closeInventory();
                             } else {
                                 LobbyPlugin.getInstance().getMessager().send(p, "§2Du wurdest in der nähe des letzten Story-NPC teleportiert, mit dem du zuletzt interagiert hast!");
-                                LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation(Progress.getProgressByID(lp.getProgressId()).getNpc().getData().getLocation().bukkit());
+                                LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(Progress.getProgressByID(lp.getProgressId()).getNpc().getData().getLocation().bukkit());
                             }
                         });
 

@@ -41,7 +41,7 @@ public class NpcListener implements Listener {
         if (e.getNpc().getData().getType().equals(EntityType.PLAYER) && e.getAction().equals(PacketPlayInUseEntity.EnumEntityUseAction.INTERACT)) {
             Player p = e.getPlayer();
             PlayerNpc npc = (PlayerNpc) e.getNpc();
-            LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+            LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
             CoreWorld w = CoreSystem.getInstance().getWorldManager().getWorld(npc.getData().getLocation().getWorld());
 
             if (w.equals(LobbyWorld.ONE_ISLAND.getWorld())) {
@@ -54,8 +54,8 @@ public class NpcListener implements Listener {
                         new CorpseInventory(p);
                     }
                     case "robert": {
-                        if (lp.getProgressId() >= Progress.SALIA.getId() && !LobbyItem.MAGICWAND.has(lp)) {
-                            LobbyItem.MAGICWAND.has(lp);
+                        if (lp.getProgressId() >= Progress.SALIA.getId() && !lp.hasLobbyItem(LobbyItem.MAGICWAND)) {
+                            lp.hasLobbyItem(LobbyItem.MAGICWAND);
                         }
                         break;
                     }
@@ -66,11 +66,13 @@ public class NpcListener implements Listener {
                         lp.setBankProgress(BankProgress.BANK_ROBBERY_END);
                         p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Wir haben es geschafft ich überlasse dir 25.000 Coins und ein kleines Geschenk im Rucksack");
                         lp.getCorePlayer().addCoins(25000);
-                        LobbyItem.GOLD_BARDING.remove(lp);
-                        LobbyItem.BANK_MAP.remove(lp);
-                        LobbyItem.IRON_SWORD.remove(lp);
-                        LobbyItem.BUTTON.remove(lp);
-                        LobbyItem.GOLD_NUGGET.add(lp);
+
+                        lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
+                        lp.removeLobbyItem(LobbyItem.BANK_MAP);
+                        lp.removeLobbyItem(LobbyItem.IRON_SWORD);
+                        lp.removeLobbyItem(LobbyItem.BUTTON);
+                        lp.addLobbyItem(LobbyItem.GOLD_NUGGET);
+
                         p.getInventory().setLeggings(null);
                         p.getInventory().setBoots(null);
                         p.getInventory().setChestplate(null);
@@ -79,9 +81,9 @@ public class NpcListener implements Listener {
                     }
                     case "cutter": {
                         if (lp.getBankprogressId() == BankProgress.CUTTER.getId()) {
-                            if (LobbyItem.WHITE_WOOL.has(lp)) {
+                            if (lp.hasLobbyItem(LobbyItem.WHITE_WOOL)) {
 
-                                LobbyItem.WHITE_WOOL.remove(lp);
+                                lp.removeLobbyItem(LobbyItem.WHITE_WOOL);
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Perfekt die Wolle war es. Hier bitte das bestellte Outfit!");
                                 lp.setBankProgress(BankProgress.SWORD);
                                 p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Ok du hast das Packet komm zurück ins Büro damit wir die Letzte Mission besprechen können!");
@@ -96,8 +98,8 @@ public class NpcListener implements Listener {
                     }
 
                     case "duty": {
-                        if (!LobbyItem.PASS.has(lp)) {
-                            LobbyItem.PASS.remove(lp);
+                        if (!lp.hasLobbyItem(LobbyItem.PASS)) {
+                            lp.removeLobbyItem(LobbyItem.PASS);
                         }
                         break;
                     }
@@ -105,7 +107,7 @@ public class NpcListener implements Listener {
                         if (lp.getProgressId() == Progress.EDWARD_CITYHALL.getId()) {
                             if (p.getItemInHand().equals(LobbyItem.MAGICDRINK.getItemStack())) {
                                 p.getInventory().remove(p.getItemInHand());
-                                LobbyItem.MAGICDRINK.remove(lp);
+                                lp.removeLobbyItem(LobbyItem.MAGICDRINK);
                                 lp.setProgress(Progress.INFECTION);
 
                                 Progress.EDWARD_CITYHALL.getNpc().toggleVisibility(p, false);
@@ -141,7 +143,7 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "captain": {
-                        if (LobbyItem.BOAT_PASS.has(lp)) {
+                        if (lp.hasLobbyItem(LobbyItem.BOAT_PASS)) {
                             if (p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
                                 new CaptainInventory(p);
                                 return;
@@ -184,11 +186,11 @@ public class NpcListener implements Listener {
                             p.sendMessage("§fDas war Teil 1 der MCONE Story der 2 Teil ist bereits in Planung und auch schon in Entwicklung");
 
 
-                           if (!LobbyItem.RADIO_SET1.has(lp)) {
-                               LobbyItem.RADIO_SET1.add(lp);
+                           if (!lp.hasLobbyItem(LobbyItem.RADIO_SET1)) {
+                               lp.addLobbyItem(LobbyItem.RADIO_SET1);
                             }
-                            if (!LobbyItem.GPS.has(lp)) {
-                                LobbyItem.GPS.add(lp);
+                            if (!lp.hasLobbyItem(LobbyItem.GPS)) {
+                                lp.addLobbyItem(LobbyItem.GPS);
                             }
                         }
 
@@ -229,8 +231,8 @@ public class NpcListener implements Listener {
                     }
                   case "sparow": {
                         if (lp.getProgressId() > Progress.MARVIN_KILL.getId()) {
-                            if (!LobbyItem.RADIO_SET_2.has(lp)) {
-                                LobbyItem.RADIO_SET_2.add(lp);
+                            if (!lp.hasLobbyItem(LobbyItem.RADIO_SET_2)) {
+                                lp.addLobbyItem(LobbyItem.RADIO_SET_2);
                                 p.sendMessage("sd");
                             }
                         }
@@ -241,8 +243,8 @@ public class NpcListener implements Listener {
                         if (lp.getProgressId() + 1 == Progress.MARVIN.getId() || lp.getProgressId() == Progress.MARVIN.getId()) {
                             LobbyWorld.CAVE.getWorld().teleportSilently(p, "spawn");
 
-                            LobbyItem.RADIO_SET1.remove(lp);
-                            LobbyItem.GPS.remove(lp);
+                            lp.removeLobbyItem(LobbyItem.RADIO_SET1);
+                            lp.removeLobbyItem(LobbyItem.GPS);
                         }
                         break;
                     }
@@ -272,7 +274,7 @@ public class NpcListener implements Listener {
                             p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + " schönes Büro aber leider gehört es bis jetzt noch mir aber du etwas für mich erledigen wo du das Büro und Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
                             lp.setBankProgress(BankProgress.SMUGGLER);
                             new JohnBankRobberyInventory(p);
-                            LobbyItem.BUTTON.add(lp);
+                            lp.addLobbyItem(LobbyItem.BUTTON);
                         }
 
                         break;

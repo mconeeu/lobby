@@ -14,11 +14,11 @@ public class OfficeTraderInventory extends CoreInventory {
 
     public OfficeTraderInventory(Player p) {
         super("§8» §d§lVerkäufer §8| §fBüro", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
-        if (LobbyItem.OFFICE_CARD_BRONZE.has(lp) || LobbyItem.OFFICE_CARD_SILVER.has(lp)) {
+        if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE) || lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER)) {
             new UpgradeOfficeTrader(p);
-        } else if (LobbyItem.OFFICE_CARD_GOLD.has(lp)) {
+        } else if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_GOLD)) {
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.IRON_DOOR).displayName("§cDu kannst kein Büro mehr kaufen!").create());
             openInventory();
         } else {

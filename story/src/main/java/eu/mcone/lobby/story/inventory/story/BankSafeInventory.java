@@ -13,11 +13,11 @@ public class BankSafeInventory extends CoreInventory {
 
     public BankSafeInventory(Player p) {
         super("§f§lTresorTruhe", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_2_SLOT_5, LobbyItem.GOLD_BARDING.getItemStack(), e -> {
-            if (!LobbyItem.GOLD_BARDING.has(lp)) {
-                LobbyItem.GOLD_BARDING.add(lp);
+            if (!lp.hasLobbyItem(LobbyItem.GOLD_BARDING)) {
+                lp.addLobbyItem(LobbyItem.GOLD_BARDING);
                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
                     p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Ohhh Perfekt du hast die 24 Gold Barren gehe jetzt links zum alten Bank Ausgang trete da einfach auf eine Eisen Platte!");
                 }, 40L);

@@ -12,7 +12,6 @@ import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.LobbyCategory;
 import eu.mcone.lobby.api.enums.LobbyItem;
-import eu.mcone.lobby.items.backpack.MaterialBackpackInventoryListener;
 import eu.mcone.lobby.items.backpack.StoryBackpackInventoryListener;
 import eu.mcone.lobby.items.command.ChestCMD;
 import eu.mcone.lobby.items.listener.InventoryTriggerListener;
@@ -102,7 +101,6 @@ public class LobbyItems extends LobbyAddon {
 
     private static BackpackInventoryListener getInventoryListener(LobbyCategory category) {
         switch (category) {
-            case MATERIAL: return new MaterialBackpackInventoryListener();
             case STORY_ITEMS: return new StoryBackpackInventoryListener();
             default: return null;
         }

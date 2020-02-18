@@ -18,17 +18,17 @@ public class SilverOfficeInventory extends CoreInventory {
     SilverOfficeInventory(Player p) {
         super("§8» §d§lBüro §8| §fSilver", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.IRON_INGOT, 1, 0).displayName("§aBüro kaufen").lore("§a§lBüro kosten 250 Emeralds").create(),
                 e -> {
                     if (cp.getEmeralds() - 250 >= 0) {
                         cp.removeEmeralds(250);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
-                        LobbyItem.OFFICE_CARD_SILVER.add(lp);
+                        lp.addLobbyItem(LobbyItem.OFFICE_CARD_SILVER);
 
-                        if (LobbyItem.OFFICE_CARD_BRONZE.has(lp)) {
-                            LobbyItem.OFFICE_CARD_BRONZE.remove(lp);
+                        if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE)) {
+                            lp.removeLobbyItem(LobbyItem.OFFICE_CARD_BRONZE);
                         }
 
                         p.closeInventory();

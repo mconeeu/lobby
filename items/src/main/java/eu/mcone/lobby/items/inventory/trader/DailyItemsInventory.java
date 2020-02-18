@@ -24,7 +24,7 @@ class DailyItemsInventory extends CoreInventory {
 
     DailyItemsInventory(Player p) {
         super("§8» §e§lHändler §8| §fDailyShop", p, InventorySlot.ROW_6, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_1_SLOT_2, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e -> new TraderInventory(p));
         setItem(InventorySlot.ROW_1_SLOT_3, new ItemBuilder(Material.EMERALD, 1, 0).displayName("§a§lDein Kontostand").lore("§7§oDein Kontostand beträgt:", "§f§o" + lp.getCorePlayer().getCoins() + "§7§o Coins").create());
@@ -43,7 +43,7 @@ class DailyItemsInventory extends CoreInventory {
 
             if (item.getLevel().equals(Level.UNUSUAL) || item.getLevel().equals(Level.USUAL)) {
                 setItem(i, item.getItemStack(), e -> {
-                    if (!item.has(lp)) {
+                    if (!lp.getGamePlayer().hasDefaultItem(item)) {
                         new DailyItemsBuyInventory(p, item);
                     } else {
                         player.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du besitzt das Item §e" + item.getName() + " §2bereits!");
@@ -60,7 +60,7 @@ class DailyItemsInventory extends CoreInventory {
                 setItem(InventorySlot.ROW_4_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//§oMCONE§8//").create());
 
                 setItem(i1, item.getItemStack(), e -> {
-                    if (!item.has(lp)) {
+                    if (!lp.getGamePlayer().hasDefaultItem(item)) {
                         new DailyItemsBuyInventory(p, item);
                     } else {
                         player.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du besitzt das Item §e" + item.getName() + " §2bereits!");

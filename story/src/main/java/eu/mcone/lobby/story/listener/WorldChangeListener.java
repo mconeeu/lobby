@@ -16,7 +16,7 @@ public class WorldChangeListener implements Listener {
             npc.toggleVisibility(e.getPlayer(), false);
         }
 
-        LobbyPlayerLoadedListener.spawnStoryNpcs(LobbyPlugin.getInstance().getGamePlayer(e.getPlayer().getUniqueId()));
+        LobbyPlayerLoadedListener.spawnStoryNpcs(LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().getUniqueId()));
     }
 
 }

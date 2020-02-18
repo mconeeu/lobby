@@ -20,7 +20,7 @@ public class LobbyCMD extends CoreCommand {
     @Override
     public boolean onCommand(CommandSender commandSender, String[] args) {
         if (args.length == 1 && (args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("rl"))) {
-            for (LobbyPlayer lp : Lobby.getInstance().getOnlineGamePlayers()) {
+            for (LobbyPlayer lp : Lobby.getSystem().getOnlineLobbyPlayers()) {
                 lp.reload();
             }
             for (LobbyAddon addon : Lobby.ADDONS) {
@@ -38,11 +38,11 @@ public class LobbyCMD extends CoreCommand {
                 }
             }
 
-            Lobby.getInstance().getMessager().send(commandSender, "§4Ein Addon mit dem Name §c" + name + "§4 ist nicht geladen!");
+            Lobby.getSystem().getMessager().send(commandSender, "§4Ein Addon mit dem Name §c" + name + "§4 ist nicht geladen!");
             return false;
         }
 
-        Lobby.getInstance().getMessager().send(commandSender, "§4Bitte benutze; §c/lobby reload [<addon>]");
+        Lobby.getSystem().getMessager().send(commandSender, "§4Bitte benutze; §c/lobby reload [<addon>]");
         return false;
     }
 

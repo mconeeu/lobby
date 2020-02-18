@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.api;
 
+import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.gameapi.api.Option;
@@ -15,8 +16,12 @@ import eu.mcone.lobby.api.player.PlayerHiderManager;
 import eu.mcone.lobby.api.player.SilentLobbyManager;
 import lombok.Getter;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
-public abstract class LobbyPlugin extends GamePlugin<LobbyPlayer> {
+import java.util.Collection;
+import java.util.UUID;
+
+public abstract class LobbyPlugin extends GamePlugin {
 
     @Getter
     private static LobbyPlugin instance;
@@ -43,5 +48,15 @@ public abstract class LobbyPlugin extends GamePlugin<LobbyPlayer> {
     public abstract SilentLobbyManager getSilentLobbyManager();
 
     public abstract PlayerHiderManager getPlayerHiderManager();
+
+    public abstract LobbyPlayer getLobbyPlayer(CorePlayer cp);
+
+    public abstract LobbyPlayer getLobbyPlayer(Player p);
+
+    public abstract LobbyPlayer getLobbyPlayer(UUID uuid);
+
+    public abstract LobbyPlayer getLobbyPlayer(String name);
+
+    public abstract Collection<LobbyPlayer> getOnlineLobbyPlayers();
 
 }

@@ -28,7 +28,7 @@ public class InventoryTriggerListener implements Listener {
     @EventHandler
     public void on(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_AIR)) {
             if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getClickedBlock() != null) {
@@ -37,7 +37,7 @@ public class InventoryTriggerListener implements Listener {
                 switch (clicked) {
                     case CAULDRON: {
                         int progressID = lp.getProgressId();
-                        if (progressID >= 6 && progressID < 8 && !LobbyItem.MAGICDRINK.has(lp)) {
+                        if (progressID >= 6 && progressID < 8 && !lp.hasLobbyItem(LobbyItem.MAGICDRINK)) {
                             new WitchInventory(p);
                         }
                         return;

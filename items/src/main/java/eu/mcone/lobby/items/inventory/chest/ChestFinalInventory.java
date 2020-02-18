@@ -26,7 +26,7 @@ class ChestFinalInventory extends CoreInventory {
 
     ChestFinalInventory(Player p, Category category, BackpackItem item) {
         super("§8» §e§lDein Gewinn", p, InventorySlot.ROW_6, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         lp.removeChests(1);
 
@@ -62,7 +62,7 @@ class ChestFinalInventory extends CoreInventory {
         if (category == null) {
             CoreSystem.getInstance().getCorePlayer(p).addEmeralds(item.getSellPrice());
         } else {
-            lp.addBackpackItem(category.getName(), item);
+            lp.getGamePlayer().addBackpackItem(category.getName(), item);
         }
 
         setItem(InventorySlot.ROW_5_SLOT_3, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, item.getLevel().getGlasSubId()).displayName("§8//MCONE//").create());

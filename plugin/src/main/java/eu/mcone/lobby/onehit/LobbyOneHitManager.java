@@ -52,7 +52,7 @@ public class LobbyOneHitManager implements OneHitManager {
             fighting.add(p);
             p.setGameMode(GameMode.ADVENTURE);
             p.setAllowFlight(false);
-            LobbyPlugin.getInstance().getGamePlayer(p).teleportAnimation(getRandomSpawn());
+            LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(getRandomSpawn());
 
             if (fighting.size() <= 1) {
                 LobbyPlugin.getInstance().getMessager().send(p, "§7Du bist gerade der §f§oeinzigste§7, der §fOneHit§7 spielt!");
@@ -118,9 +118,9 @@ public class LobbyOneHitManager implements OneHitManager {
 
         p.getInventory().setHelmet(ItemBuilder.createLeatherArmorItem(Material.LEATHER_HELMET, Color.RED).create());
 
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
-        if (LobbyItem.ONE_HIT_SWORD.has(lp)) {
+        if (lp.hasLobbyItem(LobbyItem.ONE_HIT_SWORD)) {
             p.getInventory().setItem(0, HotbarItems.STORY_ONEHIT_SWORD);
         } else {
             p.getInventory().setItem(0, HotbarItems.ONEHIT_SWORD);

@@ -21,7 +21,7 @@ class ChestBuyInventory extends CoreInventory {
     ChestBuyInventory(Player p) {
         super("§8» §e§lHändler §8| §fKisten", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.PAPER, 1, 0).displayName("§8» §7Du besitzt §f" +lp.getChests() + "§7 Kisten").create());
 

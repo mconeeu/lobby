@@ -18,7 +18,7 @@ public class ChestOpeningInventory extends CoreInventory {
 
     public ChestOpeningInventory(Player p) {
         super("§8» §e§lChestOpening", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         if (lp.getChests() < 1) {
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.CHEST, 1, 0).displayName("§c§lNicht genügend Kisten").lore("§7§oDu hast keine Kisten mehr!", "§7§oBesorge dir welche beim Händler").create(), e -> {

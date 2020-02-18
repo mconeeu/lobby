@@ -7,8 +7,6 @@ package eu.mcone.lobby.api.enums;
 
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.gameapi.api.backpack.Level;
-import eu.mcone.gameapi.api.player.GameAPIPlayer;
-import eu.mcone.lobby.api.LobbyPlugin;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -39,14 +37,6 @@ public enum LobbyItem {
     WHITE_WOOL(16, "Bank Plan", LobbyCategory.STORY_ITEMS, Level.UNUSUAL, 0, 0, new ItemBuilder(Material.WOOL, 37, 0).displayName("§3§lWeiße Wolle").lore("§7Kategorie: §bItem", "§7Seltenheit: §3Ungewöhnlich", "", "§7Zum nähen geeignet").create()),
     BANK_OUTFIT(17, "Bank Outfit", LobbyCategory.STORY_ITEMS, Level.UNUSUAL, 0, 0, new ItemBuilder(Material.CHEST, 1, 0).displayName("§3§lBank Outfit im Packet").lore("§7Kategorie: §bItem / Outfit", "§7Seltenheit: §3Ungewöhnlich", "", "§7Sehe aus wie ein Bänker").create()),
     GOLD_NUGGET(18, "Gold Münze", LobbyCategory.STORY_ITEMS, Level.MYSTICAL, 0, 0, new ItemBuilder(Material.GOLD_NUGGET, 1, 0).displayName("§c§lGold Münze").lore("§7Kategorie: §bItem", "§7Seltenheit: §cMythisch", "", "§7Ein kleines Geschenk von John").create()),
-
-    //Coin material items
-    MATERIAL_DIAMOND_4(0, "Material_dia_4", LobbyCategory.MATERIAL, Level.UNUSUAL, 30, 15, new ItemBuilder(Material.DIAMOND, 4, 0).displayName("§5§l4 Diamanten").lore("§7Kategorie: §9Material", "§7Seltenheit: §5Episch", "", "§730 Coins", "", "§7Diamante zum bauen").create()),
-    MATERIAL_IRON_2(1, "Material_iron_2", LobbyCategory.MATERIAL, Level.UNUSUAL, 15, 5, new ItemBuilder(Material.IRON_INGOT, 2, 0).displayName("§3§l2 Eisen").lore("§7Kategorie: §9Material", "§7Seltenheit: §3Ungewöhnlich", "", "§715 Coins", "", "§7Eisen zum bauen").create()),
-    MATERIAL_IRON_4(2, "Material_iron_4", LobbyCategory.MATERIAL, Level.UNUSUAL, 25, 10, new ItemBuilder(Material.IRON_INGOT, 4, 0).displayName("§3§l4 Eisen").lore("§7Kategorie: §9Material", "§7Seltenheit: §3Ungewöhnlich", "", "§725 Coins", "", "§7Eisen zum bauen").create()),
-    MATERIAL_IRON_6(3, "Material_iron_6", LobbyCategory.MATERIAL, Level.UNUSUAL, 35, 20, new ItemBuilder(Material.IRON_INGOT, 6, 0).displayName("§3§l6 Eisen").lore("§7Kategorie: §9Material", "§7Seltenheit: §3Ungewöhnlich", "", "§735 Coins", "", "§7Eisen zum bauen").create()),
-    MATERIAL_IRON_8(4, "Material_iron_8", LobbyCategory.MATERIAL, Level.UNUSUAL, 45, 30, new ItemBuilder(Material.IRON_INGOT, 8, 0).displayName("§3§l8 Eisen").lore("§7Kategorie: §9Material", "§7Seltenheit: §3Ungewöhnlich", "", "§745 Coins", "", "§7Eisen zum bauen").create()),
-    MATERIAL_IRON_10(5, "Material_iron_10", LobbyCategory.MATERIAL, Level.EPIC, 55, 40, new ItemBuilder(Material.IRON_INGOT, 10, 0).displayName("§5§l10 Eisen").lore("§7Kategorie: §9Material", "§7Seltenheit: §5Episch", "", "§755 Coins", "", "§7Eisen zum bauen").create()),
 
     //Armor
     IRON_SWORD(0, "eisenschwert", LobbyCategory.ARMOR, Level.UNUSUAL, 0, 0, new ItemBuilder(Material.IRON_SWORD, 1, 0).displayName("§3§lEisen Schwerd").lore("§7Kategorie: §bSchwerter", "§7Seltenheit: §3Ungewöhnlich", "§74 Eisen", "§7Mit dem Eisen Schwerdt in den Krieg").create()),
@@ -106,24 +96,6 @@ public enum LobbyItem {
             }
         }
         return null;
-    }
-
-    public boolean has(GameAPIPlayer<?> gp) {
-        return gp.hasBackpackItem(category.name(), id);
-    }
-
-    public void add(GameAPIPlayer<?> gp) {
-        gp.addBackpackItem(
-                category.name(),
-                LobbyPlugin.getInstance().getBackpackManager().getBackpackItem(category.name(), id)
-        );
-    }
-
-    public void remove(GameAPIPlayer<?> gp) {
-        gp.removeBackpackItem(
-                category.name(),
-                LobbyPlugin.getInstance().getBackpackManager().getBackpackItem(category.name(), id)
-        );
     }
 
 }

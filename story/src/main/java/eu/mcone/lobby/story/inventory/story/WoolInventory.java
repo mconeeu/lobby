@@ -13,11 +13,11 @@ public class WoolInventory extends CoreInventory {
 
     public WoolInventory(Player p) {
         super("§f§lWolle Packet", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_2_SLOT_5, LobbyItem.WHITE_WOOL.getItemStack(), e -> {
-            if (!LobbyItem.WHITE_WOOL.has(lp)) {
-                LobbyItem.WHITE_WOOL.add(lp);
+            if (!lp.hasLobbyItem(LobbyItem.WHITE_WOOL)) {
+                lp.addLobbyItem(LobbyItem.WHITE_WOOL);
                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
                     p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Wieso hast du denn jetzt Wolle? Besorge das Bank Outfit!");
                 }, 30L);

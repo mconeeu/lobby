@@ -16,7 +16,7 @@ public class DailyItemsBuyInventory extends CoreInventory {
 
     DailyItemsBuyInventory(Player p, DefaultItem toBuy) {
         super("§8» §e§lHändler §8| §fDailyShop Item kaufen", p, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
         CorePlayer cp = lp.getCorePlayer();
 
         setItem(InventorySlot.ROW_1_SLOT_5, toBuy.getItemStack());
@@ -27,7 +27,7 @@ public class DailyItemsBuyInventory extends CoreInventory {
             if ((cp.getEmeralds() - toBuy.getBuyemeralds()) >= 0) {
                 cp.removeEmeralds(toBuy.getBuyemeralds());
                 cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
-                toBuy.add(lp);
+                lp.getGamePlayer().addDefaultItem(toBuy);
 
                 p.closeInventory();
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du hast das Item §a" + toBuy.getName() + " §2für §f" + toBuy.getBuyemeralds() + " Emeralds §2erfolgreich gekauft!");

@@ -21,7 +21,7 @@ public class ChestInfoInventory extends CoreInventory {
 
     public ChestInfoInventory(Player p) {
         super("§8» §e§lDeine Kisten", p, InventorySlot.ROW_3);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.ENDER_PORTAL_FRAME).displayName("§f§lZum Chestopening teleportieren").create(), e -> {
             p.closeInventory();

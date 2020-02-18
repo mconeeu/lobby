@@ -11,13 +11,14 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
+import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.command.LobbyCMD;
 import eu.mcone.lobby.gang.LobbyGang;
 import eu.mcone.lobby.inventory.LobbySettingsInventory;
@@ -26,22 +27,21 @@ import eu.mcone.lobby.jumpnrun.LobbyJumpNRunManager;
 import eu.mcone.lobby.listener.*;
 import eu.mcone.lobby.onehit.LobbyOneHitManager;
 import eu.mcone.lobby.scoreboard.LobbyObjective;
-import eu.mcone.lobby.scoreboard.OneHitObjective;
 import eu.mcone.lobby.story.LobbyStory;
-import eu.mcone.lobby.scoreboard.SidebarObjective;
 import eu.mcone.lobby.util.PlayerHiderManager;
 import eu.mcone.lobby.util.RealTimeUtil;
 import eu.mcone.lobby.util.SilentLobbyManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 
 public class Lobby extends LobbyPlugin {
 
     @Getter
-    private static Lobby instance;
+    private static Lobby system;
 
     @Getter
     private BuildSystem buildSystem;
@@ -56,15 +56,19 @@ public class Lobby extends LobbyPlugin {
     @Getter
     private Map<LobbyWorld, CoreWorld> worlds;
 
+    @Getter
+    private List<LobbyPlayer> players;
+
     public final static List<LobbyAddon> ADDONS = new ArrayList<>(Arrays.asList(
             new LobbyGang(), new LobbyItems(), new LobbyStory()
     ));
 
     @Override
     public void onEnable() {
-        instance = this;
+        system = this;
 
         worlds = new HashMap<>();
+        players = new ArrayList<>();
 
         for (LobbyWorld w : LobbyWorld.values())
             worlds.put(w, CoreSystem.getInstance().getWorldManager().getWorld(w.getName()));
@@ -156,6 +160,48 @@ public class Lobby extends LobbyPlugin {
         return worlds.get(world);
     }
 
+    @Override
+    public LobbyPlayer getLobbyPlayer(CorePlayer cp) {
+        return getLobbyPlayer(cp.getUuid());
+    }
+
+    @Override
+    public LobbyPlayer getLobbyPlayer(Player p) {
+        return getLobbyPlayer(p.getUniqueId());
+    }
+
+    @Override
+    public LobbyPlayer getLobbyPlayer(UUID uuid) {
+        for (LobbyPlayer lp : players) {
+            if (lp.getCorePlayer().getUuid().equals(uuid)) {
+                return lp;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public LobbyPlayer getLobbyPlayer(String name) {
+        for (LobbyPlayer lp : players) {
+            if (lp.getCorePlayer().getName().equals(name)) {
+                return lp;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Collection<LobbyPlayer> getOnlineLobbyPlayers() {
+        return new ArrayList<>(players);
+    }
+
+    public void registerLobbyPlayer(LobbyPlayer lp) {
+        players.add(lp);
+    }
+
+    public void unregisterLobbyPlayer(LobbyPlayer lp) {
+        players.remove(lp);
+    }
 
     private void startScheduler() {
         Bukkit.getScheduler().runTaskTimer(this, LobbyObjective::updateLines, 50, 100);

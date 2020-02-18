@@ -17,11 +17,11 @@ public class WitchInventory extends CoreInventory {
 
     public WitchInventory(Player p) {
         super("§5§lBeutel", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_2_SLOT_5, LobbyItem.MAGICDRINK.getItemStack(), e -> {
-            if (!LobbyItem.MAGICDRINK.has(lp)) {
-                LobbyItem.MAGICDRINK.add(lp);
+            if (!lp.hasLobbyItem(LobbyItem.MAGICDRINK)) {
+                lp.addLobbyItem(LobbyItem.MAGICDRINK);
                 LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast den Zaubertrank aufgenommen!");
             } else {
                 LobbyPlugin.getInstance().getMessager().send(p, "§4Du besitzt diese Item bereits!");

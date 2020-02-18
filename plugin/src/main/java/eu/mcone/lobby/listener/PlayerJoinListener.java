@@ -12,8 +12,10 @@ import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
-import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
+import eu.mcone.gameapi.api.event.player.GamePlayerLoadedEvent;
+import eu.mcone.gameapi.api.player.GamePlayer;
+import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.LobbyItem;
@@ -21,10 +23,8 @@ import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.manager.OfficeManager;
-import eu.mcone.lobby.util.PlayerHiderManager;
 import eu.mcone.lobby.scoreboard.SidebarObjective;
 import eu.mcone.lobby.util.RealTimeUtil;
-import eu.mcone.lobby.util.SilentLobbyManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -47,22 +47,23 @@ public class PlayerJoinListener implements Listener {
     }
 
     @EventHandler
-    public void onCorePlayerLoaded(CorePlayerLoadedEvent e) {
+    public void onGamePlayerLoaded(GamePlayerLoadedEvent e) {
         Player p = e.getBukkitPlayer();
-        CorePlayer cp = e.getPlayer();
+        GamePlayer gp = e.getPlayer();
 
-        if (e.getLoadReason().equals(CorePlayerLoadedEvent.Reason.RELOAD)) preloadLobbyPlayer(p);
+        if (e.getCorePlayerLoadedEvent().getLoadReason().equals(CorePlayerLoadedEvent.Reason.RELOAD))
+            preloadLobbyPlayer(p);
         postloadLobbyPlayer(p);
 
-        LobbyPlayer lp = new LobbyPlayer(cp);
-        LobbyPlugin.getInstance().registerGamePlayer(lp);
+        LobbyPlayer lp = new LobbyPlayer(gp);
+        Lobby.getSystem().registerLobbyPlayer(lp);
 
         LobbyPlugin.getInstance().getPlayerHiderManager().playerJoined(p);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
 
-        loadLobbyPlayer(p, lp, e);
+        loadLobbyPlayer(p, lp, e.getCorePlayerLoadedEvent());
     }
 
     public static void loadLobbyPlayer(Player p, LobbyPlayer lp, CorePlayerLoadedEvent e) {
@@ -82,35 +83,35 @@ public class PlayerJoinListener implements Listener {
                     break;
                 }
                 case OFFICE: {
-                    if (LobbyItem.OFFICE_CARD_BRONZE.has(lp)) {
+                    if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE)) {
                         LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.BRONZE_OFFICE.getSpawnLocation());
-                    } else if (LobbyItem.OFFICE_CARD_SILVER.has(lp)) {
+                    } else if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER)) {
                         LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.SILVER_OFFICE.getSpawnLocation());
-                    } else if (LobbyItem.OFFICE_CARD_GOLD.has(lp)) {
+                    } else if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_GOLD)) {
                         LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.GOLD_OFFICE.getSpawnLocation());
                     }
                 }
             }
         }
 
-        if (!LobbyItem.BANKCARD_PREMIUM.has(lp)) {
+        if (!lp.hasLobbyItem(LobbyItem.BANKCARD_PREMIUM)) {
             if (p.hasPermission("mcone.premium")) {
-                if (!LobbyItem.BANKCARD.has(lp)) {
-                    LobbyItem.BANKCARD_PREMIUM.add(lp);
+                if (!lp.hasLobbyItem(LobbyItem.BANKCARD)) {
+                    lp.addLobbyItem(LobbyItem.BANKCARD_PREMIUM);
                 } else {
-                    LobbyItem.BANKCARD.remove(lp);
-                    LobbyItem.BANKCARD_PREMIUM.add(lp);
+                    lp.removeLobbyItem(LobbyItem.BANKCARD);
+                    lp.addLobbyItem(LobbyItem.BANKCARD_PREMIUM);
                 }
 
             } else {
-                if (LobbyItem.BANKCARD_PREMIUM.has(lp)) {
-                    LobbyItem.BANKCARD_PREMIUM.remove(lp);
+                if (lp.hasLobbyItem(LobbyItem.BANKCARD_PREMIUM)) {
+                    lp.removeLobbyItem(LobbyItem.BANKCARD_PREMIUM);
                 }
             }
         } else {
             if (p.hasPermission("mcone.premium")) {
-                if (LobbyItem.BANKCARD.has(lp)) {
-                    LobbyItem.BANKCARD.remove(lp);
+                if (lp.hasLobbyItem(LobbyItem.BANKCARD)) {
+                    lp.removeLobbyItem(LobbyItem.BANKCARD);
                 }
             }
         }

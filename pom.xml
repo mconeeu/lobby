@@ -29,6 +29,33 @@
         <project.build.targetEncoding>UTF-8</project.build.targetEncoding>
     </properties>
 
+    <developers>
+        <developer>
+            <id>marvinhuelsmann</id>
+            <name>Marvin Huelsmann</name>
+            <url>https://marvhuelsmann.de</url>
+            <organization>MC ONE</organization>
+            <organizationUrl>https://www.mcone.eu</organizationUrl>
+            <roles>
+                <role>developer</role>
+                <role>builder</role>
+            </roles>
+            <timezone>Europe/Berlin</timezone>
+        </developer>
+        <developer>
+            <id>rufusmaiwald</id>
+            <name>Rufus Maiwald</name>
+            <url>https://rufusmaiwald.de</url>
+            <organization>MC ONE</organization>
+            <organizationUrl>https://www.mcone.eu</organizationUrl>
+            <roles>
+                <role>adminstrator</role>
+                <role>developer</role>
+            </roles>
+            <timezone>Europe/Berlin</timezone>
+        </developer>
+    </developers>
+
     <build>
         <plugins>
             <plugin>
@@ -73,7 +100,7 @@
         <dependency>
             <groupId>eu.mcone.gameapi</groupId>
             <artifactId>api</artifactId>
-            <version>3.0.1-SNAPSHOT</version>
+            <version>3.0.4-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -23,10 +23,10 @@ public class BankMenInventory extends CoreInventory {
     public BankMenInventory(Player p) {
         super("§8» §d§lBänker", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
 
-        if (LobbyItem.BANKCARD.has(lp)) {
+        if (lp.hasLobbyItem(LobbyItem.BANKCARD)) {
             setItem(InventorySlot.ROW_1_SLOT_1, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder()
                     .displayName("§d§lBänker")
                     .lore("§7§oBeim Bänker kannst du dein Bank Konto",
@@ -50,7 +50,7 @@ public class BankMenInventory extends CoreInventory {
 //
 //                });
 
-        } else if (LobbyItem.BANKCARD_PREMIUM.has(lp)) {
+        } else if (lp.hasLobbyItem(LobbyItem.BANKCARD_PREMIUM)) {
 
             setItem(InventorySlot.ROW_1_SLOT_1, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder()
                     .displayName("§d§lBänker")

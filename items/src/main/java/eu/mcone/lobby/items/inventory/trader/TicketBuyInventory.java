@@ -19,7 +19,7 @@ class TicketBuyInventory extends CoreInventory {
 
     TicketBuyInventory(Player p) {
         super("§8» §e§lHändler §8| §bTickets", p, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_1_SLOT_3, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e -> new TraderInventory(p));
         setItem(InventorySlot.ROW_1_SLOT_5, new ItemBuilder(Material.PAPER, 1, 0).displayName("§c§lItems kaufen").lore("§7§oKaufe hier Tickets mit Coins.", "§7§oDie Items stehen dir danach in", "§7§odeinem Rucksack zur Verfügung.").create());
@@ -27,8 +27,8 @@ class TicketBuyInventory extends CoreInventory {
 
 
         setItem(InventorySlot.ROW_3_SLOT_5, LobbyItem.BOAT_PASS.getItemStack(), e -> {
-            if (!LobbyItem.BOAT_PASS.has(lp)) {
-                LobbyItem.BOAT_PASS.add(lp);
+            if (!lp.hasLobbyItem(LobbyItem.BOAT_PASS)) {
+                lp.addLobbyItem(LobbyItem.BOAT_PASS);
                 p.sendMessage("§8[§7§l!§8] §fServer §8» §7Du hast ein Ticket bekommen");
             } else {
                 p.sendMessage( "§8[§7§l!§8] §fServer §8» §4Du besitzt diese Item bereits!");

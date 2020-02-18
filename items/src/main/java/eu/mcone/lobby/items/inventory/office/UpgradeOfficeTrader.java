@@ -14,9 +14,9 @@ public class UpgradeOfficeTrader extends CoreInventory {
 
     UpgradeOfficeTrader(Player p) {
         super("§8» §d§lUpgrade §8| §fBüro", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
-        if (LobbyItem.OFFICE_CARD_BRONZE.has(lp)) {
+        if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE)) {
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.IRON_INGOT, 1, 0).displayName("§6§lSilver Büro")
                     .lore("§fWelche Ihnhalte dieses Büro hat", "§ferfahren sie wenn sie klicken", "", "§a§LDie Kosten liegen bei 250 Emeralds")
                     .create(), e -> new SilverOfficeInventory(p));
@@ -24,7 +24,7 @@ public class UpgradeOfficeTrader extends CoreInventory {
             setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§6§lGold Büro")
                     .lore("§fWelche Ihnhalte dieses Büro hat", "§ferfahren sie wenn sie klicken", "", "§a§LDie Kosten liegen bei 500 Emeralds")
                     .create(), e -> new GoldOfficeInventory(p));
-        } else if ((!LobbyItem.OFFICE_CARD_BRONZE.has(lp)) && LobbyItem.OFFICE_CARD_SILVER.has(lp)) {
+        } else if (!lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE) && lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER)) {
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§6§lGold Büro")
                     .lore("§fWelche Ihnhalte dieses Büro hat", "§ferfahren sie wenn sie klicken", "", "§a§LDie Kosten liegen bei 500 Emeralds")
                     .create(), e -> new GoldOfficeInventory(p)

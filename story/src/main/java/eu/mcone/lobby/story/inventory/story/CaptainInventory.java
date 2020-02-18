@@ -18,13 +18,13 @@ public class CaptainInventory extends CoreInventory {
 
     public CaptainInventory(Player p) {
         super("§f§lWähle dein Ziel", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
 
         setItem(InventorySlot.ROW_2_SLOT_3, new Skull(p.getName(), 1).toItemBuilder().displayName("§5§lCommunity / Festival").lore("§7§oTreffe deine Freunde oder Yuotuber","§7§oauf dem Festival").create(), e -> {
             if (p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
                 p.getInventory().remove(p.getItemInHand());
-                LobbyItem.BOAT_PASS.remove(lp);
+                lp.removeLobbyItem(LobbyItem.BOAT_PASS);
                 CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CONNECT", "Community");
                 p.closeInventory();
             } else {
@@ -38,7 +38,7 @@ public class CaptainInventory extends CoreInventory {
             if (lp.getProgressId() < Progress.MARVIN_KILL.getId()) {
                 if (p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
                     p.getInventory().remove(p.getItemInHand());
-                    LobbyItem.BOAT_PASS.remove(lp);
+                    lp.removeLobbyItem(LobbyItem.BOAT_PASS);
                     LobbyWorld.PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn");
                     p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in Paradise Island");
                     p.closeInventory();
