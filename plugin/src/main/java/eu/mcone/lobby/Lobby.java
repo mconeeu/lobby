@@ -17,8 +17,7 @@ import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.lobbypvp.LobbyPvPManager;
-import eu.mcone.lobby.api.onehit.OneHitManager;
+
 import eu.mcone.lobby.command.LobbyCMD;
 import eu.mcone.lobby.gang.LobbyGang;
 import eu.mcone.lobby.inventory.LobbySettingsInventory;
@@ -48,8 +47,6 @@ public class Lobby extends LobbyPlugin {
     private BuildSystem buildSystem;
     @Getter
     private LobbyOneHitManager oneHitManager;
-    @Getter
-    private LobbyPvPManager lobbyPvPManager;
     @Getter
     private LobbyJumpNRunManager jumpNRunManager;
     @Getter

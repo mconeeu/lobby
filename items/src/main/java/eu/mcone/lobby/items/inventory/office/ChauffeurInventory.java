@@ -32,7 +32,7 @@ public class ChauffeurInventory extends CoreInventory {
         setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.RAW_FISH, 1, 0).displayName("§f§lZum Hafen reisen").create(),
                 e -> ChauffeurSpawnPoints.PORT.getWorld().teleport(p, ChauffeurSpawnPoints.PORT.getSpawnLocation()));
 
-        setItem(InventorySlot.ROW_4_SLOT_6, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§f§lZum Bank Gebeäude reisen").create(),
+        setItem(InventorySlot.ROW_4_SLOT_6, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§f§lZum Bank Gebäude reisen").create(),
                 e -> ChauffeurSpawnPoints.BANK.getWorld().teleport(p, ChauffeurSpawnPoints.BANK.getSpawnLocation()));
 
         setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.CHEST, 1, 0).displayName("§f§lZum Händler reisen").create(),

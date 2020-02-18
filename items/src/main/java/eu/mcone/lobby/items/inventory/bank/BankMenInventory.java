@@ -25,6 +25,7 @@ public class BankMenInventory extends CoreInventory {
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         LobbyPlayer lp = LobbyPlugin.getInstance().getGamePlayer(p);
 
+
         if (LobbyItem.BANKCARD.has(lp)) {
             setItem(InventorySlot.ROW_1_SLOT_1, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder()
                     .displayName("§d§lBänker")

@@ -35,7 +35,7 @@ public class SilverOfficeInventory extends CoreInventory {
                         p.sendMessage("§8[§7§l!§8] §cNPC §8» §fVerkäufer §8|§7 Bitte sehr ihre Büro Schlüsselkarte gehen sie zu mein Kolegen er bringt sie dann zu ihr Büro!");
                     } else {
                         p.closeInventory();
-                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fVerkäufer §8|§4 Du hast zu wening Emeralds!");
+                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fVerkäufer §8|§4 Du hast zu wenig Emeralds!");
                     }
                 });
 
