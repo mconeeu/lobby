@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.util;
 
+import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
@@ -36,6 +37,7 @@ public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobby
 
         LobbyPlugin.getInstance().getMessager().send(p, "§7Du bist nun nicht mehr in der Privaten Lobby!");
 
+        GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(true);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.getInventory().setItem(Lobby.getSystem().getJumpNRunManager().isCurrentlyPlaying(p) ? 1 : 2, HotbarItems.PRIVATE_LOBBY);
@@ -52,6 +54,8 @@ public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobby
             all.hidePlayer(p);
             p.hidePlayer(all);
         }
+
+        GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
         p.playSound(p.getLocation(), Sound.GLASS, 1, 1);
         p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
         p.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);

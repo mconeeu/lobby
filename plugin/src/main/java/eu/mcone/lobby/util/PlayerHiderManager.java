@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.util;
 
+import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
 import org.bukkit.Bukkit;
@@ -29,21 +30,22 @@ public class PlayerHiderManager implements eu.mcone.lobby.api.player.PlayerHider
 
     @Override
     public void hidePlayers(Player p) {
-        if (time.containsKey(p.getName())){
+        if (time.containsKey(p.getName())) {
             long diff = (System.currentTimeMillis() - time.get(p.getName())) / 10L / 60L;
             int cooldown = 1;
-            if (diff < cooldown){
+            if (diff < cooldown) {
                 LobbyPlugin.getInstance().getMessager().send(p, "§7Du musst kurz warte um den Player hider wieder benutzen zu können");
                 return;
             }
         }
 
-        for (Player all : Bukkit.getOnlinePlayers()){
+        for (Player all : Bukkit.getOnlinePlayers()) {
             p.hidePlayer(all);
         }
 
         players.add(p);
 
+        GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
@@ -54,12 +56,13 @@ public class PlayerHiderManager implements eu.mcone.lobby.api.player.PlayerHider
 
     @Override
     public void showPlayers(Player p) {
-        for (Player all : Bukkit.getOnlinePlayers()){
+        for (Player all : Bukkit.getOnlinePlayers()) {
             p.showPlayer(all);
         }
 
         players.remove(p);
 
+        GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(true);
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
