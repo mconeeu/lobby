@@ -28,7 +28,7 @@ public class LobbySettingsInventory extends CoreInventory {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
         LobbySettings settings = lp.getSettings();
 
-        setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.COMPASS, 1, 0).displayName("§f§lNavigator Animation abspielen").create());
+        setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.COMPASS, 1, 0).displayName("§f§lTeleport Animation abspielen").create());
         if (settings.isAllowAnimation()) {
             setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um die Animation", "§7§onicht zu sehen und um", "§7§osofort telepotiert zu werden").create(), e -> {
                 settings.setAllowAnimation(false);
@@ -110,6 +110,34 @@ public class LobbySettingsInventory extends CoreInventory {
             setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um die Gadgets für dich zu aktivieren", "§7§ound um die Effekte der anderen zu sehen").create(), e -> {
                 gp.getSettings().setEnableGadgets(true);
                 new LobbySettingsInventory(p);
+            });
+        }
+
+        setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.STORAGE_MINECART, 1, 0).displayName("§f§lTauschen").create());
+        if (gp.getSettings().isEnableTraiding()) {
+            setItem(InventorySlot.ROW_3_SLOT_8, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um das Tauschen von", "§7§oRucksack Items zu deaktivieren").create(), e -> {
+                gp.getSettings().setEnableTraiding(false);
+                new LobbySettingsInventory(p);
+            });
+        } else {
+            setItem(InventorySlot.ROW_3_SLOT_8, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um das Tauschen von", "§7§oRucksack Items zu aktivieren").create(), e -> {
+                gp.getSettings().setEnableTraiding(true);
+                new LobbySettingsInventory(p);
+            });
+        }
+
+        //TODO BUG FIXEN
+
+        setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.SKULL_ITEM, 1, 0).displayName("§f§lNPC Sprach Texte").create());
+        if (settings.isNpcRandomeMessage()) {
+            setItem(InventorySlot.ROW_3_SLOT_2, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um die NPCs Zufalls Texte auszuschalten", "§7§owenn du in der nähe eines NPCs bist!").create(), e -> {
+                settings.setNpcRandomeMessage(false);
+                setSettings(p, lp);
+            });
+        } else {
+            setItem(InventorySlot.ROW_3_SLOT_2, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um die NPCs Zufalls Texte einzuschalten", "§7§owenn du in der nähe eines NPCs bist!").create(), e -> {
+                settings.setNpcRandomeMessage(true);
+                setSettings(p, lp);
             });
         }
 

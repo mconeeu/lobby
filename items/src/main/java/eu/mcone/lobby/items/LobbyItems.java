@@ -94,15 +94,19 @@ public class LobbyItems extends LobbyAddon {
     }
 
     @Override
-    public void onDisable() {}
+    public void onDisable() {
+    }
 
     @Override
-    public void reload() {}
+    public void reload() {
+    }
 
     private static BackpackInventoryListener getInventoryListener(LobbyCategory category) {
         switch (category) {
-            case STORY_ITEMS: return new StoryBackpackInventoryListener();
-            default: return null;
+            case STORY_ITEMS:
+                return new StoryBackpackInventoryListener();
+            default:
+                return null;
         }
     }
 

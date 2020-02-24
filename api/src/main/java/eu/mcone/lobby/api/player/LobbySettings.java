@@ -11,11 +11,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 @ToString
 public class LobbySettings {
 
-    private boolean allowTrading, spawnInSilentLobby, allowAnimation = true, realTime = true;
+    private boolean allowTrading, spawnInSilentLobby, allowAnimation = true, realTime = true, npcRandomeMessage;
     private SpawnPoint spawnPoint = SpawnPoint.SPAWN;
 
 }
