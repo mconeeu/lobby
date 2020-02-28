@@ -67,8 +67,16 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
             LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);
             LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jumpNRun.getStartLocation());
 
+            if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p)) {
+                LobbyPlugin.getInstance().getOneHitManager().leave(p);
+                LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jumpNRun.getStartLocation());
+                if (!lp.hasJumpnrunMade(jumpNRun)) {
+                    p.sendMessage("§8[§7§l!§8] §fJump and Run §8» §7Du spielst nun das §e" + jumpNRun.getJumpandrunname() + "§7 §7Jump and Run. Zum §cbeenden §7die §fEisentür §7klicken!");
+                } else {
+                    p.sendMessage("§8[§7§l!§8] §fJump and Run §8» §cDu hast dieses Jump and Run bereits gespielt kannst es aber trotzdem wiederholen. Deshalb erhälst du auch keine Belohnung mehr!");
+                }
 
-            if (!lp.hasJumpnrunMade(jumpNRun)) {
+            } else if (!lp.hasJumpnrunMade(jumpNRun)) {
                 p.sendMessage("§8[§7§l!§8] §fJump and Run §8» §7Du spielst nun das §e" + jumpNRun.getJumpandrunname() + "§7 §7Jump and Run. Zum §cbeenden §7die §fEisentür §7klicken!");
             } else {
                 p.sendMessage("§8[§7§l!§8] §fJump and Run §8» §cDu hast dieses Jump and Run bereits gespielt kannst es aber trotzdem wiederholen. Deshalb erhälst du auch keine Belohnung mehr!");

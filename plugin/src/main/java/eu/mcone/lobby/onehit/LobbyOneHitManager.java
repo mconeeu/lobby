@@ -3,6 +3,7 @@ package eu.mcone.lobby.onehit;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.world.CoreLocation;
+import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -43,7 +44,7 @@ public class LobbyOneHitManager implements OneHitManager {
     @Override
     public void setStart(Player p) {
         if (!fighting.contains(p)) {
-
+            GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
             CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new OneHitObjective(this));
 
             p.setExp(1);
@@ -82,6 +83,7 @@ public class LobbyOneHitManager implements OneHitManager {
             p.getActivePotionEffects().clear();
             p.setLevel(0);
             p.setExp(0);
+            GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(true);
 
             for (Player player : fighting) {
                 CoreSystem.getInstance().getCorePlayer(player).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();

@@ -79,8 +79,13 @@ public class InventoryTriggerListener implements Listener {
                         } else if (sign.getLine(0).equals("§7»§c Jump'n'Run")) {
                             for (JumpNRun jumpnrun : JumpNRun.values()) {
                                 if (sign.getLine(1).equals(jumpnrun.getJumpandrunname())) {
-                                    LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jumpnrun.getWarpLocation());
-                                    LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "Du hast dich zum §f" + jumpnrun.getJumpandrunname() + " §7Jump and Run telepotiert");
+                                    if (!LobbyPlugin.getInstance().getOneHitManager().isFighting(p)) {
+                                        p.sendMessage("§4Du hast OneHit verlassen und ein Jump and Run gestartet");
+                                        LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jumpnrun.getWarpLocation());
+                                        LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "Du hast dich zum §f" + jumpnrun.getJumpandrunname() + " §7Jump and Run telepotiert");
+                                    } else {
+                                        LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§4Du darfst im moment keine Jump and Runs spielen!");
+                                    }
                                 } else {
                                     LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§4Das §c" + sign.getLine(1) + "§4 Jump and Run ist momentan in §oWartungen§4!");
                                 }
