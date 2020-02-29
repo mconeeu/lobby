@@ -43,6 +43,12 @@ public class LobbyOneHitManager implements OneHitManager {
 
     @Override
     public void setStart(Player p) {
+        if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(p)) {
+            LobbyPlugin.getInstance().getPlayerHiderManager().showPlayers(p);
+        }
+        if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
+            LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(p);
+        }
         if (!fighting.contains(p)) {
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
             CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new OneHitObjective(this));
@@ -65,7 +71,7 @@ public class LobbyOneHitManager implements OneHitManager {
                         CoreSystem.getInstance().getCorePlayer(all).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                 }
 
-                LobbyPlugin.getInstance().getMessager().send(p,"§7Töte alle §fSpieler §7mit einem §fRoten Hut§7!");
+                LobbyPlugin.getInstance().getMessager().send(p, "§7Töte alle §fSpieler §7mit einem §fRoten Hut§7!");
 
             }
             LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);
