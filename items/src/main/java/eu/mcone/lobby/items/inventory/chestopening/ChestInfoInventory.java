@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.items.inventory.chest;
+package eu.mcone.lobby.items.inventory.chestopening;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;

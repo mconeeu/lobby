@@ -3,7 +3,7 @@
  * You are not allowed to decompile the code
  */
 
-package eu.mcone.lobby.items.inventory.chest;
+package eu.mcone.lobby.items.inventory.chestopening;
 
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -118,7 +118,7 @@ class ChestItemInventory extends CoreInventory {
 
                     fadeAnimation = Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
                         if (fadeSlots.size() < 1) {
-                            Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> new ChestFinalInventory(p, wonItem.getValue().getName().contains(" Emerald") ? ALLOWED_ITEMS.get(wonItem.getValue()) : null, wonItem.getValue()), 20);
+                            Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> new ChestFinalInventory(p, !wonItem.getValue().getName().contains(" Emerald") ? ALLOWED_ITEMS.get(wonItem.getValue()) : null, wonItem.getValue()), 20);
                             fadeAnimation.cancel();
                             return;
                         }

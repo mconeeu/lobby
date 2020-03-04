@@ -8,7 +8,7 @@ package eu.mcone.lobby.items.command;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.command.CoreCommand;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.items.inventory.chest.ChestInfoInventory;
+import eu.mcone.lobby.items.inventory.chestopening.ChestInfoInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;

@@ -16,7 +16,6 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -78,7 +77,7 @@ public class GeneralPlayerListener implements Listener {
         e.setCancelled(true);
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         e.setQuitMessage(null);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().getUniqueId());
@@ -87,8 +86,8 @@ public class GeneralPlayerListener implements Listener {
             lp.setBankProgress(BankProgress.BANK_ROBBERY_START);
             JohnBankRobberyInventory.currentlyInBank = null;
             lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
-
         }
+
         lp.saveData();
         Lobby.getSystem().unregisterLobbyPlayer(lp);
     }
@@ -96,9 +95,10 @@ public class GeneralPlayerListener implements Listener {
     @EventHandler
     public void onItemConsume(PlayerItemConsumeEvent e) {
         ItemStack consumed = e.getItem();
+
         if (consumed.getType().equals(Material.POTION)) {
             e.setCancelled(true);
-
         }
     }
+
 }

@@ -12,7 +12,7 @@
     <groupId>eu.mcone.lobby</groupId>
     <artifactId>mcone-lobby</artifactId>
     <packaging>pom</packaging>
-    <version>4.3.1-SNAPSHOT</version>
+    <version>4.3.2-SNAPSHOT</version>
 
     <modules>
         <module>plugin</module>
@@ -102,13 +102,13 @@
         <dependency>
             <groupId>eu.mcone.coresystem</groupId>
             <artifactId>bukkit-api</artifactId>
-            <version>10.5.3-SNAPSHOT</version>
+            <version>10.5.5-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>eu.mcone.gameapi</groupId>
             <artifactId>api</artifactId>
-            <version>3.0.4-SNAPSHOT</version>
+            <version>3.1.2-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

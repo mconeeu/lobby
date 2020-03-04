@@ -64,7 +64,7 @@ public class Lobby extends LobbyPlugin {
     ));
 
     @Override
-    public void onEnable() {
+    public void onGameEnable() {
         system = this;
 
         worlds = new HashMap<>();
@@ -128,7 +128,7 @@ public class Lobby extends LobbyPlugin {
     }
 
     @Override
-    public void onDisable() {
+    public void onGameDisable() {
         sendConsoleMessage("§cDeactivating AddOns...");
         for (LobbyAddon addon : ADDONS) {
             addon.onDisable();

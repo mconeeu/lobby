@@ -11,7 +11,6 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Progress;
@@ -183,21 +182,17 @@ public class CompassInventory extends CoreInventory {
                                 });
 
                         setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.DIAMOND, 1, 0)
-                                        .displayName("§eAnKäufer")
+                                        .displayName("§eAnkäufer")
                                         .lore("§7§oVerkaufe deine gekauften coolen Items", "§7§oDu bekommst sogar ein paar Emeralds zurück!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                                         .create(),
                                 e -> {
                                     player.closeInventory();
 
-                                    PlayerNpc playernpc_vendor = ((PlayerNpc) CoreSystem.getInstance().getNpcManager().getNPC(CoreSystem.getInstance().getWorldManager().getWorld("Lobby-OneIsland"), "vendor"));
-
-                                    if (playernpc_vendor.getData().getTempLocation() != null) {
-                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(playernpc_vendor.getData().getTempLocation().bukkit());
-                                    } else {
-                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(playernpc_vendor.getData().getTempLocation().bukkit());
-                                    }
-
-
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(
+                                            CoreSystem.getInstance().getNpcManager().getNPC(
+                                                    CoreSystem.getInstance().getWorldManager().getWorld("Lobby-OneIsland"), "vendor"
+                                            ).getLocation()
+                                    );
                                 });
 
                         setItem(InventorySlot.ROW_4_SLOT_4, new ItemBuilder(Material.CHEST, 1, 0)

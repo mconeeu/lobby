@@ -9,7 +9,7 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.LobbyCategory;
 import eu.mcone.lobby.api.player.HotbarItems;
-import eu.mcone.lobby.items.inventory.chest.ChestOpeningInventory;
+import eu.mcone.lobby.items.inventory.chestopening.ChestOpeningInventory;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
