@@ -15,8 +15,6 @@ import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.inventory.CompassInventory;
 import eu.mcone.lobby.inventory.LobbyInventory;
 import eu.mcone.lobby.inventory.OneHitGadgetInventory;
-import eu.mcone.lobby.util.PlayerHiderManager;
-import eu.mcone.lobby.util.SilentLobbyManager;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -59,7 +57,6 @@ public class InventoryTriggerListener implements Listener {
                 if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
                     LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(p);
                 } else {
-                    LobbyPlugin.getInstance().getMessager().send(p, "§2Du bist nun in der §aPrivaten Lobby§2. Hier bist du vollkommen ungestört!");
                     LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
                 }
             } else if (i.equals(HotbarItems.LOBBY_CHANGER)) {

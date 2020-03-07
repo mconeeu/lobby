@@ -74,7 +74,6 @@ public class PlayerJoinListener implements Listener {
             if (p.hasPermission("lobby.silenthub") && lp.getSettings().isSpawnInSilentLobby()) {
                 e.setHidden(true);
                 LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
-                LobbyPlugin.getInstance().getMessager().send(p, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
             }
 
             switch (lp.getSettings().getSpawnPoint()) {

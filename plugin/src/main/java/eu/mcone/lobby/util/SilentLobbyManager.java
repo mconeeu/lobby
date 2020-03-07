@@ -54,6 +54,7 @@ public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobby
             all.hidePlayer(p);
             p.hidePlayer(all);
         }
+        LobbyPlugin.getInstance().getMessager().send(p, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
 
         GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
         p.playSound(p.getLocation(), Sound.GLASS, 1, 1);
