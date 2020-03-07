@@ -82,6 +82,11 @@ public class GeneralPlayerListener implements Listener {
         e.setQuitMessage(null);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().getUniqueId());
 
+        if (LobbyPlugin.getInstance().getJumpNRunManager().isJumping(e.getPlayer())) {
+            LobbyPlugin.getInstance().getJumpNRunManager().setCancel(e.getPlayer());
+        }
+
+
         if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
             lp.setBankProgress(BankProgress.BANK_ROBBERY_START);
             JohnBankRobberyInventory.currentlyInBank = null;
