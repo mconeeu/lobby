@@ -16,6 +16,16 @@ public enum JumpNRun {
                     new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 18, 90, -61),
                     new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 18, 90, -53)
             }
+    ),
+    CAVE(
+            0,
+            "jumpandrun_cave_warp", "Cave",
+            "jumpandrun_cave_start",
+            /* START */ new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), -37, 63, -19),
+            new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 18, 70, -14),
+            new Location[]{
+                    new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 11, 66, -15),
+            }
     );
 
     private int id;

@@ -107,7 +107,7 @@ public class OneHitListener implements Listener {
                 LobbyPlayer lk = LobbyPlugin.getInstance().getLobbyPlayer(k);
                 lk.getCorePlayer().addCoins(2);
                 k.getInventory().setItem(6, new ItemBuilder(Material.ARROW, 1, 0).displayName("§bOneHit-Pfeil").create());
-                k.getWorld().playSound(k.getLocation(), Sound.LEVEL_UP, 1, 1);
+                k.playSound(k.getLocation(), Sound.LEVEL_UP, 1, 1);
                 k.setExp(1);
                 p.setExp(1);
                 k.setLevel(k.getLevel() + 1);
@@ -168,6 +168,7 @@ public class OneHitListener implements Listener {
                 if (manager.isFighting(p) && manager.isFighting(k)) {
                     if (e.getDamager() instanceof Arrow) {
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5, 4500, false, false));
+                        p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 5, 4500, false, false));
                         p.setHealth(0);
                         e.setCancelled(false);
                     } else if (
