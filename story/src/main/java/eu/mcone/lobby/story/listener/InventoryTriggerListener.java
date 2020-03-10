@@ -85,10 +85,11 @@ public class InventoryTriggerListener implements Listener {
                                     } else {
                                         LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§4Du darfst im moment keine Jump and Runs spielen, weil du OneHit spielst!");
                                     }
-                                } else {
-                                    LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§4Das §c" + sign.getLine(1) + "§4 Jump and Run ist momentan in §oWartungen§4!");
+                                    return;
                                 }
                             }
+
+                            LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§4Das §c" + sign.getLine(1) + "§4 Jump and Run ist momentan in §oWartungen§4!");
                         }
                         return;
                     }
