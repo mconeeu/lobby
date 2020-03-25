@@ -237,6 +237,19 @@ public class CompassInventory extends CoreInventory {
 
                                 });
 
+                        setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.STICK, 1, 0)
+                                        .displayName("§eFangen §8| §fLobbygame")
+                                        .lore("§7§oFange andere Spieler", "§7§ooder laufe vor anderen weg", "", "§8» §f§nLinksklick§8 | §7§oSpielen")
+                                        .create(),
+
+                                e -> {
+
+
+                                    p.closeInventory();
+                                    LobbyPlugin.getInstance().getCatchManager().setStart(p);
+                                });
+
+
                         setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.IRON_SWORD, 1, 0)
                                         .displayName("§cOne-Hit §8| §fLobbygame")
                                         .lore("§7§oSpiele ein bekannten Modi", "§7§omit deinen Freunden auf der Lobby", "", "§8» §f§nLinksklick§8 | §7§oSpielen")

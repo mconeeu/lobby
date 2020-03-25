@@ -81,6 +81,32 @@ public class HotbarItems {
             .displayName("§c§lZurück zum Checkpoint")
             .create();
 
+    /*
+     * Catching Fighting
+     */
+
+    public static final ItemStack CATCH_STICK = new ItemBuilder(Material.BLAZE_ROD, 1, 0)
+            .unbreakable(true)
+            .itemFlags(ItemFlag.HIDE_UNBREAKABLE)
+            .displayName("§fFang-Stock")
+            .create();
+
+    public static final ItemStack CATCH_STICK_RUN = new ItemBuilder(Material.STICK, 1, 0)
+            .unbreakable(true)
+            .itemFlags(ItemFlag.HIDE_UNBREAKABLE)
+            .displayName("§fLauf-Stock")
+            .create();
+
+
+    public static final ItemStack CATCH_ROD = new ItemBuilder(Material.FISHING_ROD, 1, 0)
+            .displayName("§eCatch-Enterhacken")
+            .unbreakable(true)
+            .itemFlags(ItemFlag.HIDE_UNBREAKABLE)
+            .create();
+
+    public static final ItemStack LEAVE_CATCH_FIGHTING = new ItemBuilder(Material.IRON_DOOR, 1)
+            .displayName("§4Verlassen")
+            .create();
 
     /*
      * OneHit Fighting

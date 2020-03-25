@@ -18,9 +18,11 @@ import org.bukkit.util.Vector;
 
 public class FishingRodListener implements Listener {
 
+
     @EventHandler
     public void onFish(PlayerFishEvent e) {
         Player p = e.getPlayer();
+
         Fish h = e.getHook();
 
         if (((e.getState().equals(PlayerFishEvent.State.IN_GROUND)) ||
@@ -55,6 +57,6 @@ public class FishingRodListener implements Listener {
                 p.setVelocity(v);
             }
         }
-    }
 
+    }
 }

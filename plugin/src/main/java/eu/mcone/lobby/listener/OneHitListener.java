@@ -77,10 +77,11 @@ public class OneHitListener implements Listener {
     public void onAFK(AfkEvent e) {
         Player p = e.getPlayer();
 
-        if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getJumpNRunManager().isJumping(p)) {
+        if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getJumpNRunManager().isJumping(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p)) {
             if (e.getState().equals(PlayerState.AFK)) {
                 LobbyPlugin.getInstance().getJumpNRunManager().setCancel(p);
                 LobbyPlugin.getInstance().getOneHitManager().leave(p);
+                LobbyPlugin.getInstance().getCatchManager().leave(p);
                 LobbyPlugin.getInstance().getMessager().send(p, "§4Du wurdest automatisch von deiner Lobby Aktivität gekickt!");
             }
         }
@@ -180,7 +181,9 @@ public class OneHitListener implements Listener {
                 }
             } else if (e.getDamager() instanceof Arrow) {
                 if (manager.isFighting(p)) {
+                    Player k = (Player) e.getDamager();
                     e.setCancelled(false);
+                    k.setHealth(0);
                 }
             }
         }

@@ -28,6 +28,7 @@ import eu.mcone.lobby.listener.*;
 import eu.mcone.lobby.onehit.LobbyOneHitManager;
 import eu.mcone.lobby.scoreboard.LobbyObjective;
 import eu.mcone.lobby.story.LobbyStory;
+import eu.mcone.lobby.trap.TrapManager;
 import eu.mcone.lobby.util.PlayerHiderManager;
 import eu.mcone.lobby.util.RealTimeUtil;
 import eu.mcone.lobby.util.SilentLobbyManager;
@@ -47,6 +48,8 @@ public class Lobby extends LobbyPlugin {
     private BuildSystem buildSystem;
     @Getter
     private LobbyOneHitManager oneHitManager;
+    @Getter
+    private TrapManager catchManager;
     @Getter
     private LobbyJumpNRunManager jumpNRunManager;
     @Getter
@@ -107,6 +110,9 @@ public class Lobby extends LobbyPlugin {
 
         sendConsoleMessage("§aLoading OneHitManager...");
         oneHitManager = new LobbyOneHitManager(this);
+
+        sendConsoleMessage("§aLoading CatchManager...");
+        catchManager = new TrapManager(this);
 
         sendConsoleMessage("§aLoading JmpNRunManager...");
         jumpNRunManager = new LobbyJumpNRunManager(this);
