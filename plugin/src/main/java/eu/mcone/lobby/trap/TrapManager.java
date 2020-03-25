@@ -187,10 +187,23 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
             if (catcher.contains(p)) {
                 if (catching.isEmpty()) {
                     catcher.remove(p);
+                } else if (catching.size() == 1) {
+                    for (Player random : catching) {
+                        catcher.remove(p);
+                        catcher.add(random);
+                        setCatchItems(random);
+                        LobbyPlugin.getInstance().getMessager().send(random, "§7Du bist nun §fFänger§7 ,weil der §fvorherige Fänger §7das Spiel §fverlassen§7 hat.");
+                        random.setLevel(1);
+                        CoreSystem.getInstance().getCorePlayer(random).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                    }
                 } else {
                     catcher.remove(p);
                     Player random = catching.get(TRAP_RANDOM.nextInt(catching.size()));
                     catcher.add(random);
+                    setCatchItems(random);
+                    LobbyPlugin.getInstance().getMessager().send(random, "§7Du bist nun §fFänger§7 ,weil der §fvorherige Fänger §7das Spiel §fverlassen§7 hat.");
+                    random.setLevel(1);
+                    CoreSystem.getInstance().getCorePlayer(random).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                 }
             }
         }
