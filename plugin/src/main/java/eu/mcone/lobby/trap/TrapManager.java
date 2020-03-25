@@ -108,7 +108,7 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
                     }
                 } else {
                     catcher.remove(p);
-                    Player random = catching.get(TRAP_RANDOM.nextInt(catching.size() + 1));
+                    Player random = catching.get(TRAP_RANDOM.nextInt(catching.size()));
                     catcher.add(random);
                     setCatchItems(random);
                     LobbyPlugin.getInstance().getMessager().send(random, "§7Du bist nun §fFänger§7 ,weil der §fvorherige Fänger §7das Spiel §fverlassen§7 hat.");
@@ -149,7 +149,7 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
             }
         }
 
-        Location location = locations.get(new Random().nextInt(locations.size() - 1));
+        Location location = locations.get(TRAP_RANDOM.nextInt(locations.size()));
         SPAWN_LOCATIONS.put(location, System.currentTimeMillis() / 1000);
 
         return location;
@@ -189,7 +189,7 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
                     catcher.remove(p);
                 } else {
                     catcher.remove(p);
-                    Player random = catching.get(TRAP_RANDOM.nextInt(catching.size() - 1));
+                    Player random = catching.get(TRAP_RANDOM.nextInt(catching.size()));
                     catcher.add(random);
                 }
             }
