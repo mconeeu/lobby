@@ -67,7 +67,7 @@ public class TrappingListener implements Listener {
                     v.setZ(v_z);
                     p.setVelocity(v);
 
-                    p.getInventory().setItem(1, null);
+                    p.getInventory().setItem(2, null);
 
 
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
@@ -81,7 +81,7 @@ public class TrappingListener implements Listener {
                             Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                                 if (manager.getCatcher().contains(p)) {
                                     p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
-                                    p.getInventory().setItem(1, HotbarItems.CATCH_ROD);
+                                    p.getInventory().setItem(2, HotbarItems.CATCH_ROD);
                                 }
                             }, 52);
                         }, 40);
