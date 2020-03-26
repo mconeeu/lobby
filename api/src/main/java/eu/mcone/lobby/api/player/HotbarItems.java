@@ -91,6 +91,20 @@ public class HotbarItems {
             .displayName("§fFang-Stock")
             .create();
 
+
+    public static final ItemStack CATCHER_TRACKER = new ItemBuilder(Material.COMPASS, 1, 0)
+            .unbreakable(true)
+            .itemFlags(ItemFlag.HIDE_UNBREAKABLE)
+            .displayName("§cFänger Tracker")
+            .create();
+
+    public static final ItemStack CATCH_RUN_TRACKER = new ItemBuilder(Material.COMPASS, 1, 0)
+            .unbreakable(true)
+            .itemFlags(ItemFlag.HIDE_UNBREAKABLE)
+            .displayName("§cLäufer Tracker")
+            .create();
+
+
     public static final ItemStack CATCH_STICK_RUN = new ItemBuilder(Material.STICK, 1, 0)
             .unbreakable(true)
             .itemFlags(ItemFlag.HIDE_UNBREAKABLE)

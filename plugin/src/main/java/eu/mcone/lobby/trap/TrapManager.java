@@ -8,7 +8,6 @@ import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.player.HotbarItems;
-import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.listener.PlayerJoinListener;
 import eu.mcone.lobby.listener.TrappingListener;
 import eu.mcone.lobby.scoreboard.CatchObjective;
@@ -161,19 +160,16 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
         p.getInventory().clear();
         p.getActivePotionEffects().clear();
 
-        p.setMaxHealth(2);
-        p.setHealth(2);
-
         p.getInventory().setHelmet(ItemBuilder.createLeatherArmorItem(Material.LEATHER_HELMET, Color.GREEN).unbreakable(true).itemFlags(ItemFlag.HIDE_UNBREAKABLE).create());
-
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
 
         if (catcher.contains(p)) {
             p.getInventory().setItem(0, HotbarItems.CATCH_STICK);
-            p.getInventory().setItem(1, HotbarItems.CATCH_ROD);
+            p.getInventory().setItem(2, HotbarItems.CATCH_ROD);
+            p.getInventory().setItem(1, HotbarItems.CATCH_RUN_TRACKER);
         } else {
             p.getInventory().setItem(0, HotbarItems.CATCH_STICK_RUN);
+            p.getInventory().setItem(1, HotbarItems.CATCHER_TRACKER);
             p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         }
 
@@ -208,5 +204,5 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
             }
         }
     }
-
 }
+

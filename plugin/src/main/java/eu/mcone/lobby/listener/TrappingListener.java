@@ -8,6 +8,7 @@ import eu.mcone.lobby.inventory.InteractionInventory;
 import eu.mcone.lobby.trap.TrapManager;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.*;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Fish;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -92,7 +93,7 @@ public class TrappingListener implements Listener {
     }
 
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onInteractEntity(PlayerInteractEntityEvent e) {
         Player p = e.getPlayer();
 
@@ -114,9 +115,36 @@ public class TrappingListener implements Listener {
             if ((i == null) || (!i.hasItemMeta()) || (!i.getItemMeta().hasDisplayName())) {
                 return;
             }
+            if (manager.isCatching(p)) {
+                if (i.equals(HotbarItems.CATCHER_TRACKER)) {
+                    for (Entity ent : p.getNearbyEntities(100D, 25D, 100D)) {
+                        if (ent instanceof Player) {
+                            Player near = (Player) ent;
+                            if (manager.getCatcher().contains(ent)) {
+                                p.setCompassTarget(near.getLocation());
+                                LobbyPlugin.getInstance().getMessager().send(p, "§7Der Fänger ist §f" + ((int) p.getLocation().distance(near.getLocation())) + " Blöcke §7entfernt!");
+                            }
+                        }
+                    }
+                } else if (i.equals(HotbarItems.CATCH_RUN_TRACKER)) {
+                    for (Entity ent : p.getNearbyEntities(100D, 25D, 100D)) {
+                        if (ent instanceof Player) {
+                            Player near = (Player) ent;
+                            if (manager.getCatching().size() == 1) {
+                                LobbyPlugin.getInstance().getMessager().send(p, "§cDu bist der einzigste der momentan Fangen spielt!");
+                                return;
+                            } else if (manager.getCatching().contains(ent)) {
+                                p.setCompassTarget(near.getLocation());
+                                LobbyPlugin.getInstance().getMessager().send(p, "§7Der nächste Läufer ist §f" + ((int) p.getLocation().distance(near.getLocation())) + " Blöcke §7entfernt!");
+                            }
+                        }
+                    }
+                }
 
-            if (i.equals(HotbarItems.LEAVE_CATCH_FIGHTING)) {
-                manager.leave(p);
+                if (i.equals(HotbarItems.LEAVE_CATCH_FIGHTING)) {
+                    manager.leave(p);
+                }
+
             }
         }
     }
@@ -157,6 +185,7 @@ public class TrappingListener implements Listener {
                 if (manager.isCatching(p) && manager.isCatching(k)) {
                     if (k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.CATCH_STICK)) {
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 39, 4500, false, false));
+                        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 41, 4500, false, false));
                         p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 5, 4500, false, false));
                         manager.getCatcher().remove(k);
                         manager.getCatcher().add(p);
@@ -166,6 +195,7 @@ public class TrappingListener implements Listener {
                         LobbyPlugin.getInstance().getMessager().send(k, "§7Du hast §c" + p.getName() + "§7 gefangen!");
                         k.setLevel(0);
                         k.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
+                        k.getLocation().getWorld().playSound(k.getLocation(), Sound.NOTE_PIANO, 1.0F, 1.0F);
                         k.getLocation().getWorld().playSound(k.getLocation(), Sound.NOTE_PIANO, 1.0F, 1.0F);
 
                         manager.setCatchItems(p);
