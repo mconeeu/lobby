@@ -170,8 +170,8 @@ public class OneHitListener implements Listener {
                     if (e.getDamager() instanceof Arrow) {
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5, 4500, false, false));
                         p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 5, 4500, false, false));
-                        p.setHealth(0);
                         e.setCancelled(false);
+                        k.setHealth(0);
                     } else if (
                             k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.ONEHIT_SWORD) || k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.STORY_ONEHIT_SWORD)) {
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5, 4500, false, false));
@@ -181,9 +181,8 @@ public class OneHitListener implements Listener {
                 }
             } else if (e.getDamager() instanceof Arrow) {
                 if (manager.isFighting(p)) {
-                    Player k = (Player) e.getDamager();
+                    p.setHealth(0);
                     e.setCancelled(false);
-                    k.setHealth(0);
                 }
             }
         }
