@@ -141,7 +141,7 @@ public class CompassInventory extends CoreInventory {
                                         .create(),
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("replay");
+                                    CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CONNECT", "replay");
 
                                 });
 
