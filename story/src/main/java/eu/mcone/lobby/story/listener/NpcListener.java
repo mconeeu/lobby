@@ -148,10 +148,10 @@ public class NpcListener implements Listener {
                                 new CaptainInventory(p);
                                 return;
                             } else {
-                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Ich brauche das Ticket du Fischgesicht!");
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Nimm das Ticket in die Hand, du Landratte!");
                             }
                         } else if (!p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Ich brauche das Ticket du Landratte");
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Ich brauche das Ticket du Fischgesicht, kaufe es dir beim Verkäufer!");
                         } else {
                             p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Nimm das Ticket in die Hand!");
                         }

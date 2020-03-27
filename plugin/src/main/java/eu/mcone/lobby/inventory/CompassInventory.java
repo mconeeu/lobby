@@ -11,6 +11,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Progress;
@@ -131,6 +132,26 @@ public class CompassInventory extends CoreInventory {
                                 e -> {
                                     player.closeInventory();
                                     LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("skypvp");
+
+                                });
+
+                        setItem(InventorySlot.ROW_1_SLOT_7, new ItemBuilder(Material.REDSTONE_COMPARATOR, 1, 0)
+                                        .displayName("§eReplay")
+                                        .lore("§7§oSchaue dir mit deinen Freunden", "§7§odeinen alten Spielrunden an!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                        .create(),
+                                e -> {
+                                    player.closeInventory();
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("replay");
+
+                                });
+
+                        setItem(InventorySlot.ROW_1_SLOT_3, new Skull(p.getName(), 1).toItemBuilder()
+                                        .displayName("§5Festival / Community")
+                                        .lore("§7§oTreffe dich mit Freunden auf dem ", "§7§oFestival/Community und", "§7§oreise mit einem gültigen Ticket hin!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                        .create(),
+                                e -> {
+                                    player.closeInventory();
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("community");
 
                                 });
 

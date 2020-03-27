@@ -21,7 +21,7 @@ public class CaptainInventory extends CoreInventory {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
 
-        setItem(InventorySlot.ROW_2_SLOT_3, new Skull(p.getName(), 1).toItemBuilder().displayName("§5§lCommunity / Festival").lore("§7§oTreffe deine Freunde oder Yuotuber","§7§oauf dem Festival").create(), e -> {
+        setItem(InventorySlot.ROW_2_SLOT_3, new Skull(p.getName(), 1).toItemBuilder().displayName("§5§lCommunity / Festival").lore("§7§oTreffe deine Freunde oder Creator", "§7§oauf dem Festival").create(), e -> {
             if (p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
                 p.getInventory().remove(p.getItemInHand());
                 lp.removeLobbyItem(LobbyItem.BOAT_PASS);
@@ -33,7 +33,7 @@ public class CaptainInventory extends CoreInventory {
             }
         });
 
-        setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.SAND).displayName("§f§lParadise-Island").lore("§7§oMache Urlaub und entspanne","§7§oauf der schönen Insel","§7§omitten im Paradis!").create(), e -> {
+        setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.SAND).displayName("§f§lParadise-Island").lore("§7§oMache Urlaub und entspanne", "§7§oauf der schönen Insel", "§7§omitten im Paradis!").create(), e -> {
 
             if (lp.getProgressId() < Progress.MARVIN_KILL.getId()) {
                 if (p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
