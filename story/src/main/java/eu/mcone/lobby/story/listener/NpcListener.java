@@ -55,7 +55,9 @@ public class NpcListener implements Listener {
                     }
                     case "robert": {
                         if (lp.getProgressId() >= Progress.SALIA.getId() && !lp.hasLobbyItem(LobbyItem.MAGICWAND)) {
-                            lp.hasLobbyItem(LobbyItem.MAGICWAND);
+                            if (!lp.hasLobbyItem(LobbyItem.MAGICWAND)) {
+                                lp.addLobbyItem(LobbyItem.MAGICWAND);
+                            }
                         }
                         break;
                     }
@@ -99,7 +101,7 @@ public class NpcListener implements Listener {
 
                     case "duty": {
                         if (!lp.hasLobbyItem(LobbyItem.PASS)) {
-                            lp.removeLobbyItem(LobbyItem.PASS);
+                            lp.addLobbyItem(LobbyItem.PASS);
                         }
                         break;
                     }
@@ -186,8 +188,8 @@ public class NpcListener implements Listener {
                             p.sendMessage("§fDas war Teil 1 der MCONE Story der 2 Teil ist bereits in Planung und auch schon in Entwicklung");
 
 
-                           if (!lp.hasLobbyItem(LobbyItem.RADIO_SET1)) {
-                               lp.addLobbyItem(LobbyItem.RADIO_SET1);
+                            if (!lp.hasLobbyItem(LobbyItem.RADIO_SET1)) {
+                                lp.addLobbyItem(LobbyItem.RADIO_SET1);
                             }
                             if (!lp.hasLobbyItem(LobbyItem.GPS)) {
                                 lp.addLobbyItem(LobbyItem.GPS);
@@ -229,17 +231,16 @@ public class NpcListener implements Listener {
                         p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in One Island");
                         break;
                     }
-                  case "sparow": {
+                    case "sparow": {
                         if (lp.getProgressId() > Progress.MARVIN_KILL.getId()) {
                             if (!lp.hasLobbyItem(LobbyItem.RADIO_SET_2)) {
                                 lp.addLobbyItem(LobbyItem.RADIO_SET_2);
-                                p.sendMessage("sd");
                             }
                         }
                         break;
                     }
 
-                           case "marvin": {
+                    case "marvin": {
                         if (lp.getProgressId() + 1 == Progress.MARVIN.getId() || lp.getProgressId() == Progress.MARVIN.getId()) {
                             LobbyWorld.CAVE.getWorld().teleportSilently(p, "spawn");
 

@@ -75,6 +75,7 @@ public class InventoryTriggerListener implements Listener {
             } else if (i.equals(HotbarItems.ACTIVATE_NICK)) {
                 if (!cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
+                    p.getInventory().setBoots(null);
                 }
 
                 p.getInventory().setItem(

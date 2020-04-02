@@ -204,7 +204,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
     public void jumpandrunItems(Player p) {
         p.getInventory().clear();
 
-        p.setGameMode(GameMode.SURVIVAL);
+        p.setGameMode(GameMode.ADVENTURE);
         p.getActivePotionEffects().clear();
         p.removePotionEffect(PotionEffectType.INVISIBILITY);
 

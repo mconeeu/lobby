@@ -27,6 +27,7 @@ import org.bukkit.potion.PotionEffectType;
 public class GeneralPlayerListener implements Listener {
     private Plugin plugin;
 
+
     @EventHandler
     public void onLobbyPlayerLoaded(LobbyPlayerLoadedEvent e) {
         LobbyPlayer p = e.getPlayer();
