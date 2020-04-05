@@ -155,13 +155,28 @@ public class CompassInventory extends CoreInventory {
 
                                 });
 
-                        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Gamemode.CITYBUILD.getItem(), 1, 0)
-                                        .displayName(Gamemode.CITYBUILD.getLabel())
-                                        .lore("§7§oErbaue dein eigenes Grundstück", "§7§ound werde einer der Reichsten Spieler", "§7§oauf dem Server!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Gamemode.BEDWARS.getItem(), 1, 0)
+                                        .displayName(Gamemode.BEDWARS.getLabel())
+                                        .lore("§7§oBaue Betten von anderen Spielern ab", "§7§ound start mit Kits durch!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                                         .create(),
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("build");
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("bedwars");
+
+                                    if (p.getWorld().getName().equalsIgnoreCase("Office")) {
+                                        OfficeManager.unVanishPlayer(p);
+                                    }
+                                }
+                        );
+
+
+                        setItem(InventorySlot.ROW_4_SLOT_6, new ItemBuilder(Gamemode.MINEWAR.getItem(), 1, 0)
+                                        .displayName(Gamemode.MINEWAR.getLabel())
+                                        .lore("§7§oBaue Erze ab und erhalte", "§7§ocoole Items und töte Gegner!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                        .create(),
+                                e -> {
+                                    player.closeInventory();
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("minewar");
 
                                     if (p.getWorld().getName().equalsIgnoreCase("Office")) {
                                         OfficeManager.unVanishPlayer(p);
@@ -226,7 +241,7 @@ public class CompassInventory extends CoreInventory {
 
                                 });
 
-                        setItem(InventorySlot.ROW_4_SLOT_6, new ItemBuilder(Material.GOLD_INGOT, 1, 0)
+                        setItem(InventorySlot.ROW_1_SLOT_5, new ItemBuilder(Material.GOLD_INGOT, 1, 0)
                                         .displayName("§aBank")
                                         .lore("§7§oEröffne ein Konto und hole Dir", "§7§ojeden Tag coole Belohnungen ab!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                                         .create(),
