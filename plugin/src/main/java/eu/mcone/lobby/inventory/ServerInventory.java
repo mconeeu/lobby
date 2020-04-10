@@ -43,5 +43,4 @@ public class ServerInventory extends CoreInventory {
             }
         }, "SERVERS", modus.toString());
     }
-
 }
