@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString
 public class LobbySettings {
 
-    private boolean allowTrading, spawnInSilentLobby, allowAnimation = true, realTime = true, npcRandomeMessage;
+    private boolean allowTrading, spawnInSilentLobby, allowAnimation = true, realTime = true, RankBoots = true;
     private SpawnPoint spawnPoint = SpawnPoint.SPAWN;
 
 }

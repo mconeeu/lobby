@@ -12,6 +12,8 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
+import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.api.player.LobbySettings;
 import eu.mcone.lobby.inventory.CompassInventory;
 import eu.mcone.lobby.inventory.LobbyInventory;
 import eu.mcone.lobby.inventory.OneHitGadgetInventory;
@@ -30,6 +32,8 @@ public class InventoryTriggerListener implements Listener {
     public void on(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
+        LobbySettings settings = lp.getSettings();
 
         if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             ItemStack i = e.getItem();
@@ -65,6 +69,9 @@ public class InventoryTriggerListener implements Listener {
                 new OneHitGadgetInventory(p);
             } else if (i.equals(HotbarItems.DEACTIVATE_NICK)) {
                 if (cp.isNicked()) {
+                    if (settings.isRankBoots()) {
+                        LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
+                    }
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
                 }
 
@@ -75,7 +82,9 @@ public class InventoryTriggerListener implements Listener {
             } else if (i.equals(HotbarItems.ACTIVATE_NICK)) {
                 if (!cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
-                    p.getInventory().setBoots(null);
+                    if (settings.isRankBoots()) {
+                        p.getInventory().setBoots(null);
+                    }
                 }
 
                 p.getInventory().setItem(

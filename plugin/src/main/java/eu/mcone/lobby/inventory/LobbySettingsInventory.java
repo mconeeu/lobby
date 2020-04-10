@@ -128,15 +128,17 @@ public class LobbySettingsInventory extends CoreInventory {
 
         //TODO BUG FIXEN
 
-        setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.SKULL_ITEM, 1, 0).displayName("§f§lNPC Sprach Texte").create());
-        if (settings.isNpcRandomeMessage()) {
-            setItem(InventorySlot.ROW_3_SLOT_2, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um die NPCs Zufalls Texte auszuschalten", "§7§owenn du in der nähe eines NPCs bist!").create(), e -> {
-                settings.setNpcRandomeMessage(false);
+        setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.LEATHER_BOOTS, 1, 0).displayName("§f§lErhalte Rang Schuhe").create());
+        if (settings.isRankBoots()) {
+            setItem(InventorySlot.ROW_3_SLOT_2, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um keine Rank Schuhe zu erhalten", "§7§owenn du den Server beitritts!").create(), e -> {
+                settings.setRankBoots(false);
+                player.getInventory().setBoots(null);
                 setSettings(p, lp);
             });
         } else {
-            setItem(InventorySlot.ROW_3_SLOT_2, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um die NPCs Zufalls Texte einzuschalten", "§7§owenn du in der nähe eines NPCs bist!").create(), e -> {
-                settings.setNpcRandomeMessage(true);
+            setItem(InventorySlot.ROW_3_SLOT_2, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um Rank Schuhe zu erhalten", "§7§owenn du den Server beitritts!").create(), e -> {
+                settings.setRankBoots(true);
+                LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
                 setSettings(p, lp);
             });
         }
