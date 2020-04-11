@@ -313,7 +313,7 @@ public class CompassInventory extends CoreInventory {
 
 
                         setItem(InventorySlot.ROW_3_SLOT_9, new ItemBuilder(Material.PUMPKIN, 1, 0)
-                                        .displayName("§7§lSchumgler")
+                                        .displayName("§7§lSchugler")
                                         .lore("§7§oKaufe dir illegale Ware", "§7§owie zum Beispiel seltene Kisten", "§7§ofür das Chest-Opening", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                                         .create(),
 
