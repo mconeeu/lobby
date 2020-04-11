@@ -22,6 +22,7 @@ import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.api.player.LobbySettings;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.scoreboard.SidebarObjective;
 import eu.mcone.lobby.util.RealTimeUtil;
@@ -56,6 +57,11 @@ public class PlayerJoinListener implements Listener {
         postloadLobbyPlayer(p);
 
         LobbyPlayer lp = new LobbyPlayer(gp);
+        LobbySettings settings = lp.getSettings();
+
+        if (settings.isRankBoots()) {
+            LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
+        }
         Lobby.getSystem().registerLobbyPlayer(lp);
 
         LobbyPlugin.getInstance().getPlayerHiderManager().playerJoined(p);
@@ -147,6 +153,7 @@ public class PlayerJoinListener implements Listener {
     private static void postloadLobbyPlayer(Player p) {
         p.getActivePotionEffects().clear();
 
+
         if (p.hasPermission("mcone.premium")) p.setAllowFlight(true);
 
         if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
@@ -169,7 +176,6 @@ public class PlayerJoinListener implements Listener {
 
         p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
 
-        LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
         CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new SidebarObjective());
     }
 

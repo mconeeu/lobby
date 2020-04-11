@@ -153,6 +153,10 @@ public class HotbarItems {
             .displayName("§bOneHit-Pfeil")
             .create();
 
+    public static final ItemStack ONEHIT_SNOWBALL = new ItemBuilder(Material.SNOW_BALL, 1, 0)
+            .displayName("§fOneHit-Schneball")
+            .create();
+
     public static final ItemStack LEAVE_ONEHIT_FIGHTING = new ItemBuilder(Material.IRON_DOOR, 1)
             .displayName("§4Verlassen")
             .create();

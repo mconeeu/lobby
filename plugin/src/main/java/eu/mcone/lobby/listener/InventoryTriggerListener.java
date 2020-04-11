@@ -32,9 +32,6 @@ public class InventoryTriggerListener implements Listener {
     public void on(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
-        LobbySettings settings = lp.getSettings();
-
         if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             ItemStack i = e.getItem();
             if ((i == null) || (!i.hasItemMeta()) || (!i.getItemMeta().hasDisplayName())) {
@@ -69,9 +66,6 @@ public class InventoryTriggerListener implements Listener {
                 new OneHitGadgetInventory(p);
             } else if (i.equals(HotbarItems.DEACTIVATE_NICK)) {
                 if (cp.isNicked()) {
-                    if (settings.isRankBoots()) {
-                        LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
-                    }
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
                 }
 
@@ -82,9 +76,6 @@ public class InventoryTriggerListener implements Listener {
             } else if (i.equals(HotbarItems.ACTIVATE_NICK)) {
                 if (!cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
-                    if (settings.isRankBoots()) {
-                        p.getInventory().setBoots(null);
-                    }
                 }
 
                 p.getInventory().setItem(
@@ -97,18 +88,33 @@ public class InventoryTriggerListener implements Listener {
 
     @EventHandler
     public void onNick(NickEvent e) {
+        Player player = (Player) e.getPlayer();
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
+        LobbySettings settings = lp.getSettings();
+
         e.getPlayer().bukkit().getInventory().setItem(
                 6,
                 new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§a§lNicken §8» §7§oAktiviert").lore("§7§oKlicke zum deaktivieren").create()
         );
+
+        if (settings.isRankBoots()) {
+            player.getInventory().setBoots(null);
+        }
     }
 
     @EventHandler
     public void onUnnick(UnnickEvent e) {
+        Player player = (Player) e.getPlayer();
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
+        LobbySettings settings = lp.getSettings();
+
         e.getPlayer().bukkit().getInventory().setItem(
                 6,
                 new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§c§lNicken §8» §7§oDeaktiviert").lore("§7§oKlicke zum aktivieren").create()
         );
+        if (settings.isRankBoots()) {
+            LobbyPlugin.getInstance().getBackpackManager().setRankBoots(player);
+        }
     }
 
 }

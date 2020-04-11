@@ -207,7 +207,18 @@ public class CompassInventory extends CoreInventory {
                                 });
 
 
-                        setItem(InventorySlot.ROW_4_SLOT_1, new ItemBuilder(Material.EMERALD, 1, 0)
+                        setItem(InventorySlot.ROW_4_SLOT_4, new ItemBuilder(Material.DEAD_BUSH, 1, 0)
+                                        .displayName("§aTrashwars")
+                                        .lore("§7§oKämpfe um den Sieg mit einem Müll", "§7§oInventar auf einer Insel voller Gegner", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                        .create(),
+                                e -> {
+                                    player.closeInventory();
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("trashwars");
+
+                                });
+
+
+                        setItem(InventorySlot.ROW_5_SLOT_1, new ItemBuilder(Material.EMERALD, 1, 0)
                                         .displayName("§eHändler")
                                         .lore("§7§oKaufe dir coole Items oder seltene Truhen", "§7§ofür das Chest-Opening", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                                         .create(),
@@ -217,7 +228,9 @@ public class CompassInventory extends CoreInventory {
 
                                 });
 
-                        setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.DIAMOND, 1, 0)
+                        ///
+
+                        setItem(InventorySlot.ROW_5_SLOT_9, new ItemBuilder(Material.DIAMOND, 1, 0)
                                         .displayName("§eAnkäufer")
                                         .lore("§7§oVerkaufe deine gekauften coolen Items", "§7§oDu bekommst sogar ein paar Emeralds zurück!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                                         .create(),
@@ -231,7 +244,7 @@ public class CompassInventory extends CoreInventory {
                                     );
                                 });
 
-                        setItem(InventorySlot.ROW_4_SLOT_4, new ItemBuilder(Material.CHEST, 1, 0)
+                        setItem(InventorySlot.ROW_3_SLOT_1, new ItemBuilder(Material.CHEST, 1, 0)
                                         .displayName("§eChest-Opening")
                                         .lore("§7§oÖffne Kisten und gewinne coole Items!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                                         .create(),
@@ -251,7 +264,7 @@ public class CompassInventory extends CoreInventory {
                                     LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("bank");
 
                                 });
-                        setItem(InventorySlot.ROW_2_SLOT_9, new ItemBuilder(Material.REDSTONE, 1, 0)
+                        setItem(InventorySlot.ROW_1_SLOT_9, new ItemBuilder(Material.REDSTONE, 1, 0)
                                         .displayName("§dBüro")
                                         .lore("§7§oKaufe dir ein tolles Büro", "§7§ooder Besuche dein Büro", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                                         .create(),
@@ -299,7 +312,18 @@ public class CompassInventory extends CoreInventory {
                                 });
 
 
-                        setItem(InventorySlot.ROW_4_SLOT_9, new ItemBuilder(Material.BOOK, 1, 0).displayName("§3Die Story").lore("§7§oSpiele die Story und erhalte", "§7§ocoole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren").create(), e -> {
+                        setItem(InventorySlot.ROW_3_SLOT_9, new ItemBuilder(Material.PUMPKIN, 1, 0)
+                                        .displayName("§7§lSchumgler")
+                                        .lore("§7§oKaufe dir illegale Ware", "§7§owie zum Beispiel seltene Kisten", "§7§ofür das Chest-Opening", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                        .create(),
+
+                                e -> {
+                                    player.closeInventory();
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("smuggler");
+
+                                });
+
+                        setItem(InventorySlot.ROW_1_SLOT_1, new ItemBuilder(Material.BOOK, 1, 0).displayName("§3Die Story").lore("§7§oSpiele die Story und erhalte", "§7§ocoole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren").create(), e -> {
                             LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
                             if (lp.getProgressId() == 0) {

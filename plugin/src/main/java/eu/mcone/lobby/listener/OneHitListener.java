@@ -23,6 +23,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -45,9 +46,9 @@ public class OneHitListener implements Listener {
     public void onInteractEntity(PlayerInteractEntityEvent e) {
         Player p = e.getPlayer();
 
-        if (!manager.isFighting(p)) {
-            if (e.getRightClicked() instanceof Player) {
-                Player clicked = (Player) e.getRightClicked();
+        if (e.getRightClicked() instanceof Player) {
+            Player clicked = (Player) e.getRightClicked();
+            if (!manager.isFighting(p)) {
                 new InteractionInventory(p, clicked);
             }
         }
@@ -167,12 +168,7 @@ public class OneHitListener implements Listener {
                 Player k = (Player) e.getDamager();
 
                 if (manager.isFighting(p) && manager.isFighting(k)) {
-                    if (e.getDamager() instanceof Arrow) {
-                        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5, 4500, false, false));
-                        p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 5, 4500, false, false));
-                        e.setCancelled(false);
-                        k.setHealth(0);
-                    } else if (
+                    if (
                             k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.ONEHIT_SWORD) || k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.STORY_ONEHIT_SWORD)) {
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5, 4500, false, false));
                         p.setHealth(0);
@@ -182,6 +178,15 @@ public class OneHitListener implements Listener {
             } else if (e.getDamager() instanceof Arrow) {
                 if (manager.isFighting(p)) {
                     p.setHealth(0);
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5, 4500, false, false));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 5, 4500, false, false));
+                    e.setCancelled(false);
+                }
+            } else if (e.getDamager() instanceof Snowball) {
+                if (manager.isFighting(p)) {
+                    p.setHealth(0);
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5, 4500, false, false));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 5, 4500, false, false));
                     e.setCancelled(false);
                 }
             }

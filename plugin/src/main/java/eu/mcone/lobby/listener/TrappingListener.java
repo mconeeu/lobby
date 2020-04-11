@@ -97,9 +97,9 @@ public class TrappingListener implements Listener {
     public void onInteractEntity(PlayerInteractEntityEvent e) {
         Player p = e.getPlayer();
 
-        if (!manager.isCatching(p)) {
             if (e.getRightClicked() instanceof Player) {
                 Player clicked = (Player) e.getRightClicked();
+                if (!manager.isCatching(p)) {
                 new InteractionInventory(p, clicked);
             }
         }

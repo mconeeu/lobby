@@ -7,7 +7,6 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -79,6 +78,29 @@ public class OneHitGadgetInventory extends CoreInventory {
 
                             p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 220, 1));
                             LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast erfolgreich den §fSpeedboost §7für §f2 Level gekauft!");
+                            p.closeInventory();
+                        } else {
+                            p.closeInventory();
+                            LobbyPlugin.getInstance().getMessager().send(p, "§4Du benötigst eine 2er Killstreak!");
+                        }
+                    }
+
+                }
+        );
+
+        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.SNOW_BALL, 1, 0)
+                        .displayName("§fOneHit-Schneball")
+                        .lore("§7Um dieses Item kaufen zu können", "§7benötigst du eine §a2er Killstreak")
+                        .create(),
+
+                e -> {
+                    if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p)) {
+                        if (p.getLevel() >= 2) {
+                            p.setLevel(p.getLevel() - 2);
+                            CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+
+                            p.getInventory().setItem(2, HotbarItems.ONEHIT_SNOWBALL);
+                            LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast erfolgreich den §fSchneball §7für §f2 Level gekauft!");
                             p.closeInventory();
                         } else {
                             p.closeInventory();
