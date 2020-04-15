@@ -146,7 +146,6 @@ public class Lobby extends LobbyPlugin {
                 new ChatListener(),
                 new DoubleJumpListener(),
                 new EntitiyDamageListener(),
-                new FishingRodListener(),
                 new GeneralPlayerListener(),
                 new InventoryTriggerListener(),
                 new NpcListener(),
