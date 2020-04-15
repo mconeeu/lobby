@@ -167,6 +167,12 @@ public class OneHitListener implements Listener {
             if (e.getDamager() instanceof Player) {
                 Player k = (Player) e.getDamager();
 
+                if (k.getName().equalsIgnoreCase(p.getName())) {
+                    e.setCancelled(true);
+                    LobbyPlugin.getInstance().getMessager().send(p, "§cDu darfst dich nicht selbst angreifen!");
+                    return;
+                }
+
                 if (manager.isFighting(p) && manager.isFighting(k)) {
                     if (
                             k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.ONEHIT_SWORD) || k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.STORY_ONEHIT_SWORD)) {
