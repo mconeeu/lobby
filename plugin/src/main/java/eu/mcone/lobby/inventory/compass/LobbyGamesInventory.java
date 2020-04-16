@@ -130,7 +130,7 @@ public class LobbyGamesInventory extends CoreInventory {
 
                             setItem(InventorySlot.ROW_5_SLOT_3, new ItemBuilder(Material.NETHER_STAR, 1, 0)
                                             .displayName("§fMinigames")
-                                            .lore("§7§oKämpfe um den Sieg mit einem Müll", "§7§oInventar auf einer Insel voller Gegner", "", "§8» §f§nLinksklick§8 | §7§oÖffnen")
+                                            .lore("§7§oSchaue dir unsere Spielmodi an", "§7§ound telepotiere dich zu ihnen!", "", "§8» §f§nLinksklick§8 | §7§oÖffnen")
                                             .create(),
                                     e -> {
                                         new MinigamesInventory(p);
@@ -139,7 +139,7 @@ public class LobbyGamesInventory extends CoreInventory {
 
                             setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.BOOK, 1, 0)
                                             .displayName("§fLobby-Orte")
-                                            .lore("§7§oKämpfe um den Sieg mit einem Müll", "§7§oInventar auf einer Insel voller Gegner", "", "§8» §f§nLinksklick§8 | §7§oÖffnen")
+                                            .lore("§7§oSchaue dir unsere Lobby-OneIsland genauer an", "§7§ound reise zu verschiedene Orten", "", "§8» §f§nLinksklick§8 | §7§oÖffnen")
                                             .create(),
                                     e -> {
                                         player.playSound(p.getLocation(), Sound.NOTE_STICKS, 1, 1);
