@@ -14,9 +14,9 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.LobbySettings;
-import eu.mcone.lobby.inventory.CompassInventory;
 import eu.mcone.lobby.inventory.LobbyInventory;
 import eu.mcone.lobby.inventory.OneHitGadgetInventory;
+import eu.mcone.lobby.inventory.compass.MinigamesInventory;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -49,7 +49,7 @@ public class InventoryTriggerListener implements Listener {
                 LobbyPlugin.getInstance().getPlayerHiderManager().showPlayers(p);
             } else if (i.equals(HotbarItems.COMPASS)) {
                 e.setCancelled(true);
-                new CompassInventory(p);
+                new MinigamesInventory(p);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
             } else if (i.equals(HotbarItems.PRIVATE_LOBBY) || i.equals(HotbarItems.LEAVE_PRIVATE_LOBBY)) {
                 if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
@@ -68,6 +68,12 @@ public class InventoryTriggerListener implements Listener {
                 if (cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
                 }
+                LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
+                LobbySettings settings = lp.getSettings();
+
+                if (settings.isRankBoots()) {
+                    LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
+                }
 
                 p.getInventory().setItem(
                         6,
@@ -76,6 +82,13 @@ public class InventoryTriggerListener implements Listener {
             } else if (i.equals(HotbarItems.ACTIVATE_NICK)) {
                 if (!cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
+                }
+
+                LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
+                LobbySettings settings = lp.getSettings();
+
+                if (settings.isRankBoots()) {
+                    p.getInventory().setBoots(null);
                 }
 
                 p.getInventory().setItem(

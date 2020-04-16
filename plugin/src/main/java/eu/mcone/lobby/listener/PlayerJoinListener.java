@@ -41,6 +41,7 @@ public class PlayerJoinListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
 
+
         preloadLobbyPlayer(p);
         p.getInventory().setItem(0, HotbarItems.LOADING);
         p.getInventory().setItem(7, HotbarItems.LOADING);

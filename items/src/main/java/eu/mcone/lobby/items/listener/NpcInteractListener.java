@@ -70,9 +70,9 @@ public class NpcInteractListener implements Listener {
         ASSISTANT_1("assistentin1"),
         ASSISTANT_2("assistentin2"),
         ASSISTANT_3("assistentin3"),
-        CHAUFFEUR_1("chauffeur"),
-        CHAUFFEUR_2("chauffeur2"),
-        CHAUFFEUR_3("chauffeur3"),
+        CHAUFFEUR_1("Chauffeur"),
+        CHAUFFEUR_2("Chauffeur1"),
+        CHAUFFEUR_3("Chauffeur2"),
         VENDOR("vendor");
 
         @Getter
