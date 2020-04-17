@@ -22,9 +22,9 @@ public class EndInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_5, LobbyItem.ONE_HIT_SWORD.getItemStack(), e -> {
             if (!lp.hasLobbyItem(LobbyItem.ONE_HIT_SWORD)) {
                 lp.addLobbyItem(LobbyItem.ONE_HIT_SWORD);
-                LobbyPlugin.getInstance().getMessager().send(p, "Du hast das One Hit Sword aufgenommen!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "Du hast das One Hit Sword aufgenommen!");
             } else {
-                LobbyPlugin.getInstance().getMessager().send(p, "§4Du besitzt diese Item bereits!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du besitzt diese Item bereits!");
             }
             p.closeInventory();
         });

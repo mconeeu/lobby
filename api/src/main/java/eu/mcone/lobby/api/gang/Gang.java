@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public interface Gang {
 
-    String GANG_PREFIX = CoreSystem.getInstance().getTranslationManager().get("lobby.adventure.prefix.gang");
+    String GANG_PREFIX = CoreSystem.getInstance().getTranslationManager().get("lobby.prefix.gang");
 
     String getName();
 

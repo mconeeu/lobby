@@ -94,10 +94,10 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
             if (checkpoint <= jnrPlayer.getCheckpoint() + 1) {
                 if (checkpoint == jnrPlayer.getCheckpoint() + 1) {
                     jnrPlayer.setCheckpoint(checkpoint);
-                    LobbyPlugin.getInstance().getMessager().send(p, "§2Du hast den §a" + checkpoint + ". Checkpoint§2 erreicht!");
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§2Du hast den §a" + checkpoint + ". Checkpoint§2 erreicht!");
                 }
             } else {
-                LobbyPlugin.getInstance().getMessager().send(p, "§4Du hast einen Checkpoint übersprungen und wurdest zu deinem letzten Checkpoint telepotiert!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast einen Checkpoint übersprungen und wurdest zu deinem letzten Checkpoint telepotiert!");
                 title.send(p);
                 if (jnrPlayer.getCheckpoint() <= 1) {
                     LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jnrPlayer.getJumpNRun().getStartLocation());
@@ -126,7 +126,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
             PlayerJoinListener.setLobbyItems(p);
             removePlaying(p);
-            LobbyPlugin.getInstance().getMessager().send(p, "§cDu hast das Jump and Run §oerfolgreich §cbeendet!");
+            LobbyPlugin.getInstance().getMessenger().send(p, "§cDu hast das Jump and Run §oerfolgreich §cbeendet!");
         }
     }
 
@@ -152,7 +152,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
 
             if (checkpoint == jumpNRun.getCheckpoints().length) {
                 if (lp.hasJumpnrunMade(jumpNRun)) {
-                    LobbyPlugin.getInstance().getMessager().send(p, "§2Du hast das Jump and Run §aerfolgreich§2 wiederholt! Du hast §f"
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§2Du hast das Jump and Run §aerfolgreich§2 wiederholt! Du hast §f"
                             + (calendarTime.get(Calendar.HOUR) > 0 ? " " + calendarTime.get(Calendar.HOUR) + " Stunden" : "")
                             + (calendarTime.get(Calendar.MINUTE) > 0 ? " " + calendarTime.get(Calendar.MINUTE) + " Minuten" : "")
                             + (calendarTime.get(Calendar.SECOND) > 0 ? " " + calendarTime.get(Calendar.SECOND) + " Sekunden" : "")
@@ -163,13 +163,13 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
                     calendarBestTime.setTimeInMillis(bestTime * 1000);
 
                     if (time < bestTime && bestTime != -1) {
-                        LobbyPlugin.getInstance().getMessager().send(p, "§aDu hast deinen alten Rekord von §7§o"
+                        LobbyPlugin.getInstance().getMessenger().send(p, "§aDu hast deinen alten Rekord von §7§o"
                                 + (calendarBestTime.get(Calendar.HOUR) > 0 ? " " + calendarBestTime.get(Calendar.HOUR) + " Stunden" : "")
                                 + (calendarBestTime.get(Calendar.MINUTE) > 0 ? " " + calendarBestTime.get(Calendar.MINUTE) + " Minuten" : "")
                                 + (calendarBestTime.get(Calendar.SECOND) > 0 ? " " + calendarBestTime.get(Calendar.SECOND) + " Sekunden" : "")
                                 + "§a geknackt! §oHerzlichen Glückwunsch");
                     } else if (bestTime != -1) {
-                        LobbyPlugin.getInstance().getMessager().send(p, "§7Dein Rekord ist weiterhin §f§o"
+                        LobbyPlugin.getInstance().getMessenger().send(p, "§7Dein Rekord ist weiterhin §f§o"
                                 + (calendarBestTime.get(Calendar.HOUR) > 0 ? " " + calendarBestTime.get(Calendar.HOUR) + " Stunden" : "")
                                 + (calendarBestTime.get(Calendar.MINUTE) > 0 ? " " + calendarBestTime.get(Calendar.MINUTE) + " Minuten" : "")
                                 + (calendarBestTime.get(Calendar.SECOND) > 0 ? " " + calendarBestTime.get(Calendar.SECOND) + " Sekunden" : "")
@@ -177,7 +177,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
                     }
                 } else {
                     corePlayer.addCoins(100);
-                    LobbyPlugin.getInstance().getMessager().send(p, "§2Du hast das Jump and Run §aerfolgreich §2zum erten Mal fertig gespielt! Du hast §f"
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§2Du hast das Jump and Run §aerfolgreich §2zum erten Mal fertig gespielt! Du hast §f"
                             + (calendarTime.get(Calendar.HOUR) > 0 ? " " + calendarTime.get(Calendar.HOUR) + " Stunden" : "")
                             + (calendarTime.get(Calendar.MINUTE) > 0 ? " " + calendarTime.get(Calendar.MINUTE) + " Minuten" : "")
                             + (calendarTime.get(Calendar.SECOND) > 0 ? " " + calendarTime.get(Calendar.SECOND) + " Sekunden" : "")
@@ -189,7 +189,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
                 lp.setJumpnrunBestTime(jumpNRun, time < bestTime || bestTime == -1 ? time : bestTime);
                 removePlaying(p);
             } else {
-                LobbyPlugin.getInstance().getMessager().send(p, "§4Du hast einen Checkpoint übersprungen und wurdest zu deinem letzten!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast einen Checkpoint übersprungen und wurdest zu deinem letzten!");
 
                 if (checkpoint == 0) {
                     p.teleport(jumpNRun.getStartPlateLocation());

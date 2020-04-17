@@ -35,7 +35,7 @@ public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobby
             }
         }
 
-        LobbyPlugin.getInstance().getMessager().send(p, "§7Du bist nun nicht mehr in der Privaten Lobby!");
+        LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist nun nicht mehr in der Privaten Lobby!");
 
         GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(true);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
@@ -54,7 +54,7 @@ public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobby
             all.hidePlayer(p);
             p.hidePlayer(all);
         }
-        LobbyPlugin.getInstance().getMessager().send(p, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
+        LobbyPlugin.getInstance().getMessenger().send(p, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
 
         GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
         p.playSound(p.getLocation(), Sound.GLASS, 1, 1);

@@ -64,17 +64,17 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
             p.setAllowFlight(false);
 
             if (catching.size() <= 1) {
-                LobbyPlugin.getInstance().getMessager().send(p, "§7Du bist gerade der §f§oeinzigste§7, der §fFangen§7 spielt!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist gerade der §f§oeinzigste§7, der §fFangen§7 spielt!");
 
                 if (catcher.isEmpty()) {
                     p.setLevel(1);
                     catcher.add(p);
-                    LobbyPlugin.getInstance().getMessager().send(p, "§7Du bist ein §fFänger§7, warte bis ein §fandere Spieler §7beitritt und §ffange§7 ihn!");
-                    LobbyPlugin.getInstance().getMessager().send(p, "§7Fange einen §fSpieler §7mit einem §fGrünen Hut§7!");
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist ein §fFänger§7, warte bis ein §fandere Spieler §7beitritt und §ffange§7 ihn!");
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§7Fange einen §fSpieler §7mit einem §fGrünen Hut§7!");
                 }
                 CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
             } else {
-                LobbyPlugin.getInstance().getMessager().send(p, "§7Es spielen gerade §f§o" + catching.size() + "§7 Spieler §fFangen§7!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§7Es spielen gerade §f§o" + catching.size() + "§7 Spieler §fFangen§7!");
                 for (Player all : Bukkit.getOnlinePlayers()) {
                     if (catching.contains(all))
                         CoreSystem.getInstance().getCorePlayer(all).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
@@ -100,7 +100,7 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
                         catcher.remove(p);
                         catcher.add(random);
                         setCatchItems(random);
-                        LobbyPlugin.getInstance().getMessager().send(random, "§7Du bist nun §fFänger§7 ,weil der §fvorherige Fänger §7das Spiel §fverlassen§7 hat.");
+                        LobbyPlugin.getInstance().getMessenger().send(random, "§7Du bist nun §fFänger§7 ,weil der §fvorherige Fänger §7das Spiel §fverlassen§7 hat.");
                         p.removePotionEffect(PotionEffectType.SPEED);
                         p.getInventory().clear();
                         random.setLevel(1);
@@ -110,7 +110,7 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
                     Player random = catching.get(TRAP_RANDOM.nextInt(catching.size()));
                     catcher.add(random);
                     setCatchItems(random);
-                    LobbyPlugin.getInstance().getMessager().send(random, "§7Du bist nun §fFänger§7 ,weil der §fvorherige Fänger §7das Spiel §fverlassen§7 hat.");
+                    LobbyPlugin.getInstance().getMessenger().send(random, "§7Du bist nun §fFänger§7 ,weil der §fvorherige Fänger §7das Spiel §fverlassen§7 hat.");
                     p.removePotionEffect(PotionEffectType.SPEED);
                     p.getInventory().clear();
                     random.setLevel(1);
@@ -126,7 +126,7 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
             p.setExp(0);
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(true);
 
-            LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast das Spiel verlassen!");
+            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast das Spiel verlassen!");
 
             for (Player player : catching) {
                 CoreSystem.getInstance().getCorePlayer(player).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
@@ -188,7 +188,7 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
                         catcher.remove(p);
                         catcher.add(random);
                         setCatchItems(random);
-                        LobbyPlugin.getInstance().getMessager().send(random, "§7Du bist nun §fFänger§7 ,weil der §fvorherige Fänger §7das Spiel §fverlassen§7 hat.");
+                        LobbyPlugin.getInstance().getMessenger().send(random, "§7Du bist nun §fFänger§7 ,weil der §fvorherige Fänger §7das Spiel §fverlassen§7 hat.");
                         random.setLevel(1);
                         CoreSystem.getInstance().getCorePlayer(random).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                     }
@@ -198,7 +198,7 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
                     catcher.add(random);
                     setCatchItems(random);
                     random.setLevel(1);
-                    LobbyPlugin.getInstance().getMessager().send(random, "§7Du bist nun §fFänger§7 ,weil der §fvorherige Fänger §7das Spiel §fverlassen§7 hat.");
+                    LobbyPlugin.getInstance().getMessenger().send(random, "§7Du bist nun §fFänger§7 ,weil der §fvorherige Fänger §7das Spiel §fverlassen§7 hat.");
                     CoreSystem.getInstance().getCorePlayer(random).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                 }
             }

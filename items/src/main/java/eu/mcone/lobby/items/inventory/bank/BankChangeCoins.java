@@ -36,10 +36,10 @@ class BankChangeCoins extends CoreInventory {
                         cp.addEmeralds(100);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
-                        LobbyPlugin.getInstance().getMessager().send(p, "Du has erfolgreich §f25.000 Coins§7 in §f100 Emeralds §fumgetauscht");
+                        LobbyPlugin.getInstance().getMessenger().send(p, "Du has erfolgreich §f25.000 Coins§7 in §f100 Emeralds §fumgetauscht");
                         new BankMenInventory(p);
                     } else {
-                        LobbyPlugin.getInstance().getMessager().send(p, "§cDu hast nicht genügend Coins!");
+                        LobbyPlugin.getInstance().getMessenger().send(p, "§cDu hast nicht genügend Coins!");
                         player.closeInventory();
                     }
                 }
@@ -58,10 +58,10 @@ class BankChangeCoins extends CoreInventory {
                         cp.addEmeralds(280);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
-                        LobbyPlugin.getInstance().getMessager().send(p, "Du has erfolgreich §f75.000 Coins§7 in §f280 Emeralds §fumgetauscht");
+                        LobbyPlugin.getInstance().getMessenger().send(p, "Du has erfolgreich §f75.000 Coins§7 in §f280 Emeralds §fumgetauscht");
                         new BankMenInventory(p);
                     } else {
-                        LobbyPlugin.getInstance().getMessager().send(p, "§cDu hast nicht genügend Coins!");
+                        LobbyPlugin.getInstance().getMessenger().send(p, "§cDu hast nicht genügend Coins!");
                         player.closeInventory();
                     }
                 }
@@ -80,10 +80,10 @@ class BankChangeCoins extends CoreInventory {
                         cp.addEmeralds(450);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
-                        LobbyPlugin.getInstance().getMessager().send(p, "Du has erfolgreich §f165.000 Coins§7 in §f450 Emeralds §fumgetauscht");
+                        LobbyPlugin.getInstance().getMessenger().send(p, "Du has erfolgreich §f165.000 Coins§7 in §f450 Emeralds §fumgetauscht");
                         new BankMenInventory(p);
                     } else {
-                        LobbyPlugin.getInstance().getMessager().send(p, "§cDu hast nicht genügend Coins!");
+                        LobbyPlugin.getInstance().getMessenger().send(p, "§cDu hast nicht genügend Coins!");
                         player.closeInventory();
                     }
                 }
