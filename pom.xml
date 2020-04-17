@@ -74,7 +74,7 @@
         <repository>
             <id>mcone-systems</id>
             <name>MC ONE Repo</name>
-            <url>https://repo.mcone.eu/repository/mcone-systems/</url>
+            <url>https://repo.onegaming.group/repository/mcone-systems/</url>
         </repository>
     </distributionManagement>
 
@@ -102,7 +102,7 @@
         <dependency>
             <groupId>eu.mcone.coresystem</groupId>
             <artifactId>bukkit-api</artifactId>
-            <version>10.6.1-SNAPSHOT</version>
+            <version>10.6.2-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

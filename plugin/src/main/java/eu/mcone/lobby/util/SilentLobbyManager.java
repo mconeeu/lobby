@@ -15,7 +15,6 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobbyManager {
@@ -56,8 +55,6 @@ public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobby
             p.hidePlayer(all);
         }
         LobbyPlugin.getInstance().getMessager().send(p, "§2Du bist in der §aPrivaten Lobby§2 gespawnt. Hier bist du vollkommen ungestört!");
-
-        System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
 
         GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
         p.playSound(p.getLocation(), Sound.GLASS, 1, 1);
