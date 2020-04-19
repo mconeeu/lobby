@@ -124,7 +124,7 @@ public class MinigamesInventory extends CoreInventory {
 
                             setItem(InventorySlot.ROW_3_SLOT_6, new Skull(p.getName(), 1).toItemBuilder()
                                             .displayName("§5Festival / Community")
-                                            .lore("§7§oTreffe dich mit Freunden auf dem ", "§7§oFestival/Community und", "§7§oreise mit einem gültigen Ticket hin!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                            .lore("§7§oTreffe dich mit Freunden auf dem ", "§7§oFestival/Community aber", "§7§oreise mit einem gültigen Ticket hin!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                                             .create(),
                                     e -> {
                                         player.closeInventory();
