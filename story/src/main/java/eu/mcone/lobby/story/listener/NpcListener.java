@@ -89,7 +89,7 @@ public class NpcListener implements Listener {
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Perfekt die Wolle war es. Hier bitte das bestellte Outfit!");
                                 lp.setBankProgress(BankProgress.SWORD);
                                 p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Ok du hast das Packet komm zurück ins Büro damit wir die Letzte Mission besprechen können!");
-
+                                lp.addLobbyItem(LobbyItem.BANK_OUTFIT);
                             } else {
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ah du musst " + p.getName() + " ich konnte deine Bestellung leider nicht bearbeiten ,weil ich keine Wolle da hab du kannst sie aber besorgen sie liegt warscheinlich noch in einer Kiste im Boot!");
                             }
@@ -271,7 +271,7 @@ public class NpcListener implements Listener {
                         if (lp.getBankprogressId() >= BankProgress.SMUGGLER.getId()) {
                             new JohnBankRobberyInventory(p);
                         } else {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + " schönes Büro aber leider gehört es bis jetzt noch mir aber du etwas für mich erledigen wo du das Büro und Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + " schönes Büro aber leider gehört es bis jetzt noch mir aber du kannst etwas für mich erledigen wo du das Büro und ein paar Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
                             lp.setBankProgress(BankProgress.SMUGGLER);
                             new JohnBankRobberyInventory(p);
                             lp.addLobbyItem(LobbyItem.BUTTON);
