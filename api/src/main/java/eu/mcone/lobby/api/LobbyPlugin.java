@@ -28,7 +28,7 @@ public abstract class LobbyPlugin extends GamePlugin {
     private static LobbyPlugin instance;
 
     protected LobbyPlugin() {
-        super("lobby", ChatColor.DARK_AQUA, "lobby.prefix", Option.BACKPACK_MANAGER_REGISTER_ALL_DEFAULT_CATEGORIES, Option.BACKPACK_MANAGER_USE_RANK_BOOTS);
+        super("lobby", ChatColor.DARK_AQUA, "lobby.prefix", Option.BACKPACK_MANAGER_REGISTER_ALL_DEFAULT_CATEGORIES);
         setInstance(this);
     }
 
