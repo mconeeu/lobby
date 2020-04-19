@@ -49,7 +49,9 @@ public class InventoryTriggerListener implements Listener {
                             }
                         }
                         if (lp.getBankprogressId() == BankProgress.CUTTER.getId()) {
-                            new WoolInventory(p);
+                            if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-wool-chest").equals(e.getClickedBlock().getLocation())) {
+                                new WoolInventory(p);
+                            }
                         } else if (lp.getBankprogressId() == BankProgress.SWORD.getId()) {
                             if (LobbyWorld.PARADISE_ISLAND.getWorld().getBlockLocation("bank-robbery-sword-chest").equals(e.getClickedBlock().getLocation())) {
                                 new SwordInventory(p);
@@ -81,7 +83,7 @@ public class InventoryTriggerListener implements Listener {
                             for (JumpNRun jumpnrun : JumpNRun.values()) {
                                 if (sign.getLine(1).equals(jumpnrun.getJumpandrunname())) {
                                     if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p)) {
-                                        LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Du darfst im moment keine Jump and Runs spielen, weil du gerade ein Lobbysame spielst!");
+                                        LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Du darfst im moment keine Jump and Runs spielen, weil du gerade ein Lobbygame spielst!");
                                         return;
                                     }
                                     LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jumpnrun.getWarpLocation());
@@ -99,14 +101,14 @@ public class InventoryTriggerListener implements Listener {
                             if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
 
                                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
-                                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Du bist drin jetzt drück auf der rechten Seite ganz links unten denn Knopf");
+                                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Du bist drin jetzt drück auf der rechten Seite ganz links unten den Knopf");
                                 }, 30L);
 
                             }
                         } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-safe-entrance-button").equals(e.getClickedBlock().getLocation())) {
                             if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
                                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
-                                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Perfekt du bist drin jetzt klau die Goldbarren in der Truhe!");
+                                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Super du bist drin jetzt klau die Goldbarren in der Truhe!");
                                 }, 20L);
                             } else {
                                 e.setCancelled(true);
@@ -119,7 +121,7 @@ public class InventoryTriggerListener implements Listener {
                         if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-main-entrance-button").equals(e.getClickedBlock().getLocation())) {
                             if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
 
-                                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Drücke jetzt gleich bei den Bücher Regalen ein Holz Knopf dann öffnet sich eine Geheime Tür links!");
+                                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Drücke jetzt gleich bei den Bücher Regalen ein Holz Knopf dann öffnet sich eine Geheime Tür rechts!");
 
                             } else {
                                 e.setCancelled(true);

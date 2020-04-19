@@ -19,7 +19,7 @@ public class WoolInventory extends CoreInventory {
             if (!lp.hasLobbyItem(LobbyItem.WHITE_WOOL)) {
                 lp.addLobbyItem(LobbyItem.WHITE_WOOL);
                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
-                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Wieso hast du denn jetzt Wolle? Besorge das Bank Outfit!");
+                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Wieso hast du denn jetzt Wolle? Besorg das Bank Outfit!");
                 }, 30L);
             } else {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§4Du besitzt diese Item bereits!");

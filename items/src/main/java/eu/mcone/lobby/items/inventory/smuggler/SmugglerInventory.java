@@ -21,16 +21,14 @@ public class SmugglerInventory extends CoreInventory {
 
 
     public SmugglerInventory(Player p) {
-        super("§8» §7§lSchmugler", p, 9 * 3, InventoryOption.FILL_EMPTY_SLOTS);
+        super("§8» §7§lSchmugler", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
-        setItem(4, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder().displayName("§7§lSchmuggler").lore("§7§oBeim Schmuggler kannst ausgewählte", "§7§oWare für deinen Rucksack kaufen.", "§7§ooder geschmugglte Kisten", "§7§oAber pass auf er kann auch kappute Ware verkaufen!").create());
+        setItem(InventorySlot.ROW_1_SLOT_5, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder().displayName("§7§lSchmuggler").lore("§7§oBeim Schmuggler kannst ausgewählte", "§7§oWare für deinen Rucksack kaufen.", "§7§ooder geschmugglte Kisten", "§7§oAber pass auf er kann auch kappute Ware verkaufen!").create());
 
-        setItem(11 - 1, new ItemBuilder(Material.CHEST, 1, 0).displayName("§6Kisten kaufen").create(),
-                e -> new ChestBuyInventorySmuggler(p));
 
         if (lp.getBankprogressId() == BankProgress.SMUGGLER.getId()) {
-            setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.EMPTY_MAP).displayName("§f§lPlan der Bank").lore("", "§6Kosten 20 Coins").create(), e -> {
+            setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.EMPTY_MAP).displayName("§f§lPlan der Bank").lore("", "§6Kosten 20 Coins").create(), e -> {
                 p.closeInventory();
 
                 if (lp.getCorePlayer().getCoins() - 20 >= 0) {
@@ -46,6 +44,13 @@ public class SmugglerInventory extends CoreInventory {
                     p.sendMessage("§cDu hast nicht genügend Coins!");
                 }
             });
+
+            setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.CHEST, 1, 0).displayName("§6Kisten kaufen").create(),
+                    e -> new ChestBuyInventorySmuggler(p));
+
+        } else {
+            setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.CHEST, 1, 0).displayName("§6Kisten kaufen").create(),
+                    e -> new ChestBuyInventorySmuggler(p));
         }
 
 

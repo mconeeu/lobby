@@ -88,15 +88,14 @@ public class NpcListener implements Listener {
                                 lp.removeLobbyItem(LobbyItem.WHITE_WOOL);
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Perfekt die Wolle war es. Hier bitte das bestellte Outfit!");
                                 lp.setBankProgress(BankProgress.SWORD);
-                                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Ok du hast das Packet komm zurück ins Büro damit wir die Letzte Mission besprechen können!");
+                                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Ok du hast das Packet komm zurück ins Büro damit wir die Letzte Mission besprechen können!");
 
                             } else {
-                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ah du musst " + p.getName() + "i ch konnte deine Bestellung leider nicht bearbeiten ,weil ich keine Wolle da hab du kannst sie aber doch besorgen sie liegt warscheinlich noch in einer Kiste im Boot!");
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ah du musst " + p.getName() + " ich konnte deine Bestellung leider nicht bearbeiten ,weil ich keine Wolle da hab du kannst sie aber besorgen sie liegt warscheinlich noch in einer Kiste im Boot!");
                             }
-
-                        } else {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ich habe leider momentan viel zu viel zu tun komm später wieder!");
+                            return;
                         }
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ich habe leider momentan viel zu viel zu tun komm später wieder!");
                     }
 
                     case "duty": {
@@ -121,20 +120,20 @@ public class NpcListener implements Listener {
                                     npc.setSkin(RUFI_HEADLED_SKIN, p);
                                     npc.changeDisplayname(RUFI_HEADLED_DISPLAY_NAME, p);
                                 }, 2);
-                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fHeer Rufi §8|§7 Danke Danke du hast mich gerretet du kannst dir die belohnung in der Mitte von One-Island abholen, springe in ein großes Loch!");
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fRufi §8|§7 Danke Danke du hast mich gerretet du kannst dir die Belohnung in der Mitte von One-Island abholen, springe in ein großes Loch!");
                             } else {
-                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fHeer Rufi §8|§7 Das hilft mir nicht! Hast du eventuell einen Heiltrank, den du mir geben kannst?");
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fRufi §8|§7 Das hilft mir nicht! Hast du eventuell einen Heiltrank, den du mir geben kannst?");
                             }
                         } else if (lp.getProgressId() == Progress.INFECTION.getId()) {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fHeer Rufi §8|§7 Hol dir deine Belohnung in der Mitte von One-Island ab!");
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fRufi §8|§7 Hol dir deine Belohnung in der Mitte von One-Island ab!");
                         }
                         return;
                     }
                     case "smuggler": {
-                        if (lp.getProgressId() > Progress.DUTY.getId() || lp.getBankprogressId() == BankProgress.SMUGGLER.getId()) {
+                        if (lp.hasLobbyItem(LobbyItem.PASS) || lp.getBankprogressId() == BankProgress.SMUGGLER.getId()) {
                             new SmugglerInventory(p);
                         } else {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fSchmuggler §8|§7 Ich handel nur mit Leuten die ich kenne hol dir ein Ausweis!");
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fSchmugler §8|§7 Ich handel nur mit Leuten die ich kenne hol dir ein Ausweis!");
                         }
                         break;
                     }

@@ -34,7 +34,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
 
             setItem(InventorySlot.ROW_4_SLOT_2, new ItemBuilder(Material.MAP, 1, 0).displayName("§fVorbereitung: Tunnel Karte").create(), e -> {
                 p.closeInventory();
-                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Okay die erste Vorbereitung bis zum großen Bank Raub du musst zum Schmuggler er steht in der nähe vom Zoll und da musst du den Plan der Bank kaufen und du weißt kein Wort zu Polizei sonst bist du tot!");
+                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Okay die erste Vorbereitungs Mission lautet Tunnel du musst zum Schmugler er steht in der nähe vom Zoll dort muss du den Plan der Bank kaufen und du weißt kein Wort zu Polizei sonst bist du tot!");
 
             });
 
@@ -71,7 +71,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
 
             setItem(InventorySlot.ROW_4_SLOT_5, new ItemBuilder(Material.LEATHER_CHESTPLATE, 1, 0).displayName("§fVorbereitung: Bank Outift").create(), e -> {
                 p.closeInventory();
-                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Okay die zweite Vorbereitung bis zum großen Bank Raub du musst zur Schneiderei Joguloa und dir da ein Bank Mitarbeiter Outfit besorgen!");
+                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Okay die zweite Vorbereitungs Mission bis zum großen Bank Raub du musst zur Schneiderei Joguloa und dir da ein Bank Mitarbeiter Outfit besorgen, sie wohnt in einem großen Haus!");
 
             });
 
@@ -108,7 +108,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
 
             setItem(InventorySlot.ROW_4_SLOT_8, new ItemBuilder(Material.IRON_SWORD, 1, 0).displayName("§fVorbereitung: Sicherheits Schwert").create(), e -> {
                 p.closeInventory();
-                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Okay die letzte Vorbereitungs Mission bis zum großen Bank Raub du musst zur Paradise Island reisen und da in die Waffenkammer der Polizei einbrechen um das Sicherheits Schwert zu klauen!");
+                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Okay jetzt musst du zur Paradise Island reisen und da in die Waffenkammer der Polizei einbrechen um das Sicherheits Schwert zu klauen!");
 
             });
 
@@ -132,7 +132,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
             setItem(InventorySlot.ROW_4_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§fBank Raub").lore("§aZum §lStarten §aklicken").create(), e -> {
                 if (currentlyInBank == null) {
                     p.closeInventory();
-                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7So jetzt geht es los begib dich zur Bank. Die ist sofort links und dann gehe bis nach hinten durch und öffne die Eisen Tür!");
+                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7So jetzt geht es los begib dich zur Bank. Gehe bis nach hinten durch und öffne die Eisen Tür!");
                     lp.setBankProgress(BankProgress.BANK_ROBBERY_MIDDLE);
                     LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, true);
 

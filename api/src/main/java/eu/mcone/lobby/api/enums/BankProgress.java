@@ -7,7 +7,7 @@ public enum BankProgress {
 
     SMUGGLER(1, "Schmuggler"),
     CUTTER(2,"Schneider"),
-    SWORD(3,"Sicherheits-Schwerd"),
+    SWORD(3,"Sicherheits-Schwert"),
     BANK_ROBBERY_START(4,"Bank Raub start"),
     BANK_ROBBERY_MIDDLE(5,"Bank Raub mitte"),
     BANK_ROBBERY_END(6,"Bank Raub ende");
