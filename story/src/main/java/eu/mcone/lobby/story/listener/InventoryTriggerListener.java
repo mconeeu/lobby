@@ -47,7 +47,8 @@ public class InventoryTriggerListener implements Listener {
                             if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("end-chest").equals(e.getClickedBlock().getLocation())) {
                                 new EndInventory(p);
                             }
-                        } else if (lp.getBankprogressId() == BankProgress.CUTTER.getId()) {
+                        }
+                        if (lp.getBankprogressId() == BankProgress.CUTTER.getId()) {
                             new WoolInventory(p);
                         } else if (lp.getBankprogressId() == BankProgress.SWORD.getId()) {
                             if (LobbyWorld.PARADISE_ISLAND.getWorld().getBlockLocation("bank-robbery-sword-chest").equals(e.getClickedBlock().getLocation())) {

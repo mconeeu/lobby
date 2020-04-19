@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 public class GangArmorInventory extends CoreInventory {
 
     GangArmorInventory(Player p) {
-        super("§8» §3§lRucksack §8| §fAusgerüstet Kamp Items", p, InventorySlot.ROW_6, InventoryOption.FILL_EMPTY_SLOTS);
+        super("§8» §3§lRucksack §8| §fAusgerüstet Kampf Items", p, InventorySlot.ROW_6, InventoryOption.FILL_EMPTY_SLOTS);
 
         setItem(InventorySlot.ROW_1_SLOT_5, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder().displayName("§d§lkamp einstellung").lore("§7§oHier kannst du deine Gang PVP fights einstellen").create());
 

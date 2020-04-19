@@ -63,11 +63,11 @@ public class BankMenInventory extends CoreInventory {
                     .lore("§7Du hast momemtan §6" + cp.getCoins())
                     .create());
 
-            setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.EMERALD, 1, 0).displayName("§a§lEmerald-Guthaben")
+            setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.EMERALD, 1, 0).displayName("§a§lEmerald-Guthaben")
                     .lore("§7Du hast momemtan §a" + cp.getEmeralds())
                     .create());
 
-            setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.SIGN, 1, 0).displayName("§f§lUmwandler").create(),
+            setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.SIGN, 1, 0).displayName("§f§lUmwandler").create(),
                     e -> new BankChangeCoins(p));
 
 //        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.SIGN, 1, 0).displayName("§f§lEmerald(s) Überweisen").create(),

@@ -101,7 +101,7 @@ public class InventoryTriggerListener implements Listener {
 
     @EventHandler
     public void onNick(NickEvent e) {
-        Player player = (Player) e.getPlayer();
+        Player player = e.getPlayer().bukkit();
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
         LobbySettings settings = lp.getSettings();
 
@@ -117,7 +117,7 @@ public class InventoryTriggerListener implements Listener {
 
     @EventHandler
     public void onUnnick(UnnickEvent e) {
-        Player player = (Player) e.getPlayer();
+        Player player = e.getPlayer().bukkit();
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
         LobbySettings settings = lp.getSettings();
 
