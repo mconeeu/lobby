@@ -8,7 +8,7 @@ public interface PlayerHiderManager {
 
     void showPlayers(Player p);
 
-    void playerJoined(Player j);
+    void updateHider(Player p);
 
     boolean isHidden(Player p);
 }

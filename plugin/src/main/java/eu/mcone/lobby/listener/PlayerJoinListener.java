@@ -65,12 +65,16 @@ public class PlayerJoinListener implements Listener {
         }
         Lobby.getSystem().registerLobbyPlayer(lp);
 
-        LobbyPlugin.getInstance().getPlayerHiderManager().playerJoined(p);
-
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
         p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
 
         loadLobbyPlayer(p, lp, e.getCorePlayerLoadedEvent());
+
+        Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
+            LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(p);
+            LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(p);
+        }, 1);
+
     }
 
     public static void loadLobbyPlayer(Player p, LobbyPlayer lp, CorePlayerLoadedEvent e) {
@@ -176,6 +180,7 @@ public class PlayerJoinListener implements Listener {
         }
 
         p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
+
 
         CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new SidebarObjective());
     }

@@ -7,5 +7,7 @@ public interface SilentLobbyManager {
 
     void activateSilentLobby(Player p);
 
+    void updateSilentLobby(Player p);
+
     boolean isActivatedSilentHub(Player p);
 }

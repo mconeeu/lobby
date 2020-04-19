@@ -40,6 +40,8 @@ public class OfficeManager {
                 player.hidePlayer(all);
             }
 
+
+
             CoreScoreboard sb = CoreSystem.getInstance().getCorePlayer(player).getScoreboard();
 
             if (sb instanceof MainScoreboard) {

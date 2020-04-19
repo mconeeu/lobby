@@ -34,6 +34,7 @@ public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobby
                 p.showPlayer(all);
             }
         }
+        LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(p);
 
         LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist nun nicht mehr in der Privaten Lobby!");
 
@@ -65,6 +66,14 @@ public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobby
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.VOID_FOG, 10);
+    }
+
+    @Override
+    public void updateSilentLobby(Player p) {
+        for (Player SilentPlayer : silent) {
+            p.hidePlayer(SilentPlayer);
+            SilentPlayer.hidePlayer(p);
+        }
     }
 
     @Override

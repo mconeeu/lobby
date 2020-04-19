@@ -59,7 +59,7 @@ public class PlayerHiderManager implements eu.mcone.lobby.api.player.PlayerHider
         for (Player all : Bukkit.getOnlinePlayers()) {
             p.showPlayer(all);
         }
-
+        LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(p);
         players.remove(p);
 
         GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(true);
@@ -72,11 +72,9 @@ public class PlayerHiderManager implements eu.mcone.lobby.api.player.PlayerHider
     }
 
     @Override
-    public void playerJoined(Player j) {
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            if (players.contains(j)) {
-                j.hidePlayer(p);
-            }
+    public void updateHider(Player p) {
+        for (Player isVanish : players) {
+            isVanish.hidePlayer(p);
         }
     }
 
