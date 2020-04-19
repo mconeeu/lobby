@@ -80,6 +80,10 @@ public class GeneralPlayerListener implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
+
+        if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(e.getPlayer())) {
+            LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(e.getPlayer());
+        }
         e.setQuitMessage(null);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().getUniqueId());
 

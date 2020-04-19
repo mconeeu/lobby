@@ -73,6 +73,7 @@ public class PlayerJoinListener implements Listener {
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
             LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(p);
             LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(p);
+            OfficeManager.updateOffice(p);
         }, 1);
 
     }

@@ -108,7 +108,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
 
             setItem(InventorySlot.ROW_4_SLOT_8, new ItemBuilder(Material.IRON_SWORD, 1, 0).displayName("§fVorbereitung: Sicherheits Schwert").create(), e -> {
                 p.closeInventory();
-                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Okay jetzt musst du zur Paradise Island reisen und da in die Waffenkammer der Polizei einbrechen um das Sicherheits Schwert zu klauen!");
+                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Okay jetzt musst du zur Paradise Island reisen und da in die Waffenkammer der Polizei einbrechen um das Sicherheits Schwert zu klauen!");
 
             });
 
@@ -132,7 +132,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
             setItem(InventorySlot.ROW_4_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§fBank Raub").lore("§aZum §lStarten §aklicken").create(), e -> {
                 if (currentlyInBank == null) {
                     p.closeInventory();
-                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7So jetzt geht es los begib dich zur Bank. Gehe bis nach hinten durch und öffne die Eisen Tür!");
+                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7So jetzt geht es los begib dich zur Bank. Gehe bis nach hinten durch und öffne die Eisen Tür!");
                     lp.setBankProgress(BankProgress.BANK_ROBBERY_MIDDLE);
                     LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, true);
 

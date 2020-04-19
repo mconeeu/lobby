@@ -1,11 +1,9 @@
 package eu.mcone.lobby.items.manager;
 
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.scoreboard.CoreScoreboard;
-import eu.mcone.coresystem.api.bukkit.scoreboard.MainScoreboard;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.LobbyItem;
+import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -23,14 +21,45 @@ public class OfficeManager {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
 
         if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE)) {
-            vanishPlayer(player);
             LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.BRONZE_OFFICE.getSpawnLocation());
         } else if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER)) {
-            vanishPlayer(player);
             LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.SILVER_OFFICE.getSpawnLocation());
         } else if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_GOLD)) {
-            vanishPlayer(player);
             LobbyWorld.OFFICE.getWorld().teleport(player, OfficeType.GOLD_OFFICE.getSpawnLocation());
+        }
+    }
+
+    public static void joinOffice(Player player) {
+        if (player.hasPermission("lobby.silenthub")) {
+            player.getInventory().setItem(2, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE);
+        }
+
+        if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(player)) {
+            LobbyPlugin.getInstance().getPlayerHiderManager().showPlayers(player);
+        }
+        player.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE);
+
+
+        getOffice(player);
+        if (!LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(player)) {
+            vanishPlayer(player);
+        }
+
+    }
+
+
+    public static void quitOffice(Player player) {
+        unVanishPlayer(player);
+
+        player.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
+
+        if (player.hasPermission("lobby.silenthub")) {
+            if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(player)) {
+                player.getInventory().setItem(2, HotbarItems.LEAVE_PRIVATE_LOBBY);
+                player.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);
+            } else {
+                player.getInventory().setItem(2, HotbarItems.PRIVATE_LOBBY);
+            }
         }
     }
 
@@ -38,14 +67,6 @@ public class OfficeManager {
         if (!VANISHED.contains(player)) {
             for (Player all : Bukkit.getOnlinePlayers()) {
                 player.hidePlayer(all);
-            }
-
-
-
-            CoreScoreboard sb = CoreSystem.getInstance().getCorePlayer(player).getScoreboard();
-
-            if (sb instanceof MainScoreboard) {
-                sb.reload();
             }
 
             VANISHED.add(player);
@@ -58,13 +79,14 @@ public class OfficeManager {
                 player.showPlayer(all);
             }
 
-            CoreScoreboard sb = CoreSystem.getInstance().getCorePlayer(player).getScoreboard();
-
-            if (sb instanceof MainScoreboard) {
-                sb.reload();
-            }
-
             VANISHED.remove(player);
+        }
+    }
+
+
+    public static void updateOffice(Player player) {
+        for (Player p : VANISHED) {
+            p.hidePlayer(player);
         }
     }
 

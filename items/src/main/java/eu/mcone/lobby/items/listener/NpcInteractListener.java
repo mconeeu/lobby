@@ -46,7 +46,7 @@ public class NpcInteractListener implements Listener {
             } else if (npcName.equalsIgnoreCase(StoryNPC.OFFICE_SELLER.getNpcName())) {
                 new OfficeTraderInventory(p);
             } else if (npcName.equalsIgnoreCase(StoryNPC.OFFICE_PAGE.getNpcName())) {
-                OfficeManager.getOffice(p);
+                OfficeManager.joinOffice(p);
             } else if (npcName.equalsIgnoreCase(StoryNPC.ASSISTANT_1.getNpcName())
                     || npcName.equalsIgnoreCase(StoryNPC.ASSISTANT_2.getNpcName())
                     || npcName.equalsIgnoreCase(StoryNPC.ASSISTANT_3.getNpcName())) {
