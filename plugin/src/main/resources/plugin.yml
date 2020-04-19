@@ -39,3 +39,7 @@ permissions:
         description: Manage all chests
       lobby.silenthub:
         description: Allows to join to the SilenLobby
+
+translations:
+  # prefix
+  - lobby.prefix.gang

@@ -122,7 +122,7 @@ public class TrappingListener implements Listener {
                             Player near = (Player) ent;
                             if (manager.getCatcher().contains(ent)) {
                                 p.setCompassTarget(near.getLocation());
-                                LobbyPlugin.getInstance().getMessager().send(p, "§7Der Fänger ist §f" + ((int) p.getLocation().distance(near.getLocation())) + " Blöcke §7entfernt!");
+                                LobbyPlugin.getInstance().getMessenger().send(p, "§7Der Fänger ist §f" + ((int) p.getLocation().distance(near.getLocation())) + " Blöcke §7entfernt!");
                             }
                         }
                     }
@@ -131,11 +131,11 @@ public class TrappingListener implements Listener {
                         if (ent instanceof Player) {
                             Player near = (Player) ent;
                             if (manager.getCatching().size() == 1) {
-                                LobbyPlugin.getInstance().getMessager().send(p, "§cDu bist der einzigste der momentan Fangen spielt!");
+                                LobbyPlugin.getInstance().getMessenger().send(p, "§cDu bist der einzigste der momentan Fangen spielt!");
                                 return;
                             } else if (manager.getCatching().contains(ent)) {
                                 p.setCompassTarget(near.getLocation());
-                                LobbyPlugin.getInstance().getMessager().send(p, "§7Der nächste Läufer ist §f" + ((int) p.getLocation().distance(near.getLocation())) + " Blöcke §7entfernt!");
+                                LobbyPlugin.getInstance().getMessenger().send(p, "§7Der nächste Läufer ist §f" + ((int) p.getLocation().distance(near.getLocation())) + " Blöcke §7entfernt!");
                             }
                         }
                     }
@@ -189,10 +189,10 @@ public class TrappingListener implements Listener {
                         p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 5, 4500, false, false));
                         manager.getCatcher().remove(k);
                         manager.getCatcher().add(p);
-                        LobbyPlugin.getInstance().getMessager().send(p, "§7Du wurdest von §c" + k.getName() + "§7 gefangen.");
-                        LobbyPlugin.getInstance().getMessager().send(p, "§7Fange nun §fSpieler §7mit einem §fGrünen Hut§7!");
+                        LobbyPlugin.getInstance().getMessenger().send(p, "§7Du wurdest von §c" + k.getName() + "§7 gefangen.");
+                        LobbyPlugin.getInstance().getMessenger().send(p, "§7Fange nun §fSpieler §7mit einem §fGrünen Hut§7!");
 
-                        LobbyPlugin.getInstance().getMessager().send(k, "§7Du hast §c" + p.getName() + "§7 gefangen!");
+                        LobbyPlugin.getInstance().getMessenger().send(k, "§7Du hast §c" + p.getName() + "§7 gefangen!");
                         k.setLevel(0);
                         k.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
                         k.getLocation().getWorld().playSound(k.getLocation(), Sound.NOTE_PIANO, 1.0F, 1.0F);

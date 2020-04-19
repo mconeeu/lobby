@@ -69,10 +69,10 @@ public class InventoryTriggerListener implements Listener {
                             String name = ChatColor.stripColor(sign.getLine(1)).replace("»", "").replace("«", "").trim();
 
                             if (lp.checkAndAddSecret(name, System.currentTimeMillis() / 1000)) {
-                                LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§7Du hast das Secret §f" + name + "§7 entdeckt! §8[§a+35 Coins§8]");
+                                LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§7Du hast das Secret §f" + name + "§7 entdeckt! §8[§a+35 Coins§8]");
                                 lp.getCorePlayer().addCoins(35);
                             } else {
-                                LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§4Du hast dieses §cSecret §4bereits gefunden!");
+                                LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Du hast dieses §cSecret §4bereits gefunden!");
                             }
 
                             //JUMP AND RUNS
@@ -80,16 +80,16 @@ public class InventoryTriggerListener implements Listener {
                             for (JumpNRun jumpnrun : JumpNRun.values()) {
                                 if (sign.getLine(1).equals(jumpnrun.getJumpandrunname())) {
                                     if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p)) {
-                                        LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§4Du darfst im moment keine Jump and Runs spielen, weil du gerade ein Lobbysame spielst!");
+                                        LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Du darfst im moment keine Jump and Runs spielen, weil du gerade ein Lobbysame spielst!");
                                         return;
                                     }
                                     LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jumpnrun.getWarpLocation());
-                                    LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "Du hast dich zum §f" + jumpnrun.getJumpandrunname() + " §7Jump and Run telepotiert");
+                                    LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "Du hast dich zum §f" + jumpnrun.getJumpandrunname() + " §7Jump and Run telepotiert");
                                     return;
                                 }
                             }
 
-                            LobbyPlugin.getInstance().getMessager().send(e.getPlayer(), "§4Das §c" + sign.getLine(1) + "§4 Jump and Run ist momentan in §oWartungen§4!");
+                            LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Das §c" + sign.getLine(1) + "§4 Jump and Run ist momentan in §oWartungen§4!");
                         }
                         return;
                     }

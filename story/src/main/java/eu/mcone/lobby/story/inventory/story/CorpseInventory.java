@@ -18,10 +18,10 @@ public class CorpseInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_5, DefaultItem.HEAD_SECRET_STRIPCLUB.getItemStack(), e -> {
             if (!lp.hasDefaultItem(DefaultItem.HEAD_SECRET_STRIPCLUB)) {
                 lp.addDefaultItem(DefaultItem.HEAD_SECRET_STRIPCLUB);
-                LobbyPlugin.getInstance().getMessager().send(p, "§aDu hast den alten Kopf von §fKirpha aufgenommen!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§aDu hast den alten Kopf von §fKirpha aufgenommen!");
                 LobbyPlugin.getInstance().getJumpNRunManager().setFinish(p);
             } else {
-                LobbyPlugin.getInstance().getMessager().send(p, "§cDu besitzt diese Item bereits!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§cDu besitzt diese Item bereits!");
                 LobbyPlugin.getInstance().getJumpNRunManager().setFinish(p);
             }
             p.closeInventory();

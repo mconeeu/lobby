@@ -25,13 +25,13 @@ public class ChestCMD extends CoreCommand {
         if (args.length == 0 && sender instanceof Player) {
             Player p = (Player) sender;
 
-            LobbyPlugin.getInstance().getMessager().send(p, "§7Du hast momentan §d" + LobbyPlugin.getInstance().getLobbyPlayer(p).getChests() + " Kisten§7!");
+            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast momentan §d" + LobbyPlugin.getInstance().getLobbyPlayer(p).getChests() + " Kisten§7!");
             new ChestInfoInventory(p);
             p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
         } else if (sender.hasPermission("lobby.chests")) {
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("remove")) {
-                    CoreSystem.getInstance().getMessager().send(sender, "§4Bitte benutze: §c/chest <add | remove> <name> <amount> §4oder §c/chests <name>");
+                    CoreSystem.getInstance().getMessenger().send(sender, "§4Bitte benutze: §c/chest <add | remove> <name> <amount> §4oder §c/chests <name>");
                     return true;
                 } else {
                     Player t = Bukkit.getPlayer(args[0]);
@@ -74,9 +74,9 @@ public class ChestCMD extends CoreCommand {
                 }
             }
 
-            CoreSystem.getInstance().getMessager().send(sender, "§4Bitte benutze: §c/chest <add | remove> <name> <amount> §4oder §c/chests <name>");
+            CoreSystem.getInstance().getMessenger().send(sender, "§4Bitte benutze: §c/chest <add | remove> <name> <amount> §4oder §c/chests <name>");
         } else if (sender instanceof Player) {
-            CoreSystem.getInstance().getMessager().sendTransl((Player) sender, "system.command.noperm");
+            CoreSystem.getInstance().getMessenger().sendTransl((Player) sender, "system.command.noperm");
         }
 
         return true;

@@ -64,9 +64,9 @@ public class OneHitListener implements Listener {
                     CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                     player.getLocation().getWorld().playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
                     if (player != p) {
-                        LobbyPlugin.getInstance().getMessager().send(player, "§7Der Spieler §f" + p.getDisplayName() + " §7hat eine §e" + e.getNewLevel() + "§7er Killstreak!");
+                        LobbyPlugin.getInstance().getMessenger().send(player, "§7Der Spieler §f" + p.getDisplayName() + " §7hat eine §e" + e.getNewLevel() + "§7er Killstreak!");
                     } else {
-                        LobbyPlugin.getInstance().getMessager().send(player, "§7Du hast eine §e" + e.getNewLevel() + "er Killstreak!");
+                        LobbyPlugin.getInstance().getMessenger().send(player, "§7Du hast eine §e" + e.getNewLevel() + "er Killstreak!");
                     }
                 }
             }
@@ -83,7 +83,7 @@ public class OneHitListener implements Listener {
                 LobbyPlugin.getInstance().getJumpNRunManager().setCancel(p);
                 LobbyPlugin.getInstance().getOneHitManager().leave(p);
                 LobbyPlugin.getInstance().getCatchManager().leave(p);
-                LobbyPlugin.getInstance().getMessager().send(p, "§4Du wurdest automatisch von deiner Lobby Aktivität gekickt!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du wurdest automatisch von deiner Lobby Aktivität gekickt!");
             }
         }
     }
@@ -101,9 +101,9 @@ public class OneHitListener implements Listener {
             p.setExp(1);
 
             if (k == null) {
-                LobbyPlugin.getInstance().getMessager().send(p, "§cDu bist gestorben");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§cDu bist gestorben");
             } else {
-                LobbyPlugin.getInstance().getMessager().send(k, "§7Du hast §f" + p.getDisplayName() + " §7getötet §8[§a+2 Coins§8]");
+                LobbyPlugin.getInstance().getMessenger().send(k, "§7Du hast §f" + p.getDisplayName() + " §7getötet §8[§a+2 Coins§8]");
                 CoreSystem.getInstance().getCorePlayer(k).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                 CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                 LobbyPlayer lk = LobbyPlugin.getInstance().getLobbyPlayer(k);
@@ -114,7 +114,7 @@ public class OneHitListener implements Listener {
                 p.setExp(1);
                 k.setLevel(k.getLevel() + 1);
 
-                LobbyPlugin.getInstance().getMessager().send(p, "§7Du wurdest von §f" + k.getDisplayName() + " §7getötet!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§7Du wurdest von §f" + k.getDisplayName() + " §7getötet!");
             }
         }
 
@@ -169,7 +169,7 @@ public class OneHitListener implements Listener {
 
                 if (k.getName().equalsIgnoreCase(p.getName())) {
                     e.setCancelled(true);
-                    LobbyPlugin.getInstance().getMessager().send(p, "§cDu darfst dich nicht selbst angreifen!");
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§cDu darfst dich nicht selbst angreifen!");
                     return;
                 }
 

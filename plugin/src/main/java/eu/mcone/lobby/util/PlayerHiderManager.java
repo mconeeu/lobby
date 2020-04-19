@@ -34,7 +34,7 @@ public class PlayerHiderManager implements eu.mcone.lobby.api.player.PlayerHider
             long diff = (System.currentTimeMillis() - time.get(p.getName())) / 10L / 60L;
             int cooldown = 1;
             if (diff < cooldown) {
-                LobbyPlugin.getInstance().getMessager().send(p, "§7Du musst kurz warte um den Player hider wieder benutzen zu können");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§7Du musst kurz warte um den Player hider wieder benutzen zu können");
                 return;
             }
         }
@@ -50,7 +50,7 @@ public class PlayerHiderManager implements eu.mcone.lobby.api.player.PlayerHider
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
         p.getInventory().setItem(0, HotbarItems.SHOW_PLAYERS);
-        LobbyPlugin.getInstance().getMessager().send(p, "§7Du siehst nun §ckeine §7Spieler mehr.");
+        LobbyPlugin.getInstance().getMessenger().send(p, "§7Du siehst nun §ckeine §7Spieler mehr.");
         time.put(p.getName(), System.currentTimeMillis());
     }
 
@@ -67,7 +67,7 @@ public class PlayerHiderManager implements eu.mcone.lobby.api.player.PlayerHider
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
         p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
-        LobbyPlugin.getInstance().getMessager().send(p, "§7Du siehst nun §aalle §7Spieler wieder.");
+        LobbyPlugin.getInstance().getMessenger().send(p, "§7Du siehst nun §aalle §7Spieler wieder.");
         time.put(p.getName(), System.currentTimeMillis());
     }
 

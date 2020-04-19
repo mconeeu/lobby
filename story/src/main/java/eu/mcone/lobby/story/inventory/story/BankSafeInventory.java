@@ -23,7 +23,7 @@ public class BankSafeInventory extends CoreInventory {
                 }, 40L);
 
             } else {
-                LobbyPlugin.getInstance().getMessager().send(p, "§4Du besitzt diese Item bereits!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du besitzt diese Item bereits!");
             }
             p.closeInventory();
         });

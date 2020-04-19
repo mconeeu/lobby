@@ -62,16 +62,16 @@ public class LobbyOneHitManager implements OneHitManager {
             LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(getRandomSpawn());
 
             if (fighting.size() <= 1) {
-                LobbyPlugin.getInstance().getMessager().send(p, "§7Du bist gerade der §f§oeinzigste§7, der §fOneHit§7 spielt!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist gerade der §f§oeinzigste§7, der §fOneHit§7 spielt!");
                 CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
             } else {
-                LobbyPlugin.getInstance().getMessager().send(p, "§7Es spielen gerade §f§o" + fighting.size() + "§7 Spieler §fOneHit§7!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§7Es spielen gerade §f§o" + fighting.size() + "§7 Spieler §fOneHit§7!");
                 for (Player all : Bukkit.getOnlinePlayers()) {
                     if (fighting.contains(all))
                         CoreSystem.getInstance().getCorePlayer(all).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                 }
 
-                LobbyPlugin.getInstance().getMessager().send(p, "§7Töte alle §fSpieler §7mit einem §fRoten Hut§7!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§7Töte alle §fSpieler §7mit einem §fRoten Hut§7!");
 
             }
             LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);

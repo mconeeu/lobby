@@ -101,7 +101,7 @@ public class LobbyPlacesInventory extends CoreInventory {
                                     LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("storyspawn");
                                     p.closeInventory();
                                 } else {
-                                    LobbyPlugin.getInstance().getMessager().send(p, "§2Du wurdest in der nähe des letzten Story-NPC teleportiert, mit dem du zuletzt interagiert hast!");
+                                    LobbyPlugin.getInstance().getMessenger().send(p, "§2Du wurdest in der nähe des letzten Story-NPC teleportiert, mit dem du zuletzt interagiert hast!");
                                     LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(Progress.getProgressByID(lp.getProgressId()).getNpc().getData().getLocation().bukkit());
                                 }
                             });
