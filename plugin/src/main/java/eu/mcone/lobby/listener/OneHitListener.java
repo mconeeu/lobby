@@ -14,7 +14,6 @@ import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.inventory.InteractionInventory;
 import eu.mcone.lobby.onehit.LobbyOneHitManager;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
@@ -37,22 +36,13 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
+
 @RequiredArgsConstructor
 public class OneHitListener implements Listener {
 
     private final LobbyOneHitManager manager;
-
-    @EventHandler
-    public void onInteractEntity(PlayerInteractEntityEvent e) {
-        Player p = e.getPlayer();
-
-        if (e.getRightClicked() instanceof Player) {
-            Player clicked = (Player) e.getRightClicked();
-            if (!manager.isFighting(p)) {
-                new InteractionInventory(p, clicked);
-            }
-        }
-    }
+    public static ArrayList<Player> doubleJump = new ArrayList<>();
 
     @EventHandler
     public void onLevelChange(PlayerLevelChangeEvent e) {
@@ -167,11 +157,6 @@ public class OneHitListener implements Listener {
             if (e.getDamager() instanceof Player) {
                 Player k = (Player) e.getDamager();
 
-                if (k.getName().equalsIgnoreCase(p.getName())) {
-                    e.setCancelled(true);
-                    LobbyPlugin.getInstance().getMessenger().send(p, "§cDu darfst dich nicht selbst angreifen!");
-                    return;
-                }
 
                 if (manager.isFighting(p) && manager.isFighting(k)) {
                     if (

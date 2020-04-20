@@ -11,11 +11,13 @@ import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.inventory.InteractionInventory;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -108,6 +110,18 @@ public class GeneralPlayerListener implements Listener {
 
         if (consumed.getType().equals(Material.POTION)) {
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onInteractEntity(PlayerInteractEntityEvent e) {
+        Player p = e.getPlayer();
+
+        if (e.getRightClicked() instanceof Player) {
+            Player clicked = (Player) e.getRightClicked();
+            if (!LobbyPlugin.getInstance().getCatchManager().isCatching(p) && !LobbyPlugin.getInstance().getOneHitManager().isFighting(p)) {
+                new InteractionInventory(p, clicked);
+            }
         }
     }
 

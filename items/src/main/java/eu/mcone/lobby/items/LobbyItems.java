@@ -14,6 +14,7 @@ import eu.mcone.lobby.api.enums.LobbyCategory;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.items.backpack.StoryBackpackInventoryListener;
 import eu.mcone.lobby.items.command.ChestCMD;
+import eu.mcone.lobby.items.command.OfficeCMD;
 import eu.mcone.lobby.items.listener.InventoryTriggerListener;
 import eu.mcone.lobby.items.listener.NpcInteractListener;
 import eu.mcone.lobby.items.listener.effects.MagicWandListener;
@@ -81,7 +82,9 @@ public class LobbyItems extends LobbyAddon {
                 new NpcInteractListener()
         );
 
-        LobbyPlugin.getInstance().registerCommands(new ChestCMD());
+        LobbyPlugin.getInstance().registerCommands(
+                new ChestCMD(),
+                new OfficeCMD());
 
         final Location rewardBlock = new Location(Bukkit.getWorld("Lobby-OneIsland"), 46.5, 102D, -33.5);
         Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {

@@ -33,7 +33,7 @@ public class DoubleJumpListener implements Listener {
 
         if (p.getGameMode().equals(GameMode.CREATIVE)) {
             e.setCancelled(false);
-        } else if (p.getGameMode().equals(GameMode.SURVIVAL) && p.hasPermission("mcone.premium")) {
+        } else if (p.getGameMode().equals(GameMode.SURVIVAL) && p.hasPermission("mcone.premium") || OneHitListener.doubleJump.contains(p)) {
             e.setCancelled(true);
 
             if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
@@ -41,6 +41,12 @@ public class DoubleJumpListener implements Listener {
                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> NCPExemptionManager.unexempt(p), 3 * 20);
             }
             djPlayers.add(p.getUniqueId());
+
+            if (OneHitListener.doubleJump.contains(p)) {
+                OneHitListener.doubleJump.remove(p);
+
+                p.setGameMode(GameMode.ADVENTURE);
+            }
 
             p.setAllowFlight(false);
             p.setFlying(false);

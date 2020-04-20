@@ -139,7 +139,7 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
         LobbySettings settings = lp.getSettings();
 
-        if (settings.isAllowAnimation()) {
+        if (settings.isAllowAnimation() && !corePlayer.getWorld().equals(LobbyWorld.OFFICE.getWorld()) && !corePlayer.getWorld().equals(LobbyWorld.CAVE.getWorld())) {
             for (Player all : Bukkit.getOnlinePlayers()) {
                 all.spigot().playEffect(player.getLocation(), Effect.SMALL_SMOKE, 1, 1, 1, 1, 1, 3, 30, 15);
                 all.hidePlayer(player);

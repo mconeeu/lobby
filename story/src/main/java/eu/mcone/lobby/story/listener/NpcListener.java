@@ -17,7 +17,6 @@ import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.inventory.smuggler.SmugglerInventory;
-import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import eu.mcone.lobby.story.inventory.searcher.SearcherInventory;
 import eu.mcone.lobby.story.inventory.story.CaptainInventory;
@@ -62,22 +61,6 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "JohnEnd": {
-                        LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, false);
-                        JohnBankRobberyInventory.currentlyInBank = null;
-                        OfficeManager.getOffice(p);
-                        lp.setBankProgress(BankProgress.BANK_ROBBERY_END);
-                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Wir haben es geschafft ich überlasse dir 25.000 Coins und ein kleines Geschenk im Rucksack");
-                        lp.getCorePlayer().addCoins(25000);
-
-                        lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
-                        lp.removeLobbyItem(LobbyItem.BANK_MAP);
-                        lp.removeLobbyItem(LobbyItem.IRON_SWORD);
-                        lp.removeLobbyItem(LobbyItem.BUTTON);
-                        lp.addLobbyItem(LobbyItem.GOLD_NUGGET);
-
-                        p.getInventory().setLeggings(null);
-                        p.getInventory().setBoots(null);
-                        p.getInventory().setChestplate(null);
 
                         break;
                     }
@@ -95,7 +78,7 @@ public class NpcListener implements Listener {
                             }
                             return;
                         }
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ich habe leider momentan viel zu viel zu tun komm später wieder!");
+                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ich habe leider momentan viel zu viel zu tun komm später wieder!");
                     }
 
                     case "duty": {
@@ -268,15 +251,19 @@ public class NpcListener implements Listener {
                     case "John1":
                     case "John2":
                     case "John3": {
-                        if (lp.getBankprogressId() >= BankProgress.SMUGGLER.getId()) {
-                            new JohnBankRobberyInventory(p);
-                        } else {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + " schönes Büro aber leider gehört es bis jetzt noch mir aber du kannst etwas für mich erledigen wo du das Büro und ein paar Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
-                            lp.setBankProgress(BankProgress.SMUGGLER);
-                            new JohnBankRobberyInventory(p);
-                            lp.addLobbyItem(LobbyItem.BUTTON);
-                        }
+                        if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE) || lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER) || lp.hasLobbyItem(LobbyItem.OFFICE_CARD_GOLD)) {
+                            if (lp.getBankprogressId() >= BankProgress.SMUGGLER.getId()) {
+                                new JohnBankRobberyInventory(p);
+                            } else {
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + " schönes Büro aber leider gehört es bis jetzt noch mir aber du kannst etwas für mich erledigen wo du das Büro und ein paar Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
+                                lp.setBankProgress(BankProgress.SMUGGLER);
+                                new JohnBankRobberyInventory(p);
+                                lp.addLobbyItem(LobbyItem.BUTTON);
+                            }
 
+                        } else {
+                            LobbyPlugin.getInstance().getMessenger().send(p, "§cIch rede nicht mit dir!");
+                        }
                         break;
                     }
                 }

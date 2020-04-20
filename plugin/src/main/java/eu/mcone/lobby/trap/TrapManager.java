@@ -58,6 +58,8 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
             CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new CatchObjective(this));
 
+            CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p,"Fangen");
+
             p.setExp(1);
             catching.add(p);
             p.setGameMode(GameMode.ADVENTURE);
@@ -116,6 +118,9 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
                     random.setLevel(1);
                 }
             }
+
+            CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p,"Lobby");
+
             p.removePotionEffect(PotionEffectType.SPEED);
             p.getInventory().clear();
             p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);

@@ -4,7 +4,6 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.BuildModeChangeEvent;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
-import eu.mcone.lobby.inventory.InteractionInventory;
 import eu.mcone.lobby.trap.TrapManager;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.*;
@@ -88,19 +87,6 @@ public class TrappingListener implements Listener {
                     }, 35);
 
                 }
-            }
-        }
-    }
-
-
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onInteractEntity(PlayerInteractEntityEvent e) {
-        Player p = e.getPlayer();
-
-            if (e.getRightClicked() instanceof Player) {
-                Player clicked = (Player) e.getRightClicked();
-                if (!manager.isCatching(p)) {
-                new InteractionInventory(p, clicked);
             }
         }
     }

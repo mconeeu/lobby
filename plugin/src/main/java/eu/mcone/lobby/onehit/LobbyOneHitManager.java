@@ -53,6 +53,8 @@ public class LobbyOneHitManager implements OneHitManager {
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
             CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new OneHitObjective(this));
 
+            CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p,"OneHit");
+
             p.setExp(1);
             p.setLevel(0);
             setOneHitFightItems(p);
@@ -90,6 +92,8 @@ public class LobbyOneHitManager implements OneHitManager {
             p.setLevel(0);
             p.setExp(0);
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(true);
+
+            CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p,"Lobby");
 
             for (Player player : fighting) {
                 CoreSystem.getInstance().getCorePlayer(player).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();

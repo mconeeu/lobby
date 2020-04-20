@@ -50,14 +50,18 @@ public class HotbarItems {
             .displayName("§7§lSpieler Verstecken §8» §7§oIn der Privaten Lobby deaktiviert")
             .create();
 
-    public static final ItemStack LOBBY_HIDER_UNAVAILABLE_OFFICE = new ItemBuilder(Material.INK_SACK, 1, 8)
-            .displayName("§7§lSpieler Verstecken §8» §7§oIm Büro deaktiviert")
-            .create();
-
     public static final ItemStack SHOW_PLAYERS = new ItemBuilder(Material.INK_SACK, 1, 2)
             .displayName("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an")
             .create();
 
+
+    public static final ItemStack LOBBY_HIDER_UNAVAILABLE_OFFICE = new ItemBuilder(Material.INK_SACK, 1, 8)
+            .displayName("§7§lSpieler Verstecken §8» §7§oIm Büro deaktiviert")
+            .create();
+
+    public static final ItemStack LOBBY_HIDER_UNAVAILABLE_OFFICE_SILENTHUB = new ItemBuilder(Material.INK_SACK, 1, 8)
+            .displayName("§7§lPrivate Lobby §8» §7§oIm Büro deaktiviert")
+            .create();
 
     /*
      * Private Lobby

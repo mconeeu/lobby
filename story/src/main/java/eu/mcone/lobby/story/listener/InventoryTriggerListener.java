@@ -11,6 +11,8 @@ import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.enums.JumpNRun;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.items.manager.OfficeManager;
+import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import eu.mcone.lobby.story.inventory.story.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -102,7 +104,7 @@ public class InventoryTriggerListener implements Listener {
 
                                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
                                     p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Du bist drin jetzt drück auf der rechten Seite ganz links unten den Knopf");
-                                }, 30L);
+                                }, 35L);
 
                             }
                         } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-safe-entrance-button").equals(e.getClickedBlock().getLocation())) {
@@ -113,6 +115,30 @@ public class InventoryTriggerListener implements Listener {
                             } else {
                                 e.setCancelled(true);
                             }
+                        } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-end").equals(e.getClickedBlock().getLocation())) {
+                            LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, false);
+                            JohnBankRobberyInventory.currentlyInBank = null;
+                            OfficeManager.getOffice(p);
+                            lp.setBankProgress(BankProgress.BANK_ROBBERY_END);
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Wir haben es geschafft ich überlasse dir 25.000 Coins und ein kleines Geschenk im Rucksack, wir sehen uns!");
+                            lp.getCorePlayer().addCoins(25000);
+
+                            lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
+                            lp.removeLobbyItem(LobbyItem.BANK_MAP);
+                            lp.removeLobbyItem(LobbyItem.IRON_SWORD);
+                            lp.removeLobbyItem(LobbyItem.BUTTON);
+                            lp.removeLobbyItem(LobbyItem.BANK_OUTFIT);
+                            lp.addLobbyItem(LobbyItem.GOLD_NUGGET);
+
+                            if (p.hasPermission("lobby.silenthub")) {
+                                p.getInventory().setItem(3, null);
+                            } else {
+                                p.getInventory().setItem(2, null);
+                            }
+
+                            p.getInventory().setLeggings(null);
+                            p.getInventory().setBoots(null);
+                            p.getInventory().setChestplate(null);
                         }
 
                         break;
@@ -121,7 +147,7 @@ public class InventoryTriggerListener implements Listener {
                         if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-main-entrance-button").equals(e.getClickedBlock().getLocation())) {
                             if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
 
-                                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Drücke jetzt gleich bei den Bücher Regalen ein Holz Knopf dann öffnet sich eine Geheime Tür rechts!");
+                                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Drücke jetzt gleich bei den Bücher Regalen ein Holz Knopf dann öffnet sich eine Geheime Tür rechts!");
 
                             } else {
                                 e.setCancelled(true);

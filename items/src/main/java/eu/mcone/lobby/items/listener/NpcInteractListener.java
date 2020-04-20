@@ -14,7 +14,7 @@ import eu.mcone.lobby.items.inventory.bank.BankCreateCardInventory;
 import eu.mcone.lobby.items.inventory.bank.BankMenInventory;
 import eu.mcone.lobby.items.inventory.office.ChauffeurInventory;
 import eu.mcone.lobby.items.inventory.office.OfficeTraderInventory;
-import eu.mcone.lobby.items.inventory.office.SecretaryInventory;
+import eu.mcone.lobby.items.inventory.office.secretary.SecretaryInventory;
 import eu.mcone.lobby.items.inventory.trader.TraderInventory;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import lombok.Getter;

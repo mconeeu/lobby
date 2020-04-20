@@ -15,7 +15,8 @@ import java.util.List;
 
 public class OfficeManager {
 
-    private static List<Player> VANISHED = new ArrayList<>();
+    private static final List<Player> VANISHED = new ArrayList<>();
+    public static final List<Player> ISTOGETHEROFFICE = new ArrayList<>();
 
     public static void getOffice(Player player) {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
@@ -29,9 +30,76 @@ public class OfficeManager {
         }
     }
 
-    public static void joinOffice(Player player) {
+    public static void getOfficeFromOther(Player player, Player other) {
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
+
+        if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE)) {
+            LobbyWorld.OFFICE.getWorld().teleport(other, OfficeType.BRONZE_OFFICE.getSpawnLocation());
+        } else if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER)) {
+            LobbyWorld.OFFICE.getWorld().teleport(other, OfficeType.SILVER_OFFICE.getSpawnLocation());
+        } else if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_GOLD)) {
+            LobbyWorld.OFFICE.getWorld().teleport(other, OfficeType.GOLD_OFFICE.getSpawnLocation());
+        }
+    }
+
+
+    public static void joinOtherOffice(Player player, Player other) {
+        if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(player)) {
+            LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(player);
+        }
+        if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(other)) {
+            LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(other);
+        }
+
+        if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(player)) {
+            LobbyPlugin.getInstance().getPlayerHiderManager().showPlayers(player);
+        }
+        if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(other)) {
+            LobbyPlugin.getInstance().getPlayerHiderManager().showPlayers(other);
+        }
+
+        getOfficeFromOther(player, other);
+
+
+        ISTOGETHEROFFICE.add(player);
+        ISTOGETHEROFFICE.add(other);
+
+        VANISHED.add(other);
+        VANISHED.add(player);
+
+
+        if (other.hasPermission("lobby.silenthub")) {
+            other.getInventory().setItem(2, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE_SILENTHUB);
+        }
         if (player.hasPermission("lobby.silenthub")) {
-            player.getInventory().setItem(2, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE);
+            player.getInventory().setItem(2, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE_SILENTHUB);
+        }
+
+        other.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE);
+        player.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE);
+
+        for (Player all : Bukkit.getOnlinePlayers()) {
+            other.hidePlayer(all);
+            player.hidePlayer(all);
+        }
+
+
+        other.showPlayer(player);
+        player.showPlayer(other);
+
+
+    }
+
+    public static void joinOffice(Player player) {
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
+
+        if (!lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE) && !lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER) && !lp.hasLobbyItem(LobbyItem.OFFICE_CARD_GOLD)) {
+            LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast kein Büro!");
+            return;
+        }
+
+        if (player.hasPermission("lobby.silenthub")) {
+            player.getInventory().setItem(2, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE_SILENTHUB);
         }
 
         if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(player)) {

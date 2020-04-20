@@ -7,6 +7,8 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
+import eu.mcone.lobby.listener.OneHitListener;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -98,6 +100,33 @@ public class OneHitGadgetInventory extends CoreInventory {
                         } else {
                             p.closeInventory();
                             LobbyPlugin.getInstance().getMessenger().send(p, "§4Du benötigst eine 2er Killstreak!");
+                        }
+                    }
+                }
+        );
+
+        setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.FEATHER, 1, 0)
+                        .displayName("§fOneHit-Doppel Sprung")
+                        .lore("§7Um dieses Item kaufen zu können", "§7benötigst du eine §a1er Killstreak", "§4Du kannst 1x mal Doppelt springen!")
+                        .create(),
+
+                e -> {
+                    if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p)) {
+                        if (p.getLevel() >= 1) {
+                            p.setLevel(p.getLevel() - 1);
+                            CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                            OneHitListener.doubleJump.add(p);
+
+                            p.setGameMode(GameMode.SURVIVAL);
+                            p.setAllowFlight(true);
+
+                            CoreSystem.getInstance().createActionBar().message("§fDoppelsprung bereit").send(p);
+
+                            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast erfolgreich den §fDoppel Sprung §7für §f1 Level gekauft!");
+                            p.closeInventory();
+                        } else {
+                            p.closeInventory();
+                            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du benötigst eine 1er Killstreak!");
                         }
                     }
                 }
