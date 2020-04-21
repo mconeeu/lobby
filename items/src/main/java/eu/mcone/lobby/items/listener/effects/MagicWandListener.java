@@ -70,6 +70,31 @@ public class MagicWandListener implements Listener {
                         arrowdrop.remove();
                     }
                 }
+
+                for (Entity arrowdrop : LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.OFFICE).bukkit().getEntities()) {
+                    if (arrowdrop.getType().equals(EntityType.DROPPED_ITEM) || arrowdrop.getType().equals(EntityType.ARROW)) {
+                        arrowdrop.remove();
+                    }
+                }
+
+                for (Entity arrowdrop : LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.PARADISE_ISLAND).bukkit().getEntities()) {
+                    if (arrowdrop.getType().equals(EntityType.DROPPED_ITEM) || arrowdrop.getType().equals(EntityType.ARROW)) {
+                        arrowdrop.remove();
+                    }
+                }
+
+                for (Entity arrowdrop : LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.DESTROYED_PARADISE_ISLAND).bukkit().getEntities()) {
+                    if (arrowdrop.getType().equals(EntityType.DROPPED_ITEM) || arrowdrop.getType().equals(EntityType.ARROW)) {
+                        arrowdrop.remove();
+                    }
+                }
+
+                for (Entity arrowdrop : LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.CAVE).bukkit().getEntities()) {
+                    if (arrowdrop.getType().equals(EntityType.DROPPED_ITEM) || arrowdrop.getType().equals(EntityType.ARROW)) {
+                        arrowdrop.remove();
+                    }
+                }
+
             }
         }
     }

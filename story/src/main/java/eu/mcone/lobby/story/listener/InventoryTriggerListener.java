@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.story.listener;
 
+import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.BankProgress;
@@ -125,14 +126,17 @@ public class InventoryTriggerListener implements Listener {
                             lp.getCorePlayer().addCoins(25000);
 
                             p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
+                            p.playSound(p.getLocation(), Sound.NOTE_PIANO, 1, 1);
 
                             JohnBankRobberyInventory.robberyTime.cancel();
 
+                            CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p,"MCONE-Lobby");
                             lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
                             lp.removeLobbyItem(LobbyItem.BANK_MAP);
                             lp.removeLobbyItem(LobbyItem.IRON_SWORD);
                             lp.removeLobbyItem(LobbyItem.BUTTON);
                             lp.removeLobbyItem(LobbyItem.BANK_OUTFIT);
+
                             lp.addLobbyItem(LobbyItem.GOLD_NUGGET);
 
                             if (p.hasPermission("lobby.silenthub")) {

@@ -143,6 +143,8 @@ public class JohnBankRobberyInventory extends CoreInventory {
 
                     LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "bank-robbery");
 
+                    CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p,"MCONE-Banküberfall");
+
                     p.getInventory().setBoots(ItemBuilder.createLeatherArmorItem(Material.LEATHER_BOOTS, Color.BLACK).create());
                     p.getInventory().setChestplate(ItemBuilder.createLeatherArmorItem(Material.LEATHER_CHESTPLATE, Color.BLACK).create());
                     p.getInventory().setLeggings(ItemBuilder.createLeatherArmorItem(Material.LEATHER_LEGGINGS, Color.GRAY).create());

@@ -53,7 +53,7 @@ public class LobbyOneHitManager implements OneHitManager {
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
             CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new OneHitObjective(this));
 
-            CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p,"OneHit");
+            CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p,"MCONE-OneHit");
 
             p.setExp(1);
             p.setLevel(0);
