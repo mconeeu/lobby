@@ -17,6 +17,7 @@ import eu.mcone.lobby.story.inventory.story.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -120,8 +121,12 @@ public class InventoryTriggerListener implements Listener {
                             JohnBankRobberyInventory.currentlyInBank = null;
                             OfficeManager.getOffice(p);
                             lp.setBankProgress(BankProgress.BANK_ROBBERY_END);
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Wir haben es geschafft ich überlasse dir 25.000 Coins und ein kleines Geschenk im Rucksack, wir sehen uns!");
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Wir haben es §fgeschafft§7 ich überlasse dir §f25.000 Coins §7und ein kleines Geschenk im Rucksack, wir sehen uns!");
                             lp.getCorePlayer().addCoins(25000);
+
+                            p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
+
+                            JohnBankRobberyInventory.robberyTime.cancel();
 
                             lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
                             lp.removeLobbyItem(LobbyItem.BANK_MAP);

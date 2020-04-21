@@ -9,6 +9,7 @@ import eu.mcone.coresystem.api.bukkit.event.AfkEvent;
 import eu.mcone.coresystem.api.core.player.PlayerState;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.BankProgress;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
@@ -47,6 +48,7 @@ public class GeneralPlayerListener implements Listener {
         if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
             lp.setBankProgress(BankProgress.BANK_ROBBERY_START);
             LobbyPlugin.getInstance().getMessenger().send(p, "§4Der Banküberfall ist gescheitert!");
+            LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "office-entrance");
             JohnBankRobberyInventory.currentlyInBank = null;
             if (lp.hasLobbyItem(LobbyItem.GOLD_BARDING)) {
                 lp.removeLobbyItem(LobbyItem.GOLD_BARDING);

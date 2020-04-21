@@ -34,7 +34,8 @@ public class LobbyStory extends LobbyAddon {
                 new NpcListener(),
                 new InventoryTriggerListener(),
                 new SignsListener(),
-                new WorldChangeListener()
+                new WorldChangeListener(),
+                new PlayerMoveListener()
         );
 
         CoreSystem.getInstance().modifyProfileInventory((coreInventory, player) -> {
@@ -71,6 +72,7 @@ public class LobbyStory extends LobbyAddon {
     }
 
     @Override
-    public void onDisable() {}
+    public void onDisable() {
+    }
 
 }

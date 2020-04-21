@@ -1,5 +1,6 @@
 package eu.mcone.lobby.story.inventory.john;
 
+import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -8,16 +9,21 @@ import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.BankProgress;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.UUID;
 
 public class JohnBankRobberyInventory extends CoreInventory {
 
     public static UUID currentlyInBank = null;
+    public static BukkitTask robberyTime;
 
     public JohnBankRobberyInventory(Player p) {
         super("§fJohn | Bank-Raub", p, InventorySlot.ROW_6, InventoryOption.FILL_EMPTY_SLOTS);
@@ -131,7 +137,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
             setItem(InventorySlot.ROW_4_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§fBank Raub").lore("§aZum §lStarten §aklicken").create(), e -> {
                 if (currentlyInBank == null) {
                     p.closeInventory();
-                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 So jetzt geht es los begib dich zur Bank. Gehe bis nach hinten durch und öffne die Eisen Tür!");
+                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 So jetzt geht es los begib dich zur Bank. Gehe bis nach hinten durch und öffne die Eisen Tür, du hast nicht lange Zeit!");
                     lp.setBankProgress(BankProgress.BANK_ROBBERY_MIDDLE);
                     LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, true);
 
@@ -143,9 +149,47 @@ public class JohnBankRobberyInventory extends CoreInventory {
 
 
                     currentlyInBank = p.getUniqueId();
+                    robberyTime = Bukkit.getScheduler().runTaskLater(LobbyPlugin.getGamePlugin(), () -> {
+                        p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 | §7Die Polizei wurde alamiert sie ist in §f30 Sekunden §7da und der §lRaub §7ist gescheitert!");
+                        robberyTime = Bukkit.getScheduler().runTaskLater(LobbyPlugin.getGamePlugin(), () -> {
+                            robberyTime = Bukkit.getScheduler().runTaskLater(LobbyPlugin.getGamePlugin(), () -> {
+                                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 | §7Du hast noch 3 Sekunden");
+                                robberyTime = Bukkit.getScheduler().runTaskLater(LobbyPlugin.getGamePlugin(), () -> {
+                                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 | §7Du hast noch 2 Sekunden");
+                                    robberyTime = Bukkit.getScheduler().runTaskLater(LobbyPlugin.getGamePlugin(), () -> {
+                                        p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 | §7Du hast nur noch §f1 Sekunde");
+                                        robberyTime = Bukkit.getScheduler().runTaskLater(LobbyPlugin.getGamePlugin(), () -> {
+                                            currentlyInBank = null;
+                                            p.getInventory().setArmorContents(null);
+
+                                            lp.setBankProgress(BankProgress.BANK_ROBBERY_START);
+                                            if (lp.hasLobbyItem(LobbyItem.GOLD_BARDING)) {
+                                                lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
+                                            }
+
+                                            if (p.hasPermission("lobby.silenthub")) {
+                                                p.getInventory().setItem(3, null);
+                                            } else {
+                                                p.getInventory().setItem(2, null);
+                                            }
+
+                                            LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "office-entrance");
+                                            p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
+                                            p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
+                                            CoreSystem.getInstance().createTitle().fadeIn(1).stay(3).title("§cBank Raub").subTitle("§4gescheitert").fadeOut(1).send(p);
+                                            p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 | §7Die §fMission §7ist gescheitert. Du hast zu §flange gebraucht§7!");
+
+                                        }, 20);
+                                    }, 20);
+                                }, 20);
+                            }, 20);
+                        }, 540);
+                    }, 450);
+
+
                 } else {
                     p.closeInventory();
-                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§cEs überfällt momentan schon einer die Bank, bitte warte kurz!");
+                    p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Es §füberfällt momentan schon einer die §fBank§7, bitte warte kurz!");
                 }
             });
 

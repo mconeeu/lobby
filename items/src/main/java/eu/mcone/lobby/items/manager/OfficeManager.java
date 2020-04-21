@@ -1,5 +1,6 @@
 package eu.mcone.lobby.items.manager;
 
+import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.LobbyItem;
@@ -46,6 +47,7 @@ public class OfficeManager {
     public static void joinOtherOffice(Player player, Player other) {
         if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(player)) {
             LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(player);
+            GameAPI.getInstance().getGamePlayer(player).setEffectsVisible(false);
         }
         if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(other)) {
             LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(other);
@@ -58,8 +60,10 @@ public class OfficeManager {
             LobbyPlugin.getInstance().getPlayerHiderManager().showPlayers(other);
         }
 
+
         getOfficeFromOther(player, other);
 
+        GameAPI.getInstance().getGamePlayer(other).setEffectsVisible(false);
 
         ISTOGETHEROFFICE.add(player);
         ISTOGETHEROFFICE.add(other);
@@ -70,6 +74,9 @@ public class OfficeManager {
 
         if (other.hasPermission("lobby.silenthub")) {
             other.getInventory().setItem(2, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE_SILENTHUB);
+            other.getInventory().setItem(3, null);
+        } else {
+            other.getInventory().setItem(2, null);
         }
         if (player.hasPermission("lobby.silenthub")) {
             player.getInventory().setItem(2, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE_SILENTHUB);
@@ -91,6 +98,7 @@ public class OfficeManager {
     }
 
     public static void joinOffice(Player player) {
+
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
         if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(player)) {
             LobbyPlugin.getInstance().getPlayerHiderManager().showPlayers(player);
@@ -106,6 +114,9 @@ public class OfficeManager {
 
         if (player.hasPermission("lobby.silenthub")) {
             player.getInventory().setItem(2, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE_SILENTHUB);
+            player.getInventory().setItem(3, null);
+        } else {
+            player.getInventory().setItem(2, null);
         }
 
         player.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE);
@@ -114,6 +125,7 @@ public class OfficeManager {
         getOffice(player);
         if (!LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(player)) {
             vanishPlayer(player);
+            GameAPI.getInstance().getGamePlayer(player).setEffectsVisible(false);
         }
 
     }
@@ -129,9 +141,12 @@ public class OfficeManager {
                 player.getInventory().setItem(2, HotbarItems.LEAVE_PRIVATE_LOBBY);
                 player.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);
             } else {
+                GameAPI.getInstance().getGamePlayer(player).setEffectsVisible(true);
                 player.getInventory().setItem(2, HotbarItems.PRIVATE_LOBBY);
             }
+            return;
         }
+        GameAPI.getInstance().getGamePlayer(player).setEffectsVisible(true);
     }
 
     public static void vanishPlayer(Player player) {

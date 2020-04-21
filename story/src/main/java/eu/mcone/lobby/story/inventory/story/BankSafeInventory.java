@@ -20,7 +20,7 @@ public class BankSafeInventory extends CoreInventory {
                 lp.addLobbyItem(LobbyItem.GOLD_BARDING);
                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
                     p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Perfekt du hast die Gold Barren gehe jetzt links zum alten Bank Ausgang trete dort auf eine Druckplatte um die alte Tür zu öffnen ");
-                }, 40L);
+                }, 30L);
 
             } else {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§4Du besitzt diese Item bereits!");
