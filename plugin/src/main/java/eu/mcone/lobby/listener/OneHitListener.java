@@ -6,10 +6,8 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.event.AfkEvent;
 import eu.mcone.coresystem.api.bukkit.event.BuildModeChangeEvent;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.coresystem.api.core.player.PlayerState;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
@@ -64,19 +62,6 @@ public class OneHitListener implements Listener {
         }
     }
 
-    @EventHandler
-    public void onAFK(AfkEvent e) {
-        Player p = e.getPlayer();
-
-        if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getJumpNRunManager().isJumping(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p)) {
-            if (e.getState().equals(PlayerState.AFK)) {
-                LobbyPlugin.getInstance().getJumpNRunManager().setCancel(p);
-                LobbyPlugin.getInstance().getOneHitManager().leave(p);
-                LobbyPlugin.getInstance().getCatchManager().leave(p);
-                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du wurdest automatisch von deiner Lobby Aktivität gekickt!");
-            }
-        }
-    }
 
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {

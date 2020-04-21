@@ -35,7 +35,7 @@ public class SmugglerInventory extends CoreInventory {
                     if (!lp.hasLobbyItem(LobbyItem.BANK_MAP)) {
                         lp.getCorePlayer().removeCoins(20);
                         lp.addLobbyItem(LobbyItem.BANK_MAP);
-                        p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8|§7 Perfekt du hast die Karte komm wieder zum Büro dann kann ich dir denn nächsten Schritt sagen!");
+                        p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Perfekt du hast die Karte komm wieder zum Büro dann kann ich dir denn nächsten Schritt sagen!");
                         lp.setBankProgress(BankProgress.CUTTER);
                     } else {
                         p.sendMessage("§4Du hast das Item bereits!");

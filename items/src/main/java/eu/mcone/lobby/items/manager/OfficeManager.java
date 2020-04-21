@@ -92,8 +92,12 @@ public class OfficeManager {
 
     public static void joinOffice(Player player) {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
+        if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(player)) {
+            LobbyPlugin.getInstance().getPlayerHiderManager().showPlayers(player);
+        }
 
         updateOffice(player);
+        LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(player);
 
         if (!lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE) && !lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER) && !lp.hasLobbyItem(LobbyItem.OFFICE_CARD_GOLD)) {
             LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast kein Büro!");
@@ -104,9 +108,6 @@ public class OfficeManager {
             player.getInventory().setItem(2, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE_SILENTHUB);
         }
 
-        if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(player)) {
-            LobbyPlugin.getInstance().getPlayerHiderManager().showPlayers(player);
-        }
         player.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE);
 
 

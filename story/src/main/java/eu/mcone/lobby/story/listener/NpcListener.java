@@ -74,11 +74,11 @@ public class NpcListener implements Listener {
                                 p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Ok du hast das Packet komm zurück ins Büro damit wir die Letzte Mission besprechen können!");
                                 lp.addLobbyItem(LobbyItem.BANK_OUTFIT);
                             } else {
-                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ah du musst " + p.getName() + " ich konnte deine Bestellung leider nicht bearbeiten ,weil ich keine Wolle da hab du kannst sie aber besorgen sie liegt warscheinlich noch in einer Kiste im Boot!");
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ah du musst " + p.getName() + " sein ich konnte deine Bestellung leider nicht bearbeiten, weil ich keine Wolle da hab du kannst sie aber besorgen sie liegt warscheinlich noch in einer Kiste im Boot!");
                             }
                             return;
                         }
-                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ich habe leider momentan viel zu viel zu tun komm später wieder!");
+                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ich habe leider momentan viel zu tun komm später wieder!");
                     }
 
                     case "duty": {
@@ -262,7 +262,7 @@ public class NpcListener implements Listener {
                             }
 
                         } else {
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§cIch rede nicht mit dir!");
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Ich rede nicht mit dir!");
                         }
                         break;
                     }
