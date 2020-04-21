@@ -11,12 +11,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class OfficeManager {
 
-    private static final List<Player> VANISHED = new ArrayList<>();
+    private static final Set<Player> VANISHED = new HashSet<>();
     public static final List<Player> ISTOGETHEROFFICE = new ArrayList<>();
 
     public static void getOffice(Player player) {

@@ -20,9 +20,8 @@ public class PlayerMoveListener implements Listener {
         Location robbery_entrance = LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).getLocation("robbery-entrance");
 
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
-        if (lp.getBankprogressId() != BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
-            if (
-                    player.getLocation().distance(robbery_entrance) <= 1) {
+        if (lp != null && lp.getBankprogressId() != BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
+            if (player.getWorld().equals(robbery_entrance.getWorld()) && player.getLocation().distance(robbery_entrance) <= 1) {
                 Vector v1 = player.getLocation().getDirection().multiply(0.8).setX(0.8);
                 player.setVelocity(v1);
             }

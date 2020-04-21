@@ -153,10 +153,12 @@ public class OneHitListener implements Listener {
                 }
             } else if (e.getDamager() instanceof Arrow) {
                 if (manager.isFighting(p)) {
-                    p.setHealth(0);
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5, 4500, false, false));
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 5, 4500, false, false));
-                    e.setCancelled(false);
+                    if (((Arrow) e.getDamager()).getShooter() instanceof Player && !((Player) ((Arrow) e.getDamager()).getShooter()).equals(p)) {
+                        p.setHealth(0);
+                        p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5, 4500, false, false));
+                        p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 5, 4500, false, false));
+                        e.setCancelled(false);
+                    }
                 }
             } else if (e.getDamager() instanceof Snowball) {
                 if (manager.isFighting(p)) {

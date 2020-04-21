@@ -22,6 +22,10 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.util.Vector;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 @RequiredArgsConstructor
 public class TrappingListener implements Listener {
 
@@ -103,16 +107,29 @@ public class TrappingListener implements Listener {
             }
             if (manager.isCatching(p)) {
                 if (i.equals(HotbarItems.CATCHER_TRACKER)) {
+                    if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
+                        return;
+
+                    Map<Double, Location> aroundPlayers = new HashMap<>();
                     for (Entity ent : p.getNearbyEntities(100D, 25D, 100D)) {
                         if (ent instanceof Player) {
                             Player near = (Player) ent;
                             if (manager.getCatcher().contains(ent)) {
-                                p.setCompassTarget(near.getLocation());
-                                LobbyPlugin.getInstance().getMessenger().send(p, "§7Der Fänger ist §f" + ((int) p.getLocation().distance(near.getLocation())) + " Blöcke §7entfernt!");
+                                aroundPlayers.put(p.getLocation().distance(near.getLocation()), near.getLocation());
                             }
                         }
                     }
+
+                    Location min = Collections.min(aroundPlayers.entrySet(), Map.Entry.comparingByKey()).getValue();
+                    p.setCompassTarget(min);
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§7Der Fänger ist §f" + ((int) p.getLocation().distance(min)) + " Blöcke §7entfernt!");
                 } else if (i.equals(HotbarItems.CATCH_RUN_TRACKER)) {
+                    if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
+                        return;
+
+                    Map<Double, Location> aroundPlayers = new HashMap<>();
+
+
                     for (Entity ent : p.getNearbyEntities(100D, 25D, 100D)) {
                         if (ent instanceof Player) {
                             Player near = (Player) ent;
@@ -120,11 +137,14 @@ public class TrappingListener implements Listener {
                                 LobbyPlugin.getInstance().getMessenger().send(p, "§cDu bist der einzigste der momentan Fangen spielt!");
                                 return;
                             } else if (manager.getCatching().contains(ent)) {
-                                p.setCompassTarget(near.getLocation());
-                                LobbyPlugin.getInstance().getMessenger().send(p, "§7Der nächste Läufer ist §f" + ((int) p.getLocation().distance(near.getLocation())) + " Blöcke §7entfernt!");
+                                aroundPlayers.put(p.getLocation().distance(near.getLocation()), near.getLocation());
                             }
                         }
                     }
+
+                    Location min = Collections.min(aroundPlayers.entrySet(), Map.Entry.comparingByKey()).getValue();
+                    p.setCompassTarget(min);
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§7Der nächste Läufer ist §f" + ((int) p.getLocation().distance(min)) + " Blöcke §7entfernt!");
                 }
 
                 if (i.equals(HotbarItems.LEAVE_CATCH_FIGHTING)) {

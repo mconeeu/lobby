@@ -118,36 +118,38 @@ public class InventoryTriggerListener implements Listener {
                                 e.setCancelled(true);
                             }
                         } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-end").equals(e.getClickedBlock().getLocation())) {
-                            LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, false);
-                            JohnBankRobberyInventory.currentlyInBank = null;
-                            OfficeManager.getOffice(p);
-                            lp.setBankProgress(BankProgress.BANK_ROBBERY_END);
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Wir haben es §fgeschafft§7 ich überlasse dir §f25.000 Coins §7und ein kleines Geschenk im Rucksack, wir sehen uns!");
-                            lp.getCorePlayer().addCoins(25000);
+                            if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
+                                LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, false);
+                                JohnBankRobberyInventory.currentlyInBank = null;
+                                OfficeManager.joinOffice(p);
+                                lp.setBankProgress(BankProgress.BANK_ROBBERY_END);
+                                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Wir haben es §fgeschafft§7 ich überlasse dir §f25.000 Coins §7und ein kleines Geschenk im Rucksack, wir sehen uns!");
+                                lp.getCorePlayer().addCoins(25000);
 
-                            p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
-                            p.playSound(p.getLocation(), Sound.NOTE_PIANO, 1, 1);
+                                p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
+                                p.playSound(p.getLocation(), Sound.NOTE_PIANO, 1, 1);
 
-                            JohnBankRobberyInventory.robberyTime.cancel();
+                                JohnBankRobberyInventory.robberyTime.cancel();
 
-                            CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p,"MCONE-Lobby");
-                            lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
-                            lp.removeLobbyItem(LobbyItem.BANK_MAP);
-                            lp.removeLobbyItem(LobbyItem.IRON_SWORD);
-                            lp.removeLobbyItem(LobbyItem.BUTTON);
-                            lp.removeLobbyItem(LobbyItem.BANK_OUTFIT);
+                                CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p, "MCONE-Lobby");
+                                lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
+                                lp.removeLobbyItem(LobbyItem.BANK_MAP);
+                                lp.removeLobbyItem(LobbyItem.IRON_SWORD);
+                                lp.removeLobbyItem(LobbyItem.BUTTON);
+                                lp.removeLobbyItem(LobbyItem.BANK_OUTFIT);
 
-                            lp.addLobbyItem(LobbyItem.GOLD_NUGGET);
+                                lp.addLobbyItem(LobbyItem.GOLD_NUGGET);
 
-                            if (p.hasPermission("lobby.silenthub")) {
-                                p.getInventory().setItem(3, null);
-                            } else {
-                                p.getInventory().setItem(2, null);
+                                if (p.hasPermission("lobby.silenthub")) {
+                                    p.getInventory().setItem(3, null);
+                                } else {
+                                    p.getInventory().setItem(2, null);
+                                }
+
+                                p.getInventory().setLeggings(null);
+                                p.getInventory().setBoots(null);
+                                p.getInventory().setChestplate(null);
                             }
-
-                            p.getInventory().setLeggings(null);
-                            p.getInventory().setBoots(null);
-                            p.getInventory().setChestplate(null);
                         }
 
                         break;

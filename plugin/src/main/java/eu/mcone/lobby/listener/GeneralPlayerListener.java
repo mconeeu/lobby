@@ -15,6 +15,8 @@ import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.inventory.InteractionInventory;
+import eu.mcone.lobby.items.inventory.office.secretary.SecretaryInventory;
+import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -109,7 +111,7 @@ public class GeneralPlayerListener implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
-
+        Player player = e.getPlayer();
         if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(e.getPlayer())) {
             LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(e.getPlayer());
         }
@@ -120,6 +122,22 @@ public class GeneralPlayerListener implements Listener {
             LobbyPlugin.getInstance().getJumpNRunManager().setCancel(e.getPlayer());
         }
 
+
+        OfficeManager.quitOffice(player);
+
+        if (SecretaryInventory.isInviting.contains(player)) {
+            SecretaryInventory.isInviting.remove(player);
+            LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast das Büro verlassen dadurch wurde dein Einladungslink gelöscht!");
+        }
+
+        if (OfficeManager.ISTOGETHEROFFICE.contains(player)) {
+            OfficeManager.ISTOGETHEROFFICE.remove(player);
+
+            for (Player all : OfficeManager.ISTOGETHEROFFICE) {
+                all.hidePlayer(player);
+            }
+
+        }
 
         if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
             lp.setBankProgress(BankProgress.BANK_ROBBERY_START);

@@ -63,6 +63,7 @@ public class PlayerJoinListener implements Listener {
         if (settings.isRankBoots()) {
             LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
         }
+
         Lobby.getSystem().registerLobbyPlayer(lp);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
@@ -94,12 +95,12 @@ public class PlayerJoinListener implements Listener {
                     break;
                 }
                 case OFFICE: {
-                    if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE)) {
-                        LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.BRONZE_OFFICE.getSpawnLocation());
-                    } else if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER)) {
-                        LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.SILVER_OFFICE.getSpawnLocation());
-                    } else if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_GOLD)) {
-                        LobbyWorld.OFFICE.getWorld().teleportSilently(p, OfficeManager.OfficeType.GOLD_OFFICE.getSpawnLocation());
+                    OfficeManager.joinOffice(p);
+                    break;
+                }
+                case LAST_LOCATION: {
+                    if (lp.getCorePlayer().getWorld().equals(LobbyWorld.OFFICE.getWorld())) {
+                        OfficeManager.joinOffice(p);
                     }
                 }
             }
