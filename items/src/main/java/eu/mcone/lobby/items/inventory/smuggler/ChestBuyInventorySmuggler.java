@@ -13,7 +13,14 @@ import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import java.util.Random;
+
 class ChestBuyInventorySmuggler extends CoreInventory {
+
+    private static int getRandomNumberInRange(int min, int max) {
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
+    }
 
     ChestBuyInventorySmuggler(Player p) {
         super("§8» §7§lSchmuggler §8| §fKisten", p, 9 * 3, InventoryOption.FILL_EMPTY_SLOTS);
@@ -21,12 +28,19 @@ class ChestBuyInventorySmuggler extends CoreInventory {
 
         setItem(11 - 1, new ItemBuilder(Material.PAPER, 1, 0).displayName("§8» §7Du besitzt §f" + lp.getChests() + "§7 Kisten").create());
 
-        setItem(13 - 1, new ItemBuilder(Material.CHEST, 3, 0).displayName("§c§l3 Kiste").lore("§7Kosten: §f§o139 Emeralds", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
-            if ((lp.getCorePlayer().getEmeralds() - 139) >= 0) {
-                lp.getCorePlayer().removeEmeralds(139);
-                lp.addChests(3);
+        setItem(13 - 1, new ItemBuilder(Material.CHEST, 3, 0).displayName("§c§l3 Kiste").lore("§7Kosten: §f§o129 Emeralds", "§cDu kannst aber auch weniger", "§c§lKisten§c erhalten", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
+            if ((lp.getCorePlayer().getEmeralds() - 129) >= 0) {
+                lp.getCorePlayer().removeEmeralds(129);
 
-                p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §aDu hast 3 Kisten gekauft!");
+                int chest = getRandomNumberInRange(1, 3);
+                lp.addChests(chest);
+                if (chest == 1) {
+                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast nur §a" + chest + "§7 Kiste bekommen weil die anderen §akaputt §7gegangen sind!");
+                } else if (chest < 3) {
+                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast nur §a" + chest + "§7 Kisten bekommen weil die anderen §akaputt §7gegangen sind!");
+                } else {
+                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast " + chest + " Kisten gekauft!");
+                }
             } else {
                 p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §4Du hast nicht genügend Emeralds!");
             }
@@ -34,12 +48,17 @@ class ChestBuyInventorySmuggler extends CoreInventory {
         });
 
 
-        setItem(15 - 1, new ItemBuilder(Material.CHEST, 7, 0).displayName("§c§l7 Kisten").lore("§7Kosten: §f§o342 Emeralds", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
-            if ((lp.getCorePlayer().getEmeralds() - 342) >= 0) {
-                p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §aDu hast 7 Kisten gekauft!");
+        setItem(15 - 1, new ItemBuilder(Material.CHEST, 7, 0).displayName("§c§l7 Kisten").lore("§7Kosten: §f§o297 Emeralds", "§cDu kannst aber auch weniger", "§c§lKisten§c erhalten", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
+            if ((lp.getCorePlayer().getEmeralds() - 297) >= 0) {
+                lp.getCorePlayer().removeEmeralds(297);
 
-                lp.getCorePlayer().removeEmeralds(342);
-                lp.addChests(7);
+                int chest = getRandomNumberInRange(2, 7);
+                lp.addChests(chest);
+                if (chest < 7) {
+                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast nur §a" + chest + "§7 Kisten bekommen weil die anderen §akaputt §7gegangen sind!");
+                } else {
+                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast " + chest + " Kisten gekauft!");
+                }
             } else {
                 p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §4Du hast nicht genügend Emeralds");
             }
@@ -47,12 +66,16 @@ class ChestBuyInventorySmuggler extends CoreInventory {
         });
 
 
-        setItem(17 - 1, new ItemBuilder(Material.CHEST, 12, 0).displayName("§c§l12 Kisten").lore("§7Kosten: §f§o586 Emeralds", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
-            if ((lp.getCorePlayer().getCoins() - 586) >= 0) {
-                p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §aDu hast 12 Kisten gekauft!");
-
-                lp.getCorePlayer().removeEmeralds(586);
-                lp.addChests(12);
+        setItem(17 - 1, new ItemBuilder(Material.CHEST, 12, 0).displayName("§c§l12 Kisten").lore("§7Kosten: §f§o526 Emeralds", "§cDu kannst aber auch weniger", "§c§lKisten §cerhalten", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
+            if ((lp.getCorePlayer().getCoins() - 526) >= 0) {
+                lp.getCorePlayer().removeEmeralds(526);
+                int chest = getRandomNumberInRange(5, 12);
+                lp.addChests(chest);
+                if (chest < 12) {
+                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast nur §a" + chest + "§7 Kisten bekommen weil die anderen §akaputt §7gegangen sind!");
+                } else {
+                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast " + chest + " Kisten gekauft!");
+                }
             } else {
                 p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §4Du hast nicht genügend Emeralds");
             }

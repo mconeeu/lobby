@@ -10,6 +10,7 @@ import eu.mcone.coresystem.api.bukkit.event.NickEvent;
 import eu.mcone.coresystem.api.bukkit.event.UnnickEvent;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -17,6 +18,8 @@ import eu.mcone.lobby.api.player.LobbySettings;
 import eu.mcone.lobby.inventory.LobbyInventory;
 import eu.mcone.lobby.inventory.OneHitGadgetInventory;
 import eu.mcone.lobby.inventory.compass.MinigamesInventory;
+import eu.mcone.lobby.items.manager.OfficeManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -104,6 +107,11 @@ public class InventoryTriggerListener implements Listener {
         Player player = e.getPlayer().bukkit();
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
         LobbySettings settings = lp.getSettings();
+        Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
+                    LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(player);
+                    LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(player);
+                    OfficeManager.updateOffice(player);
+                },1);
 
         e.getPlayer().bukkit().getInventory().setItem(
                 6,
@@ -120,6 +128,12 @@ public class InventoryTriggerListener implements Listener {
         Player player = e.getPlayer().bukkit();
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
         LobbySettings settings = lp.getSettings();
+
+        Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
+        LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(player);
+        LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(player);
+        OfficeManager.updateOffice(player);
+        },1);
 
         e.getPlayer().bukkit().getInventory().setItem(
                 6,

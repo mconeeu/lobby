@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 
 public class LobbyGamesInventory extends CoreInventory {
 
@@ -118,13 +119,16 @@ public class LobbyGamesInventory extends CoreInventory {
 
                         setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.DIAMOND_BOOTS, 1, 0)
                                         .displayName("§bJumpAndRun §8| §fLobbygame")
-                                        .lore("§7§oBesuche die JumpAndRun Tafel", "§7§oUm alle Jump and Runs zu sehen", "§7§oUnd um sie zu starten", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                        .lore("§7§oBesuche die JumpAndRun Tafel", "§7§oUm alle Jump and Runs zu sehen", "§7§oUnd um sie zu starten", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren", "§8» §f§nRechtsklick§8 | §7§oSchnellbeitritt")
                                         .create(),
 
                                 e -> {
-                                    player.closeInventory();
-                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("jumpandrun-board");
-
+                                    if (e.getClick().equals(ClickType.RIGHT)) {
+                                        new GameJARInventory(p);
+                                    } else if (e.getClick().equals(ClickType.LEFT)) {
+                                        player.closeInventory();
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("jumpandrun-board");
+                                    }
                                 });
 
                         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {

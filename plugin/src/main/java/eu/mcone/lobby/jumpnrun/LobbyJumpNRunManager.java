@@ -55,6 +55,11 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
 
     @Override
     public void setStart(Player p, JumpNRun jumpNRun) {
+        if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p)) {
+            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du darfst im moment keine Jump and Runs spielen, weil du gerade ein Lobbygame spielst!");
+            LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "spawn");
+            return;
+        }
         if (!isCurrentlyPlaying(p)) {
 
             currentlyPlaying.add(new JumpNRunPlayer(p, jumpNRun, System.currentTimeMillis() / 1000));

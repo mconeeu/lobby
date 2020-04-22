@@ -9,12 +9,13 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.items.manager.OfficeManager;
+import eu.mcone.lobby.inventory.ServerInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemFlag;
 
 public class MinigamesInventory extends CoreInventory {
@@ -104,12 +105,15 @@ public class MinigamesInventory extends CoreInventory {
 
                             setItem(InventorySlot.ROW_2_SLOT_9, new ItemBuilder(Gamemode.SKYPVP.getItem(), 1, 0)
                                             .displayName(Gamemode.SKYPVP.getLabel())
-                                            .lore("§7§oFinde deine Gegner auf einer Sky-Map", "§7§ound töte sie, um Coins zu erhalten!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                            .lore("§7§oFinde deine Gegner auf einer Sky-Map", "§7§ound töte sie, um Coins zu erhalten!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren", "§8» §f§nRechtsklick§8 | §7§oSchnellbeitritt")
                                             .create(),
                                     e -> {
-                                        player.closeInventory();
-                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("skypvp");
-
+                                        if (e.getClick().equals(ClickType.RIGHT)) {
+                                            new ServerInventory(p, Gamemode.SKYPVP);
+                                        } else if (e.getClick().equals(ClickType.LEFT)) {
+                                            player.closeInventory();
+                                            LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("skypvp");
+                                        }
                                     });
 
                             setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.REDSTONE_COMPARATOR, 1, 0)
@@ -124,7 +128,7 @@ public class MinigamesInventory extends CoreInventory {
 
                             setItem(InventorySlot.ROW_3_SLOT_6, new Skull(p.getName(), 1).toItemBuilder()
                                             .displayName("§5Festival / Community")
-                                            .lore("§7§oTreffe dich mit Freunden auf dem ", "§7§oFestival/Community aber", "§7§oreise mit einem gültigen Ticket hin!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                            .lore("§7§oTreffe dich mit Freunden auf dem ", "§7§oFestival/Community aber", "§7§oreise mit einem gültigen Ticket hin!", "", "§8» §f§nRechtsklick§8 | §7§oSchnellbeitritt")
                                             .create(),
                                     e -> {
                                         player.closeInventory();
@@ -134,63 +138,77 @@ public class MinigamesInventory extends CoreInventory {
 
                             setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Gamemode.BEDWARS.getItem(), 1, 0)
                                             .displayName(Gamemode.BEDWARS.getLabel())
-                                            .lore("§7§oBaue Betten von anderen Spielern ab", "§7§ound start mit Kits durch!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                            .lore("§7§oBaue Betten von anderen Spielern ab", "§7§ound start mit Kits durch!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren", "§8» §f§nRechtsklick§8 | §7§oSchnellbeitritt")
                                             .create(),
                                     e -> {
-                                        player.closeInventory();
-                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("bedwars");
-
-                                        if (p.getWorld().getName().equalsIgnoreCase("Office")) {
-                                            OfficeManager.unVanishPlayer(p);
+                                        if (e.getClick().equals(ClickType.RIGHT)) {
+                                            new ServerInventory(p, Gamemode.SKYPVP);
+                                        } else if (e.getClick().equals(ClickType.LEFT)) {
+                                            player.closeInventory();
+                                            LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("bedwars");
                                         }
+
                                     }
                             );
 
                             p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
                             setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Gamemode.MINEWAR.getItem(), 1, 0)
                                             .displayName(Gamemode.MINEWAR.getLabel())
-                                            .lore("§7§oBaue Erze ab und erhalte", "§7§ocoole Items und töte Gegner!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                            .lore("§7§oBaue Erze ab und erhalte", "§7§ocoole Items und töte Gegner!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren", "§8» §f§nRechtsklick§8 | §7§oSchnellbeitritt")
                                             .create(),
                                     e -> {
-                                        player.closeInventory();
-                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("minewar");
-
-                                        if (p.getWorld().getName().equalsIgnoreCase("Office")) {
-                                            OfficeManager.unVanishPlayer(p);
+                                        if (e.getClick().equals(ClickType.RIGHT)) {
+                                            new ServerInventory(p, Gamemode.MINEWAR);
+                                        } else if (e.getClick().equals(ClickType.LEFT)) {
+                                            player.closeInventory();
+                                            LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("minewar");
                                         }
+
                                     }
                             );
 
                             setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Gamemode.BUILD.getItem(), 1, 0)
                                             .displayName(Gamemode.BUILD.getLabel())
-                                            .lore("§7§oBuild Server. Überzeuge uns von deinen Baukünsten", "§7§ound werde Builder im MC ONE Team!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                            .lore("§7§oBuild Server. Überzeuge uns von deinen Baukünsten", "§7§ound werde Builder im MC ONE Team!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren", "§8» §f§nRechtsklick§8 | §7§oSchnellbeitritt")
                                             .create(),
                                     e -> {
-                                        player.closeInventory();
-                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("build");
+                                        if (e.getClick().equals(ClickType.RIGHT)) {
+                                            new ServerInventory(p, Gamemode.BUILD);
+                                        } else if (e.getClick().equals(ClickType.LEFT)) {
+                                            player.closeInventory();
+                                            LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("build");
+                                        }
 
                                     });
 
                             setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Gamemode.KNOCKIT.getItem(), 1, 0)
                                             .displayName(Gamemode.KNOCKIT.getLabel())
                                             .enchantment(Enchantment.KNOCKBACK, 1)
-                                            .lore("§7§oSchlage die Gegner von der Plattform um Coins", "§7§ozu erhalten!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                            .lore("§7§oSchlage die Gegner von der Plattform um Coins", "§7§ozu erhalten!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren", "§8» §f§nRechtsklick§8 | §7§oSchnellbeitritt")
                                             .itemFlags(ItemFlag.HIDE_ENCHANTS)
                                             .create(),
                                     e -> {
-                                        player.closeInventory();
-                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("knockit");
+                                        if (e.getClick().equals(ClickType.RIGHT)) {
+                                            new ServerInventory(p, Gamemode.KNOCKIT);
+                                        } else if (e.getClick().equals(ClickType.LEFT)) {
+                                            player.closeInventory();
+                                            LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("knockit");
+                                        }
 
                                     });
 
 
                             setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.DEAD_BUSH, 1, 0)
                                             .displayName("§aTrashwars")
-                                            .lore("§7§oKämpfe um den Sieg mit einem Müll", "§7§oInventar auf einer Insel voller Gegner", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                            .lore("§7§oKämpfe um den Sieg mit einem Müll", "§7§oInventar auf einer Insel voller Gegner", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren", "§8» §f§nRechtsklick§8 | §7§oSchnellbeitritt")
                                             .create(),
                                     e -> {
-                                        player.closeInventory();
-                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("trashwars");
+                                        if (e.getClick().equals(ClickType.RIGHT)) {
+                                            new ServerInventory(p, Gamemode.TRASHWARS);
+                                        } else if (e.getClick().equals(ClickType.LEFT)) {
+                                            player.closeInventory();
+                                            LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("trashwars");
+                                        }
 
                                     });
 

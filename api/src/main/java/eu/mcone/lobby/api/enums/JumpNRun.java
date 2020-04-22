@@ -1,13 +1,17 @@
 package eu.mcone.lobby.api.enums;
 
+import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyWorld;
 import lombok.Getter;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 @Getter
 public enum JumpNRun {
     STIPCLUB_KIRPHA(
             0,
+            new ItemBuilder(Material.LEATHER_BOOTS, 1, 0).displayName("§fStriclub").lore("§8» §f§nLinksklick§8 | §7§oBetreten").create(),
             "jumpandrun_stripclub_warp", "Stripclub",
             "jumpandrun_stripclub_spawn",
             /* START */ new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 8, 88, -67),
@@ -19,6 +23,7 @@ public enum JumpNRun {
     ),
     CAVE(
             0,
+            new ItemBuilder(Material.STONE, 1, 0).displayName("§fCave").lore("§8» §f§nLinksklick§8 | §7§oBetreten").create(),
             "jumpandrun_cave_warp", "Cave",
             "jumpandrun_cave_start",
             /* START */ new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), -42, 63, -20),
@@ -29,12 +34,14 @@ public enum JumpNRun {
     );
 
     private int id;
+    private ItemStack itemstack;
     private String warpLocation, startLocation, jumpandrunname;
     private Location startPlateLocation, endPlateLocation;
     private Location[] checkpoints;
 
-    JumpNRun(int id, String warpLocation, String jumpandrunname, String startLocation, Location startPlateLocation, Location endPlateLocation, Location[] checkpoints) {
+    JumpNRun(int id, ItemStack itemStack, String warpLocation, String jumpandrunname, String startLocation, Location startPlateLocation, Location endPlateLocation, Location[] checkpoints) {
         this.id = id;
+        this.itemstack = itemStack;
         this.warpLocation = warpLocation;
         this.jumpandrunname = jumpandrunname;
         this.startLocation = startLocation;

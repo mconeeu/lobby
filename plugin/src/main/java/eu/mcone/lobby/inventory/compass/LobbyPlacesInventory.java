@@ -9,10 +9,12 @@ import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.items.manager.OfficeManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 
 public class LobbyPlacesInventory extends CoreInventory {
 
@@ -172,13 +174,17 @@ public class LobbyPlacesInventory extends CoreInventory {
                                 });
                         setItem(InventorySlot.ROW_1_SLOT_8, new ItemBuilder(Material.REDSTONE, 1, 0)
                                         .displayName("§dBüro")
-                                        .lore("§7§oKaufe dir ein tolles Büro", "§7§ooder Besuche dein Büro", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                        .lore("§7§oKaufe dir ein tolles Büro", "§7§ooder Besuche dein Büro", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren", "§8» §f§nRechtslick§8 | §7§oSchnellbeitritt")
                                         .create(),
 
                                 e -> {
-                                    player.closeInventory();
-                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("office-entrance");
-
+                                    if (e.getClick().equals(ClickType.RIGHT)) {
+                                        player.closeInventory();
+                                        OfficeManager.joinOffice(p);
+                                    } else if (e.getClick().equals(ClickType.LEFT)) {
+                                        player.closeInventory();
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("office-entrance");
+                                    }
                                 });
 
                         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
