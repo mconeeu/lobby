@@ -35,14 +35,14 @@ class ChestBuyInventorySmuggler extends CoreInventory {
                 int chest = getRandomNumberInRange(1, 3);
                 lp.addChests(chest);
                 if (chest == 1) {
-                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast nur §a" + chest + "§7 Kiste bekommen weil die anderen §akaputt §7gegangen sind!");
+                    p.sendMessage("§8[§7§l!§8] §7Schmugler §8» §7Du hast nur §a" + chest + "§7 Kiste bekommen weil die anderen §akaputt §7gegangen sind!");
                 } else if (chest < 3) {
-                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast nur §a" + chest + "§7 Kisten bekommen weil die anderen §akaputt §7gegangen sind!");
+                    p.sendMessage("§8[§7§l!§8] §7Schmugler §8» §7Du hast nur §a" + chest + "§7 Kisten bekommen weil die anderen §akaputt §7gegangen sind!");
                 } else {
-                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast " + chest + " Kisten gekauft!");
+                    p.sendMessage("§8[§7§l!§8] §7Schmugler §8» §7Du hast " + chest + " Kisten gekauft!");
                 }
             } else {
-                p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §4Du hast nicht genügend Emeralds!");
+                p.sendMessage("§8[§7§l!§8] §7Schmugler §8» §4Du hast nicht genügend Emeralds!");
             }
             p.closeInventory();
         });
@@ -55,12 +55,12 @@ class ChestBuyInventorySmuggler extends CoreInventory {
                 int chest = getRandomNumberInRange(2, 7);
                 lp.addChests(chest);
                 if (chest < 7) {
-                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast nur §a" + chest + "§7 Kisten bekommen weil die anderen §akaputt §7gegangen sind!");
+                    p.sendMessage("§8[§7§l!§8] §7Schmugler §8» §7Du hast nur §a" + chest + "§7 Kisten bekommen weil die anderen §akaputt §7gegangen sind!");
                 } else {
-                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast " + chest + " Kisten gekauft!");
+                    p.sendMessage("§8[§7§l!§8] §7Schmugler §8» §7Du hast " + chest + " Kisten gekauft!");
                 }
             } else {
-                p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §4Du hast nicht genügend Emeralds");
+                p.sendMessage("§8[§7§l!§8] §7Schmugler §8» §4Du hast nicht genügend Emeralds");
             }
             p.closeInventory();
         });
@@ -72,12 +72,12 @@ class ChestBuyInventorySmuggler extends CoreInventory {
                 int chest = getRandomNumberInRange(5, 12);
                 lp.addChests(chest);
                 if (chest < 12) {
-                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast nur §a" + chest + "§7 Kisten bekommen weil die anderen §akaputt §7gegangen sind!");
+                    p.sendMessage("§8[§7§l!§8] §7Schmugler §8» §7Du hast nur §a" + chest + "§7 Kisten bekommen weil die anderen §akaputt §7gegangen sind!");
                 } else {
-                    p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §7Du hast " + chest + " Kisten gekauft!");
+                    p.sendMessage("§8[§7§l!§8] §7Schmugler §8» §7Du hast " + chest + " Kisten gekauft!");
                 }
             } else {
-                p.sendMessage("§8[§7§l!§8] §7Schmuggler §8» §4Du hast nicht genügend Emeralds");
+                p.sendMessage("§8[§7§l!§8] §7Schmugler §8» §4Du hast nicht genügend Emeralds");
             }
             p.closeInventory();
         });
