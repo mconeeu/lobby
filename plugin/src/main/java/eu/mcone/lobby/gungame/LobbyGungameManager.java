@@ -27,8 +27,8 @@ public class LobbyGungameManager implements GungameManager {
     private static final Map<Location, Long> SPAWN_LOCATIONS = new HashMap<>();
 
     static {
-        for (Map.Entry<String, CoreLocation> location : LobbyWorld.ONE_ISLAND.getWorld().getLocations().entrySet()) {
-            if (location.getKey().startsWith("gungame-")) {
+        for (Map.Entry<String, CoreLocation> location : LobbyWorld.GUNGAME.getWorld().getLocations().entrySet()) {
+            if (location.getKey().startsWith("gungame-1-")) {
                 SPAWN_LOCATIONS.put(location.getValue().bukkit(), (System.currentTimeMillis() / 1000) - 5);
             }
         }
@@ -163,10 +163,14 @@ public class LobbyGungameManager implements GungameManager {
 
 
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-            updateGungameFightItems(p);
-            savePlayer.remove(p);
-            p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 1);
-            LobbyPlugin.getInstance().getMessenger().send(p, "§cDu kannst nun angreifen und angegriffen werden werden!");
+            if (fighting.contains(p)) {
+                updateGungameFightItems(p);
+                savePlayer.remove(p);
+                p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 1);
+                LobbyPlugin.getInstance().getMessenger().send(p, "§cDu kannst nun angreifen und angegriffen werden!");
+            } else {
+                savePlayer.remove(p);
+            }
         }, 60);
     }
 

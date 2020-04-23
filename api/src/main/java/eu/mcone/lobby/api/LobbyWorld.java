@@ -14,7 +14,8 @@ public enum LobbyWorld {
     OFFICE("Lobby-Office"),
     PARADISE_ISLAND("Lobby-ParadiseIsland"),
     CAVE("Lobby-Cave"),
-    DESTROYED_PARADISE_ISLAND("Lobby-Destroyed-ParadiseIsland");
+    DESTROYED_PARADISE_ISLAND("Lobby-Destroyed-ParadiseIsland"),
+    GUNGAME("gungame-1");
 
     @Getter
     private String name;

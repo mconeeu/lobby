@@ -26,6 +26,7 @@ import java.util.UUID;
 public class DoubleJumpListener implements Listener {
 
     private static final List<UUID> djPlayers = new ArrayList<>();
+    private static final ArrayList<Player> isJumping = new ArrayList<>();
 
     @EventHandler
     public void onToggleFlight(PlayerToggleFlightEvent e) {
@@ -36,10 +37,18 @@ public class DoubleJumpListener implements Listener {
         } else if (p.getGameMode().equals(GameMode.SURVIVAL) && p.hasPermission("mcone.premium") || OneHitListener.doubleJump.contains(p)) {
             e.setCancelled(true);
 
+
+            if (isJumping.contains(p)) {
+                e.setCancelled(true);
+                return;
+            }
+
+
             if (Bukkit.getPluginManager().getPlugin("NoCheatPlus") != null) {
                 NCPExemptionManager.exemptPermanently(p, CheckType.MOVING_SURVIVALFLY);
                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> NCPExemptionManager.unexempt(p), 3 * 20);
             }
+            isJumping.add(p);
             djPlayers.add(p.getUniqueId());
 
             if (OneHitListener.doubleJump.contains(p)) {
@@ -54,6 +63,10 @@ public class DoubleJumpListener implements Listener {
             Vector vec = p.getLocation().getDirection().normalize();
             vec = vec.setY(Math.max(0.4000000059604645D, vec.getY())).multiply(1.5F);
             p.setVelocity(vec);
+
+            Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
+                isJumping.remove(p);
+            }, 12L);
 
             p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 2.0F, 2.0F);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 10);

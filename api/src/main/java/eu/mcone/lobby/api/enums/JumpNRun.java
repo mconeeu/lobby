@@ -35,8 +35,8 @@ public enum JumpNRun {
 
     TOWN_HALL(
             2,
-            new ItemBuilder(Material.WOOD, 1, 0).displayName("§fRathaus").lore("§8» §f§nLinksklick§8 | §7§oBetreten").create(),
-            "jumpandrun_townhall_warp", "Rathaus",
+            new ItemBuilder(Material.BOOKSHELF, 1, 0).displayName("§fBibliothek").lore("§8» §f§nLinksklick§8 | §7§oBetreten").create(),
+            "jumpandrun_townhall_warp", "Bibliothek",
             "jumpandrun_townhall_start",
             /* START */ new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 53, 92, -4),
             new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 49, 69, -6),

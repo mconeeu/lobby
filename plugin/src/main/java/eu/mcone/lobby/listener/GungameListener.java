@@ -21,6 +21,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.util.Vector;
 
@@ -48,6 +50,7 @@ public class GungameListener implements Listener {
             k.playSound(k.getLocation(), Sound.LEVEL_UP, 1, 1);
             k.setExp(1);
             p.setExp(1);
+            k.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 40, 2));
             k.setLevel(k.getLevel() + 1);
             manager.updateGungameFightItems(k);
 
