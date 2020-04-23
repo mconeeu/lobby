@@ -95,7 +95,7 @@ public class LobbyGamesInventory extends CoreInventory {
                     Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
                         p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
                         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                            setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.IRON_SWORD, 1, 0)
+                            setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.IRON_SWORD, 1, 0)
                                             .displayName("§cOne-Hit §8| §fLobbygame")
                                             .lore("§7§oSpiele ein bekannten Modi", "§7§omit deinen Freunden auf der Lobby", "", "§8» §f§nLinksklick§8 | §7§oSpielen")
                                             .create(),
@@ -104,6 +104,18 @@ public class LobbyGamesInventory extends CoreInventory {
                                         p.closeInventory();
                                         LobbyPlugin.getInstance().getOneHitManager().setStart(p);
                                     });
+
+                            setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.WOOD_AXE, 1, 0)
+                                            .displayName("§5Gungame §8| §fLobbygame")
+                                            .lore("§7§oSchlage deine Gegner ins Wasser", "§7§ound werde steige Level auf!", "", "§8» §f§nLinksklick§8 | §7§oSpielen")
+                                            .create(),
+
+                                    e -> {
+                                        p.closeInventory();
+                                        LobbyPlugin.getInstance().getGungameManager().setStart(p);
+                                    });
+
+                            setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
 
                         }, 2L);
 

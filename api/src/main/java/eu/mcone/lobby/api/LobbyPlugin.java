@@ -9,6 +9,7 @@ import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.gameapi.api.Option;
+import eu.mcone.lobby.api.gungame.GungameManager;
 import eu.mcone.lobby.api.jumpnrun.JumpNRunManager;
 import eu.mcone.lobby.api.onehit.OneHitManager;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -43,6 +44,8 @@ public abstract class LobbyPlugin extends GamePlugin {
     public abstract CoreWorld getLobbyWorld(LobbyWorld world);
 
     public abstract OneHitManager getOneHitManager();
+
+    public abstract GungameManager getGungameManager();
 
     public abstract CatchManager getCatchManager();
 

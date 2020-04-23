@@ -86,7 +86,7 @@ public class InventoryTriggerListener implements Listener {
                         } else if (sign.getLine(0).equals("§7»§c Jump'n'Run")) {
                             for (JumpNRun jumpnrun : JumpNRun.values()) {
                                 if (sign.getLine(1).equals(jumpnrun.getJumpandrunname())) {
-                                    if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p)) {
+                                    if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p) || LobbyPlugin.getInstance().getGungameManager().isFighting(p)) {
                                         LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Du darfst im moment keine Jump and Runs spielen, weil du gerade ein Lobbygame spielst!");
                                         return;
                                     }

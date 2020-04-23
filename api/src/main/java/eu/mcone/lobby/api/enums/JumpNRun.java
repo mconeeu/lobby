@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 public enum JumpNRun {
     STIPCLUB_KIRPHA(
             0,
-            new ItemBuilder(Material.LEATHER_BOOTS, 1, 0).displayName("§fStriclub").lore("§8» §f§nLinksklick§8 | §7§oBetreten").create(),
+            new ItemBuilder(Material.LEATHER_BOOTS, 1, 0).displayName("§fStripclub").lore("§8» §f§nLinksklick§8 | §7§oBetreten").create(),
             "jumpandrun_stripclub_warp", "Stripclub",
             "jumpandrun_stripclub_spawn",
             /* START */ new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 8, 88, -67),
@@ -22,14 +22,26 @@ public enum JumpNRun {
             }
     ),
     CAVE(
-            0,
-            new ItemBuilder(Material.STONE, 1, 0).displayName("§fCave").lore("§8» §f§nLinksklick§8 | §7§oBetreten").create(),
+            1,
+            new ItemBuilder(Material.STONE, 1, 0).displayName("§fHöhle").lore("§8» §f§nLinksklick§8 | §7§oBetreten").create(),
             "jumpandrun_cave_warp", "Cave",
             "jumpandrun_cave_start",
             /* START */ new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), -42, 63, -20),
             new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 18, 70, -15),
             new Location[]{
                     new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), -12, 66, -16),
+            }
+    ),
+
+    TOWN_HALL(
+            2,
+            new ItemBuilder(Material.WOOD, 1, 0).displayName("§fRathaus").lore("§8» §f§nLinksklick§8 | §7§oBetreten").create(),
+            "jumpandrun_townhall_warp", "Rathaus",
+            "jumpandrun_townhall_start",
+            /* START */ new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 53, 92, -4),
+            new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 49, 69, -6),
+            new Location[]{
+                    new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 53, 74, 0),
             }
     );
 

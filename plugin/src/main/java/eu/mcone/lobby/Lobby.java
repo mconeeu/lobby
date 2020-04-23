@@ -21,6 +21,7 @@ import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.command.LobbyCMD;
 import eu.mcone.lobby.gang.LobbyGang;
+import eu.mcone.lobby.gungame.LobbyGungameManager;
 import eu.mcone.lobby.inventory.LobbySettingsInventory;
 import eu.mcone.lobby.items.LobbyItems;
 import eu.mcone.lobby.jumpnrun.LobbyJumpNRunManager;
@@ -48,6 +49,8 @@ public class Lobby extends LobbyPlugin {
     private BuildSystem buildSystem;
     @Getter
     private LobbyOneHitManager oneHitManager;
+    @Getter
+    private LobbyGungameManager gungameManager;
     @Getter
     private TrapManager catchManager;
     @Getter
@@ -109,6 +112,9 @@ public class Lobby extends LobbyPlugin {
         sendConsoleMessage("§aLoading OneHitManager...");
         oneHitManager = new LobbyOneHitManager(this);
 
+        sendConsoleMessage("§aLoading GungameManager...");
+        gungameManager = new LobbyGungameManager(this);
+
         sendConsoleMessage("§aLoading CatchManager...");
         catchManager = new TrapManager(this);
 
@@ -118,6 +124,7 @@ public class Lobby extends LobbyPlugin {
         silentLobbyManager = new SilentLobbyManager();
         playerHiderManager = new PlayerHiderManager();
 
+        getDamageLogger();
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");
 
         if (Bukkit.getOnlinePlayers().size() > 0) {

@@ -38,11 +38,12 @@ public class GeneralPlayerListener implements Listener {
     public void onAFK(AfkEvent e) {
         Player p = e.getPlayer();
 
-        if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getJumpNRunManager().isJumping(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p)) {
+        if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getJumpNRunManager().isJumping(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p) || LobbyPlugin.getInstance().getGungameManager().isFighting(p)) {
             if (e.getState().equals(PlayerState.AFK)) {
                 LobbyPlugin.getInstance().getJumpNRunManager().setCancel(p);
                 LobbyPlugin.getInstance().getOneHitManager().leave(p);
                 LobbyPlugin.getInstance().getCatchManager().leave(p);
+                LobbyPlugin.getInstance().getGungameManager().leave(p);
                 LobbyPlugin.getInstance().getMessenger().send(p, "§4Du wurdest automatisch von deiner Lobby Aktivität gekickt!");
             }
         }
@@ -164,7 +165,7 @@ public class GeneralPlayerListener implements Listener {
 
         if (e.getRightClicked() instanceof Player) {
             Player clicked = (Player) e.getRightClicked();
-            if (!LobbyPlugin.getInstance().getCatchManager().isCatching(p) && !LobbyPlugin.getInstance().getOneHitManager().isFighting(p)) {
+            if (!LobbyPlugin.getInstance().getCatchManager().isCatching(p) && !LobbyPlugin.getInstance().getOneHitManager().isFighting(p) && !LobbyPlugin.getInstance().getGungameManager().isFighting(p)) {
                 new InteractionInventory(p, clicked);
             }
         }

@@ -11,6 +11,7 @@ import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.onehit.OneHitManager;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.api.player.LobbySettings;
 import eu.mcone.lobby.listener.OneHitListener;
 import eu.mcone.lobby.listener.PlayerJoinListener;
 import eu.mcone.lobby.scoreboard.OneHitObjective;
@@ -53,7 +54,7 @@ public class LobbyOneHitManager implements OneHitManager {
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
             CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new OneHitObjective(this));
 
-            CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p,"MCONE-OneHit");
+            CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p, "MCONE-OneHit");
 
             p.setExp(1);
             p.setLevel(0);
@@ -93,7 +94,13 @@ public class LobbyOneHitManager implements OneHitManager {
             p.setExp(0);
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(true);
 
-            CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p,"Lobby");
+            LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
+            LobbySettings settings = lp.getSettings();
+            if (settings.isRankBoots()) {
+                LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
+            }
+
+            CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p, "MCONE-Lobby");
 
             for (Player player : fighting) {
                 CoreSystem.getInstance().getCorePlayer(player).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();

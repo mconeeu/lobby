@@ -7,16 +7,15 @@ package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.BuildModeChangeEvent;
-import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.inventory.OneHitGadgetInventory;
 import eu.mcone.lobby.onehit.LobbyOneHitManager;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -75,6 +74,7 @@ public class OneHitListener implements Listener {
             p.setLevel(0);
             p.setExp(1);
 
+
             if (k == null) {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§cDu bist gestorben");
             } else {
@@ -83,8 +83,8 @@ public class OneHitListener implements Listener {
                 CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                 LobbyPlayer lk = LobbyPlugin.getInstance().getLobbyPlayer(k);
                 lk.getCorePlayer().addCoins(2);
-                k.getInventory().setItem(6, new ItemBuilder(Material.ARROW, 1, 0).displayName("§bOneHit-Pfeil").create());
                 k.playSound(k.getLocation(), Sound.LEVEL_UP, 1, 1);
+                k.getInventory().setItem(6, HotbarItems.ONEHIT_ARROW);
                 k.setExp(1);
                 p.setExp(1);
                 k.setLevel(k.getLevel() + 1);
@@ -92,6 +92,7 @@ public class OneHitListener implements Listener {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§7Du wurdest von §f" + k.getDisplayName() + " §7getötet!");
             }
         }
+
 
         e.setDeathMessage("");
         p.spigot().respawn();
@@ -119,6 +120,8 @@ public class OneHitListener implements Listener {
 
             if (i.equals(HotbarItems.LEAVE_ONEHIT_FIGHTING)) {
                 manager.leave(p);
+            } else if (i.equals(HotbarItems.ONEHIT_GADGET)) {
+                new OneHitGadgetInventory(p);
             }
         }
     }

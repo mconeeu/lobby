@@ -55,7 +55,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
 
     @Override
     public void setStart(Player p, JumpNRun jumpNRun) {
-        if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p)) {
+        if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p) || LobbyPlugin.getInstance().getGungameManager().isFighting(p)) {
             LobbyPlugin.getInstance().getMessenger().send(p, "§4Du darfst im moment keine Jump and Runs spielen, weil du gerade ein Lobbygame spielst!");
             LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "spawn");
             return;
@@ -194,7 +194,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
                 lp.setJumpnrunBestTime(jumpNRun, time < bestTime || bestTime == -1 ? time : bestTime);
                 removePlaying(p);
             } else {
-                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast einen Checkpoint übersprungen und wurdest zu deinem letzten!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast einen Checkpoint übersprungen und wurdest zu deinem letzten Checkpoint telepotiert!");
 
                 if (checkpoint == 0) {
                     p.teleport(jumpNRun.getStartPlateLocation());
@@ -255,6 +255,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
         if (getCurrentlyPlaying() != null) {
             currentlyPlaying.remove(getCurrentlyPlaying(p));
         }
+
     }
 
 }

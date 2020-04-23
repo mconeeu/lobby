@@ -27,7 +27,7 @@ class BankChangeCoins extends CoreInventory {
                 new ItemBuilder(Material.EMERALD, 1, 0)
                         .displayName("§a§l100 Emeralds")
                         .lore(
-                                "§f§n25.000 Coinss§f entsprechen §n100 Emeralds",
+                                "§f§n25.000 Coins§f entsprechen §n100 Emeralds",
                                 "",
                                 "§8» §f§nLinksklick§8 | §7§oBestätigen")
                         .create(), e -> {

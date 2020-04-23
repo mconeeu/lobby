@@ -171,6 +171,16 @@ public class HotbarItems {
 
 
     /*
+    * Gungame
+     */
+
+
+    public static final ItemStack LEAVE_GUNGAME_FIGHTING = new ItemBuilder(Material.IRON_DOOR, 1)
+            .displayName("§4Verlassen")
+            .create();
+
+
+    /*
      * Lobby-PVP ITEMS
      */
 

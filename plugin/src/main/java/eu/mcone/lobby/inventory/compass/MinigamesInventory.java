@@ -142,7 +142,7 @@ public class MinigamesInventory extends CoreInventory {
                                             .create(),
                                     e -> {
                                         if (e.getClick().equals(ClickType.RIGHT)) {
-                                            new ServerInventory(p, Gamemode.SKYPVP);
+                                            new ServerInventory(p, Gamemode.BEDWARS);
                                         } else if (e.getClick().equals(ClickType.LEFT)) {
                                             player.closeInventory();
                                             LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("bedwars");

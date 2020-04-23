@@ -16,7 +16,6 @@ import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.LobbySettings;
 import eu.mcone.lobby.inventory.LobbyInventory;
-import eu.mcone.lobby.inventory.OneHitGadgetInventory;
 import eu.mcone.lobby.inventory.compass.MinigamesInventory;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import org.bukkit.Bukkit;
@@ -65,8 +64,6 @@ public class InventoryTriggerListener implements Listener {
                 }
             } else if (i.equals(HotbarItems.LOBBY_CHANGER)) {
                 new LobbyInventory(p);
-            } else if (i.equals(HotbarItems.ONEHIT_GADGET)) {
-                new OneHitGadgetInventory(p);
             } else if (i.equals(HotbarItems.DEACTIVATE_NICK)) {
                 if (cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
@@ -107,20 +104,17 @@ public class InventoryTriggerListener implements Listener {
         Player player = e.getPlayer().bukkit();
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
         LobbySettings settings = lp.getSettings();
+        if (settings.isRankBoots()) {
+            player.getInventory().setBoots(null);
+        }
+
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
                     LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(player);
                     LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(player);
                     OfficeManager.updateOffice(player);
                 },1);
 
-        e.getPlayer().bukkit().getInventory().setItem(
-                6,
-                new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§a§lNicken §8» §7§oAktiviert").lore("§7§oKlicke zum deaktivieren").create()
-        );
 
-        if (settings.isRankBoots()) {
-            player.getInventory().setBoots(null);
-        }
     }
 
     @EventHandler
@@ -135,10 +129,6 @@ public class InventoryTriggerListener implements Listener {
         OfficeManager.updateOffice(player);
         },1);
 
-        e.getPlayer().bukkit().getInventory().setItem(
-                6,
-                new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§c§lNicken §8» §7§oDeaktiviert").lore("§7§oKlicke zum aktivieren").create()
-        );
         if (settings.isRankBoots()) {
             LobbyPlugin.getInstance().getBackpackManager().setRankBoots(player);
         }
