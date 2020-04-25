@@ -25,14 +25,14 @@ public class InteractionInventory extends CoreInventory {
 
     public InteractionInventory(Player p, Player clicked) {
         super("§8» §3Interaktionsmenü", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
-        CorePlayer c = CoreSystem.getInstance().getCorePlayer(clicked);
-        double onlinetime = Math.floor(((double) c.getOnlinetime() / 60 / 60) * 100) / 100;
+        CorePlayer clickedCorePlayer = CoreSystem.getInstance().getCorePlayer(clicked);
+        double onlinetime = Math.floor(((double) (clickedCorePlayer.isNicked() ? clickedCorePlayer.getNick().getOnlineTime() : clickedCorePlayer.getOnlinetime())  / 60 / 60) * 100) / 100;
 
-        setItem(InventorySlot.ROW_1_SLOT_5, new Skull(clicked.getName(), 1).toItemBuilder().displayName("§f§l" + clicked.getName()).lore(
+        setItem(InventorySlot.ROW_1_SLOT_5, new Skull((clickedCorePlayer.isNicked() ? clickedCorePlayer.getNick().getName() : clicked.getName()), 1).toItemBuilder().displayName("§f§l" + clicked.getName()).lore(
                 CoreSystem.getInstance().getCorePlayer(clicked).getMainGroup().getLabel(),
                 "",
-                "§7Coins: §f" + c.getCoins(),
-                "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + c.getState().getName()
+                "§7Coins: §f" + (clickedCorePlayer.isNicked() ? clickedCorePlayer.getNick().getCoins() : clickedCorePlayer.getCoins()),
+                "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + clickedCorePlayer.getState().getName()
                 ).create()
         );
 
