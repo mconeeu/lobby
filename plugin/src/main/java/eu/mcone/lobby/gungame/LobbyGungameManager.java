@@ -212,5 +212,8 @@ public class LobbyGungameManager implements GungameManager {
 
     public void playerLeaved(Player p) {
         fighting.remove(p);
+        for (Player all : fighting) {
+            CoreSystem.getInstance().getCorePlayer(all).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+        }
     }
 }

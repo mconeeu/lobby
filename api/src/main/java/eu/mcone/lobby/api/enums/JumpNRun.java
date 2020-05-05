@@ -39,9 +39,9 @@ public enum JumpNRun {
             "jumpandrun_townhall_warp", "Bibliothek",
             "jumpandrun_townhall_start",
             /* START */ new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 53, 92, -4),
-            new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 49, 69, -6),
+            new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 78, 61, 10),
             new Location[]{
-                    new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 53, 74, 0),
+                    new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 71, 59, -13),
             }
     );
 

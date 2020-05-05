@@ -66,7 +66,7 @@ public class DoubleJumpListener implements Listener {
 
             Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
                 isJumping.remove(p);
-            }, 12L);
+            }, 16L);
 
             p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 2.0F, 2.0F);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 10);

@@ -50,7 +50,7 @@ public class GungameListener implements Listener {
             k.playSound(k.getLocation(), Sound.LEVEL_UP, 1, 1);
             k.setExp(1);
             p.setExp(1);
-            k.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 40, 2));
+            k.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 50, 3));
             k.setLevel(k.getLevel() + 1);
             manager.updateGungameFightItems(k);
 

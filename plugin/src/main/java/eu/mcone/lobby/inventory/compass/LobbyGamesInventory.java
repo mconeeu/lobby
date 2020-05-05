@@ -31,7 +31,6 @@ public class LobbyGamesInventory extends CoreInventory {
         setItem(InventorySlot.ROW_5_SLOT_2, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
 
         setItem(InventorySlot.ROW_5_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
-        setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
         setItem(InventorySlot.ROW_5_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
 
 
@@ -107,7 +106,7 @@ public class LobbyGamesInventory extends CoreInventory {
 
                             setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.WOOD_AXE, 1, 0)
                                             .displayName("§5Gungame §8| §fLobbygame")
-                                            .lore("§7§oSchlage deine Gegner ins Wasser", "§7§ound werde steige Level auf!", "", "§8» §f§nLinksklick§8 | §7§oSpielen")
+                                            .lore("§7§oSchlage deine Gegner ins Wasser", "§7§ound steige Level auf!", "", "§8» §f§nLinksklick§8 | §7§oSpielen")
                                             .create(),
 
                                     e -> {
@@ -153,6 +152,15 @@ public class LobbyGamesInventory extends CoreInventory {
                                             .create(),
                                     e -> {
                                         new MinigamesInventory(p);
+                                        player.playSound(p.getLocation(), Sound.NOTE_STICKS, 1, 1);
+                                    });
+
+                            setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.EMERALD, 1, 0)
+                                            .displayName("§fEvents")
+                                            .lore("§7§oSpiele ein Community Event", "§7§omit deinen Freunden!", "", "§8» §f§nLinksklick§8 | §7§oÖffnen")
+                                            .create(),
+                                    e -> {
+                                        new EventInventory(p);
                                         player.playSound(p.getLocation(), Sound.NOTE_STICKS, 1, 1);
                                     });
 

@@ -112,6 +112,13 @@ public class NpcListener implements Listener {
                         }
                         return;
                     }
+                    case "edward-cityhall": {
+                        if (!lp.hasLobbyItem(LobbyItem.MAGICDRINK)) {
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fEdward §8|§7 Du hast den Zauber Trank nicht dabei kaufe ihn bei der Zauberin Mandalai und komme dann wieder zurück!");
+                            return;
+                        }
+                        break;
+                    }
                     case "smuggler": {
                         if (lp.hasLobbyItem(LobbyItem.PASS) || lp.getBankprogressId() == BankProgress.SMUGGLER.getId()) {
                             new SmugglerInventory(p);

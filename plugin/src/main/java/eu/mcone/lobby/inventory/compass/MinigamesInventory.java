@@ -37,7 +37,6 @@ public class MinigamesInventory extends CoreInventory {
         setItem(InventorySlot.ROW_5_SLOT_2, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
 
         setItem(InventorySlot.ROW_5_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
-        setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
         setItem(InventorySlot.ROW_5_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
 
 
@@ -234,6 +233,16 @@ public class MinigamesInventory extends CoreInventory {
                                             new LobbyGamesInventory(p);
                                             player.playSound(p.getLocation(), Sound.NOTE_STICKS, 1, 1);
                                         });
+
+                                setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.EMERALD, 1, 0)
+                                                .displayName("§fEvents")
+                                                .lore("§7§oSpiele ein Community Event", "§7§omit deinen Freunden!", "", "§8» §f§nLinksklick§8 | §7§oÖffnen")
+                                                .create(),
+                                        e -> {
+                                            new EventInventory(p);
+                                            player.playSound(p.getLocation(), Sound.NOTE_STICKS, 1, 1);
+                                        });
+                                System.out.println("Emerald set");
 
                                 setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.BOOK, 1, 0)
                                                 .displayName("§fLobby-Orte")
