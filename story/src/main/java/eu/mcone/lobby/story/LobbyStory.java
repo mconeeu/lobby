@@ -62,13 +62,13 @@ public class LobbyStory extends LobbyAddon {
 
         LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").togglePlayerVisibility(ListMode.WHITELIST);
 
-        /*((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("vendor")).playMotionCapture("capture-vendor");
+       /* ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("vendor")).playMotionCapture("capture-vendor");
         ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-welcome")).playMotionCapture("capture-welcome");
         ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-start")).playMotionCapture("capture-start");
         ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("duty")).playMotionCapture("capture-duty");
         ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("salia")).playMotionCapture("capture-salia");
         ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("robert")).playMotionCapture("capture-robert");
-        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-cityhall")).playMotionCapture("capture-cityhall");*/
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-cityhall")).playMotionCapture("capture-cityhall"); */
     }
 
     @Override

@@ -35,6 +35,8 @@ public class CaptainInventory extends CoreInventory {
 
         setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.SAND).displayName("§f§lParadise-Island").lore("§7§oMache Urlaub und entspanne", "§7§oauf der schönen Insel", "§7§omitten im Paradis!").create(), e -> {
 
+            //NORMAL SPAWN NOTHING STORY
+
             if (lp.getProgressId() < Progress.MARVIN_KILL.getId()) {
                 if (p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
                     p.getInventory().remove(p.getItemInHand());
@@ -47,13 +49,37 @@ public class CaptainInventory extends CoreInventory {
                     p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Nimm das Ticket in die Hand, du Fisch Gesicht!");
                 }
                 //TODO: Umändern !!wenn!! Teil 2 eröffnet werden soll!!!!
-                //
-                //  if (lobbyPlayer.getProgressId() == 9) {
-                //   p.sendMessage("§8[§7§l!§8] §fServer §8» §fFunkgerät §8|§7 Bringg Bringgg  Hallo " + p.getName() + "§7 ich sehe das du auf der Insel bist und wollte so mit fragen ob du Sparow gefunden hab? Ich schreib dir einfach in ein paar minuten zurück.");
-                // }
+             //   if (lp.getProgressId() == 9) {
+            //        p.sendMessage("§8[§7§l!§8] §fServer §8» §fFunkgerät §8|§7 Bringg Bringgg  Hallo " + p.getName() + "§7 ich sehe das du auf der Insel bist und wollte somit fragen ob du Sparow gefunden hast? Ich schreib dir einfach in ein paar minuten zurück.");
+           //     }
+
+                // SPAWN CHAPTER 3
+
+            } else if (lp.getProgressId() >= Progress.EDWARD_LABOR_START.getId()) {
+                if (p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
+                    p.getInventory().remove(p.getItemInHand());
+                    lp.removeLobbyItem(LobbyItem.BOAT_PASS);
+                    LobbyWorld.PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn");
+                    p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in Paradise Island");
+                    p.closeInventory();
+                } else {
+                    p.closeInventory();
+                    p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Nimm das Ticket in die Hand, du Fisch Gesicht!");
+                }
+
+                //DESTROY
+
             } else {
-                LobbyWorld.DESTROYED_PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn");
-                p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun im zerstörten Paradise Island");
+                if (p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
+                    p.getInventory().remove(p.getItemInHand());
+                    lp.removeLobbyItem(LobbyItem.BOAT_PASS);
+                    LobbyWorld.DESTROYED_PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn");
+                    p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun im zerstörten Paradise Island");
+                    p.closeInventory();
+                } else {
+                    p.closeInventory();
+                    p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Nimm das Ticket in die Hand, du Fisch Gesicht!");
+                }
             }
 
 

@@ -175,7 +175,7 @@ public class InventoryTriggerListener implements Listener {
 
             if (e.hasItem() && e.getItem().equals(LobbyItem.RADIO_SET1.getItemStack())) {
                 if (lp.getProgressId() == 10) {
-                    p.sendMessage("§8[§7§l!§8] §cFunkgerät §8» §fEdward§8|§7 Du hast mit Sparow geredet richtig und du willst mir bestimmnt mitteilen das Marvin gefangen wurde richtig? Das stimmnt es ist ein riesen kracher in One Island aber am besten besorgst du uns ein paar mehr Informationen und dann funk mich wieder an");
+                    p.sendMessage("§8[§7§l!§8] §cFunkgerät §8» §fEdward§8 |§7 Du hast mit Sparow geredet oder? Und du willst mir bestimmt mitteilen das Marvin gefangen wurde oder? Das stimmt dieser Artikel ist ein riesen Kracher in der One Island Zeitung aber am besten besorgst du uns ein paar mehr Informationen und dann funkst du mich einfach wieder an.");
                 } else {
                     p.sendMessage("§8[§7§l!§8] §cFunkgerät §7» Du hast keine neue Nachricht");
                 }

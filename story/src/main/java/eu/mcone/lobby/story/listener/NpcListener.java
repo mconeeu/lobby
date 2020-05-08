@@ -7,6 +7,7 @@ package eu.mcone.lobby.story.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.npc.NpcInteractEvent;
+import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.coresystem.api.core.player.SkinInfo;
@@ -29,6 +30,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class NpcListener implements Listener {
 
@@ -159,23 +162,26 @@ public class NpcListener implements Listener {
                                     .fadeOut(1)
                                     .send(p);
 
-                            Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () ->
+                            Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () ->
                                     CoreSystem.getInstance().createTitle()
-                                            .title("§3§lTEIL 2 IN ENTWICKLUNG")
-                                            .subTitle(null)
+                                            .title("§3§lTEIL 2")
+                                            .subTitle("§eIN ENTWICKLUNG")
                                             .stay(2)
                                             .fadeIn(1)
                                             .fadeOut(1)
-                                            .send(p), 0L);
+                                            .send(p), 40L);
 
 
-                            Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
-                                CoreSystem.getInstance().createActionBar().message("§3Regie und Entwickelt von DrMarv").send(p);
-                            }, 160);
+                            Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
+                                CoreSystem.getInstance().createActionBar().message("§3Regie und Entwickelt von Marvio").send(p);
+                            }, 40L);
 
 
-                            p.sendMessage("§fDas war Teil 1 der MCONE Story der 2 Teil ist bereits in Planung und auch schon in Entwicklung");
+                            p.sendMessage("§fDas war das erste Kapitel der MCONE Story das 2 Kapitel ist bereits in Planung und auch schon in Entwicklung");
 
+
+                            //TODO CHAPTER 2 TEIL 2
+                            lp.setProgress(Progress.ONEHIT_SWORD);
 
                             if (!lp.hasLobbyItem(LobbyItem.RADIO_SET1)) {
                                 lp.addLobbyItem(LobbyItem.RADIO_SET1);
@@ -212,6 +218,17 @@ public class NpcListener implements Listener {
                         p.sendMessage("§8[§7§l!§8] §cNPC §8» §fKapitän §8|§7 Du bist nun in One Island");
                         break;
                     }
+                    case "marvin": {
+                        if (lp.getProgressId() + 1 == Progress.MARVIN.getId() || lp.getProgressId() == Progress.MARVIN.getId()) {
+                            LobbyWorld.CAVE.getWorld().teleportSilently(p, "spawn");
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 150, 2));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 2));
+
+                            lp.removeLobbyItem(LobbyItem.RADIO_SET1);
+                            lp.removeLobbyItem(LobbyItem.GPS);
+                        }
+                        break;
+                    }
                 }
             } else if (w.equals(LobbyWorld.DESTROYED_PARADISE_ISLAND.getWorld())) {
                 switch (npc.getData().getName()) {
@@ -221,20 +238,33 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "sparow": {
-                        if (lp.getProgressId() > Progress.MARVIN_KILL.getId()) {
+                        if (lp.getProgressId() == Progress.MARVIN_WELCOME.getId()) {
                             if (!lp.hasLobbyItem(LobbyItem.RADIO_SET_2)) {
                                 lp.addLobbyItem(LobbyItem.RADIO_SET_2);
                             }
-                        }
-                        break;
-                    }
 
-                    case "marvin": {
-                        if (lp.getProgressId() + 1 == Progress.MARVIN.getId() || lp.getProgressId() == Progress.MARVIN.getId()) {
-                            LobbyWorld.CAVE.getWorld().teleportSilently(p, "spawn");
+                            CoreSystem.getInstance().createTitle()
+                                    .title("§3§lDAS WAR DIE MCONE STORY")
+                                    .subTitle("§f§lTEIL 2")
+                                    .stay(3)
+                                    .fadeIn(1)
+                                    .fadeOut(1)
+                                    .send(p);
 
-                            lp.removeLobbyItem(LobbyItem.RADIO_SET1);
-                            lp.removeLobbyItem(LobbyItem.GPS);
+                            Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () ->
+                                    CoreSystem.getInstance().createTitle()
+                                            .title("§3§lTEIL 2")
+                                            .subTitle("§eIN ENTWICKLUNG")
+                                            .stay(2)
+                                            .fadeIn(1)
+                                            .fadeOut(1)
+                                            .send(p), 20L);
+
+
+                            Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
+                                CoreSystem.getInstance().createActionBar().message("§3Regie und Entwickelt von Marvio").send(p);
+                                p.sendMessage("§fDas war das 2 Kapitel der MCONE Story das 3 Kapitel ist bereits in Planung!");
+                            }, 20L);
                         }
                         break;
                     }
@@ -242,16 +272,10 @@ public class NpcListener implements Listener {
 
                 }
             } else if (w.equals(LobbyWorld.CAVE.getWorld())) {
-                switch (npc.getData().getName()) {
-                    case "marvin-kill": {
-                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fMarvin §8|§e PENG");
-                        Bukkit.getScheduler().runTaskLater(
-                                LobbyPlugin.getInstance(),
-                                () -> LobbyWorld.DESTROYED_PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn"),
-                                2 * 20
-                        );
-                        return;
-                    }
+                if ("marvin-kill".equals(npc.getData().getName())) {
+                    LobbyWorld.DESTROYED_PARADISE_ISLAND.getWorld().teleportSilently(p, "spawn");
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 180, 2));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 2));
                 }
             } else if (w.equals(LobbyWorld.OFFICE.getWorld())) {
                 switch (npc.getData().getName()) {
@@ -275,17 +299,19 @@ public class NpcListener implements Listener {
                     }
                 }
             }
-
             for (Progress progress : Progress.values()) {
-                if (e.getNpc().getData().getName().equals(progress.getNpcName())) {
+                NPC progressNpc = progress.getWorld().getWorld().getNPC(progress.getNpcName());
+
+                if (e.getNpc().equals(progressNpc)) {
                     p.getWorld().playEffect(e.getNpc().getData().getLocation().bukkit(), Effect.LAVA_POP, 100);
 
+                    p.sendMessage(lp.getProgressId() + "");
                     if (progress.getId() >= lp.getProgressId()) {
                         if (progress.getId() <= lp.getProgressId() + 1) {
-                            p.sendMessage("\n" + progress.getMessage().replaceAll("%%player%%", p.getName()));
+                            // TODO REMOVE THE IF WHEN CHAPTER 2 TEIL 2 OPEN!
+                            if (!lp.hasLobbyItem(LobbyItem.RADIO_SET1)) {
+                                p.sendMessage("\n" + progress.getMessage().replaceAll("%%player%%", p.getName()));
 
-                            // TODO: folgende If Abfrage löschen wenn Teil 2 freigeschaltet werden soll!!
-                            if (!progress.equals(Progress.ONEHIT_SWORD)) {
                                 lp.setProgress(progress);
 
                                 if (progress.getId() > 1) {

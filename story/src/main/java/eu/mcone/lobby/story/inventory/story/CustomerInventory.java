@@ -24,10 +24,12 @@ public class CustomerInventory extends CoreInventory {
                 if ((lp.getCorePlayer().getCoins() - 20) >= 0) {
                     lp.getCorePlayer().removeCoins(20);
                     lp.addLobbyItem(LobbyItem.BOAT_PASS);
-                    if (p.hasPermission("lobby.silenthub")) {
-                        p.getInventory().setItem(3, LobbyItem.BOAT_PASS.getItemStack());
-                    } else {
-                        p.getInventory().setItem(2, LobbyItem.BOAT_PASS.getItemStack());
+                    if (!LobbyPlugin.getInstance().getOneHitManager().isFighting(p) && !LobbyPlugin.getInstance().getCatchManager().isCatching(p)) {
+                        if (p.hasPermission("lobby.silenthub")) {
+                            p.getInventory().setItem(3, LobbyItem.BOAT_PASS.getItemStack());
+                        } else {
+                            p.getInventory().setItem(2, LobbyItem.BOAT_PASS.getItemStack());
+                        }
                     }
                     p.sendMessage("§8[§7§l!§8] §cNPC §8» §fVerkäufer §8|§7 Bitte sehr ihr Ticket");
                 } else {

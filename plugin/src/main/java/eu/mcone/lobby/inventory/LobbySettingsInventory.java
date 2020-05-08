@@ -126,7 +126,6 @@ public class LobbySettingsInventory extends CoreInventory {
             });
         }
 
-        //TODO BUG FIXEN
 
         setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.LEATHER_BOOTS, 1, 0).displayName("§f§lErhalte Rang Schuhe").create());
         if (settings.isRankBoots()) {
