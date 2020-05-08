@@ -15,10 +15,10 @@ public enum LobbyWorld {
     PARADISE_ISLAND("Lobby-ParadiseIsland"),
     CAVE("Lobby-Cave"),
     DESTROYED_PARADISE_ISLAND("Lobby-Destroyed-ParadiseIsland"),
-    GUNGAME("gungame-1");
+    GUNGAME("Lobby-Gungame-1");
 
     @Getter
-    private String name;
+    private final String name;
 
     LobbyWorld(String name) {
         this.name = name;

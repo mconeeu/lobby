@@ -28,11 +28,9 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 
 public class GeneralPlayerListener implements Listener {
-    private Plugin plugin;
 
     @EventHandler
     public void onAFK(AfkEvent e) {
@@ -86,23 +84,13 @@ public class GeneralPlayerListener implements Listener {
     @EventHandler
     public void onPickupItem(PlayerPickupItemEvent e) {
         Player p = e.getPlayer();
-
-        if (p.getGameMode() == GameMode.CREATIVE) {
-            e.setCancelled(false);
-        } else {
-            e.setCancelled(true);
-        }
+        e.setCancelled(p.getGameMode() != GameMode.CREATIVE);
     }
 
     @EventHandler
     public void onDropItem(PlayerDropItemEvent e) {
         Player p = e.getPlayer();
-
-        if (p.getGameMode() == GameMode.CREATIVE) {
-            e.setCancelled(false);
-        } else {
-            e.setCancelled(true);
-        }
+        e.setCancelled(p.getGameMode() != GameMode.CREATIVE);
     }
 
     @EventHandler
