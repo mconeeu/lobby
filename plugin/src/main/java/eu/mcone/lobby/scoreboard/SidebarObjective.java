@@ -5,10 +5,7 @@
 
 package eu.mcone.lobby.scoreboard;
 
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.coresystem.api.bukkit.scoreboard.CoreSidebarObjective;
-import org.bukkit.scoreboard.DisplaySlot;
 
 public class SidebarObjective extends LobbyObjective {
 
@@ -18,7 +15,7 @@ public class SidebarObjective extends LobbyObjective {
 
     @Override
     public void onRegister(CorePlayer player) {
-        setDisplayName("§f§l§n"+player.bukkit().getDisplayName());
+        setDisplayName("§f§l§n"+player.bukkit().getName());
 
         setScore(12, "");
         setScore(11, "§8» §3§lMCONE.EU");
@@ -37,7 +34,7 @@ public class SidebarObjective extends LobbyObjective {
 
     @Override
     public void onReload(CorePlayer player) {
-        setDisplayName("§f§l§n" + player.bukkit().getDisplayName());
+        setDisplayName("§f§l§n" + player.bukkit().getName());
         setScore(6, " §b§o"+ player.getFormattedCoins());
         setScore(3, " §a§o"+ player.getEmeralds());
     }

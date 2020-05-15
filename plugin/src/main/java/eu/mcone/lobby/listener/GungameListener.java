@@ -44,7 +44,7 @@ public class GungameListener implements Listener {
 
         if (manager.isFighting(p) && manager.isFighting(k)) {
             p.setExp(1);
-            LobbyPlugin.getInstance().getMessenger().send(k, "§7Du hast §f" + p.getDisplayName() + " §7getötet §8[§a+2 Coins§8]");
+            LobbyPlugin.getInstance().getMessenger().send(k, "§7Du hast §f" + p.getName() + " §7getötet §8[§a+2 Coins§8]");
             LobbyPlayer lk = LobbyPlugin.getInstance().getLobbyPlayer(k);
             lk.getCorePlayer().addCoins(2);
             k.playSound(k.getLocation(), Sound.LEVEL_UP, 1, 1);
@@ -56,7 +56,7 @@ public class GungameListener implements Listener {
 
             CoreSystem.getInstance().getCorePlayer(k).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
-            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du wurdest von §f" + k.getDisplayName() + " §7getötet!");
+            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du wurdest von §f" + k.getName() + " §7getötet!");
 
         }
 

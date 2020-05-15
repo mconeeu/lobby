@@ -15,11 +15,9 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatListener implements Listener {
 
-
     @EventHandler(priority = EventPriority.LOW)
     public void onChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
-        String message = e.getMessage();
 
         if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
             e.setCancelled(true);
@@ -33,6 +31,5 @@ public class ChatListener implements Listener {
             }
         }
     }
-
 
 }

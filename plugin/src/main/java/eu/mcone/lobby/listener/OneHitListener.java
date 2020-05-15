@@ -51,7 +51,7 @@ public class OneHitListener implements Listener {
                     CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                     player.getLocation().getWorld().playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
                     if (player != p) {
-                        LobbyPlugin.getInstance().getMessenger().send(player, "§7Der Spieler §f" + p.getDisplayName() + " §7hat eine §e" + e.getNewLevel() + "§7er Killstreak!");
+                        LobbyPlugin.getInstance().getMessenger().send(player, "§7Der Spieler §f" + p.getName() + " §7hat eine §e" + e.getNewLevel() + "§7er Killstreak!");
                     } else {
                         LobbyPlugin.getInstance().getMessenger().send(player, "§7Du hast eine §e" + e.getNewLevel() + "er Killstreak!");
                     }
@@ -78,7 +78,7 @@ public class OneHitListener implements Listener {
             if (k == null) {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§cDu bist gestorben");
             } else {
-                LobbyPlugin.getInstance().getMessenger().send(k, "§7Du hast §f" + p.getDisplayName() + " §7getötet §8[§a+2 Coins§8]");
+                LobbyPlugin.getInstance().getMessenger().send(k, "§7Du hast §f" + p.getName() + " §7getötet §8[§a+2 Coins§8]");
                 CoreSystem.getInstance().getCorePlayer(k).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                 CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                 LobbyPlayer lk = LobbyPlugin.getInstance().getLobbyPlayer(k);
@@ -89,7 +89,7 @@ public class OneHitListener implements Listener {
                 p.setExp(1);
                 k.setLevel(k.getLevel() + 1);
 
-                LobbyPlugin.getInstance().getMessenger().send(p, "§7Du wurdest von §f" + k.getDisplayName() + " §7getötet!");
+                LobbyPlugin.getInstance().getMessenger().send(p, "§7Du wurdest von §f" + k.getName() + " §7getötet!");
             }
         }
 
@@ -148,7 +148,9 @@ public class OneHitListener implements Listener {
 
                 if (manager.isFighting(p) && manager.isFighting(k)) {
                     if (
-                            k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.ONEHIT_SWORD) || k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.STORY_ONEHIT_SWORD)) {
+                            k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.ONEHIT_SWORD)
+                                    || k.getItemInHand().hasItemMeta() && k.getItemInHand().equals(HotbarItems.STORY_ONEHIT_SWORD)
+                    ) {
                         p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5, 4500, false, false));
                         p.setHealth(0);
                         e.setCancelled(false);
