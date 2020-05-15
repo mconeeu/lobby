@@ -8,7 +8,7 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.BankProgress;
+import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -30,7 +30,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
         super("§fJohn | Bank-Raub", p, InventorySlot.ROW_6, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
-        if (lp.getBankprogressId() == BankProgress.SMUGGLER.getId()) {
+        if (lp.getBankprogressId() == BankRobberySmallProgress.SMUGGLER.getId()) {
 
             setItem(InventorySlot.ROW_1_SLOT_5, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder()
                     .displayName("§d§lBank-Raub")
@@ -58,7 +58,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
 
         }
 
-        if (lp.getBankprogressId() == BankProgress.CUTTER.getId()) {
+        if (lp.getBankprogressId() == BankRobberySmallProgress.CUTTER.getId()) {
 
             setItem(InventorySlot.ROW_1_SLOT_5, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder()
                     .displayName("§d§lBank-Raub")
@@ -91,7 +91,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
         }
 
 
-        if (lp.getBankprogressId() == BankProgress.SWORD.getId()) {
+        if (lp.getBankprogressId() == BankRobberySmallProgress.SWORD.getId()) {
 
             setItem(InventorySlot.ROW_1_SLOT_5, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder()
                     .displayName("§d§lBank-Raub")
@@ -125,7 +125,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
 
         }
 
-        if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_START.getId()) {
+        if (lp.getBankprogressId() == BankRobberySmallProgress.BANK_ROBBERY_START.getId()) {
             setItem(InventorySlot.ROW_1_SLOT_1, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder()
                     .displayName("§d§lBank-Raub")
                     .lore("§7§oDu Raubst für John die One-Island Bank aus",
@@ -142,7 +142,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
                 if (currentlyInBank == null) {
                     p.closeInventory();
                     p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 So jetzt geht es los begib dich zur Bank. Gehe bis nach hinten durch und öffne die Eisen Tür, du hast nicht lange Zeit!");
-                    lp.setBankProgress(BankProgress.BANK_ROBBERY_MIDDLE);
+                    lp.setBankProgress(BankRobberySmallProgress.BANK_ROBBERY_MIDDLE);
                     LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, true);
 
                     LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "bank-robbery");
@@ -168,7 +168,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
                                             currentlyInBank = null;
                                             p.getInventory().setArmorContents(null);
 
-                                            lp.setBankProgress(BankProgress.BANK_ROBBERY_START);
+                                            lp.setBankProgress(BankRobberySmallProgress.BANK_ROBBERY_START);
                                             if (lp.hasLobbyItem(LobbyItem.GOLD_BARDING)) {
                                                 lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
                                             }

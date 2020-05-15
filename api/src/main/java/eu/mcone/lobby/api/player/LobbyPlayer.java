@@ -8,7 +8,7 @@ package eu.mcone.lobby.api.player;
 import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.BankProgress;
+import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.JumpNRun;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.enums.Progress;
@@ -112,7 +112,7 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
         saveData();
     }
 
-    public void setBankProgress(BankProgress bankprogress) {
+    public void setBankProgress(BankRobberySmallProgress bankprogress) {
         this.bankprogressId = bankprogress.getId();
         saveData();
     }

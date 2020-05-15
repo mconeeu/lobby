@@ -9,6 +9,8 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.api.player.SpawnVillage;
 import eu.mcone.lobby.inventory.ServerInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -17,6 +19,8 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemFlag;
+
+import java.util.Random;
 
 public class MinigamesInventory extends CoreInventory {
 
@@ -93,12 +97,34 @@ public class MinigamesInventory extends CoreInventory {
                             Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
                                 setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.NETHER_STAR, 1, 0)
                                                 .displayName("§f§lSpawn")
-                                                .lore("§7§oZurück zum Lobby Spawn.", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                                .lore("§7§oZurück zum Lobby Spawn.", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren", "§8» §f§nRechtsklick§8 | §7§oZum anderen Dorf telepotieren")
                                                 .create(),
                                         e -> {
                                             player.closeInventory();
-                                            LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("Spawn");
+                                            LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
+                                            if (e.getClick().isRightClick()) {
+                                                if (lobbyPlayer.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("spawn2");
+                                                } else if (lobbyPlayer.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("spawn");
+                                                } else {
+                                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("spawn");
+                                                }
+                                            } else if (e.getClick().isLeftClick()) {
+                                                if (lobbyPlayer.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("spawn");
+                                                } else if (lobbyPlayer.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("spawn2");
+                                                } else {
+                                                    int randomeSpawn = getRandomNumberInRange(1, 3);
+                                                    if (randomeSpawn == 1) {
+                                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("spawn2");
+                                                    } else {
+                                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("spawn");
+                                                    }
+                                                }
+                                            }
                                         });
                             }, 2L);
 
@@ -242,7 +268,6 @@ public class MinigamesInventory extends CoreInventory {
                                             new EventInventory(p);
                                             player.playSound(p.getLocation(), Sound.NOTE_STICKS, 1, 1);
                                         });
-                                System.out.println("Emerald set");
 
                                 setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.BOOK, 1, 0)
                                                 .displayName("§fLobby-Orte")
@@ -262,5 +287,10 @@ public class MinigamesInventory extends CoreInventory {
         }, 2L);
 
 
+    }
+
+    private static int getRandomNumberInRange(int min, int max) {
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
     }
 }

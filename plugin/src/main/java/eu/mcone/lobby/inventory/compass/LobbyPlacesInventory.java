@@ -7,8 +7,10 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.api.player.SpawnVillage;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -120,8 +122,27 @@ public class LobbyPlacesInventory extends CoreInventory {
 
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("smuggler");
+                                    LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
+                                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("smuggler2");
+                                    } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("smuggler");
+                                    } else {
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("smuggler");
+                                    }
 
+                                });
+
+
+                        setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.PAPER, 1, 0)
+                                        .displayName("§f§lCasino")
+                                        .lore("§7§oSpiele Glücksspiele", "§7§ound gewinne das 9x Fache", "§7§odeines Einsatzes", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
+                                        .create(),
+
+                                e -> {
+                                    player.closeInventory();
+                                    LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
+                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("casino");
                                 });
 
 
@@ -131,7 +152,15 @@ public class LobbyPlacesInventory extends CoreInventory {
                                         .create(),
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("merchant");
+
+                                    LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
+                                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("merchant2");
+                                    } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("merchant");
+                                    } else {
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("merchant");
+                                    }
 
                                 });
 
@@ -157,7 +186,14 @@ public class LobbyPlacesInventory extends CoreInventory {
                                         .create(),
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("chest-opening");
+                                    LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
+                                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                                        LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "chest-opening2");
+                                    } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                                        LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "chest-opening");
+                                    } else {
+                                        LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "chest-opening");
+                                    }
 
                                 });
 
@@ -168,7 +204,14 @@ public class LobbyPlacesInventory extends CoreInventory {
 
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("bank");
+                                    LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
+                                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("bank2");
+                                    } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("bank");
+                                    } else {
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("bank2");
+                                    }
 
                                 });
                         setItem(InventorySlot.ROW_1_SLOT_8, new ItemBuilder(Material.REDSTONE, 1, 0)

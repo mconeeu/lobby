@@ -10,7 +10,7 @@ import eu.mcone.coresystem.api.core.player.PlayerState;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.BankProgress;
+import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -48,8 +48,8 @@ public class GeneralPlayerListener implements Listener {
             }
         }
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().getUniqueId());
-        if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
-            lp.setBankProgress(BankProgress.BANK_ROBBERY_START);
+        if (lp.getBankprogressId() == BankRobberySmallProgress.BANK_ROBBERY_MIDDLE.getId()) {
+            lp.setBankProgress(BankRobberySmallProgress.BANK_ROBBERY_START);
             LobbyPlugin.getInstance().getMessenger().send(p, "§4Der Banküberfall ist gescheitert!");
             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "office-entrance");
             JohnBankRobberyInventory.currentlyInBank = null;
@@ -140,8 +140,8 @@ public class GeneralPlayerListener implements Listener {
 
         }
 
-        if (lp.getBankprogressId() == BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
-            lp.setBankProgress(BankProgress.BANK_ROBBERY_START);
+        if (lp.getBankprogressId() == BankRobberySmallProgress.BANK_ROBBERY_MIDDLE.getId()) {
+            lp.setBankProgress(BankRobberySmallProgress.BANK_ROBBERY_START);
             JohnBankRobberyInventory.currentlyInBank = null;
             lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
         }

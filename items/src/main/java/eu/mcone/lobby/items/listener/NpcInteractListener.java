@@ -10,6 +10,7 @@ import eu.mcone.gameapi.api.backpack.defaults.DefaultCategory;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.items.casino.CasinoMainInventory;
 import eu.mcone.lobby.items.inventory.bank.BankCreateCardInventory;
 import eu.mcone.lobby.items.inventory.bank.BankMenInventory;
 import eu.mcone.lobby.items.inventory.office.ChauffeurInventory;
@@ -34,10 +35,10 @@ public class NpcInteractListener implements Listener {
         if (e.getNpc().getData().getType().equals(EntityType.PLAYER) && e.getAction().equals(PacketPlayInUseEntity.EnumEntityUseAction.INTERACT)) {
             String npcName = e.getNpc().getData().getName();
 
-            if (npcName.equalsIgnoreCase(StoryNPC.MERCHANT.getNpcName())
+            if (npcName.equalsIgnoreCase(StoryNPC.MERCHANT.getNpcName()) || npcName.equalsIgnoreCase(StoryNPC.MERCHANT2.getNpcName())
                     || npcName.equalsIgnoreCase(StoryNPC.OFFICE_TRADER.getNpcName())) {
                 new TraderInventory(p);
-            } else if (npcName.equalsIgnoreCase(StoryNPC.BANKMAN.getNpcName())) {
+            } else if (npcName.equalsIgnoreCase(StoryNPC.BANKMAN.getNpcName()) || npcName.equalsIgnoreCase(StoryNPC.BANKMAN2.getNpcName())) {
                 if (!lp.hasLobbyItem(LobbyItem.BANKCARD) && !lp.hasLobbyItem(LobbyItem.BANKCARD_PREMIUM)) {
                     new BankCreateCardInventory(p);
                 } else {
@@ -57,13 +58,18 @@ public class NpcInteractListener implements Listener {
                 new ChauffeurInventory(p);
             } else if (npcName.equalsIgnoreCase(StoryNPC.VENDOR.getNpcName())) {
                 LobbyPlugin.getInstance().getBackpackManager().openBackpackSellInventory(DefaultCategory.PET.name(), p);
+            } else if (npcName.equalsIgnoreCase(StoryNPC.CASINO.getNpcName())) {
+                new CasinoMainInventory(p);
             }
         }
     }
 
     public enum StoryNPC {
+        CASINO("casino"),
         MERCHANT("merchant"),
+        MERCHANT2("merchant2"),
         BANKMAN("bankman"),
+        BANKMAN2("bankman-central"),
         OFFICE_TRADER("officeTrader"),
         OFFICE_SELLER("officeSeller"),
         OFFICE_PAGE("officePage"),

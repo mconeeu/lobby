@@ -4,7 +4,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.BankProgress;
+import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Bukkit;
@@ -19,7 +19,7 @@ public class SwordInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_5, LobbyItem.IRON_SWORD.getItemStack(), e -> {
             if (!lp.hasLobbyItem(LobbyItem.IRON_SWORD)) {
                 lp.addLobbyItem(LobbyItem.IRON_SWORD);
-                lp.setBankProgress(BankProgress.BANK_ROBBERY_START);
+                lp.setBankProgress(BankRobberySmallProgress.BANK_ROBBERY_START);
                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
                     p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Endlich hast du das Schwert jetzt komm schnell zurück ins Büro damit wir denn Bankraub starten können!");
                 }, 20L);

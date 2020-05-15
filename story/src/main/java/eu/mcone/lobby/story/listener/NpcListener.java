@@ -10,10 +10,11 @@ import eu.mcone.coresystem.api.bukkit.event.npc.NpcInteractEvent;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
+import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.coresystem.api.core.player.SkinInfo;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.BankProgress;
+import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -56,6 +57,7 @@ public class NpcListener implements Listener {
                         new CorpseInventory(p);
                     }
                     case "robert": {
+                        npc.playLabymodEmote(LabyModEmote.SALUTE, p);
                         if (lp.getProgressId() >= Progress.SALIA.getId() && !lp.hasLobbyItem(LobbyItem.MAGICWAND)) {
                             if (!lp.hasLobbyItem(LobbyItem.MAGICWAND)) {
                                 lp.addLobbyItem(LobbyItem.MAGICWAND);
@@ -68,12 +70,13 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "cutter": {
-                        if (lp.getBankprogressId() == BankProgress.CUTTER.getId()) {
+                        npc.playLabymodEmote(LabyModEmote.BOW_DOWN, p);
+                        if (lp.getBankprogressId() == BankRobberySmallProgress.CUTTER.getId()) {
                             if (lp.hasLobbyItem(LobbyItem.WHITE_WOOL)) {
 
                                 lp.removeLobbyItem(LobbyItem.WHITE_WOOL);
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Perfekt die Wolle war es. Hier bitte das bestellte Outfit!");
-                                lp.setBankProgress(BankProgress.SWORD);
+                                lp.setBankProgress(BankRobberySmallProgress.SWORD);
                                 p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Ok du hast das Packet komm zurück ins Büro damit wir die Letzte Mission besprechen können!");
                                 lp.addLobbyItem(LobbyItem.BANK_OUTFIT);
                             } else {
@@ -122,8 +125,9 @@ public class NpcListener implements Listener {
                         }
                         break;
                     }
-                    case "smuggler": {
-                        if (lp.hasLobbyItem(LobbyItem.PASS) || lp.getBankprogressId() == BankProgress.SMUGGLER.getId()) {
+                    case "smuggler":
+                    case "smuggler2": {
+                        if (lp.hasLobbyItem(LobbyItem.PASS) || lp.getBankprogressId() == BankRobberySmallProgress.SMUGGLER.getId()) {
                             new SmugglerInventory(p);
                         } else {
                             p.sendMessage("§8[§7§l!§8] §cNPC §8» §fSchmugler §8|§7 Ich handel nur mit Leuten die ich kenne hol dir ein Ausweis!");
@@ -283,11 +287,11 @@ public class NpcListener implements Listener {
                     case "John2":
                     case "John3": {
                         if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE) || lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER) || lp.hasLobbyItem(LobbyItem.OFFICE_CARD_GOLD)) {
-                            if (lp.getBankprogressId() >= BankProgress.SMUGGLER.getId()) {
+                            if (lp.getBankprogressId() >= BankRobberySmallProgress.SMUGGLER.getId()) {
                                 new JohnBankRobberyInventory(p);
                             } else {
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + " schönes Büro aber leider gehört es bis jetzt noch mir aber du kannst etwas für mich erledigen wo du das Büro und ein paar Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
-                                lp.setBankProgress(BankProgress.SMUGGLER);
+                                lp.setBankProgress(BankRobberySmallProgress.SMUGGLER);
                                 new JohnBankRobberyInventory(p);
                                 lp.addLobbyItem(LobbyItem.BUTTON);
                             }
@@ -304,8 +308,8 @@ public class NpcListener implements Listener {
 
                 if (e.getNpc().equals(progressNpc)) {
                     p.getWorld().playEffect(e.getNpc().getData().getLocation().bukkit(), Effect.LAVA_POP, 100);
+                    npc.playLabymodEmote(LabyModEmote.HELLO, p);
 
-                    p.sendMessage(lp.getProgressId() + "");
                     if (progress.getId() >= lp.getProgressId()) {
                         if (progress.getId() <= lp.getProgressId() + 1) {
                             // TODO REMOVE THE IF WHEN CHAPTER 2 TEIL 2 OPEN!
@@ -322,6 +326,8 @@ public class NpcListener implements Listener {
                                 if (future != null) {
                                     future.getNpc().toggleVisibility(p, true);
                                 }
+                            } else {
+                                p.sendMessage("§8§l[§7§l!§8§l] §fLobby §8 » §7Teil 2 in Entwicklung!");
                             }
                         } else {
                             p.sendMessage("§8§l[§7§l!§8§l] §fLobby §8 » §7Du bist noch nicht so weit!");

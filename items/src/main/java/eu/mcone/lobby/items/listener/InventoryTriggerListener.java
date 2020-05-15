@@ -30,7 +30,7 @@ public class InventoryTriggerListener implements Listener {
 
                 switch (clicked) {
                     case ENDER_PORTAL_FRAME: {
-                        if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("chestopening").equals(e.getClickedBlock().getLocation())) {
+                        if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("chestopening").equals(e.getClickedBlock().getLocation()) || LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("chestopening2").equals(e.getClickedBlock().getLocation())) {
                             new ChestOpeningInventory(p);
                             return;
                         }

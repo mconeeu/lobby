@@ -49,6 +49,8 @@ public class InventoryTriggerListener implements Listener {
             } else if (i.equals(HotbarItems.SHOW_PLAYERS)) {
                 e.setCancelled(true);
                 LobbyPlugin.getInstance().getPlayerHiderManager().showPlayers(p);
+            } else if (i.equals(HotbarItems.SETTING_HIDER)) {
+                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast alle Spieler über eine Lobby Einstellung ausgeschaltet!");
             } else if (i.equals(HotbarItems.COMPASS)) {
                 e.setCancelled(true);
                 new MinigamesInventory(p);
@@ -109,10 +111,10 @@ public class InventoryTriggerListener implements Listener {
         }
 
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                    LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(player);
-                    LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(player);
-                    OfficeManager.updateOffice(player);
-                },1);
+            LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(player);
+            LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(player);
+            OfficeManager.updateOffice(player);
+        }, 1);
 
 
     }
@@ -124,10 +126,10 @@ public class InventoryTriggerListener implements Listener {
         LobbySettings settings = lp.getSettings();
 
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-        LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(player);
-        LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(player);
-        OfficeManager.updateOffice(player);
-        },1);
+            LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(player);
+            LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(player);
+            OfficeManager.updateOffice(player);
+        }, 1);
 
         if (settings.isRankBoots()) {
             LobbyPlugin.getInstance().getBackpackManager().setRankBoots(player);

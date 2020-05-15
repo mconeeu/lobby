@@ -87,11 +87,14 @@ public class LobbyItems extends LobbyAddon {
                 new OfficeCMD());
 
         final Location rewardBlock = new Location(Bukkit.getWorld("Lobby-OneIsland"), 46.5, 102D, -33.5);
+        final Location rewardBlock2 = new Location(Bukkit.getWorld("Lobby-OneIsland"), -25.5, 100.8D, -113.4);
         Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
             for (int i = 0; i < 6; i++) {
                 Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
+                Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock2, Effect.LAVA_POP, 20);
             }
         }, 24, 24);
+
 
         reload();
     }

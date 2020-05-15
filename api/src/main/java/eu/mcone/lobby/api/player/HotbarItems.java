@@ -42,6 +42,10 @@ public class HotbarItems {
      * LobbyHider
      */
 
+    public static final ItemStack SETTING_HIDER = new ItemBuilder(Material.INK_SACK, 1, 8)
+            .displayName("§3§lSpieler Verstecken §8» §7§oAlle Spieler deaktivert")
+            .create();
+
     public static final ItemStack HIDE_PLAYERS = new ItemBuilder(Material.INK_SACK, 1, 10)
             .displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus")
             .create();
@@ -171,7 +175,7 @@ public class HotbarItems {
 
 
     /*
-    * Gungame
+     * Gungame
      */
 
 

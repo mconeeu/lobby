@@ -1,9 +1,9 @@
-package eu.mcone.lobby.api.enums;
+package eu.mcone.lobby.api.enums.bank;
 
 import lombok.Getter;
 
 @Getter
-public enum BankProgress {
+public enum BankRobberySmallProgress {
 
     SMUGGLER(1, "Schmuggler"),
     CUTTER(2,"Schneider"),
@@ -15,13 +15,13 @@ public enum BankProgress {
     private int id;
     private String name;
 
-    BankProgress(int id, String name){
+    BankRobberySmallProgress(int id, String name){
         this.id = id;
         this.name = name;
     }
 
-    public static BankProgress getProgressByID(int id) {
-        for (BankProgress bankprogress : values()) {
+    public static BankRobberySmallProgress getProgressByID(int id) {
+        for (BankRobberySmallProgress bankprogress : values()) {
             if (bankprogress.getId() == id) {
                 return bankprogress;
             }

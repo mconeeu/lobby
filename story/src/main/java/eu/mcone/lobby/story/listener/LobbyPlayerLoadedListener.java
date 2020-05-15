@@ -7,7 +7,7 @@ package eu.mcone.lobby.story.listener;
 
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.BankProgress;
+import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -48,7 +48,7 @@ public class LobbyPlayerLoadedListener implements Listener {
             }
         }
 
-        if (lp.getBankprogressId() != BankProgress.BANK_ROBBERY_MIDDLE.getId()) {
+        if (lp.getBankprogressId() != BankRobberySmallProgress.BANK_ROBBERY_MIDDLE.getId()) {
             LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, false);
         }
     }
