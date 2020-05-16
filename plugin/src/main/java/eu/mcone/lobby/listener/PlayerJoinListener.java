@@ -191,6 +191,9 @@ public class PlayerJoinListener implements Listener {
             p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
         }
 
+        if (p.hasPermission("system.bungee.nick")) {
+            p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItems.DEACTIVATE_NICK : HotbarItems.ACTIVATE_NICK);
+        }
 
         p.getInventory().setItem(7, HotbarItems.BACKPACK);
 
