@@ -24,9 +24,9 @@ public class CasinoMainInventory extends CoreInventory {
                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                     if (NumbersChooseInventory.isInGame.contains(p)) {
                         LobbyPlugin.getInstance().getMessenger().send(p, "§4Dein Casino Spiel wurde abgebrochen, weil du zu lange gebraucht hast deine Coins wurden nicht abgebucht!");
-                        NumbersChooseInventory.isInGame.remove(p);
                         player.closeInventory();
                     }
+                    NumbersChooseInventory.isInGame.remove(p);
                     NumbersChooseInventory.Game.remove(p);
                     NumbersChooseInventory.chooseMoney.remove(p);
                 }, 200);

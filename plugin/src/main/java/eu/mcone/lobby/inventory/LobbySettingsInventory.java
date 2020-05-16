@@ -36,11 +36,11 @@ public class LobbySettingsInventory extends CoreInventory {
                         break;
                     }
                     case SILENTLOBBY: {
-                        settings.setSpawnType(SpawnType.PLAYERHIDER_DEATIVE);
+                        settings.setSpawnType(SpawnType.PLAYERHIDER);
                         setSettings(p, lp);
                         break;
                     }
-                    case PLAYERHIDER_DEATIVE: {
+                    case PLAYERHIDER: {
                         settings.setSpawnType(SpawnType.NONE);
                         setSettings(p, lp);
                         break;
@@ -49,11 +49,11 @@ public class LobbySettingsInventory extends CoreInventory {
             } else {
                 switch (settings.getSpawnType()) {
                     case NONE: {
-                        settings.setSpawnType(SpawnType.PLAYERHIDER_DEATIVE);
+                        settings.setSpawnType(SpawnType.PLAYERHIDER);
                         setSettings(p, lp);
                         break;
                     }
-                    case PLAYERHIDER_DEATIVE: {
+                    case PLAYERHIDER: {
                         settings.setSpawnType(SpawnType.NONE);
                         setSettings(p, lp);
                         break;

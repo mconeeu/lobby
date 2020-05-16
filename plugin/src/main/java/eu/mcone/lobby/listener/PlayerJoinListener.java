@@ -89,8 +89,12 @@ public class PlayerJoinListener implements Listener {
             if (p.hasPermission("lobby.silenthub") && lp.getSettings().getSpawnType().equals(SpawnType.SILENTLOBBY)) {
                 e.setHidden(true);
                 LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
-            } else if (lp.getSettings().isPlayerHider()) {
+            } else if (lp.getSettings().getSpawnType().equals(SpawnType.PLAYERHIDER)) {
                 LobbyPlugin.getInstance().getPlayerHiderManager().hidePlayers(p);
+            }
+
+            if (p.hasPermission("system.bungee.nick")) {
+                p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItems.DEACTIVATE_NICK : HotbarItems.ACTIVATE_NICK);
             }
 
             switch (lp.getSettings().getSpawnPoint()) {
@@ -187,10 +191,6 @@ public class PlayerJoinListener implements Listener {
             p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
         }
 
-
-        if (p.hasPermission("system.bungee.nick")) {
-            p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItems.DEACTIVATE_NICK : HotbarItems.ACTIVATE_NICK);
-        }
 
         p.getInventory().setItem(7, HotbarItems.BACKPACK);
 
