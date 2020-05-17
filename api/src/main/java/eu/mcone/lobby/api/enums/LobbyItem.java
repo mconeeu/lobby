@@ -30,14 +30,28 @@ public enum LobbyItem {
     OFFICE_CARD_SILVER(11, "Büro Karte", LobbyCategory.STORY_ITEMS, Level.LEGENDARY, 0, 0, new ItemBuilder(Material.PAPER, 1, 0).displayName("§6§lBüro Karte").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§7Ihre Büro SchlüsselKarte").create()),
     OFFICE_CARD_GOLD(12, "Büro Karte", LobbyCategory.STORY_ITEMS, Level.LEGENDARY, 0, 0, new ItemBuilder(Material.PAPER, 1, 0).displayName("§6§lBüro Karte").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§7Ihre Büro SchlüsselKarte").create()),
 
+    //BANK GENERAL
+    BUTTON(13, "Knopf im Ohr", LobbyCategory.STORY_ITEMS, Level.LEGENDARY, 0, 0, new ItemBuilder(Material.STONE_BUTTON, 1, 0).displayName("§6§lKnopf im Ohr").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§7Verbunden mit John").create()),
+
     //bank robbery
-    GOLD_BARDING(13, "Gold Barren", LobbyCategory.STORY_ITEMS, Level.LEGENDARY, 0, 0, new ItemBuilder(Material.GOLD_INGOT, 58).displayName("§6§lGold Barren").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§724 Karat Barren").create()),
-    BUTTON(14, "Knopf im Ohr", LobbyCategory.STORY_ITEMS, Level.LEGENDARY, 0, 0, new ItemBuilder(Material.STONE_BUTTON, 1, 0).displayName("§6§lKnopf im Ohr").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§7Verbunden mit John").create()),
-    BANK_MAP(15, "Bank Plan", LobbyCategory.STORY_ITEMS, Level.LEGENDARY, 0, 0, new ItemBuilder(Material.EMPTY_MAP, 1, 0).displayName("§6§lPlan der Bank").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§7Ach dahinten ist der Tresor").create()),
+    BANK_MAP(14, "Bank Plan", LobbyCategory.STORY_ITEMS, Level.LEGENDARY, 0, 0, new ItemBuilder(Material.EMPTY_MAP, 1, 0).displayName("§6§lPlan der Bank").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§7Ach dahinten ist der Tresor").create()),
+    GOLD_BARDING(15, "Gold Barren", LobbyCategory.STORY_ITEMS, Level.LEGENDARY, 0, 0, new ItemBuilder(Material.GOLD_INGOT, 58).displayName("§6§lGold Barren").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§724 Karat Barren").create()),
     WHITE_WOOL(16, "Bank Plan", LobbyCategory.STORY_ITEMS, Level.UNUSUAL, 0, 0, new ItemBuilder(Material.WOOL, 37, 0).displayName("§3§lWeiße Wolle").lore("§7Kategorie: §bItem", "§7Seltenheit: §3Ungewöhnlich", "", "§7Zum nähen geeignet").create()),
     BANK_OUTFIT(17, "Bank Outfit", LobbyCategory.STORY_ITEMS, Level.UNUSUAL, 0, 0, new ItemBuilder(Material.CHEST, 1, 0).displayName("§3§lBank Outfit im Packet").lore("§7Kategorie: §bItem / Outfit", "§7Seltenheit: §3Ungewöhnlich", "", "§7Sehe aus wie ein Bänker").create()),
     GOLD_NUGGET(18, "Gold Münze", LobbyCategory.STORY_ITEMS, Level.MYSTICAL, 0, 0, new ItemBuilder(Material.GOLD_NUGGET, 1, 0).displayName("§c§lGold Münze").lore("§7Kategorie: §bItem", "§7Seltenheit: §cMythisch", "", "§7Ein kleines Geschenk von John").create()),
     IRON_SWORD(19, "Eisen Schwert", LobbyCategory.STORY_ITEMS, Level.UNUSUAL, 0, 0, new ItemBuilder(Material.IRON_SWORD, 1, 0).displayName("§3§lEisen Schwert").lore("§7Kategorie: §bSchwerter", "§7Seltenheit: §3Ungewöhnlich", "§7Mit dem Eisen Schwert in die Bank!").create()),
+
+    //bank robbery central
+    HACKER_TERMINAL_LOW(20, "Hacker Terminal", LobbyCategory.STORY_ITEMS, Level.EPIC, 0, 0, new ItemBuilder(Material.IRON_TRAPDOOR, 1).displayName("§5§lHacker Terminal").lore("§7Kategorie: §bItem", "§7Seltenheit: §5Episch", "", "§7Dü Dü alles gehackt").create()),
+    HACKER_TERMINAL_HIGH(21, "Hacker Terminal", LobbyCategory.STORY_ITEMS, Level.EPIC, 0, 0, new ItemBuilder(Material.IRON_TRAPDOOR, 1).displayName("§5§lHacker Terminal").lore("§7Kategorie: §bItem", "§7Seltenheit: §5Episch", "", "§7Dü Dü alles gehackt").create()),
+    CENTRAL_BANK_MAP(22, "Plan der Central Bank", LobbyCategory.STORY_ITEMS, Level.LEGENDARY, 0, 0, new ItemBuilder(Material.EMPTY_MAP, 1, 0).displayName("§6§lPlan der Central Bank").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§7Ah da geht es rein!").create()),
+    DIAMOND_BANK_SWORD(23, "Diamanten Schwert", LobbyCategory.STORY_ITEMS, Level.EPIC, 0, 0, new ItemBuilder(Material.DIAMOND_SWORD, 1, 0).displayName("§5§lDiamantschwer Schwert").lore("§7Kategorie: §bSchwerter", "§7Seltenheit: §5Episch", "", "§7Gut zum erpressen!").create()),
+
+    WORKER_FILE_1(24, "Mitarbeiter Daten", LobbyCategory.STORY_ITEMS, Level.EPIC, 0, 0, new ItemBuilder(Material.BOOK, 1, 0).displayName("§5§lMitarbeiter Akten").lore("§7Kategorie: §bAkten", "§7Seltenheit: §5Episch", "", "§7Der Mitarbeiter Schmid!").create()),
+    NORMAL_FILES_1(25, "Bank Daten1", LobbyCategory.STORY_ITEMS, Level.EPIC, 0, 0, new ItemBuilder(Material.BOOK, 1, 0).displayName("§5§lBank Akten").lore("§7Kategorie: §bAkten", "§7Seltenheit: §5Episch", "", "§7Super für die Polizei!").create()),
+    NORMAL_FILES_2(26, "Bank Daten2", LobbyCategory.STORY_ITEMS, Level.EPIC, 0, 0, new ItemBuilder(Material.BOOK, 1, 0).displayName("§5§lBank Schlüssel Akten").lore("§7Kategorie: §bAkten", "§7Seltenheit: §5Episch", "", "§7Zu viele Passwörter!").create()),
+    NORMAL_FILES_3(27, "Bank Daten3", LobbyCategory.STORY_ITEMS, Level.EPIC, 0, 0, new ItemBuilder(Material.BOOK, 1, 0).displayName("§5§lGeld Tresor Akten").lore("§7Kategorie: §bAkten", "§7Seltenheit: §5Episch", "", "§7Ich mache Minus oder Plus").create()),
+
 
     //Armor
     IRON_HEAD(0, "eisenhelm", LobbyCategory.ARMOR, Level.UNUSUAL, 0, 0, new ItemBuilder(Material.IRON_HELMET, 1, 0).displayName("§3§lEisen Helm").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§72 Eisen", "§7Mit dem Eisen Helm in den Krieg").create()),

@@ -17,7 +17,7 @@ import lombok.ToString;
 public class LobbySettings {
 
     private boolean allowTrading = true, allowAnimation = true, realTime = true,
-            RankBoots = true, InventoryAnimation = true,
+            RankBoots = true, InventoryAnimation = true, isStacking = true,
             HotbarChangeSound = true;
     private SpawnPoint spawnPoint = SpawnPoint.SPAWN;
     private SpawnVillage spawnVillage = SpawnVillage.RANDOME;

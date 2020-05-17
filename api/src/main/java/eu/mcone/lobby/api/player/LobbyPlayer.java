@@ -12,6 +12,7 @@ import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.JumpNRun;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.enums.Progress;
+import eu.mcone.lobby.api.enums.bank.central.BankProgress;
 import eu.mcone.lobby.api.gang.Gang;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +32,7 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
     @Setter
     private Gang gang;
     @Getter
-    private int chests, progressId, bankprogressId;
+    private int chests, progressId, bankprogressId, centralbankprogressId;
     @Getter
     @Setter
     private LobbySettings settings;
@@ -52,6 +53,7 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
         this.chests = profile.getChests();
         this.progressId = profile.getProgressId();
         this.bankprogressId = profile.getBankprogressId();
+        this.centralbankprogressId = profile.getCentralbankprogressId();
         this.settings = profile.getSettings();
         this.secrets = profile.getSecrets();
         this.jumpnruns = profile.getJumpnrunSet();
@@ -66,7 +68,7 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
 
     @Override
     public void saveData() {
-        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, bankprogressId, settings, secrets, jumpnruns));
+        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, bankprogressId, centralbankprogressId, settings, secrets, jumpnruns));
     }
 
     public boolean isInGang() {
@@ -114,6 +116,11 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
 
     public void setBankProgress(BankRobberySmallProgress bankprogress) {
         this.bankprogressId = bankprogress.getId();
+        saveData();
+    }
+
+    public void setCentralBankProgress(BankProgress bankprogress) {
+        this.centralbankprogressId = bankprogress.getId();
         saveData();
     }
 

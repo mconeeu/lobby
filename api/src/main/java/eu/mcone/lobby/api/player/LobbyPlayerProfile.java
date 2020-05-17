@@ -20,18 +20,19 @@ import java.util.Map;
 @Setter
 public class LobbyPlayerProfile extends GameProfile {
 
-    private int chests, progressId, bankprogressId;
+    private int chests, progressId, bankprogressId, centralbankprogressId;
     private LobbySettings settings = new LobbySettings();
     private Map<String, Long> secrets = new HashMap<>(), jumpnruns = new HashMap<>();
 
     private transient Map<JumpNRun, Long> jumpnrunSet = new HashMap<>();
 
-    LobbyPlayerProfile(Player p, int chests, int progressId, int bankprogressId, LobbySettings settings, Map<String, Long> secrets, Map<JumpNRun, Long> jumpnruns) {
+    LobbyPlayerProfile(Player p, int chests, int progressId, int bankprogressId, int centralbankprogressId, LobbySettings settings, Map<String, Long> secrets, Map<JumpNRun, Long> jumpnruns) {
         super(p);
 
         this.chests = chests;
         this.progressId = progressId;
         this.bankprogressId = bankprogressId;
+        this.centralbankprogressId = centralbankprogressId;
         this.settings = settings;
         this.secrets = secrets;
 

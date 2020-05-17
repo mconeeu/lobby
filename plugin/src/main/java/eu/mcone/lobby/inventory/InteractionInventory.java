@@ -12,6 +12,9 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.api.player.LobbySettings;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -26,7 +29,7 @@ public class InteractionInventory extends CoreInventory {
     public InteractionInventory(Player p, Player clicked) {
         super("§8» §3Interaktionsmenü", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         CorePlayer clickedCorePlayer = CoreSystem.getInstance().getCorePlayer(clicked);
-        double onlinetime = Math.floor(((double) (clickedCorePlayer.isNicked() ? clickedCorePlayer.getNick().getOnlineTime() : clickedCorePlayer.getOnlinetime())  / 60 / 60) * 100) / 100;
+        double onlinetime = Math.floor(((double) (clickedCorePlayer.isNicked() ? clickedCorePlayer.getNick().getOnlineTime() : clickedCorePlayer.getOnlinetime()) / 60 / 60) * 100) / 100;
 
         setItem(InventorySlot.ROW_1_SLOT_5, new Skull((clickedCorePlayer.isNicked() ? clickedCorePlayer.getNick().getName() : clicked.getName()), 1).toItemBuilder().displayName("§f§l" + clicked.getName()).lore(
                 CoreSystem.getInstance().getCorePlayer(clicked).getMainGroup().getLabel(),
@@ -36,7 +39,7 @@ public class InteractionInventory extends CoreInventory {
                 ).create()
         );
 
-        setItem(InventorySlot.ROW_3_SLOT_3, Skull.fromUrl("http://textures.minecraft.net/texture/6f74f58f541342393b3b16787dd051dfacec8cb5cd3229c61e5f73d63947ad", 1).toItemBuilder().displayName("§7Online-Profil Ansehen").create(), e -> {
+        setItem(InventorySlot.ROW_3_SLOT_2, Skull.fromUrl("http://textures.minecraft.net/texture/6f74f58f541342393b3b16787dd051dfacec8cb5cd3229c61e5f73d63947ad", 1).toItemBuilder().displayName("§7Online-Profil Ansehen").create(), e -> {
             TextComponent tc0 = new TextComponent(TextComponent.fromLegacyText(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§2Das Profil von " + clicked.getName() + " findest du "));
 
             TextComponent tc = new TextComponent();
@@ -56,18 +59,35 @@ public class InteractionInventory extends CoreInventory {
             }
 
             if (isFriend) {
-                setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.BARRIER, 1, 0).displayName("§cFreund entfernen").create(), e -> {
+                setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.BARRIER, 1, 0).displayName("§cFreund entfernen").create(), e -> {
                     p.closeInventory();
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "friend remove " + clicked.getName());
                 });
             } else {
-                setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.SKULL_ITEM, 1, 3).displayName("§7Freund hinzufügen").create(), e -> {
+                setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.SKULL_ITEM, 1, 3).displayName("§7Freund hinzufügen").create(), e -> {
                     p.closeInventory();
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "friend add " + clicked.getName());
                 });
             }
 
-            setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.CAKE, 1, 0).displayName("§7In §5Party §7einladen").create(), e -> {
+            setItem(InventorySlot.ROW_3_SLOT_6, new ItemBuilder(Material.LEATHER_HELMET, 1, 0).displayName("§fTragen").create(), e -> {
+                p.closeInventory();
+
+                LobbyPlayer lc = LobbyPlugin.getInstance().getLobbyPlayer(clicked);
+                LobbySettings settings = lc.getSettings();
+
+                if (settings.isStacking()) {
+                    p.setPassenger(lc.bukkit());
+                    CoreSystem.getInstance().createActionBar()
+                            .message("§f§oBenutze LSHIFT um auszusteigen")
+                            .send(lc.bukkit());
+                    LobbyPlugin.getInstance().getMessenger().send(lc.bukkit(), "§aDu wirst nun von §3" + p.getName() + "§a getragen.");
+                } else {
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§4Der §cSpieler §4hat diese §cFunktion§4 ausgeschaltet!");
+                }
+            });
+
+            setItem(InventorySlot.ROW_3_SLOT_8, new ItemBuilder(Material.CAKE, 1, 0).displayName("§7In §5Party §7einladen").create(), e -> {
                 p.closeInventory();
                 CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "party invite " + clicked.getName());
             });

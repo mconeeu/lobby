@@ -26,8 +26,8 @@ public class LobbySettingsInventory extends CoreInventory {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
         LobbySettings settings = lp.getSettings();
 
-        setItem(InventorySlot.ROW_4_SLOT_5, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§f§lJoinTyp").create());
-        setItem(InventorySlot.ROW_5_SLOT_5, settings.getSpawnType().getItem().create(), e -> {
+        setItem(InventorySlot.ROW_4_SLOT_3, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§f§lJoinTyp").create());
+        setItem(InventorySlot.ROW_5_SLOT_3, settings.getSpawnType().getItem().create(), e -> {
             if (p.hasPermission("lobby.silenthub")) {
                 switch (settings.getSpawnType()) {
                     case NONE: {
@@ -61,6 +61,19 @@ public class LobbySettingsInventory extends CoreInventory {
                 }
             }
         });
+
+        setItem(InventorySlot.ROW_4_SLOT_7, new ItemBuilder(Material.LEATHER_HELMET, 1, 0).displayName("§f§lTragen lassen").create());
+        if (settings.isStacking()) {
+            setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oAndere Leute können dich", "§7§ohin und her tragen").create(), e -> {
+                settings.setStacking(false);
+                setSettings(p, lp);
+            });
+        } else {
+            setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oAndere Leute können dich nicht", "§7§ohin und her tragen").create(), e -> {
+                settings.setStacking(true);
+                setSettings(p, lp);
+            });
+        }
 
 
         setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.COMPASS, 1, 0).

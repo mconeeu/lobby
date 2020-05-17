@@ -90,7 +90,14 @@ public class PlayerJoinListener implements Listener {
                 e.setHidden(true);
                 LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
             } else if (lp.getSettings().getSpawnType().equals(SpawnType.PLAYERHIDER)) {
-                LobbyPlugin.getInstance().getPlayerHiderManager().hidePlayers(p);
+
+                Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
+                    LobbyPlugin.getInstance().getPlayerHiderManager().hidePlayers(p);
+
+
+                    LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(p);
+                    LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(p);
+                }, 1L);
             }
 
             if (p.hasPermission("system.bungee.nick")) {

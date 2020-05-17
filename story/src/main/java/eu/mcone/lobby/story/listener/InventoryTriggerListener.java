@@ -8,13 +8,17 @@ package eu.mcone.lobby.story.listener;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.JumpNRun;
 import eu.mcone.lobby.api.enums.LobbyItem;
+import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
+import eu.mcone.lobby.api.enums.bank.central.BankProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import eu.mcone.lobby.story.inventory.story.*;
+import eu.mcone.lobby.story.inventory.story.bank.BankInfosInventory1;
+import eu.mcone.lobby.story.inventory.story.bank.BankInfosInventory2;
+import eu.mcone.lobby.story.inventory.story.bank.BankInfosInventory3;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -65,6 +69,20 @@ public class InventoryTriggerListener implements Listener {
                                 new BankSafeInventory(p);
                             }
                         }
+
+                        if (lp.getCentralbankprogressId() == BankProgress.SPY.getId()) {
+                            if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-central-info1").equals(e.getClickedBlock().getLocation())) {
+                                new BankInfosInventory1(p);
+                            } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-central-info2").equals(e.getClickedBlock().getLocation())) {
+                                new BankInfosInventory2(p);
+                            } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-central-info3").equals(e.getClickedBlock().getLocation())) {
+                                new BankInfosInventory3(p);
+                            } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-central-info4").equals(e.getClickedBlock().getLocation())) {
+                              new BankInfosInventory1(p);
+                            }
+                        } else {
+                            LobbyPlugin.getInstance().getMessenger().send(p, "§4Diese §cKiste §4wurde abgeschlossen!");
+                        }
                         return;
                     }
                     case SIGN:
@@ -101,7 +119,10 @@ public class InventoryTriggerListener implements Listener {
                         return;
                     }
                     case WOOD_BUTTON: {
-                        if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-entrance-button").equals(e.getClickedBlock().getLocation())) {
+                        //central bank entrance // always close
+                        if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-central-entrance").equals(e.getClickedBlock().getLocation())) {
+                            e.setCancelled(true);
+                        } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-robbery-entrance-button").equals(e.getClickedBlock().getLocation())) {
                             if (lp.getBankprogressId() == BankRobberySmallProgress.BANK_ROBBERY_MIDDLE.getId()) {
 
                                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {

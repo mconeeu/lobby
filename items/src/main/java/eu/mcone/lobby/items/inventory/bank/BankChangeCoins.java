@@ -39,7 +39,7 @@ class BankChangeCoins extends CoreInventory {
                         LobbyPlugin.getInstance().getMessenger().send(p, "Du has erfolgreich §f25.000 Coins§7 in §f100 Emeralds §fumgetauscht");
                         new BankMenInventory(p);
                     } else {
-                        LobbyPlugin.getInstance().getMessenger().send(p, "§cDu hast nicht genügend Coins!");
+                        LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast nicht genügend §cCoins!");
                         player.closeInventory();
                     }
                 }
@@ -61,7 +61,7 @@ class BankChangeCoins extends CoreInventory {
                         LobbyPlugin.getInstance().getMessenger().send(p, "Du has erfolgreich §f75.000 Coins§7 in §f280 Emeralds §fumgetauscht");
                         new BankMenInventory(p);
                     } else {
-                        LobbyPlugin.getInstance().getMessenger().send(p, "§cDu hast nicht genügend Coins!");
+                        LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast nicht genügend §cCoins!");
                         player.closeInventory();
                     }
                 }
@@ -83,7 +83,7 @@ class BankChangeCoins extends CoreInventory {
                         LobbyPlugin.getInstance().getMessenger().send(p, "Du has erfolgreich §f165.000 Coins§7 in §f450 Emeralds §fumgetauscht");
                         new BankMenInventory(p);
                     } else {
-                        LobbyPlugin.getInstance().getMessenger().send(p, "§cDu hast nicht genügend Coins!");
+                        LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast nicht genügend §cCoins!");
                         player.closeInventory();
                     }
                 }

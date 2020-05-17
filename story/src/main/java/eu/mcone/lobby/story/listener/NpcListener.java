@@ -14,11 +14,13 @@ import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.coresystem.api.core.player.SkinInfo;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.enums.Progress;
+import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
+import eu.mcone.lobby.api.enums.bank.central.BankProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.inventory.smuggler.SmugglerInventory;
+import eu.mcone.lobby.story.inventory.john.JohnBankRobberyCentralBank;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import eu.mcone.lobby.story.inventory.searcher.SearcherInventory;
 import eu.mcone.lobby.story.inventory.story.CaptainInventory;
@@ -49,6 +51,10 @@ public class NpcListener implements Listener {
 
             if (w.equals(LobbyWorld.ONE_ISLAND.getWorld())) {
                 switch (npc.getData().getName()) {
+                    case "roger": {
+                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fRoger §8|§7 Ouh ähm hier ist betreten verboten und ich wohne nicht hier du bist warscheinlich "  + p.getName() + " wusste ichs doch du willst dieses Hacker Gerät abholen hat John mir gesagt ich habe es irgendwo versteckt ich war aber nicht besoffen das ist klar!");
+                        break;
+                    }
                     case "researcher": {
                         new SearcherInventory(p);
                         break;
@@ -66,7 +72,6 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "JohnEnd": {
-
                         break;
                     }
                     case "cutter": {
@@ -288,7 +293,23 @@ public class NpcListener implements Listener {
                     case "John3": {
                         if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE) || lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER) || lp.hasLobbyItem(LobbyItem.OFFICE_CARD_GOLD)) {
                             if (lp.getBankprogressId() >= BankRobberySmallProgress.SMUGGLER.getId()) {
-                                new JohnBankRobberyInventory(p);
+                                if (lp.getBankprogressId() != BankRobberySmallProgress.BANK_ROBBERY_END.getId()) {
+                                    new JohnBankRobberyInventory(p);
+                                } else {
+                                    if (lp.getCentralbankprogressId() >= BankProgress.SPY.getId()) {
+                                        if (lp.hasLobbyItem(LobbyItem.WORKER_FILE_1)) {
+                                            if (lp.getCentralbankprogressId() == BankProgress.SPY.getId()) {
+                                                lp.setCentralBankProgress(BankProgress.HACKER_TERMINAL);
+                                            }
+                                        }
+                                        new JohnBankRobberyCentralBank(p);
+                                    } else {
+                                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + " da bist du ja wieder du dachtest warscheinlich das ich nach diesen kleinen Banküberfall weg bin, oder? Das war nur ein kleiner Test ich wollte nur gucken wie du dich so anstellst. Jetzt rauben wir die OneIsland-Central Bank aus!");
+                                        lp.setCentralBankProgress(BankProgress.SPY);
+                                        lp.addLobbyItem(LobbyItem.BUTTON);
+                                        new JohnBankRobberyCentralBank(p);
+                                    }
+                                }
                             } else {
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + " schönes Büro aber leider gehört es bis jetzt noch mir aber du kannst etwas für mich erledigen wo du das Büro und ein paar Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
                                 lp.setBankProgress(BankRobberySmallProgress.SMUGGLER);
