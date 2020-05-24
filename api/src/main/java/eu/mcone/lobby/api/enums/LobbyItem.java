@@ -33,7 +33,7 @@ public enum LobbyItem {
     //BANK GENERAL
     BUTTON(13, "Knopf im Ohr", LobbyCategory.STORY_ITEMS, Level.LEGENDARY, 0, 0, new ItemBuilder(Material.STONE_BUTTON, 1, 0).displayName("§6§lKnopf im Ohr").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§7Verbunden mit John").create()),
 
-    //bank robbery
+    //bank robberyS
     BANK_MAP(14, "Bank Plan", LobbyCategory.STORY_ITEMS, Level.LEGENDARY, 0, 0, new ItemBuilder(Material.EMPTY_MAP, 1, 0).displayName("§6§lPlan der Bank").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§7Ach dahinten ist der Tresor").create()),
     GOLD_BARDING(15, "Gold Barren", LobbyCategory.STORY_ITEMS, Level.LEGENDARY, 0, 0, new ItemBuilder(Material.GOLD_INGOT, 58).displayName("§6§lGold Barren").lore("§7Kategorie: §bItem", "§7Seltenheit: §6Legendär", "", "§724 Karat Barren").create()),
     WHITE_WOOL(16, "Bank Plan", LobbyCategory.STORY_ITEMS, Level.UNUSUAL, 0, 0, new ItemBuilder(Material.WOOL, 37, 0).displayName("§3§lWeiße Wolle").lore("§7Kategorie: §bItem", "§7Seltenheit: §3Ungewöhnlich", "", "§7Zum nähen geeignet").create()),

@@ -37,6 +37,10 @@ public class HotbarItems {
             .displayName("§7§oLädt...")
             .create();
 
+    public static final ItemStack STACKING_REMOVE = new ItemBuilder(Material.BARRIER, 1, 0)
+            .displayName("§c§lSpieler absetzen")
+            .create();
+
 
     /*
      * LobbyHider

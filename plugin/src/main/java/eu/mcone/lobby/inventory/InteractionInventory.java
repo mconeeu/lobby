@@ -79,7 +79,7 @@ public class InteractionInventory extends CoreInventory {
                 if (settings.isStacking()) {
                     p.setPassenger(lc.bukkit());
                     CoreSystem.getInstance().createActionBar()
-                            .message("§f§oBenutze LSHIFT um auszusteigen")
+                            .message("§f§oBenutze LSHIFT um abzusteigen")
                             .send(lc.bukkit());
                     LobbyPlugin.getInstance().getMessenger().send(lc.bukkit(), "§aDu wirst nun von §3" + p.getName() + "§a getragen.");
                 } else {

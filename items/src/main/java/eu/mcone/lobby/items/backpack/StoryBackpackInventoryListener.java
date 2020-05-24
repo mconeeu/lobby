@@ -47,7 +47,7 @@ public class StoryBackpackInventoryListener extends BackpackInventoryListener {
 
         for (BackpackItem item : categoryItems) {
             if (gp.hasBackpackItem(category.getName(), item)) {
-                if (p.hasPermission("lobby.silenthub")) {
+                if (p.hasPermission(" lobby.silenthub")) {
                     inv.addItem(item.getItem(), e -> p.getInventory().setItem(3, item.getItem()));
                 } else {
                     inv.addItem(item.getItem(), e -> p.getInventory().setItem(2, item.getItem()));
