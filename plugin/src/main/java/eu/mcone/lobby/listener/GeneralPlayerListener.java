@@ -10,14 +10,15 @@ import eu.mcone.coresystem.api.core.player.PlayerState;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.LobbyItem;
+import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.inventory.InteractionInventory;
 import eu.mcone.lobby.items.inventory.office.secretary.SecretaryInventory;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -29,6 +30,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
+import org.spigotmc.event.entity.EntityDismountEvent;
 
 public class GeneralPlayerListener implements Listener {
 
@@ -55,6 +57,36 @@ public class GeneralPlayerListener implements Listener {
                 lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
             }
         }
+    }
+
+    @EventHandler
+    public void on(EntityDismountEvent e) {
+        Player p = (Player) e.getEntity();
+        Player isStacked = (Player) e.getDismounted();
+        if (InteractionInventory.stacking.containsValue(p)) {
+
+
+            InteractionInventory.stacking.remove(isStacked, p);
+            LobbyPlugin.getInstance().getMessenger().send(isStacked, "§c" + p.getName() + "§4 ist nun nicht mehr auf deimen Kopf");
+            LobbyPlugin.getInstance().getMessenger().send(p, "§c" + isStacked.getName() + " §4trägt dich nun nicht mehr!");
+        }
+    }
+
+    @EventHandler
+    public void onSneak(PlayerToggleSneakEvent e) {
+        Player p = e.getPlayer();
+        Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
+            if (InteractionInventory.stacking.containsKey(p)) {
+                if (e.isSneaking()) {
+                    Player isStacked = InteractionInventory.stacking.get(p);
+                    InteractionInventory.stacking.remove(p, isStacked);
+                    p.eject();
+
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§4" + isStacked.getName() + " ist nun nicht mehr auf deimen Kopf");
+                    LobbyPlugin.getInstance().getMessenger().send(isStacked, "§4" + p.getName() + " trägt dich nun nicht mehr!");
+                }
+            }
+        }, 1);
     }
 
 
@@ -104,6 +136,21 @@ public class GeneralPlayerListener implements Listener {
         if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(e.getPlayer())) {
             LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(e.getPlayer());
         }
+
+
+        if (InteractionInventory.stacking.containsKey(player)) {
+            Player isStacked = InteractionInventory.stacking.get(player);
+            isStacked.getInventory().setItem(5, null);
+
+
+            InteractionInventory.stacking.remove(player);
+            LobbyPlugin.getInstance().getMessenger().send(isStacked, "§4" + player.getName() + " ist nun nicht mehr auf deimen Kopf");
+        } else if (InteractionInventory.stacking.containsValue(player)) {
+            Player isStacked = InteractionInventory.stacking.get(player);
+            InteractionInventory.stacking.remove(player);
+            LobbyPlugin.getInstance().getMessenger().send(isStacked, "§4" + isStacked.getName() + " hat dich fallen gelassen!");
+        }
+
         e.setQuitMessage(null);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().getUniqueId());
 

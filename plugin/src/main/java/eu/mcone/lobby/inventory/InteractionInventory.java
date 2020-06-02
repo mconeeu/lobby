@@ -24,7 +24,11 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+
 public class InteractionInventory extends CoreInventory {
+
+    public static HashMap<Player, Player> stacking = new HashMap<>();
 
     public InteractionInventory(Player p, Player clicked) {
         super("§8» §3Interaktionsmenü", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
@@ -82,6 +86,9 @@ public class InteractionInventory extends CoreInventory {
                             .message("§f§oBenutze LSHIFT um abzusteigen")
                             .send(lc.bukkit());
                     LobbyPlugin.getInstance().getMessenger().send(lc.bukkit(), "§aDu wirst nun von §3" + p.getName() + "§a getragen.");
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§4Schleiche um §c" + lc.bukkit().getName() + "§4 fallen zu lassen");
+
+                    stacking.put(p, clicked);
                 } else {
                     LobbyPlugin.getInstance().getMessenger().send(p, "§4Der §cSpieler §4hat diese §cFunktion§4 ausgeschaltet!");
                 }

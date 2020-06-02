@@ -97,9 +97,6 @@ public class InventoryTriggerListener implements Listener {
                         6,
                         new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§a§lNicken §8» §7§oAktiviert").lore("§7§oKlicke zum deaktivieren").create()
                 );
-            } else if (i.equals(HotbarItems.STACKING_REMOVE)) {
-                p.setPassenger(null);
-                p.getItemInHand().setType(null);
             }
         }
     }

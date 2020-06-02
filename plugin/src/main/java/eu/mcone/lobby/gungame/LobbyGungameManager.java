@@ -44,7 +44,6 @@ public class LobbyGungameManager implements GungameManager {
         this.fighting = new HashSet<>();
     }
 
-
     @Override
     public void setStart(Player p) {
         if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(p)) {

@@ -28,7 +28,7 @@ public class LobbySettingsInventory extends CoreInventory {
 
         setItem(InventorySlot.ROW_4_SLOT_3, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§f§lJoinTyp").create());
         setItem(InventorySlot.ROW_5_SLOT_3, settings.getSpawnType().getItem().create(), e -> {
-            if (p.hasPermission("lobby.silenthub")) {
+            if (p.hasPermission("lobby.silenthub.joinspawn")) {
                 switch (settings.getSpawnType()) {
                     case NONE: {
                         settings.setSpawnType(SpawnType.SILENTLOBBY);
