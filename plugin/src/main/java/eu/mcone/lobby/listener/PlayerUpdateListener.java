@@ -33,6 +33,10 @@ public class PlayerUpdateListener implements Listener {
         CorePlayer p = e.getPlayer();
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
+
+        p.bukkit().getInventory().setItem(2, null);
+        p.bukkit().getInventory().setItem(6, null);
+
         if (!lp.hasLobbyItem(LobbyItem.BANKCARD_PREMIUM)) {
             if (p.hasPermission("mcone.premium")) {
                 if (!lp.hasLobbyItem(LobbyItem.BANKCARD)) {

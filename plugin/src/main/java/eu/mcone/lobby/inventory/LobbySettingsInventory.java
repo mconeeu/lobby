@@ -62,14 +62,28 @@ public class LobbySettingsInventory extends CoreInventory {
             }
         });
 
+
+        setItem(InventorySlot.ROW_4_SLOT_5, new ItemBuilder(Material.PAPER, 1, 0).displayName("§f§lLobbyGames Einladungen").create());
+        if (settings.isLobbyGamesInvite()) {
+            setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oAndere Spieler können dich", "§7§ozu LobbyGames einladen").create(), e -> {
+                settings.setLobbyGamesInvite(false);
+                setSettings(p, lp);
+            });
+        } else {
+            setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oAndere Spieler können dich nicht", "§7§ozu LobbyGames einladen").create(), e -> {
+                settings.setLobbyGamesInvite(true);
+                setSettings(p, lp);
+            });
+        }
+
         setItem(InventorySlot.ROW_4_SLOT_7, new ItemBuilder(Material.LEATHER_HELMET, 1, 0).displayName("§f§lTragen lassen").create());
         if (settings.isStacking()) {
-            setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oAndere Leute können dich", "§7§ohin und her tragen").create(), e -> {
+            setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oAndere Spieler können dich", "§7§ohin und her tragen").create(), e -> {
                 settings.setStacking(false);
                 setSettings(p, lp);
             });
         } else {
-            setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oAndere Leute können dich nicht", "§7§ohin und her tragen").create(), e -> {
+            setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oAndere Spieler können dich nicht", "§7§ohin und her tragen").create(), e -> {
                 settings.setStacking(true);
                 setSettings(p, lp);
             });

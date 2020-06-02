@@ -87,6 +87,8 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
             LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(getRandomSpawn());
 
             LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);
+        } else {
+            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du bist bereits in diesem LobbyGame!");
         }
     }
 

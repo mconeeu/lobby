@@ -19,6 +19,7 @@ import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.command.GameCMD;
 import eu.mcone.lobby.command.LobbyCMD;
 import eu.mcone.lobby.gang.LobbyGang;
 import eu.mcone.lobby.gungame.LobbyGungameManager;
@@ -163,7 +164,10 @@ public class Lobby extends LobbyPlugin {
                 new ItemHotbarChangeListener(),
                 new DropPickupListener()
         );
-        registerCommands(new LobbyCMD());
+        registerCommands(
+                new LobbyCMD(),
+                new GameCMD()
+        );
     }
 
     @Override

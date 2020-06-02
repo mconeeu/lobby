@@ -81,6 +81,8 @@ public class LobbyGungameManager implements GungameManager {
 
             }
             LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);
+        } else {
+            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du bist bereits in diesem LobbyGame!");
         }
     }
 
