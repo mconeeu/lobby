@@ -67,7 +67,7 @@ public class GeneralPlayerListener implements Listener {
 
 
             InteractionInventory.stacking.remove(isStacked, p);
-            LobbyPlugin.getInstance().getMessenger().send(isStacked, "§c" + p.getName() + "§4 ist nun nicht mehr auf deimen Kopf");
+            LobbyPlugin.getInstance().getMessenger().send(isStacked, "§c" + p.getName() + "§4 ist nun nicht mehr auf deimem Kopf");
             LobbyPlugin.getInstance().getMessenger().send(p, "§c" + isStacked.getName() + " §4trägt dich nun nicht mehr!");
         }
     }
@@ -82,7 +82,7 @@ public class GeneralPlayerListener implements Listener {
                     InteractionInventory.stacking.remove(p, isStacked);
                     p.eject();
 
-                    LobbyPlugin.getInstance().getMessenger().send(p, "§c" + isStacked.getName() + " §4ist nun nicht mehr auf deimen Kopf");
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§c" + isStacked.getName() + " §4ist nun nicht mehr auf deinem Kopf");
                     LobbyPlugin.getInstance().getMessenger().send(isStacked, "§c" + p.getName() + " §4trägt dich nun nicht mehr!");
                 }
             }
@@ -144,7 +144,7 @@ public class GeneralPlayerListener implements Listener {
 
 
             InteractionInventory.stacking.remove(player);
-            LobbyPlugin.getInstance().getMessenger().send(isStacked, "§4" + player.getName() + " ist nun nicht mehr auf deimen Kopf");
+            LobbyPlugin.getInstance().getMessenger().send(isStacked, "§4" + player.getName() + " ist nun nicht mehr auf deinem Kopf");
         } else if (InteractionInventory.stacking.containsValue(player)) {
             Player isStacked = InteractionInventory.stacking.get(player);
             InteractionInventory.stacking.remove(player);

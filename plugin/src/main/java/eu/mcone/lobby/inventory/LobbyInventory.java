@@ -7,7 +7,9 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 
 public class LobbyInventory extends CoreInventory {
 
@@ -16,28 +18,56 @@ public class LobbyInventory extends CoreInventory {
         super("§8» §3§lLobby wechseln", p, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
 
         if (p.hasPermission("lobby.silenthub")) {
-            setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.TNT, 1, 0).displayName("§f§lPrivate Lobby").create(),
-                    e -> {
-                        if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
+            if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
+                setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.TNT, 1, 0).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).itemFlags(ItemFlag.HIDE_ENCHANTS).displayName("§f§lPrivate Lobby").create(),
+                        e -> {
                             p.sendMessage("§8[§7§l!§8] §fServer §8» §cDu befindest dich bereits auf diesem Server");
-                        } else {
+                        });
+
+                setItem(InventorySlot.ROW_3_SLOT_1, new ItemBuilder(Material.INK_SACK, 1, 10)
+                                .displayName("§a§lPrivate Lobby online")
+                                .create(),
+                        e -> {
+                            p.closeInventory();
+                            p.sendMessage("§8[§7§l!§8] §fServer §8» §cDu befindest dich bereits auf diesem Server");
+                        });
+
+                setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.IRON_INGOT, Bukkit.getOnlinePlayers().size(), 0)
+                                .displayName("§fLobby-1")
+                                .create(),
+
+                        e -> {
+                            LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(p);
+                            p.closeInventory();
+                        });
+
+
+            } else {
+                setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.TNT, 1, 0).displayName("§f§lPrivate Lobby").create(),
+                        e -> {
                             p.closeInventory();
                             LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
-                        }
-                    });
+                        });
 
-            setItem(InventorySlot.ROW_3_SLOT_1, new ItemBuilder(Material.INK_SACK, 1, 10)
-                            .displayName("§a§lPrivate Lobby online")
-                            .create(),
-
-                    e -> {
-                        if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
-                            p.sendMessage("§8[§7§l!§8] §fServer §8» §cDu befindest dich bereits auf diesem Server");
-                        } else {
+                setItem(InventorySlot.ROW_3_SLOT_1, new ItemBuilder(Material.INK_SACK, 1, 10)
+                                .displayName("§a§lPrivate Lobby online")
+                                .create(),
+                        e -> {
                             p.closeInventory();
                             LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
-                        }
-                    });
+                        });
+
+                setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.IRON_INGOT, Bukkit.getOnlinePlayers().size(), 0).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).itemFlags(ItemFlag.HIDE_ENCHANTS)
+                                .displayName("§fLobby-1")
+                                .create(),
+
+                        e -> {
+                            {
+                                p.sendMessage("§8[§7§l!§8] §fServer §8» §cDu befindest dich bereits auf diesem Server");
+                            }
+                        });
+
+            }
         }
         setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§f§lPremium Lobby-1").create());
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§f§lPremium Lobby-2").create());
@@ -45,19 +75,6 @@ public class LobbyInventory extends CoreInventory {
         setItem(InventorySlot.ROW_3_SLOT_2, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lLobby offline").create());
         setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lLobby offline").create());
 
-
-        setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.IRON_INGOT, Bukkit.getOnlinePlayers().size(), 0)
-                        .displayName("§fLobby-1")
-                        .create(),
-
-                e -> {
-                    if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
-                        LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(p);
-                        p.closeInventory();
-                    } else {
-                        p.sendMessage("§8[§7§l!§8] §fServer §8» §cDu befindest dich bereits auf diesem Server");
-                    }
-                });
 
         setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.IRON_INGOT, 1, 0).displayName("§fLobby-2").create());
 
