@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.listener;
 
+import com.google.gson.JsonObject;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.CorePlayerLoadedEvent;
 import eu.mcone.coresystem.api.bukkit.event.LabyModPlayerJoinEvent;
@@ -12,6 +13,7 @@ import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
+import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
 import eu.mcone.gameapi.api.event.player.GamePlayerLoadedEvent;
 import eu.mcone.gameapi.api.player.GamePlayer;
@@ -25,6 +27,7 @@ import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.scoreboard.SidebarObjective;
 import eu.mcone.lobby.util.NpcEmoteManager;
 import eu.mcone.lobby.util.RealTimeUtil;
+import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -76,6 +79,7 @@ public class PlayerJoinListener implements Listener {
             LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(p);
             LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(p);
             OfficeManager.updateOffice(p);
+
         }, 1);
 
     }
@@ -184,6 +188,7 @@ public class PlayerJoinListener implements Listener {
     }
 
     private static void postloadLobbyPlayer(Player p) {
+        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         p.getActivePotionEffects().clear();
 
         if (p.hasPermission("mcone.premium")) p.setAllowFlight(true);
@@ -206,10 +211,15 @@ public class PlayerJoinListener implements Listener {
             p.getInventory().setItem(2, HotbarItems.PRIVATE_LOBBY);
         }
 
-        p.getInventory().setItem(8, new Skull(p.getName(), 1).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
+        JsonObject skin = CoreSystem.getInstance().getJsonParser().parse(
+                new String(Base64.decodeBase64(cp.getSkin().getValue()))
+        ).getAsJsonObject();
+        p.getInventory().setItem(8, Skull.fromUrl(
+                skin.getAsJsonObject("textures").getAsJsonObject("SKIN").get("url").getAsString()
+        ).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
 
 
-        CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new SidebarObjective());
+        cp.getScoreboard().setNewObjective(new SidebarObjective());
     }
 
     public static void setLobbyItems(Player p) {

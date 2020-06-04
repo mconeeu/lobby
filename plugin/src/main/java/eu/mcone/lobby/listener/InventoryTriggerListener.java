@@ -5,10 +5,12 @@
 
 package eu.mcone.lobby.listener;
 
+import com.google.gson.JsonObject;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.NickEvent;
 import eu.mcone.coresystem.api.bukkit.event.UnnickEvent;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -18,6 +20,7 @@ import eu.mcone.lobby.api.player.LobbySettings;
 import eu.mcone.lobby.inventory.LobbyInventory;
 import eu.mcone.lobby.inventory.compass.MinigamesInventory;
 import eu.mcone.lobby.items.manager.OfficeManager;
+import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -110,13 +113,23 @@ public class InventoryTriggerListener implements Listener {
             player.getInventory().setBoots(null);
         }
 
+        CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(player);
+        if (corePlayer.getSettings().isAutoNick()) {
+            player.getInventory().setItem(6, HotbarItems.DEACTIVATE_NICK);
+            JsonObject skin = CoreSystem.getInstance().getJsonParser().parse(
+                    new String(Base64.decodeBase64(e.getNick().getSkinInfo().getValue()))
+            ).getAsJsonObject();
+
+            player.getInventory().setItem(8, Skull.fromUrl(
+                    skin.getAsJsonObject("textures").getAsJsonObject("SKIN").get("url").getAsString()
+            ).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
+        }
+
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
             LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(player);
             LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(player);
             OfficeManager.updateOffice(player);
         }, 1);
-
-
     }
 
     @EventHandler
@@ -124,6 +137,14 @@ public class InventoryTriggerListener implements Listener {
         Player player = e.getPlayer().bukkit();
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
         LobbySettings settings = lp.getSettings();
+
+        JsonObject skin = CoreSystem.getInstance().getJsonParser().parse(
+                new String(Base64.decodeBase64(e.getPlayer().getSkin().getValue()))
+        ).getAsJsonObject();
+
+        player.getInventory().setItem(8, Skull.fromUrl(
+                skin.getAsJsonObject("textures").getAsJsonObject("SKIN").get("url").getAsString()
+        ).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
 
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
             LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(player);
