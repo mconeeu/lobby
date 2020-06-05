@@ -9,6 +9,7 @@ import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.lobby.api.LobbyWorld;
 import lombok.Getter;
 
+@Getter
 public enum Progress {
 
     //TEIL |
@@ -40,14 +41,10 @@ public enum Progress {
     EDWARD_LABOR_START(17, "Der Start", new String[]{"§eDer Start ins Labor"}, "edward-labor", LobbyWorld.ONE_ISLAND, "§8[§7§l!§8] §cNPC §8» §fEdward §8|§7 Ahh da bist du wieder ich habe etwas sehr großes unter OneIsland entdeckt das muss du dir ansehen");
 
 
-    @Getter
-    private int id;
-    @Getter
-    private String name, npcName, message;
-    @Getter
-    private LobbyWorld world;
-    @Getter
-    private String[] description;
+    private final int id;
+    private final String name, npcName, message;
+    private final LobbyWorld world;
+    private final String[] description;
 
     Progress(int id, String name, String[] description, String npcName, LobbyWorld world, String message) {
         this.id = id;

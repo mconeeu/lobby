@@ -23,7 +23,6 @@ import java.util.*;
 
 public class LobbyGungameManager implements GungameManager {
 
-
     private static final Map<Location, Long> SPAWN_LOCATIONS = new HashMap<>();
 
     static {
@@ -37,7 +36,6 @@ public class LobbyGungameManager implements GungameManager {
     @Getter
     private final Set<Player> fighting;
     private static final ArrayList<Player> savePlayer = new ArrayList<>();
-
 
     public LobbyGungameManager(Lobby plugin) {
         plugin.registerEvents(new GungameListener(this));

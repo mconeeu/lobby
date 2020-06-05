@@ -20,7 +20,7 @@ import java.util.List;
 
 public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobbyManager {
 
-    private List<Player> silent;
+    private final List<Player> silent;
 
     public SilentLobbyManager() {
         this.silent = new ArrayList<>();

@@ -12,8 +12,8 @@ public enum BankProgress {
     CUSTOMER(5, "Befragen des Mitarbeiters"), //bank-worker
     CHOOSE(6, "Auswahl"); //choose your chapter 2 //duo //boom //silent ..
 
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
 
     BankProgress(int id, String name) {
         this.id = id;

@@ -14,11 +14,11 @@ import org.bukkit.entity.Player;
 
 public class GameJARInventory extends CoreInventory {
 
-    private int i = 11;
-
     public GameJARInventory(Player player) {
         super("§8» §3§lJump & Runs", player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
+            int i = 11;
+
             for (JumpNRun jumpNRun : JumpNRun.values()) {
                 setItem(i, jumpNRun.getItemstack(), e -> {
                             LobbyPlugin.getInstance().getJumpNRunManager().setStart(player, jumpNRun);
@@ -31,8 +31,7 @@ public class GameJARInventory extends CoreInventory {
 
         setItem(InventorySlot.ROW_3_SLOT_9, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e -> new LobbyGamesInventory(player));
 
-
         openInventory();
-
     }
+
 }

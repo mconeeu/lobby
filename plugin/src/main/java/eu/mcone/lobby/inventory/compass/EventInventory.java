@@ -16,7 +16,6 @@ public class EventInventory extends CoreInventory {
     public EventInventory(Player player) {
         super("§8» §3§lEvent", player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
 
-
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
 
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.EMERALD, 1, 0)
@@ -35,9 +34,7 @@ public class EventInventory extends CoreInventory {
 
         setItem(InventorySlot.ROW_3_SLOT_9, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e -> new MinigamesInventory(player));
 
-
         openInventory();
-
     }
 
 }

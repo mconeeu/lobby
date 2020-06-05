@@ -108,7 +108,7 @@ public class PlayerJoinListener implements Listener {
 
             switch (lp.getSettings().getSpawnPoint()) {
                 case SPAWN: {
-                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.RANDOME)) {
+                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.RANDOM)) {
                         int spawnlocation = getRandomNumberInRange(1, 3);
                         if (spawnlocation == 1) {
                             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn2");

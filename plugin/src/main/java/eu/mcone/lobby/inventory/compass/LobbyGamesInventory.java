@@ -21,7 +21,6 @@ public class LobbyGamesInventory extends CoreInventory {
 
     public LobbyGamesInventory(Player p) {
         super("§8» §3§lLobby-Games", p, InventorySlot.ROW_5, InventoryOption.FILL_EMPTY_SLOTS);
-
         if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
             return;
 
@@ -181,7 +180,6 @@ public class LobbyGamesInventory extends CoreInventory {
                 }, 2L);
             }, 2L);
         }, 2L);
-
-
     }
+
 }

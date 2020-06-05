@@ -36,11 +36,11 @@ public class Gang implements eu.mcone.lobby.api.gang.Gang {
     @Getter
     private final UUID uuid, leader;
     @Getter
-    private Map<String, String> members;
+    private final Map<String, String> members;
     @Getter
-    private List<String> mods, invites;
+    private final List<String> mods, invites;
     @Getter
-    private GangSettings settings;
+    private final GangSettings settings;
 
     Gang(UUID uuid, String name, UUID leader, Map<String, String> members, List<String> mods, List<String> invites, GangSettings settings) {
         this.name = name;

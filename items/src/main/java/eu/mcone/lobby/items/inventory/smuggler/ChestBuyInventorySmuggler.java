@@ -17,9 +17,9 @@ import java.util.Random;
 
 class ChestBuyInventorySmuggler extends CoreInventory {
 
+    private static final Random SMUGGLER_RANDOM = new Random();
     private static int getRandomNumberInRange(int min, int max) {
-        Random r = new Random();
-        return r.nextInt((max - min) + 1) + min;
+        return SMUGGLER_RANDOM.nextInt((max - min) + 1) + min;
     }
 
     ChestBuyInventorySmuggler(Player p) {

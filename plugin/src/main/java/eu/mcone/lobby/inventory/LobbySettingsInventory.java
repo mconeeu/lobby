@@ -179,7 +179,7 @@ public class LobbySettingsInventory extends CoreInventory {
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.LEAVES, 1, 0).displayName("§f§lDorfspawn Ort").create());
             setItem(InventorySlot.ROW_3_SLOT_5, settings.getSpawnVillage().getItem().create(), e -> {
                 switch (settings.getSpawnVillage()) {
-                    case RANDOME: {
+                    case RANDOM: {
                         settings.setSpawnVillage(SpawnVillage.VILLAGE_1);
                         setSettings(p, lp);
                         break;
@@ -190,7 +190,7 @@ public class LobbySettingsInventory extends CoreInventory {
                         break;
                     }
                     case VILLAGE_2: {
-                        settings.setSpawnVillage(SpawnVillage.RANDOME);
+                        settings.setSpawnVillage(SpawnVillage.RANDOM);
                         setSettings(p, lp);
                         break;
                     }

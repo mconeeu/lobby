@@ -82,7 +82,7 @@ public class NpcInteractListener implements Listener {
         VENDOR("vendor");
 
         @Getter
-        private String npcName;
+        private final String npcName;
 
         StoryNPC(final String npcName) {
             this.npcName = npcName;

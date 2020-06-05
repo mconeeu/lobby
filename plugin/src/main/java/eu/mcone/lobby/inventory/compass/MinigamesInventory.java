@@ -30,7 +30,6 @@ public class MinigamesInventory extends CoreInventory {
 
     public MinigamesInventory(Player p) {
         super("§8» §3§lMinigames", p, InventorySlot.ROW_5, InventoryOption.FILL_EMPTY_SLOTS);
-
         if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
             return;
 
@@ -285,12 +284,11 @@ public class MinigamesInventory extends CoreInventory {
                 }, 2L);
             }, 2L);
         }, 2L);
-
-
     }
 
     private static int getRandomNumberInRange(int min, int max) {
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
     }
+
 }

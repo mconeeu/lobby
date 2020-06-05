@@ -32,8 +32,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
     public static final CoreTitle title = CoreSystem.getInstance().createTitle().fadeIn(1).fadeOut(1).stay(3).title("§cNicht überspringen!").subTitle("§4Du wurdest zurück telepotiert");
 
     @Getter
-    private Set<JumpNRunPlayer> currentlyPlaying = new HashSet<>();
-
+    private final Set<JumpNRunPlayer> currentlyPlaying = new HashSet<>();
 
     public LobbyJumpNRunManager(LobbyPlugin plugin) {
         plugin.registerEvents(new JumpNRunListener(this));

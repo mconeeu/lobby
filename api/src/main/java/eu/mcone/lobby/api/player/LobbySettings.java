@@ -20,7 +20,7 @@ public class LobbySettings {
             RankBoots = true, InventoryAnimation = true, isStacking = true,
             HotbarChangeSound = true, lobbyGamesInvite = true;
     private SpawnPoint spawnPoint = SpawnPoint.SPAWN;
-    private SpawnVillage spawnVillage = SpawnVillage.RANDOME;
+    private SpawnVillage spawnVillage = SpawnVillage.RANDOM;
     private SpawnType spawnType = SpawnType.NONE;
 
 }

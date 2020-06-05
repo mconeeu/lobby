@@ -16,7 +16,7 @@ public enum SpawnPoint {
     LAST_LOCATION(new ItemBuilder(Material.ENDER_PEARL).displayName("§a§lLetzter Ort").lore("§7§oSpawne bei deinem","§7§oletzten Logout Ort")),
     OFFICE(new ItemBuilder(Material.BOOK_AND_QUILL).displayName("§c§lBüro").lore("§7§oSpawne in deinem Büro"));
 
-    private ItemBuilder item;
+    private final ItemBuilder item;
 
     SpawnPoint(ItemBuilder item) {
         this.item = item;

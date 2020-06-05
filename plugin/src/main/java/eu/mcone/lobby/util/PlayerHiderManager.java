@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class PlayerHiderManager implements eu.mcone.lobby.api.player.PlayerHiderManager {
 
     public ArrayList<Player> players;
-    private HashMap<String, Long> time;
+    private final HashMap<String, Long> time;
 
     public PlayerHiderManager() {
         this.players = new ArrayList<>();

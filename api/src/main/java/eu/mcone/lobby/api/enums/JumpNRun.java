@@ -45,11 +45,11 @@ public enum JumpNRun {
             }
     );
 
-    private int id;
-    private ItemStack itemstack;
-    private String warpLocation, startLocation, jumpandrunname;
-    private Location startPlateLocation, endPlateLocation;
-    private Location[] checkpoints;
+    private final int id;
+    private final ItemStack itemstack;
+    private final String warpLocation, startLocation, jumpandrunname;
+    private final Location startPlateLocation, endPlateLocation;
+    private final Location[] checkpoints;
 
     JumpNRun(int id, ItemStack itemStack, String warpLocation, String jumpandrunname, String startLocation, Location startPlateLocation, Location endPlateLocation, Location[] checkpoints) {
         this.id = id;

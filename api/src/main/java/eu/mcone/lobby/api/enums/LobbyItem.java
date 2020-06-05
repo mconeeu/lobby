@@ -13,6 +13,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
+@Getter
 public enum LobbyItem {
 
     //Story items
@@ -77,16 +78,11 @@ public enum LobbyItem {
 //
 //    SUPER_SWORD(260, "Super-sword", Category.INGAME, Level.MYSTICAL, 0, 140, new ItemBuilder(Material.DIAMOND_SWORD, 1, 0).displayName("§c§lSuper-Schwert").lore("§7Kategorie: §bIngame Item", "§7Seltenheit: §cMythisch", "", "§7Einer der gefährlichsten Schwerter der Welt!").create());
 
-    @Getter
-    private int id, buyPrice, sellPrice;
-    @Getter
-    private LobbyCategory category;
-    @Getter
-    private Level level;
-    @Getter
-    private String name;
-    @Getter
-    private ItemStack itemStack;
+    private final int id, buyPrice, sellPrice;
+    private final LobbyCategory category;
+    private final Level level;
+    private final String name;
+    private final ItemStack itemStack;
 
     LobbyItem(int id, String name, LobbyCategory category, Level level, int buyPrice, int sellPrice, ItemStack itemStack) {
         this.id = id;

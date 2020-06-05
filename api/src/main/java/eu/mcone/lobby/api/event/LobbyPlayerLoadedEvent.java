@@ -19,8 +19,8 @@ public final class LobbyPlayerLoadedEvent extends Event {
     @Getter
     private final static HandlerList handlerList = new HandlerList();
 
-    private LobbyPlayer player;
-    private CorePlayerLoadedEvent.Reason reason;
+    private final LobbyPlayer player;
+    private final CorePlayerLoadedEvent.Reason reason;
 
     @Override
     public HandlerList getHandlers() {

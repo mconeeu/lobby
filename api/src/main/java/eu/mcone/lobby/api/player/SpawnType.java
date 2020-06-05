@@ -11,7 +11,7 @@ public enum SpawnType {
     SILENTLOBBY(new ItemBuilder(Material.TNT).displayName("§c§lPrivate Lobby").lore("§7§oSpawne in deiner eigenen ", "§7§oPrivaten Lobby beim joinen")),
     PLAYERHIDER(new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§a§lSpieler verstecken").lore("§7§oSchalte beim joinen alle Spieler aus"));
 
-    private ItemBuilder item;
+    private final ItemBuilder item;
 
     SpawnType(ItemBuilder item) {
         this.item = item;

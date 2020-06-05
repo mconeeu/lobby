@@ -100,246 +100,246 @@ public enum GungameArmor {
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.CHAINMAIL_BOOTS));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.CHAINMAIL_HELMET));
     }}),
-    fifteen(new HashMap<Integer, ItemBuilder>() {{
+    FIFTEEN(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.STONE_SWORD, 1).enchantment(Enchantment.DAMAGE_ALL, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.CHAINMAIL_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.CHAINMAIL_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.CHAINMAIL_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.CHAINMAIL_HELMET));
     }}),
-    sixteen(new HashMap<Integer, ItemBuilder>() {{
+    SIXTEEN(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.STONE_SWORD, 1).enchantment(Enchantment.DAMAGE_ALL, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.CHAINMAIL_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.CHAINMAIL_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.CHAINMAIL_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.CHAINMAIL_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    seventeen(new HashMap<Integer, ItemBuilder>() {{
+    SEVENTEEN(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.GOLD_SWORD, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.CHAINMAIL_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.CHAINMAIL_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.CHAINMAIL_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.CHAINMAIL_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    eighteen(new HashMap<Integer, ItemBuilder>() {{
+    EIGHTEEN(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.GOLD_SWORD, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.GOLD_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.CHAINMAIL_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.CHAINMAIL_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.CHAINMAIL_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    nineteen(new HashMap<Integer, ItemBuilder>() {{
+    NINETEEN(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.GOLD_SWORD, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.GOLD_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.GOLD_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.CHAINMAIL_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.CHAINMAIL_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    twenty(new HashMap<Integer, ItemBuilder>() {{
+    TWENTY(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.GOLD_SWORD, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.GOLD_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.GOLD_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.GOLD_BOOTS));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.CHAINMAIL_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    twenty_one(new HashMap<Integer, ItemBuilder>() {{
+    TWENTY_ONE(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.GOLD_SWORD, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.GOLD_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.GOLD_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.GOLD_BOOTS));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.GOLD_HELMET));
     }}),
-    twenty_two(new HashMap<Integer, ItemBuilder>() {{
+    TWENTY_TWO(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.GOLD_SWORD, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.GOLD_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.GOLD_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.GOLD_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.GOLD_HELMET));
     }}),
-    twenty_three(new HashMap<Integer, ItemBuilder>() {{
+    TWENTY_THREE(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.GOLD_SWORD, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.GOLD_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.GOLD_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.GOLD_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.GOLD_HELMET));
     }}),
-    twenty_four(new HashMap<Integer, ItemBuilder>() {{
+    TWENTY_FOUR(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.GOLD_AXE, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.GOLD_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.GOLD_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.GOLD_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.GOLD_HELMET));
     }}),
-    twenty_five(new HashMap<Integer, ItemBuilder>() {{
+    TWENTY_FIVE(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.GOLD_AXE, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.GOLD_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.GOLD_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.GOLD_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.GOLD_HELMET));
     }}),
-    twenty_six(new HashMap<Integer, ItemBuilder>() {{
+    TWENTY_SIX(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.GOLD_AXE, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.GOLD_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.GOLD_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.GOLD_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.GOLD_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    twenty_eight(new HashMap<Integer, ItemBuilder>() {{
+    TWENTY_EIGHT(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.IRON_AXE, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.GOLD_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.GOLD_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.GOLD_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.GOLD_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    thirty(new HashMap<Integer, ItemBuilder>() {{
+    THIRTY(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.IRON_AXE, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.IRON_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.GOLD_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.GOLD_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.GOLD_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    thirty_one(new HashMap<Integer, ItemBuilder>() {{
+    THIRTY_ONE(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.IRON_AXE, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.IRON_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.GOLD_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.GOLD_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    thirty_four(new HashMap<Integer, ItemBuilder>() {{
+    THIRTY_FOUR(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.IRON_AXE, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.IRON_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.IRON_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.IRON_HELMET));
     }}),
-    thirty_six(new HashMap<Integer, ItemBuilder>() {{
+    THIRTY_SIX(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.IRON_SWORD, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.IRON_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.IRON_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.IRON_HELMET));
     }}),
-    thirty_seven(new HashMap<Integer, ItemBuilder>() {{
+    THIRTY_SEVEN(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.IRON_SWORD, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.IRON_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.IRON_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.IRON_HELMET));
     }}),
-    thirty_eighteen(new HashMap<Integer, ItemBuilder>() {{
+    THIRTY_EIGHTEEN(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.IRON_SWORD, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.IRON_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.IRON_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.IRON_HELMET));
     }}),
-    thirty_nine(new HashMap<Integer, ItemBuilder>() {{
+    THIRTY_NINE(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.IRON_SWORD, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.IRON_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.IRON_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.IRON_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    forty(new HashMap<Integer, ItemBuilder>() {{
+    FORTY(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.IRON_SWORD, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.IRON_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.IRON_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.IRON_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    forty_one(new HashMap<Integer, ItemBuilder>() {{
-        put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.IRON_SWORD, 1).enchantment(Enchantment.DAMAGE_ALL,1));
+    FORTY_ONE(new HashMap<Integer, ItemBuilder>() {{
+        put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.IRON_SWORD, 1).enchantment(Enchantment.DAMAGE_ALL, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.IRON_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.IRON_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.IRON_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    forty_two(new HashMap<Integer, ItemBuilder>() {{
+    FORTY_TWO(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_AXE, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.IRON_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.IRON_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.IRON_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    forty_three(new HashMap<Integer, ItemBuilder>() {{
+    FORTY_THREE(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_AXE, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.IRON_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.IRON_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    forty_four(new HashMap<Integer, ItemBuilder>() {{
+    FORTY_FOUR(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_AXE, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.DIAMOND_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.IRON_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    fourty_five(new HashMap<Integer, ItemBuilder>() {{
+    FOURTY_FIVE(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_AXE, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.DIAMOND_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.DIAMOND_BOOTS));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.IRON_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    fourty_six(new HashMap<Integer, ItemBuilder>() {{
+    FOURTY_SIX(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_AXE, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.DIAMOND_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.DIAMOND_BOOTS));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.DIAMOND_HELMET));
     }}),
-    fourty_seven(new HashMap<Integer, ItemBuilder>() {{
+    FOURTY_SEVEN(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_AXE, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.DIAMOND_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.DIAMOND_BOOTS));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.DIAMOND_HELMET));
     }}),
-    fourty_eight(new HashMap<Integer, ItemBuilder>() {{
+    FOURTY_EIGHT(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_AXE, 1));
-        put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1));
+        put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.DIAMOND_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.DIAMOND_BOOTS));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.DIAMOND_HELMET));
     }}),
-    fourty_nine(new HashMap<Integer, ItemBuilder>() {{
+    FOURTY_NINE(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_AXE, 1));
-        put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1));
+        put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.DIAMOND_LEGGINGS));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.DIAMOND_BOOTS));
-        put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.DIAMOND_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1));
+        put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.DIAMOND_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    fifty(new HashMap<Integer, ItemBuilder>() {{
+    FIFTY(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_AXE, 1));
-        put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1));
+        put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.DIAMOND_LEGGINGS));
-        put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.DIAMOND_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1));
-        put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.DIAMOND_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1));
+        put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.DIAMOND_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
+        put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.DIAMOND_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    fifty_one(new HashMap<Integer, ItemBuilder>() {{
+    FIFTY_ONE(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_AXE, 1));
-        put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1));
-        put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.DIAMOND_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1));
-        put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.DIAMOND_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1));
-        put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.DIAMOND_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1));
+        put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
+        put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.DIAMOND_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
+        put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.DIAMOND_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
+        put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.DIAMOND_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    fifty_two(new HashMap<Integer, ItemBuilder>() {{
+    FIFTY_TWO(new HashMap<Integer, ItemBuilder>() {{
         put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_SWORD, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.IRON_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.IRON_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    fifty_three(new HashMap<Integer, ItemBuilder>() {{
-        put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_SWORD, 1).enchantment(Enchantment.DAMAGE_ALL,1));
+    FIFTY_THREE(new HashMap<Integer, ItemBuilder>() {{
+        put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_SWORD, 1).enchantment(Enchantment.DAMAGE_ALL, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.IRON_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.HELMET, new ItemBuilder(Material.IRON_HELMET).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
     }}),
-    fifty_four(new HashMap<Integer, ItemBuilder>() {{
-        put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_SWORD, 1).enchantment(Enchantment.DAMAGE_ALL,1));
+    FIFTY_FOUR(new HashMap<Integer, ItemBuilder>() {{
+        put(PlayerInventorySlot.HOTBAR_SLOT_1, new ItemBuilder(Material.DIAMOND_SWORD, 1).enchantment(Enchantment.DAMAGE_ALL, 1));
         put(PlayerInventorySlot.CHESTPLATE, new ItemBuilder(Material.DIAMOND_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.LEGGINGS, new ItemBuilder(Material.IRON_LEGGINGS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
         put(PlayerInventorySlot.BOOTS, new ItemBuilder(Material.IRON_BOOTS).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
@@ -361,4 +361,4 @@ public enum GungameArmor {
         return values()[killstreak].getItems();
     }
 
-    }
+}

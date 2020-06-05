@@ -11,11 +11,9 @@ public class DropPickupListener implements Listener {
     @EventHandler
     public void on(PlayerPickupItemEvent event) {
         Player p = event.getPlayer();
-        if (Lobby.getSystem().getBuildSystem().hasBuildModeEnabled(p)) {
-            event.setCancelled(false);
-        } else {
-            event.setCancelled(true);
-        }
+        event.setCancelled(
+                !Lobby.getSystem().getBuildSystem().hasBuildModeEnabled(p)
+        );
     }
 
 }

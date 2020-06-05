@@ -16,7 +16,7 @@ import java.util.UUID;
 
 public class GangCMD extends CorePlayerCommand {
 
-    private LobbyGang api;
+    private final LobbyGang api;
 
     public GangCMD(LobbyGang api) {
         super("gang", null, "g");

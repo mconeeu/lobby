@@ -12,8 +12,8 @@ public enum BankRobberySmallProgress {
     BANK_ROBBERY_MIDDLE(5,"Bank Raub mitte"),
     BANK_ROBBERY_END(6,"Bank Raub ende");
 
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
 
     BankRobberySmallProgress(int id, String name){
         this.id = id;

@@ -184,7 +184,7 @@ public class OfficeManager {
         GOLD_OFFICE("goldOffice");
 
         @Getter
-        private String spawnLocation;
+        private final String spawnLocation;
 
         OfficeType(final String spawnLocation) {
             this.spawnLocation = spawnLocation;
