@@ -5,7 +5,6 @@
 
 package eu.mcone.lobby.listener;
 
-import com.google.gson.JsonObject;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.CorePlayerLoadedEvent;
 import eu.mcone.coresystem.api.bukkit.event.LabyModPlayerJoinEvent;
@@ -27,7 +26,6 @@ import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.scoreboard.SidebarObjective;
 import eu.mcone.lobby.util.NpcEmoteManager;
 import eu.mcone.lobby.util.RealTimeUtil;
-import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -103,7 +101,7 @@ public class PlayerJoinListener implements Listener {
             }
 
             if (p.hasPermission("system.bungee.nick")) {
-                p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItems.DEACTIVATE_NICK : HotbarItems.ACTIVATE_NICK);
+                p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItems.NICK_ACTIVATED : HotbarItems.NICK_DISABLED);
             }
 
             switch (lp.getSettings().getSpawnPoint()) {
@@ -202,7 +200,7 @@ public class PlayerJoinListener implements Listener {
         }
 
         if (p.hasPermission("system.bungee.nick")) {
-            p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItems.DEACTIVATE_NICK : HotbarItems.ACTIVATE_NICK);
+            p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItems.NICK_ACTIVATED : HotbarItems.NICK_DISABLED);
         }
 
         p.getInventory().setItem(7, HotbarItems.BACKPACK);
@@ -211,12 +209,13 @@ public class PlayerJoinListener implements Listener {
             p.getInventory().setItem(2, HotbarItems.PRIVATE_LOBBY);
         }
 
-        JsonObject skin = CoreSystem.getInstance().getJsonParser().parse(
-                new String(Base64.decodeBase64(cp.getSkin().getValue()))
-        ).getAsJsonObject();
-        p.getInventory().setItem(8, Skull.fromUrl(
-                skin.getAsJsonObject("textures").getAsJsonObject("SKIN").get("url").getAsString()
-        ).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
+        p.getInventory().setItem(
+                8,
+                Skull.fromMojangValue(cp.getSkin().getValue(), 1)
+                        .toItemBuilder()
+                        .displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")
+                        .create()
+        );
 
 
         cp.getScoreboard().setNewObjective(new SidebarObjective());

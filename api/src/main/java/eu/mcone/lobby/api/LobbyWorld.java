@@ -19,7 +19,7 @@ public enum LobbyWorld {
     LOBBY_BANK("Lobby-Bank-Story");
 
     @Getter
-    private String name;
+    private final String name;
 
     LobbyWorld(String name) {
         this.name = name;

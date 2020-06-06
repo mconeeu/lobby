@@ -5,23 +5,15 @@
 
 package eu.mcone.lobby.listener;
 
-import com.google.gson.JsonObject;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.event.NickEvent;
-import eu.mcone.coresystem.api.bukkit.event.UnnickEvent;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.LobbySettings;
 import eu.mcone.lobby.inventory.LobbyInventory;
 import eu.mcone.lobby.inventory.compass.MinigamesInventory;
-import eu.mcone.lobby.items.manager.OfficeManager;
-import org.apache.commons.codec.binary.Base64;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -69,7 +61,7 @@ public class InventoryTriggerListener implements Listener {
                 }
             } else if (i.equals(HotbarItems.LOBBY_CHANGER)) {
                 new LobbyInventory(p);
-            } else if (i.equals(HotbarItems.DEACTIVATE_NICK)) {
+            } else if (i.equals(HotbarItems.NICK_ACTIVATED)) {
                 if (cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
                 }
@@ -84,7 +76,7 @@ public class InventoryTriggerListener implements Listener {
                         6,
                         new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§c§lNicken §8» §7§oDeaktiviert").lore("§7§oKlicke zum aktivieren").create()
                 );
-            } else if (i.equals(HotbarItems.ACTIVATE_NICK)) {
+            } else if (i.equals(HotbarItems.NICK_DISABLED)) {
                 if (!cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
                 }
@@ -101,59 +93,6 @@ public class InventoryTriggerListener implements Listener {
                         new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§a§lNicken §8» §7§oAktiviert").lore("§7§oKlicke zum deaktivieren").create()
                 );
             }
-        }
-    }
-
-    @EventHandler
-    public void onNick(NickEvent e) {
-        Player player = e.getPlayer().bukkit();
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
-        LobbySettings settings = lp.getSettings();
-        if (settings.isRankBoots()) {
-            player.getInventory().setBoots(null);
-        }
-
-        CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(player);
-        if (corePlayer.getSettings().isAutoNick()) {
-            player.getInventory().setItem(6, HotbarItems.DEACTIVATE_NICK);
-            JsonObject skin = CoreSystem.getInstance().getJsonParser().parse(
-                    new String(Base64.decodeBase64(e.getNick().getSkinInfo().getValue()))
-            ).getAsJsonObject();
-
-            player.getInventory().setItem(8, Skull.fromUrl(
-                    skin.getAsJsonObject("textures").getAsJsonObject("SKIN").get("url").getAsString()
-            ).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
-        }
-
-        Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-            LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(player);
-            LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(player);
-            OfficeManager.updateOffice(player);
-        }, 1);
-    }
-
-    @EventHandler
-    public void onUnnick(UnnickEvent e) {
-        Player player = e.getPlayer().bukkit();
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
-        LobbySettings settings = lp.getSettings();
-
-        JsonObject skin = CoreSystem.getInstance().getJsonParser().parse(
-                new String(Base64.decodeBase64(e.getPlayer().getSkin().getValue()))
-        ).getAsJsonObject();
-
-        player.getInventory().setItem(8, Skull.fromUrl(
-                skin.getAsJsonObject("textures").getAsJsonObject("SKIN").get("url").getAsString()
-        ).toItemBuilder().displayName("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde").create());
-
-        Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-            LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(player);
-            LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(player);
-            OfficeManager.updateOffice(player);
-        }, 1);
-
-        if (settings.isRankBoots()) {
-            LobbyPlugin.getInstance().getBackpackManager().setRankBoots(player);
         }
     }
 

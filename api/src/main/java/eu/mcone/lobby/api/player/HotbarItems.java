@@ -21,11 +21,11 @@ public class HotbarItems {
             .displayName("§3§lNavigator §8» §7§oWähle einen Spielmodus")
             .create();
 
-    public static final ItemStack ACTIVATE_NICK = new ItemBuilder(Material.NAME_TAG, 1, 0)
+    public static final ItemStack NICK_DISABLED = new ItemBuilder(Material.NAME_TAG, 1, 0)
             .displayName("§c§lNicken §8» §7§oDeaktiviert").lore("§7§oKlicke zum aktivieren")
             .create();
 
-    public static final ItemStack DEACTIVATE_NICK = new ItemBuilder(Material.NAME_TAG, 1, 0)
+    public static final ItemStack NICK_ACTIVATED = new ItemBuilder(Material.NAME_TAG, 1, 0)
             .displayName("§a§lNicken §8» §7§oAktiviert").lore("§7§oKlicke zum deaktivieren")
             .create();
 

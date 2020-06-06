@@ -63,7 +63,7 @@ public class PlayerUpdateListener implements Listener {
             p.bukkit().getInventory().setItem(2, HotbarItems.PRIVATE_LOBBY);
         }
         if (p.hasPermission("system.bungee.nick")) {
-            p.bukkit().getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p.bukkit()).isNicked() ? HotbarItems.DEACTIVATE_NICK : HotbarItems.ACTIVATE_NICK);
+            p.bukkit().getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p.bukkit()).isNicked() ? HotbarItems.NICK_ACTIVATED : HotbarItems.NICK_DISABLED);
         }
 
         if (e.getType().equals(PermissionChangeEvent.Type.GROUP_CHANGE) && p != null) {
