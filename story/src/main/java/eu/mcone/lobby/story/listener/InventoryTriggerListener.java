@@ -6,6 +6,10 @@
 package eu.mcone.lobby.story.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.gameapi.api.GameAPI;
+import eu.mcone.gameapi.api.GamePlugin;
+import eu.mcone.gameapi.api.backpack.defaults.DefaultItem;
+import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.JumpNRun;
@@ -78,7 +82,7 @@ public class InventoryTriggerListener implements Listener {
                             } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-central-info3").equals(e.getClickedBlock().getLocation())) {
                                 new BankInfosInventory3(p);
                             } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-central-info4").equals(e.getClickedBlock().getLocation())) {
-                              new BankInfosInventory1(p);
+                                new BankInfosInventory1(p);
                             }
                         } else {
                             LobbyPlugin.getInstance().getMessenger().send(p, "§4Diese §cKiste §4wurde abgeschlossen!");
@@ -94,6 +98,14 @@ public class InventoryTriggerListener implements Listener {
                             String name = ChatColor.stripColor(sign.getLine(1)).replace("»", "").replace("«", "").trim();
 
                             if (lp.checkAndAddSecret(name, System.currentTimeMillis() / 1000)) {
+                                if (lp.getSecrets() >= 15) {
+                                    GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(p);
+                                    if (!gamePlayer.hasDefaultItem(DefaultItem.HEAD_GIFT_SECRETS)) {
+                                        gamePlayer.addOnePassXp(GamePlugin.getGamePlugin().getOnePassManager().getSecretAward());
+                                        gamePlayer.addDefaultItem(DefaultItem.HEAD_GIFT_SECRETS);
+                                        GameAPI.getInstance().getMessenger().send(p, "§2Du hast alle §315 Secrets§2 entdeckt dafür hast du §3" + GamePlugin.getGamePlugin().getOnePassManager().getSecretAward() + " Xp §2im OnePass erhalten!");
+                                    }
+                                }
                                 LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§7Du hast das Secret §f" + name + "§7 entdeckt! §8[§a+35 Coins§8]");
                                 lp.getCorePlayer().addCoins(35);
                             } else {

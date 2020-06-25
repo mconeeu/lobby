@@ -14,12 +14,15 @@ import eu.mcone.lobby.api.enums.LobbyCategory;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.items.backpack.StoryBackpackInventoryListener;
 import eu.mcone.lobby.items.command.ChestCMD;
+import eu.mcone.lobby.items.command.LiveEventCMD;
 import eu.mcone.lobby.items.command.OfficeCMD;
 import eu.mcone.lobby.items.listener.InventoryTriggerListener;
 import eu.mcone.lobby.items.listener.NpcInteractListener;
+import eu.mcone.lobby.items.listener.effects.CompassListener;
 import eu.mcone.lobby.items.listener.effects.MagicWandListener;
 import eu.mcone.lobby.items.listener.effects.OneHitSwordListener;
 import eu.mcone.lobby.items.manager.DailyShopManager;
+import eu.mcone.lobby.items.manager.LiveEventManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -34,11 +37,14 @@ public class LobbyItems extends LobbyAddon {
     private static LobbyItems instance;
     @Getter
     private DailyShopManager dailyShopManager;
+    @Getter
+    private LiveEventManager liveEventManager;
 
     @Override
     public void onEnable() {
         instance = this;
         dailyShopManager = new DailyShopManager();
+        liveEventManager = new LiveEventManager();
 
         for (LobbyCategory category : LobbyCategory.values()) {
             Set<BackpackItem> items = new HashSet<>();
@@ -78,13 +84,15 @@ public class LobbyItems extends LobbyAddon {
         LobbyPlugin.getInstance().registerEvents(
                 new OneHitSwordListener(),
                 new MagicWandListener(),
+                new CompassListener(),
                 new InventoryTriggerListener(),
                 new NpcInteractListener()
         );
 
         LobbyPlugin.getInstance().registerCommands(
                 new ChestCMD(),
-                new OfficeCMD());
+                new OfficeCMD(),
+                new LiveEventCMD());
 
         final Location rewardBlock = new Location(Bukkit.getWorld("Lobby-OneIsland"), 46.5, 102D, -33.5);
         final Location rewardBlock2 = new Location(Bukkit.getWorld("Lobby-OneIsland"), -25.5, 100.8D, -113.4);

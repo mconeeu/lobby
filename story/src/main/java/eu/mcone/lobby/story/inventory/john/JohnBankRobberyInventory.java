@@ -10,7 +10,7 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.LobbyItem;
-import eu.mcone.lobby.api.enums.Progress;
+import eu.mcone.lobby.api.enums.StoryProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -41,7 +41,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
 
             setItem(InventorySlot.ROW_4_SLOT_2, new ItemBuilder(Material.MAP, 1, 0).displayName("§fVorbereitung: Tunnel Karte").create(), e -> {
                 p.closeInventory();
-                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Okay die erste Vorbereitungs Mission lautet Tunnel du musst zum Schmugler er steht in der nähe vom Zoll dort muss du den Plan der Bank kaufen und du weißt kein Wort zur Polizei sonst bist du tot!");
+                p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Okay die erste Vorbereitungs Mission lautet Tunnel du musst zum Schmuggler er steht in der nähe vom Zoll dort muss du den Plan der Bank kaufen und du weißt kein Wort zur Polizei sonst bist du tot!");
 
             });
 
@@ -114,7 +114,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
 
             setItem(InventorySlot.ROW_4_SLOT_8, new ItemBuilder(Material.IRON_SWORD, 1, 0).displayName("§fVorbereitung: Sicherheits Schwert").create(), e -> {
                 p.closeInventory();
-                if (lp.getProgressId() < Progress.MARVIN_KILL.getId() || lp.getProgressId() >= Progress.EDWARD_LABOR_START.getId()) {
+                if (lp.getProgressId() < StoryProgress.MARVIN_KILL.getId() || lp.getProgressId() >= StoryProgress.EDWARD_LABOR_START.getId()) {
                     p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Okay jetzt musst du zur Paradise Island reisen und da in die Waffenkammer der Polizei einbrechen um das Sicherheits Schwert zu klauen!");
                 } else {
                     LobbyPlugin.getInstance().getMessenger().send(p, "§4Du musst zuerst die One-Island Story weiterführen um die Mission starten zu können!");

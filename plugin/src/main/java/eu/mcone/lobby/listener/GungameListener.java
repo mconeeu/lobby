@@ -40,9 +40,9 @@ public class GungameListener implements Listener {
         e.setKeepInventory(true);
         e.setKeepLevel(true);
         e.getDrops().clear();
-        p.setVelocity(new Vector(0, 0, 0));
 
         if (manager.isFighting(p) && manager.isFighting(k)) {
+            p.setVelocity(new Vector(0, 0, 0));
             p.setExp(1);
             LobbyPlugin.getInstance().getMessenger().send(k, "§7Du hast §f" + p.getName() + " §7getötet §8[§a+2 Coins§8]");
             LobbyPlayer lk = LobbyPlugin.getInstance().getLobbyPlayer(k);

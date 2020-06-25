@@ -9,7 +9,7 @@ import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.LobbyItem;
-import eu.mcone.lobby.api.enums.Progress;
+import eu.mcone.lobby.api.enums.StoryProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -37,7 +37,7 @@ public class CaptainInventory extends CoreInventory {
 
             //NORMAL SPAWN NOTHING STORY
 
-            if (lp.getProgressId() < Progress.MARVIN_KILL.getId()) {
+            if (lp.getProgressId() < StoryProgress.MARVIN_KILL.getId()) {
                 if (p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
                     p.getInventory().remove(p.getItemInHand());
                     lp.removeLobbyItem(LobbyItem.BOAT_PASS);
@@ -55,7 +55,7 @@ public class CaptainInventory extends CoreInventory {
 
                 // SPAWN CHAPTER 3
 
-            } else if (lp.getProgressId() >= Progress.EDWARD_LABOR_START.getId()) {
+            } else if (lp.getProgressId() >= StoryProgress.EDWARD_LABOR_START.getId()) {
                 if (p.getItemInHand().equals(LobbyItem.BOAT_PASS.getItemStack())) {
                     p.getInventory().remove(p.getItemInHand());
                     lp.removeLobbyItem(LobbyItem.BOAT_PASS);

@@ -7,8 +7,10 @@ package eu.mcone.lobby.story.listener;
 
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.enums.StoryProgress;
+import eu.mcone.lobby.api.enums.TraderProgress;
+import eu.mcone.lobby.api.enums.TutorialStory;
 import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
-import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.entity.Player;
@@ -30,24 +32,50 @@ public class LobbyPlayerLoadedListener implements Listener {
     public static void spawnStoryNpcs(LobbyPlayer lp) {
         Player p = lp.bukkit();
 
-        if (lp.getProgressId() <= 15) {
+        /* One-Island Story Show NPCs */
+        if (lp.getProgressId() <= 17) {
             if (lp.getProgressId() > 0) {
-                Progress.getProgressByID(lp.getProgressId()).getNpc().toggleVisibility(p, true);
+                StoryProgress.getProgressByID(lp.getProgressId()).getNpc().toggleVisibility(p, true);
 
-                if (lp.getProgressId() == Progress.INFECTION.getId()) {
-                    PlayerNpc infectionNpc = Progress.INFECTION.getNpc();
+                if (lp.getProgressId() == StoryProgress.INFECTION.getId()) {
+                    PlayerNpc infectionNpc = StoryProgress.INFECTION.getNpc();
 
                     infectionNpc.setSkin(NpcListener.RUFI_HEADLED_SKIN, p);
                     infectionNpc.changeDisplayname(NpcListener.RUFI_HEADLED_DISPLAY_NAME, p);
                 }
             }
 
-            Progress future = Progress.getProgressByID(lp.getProgressId() + 1);
-            if (future != null) {
-                future.getNpc().toggleVisibility(p, true);
+            StoryProgress futureStory = StoryProgress.getProgressByID(lp.getProgressId() + 1);
+            if (futureStory != null) {
+                futureStory.getNpc().toggleVisibility(p, true);
             }
         }
 
+        /* Tutorial Story Show NPCs */
+        if (lp.getTutorialStoryProgressId() <= 6) {
+            if (lp.getTutorialStoryProgressId() > 0) {
+                TutorialStory.getTutorialStoryById(lp.getTutorialStoryProgressId()).getNpc().toggleVisibility(p, true);
+            }
+
+            TutorialStory futureTutorial = TutorialStory.getTutorialStoryById(lp.getTutorialStoryProgressId() + 1);
+            if (futureTutorial != null) {
+                futureTutorial.getNpc().toggleVisibility(p, true);
+            }
+        }
+
+        /* Trader Story Show NPCs */
+        if (lp.getTraderStoryProgressID() <= 5) {
+            if (lp.getTraderStoryProgressID() > 0) {
+                TraderProgress.getTraderStoryById(lp.getTraderStoryProgressID()).getNpc().toggleVisibility(p, true);
+            }
+
+            TraderProgress futureTutorial = TraderProgress.getTraderStoryById(lp.getTraderStoryProgressID() + 1);
+            if (futureTutorial != null) {
+                futureTutorial.getNpc().toggleVisibility(p, true);
+            }
+        }
+
+        /* Bank Story Show NPCs */
         if (lp.getBankprogressId() != BankRobberySmallProgress.BANK_ROBBERY_MIDDLE.getId()) {
             LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, false);
         }

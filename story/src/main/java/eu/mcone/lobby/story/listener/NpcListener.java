@@ -15,12 +15,12 @@ import eu.mcone.coresystem.api.core.player.SkinInfo;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.LobbyItem;
-import eu.mcone.lobby.api.enums.Progress;
+import eu.mcone.lobby.api.enums.StoryProgress;
+import eu.mcone.lobby.api.enums.TraderProgress;
+import eu.mcone.lobby.api.enums.TutorialStory;
 import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
-import eu.mcone.lobby.api.enums.bank.central.BankProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.items.inventory.smuggler.SmugglerInventory;
-import eu.mcone.lobby.story.inventory.john.JohnBankRobberyCentralBank;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import eu.mcone.lobby.story.inventory.searcher.SearcherInventory;
 import eu.mcone.lobby.story.inventory.story.CaptainInventory;
@@ -52,7 +52,7 @@ public class NpcListener implements Listener {
             if (w.equals(LobbyWorld.ONE_ISLAND.getWorld())) {
                 switch (npc.getData().getName()) {
                     case "roger": {
-                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fRoger §8|§7 Ouh ähm hier ist betreten verboten und ich wohne nicht hier du bist warscheinlich "  + p.getName() + " wusste ichs doch du willst dieses Hacker Gerät abholen hat John mir gesagt ich habe es irgendwo versteckt ich war aber nicht besoffen das ist klar!");
+                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fRoger §8|§7 Ouh ähm hier ist betreten verboten und ich wohne nicht hier du bist warscheinlich " + p.getName() + " wusste ichs doch du willst dieses Hacker Gerät abholen hat John mir gesagt ich habe es irgendwo versteckt ich war aber nicht besoffen das ist klar!");
                         break;
                     }
                     case "researcher": {
@@ -64,7 +64,7 @@ public class NpcListener implements Listener {
                     }
                     case "robert": {
                         npc.playLabymodEmote(LabyModEmote.SALUTE, p);
-                        if (lp.getProgressId() >= Progress.SALIA.getId() && !lp.hasLobbyItem(LobbyItem.MAGICWAND)) {
+                        if (lp.getProgressId() >= StoryProgress.SALIA.getId() && !lp.hasLobbyItem(LobbyItem.MAGICWAND)) {
                             if (!lp.hasLobbyItem(LobbyItem.MAGICWAND)) {
                                 lp.addLobbyItem(LobbyItem.MAGICWAND);
                             }
@@ -99,14 +99,14 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "rufi-infected": {
-                        if (lp.getProgressId() == Progress.EDWARD_CITYHALL.getId()) {
+                        if (lp.getProgressId() == StoryProgress.EDWARD_CITYHALL.getId()) {
                             if (p.getItemInHand().equals(LobbyItem.MAGICDRINK.getItemStack())) {
                                 p.getInventory().remove(p.getItemInHand());
                                 lp.removeLobbyItem(LobbyItem.MAGICDRINK);
-                                lp.setProgress(Progress.INFECTION);
+                                lp.setProgress(StoryProgress.INFECTION);
 
-                                Progress.EDWARD_CITYHALL.getNpc().toggleVisibility(p, false);
-                                Progress.ONEHIT_SWORD.getNpc().toggleVisibility(p, true);
+                                StoryProgress.EDWARD_CITYHALL.getNpc().toggleVisibility(p, false);
+                                StoryProgress.ONEHIT_SWORD.getNpc().toggleVisibility(p, true);
 
                                 p.spigot().playEffect(npc.getData().getLocation().bukkit(), Effect.INSTANT_SPELL, 1, 1, 1, 1, 1, 5, 1000, 1);
 
@@ -118,7 +118,7 @@ public class NpcListener implements Listener {
                             } else {
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fRufi §8|§7 Das hilft mir nicht! Hast du eventuell einen Heiltrank, den du mir geben kannst?");
                             }
-                        } else if (lp.getProgressId() == Progress.INFECTION.getId()) {
+                        } else if (lp.getProgressId() == StoryProgress.INFECTION.getId()) {
                             p.sendMessage("§8[§7§l!§8] §cNPC §8» §fRufi §8|§7 Hol dir deine Belohnung in der Mitte von One-Island ab!");
                         }
                         return;
@@ -135,7 +135,7 @@ public class NpcListener implements Listener {
                         if (lp.hasLobbyItem(LobbyItem.PASS) || lp.getBankprogressId() == BankRobberySmallProgress.SMUGGLER.getId()) {
                             new SmugglerInventory(p);
                         } else {
-                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fSchmugler §8|§7 Ich handel nur mit Leuten die ich kenne hol dir ein Ausweis!");
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fSchmuggler §8|§7 Ich handel nur mit Leuten die ich kenne hol dir ein Ausweis!");
                         }
                         break;
                     }
@@ -161,7 +161,7 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "edward-cave": {
-                        if (lp.getProgressId() == Progress.INFECTION.getId()) {
+                        if (lp.getProgressId() == StoryProgress.INFECTION.getId()) {
 
                             CoreSystem.getInstance().createTitle()
                                     .title("§3§lDAS WAR DIE MCONE STORY")
@@ -190,7 +190,7 @@ public class NpcListener implements Listener {
 
 
                             //TODO CHAPTER 2 TEIL 2
-                            lp.setProgress(Progress.ONEHIT_SWORD);
+                            lp.setProgress(StoryProgress.ONEHIT_SWORD);
 
                             if (!lp.hasLobbyItem(LobbyItem.RADIO_SET1)) {
                                 lp.addLobbyItem(LobbyItem.RADIO_SET1);
@@ -219,6 +219,11 @@ public class NpcListener implements Listener {
 
                         break;
                     }
+                    case "frank6": {
+                        if (!lp.hasLobbyItem(LobbyItem.COMPASS)) {
+                            lp.addLobbyItem(LobbyItem.COMPASS);
+                        }
+                    }
                 }
             } else if (w.equals(LobbyWorld.PARADISE_ISLAND.getWorld())) {
                 switch (npc.getData().getName()) {
@@ -228,7 +233,7 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "marvin": {
-                        if (lp.getProgressId() + 1 == Progress.MARVIN.getId() || lp.getProgressId() == Progress.MARVIN.getId()) {
+                        if (lp.getProgressId() + 1 == StoryProgress.MARVIN.getId() || lp.getProgressId() == StoryProgress.MARVIN.getId()) {
                             LobbyWorld.CAVE.getWorld().teleportSilently(p, "spawn");
                             p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 150, 2));
                             p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 2));
@@ -247,7 +252,7 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "sparow": {
-                        if (lp.getProgressId() == Progress.MARVIN_WELCOME.getId()) {
+                        if (lp.getProgressId() == StoryProgress.MARVIN_WELCOME.getId()) {
                             if (!lp.hasLobbyItem(LobbyItem.RADIO_SET_2)) {
                                 lp.addLobbyItem(LobbyItem.RADIO_SET_2);
                             }
@@ -296,6 +301,8 @@ public class NpcListener implements Listener {
                                 if (lp.getBankprogressId() != BankRobberySmallProgress.BANK_ROBBERY_END.getId()) {
                                     new JohnBankRobberyInventory(p);
                                 } else {
+                                    //TODO CENTRAL ROBBERY
+                                    /*
                                     if (lp.getCentralbankprogressId() >= BankProgress.SPY.getId()) {
                                         if (lp.hasLobbyItem(LobbyItem.WORKER_FILE_1)) {
                                             if (lp.getCentralbankprogressId() == BankProgress.SPY.getId()) {
@@ -309,6 +316,9 @@ public class NpcListener implements Listener {
                                         lp.addLobbyItem(LobbyItem.BUTTON);
                                         new JohnBankRobberyCentralBank(p);
                                     }
+                                     */
+                                    p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Ich bleibe hier, hahah...");
+
                                 }
                             } else {
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Hallo " + p.getName() + " schönes Büro aber leider gehört es bis jetzt noch mir aber du kannst etwas für mich erledigen wo du das Büro und ein paar Coins bekommst das klingt doch gut, oder? Ich stecke dir ein Knopf ins Ohr damit wir uns verständigen können!");
@@ -324,26 +334,26 @@ public class NpcListener implements Listener {
                     }
                 }
             }
-            for (Progress progress : Progress.values()) {
-                NPC progressNpc = progress.getWorld().getWorld().getNPC(progress.getNpcName());
+            for (StoryProgress storyProgress : StoryProgress.values()) {
+                NPC progressNpc = storyProgress.getWorld().getWorld().getNPC(storyProgress.getNpcName());
 
                 if (e.getNpc().equals(progressNpc)) {
                     p.getWorld().playEffect(e.getNpc().getData().getLocation().bukkit(), Effect.LAVA_POP, 100);
                     npc.playLabymodEmote(LabyModEmote.HELLO, p);
 
-                    if (progress.getId() >= lp.getProgressId()) {
-                        if (progress.getId() <= lp.getProgressId() + 1) {
+                    if (storyProgress.getId() >= lp.getProgressId()) {
+                        if (storyProgress.getId() <= lp.getProgressId() + 1) {
                             // TODO REMOVE THE IF WHEN CHAPTER 2 TEIL 2 OPEN!
                             if (!lp.hasLobbyItem(LobbyItem.RADIO_SET1)) {
-                                p.sendMessage("\n" + progress.getMessage().replaceAll("%%player%%", p.getName()));
+                                p.sendMessage("\n" + storyProgress.getMessage().replaceAll("%%player%%", p.getName()));
 
-                                lp.setProgress(progress);
+                                lp.setProgress(storyProgress);
 
-                                if (progress.getId() > 1) {
-                                    Progress.getProgressByID(progress.getId() - 1).getNpc().toggleVisibility(p, false);
+                                if (storyProgress.getId() > 1) {
+                                    StoryProgress.getProgressByID(storyProgress.getId() - 1).getNpc().toggleVisibility(p, false);
                                 }
 
-                                Progress future = Progress.getProgressByID(progress.getId() + 1);
+                                StoryProgress future = StoryProgress.getProgressByID(storyProgress.getId() + 1);
                                 if (future != null) {
                                     future.getNpc().toggleVisibility(p, true);
                                 }
@@ -360,7 +370,69 @@ public class NpcListener implements Listener {
                 }
             }
 
+            for (TutorialStory tutorialStory : TutorialStory.values()) {
+                NPC tutorialProgressNpc = tutorialStory.getWorld().getWorld().getNPC(tutorialStory.getNpcName());
 
+                if (e.getNpc().equals(tutorialProgressNpc)) {
+                    p.getWorld().playEffect(e.getNpc().getData().getLocation().bukkit(), Effect.LAVA_POP, 100);
+                    npc.playLabymodEmote(LabyModEmote.HELLO, p);
+
+                    if (tutorialStory.getId() >= lp.getTutorialStoryProgressId()) {
+                        if (tutorialStory.getId() <= lp.getTutorialStoryProgressId() + 1) {
+                            p.sendMessage("\n" + tutorialStory.getMessage().replaceAll("%%player%%", p.getName()));
+
+                            lp.setTutorialStoryProgress(tutorialStory);
+
+                            if (tutorialStory.getId() > 1) {
+                                TutorialStory.getTutorialStoryById(tutorialStory.getId() - 1).getNpc().toggleVisibility(p, false);
+                            }
+
+                            TutorialStory future = TutorialStory.getTutorialStoryById(tutorialStory.getId() + 1);
+                            if (future != null) {
+                                future.getNpc().toggleVisibility(p, true);
+                            }
+                        } else {
+                            p.sendMessage("§8§l[§7§l!§8§l] §fLobby §8 » §7Du bist noch nicht so weit!");
+                        }
+                    } else {
+                        p.sendMessage("§8§l[§7§l!§8§l] §fLobby§8 » §7Das hast du schon gemacht!");
+                    }
+                    break;
+                }
+            }
+            for (TraderProgress traderProgress : TraderProgress.values()) {
+                NPC tutorialProgressNpc = traderProgress.getWorld().getWorld().getNPC(traderProgress.getNpcName());
+
+                if (e.getNpc().equals(tutorialProgressNpc)) {
+                    p.getWorld().playEffect(e.getNpc().getData().getLocation().bukkit(), Effect.LAVA_POP, 100);
+                    npc.playLabymodEmote(LabyModEmote.BUUUH, p);
+
+                    if (traderProgress.getId() >= lp.getTraderStoryProgressID()) {
+                        if (traderProgress.getId() <= lp.getTraderStoryProgressID() + 1) {
+
+                            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJanoff §8|§7 Ich möchte gerade nicht mit dir reden");
+
+                       /*     p.sendMessage("\n" + traderProgress.getMessage().replaceAll("%%player%%", p.getName()));
+                            lp.setTraderStoryProgress(traderProgress);
+
+                            if (traderProgress.getId() > 1) {
+                             / TraderProgress.getTraderStoryById(traderProgress.getId() - 1).getNpc().toggleVisibility(p, false);
+                            }
+
+
+                            TraderProgress future = TraderProgress.getTraderStoryById(traderProgress.getId() + 1);
+                            if (future != null) {
+                                future.getNpc().toggleVisibility(p, true);
+                            } */
+                        } else {
+                            p.sendMessage("§8§l[§7§l!§8§l] §fLobby §8 » §7Du bist noch nicht so weit!");
+                        }
+                    } else {
+                        p.sendMessage("§8§l[§7§l!§8§l] §fLobby§8 » §7Das hast du schon gemacht!");
+                    }
+                    break;
+                }
+            }
         }
     }
 

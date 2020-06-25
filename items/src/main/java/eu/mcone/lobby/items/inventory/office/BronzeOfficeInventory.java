@@ -36,7 +36,7 @@ public class BronzeOfficeInventory extends CoreInventory {
                 });
 
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§6§lVorteile:")
-                .lore("§f- Du erhälst eine schöne Sekretärin", "§fdie dir viele Aufgaben nimmnt.")
+                .lore("§f- Du erhälst eine schöne Sekretärin", "§fdie dir viele Aufgaben abnimmt.")
                 .create());
 
         setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§6§lVorteile:")

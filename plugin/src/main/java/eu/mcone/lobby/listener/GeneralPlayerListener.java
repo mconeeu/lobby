@@ -133,17 +133,15 @@ public class GeneralPlayerListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(e.getPlayer())) {
-            LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(e.getPlayer());
-        }
 
+        if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(player)) {
+            LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(player);
+        }
 
         if (InteractionInventory.stacking.containsKey(player)) {
             Player isStacked = InteractionInventory.stacking.get(player);
-            isStacked.getInventory().setItem(5, null);
-
-
             InteractionInventory.stacking.remove(player);
+
             LobbyPlugin.getInstance().getMessenger().send(isStacked, "§4" + player.getName() + " ist nun nicht mehr auf deinem Kopf");
         } else if (InteractionInventory.stacking.containsValue(player)) {
             Player isStacked = InteractionInventory.stacking.get(player);
@@ -160,6 +158,7 @@ public class GeneralPlayerListener implements Listener {
 
 
         OfficeManager.quitOffice(player);
+
 
         if (SecretaryInventory.isInviting.contains(player)) {
             SecretaryInventory.isInviting.remove(player);

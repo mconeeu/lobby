@@ -23,7 +23,7 @@ import eu.mcone.lobby.command.GameCMD;
 import eu.mcone.lobby.command.LobbyCMD;
 import eu.mcone.lobby.gang.LobbyGang;
 import eu.mcone.lobby.gungame.LobbyGungameManager;
-import eu.mcone.lobby.inventory.LobbySettingsInventory;
+import eu.mcone.lobby.inventory.LobbyProfileInventory;
 import eu.mcone.lobby.items.LobbyItems;
 import eu.mcone.lobby.jumpnrun.LobbyJumpNRunManager;
 import eu.mcone.lobby.listener.*;
@@ -95,12 +95,13 @@ public class Lobby extends LobbyPlugin {
         CoreSystem.getInstance().setProfileInventorySize(InventorySlot.ROW_6);
         CoreSystem.getInstance().modifyProfileInventory((coreInventory, player) -> {
             coreInventory.setItem(
-                    InventorySlot.ROW_5_SLOT_8,
-                    new ItemBuilder(Material.CLAY_BALL, 1, 0).displayName("§3§lLobby Einstellungen").lore("§7§oVerwalte deine", "§7§oLobbyeinstellungen", "", "§8» §f§nLinksklick§8 | §7§oÖffnen").create(),
-                    e -> new LobbySettingsInventory(player)
+                    InventorySlot.ROW_5_SLOT_3,
+                    new ItemBuilder(Material.GRASS, 1, 0).displayName("§3§lLobby").lore("§7§oWähle zwischen Lobbyeinstellungen", "§7§oSecrets oder dein Story Fortschritt", "", "§8» §f§nLinksklick§8 | §7§oAnzeigen").create(),
+                    e -> new LobbyProfileInventory(player)
             );
+
             coreInventory.setItem(
-                    InventorySlot.ROW_5_SLOT_6,
+                    InventorySlot.ROW_5_SLOT_7,
                     new ItemBuilder(Material.CHEST, 1, 0).displayName("§e§lModifizierte Inventare").lore("§7§oModifiziere Shop-Inventare aus", "§7§oallen Spielmodi", "", "§8» §f§nLinksklick§8 | §7§oAnzeigen").create(),
                     e -> getInventoryModificationManager().openGamemodeModificationInventory(player)
             );
@@ -223,7 +224,5 @@ public class Lobby extends LobbyPlugin {
         Bukkit.getScheduler().runTaskTimer(this, LobbyObjective::updateLines, 50, 100);
         Bukkit.getScheduler().runTaskTimer(this, new RealTimeUtil(), 50, 20 * 60);
         Bukkit.getScheduler().runTaskTimer(this, new NpcEmoteManager(), 50, 20 * 5);
-
     }
-
 }

@@ -68,11 +68,12 @@ public class OneHitListener implements Listener {
         Player k = p.getKiller();
 
         e.setKeepInventory(true);
-        p.setVelocity(new Vector(0, 0, 0));
 
         if (manager.isFighting(p) && manager.isFighting(k)) {
             p.setLevel(0);
             p.setExp(1);
+
+            p.setVelocity(new Vector(0, 0, 0));
 
 
             if (k == null) {

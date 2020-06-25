@@ -15,8 +15,10 @@ public class ItemHotbarChangeListener implements Listener {
         Player player = e.getPlayer();
         LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(player);
 
-        if (lobbyPlayer.getSettings().isHotbarChangeSound()) {
-            player.playSound(e.getPlayer().getLocation(), Sound.ITEM_PICKUP, 0.5F, 1);
+        if (lobbyPlayer != null) {
+            if (lobbyPlayer.getSettings().isHotbarChangeSound()) {
+                player.playSound(e.getPlayer().getLocation(), Sound.ITEM_PICKUP, 0.5F, 1);
+            }
         }
     }
 }

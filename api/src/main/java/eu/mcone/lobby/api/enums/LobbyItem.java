@@ -53,6 +53,8 @@ public enum LobbyItem {
     NORMAL_FILES_2(26, "Bank Daten2", LobbyCategory.STORY_ITEMS, Level.EPIC, 0, 0, new ItemBuilder(Material.BOOK, 1, 0).displayName("§5§lBank Schlüssel Akten").lore("§7Kategorie: §bAkten", "§7Seltenheit: §5Episch", "", "§7Zu viele Passwörter!").create()),
     NORMAL_FILES_3(27, "Bank Daten3", LobbyCategory.STORY_ITEMS, Level.EPIC, 0, 0, new ItemBuilder(Material.BOOK, 1, 0).displayName("§5§lGeld Tresor Akten").lore("§7Kategorie: §bAkten", "§7Seltenheit: §5Episch", "", "§7Ich mache Minus oder Plus").create()),
 
+    //tutorial story
+    COMPASS(28, "Kompass", LobbyCategory.STORY_ITEMS, Level.EPIC, 0, 0, new ItemBuilder(Material.LEASH, 1, 0).displayName("§5§lKompass").lore("§7Kategorie: §bItem", "§7Seltenheit: §5Episch", "", "§7Funktioniert der Kompass überhaupt??").create()),
 
     //Armor
     IRON_HEAD(0, "eisenhelm", LobbyCategory.ARMOR, Level.UNUSUAL, 0, 0, new ItemBuilder(Material.IRON_HELMET, 1, 0).displayName("§3§lEisen Helm").lore("§7Kategorie: §bRüstung", "§7Seltenheit: §3Ungewöhnlich", "§72 Eisen", "§7Mit dem Eisen Helm in den Krieg").create()),

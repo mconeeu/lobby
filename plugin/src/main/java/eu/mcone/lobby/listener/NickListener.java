@@ -5,10 +5,12 @@
 
 package eu.mcone.lobby.listener;
 
+import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.NickEvent;
 import eu.mcone.coresystem.api.bukkit.event.UnnickEvent;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.LobbySettings;
 import eu.mcone.lobby.items.manager.OfficeManager;
@@ -30,6 +32,8 @@ public class NickListener implements Listener {
             }
         }
 
+        p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItems.NICK_ACTIVATED : HotbarItems.NICK_DISABLED);
+
         p.getInventory().setItem(
                 8,
                 Skull.fromMojangValue(e.getNick().getSkinInfo().getValue(), 1)
@@ -46,6 +50,8 @@ public class NickListener implements Listener {
         Player p = e.getPlayer().bukkit();
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
         LobbySettings settings = lp.getSettings();
+
+        p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItems.NICK_ACTIVATED : HotbarItems.NICK_DISABLED);
 
         p.getInventory().setItem(
                 8,

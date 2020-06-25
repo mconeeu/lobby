@@ -32,7 +32,6 @@ public enum JumpNRun {
                     new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), -12, 66, -16),
             }
     ),
-
     TOWN_HALL(
             2,
             new ItemBuilder(Material.BOOKSHELF, 1, 0).displayName("§fBibliothek").lore("§8» §f§nLinksklick§8 | §7§oBetreten").create(),

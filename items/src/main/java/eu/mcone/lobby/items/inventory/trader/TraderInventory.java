@@ -10,6 +10,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
+import eu.mcone.gameapi.api.GamePlugin;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -25,14 +26,17 @@ public class TraderInventory extends CoreInventory {
                         "§7§onur durch das Öffnen von Kisten!"
                 ).create());
 
-        setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.ANVIL, 1, 0).displayName("§cTäglicher Shop").create(),
+        setItem(InventorySlot.ROW_3_SLOT_2, new ItemBuilder(Material.ANVIL, 1, 0).displayName("§cTäglicher Shop").create(),
                 e -> new DailyItemsInventory(p));
 
-        setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.BOOK, 1, 0).displayName("§bFähre Tickets kaufen").create(),
+        setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.PAPER, 1, 0).displayName("§bFähre Tickets kaufen").create(),
                 e -> new TicketBuyInventory(p));
 
-        setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.CHEST, 1, 0).displayName("§6Kisten kaufen").create(),
+        setItem(InventorySlot.ROW_3_SLOT_6, new ItemBuilder(Material.CHEST, 1, 0).displayName("§6Kisten kaufen").create(),
                 e -> new ChestBuyInventory(p));
+
+        setItem(InventorySlot.ROW_3_SLOT_8, new ItemBuilder(Material.BOOK, 1, 0).displayName("§fOnePass").create(),
+                e -> GamePlugin.getGamePlugin().getOnePassManager().openOnePassInventory(p));
 
         openInventory();
     }

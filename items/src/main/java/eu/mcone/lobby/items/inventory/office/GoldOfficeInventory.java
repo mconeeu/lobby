@@ -42,7 +42,7 @@ public class GoldOfficeInventory extends CoreInventory {
                 });
 
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§6§lVorteile:")
-                .lore("§f- Du erhälst eine schöne Sekretärin", "§fdie dir viele Aufgaben nimmnt.", "§f- Du erhälst ein Schlaf Raum wo", "du dich ausruhen kannst", "§f- Du erhälst Sicherheits System", "§f- Du erhälst einen im Büro versteckten Geld Tresor.")
+                .lore("§f- Du erhälst eine schöne Sekretärin", "§fdie dir viele Aufgaben nimmnt.", "§f- Du erhälst ein Schlaf Raum wo", "§fdu dich ausruhen kannst", "§f- Du erhälst ein Sicherheits System", "§f- Du erhälst einen im Büro versteckten Geld Tresor.")
                 .create());
 
         setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§6§lVorteile:")

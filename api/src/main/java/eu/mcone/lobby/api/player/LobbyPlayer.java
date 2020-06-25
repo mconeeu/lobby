@@ -8,10 +8,8 @@ package eu.mcone.lobby.api.player;
 import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.enums.*;
 import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
-import eu.mcone.lobby.api.enums.JumpNRun;
-import eu.mcone.lobby.api.enums.LobbyItem;
-import eu.mcone.lobby.api.enums.Progress;
 import eu.mcone.lobby.api.enums.bank.central.BankProgress;
 import eu.mcone.lobby.api.gang.Gang;
 import lombok.Getter;
@@ -32,7 +30,7 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
     @Setter
     private Gang gang;
     @Getter
-    private int chests, progressId, bankprogressId, centralbankprogressId;
+    private int chests, progressId, bankprogressId, centralbankprogressId, tutorialStoryProgressId, traderStoryProgressID;
     @Getter
     @Setter
     private LobbySettings settings;
@@ -54,6 +52,8 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
         this.progressId = profile.getProgressId();
         this.bankprogressId = profile.getBankprogressId();
         this.centralbankprogressId = profile.getCentralbankprogressId();
+        this.tutorialStoryProgressId = profile.getTuturialStoryId();
+        this.traderStoryProgressID = profile.getTraderStoryProgressID();
         this.settings = profile.getSettings();
         this.secrets = profile.getSecrets();
         this.jumpnruns = profile.getJumpnrunSet();
@@ -68,7 +68,7 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
 
     @Override
     public void saveData() {
-        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, bankprogressId, centralbankprogressId, settings, secrets, jumpnruns));
+        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, bankprogressId, centralbankprogressId, tutorialStoryProgressId, traderStoryProgressID, settings, secrets, jumpnruns));
     }
 
     public boolean isInGang() {
@@ -109,8 +109,8 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
         );
     }
 
-    public void setProgress(Progress progress) {
-        this.progressId = progress.getId();
+    public void setProgress(StoryProgress storyProgress) {
+        this.progressId = storyProgress.getId();
         saveData();
     }
 
@@ -121,6 +121,16 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
 
     public void setCentralBankProgress(BankProgress bankprogress) {
         this.centralbankprogressId = bankprogress.getId();
+        saveData();
+    }
+
+    public void setTutorialStoryProgress(TutorialStory tutorialStoryProgress) {
+        this.tutorialStoryProgressId = tutorialStoryProgress.getId();
+        saveData();
+    }
+
+    public void setTraderStoryProgress(TraderProgress traderStoryProgress) {
+        this.traderStoryProgressID = traderStoryProgress.getId();
         saveData();
     }
 
@@ -232,7 +242,7 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
                     }, 12);
                 }, 1);
             } else {
-                player.teleport(location);
+                    player.teleport(location);
                 player.playSound(player.getLocation(), Sound.GLASS, 3, 2);
             }
         } else {
@@ -252,6 +262,10 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
             saveData();
             return true;
         }
+    }
+
+    public int getSecrets() {
+        return secrets.size();
     }
 
 }

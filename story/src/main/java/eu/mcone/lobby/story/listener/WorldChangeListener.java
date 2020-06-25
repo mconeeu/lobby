@@ -2,7 +2,9 @@ package eu.mcone.lobby.story.listener;
 
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.Progress;
+import eu.mcone.lobby.api.enums.StoryProgress;
+import eu.mcone.lobby.api.enums.TraderProgress;
+import eu.mcone.lobby.api.enums.TutorialStory;
 import eu.mcone.lobby.items.inventory.office.secretary.SecretaryInventory;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import org.bukkit.entity.Player;
@@ -14,10 +16,19 @@ public class WorldChangeListener implements Listener {
 
     @EventHandler
     public void on(PlayerChangedWorldEvent e) {
-        for (Progress progress : Progress.values()) {
-            NPC npc = progress.getNpc();
+        for (StoryProgress storyProgress : StoryProgress.values()) {
+            NPC npc = storyProgress.getNpc();
             npc.toggleVisibility(e.getPlayer(), false);
         }
+        for (TutorialStory tutorialStory : TutorialStory.values()) {
+            NPC npc = tutorialStory.getNpc();
+            npc.toggleVisibility(e.getPlayer(), false);
+        }
+        for (TraderProgress traderProgress : TraderProgress.values()) {
+            NPC npc = traderProgress.getNpc();
+            npc.toggleVisibility(e.getPlayer(), false);
+        }
+
 
         Player player = e.getPlayer();
 

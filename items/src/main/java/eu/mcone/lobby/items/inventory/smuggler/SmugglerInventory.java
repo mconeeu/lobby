@@ -21,7 +21,7 @@ public class SmugglerInventory extends CoreInventory {
 
 
     public SmugglerInventory(Player p) {
-        super("§8» §7§lSchmugler", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
+        super("§8» §7§lSchmuggler", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         setItem(InventorySlot.ROW_1_SLOT_5, Skull.fromUrl("http://textures.minecraft.net/texture/5163dafac1d91a8c91db576caac784336791a6e18d8f7f62778fc47bf146b6", 1).toItemBuilder().displayName("§7§lSchmuggler").lore("§7§oBeim Schmuggler kannst ausgewählte", "§7§oWare für deinen Rucksack kaufen.", "§7§ooder geschmugglte Kisten", "§7§oAber pass auf er kann auch kappute Ware verkaufen!").create());

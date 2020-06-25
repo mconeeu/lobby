@@ -40,11 +40,11 @@ public class SilverOfficeInventory extends CoreInventory {
                 });
 
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§6§lVorteile:")
-                .lore("§f- Du erhälst eine schöne Sekretärin", "§fdie dir viele Aufgaben nimmnt.", "§f- Du erhälst ein Schlaf Raum wo", "du dich ausruhen kannst")
+                .lore("§f- Du erhälst eine schöne Sekretärin", "§fdie dir viele Aufgaben nimmnt.", "§f- Du erhälst ein Schlaf Raum wo", "§fdu dich ausruhen kannst")
                 .create());
 
         setItem(InventorySlot.ROW_2_SLOT_7, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§6§lVorteile:")
-                .lore("§f- Du erhälst ein Exklusives Büro wo du", "§fWo du Geheime Missionen starten kannst!", "§f- Du erhälst einen Bogenstand wo", "§fdu gute Bogen Skills erlernen kannst.")
+                .lore("§f- Du erhälst ein Exklusives Büro wo du", "§fGeheime Missionen starten kannst!", "§f- Du erhälst einen Bogenstand wo", "§fdu gute Bogen Skills erlernen kannst.")
                 .create());
 
 

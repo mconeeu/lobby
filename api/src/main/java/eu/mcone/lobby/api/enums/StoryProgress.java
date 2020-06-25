@@ -10,7 +10,7 @@ import eu.mcone.lobby.api.LobbyWorld;
 import lombok.Getter;
 
 @Getter
-public enum Progress {
+public enum StoryProgress {
 
     //TEIL |
 
@@ -25,7 +25,6 @@ public enum Progress {
      ONEHIT_SWORD(9, "Belohnung", new String[]{"§eDu hast deine Belohnung abgeholt"}, "edward-cave", LobbyWorld.ONE_ISLAND, "§8[§7§l!§8] §cNPC §8» §fEdward §8|§7 Du hast es geschaft den Bürgermeister zu finden und zu heilen jetzt musst nur noch die Täter finden. Sie sind warscheinlich zu Paradise Island geflohen das ist unsere Nachbar Insel. ich weiß das sie da sind weil mein Freund Sparow da lebt. Aber jetzt brauche ich erstmal eine große und lange Pause. Achja nehme dir hier aus der Kiste deine Belohnun!"),
 
     //TEIL ||
-
 
     //  ONEHIT_SWORD(9, "Belohnung", new String[]{"§eDu hast die Belohnung bekommen"}, "edward-cave", LobbyWorld.ONE_ISLAND, "§8[§7§l!§8] §cNPC §8» §fEdward §8|§7 Du hast es geschaft den Bürgermeister zu helfen jetzt musst nur noch die Täter finden und sie sind nicht mehr hier du musst zu Paradise Island ich weiß das sie da sind weil mein Freund Sparow da lebt wir können aber mit einen Funkgerät zusammen bleiben wenn du auf diese Mission gehst. Du musst zum Fähren Verkäufer am großen Hafen da kannst du dir ein Ticket zu Paradise Island kaufen. Achja nimm dir deine Belohnung hier aus der Kiste!"),
     SPAROW(10, "Treffen", new String[]{"§eDu hast dich mit Sparow getroffen"}, "sparow", LobbyWorld.PARADISE_ISLAND, "§8[§7§l!§8] §cNPC §8» §fSparow §8|§7 Hi du musst %%player%% sein. Edward hat mir viel über dich erzählt aber Marvin wurde bereits von der Polizei gefangen genommen. Achja du weißt garnicht wer Marvin ist oder? Oke pass auf wo Marvin rufi infiziert hat ist er danach sofort nach Paradise Island gereist er wollte sich ein Hotel mieten aber leider ist Mrs Merkel und Mr Trump auf der Insel zu besuch. Deswegen konnter er sich kein Zimmer mieten und dann habe kurze Zeit später in der Post gelesen das Marvin gefangen wurde ich glaub die Hotel Rezeption weiß mehr darüber und noch etwas du musst Edward bescheid sagen. Am besten machst du das mit deinem Funkgerät in deinem Rucksack einfach draufklicken hat er gesagt!"),
@@ -46,7 +45,7 @@ public enum Progress {
     private final LobbyWorld world;
     private final String[] description;
 
-    Progress(int id, String name, String[] description, String npcName, LobbyWorld world, String message) {
+    StoryProgress(int id, String name, String[] description, String npcName, LobbyWorld world, String message) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -59,10 +58,10 @@ public enum Progress {
         return (PlayerNpc) world.getWorld().getNPC(npcName);
     }
 
-    public static Progress getProgressByID(int id) {
-        for (Progress progress : values()) {
-            if (progress.getId() == id) {
-                return progress;
+    public static StoryProgress getProgressByID(int id) {
+        for (StoryProgress storyProgress : values()) {
+            if (storyProgress.getId() == id) {
+                return storyProgress;
             }
         }
 

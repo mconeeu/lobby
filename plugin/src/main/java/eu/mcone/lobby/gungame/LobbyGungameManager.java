@@ -27,7 +27,7 @@ public class LobbyGungameManager implements GungameManager {
 
     static {
         for (Map.Entry<String, CoreLocation> location : LobbyWorld.GUNGAME.getWorld().getLocations().entrySet()) {
-            if (location.getKey().startsWith("gungame-1-")) {
+            if (location.getKey().startsWith("Lobby-Gungame-1-")) {
                 SPAWN_LOCATIONS.put(location.getValue().bukkit(), (System.currentTimeMillis() / 1000) - 5);
             }
         }
@@ -61,7 +61,10 @@ public class LobbyGungameManager implements GungameManager {
             fighting.add(p);
             p.setGameMode(GameMode.ADVENTURE);
             p.setAllowFlight(false);
+
+
             LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(getRandomSpawn());
+
 
             addSave(p);
 
