@@ -134,6 +134,11 @@ public class PlayerJoinListener implements Listener {
             }
         }
 
+        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
+        if (lp.getSettings().isScoreboard()) {
+            cp.getScoreboard().setNewObjective(new SidebarObjective());
+        }
+
         if (!lp.hasLobbyItem(LobbyItem.BANKCARD_PREMIUM)) {
             if (p.hasPermission("mcone.premium")) {
                 if (!lp.hasLobbyItem(LobbyItem.BANKCARD)) {
@@ -217,8 +222,6 @@ public class PlayerJoinListener implements Listener {
                         .create()
         );
 
-
-        cp.getScoreboard().setNewObjective(new SidebarObjective());
     }
 
     public static void setLobbyItems(Player p) {

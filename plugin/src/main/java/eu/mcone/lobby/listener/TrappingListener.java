@@ -4,6 +4,7 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.BuildModeChangeEvent;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.trap.TrapManager;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.*;
@@ -213,9 +214,15 @@ public class TrappingListener implements Listener {
                         p.removePotionEffect(PotionEffectType.SPEED);
                         p.getActivePotionEffects().clear();
 
-                        CoreSystem.getInstance().getCorePlayer(k).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
-                        CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                        LobbyPlayer lobbykiller = LobbyPlugin.getInstance().getLobbyPlayer(k);
+                        if (lobbykiller.getSettings().isScoreboard()) {
+                            CoreSystem.getInstance().getCorePlayer(k).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                        }
 
+                        LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(k);
+                        if (lobbyPlayer.getSettings().isScoreboard()) {
+                            CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                        }
                         e.setCancelled(false);
                     }
                 }

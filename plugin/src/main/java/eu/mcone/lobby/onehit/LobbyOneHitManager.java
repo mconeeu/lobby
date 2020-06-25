@@ -52,7 +52,10 @@ public class LobbyOneHitManager implements OneHitManager {
         }
         if (!fighting.contains(p)) {
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
-            CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new OneHitObjective(this));
+            LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
+            if (lobbyPlayer.getSettings().isScoreboard()) {
+                CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new OneHitObjective(this));
+            }
 
             CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p, "MCONE-OneHit");
 
@@ -66,7 +69,9 @@ public class LobbyOneHitManager implements OneHitManager {
 
             if (fighting.size() <= 1) {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist gerade der §f§oeinzigste§7, der §fOneHit§7 spielt!");
-                CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                if (lobbyPlayer.getSettings().isScoreboard()) {
+                    CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                }
             } else {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§7Es spielen gerade §f§o" + fighting.size() + "§7 Spieler §fOneHit§7!");
                 for (Player all : Bukkit.getOnlinePlayers()) {

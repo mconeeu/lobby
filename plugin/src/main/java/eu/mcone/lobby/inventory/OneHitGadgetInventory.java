@@ -7,6 +7,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.listener.OneHitListener;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -92,7 +93,10 @@ public class OneHitGadgetInventory extends CoreInventory {
                     if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p)) {
                         if (p.getLevel() >= 3) {
                             p.setLevel(p.getLevel() - 3);
-                            CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                            LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
+                            if (lobbyPlayer.getSettings().isScoreboard()) {
+                                CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                            }
 
                             p.getInventory().setItem(2, HotbarItems.ONEHIT_SNOWBALL);
                             LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast erfolgreich den §fSchneball §7für eine §f3er Killstreak gekauft!");
@@ -114,7 +118,10 @@ public class OneHitGadgetInventory extends CoreInventory {
                     if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p)) {
                         if (p.getLevel() >= 2) {
                             p.setLevel(p.getLevel() - 2);
-                            CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                            LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
+                            if (lobbyPlayer.getSettings().isScoreboard()) {
+                                CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                            }
                             OneHitListener.doubleJump.add(p);
 
                             p.setGameMode(GameMode.SURVIVAL);

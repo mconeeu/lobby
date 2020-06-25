@@ -18,7 +18,7 @@ public class LobbySettings {
 
     private boolean allowTrading = true, allowAnimation = true, realTime = true,
             RankBoots = true, InventoryAnimation = true, isStacking = true,
-            HotbarChangeSound = true, lobbyGamesInvite = true;
+            HotbarChangeSound = true, lobbyGamesInvite = true, scoreboard = true;
     private SpawnPoint spawnPoint = SpawnPoint.SPAWN;
     private SpawnVillage spawnVillage = SpawnVillage.RANDOM;
     private SpawnType spawnType = SpawnType.NONE;

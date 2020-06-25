@@ -4,6 +4,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -36,8 +37,8 @@ public class CasinoMainInventory extends CoreInventory {
         */
 
         setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.BARRIER, 1).displayName("§cWartungen...").create(), e -> {
-           p.closeInventory();
-           p.sendMessage("§4Diese Funktion befindet sich momentan in §cWartungen§4!");
+            p.closeInventory();
+            LobbyPlugin.getInstance().getMessenger().send(p, "§4Diese Funktion befindet sich momentan in §cWartungen§4!");
         });
 
         openInventory();

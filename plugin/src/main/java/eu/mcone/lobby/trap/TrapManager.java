@@ -8,6 +8,7 @@ import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.player.HotbarItems;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.listener.PlayerJoinListener;
 import eu.mcone.lobby.listener.TrappingListener;
 import eu.mcone.lobby.scoreboard.CatchObjective;
@@ -56,7 +57,11 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
         }
         if (!catching.contains(p)) {
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
-            CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new CatchObjective(this));
+
+            LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
+            if (lobbyPlayer.getSettings().isScoreboard()) {
+                CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new CatchObjective(this));
+            }
 
             CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p, "MCONE-Fangen");
             p.setGameMode(GameMode.ADVENTURE);
@@ -74,7 +79,9 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
                     LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist ein §fFänger§7, warte bis ein §fandere Spieler §7beitritt und §ffange§7 ihn!");
                     LobbyPlugin.getInstance().getMessenger().send(p, "§7Fange einen §fSpieler §7mit einem §fGrünen Hut§7!");
                 }
-                CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                 if (lobbyPlayer.getSettings().isScoreboard()) {
+                    CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                }
             } else {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§7Es spielen gerade §f§o" + catching.size() + "§7 Spieler §fFangen§7!");
                 for (Player all : Bukkit.getOnlinePlayers()) {

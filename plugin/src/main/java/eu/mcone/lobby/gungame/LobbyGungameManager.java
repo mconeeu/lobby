@@ -52,8 +52,10 @@ public class LobbyGungameManager implements GungameManager {
         }
         if (!fighting.contains(p)) {
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
-            CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new GungameObjective(this));
-
+            LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
+            if (lobbyPlayer.getSettings().isScoreboard()) {
+                CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new GungameObjective(this));
+            }
             CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p, "MCONE-Gungame");
 
             p.setExp(1);
@@ -70,7 +72,9 @@ public class LobbyGungameManager implements GungameManager {
 
             if (fighting.size() <= 1) {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist gerade der §f§oeinzigste§7, der §fGungame§7 spielt!");
-                CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+    if (lobbyPlayer.getSettings().isScoreboard()) {
+                    CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                }
             } else {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§7Es spielen gerade §f§o" + fighting.size() + "§7 Spieler §fGungame§7!");
                 for (Player all : Bukkit.getOnlinePlayers()) {
@@ -161,7 +165,10 @@ public class LobbyGungameManager implements GungameManager {
             }
         }
 
-        CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+        LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
+         if (lobbyPlayer.getSettings().isScoreboard()) {
+                    CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                }
 
 
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {

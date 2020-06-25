@@ -48,7 +48,10 @@ public class OneHitListener implements Listener {
 
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (LobbyPlugin.getInstance().getOneHitManager().isFighting(player)) {
-                    CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                    LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
+                    if (lobbyPlayer.getSettings().isScoreboard()) {
+                        CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                    }
                     player.getLocation().getWorld().playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
                     if (player != p) {
                         LobbyPlugin.getInstance().getMessenger().send(player, "§7Der Spieler §f" + p.getName() + " §7hat eine §e" + e.getNewLevel() + "§7er Killstreak!");
@@ -80,8 +83,14 @@ public class OneHitListener implements Listener {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§cDu bist gestorben");
             } else {
                 LobbyPlugin.getInstance().getMessenger().send(k, "§7Du hast §f" + p.getName() + " §7getötet §8[§a+2 Coins§8]");
-                CoreSystem.getInstance().getCorePlayer(k).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
-                CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                LobbyPlayer lobbykiller = LobbyPlugin.getInstance().getLobbyPlayer(k);
+                if (lobbykiller.getSettings().isScoreboard()) {
+                    CoreSystem.getInstance().getCorePlayer(k).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                }
+                LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
+                if (lobbyPlayer.getSettings().isScoreboard()) {
+                    CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                }
                 LobbyPlayer lk = LobbyPlugin.getInstance().getLobbyPlayer(k);
                 lk.getCorePlayer().addCoins(2);
                 k.playSound(k.getLocation(), Sound.LEVEL_UP, 1, 1);

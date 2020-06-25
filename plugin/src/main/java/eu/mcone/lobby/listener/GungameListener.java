@@ -54,7 +54,10 @@ public class GungameListener implements Listener {
             k.setLevel(k.getLevel() + 1);
             manager.updateGungameFightItems(k);
 
-            CoreSystem.getInstance().getCorePlayer(k).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+          LobbyPlayer lobbykiller = LobbyPlugin.getInstance().getLobbyPlayer(k);
+                if (lobbykiller.getSettings().isScoreboard()) {
+                    CoreSystem.getInstance().getCorePlayer(k).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+                }
 
             LobbyPlugin.getInstance().getMessenger().send(p, "§7Du wurdest von §f" + k.getName() + " §7getötet!");
 

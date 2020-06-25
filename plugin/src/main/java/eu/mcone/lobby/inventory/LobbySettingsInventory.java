@@ -5,19 +5,23 @@
 
 package eu.mcone.lobby.inventory;
 
+import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.*;
+import eu.mcone.lobby.scoreboard.SidebarObjective;
 import eu.mcone.lobby.util.RealTimeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
 
 public class LobbySettingsInventory extends CoreInventory {
 
@@ -26,8 +30,8 @@ public class LobbySettingsInventory extends CoreInventory {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
         LobbySettings settings = lp.getSettings();
 
-        setItem(InventorySlot.ROW_4_SLOT_3, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§f§lJoinTyp").create());
-        setItem(InventorySlot.ROW_5_SLOT_3, settings.getSpawnType().getItem().create(), e -> {
+        setItem(InventorySlot.ROW_4_SLOT_2, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§f§lJoinTyp").create());
+        setItem(InventorySlot.ROW_5_SLOT_2, settings.getSpawnType().getItem().create(), e -> {
             if (p.hasPermission("lobby.silenthub.joinspawn")) {
                 switch (settings.getSpawnType()) {
                     case NONE: {
@@ -63,28 +67,45 @@ public class LobbySettingsInventory extends CoreInventory {
         });
 
 
-        setItem(InventorySlot.ROW_4_SLOT_5, new ItemBuilder(Material.PAPER, 1, 0).displayName("§f§lLobbyGames Einladungen").create());
+        setItem(InventorySlot.ROW_4_SLOT_6, new ItemBuilder(Material.PAPER, 1, 0).displayName("§f§lLobbyGames Einladungen").create());
         if (settings.isLobbyGamesInvite()) {
-            setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oAndere Spieler können dich", "§7§ozu LobbyGames einladen").create(), e -> {
+            setItem(InventorySlot.ROW_5_SLOT_6, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oAndere Spieler können dich", "§7§ozu LobbyGames einladen").create(), e -> {
                 settings.setLobbyGamesInvite(false);
                 setSettings(p, lp);
             });
         } else {
-            setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oAndere Spieler können dich nicht", "§7§ozu LobbyGames einladen").create(), e -> {
+            setItem(InventorySlot.ROW_5_SLOT_6, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oAndere Spieler können dich nicht", "§7§ozu LobbyGames einladen").create(), e -> {
                 settings.setLobbyGamesInvite(true);
                 setSettings(p, lp);
             });
         }
 
-        setItem(InventorySlot.ROW_4_SLOT_7, new ItemBuilder(Material.LEATHER_HELMET, 1, 0).displayName("§f§lTragen lassen").create());
+        setItem(InventorySlot.ROW_4_SLOT_8, new ItemBuilder(Material.LEATHER_HELMET, 1, 0).displayName("§f§lTragen lassen").create());
         if (settings.isStacking()) {
-            setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oAndere Spieler können dich", "§7§ohin und her tragen").create(), e -> {
+            setItem(InventorySlot.ROW_5_SLOT_8, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oAndere Spieler können dich", "§7§ohin und her tragen").create(), e -> {
                 settings.setStacking(false);
                 setSettings(p, lp);
             });
         } else {
-            setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oAndere Spieler können dich nicht", "§7§ohin und her tragen").create(), e -> {
+            setItem(InventorySlot.ROW_5_SLOT_8, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oAndere Spieler können dich nicht", "§7§ohin und her tragen").create(), e -> {
                 settings.setStacking(true);
+                setSettings(p, lp);
+            });
+        }
+
+        setItem(InventorySlot.ROW_4_SLOT_4, new ItemBuilder(Material.SIGN, 1, 0).displayName("§f§lScoreboard anzeigen").create());
+        if (settings.isScoreboard()) {
+            setItem(InventorySlot.ROW_5_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um nicht mehr das Scoreboard", "§7§oauf der rechten Seite zu sehen").create(), e -> {
+                settings.setScoreboard(false);
+                CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
+                CoreSystem.getInstance().getCorePlayer(p).getScoreboard().unregister();
+                setSettings(p, lp);
+            });
+        } else {
+            setItem(InventorySlot.ROW_5_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um das Scoreboard", "§7§oauf der rechte Seite zu sehen").create(), e -> {
+                CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
+                settings.setScoreboard(true);
+                cp.getScoreboard().setNewObjective(new SidebarObjective());
                 setSettings(p, lp);
             });
         }
