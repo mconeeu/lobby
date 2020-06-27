@@ -98,7 +98,6 @@ public class LobbySettingsInventory extends CoreInventory {
             setItem(InventorySlot.ROW_5_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um nicht mehr das Scoreboard", "§7§oauf der rechten Seite zu sehen").create(), e -> {
                 settings.setScoreboard(false);
                 CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
-                CoreSystem.getInstance().getCorePlayer(p).getScoreboard().unregister();
                 setSettings(p, lp);
             });
         } else {

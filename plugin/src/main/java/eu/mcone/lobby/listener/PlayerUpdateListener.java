@@ -46,15 +46,15 @@ public class PlayerUpdateListener implements Listener {
                     lp.addLobbyItem(LobbyItem.BANKCARD_PREMIUM);
                 }
 
-            } else {
-                if (lp.hasLobbyItem(LobbyItem.BANKCARD_PREMIUM)) {
-                    lp.removeLobbyItem(LobbyItem.BANKCARD_PREMIUM);
-                }
             }
         } else {
             if (p.hasPermission("mcone.premium")) {
                 if (lp.hasLobbyItem(LobbyItem.BANKCARD)) {
                     lp.removeLobbyItem(LobbyItem.BANKCARD);
+                }
+            } else {
+                if (lp.hasLobbyItem(LobbyItem.BANKCARD_PREMIUM)) {
+                    lp.removeLobbyItem(LobbyItem.BANKCARD_PREMIUM);
                 }
             }
         }

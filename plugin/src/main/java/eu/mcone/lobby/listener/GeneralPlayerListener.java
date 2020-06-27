@@ -131,6 +131,13 @@ public class GeneralPlayerListener implements Listener {
     }
 
     @EventHandler
+    public void onEntryBed(PlayerBedEnterEvent e) {
+        e.setCancelled(true);
+        Player p = e.getPlayer();
+        LobbyPlugin.getInstance().getMessenger().send(p, "§4Du darfst in diesem §cBett §4nicht schlafen!");
+    }
+
+    @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
 
@@ -205,4 +212,17 @@ public class GeneralPlayerListener implements Listener {
         }
     }
 
+    @EventHandler
+    public void onInteract(PlayerInteractEvent e) {
+        if (e.getClickedBlock() != null) {
+            if (e.getClickedBlock().getType() == Material.BED_BLOCK) {
+                e.setCancelled(true);
+                Player p = e.getPlayer();
+
+                p.setSleepingIgnored(false);
+
+                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du darfst in diesem §cBett §4nicht schlafen!");
+            }
+        }
+    }
 }
