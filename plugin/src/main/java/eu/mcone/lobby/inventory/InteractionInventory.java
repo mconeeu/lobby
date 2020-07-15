@@ -43,7 +43,7 @@ public class InteractionInventory extends CoreInventory {
                 ).create()
         );
 
-        setItem(InventorySlot.ROW_3_SLOT_2, Skull.fromUrl("http://textures.minecraft.net/texture/6f74f58f541342393b3b16787dd051dfacec8cb5cd3229c61e5f73d63947ad", 1).toItemBuilder().displayName("§7Online-Profil Ansehen").create(), e -> {
+        setItem(InventorySlot.ROW_3_SLOT_2, Skull.fromUrl("http://textures.minecraft.net/texture/6f74f58f541342393b3b16787dd051dfacec8cb5cad3229c61e5f73d63947ad", 1).toItemBuilder().displayName("§7Online-Profil Ansehen").create(), e -> {
             TextComponent tc0 = new TextComponent(TextComponent.fromLegacyText(CoreSystem.getInstance().getTranslationManager().get("lobby.prefix") + "§2Das Profil von " + clicked.getName() + " findest du "));
 
             TextComponent tc = new TextComponent();
@@ -81,10 +81,10 @@ public class InteractionInventory extends CoreInventory {
                 LobbySettings settings = lc.getSettings();
 
                 if (settings.isStacking()) {
-                    if (!LobbyPlugin.getInstance().getOneHitManager().isFighting(p)
-                            || !LobbyPlugin.getInstance().getGungameManager().isFighting(p)
-                            || !LobbyPlugin.getInstance().getCatchManager().isCatching(p)
-                            || !LobbyPlugin.getInstance().getJumpNRunManager().isJumping(p)) {
+                    if (!LobbyPlugin.getInstance().getOneHitManager().isFighting(clicked)
+                            || !LobbyPlugin.getInstance().getGungameManager().isFighting(clicked)
+                            || !LobbyPlugin.getInstance().getCatchManager().isCatching(clicked)
+                            || !LobbyPlugin.getInstance().getJumpNRunManager().isJumping(clicked)) {
                     p.setPassenger(lc.bukkit());
                     CoreSystem.getInstance().createActionBar()
                             .message("§f§oBenutze LSHIFT um abzusteigen")

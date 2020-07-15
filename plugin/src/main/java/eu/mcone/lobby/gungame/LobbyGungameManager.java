@@ -58,6 +58,7 @@ public class LobbyGungameManager implements GungameManager {
                 CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new GungameObjective(this));
             }
             CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p, "MCONE-Gungame");
+            CoreSystem.getInstance().createActionBar().message("§cTeaming verboten!").send(p);
 
             p.setExp(1);
             p.setLevel(0);

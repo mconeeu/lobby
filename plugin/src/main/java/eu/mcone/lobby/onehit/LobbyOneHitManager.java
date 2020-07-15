@@ -58,6 +58,8 @@ public class LobbyOneHitManager implements OneHitManager {
                 CoreSystem.getInstance().getCorePlayer(p.getUniqueId()).getScoreboard().setNewObjective(new OneHitObjective(this));
             }
 
+
+            CoreSystem.getInstance().createActionBar().message("§cTeaming verboten!").send(p);
             CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p, "MCONE-OneHit");
 
             p.setExp(1);

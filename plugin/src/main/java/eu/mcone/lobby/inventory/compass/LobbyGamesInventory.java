@@ -15,6 +15,7 @@ import org.bukkit.event.inventory.ClickType;
 
 public class LobbyGamesInventory extends CoreInventory {
 
+
     static {
         CoreSystem.getInstance().getCooldownSystem().setCustomCooldownFor(LobbyGamesInventory.class, 3);
     }
@@ -23,6 +24,7 @@ public class LobbyGamesInventory extends CoreInventory {
         super("§8» §3§lLobby-Games", p, InventorySlot.ROW_5, InventoryOption.FILL_EMPTY_SLOTS);
         if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
             return;
+
 
         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
 
@@ -95,7 +97,7 @@ public class LobbyGamesInventory extends CoreInventory {
                         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
                             setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.IRON_SWORD, 1, 0)
                                             .displayName("§cOne-Hit §8| §fLobbygame")
-                                            .lore("§7§oSpiele ein bekannten Modi", "§7§omit deinen Freunden auf der Lobby", "", "§8» §f§nLinksklick§8 | §7§oSpielen")
+                                            .lore("§7§oSpiele ein bekannten Modi", "§7§omit deinen Freunden auf der Lobby", "", "§8» §f§nSpieler | §7§o"  + LobbyPlugin.getInstance().getOneHitManager(), "§8» §f§nLinksklick§8 | §7§oSpielen")
                                             .create(),
 
                                     e -> {
