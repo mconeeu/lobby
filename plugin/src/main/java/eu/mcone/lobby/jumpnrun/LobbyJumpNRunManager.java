@@ -253,8 +253,10 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
     }
 
     private void removePlaying(Player p) {
-        CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
-        corePlayer.getScoreboard().setNewObjective(new SidebarObjective());
+        LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
+        if (lobbyPlayer.getSettings().isScoreboard()) {
+            lobbyPlayer.getCorePlayer().getScoreboard().setNewObjective(new SidebarObjective());
+        }
 
         if (getCurrentlyPlaying() != null) {
             currentlyPlaying.remove(getCurrentlyPlaying(p));

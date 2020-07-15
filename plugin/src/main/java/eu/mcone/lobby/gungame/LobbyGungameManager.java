@@ -74,7 +74,7 @@ public class LobbyGungameManager implements GungameManager {
 
             if (fighting.size() <= 1) {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist gerade der §f§oeinzigste§7, der §fGungame§7 spielt!");
-    if (lobbyPlayer.getSettings().isScoreboard()) {
+                if (lobbyPlayer.getSettings().isScoreboard()) {
                     CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
                 }
             } else {
@@ -114,8 +114,9 @@ public class LobbyGungameManager implements GungameManager {
 
             CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p, "MCONE-Lobby");
 
-            lp.getCorePlayer().getScoreboard().setNewObjective(new SidebarObjective());
-
+            if (lp.getSettings().isScoreboard()) {
+                lp.getCorePlayer().getScoreboard().setNewObjective(new SidebarObjective());
+            }
             for (Player player : fighting) {
                 CoreSystem.getInstance().getCorePlayer(player).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
             }
@@ -170,9 +171,9 @@ public class LobbyGungameManager implements GungameManager {
         }
 
         LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
-         if (lobbyPlayer.getSettings().isScoreboard()) {
-                    CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
-                }
+        if (lobbyPlayer.getSettings().isScoreboard()) {
+            CoreSystem.getInstance().getCorePlayer(p).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+        }
 
 
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {

@@ -39,8 +39,13 @@ public class EntitiyDamageListener implements Listener {
                 Player p = (Player) e.getEntity();
                 ItemMeta meta = ((Player) e.getDamager()).getItemInHand().getItemMeta();
 
-                if (meta != null && meta.getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde"))
-                    CoreSystem.getInstance().getChannelHandler().sendPluginMessage(p, "CMD", "friend add " + p.getName());
+                if (meta != null) {
+                    if (((Player) e.getDamager()).getItemInHand().hasItemMeta()) {
+                        if (meta.getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
+                            CoreSystem.getInstance().getChannelHandler().sendPluginMessage(p, "CMD", "friend add " + p.getName());
+                        }
+                    }
+                }
             }
         }
 

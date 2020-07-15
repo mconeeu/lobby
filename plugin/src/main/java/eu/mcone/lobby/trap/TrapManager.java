@@ -2,7 +2,6 @@ package eu.mcone.lobby.trap;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.world.CoreLocation;
 import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.lobby.Lobby;
@@ -145,9 +144,10 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
 
             LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast das Spiel verlassen!");
 
-
-            CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
-            corePlayer.getScoreboard().setNewObjective(new SidebarObjective());
+            LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
+            if (lobbyPlayer.getSettings().isScoreboard()) {
+                lobbyPlayer.getCorePlayer().getScoreboard().setNewObjective(new SidebarObjective());
+            }
 
             for (Player player : catching) {
                 CoreSystem.getInstance().getCorePlayer(player).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
@@ -201,6 +201,12 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
     public void playerLeaved(Player p) {
         if (catching.contains(p)) {
             catching.remove(p);
+
+            LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
+            if (lobbyPlayer.getSettings().isScoreboard()) {
+                lobbyPlayer.getCorePlayer().getScoreboard().setNewObjective(new SidebarObjective());
+            }
+
             if (catcher.contains(p)) {
                 if (catching.isEmpty()) {
                     catcher.remove(p);
