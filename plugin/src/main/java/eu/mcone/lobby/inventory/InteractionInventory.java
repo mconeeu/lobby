@@ -82,17 +82,18 @@ public class InteractionInventory extends CoreInventory {
 
                 if (settings.isStacking()) {
                     if (!LobbyPlugin.getInstance().getOneHitManager().isFighting(clicked)
-                            || !LobbyPlugin.getInstance().getGungameManager().isFighting(clicked)
-                            || !LobbyPlugin.getInstance().getCatchManager().isCatching(clicked)
-                            || !LobbyPlugin.getInstance().getJumpNRunManager().isJumping(clicked)) {
-                    p.setPassenger(lc.bukkit());
-                    CoreSystem.getInstance().createActionBar()
-                            .message("§f§oBenutze LSHIFT um abzusteigen")
-                            .send(lc.bukkit());
-                    LobbyPlugin.getInstance().getMessenger().send(lc.bukkit(), "§aDu wirst nun von §3" + p.getName() + "§a getragen.");
-                    LobbyPlugin.getInstance().getMessenger().send(p, "§4Schleiche um §c" + lc.bukkit().getName() + "§4 fallen zu lassen");
+                            && !LobbyPlugin.getInstance().getGungameManager().isFighting(clicked)
+                            && !LobbyPlugin.getInstance().getCatchManager().isCatching(clicked)
+                            && !LobbyPlugin.getInstance().getJumpNRunManager().isJumping(clicked)) {
+                        System.out.println(clicked.getName());
+                        p.setPassenger(lc.bukkit());
+                        CoreSystem.getInstance().createActionBar()
+                                .message("§f§oBenutze LSHIFT um abzusteigen")
+                                .send(lc.bukkit());
+                        LobbyPlugin.getInstance().getMessenger().send(lc.bukkit(), "§aDu wirst nun von §3" + p.getName() + "§a getragen.");
+                        LobbyPlugin.getInstance().getMessenger().send(p, "§4Schleiche um §c" + lc.bukkit().getName() + "§4 fallen zu lassen");
 
-                    stacking.put(p, clicked);
+                        stacking.put(p, clicked);
                     } else {
                         LobbyPlugin.getInstance().getMessenger().send(p, "§4Der §cSpieler §4spielt momentan ein Lobby-Game!");
                     }
