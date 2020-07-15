@@ -13,8 +13,11 @@ import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.StoryProgress;
 import eu.mcone.lobby.api.enums.TraderProgress;
 import eu.mcone.lobby.api.enums.TutorialStory;
+import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.story.listener.*;
 import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 public class LobbyStory extends LobbyAddon {
 
@@ -56,6 +59,17 @@ public class LobbyStory extends LobbyAddon {
             NPC npc = traderProgress.getNpc();
             npc.togglePlayerVisibility(ListMode.WHITELIST);
         }
+
+
+        Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
+            for (Player all : Bukkit.getOnlinePlayers()) {
+                if (all.getWorld().getName().equalsIgnoreCase(LobbyWorld.OFFICE.getName())) {
+                    OfficeManager.joinOffice(all);
+                } else if (all.getWorld().getName().equalsIgnoreCase(LobbyWorld.GUNGAME.getName())) {
+                    LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(all, "Spawn");
+                }
+            }
+        }, 20);
 
 
         LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").togglePlayerVisibility(ListMode.WHITELIST);
