@@ -70,6 +70,8 @@ public class OneHitListener implements Listener {
         Player p = e.getEntity();
         Player k = p.getKiller();
 
+        p.setGameMode(GameMode.ADVENTURE);
+
         e.setKeepInventory(true);
 
         if (manager.isFighting(p) && manager.isFighting(k)) {
@@ -77,7 +79,6 @@ public class OneHitListener implements Listener {
             p.setExp(1);
 
             p.setVelocity(new Vector(0, 0, 0));
-
 
             if (k == null) {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§cDu bist gestorben");
@@ -113,6 +114,9 @@ public class OneHitListener implements Listener {
         Player p = e.getPlayer();
         if (manager.isFighting(p)) {
             p.setExp(1);
+
+            p.setGameMode(GameMode.ADVENTURE);
+
             e.setRespawnLocation(manager.getRandomSpawn());
             Bukkit.getScheduler().runTask(Lobby.getSystem(), () -> manager.setOneHitFightItems(p));
         }

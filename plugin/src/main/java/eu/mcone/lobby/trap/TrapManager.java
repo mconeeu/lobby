@@ -2,6 +2,7 @@ package eu.mcone.lobby.trap;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.world.CoreLocation;
 import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.lobby.Lobby;
@@ -12,6 +13,7 @@ import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.listener.PlayerJoinListener;
 import eu.mcone.lobby.listener.TrappingListener;
 import eu.mcone.lobby.scoreboard.CatchObjective;
+import eu.mcone.lobby.scoreboard.SidebarObjective;
 import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -142,6 +144,10 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(true);
 
             LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast das Spiel verlassen!");
+
+
+            CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
+            corePlayer.getScoreboard().setNewObjective(new SidebarObjective());
 
             for (Player player : catching) {
                 CoreSystem.getInstance().getCorePlayer(player).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();

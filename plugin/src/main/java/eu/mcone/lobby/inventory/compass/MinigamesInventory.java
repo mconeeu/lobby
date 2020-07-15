@@ -242,7 +242,7 @@ public class MinigamesInventory extends CoreInventory {
                                             .create(),
                                     e -> {
                                         player.closeInventory();
-                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("community");
+                                        CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CONNECT", "Community");
 
                                     });
 

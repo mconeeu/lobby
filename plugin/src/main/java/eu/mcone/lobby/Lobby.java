@@ -71,8 +71,10 @@ public class Lobby extends LobbyPlugin {
             new LobbyGang(), new LobbyItems(), new LobbyStory()
     ));
 
+
     @Override
     public void onGameEnable() {
+
         system = this;
 
         worlds = new HashMap<>();
@@ -146,6 +148,9 @@ public class Lobby extends LobbyPlugin {
         sendConsoleMessage("§cDeactivating AddOns...");
         for (LobbyAddon addon : ADDONS) {
             addon.onDisable();
+        }
+        for (LobbyPlayer lp : getOnlineLobbyPlayers()) {
+            lp.saveData();
         }
 
         sendConsoleMessage("§cPlugin disabled!");

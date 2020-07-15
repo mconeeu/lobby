@@ -12,11 +12,16 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class BankMenInventory extends CoreInventory {
 
@@ -45,10 +50,6 @@ public class BankMenInventory extends CoreInventory {
             setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.SIGN, 1, 0).displayName("§f§lUmwandler").create(),
                     e -> new BankChangeCoins(p));
 
-            //         setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.SIGN, 1, 0).displayName("§f§lEmerald(s) Überweisen").create(),
-//                e -> {
-//
-//                });
 
         } else if (lp.hasLobbyItem(LobbyItem.BANKCARD_PREMIUM)) {
 
@@ -70,18 +71,42 @@ public class BankMenInventory extends CoreInventory {
             setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.SIGN, 1, 0).displayName("§f§lUmwandler").create(),
                     e -> new BankChangeCoins(p));
 
-//        setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.SIGN, 1, 0).displayName("§f§lEmerald(s) Überweisen").create(),
-//                e -> {
-//
-//                });
 
-//        //TODO: Every 12 hours -> Coin gift
-//        setItem(InventorySlot.ROW_3_SLOT_5, Skull.fromUrl("http://textures.minecraft.net/texture/f5612dc7b86d71afc1197301c15fd979e9f39e7b1f41d8f1ebdf8115576e2e", 1).toItemBuilder().displayName("§d§lHole dir deine Belohnung ab").create(),
-//                e -> {
-//                    p.closeInventory();
-//                    p.sendMessage("Haha");
-//                });
+            if (lp.getDailyReward() == null) {
+                setItem(InventorySlot.ROW_2_SLOT_6, Skull.fromUrl("http://textures.minecraft.net/texture/f5612dc7b86d71afc1197301c15fd979e9f39e7b1f41d8f1ebdf8115576e2e", 1).toItemBuilder().displayName("§4§lTägliche Belohnung").lore("§8» §f§nRechtsklick§8 | §7§oAbholen").create(),
+                        e -> {
+                            lp.getCorePlayer().addCoins(100);
+                            lp.setDailyReward();
 
+                            LobbyPlugin.getInstance().getMessenger().send(p, "§2Du hast dir deine §a§oTägliche Belohnung §2abgeholt!");
+                            LobbyPlugin.getInstance().getMessenger().send(p, "§8[§a+100 Coins§8]");
+                            p.closeInventory();
+                            p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 1);
+                        });
+            }
+            Calendar lastDailyRewardPlusOneDay = Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin"));
+            lastDailyRewardPlusOneDay.setTime(lp.getLastDailyRewardDate());
+            lastDailyRewardPlusOneDay.add(Calendar.DAY_OF_MONTH, 1);
+
+            if (new Date().after(lastDailyRewardPlusOneDay.getTime())) {
+                setItem(InventorySlot.ROW_2_SLOT_6, Skull.fromUrl("http://textures.minecraft.net/texture/f5612dc7b86d71afc1197301c15fd979e9f39e7b1f41d8f1ebdf8115576e2e", 1).toItemBuilder().displayName("§4§lTägliche Belohnung").lore("§8» §f§nRechtsklick§8 | §7§oAbholen").create(),
+                        e -> {
+                            lp.getCorePlayer().addCoins(100);
+                            lp.setDailyReward();
+
+                            LobbyPlugin.getInstance().getMessenger().send(p, "§2Du hast dir deine §a§oTägliche Belohnung §2abgeholt!");
+                            LobbyPlugin.getInstance().getMessenger().send(p, "§8[§a+100 Coins§8]");
+
+                            p.closeInventory();
+                            p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 1);
+                        });
+            } else {
+                setItem(InventorySlot.ROW_2_SLOT_6, Skull.fromUrl("http://textures.minecraft.net/texture/86d35a963d5987894b6bc214e328b39cd2382426ff9c8e082b0b6a6e044d3a3", 1).toItemBuilder().displayName("§4§lTägliche Belohnung").lore("§c§oAb Morgen Verfügbar").create(),
+                        e -> {
+                            p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
+                            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast deine §cBelohnung §4erst am nächsten Tag abholen!");
+                        });
+            }
         }
 
 

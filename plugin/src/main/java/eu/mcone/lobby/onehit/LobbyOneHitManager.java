@@ -15,6 +15,7 @@ import eu.mcone.lobby.api.player.LobbySettings;
 import eu.mcone.lobby.listener.OneHitListener;
 import eu.mcone.lobby.listener.PlayerJoinListener;
 import eu.mcone.lobby.scoreboard.OneHitObjective;
+import eu.mcone.lobby.scoreboard.SidebarObjective;
 import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -108,6 +109,8 @@ public class LobbyOneHitManager implements OneHitManager {
             }
 
             CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p, "MCONE-Lobby");
+
+            lp.getCorePlayer().getScoreboard().setNewObjective(new SidebarObjective());
 
             for (Player player : fighting) {
                 CoreSystem.getInstance().getCorePlayer(player).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();

@@ -70,6 +70,9 @@ public class GungameListener implements Listener {
     @EventHandler
     public void onRespawn(PlayerRespawnEvent e) {
         Player p = e.getPlayer();
+
+        p.setGameMode(GameMode.ADVENTURE);
+
         if (manager.isFighting(p)) {
             p.setExp(1);
             e.setRespawnLocation(manager.getRandomSpawn());

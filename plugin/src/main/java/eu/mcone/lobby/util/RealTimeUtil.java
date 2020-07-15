@@ -10,7 +10,9 @@ public class RealTimeUtil implements Runnable {
     @Override
     public void run() {
         for (LobbyPlayer lp : Lobby.getSystem().getOnlineLobbyPlayers()) {
-            setCurrentRealTime(lp);
+            if (lp != null) {
+                setCurrentRealTime(lp);
+            }
         }
     }
 

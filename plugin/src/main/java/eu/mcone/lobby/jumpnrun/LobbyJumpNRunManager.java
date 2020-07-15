@@ -16,6 +16,7 @@ import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.listener.JumpNRunListener;
 import eu.mcone.lobby.listener.PlayerJoinListener;
+import eu.mcone.lobby.scoreboard.SidebarObjective;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -131,6 +132,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
             PlayerJoinListener.setLobbyItems(p);
             removePlaying(p);
             LobbyPlugin.getInstance().getMessenger().send(p, "§cDu hast das Jump and Run §oerfolgreich §cbeendet!");
+
         }
     }
 
@@ -251,6 +253,9 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
     }
 
     private void removePlaying(Player p) {
+        CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
+        corePlayer.getScoreboard().setNewObjective(new SidebarObjective());
+
         if (getCurrentlyPlaying() != null) {
             currentlyPlaying.remove(getCurrentlyPlaying(p));
         }

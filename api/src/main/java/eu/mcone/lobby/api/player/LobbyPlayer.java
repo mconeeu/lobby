@@ -19,6 +19,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Date;
 import java.util.Map;
 
 public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.GamePlayer<LobbyPlayerProfile> {
@@ -31,6 +32,8 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
     private Gang gang;
     @Getter
     private int chests, progressId, bankprogressId, centralbankprogressId, tutorialStoryProgressId, traderStoryProgressID;
+    @Getter
+    private Date dailyReward;
     @Getter
     @Setter
     private LobbySettings settings;
@@ -54,6 +57,7 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
         this.centralbankprogressId = profile.getCentralbankprogressId();
         this.tutorialStoryProgressId = profile.getTuturialStoryId();
         this.traderStoryProgressID = profile.getTraderStoryProgressID();
+        this.dailyReward = profile.getDailyReward();
         this.settings = profile.getSettings();
         this.secrets = profile.getSecrets();
         this.jumpnruns = profile.getJumpnrunSet();
@@ -68,7 +72,7 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
 
     @Override
     public void saveData() {
-        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, bankprogressId, centralbankprogressId, tutorialStoryProgressId, traderStoryProgressID, settings, secrets, jumpnruns));
+        LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, bankprogressId, centralbankprogressId, tutorialStoryProgressId, traderStoryProgressID, dailyReward, settings, secrets, jumpnruns));
     }
 
     public boolean isInGang() {
@@ -132,6 +136,19 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
     public void setTraderStoryProgress(TraderProgress traderStoryProgress) {
         this.traderStoryProgressID = traderStoryProgress.getId();
         saveData();
+    }
+
+    public void setDailyReward() {
+        this.dailyReward = new Date(System.currentTimeMillis());
+        saveData();
+    }
+
+    public Date getLastDailyRewardDate() {
+        if (dailyReward != null) {
+            return dailyReward;
+        } else {
+            return new Date(System.currentTimeMillis());
+        }
     }
 
     public void setJumpnrunBestTime(JumpNRun jumpnrun, Long time) {
@@ -242,7 +259,7 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
                     }, 12);
                 }, 1);
             } else {
-                    player.teleport(location);
+                player.teleport(location);
                 player.playSound(player.getLocation(), Sound.GLASS, 3, 2);
             }
         } else {

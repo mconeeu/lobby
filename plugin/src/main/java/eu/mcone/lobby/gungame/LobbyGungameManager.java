@@ -14,6 +14,7 @@ import eu.mcone.lobby.api.player.LobbySettings;
 import eu.mcone.lobby.listener.GungameListener;
 import eu.mcone.lobby.listener.PlayerJoinListener;
 import eu.mcone.lobby.scoreboard.GungameObjective;
+import eu.mcone.lobby.scoreboard.SidebarObjective;
 import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -111,6 +112,8 @@ public class LobbyGungameManager implements GungameManager {
             }
 
             CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p, "MCONE-Lobby");
+
+            lp.getCorePlayer().getScoreboard().setNewObjective(new SidebarObjective());
 
             for (Player player : fighting) {
                 CoreSystem.getInstance().getCorePlayer(player).getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();

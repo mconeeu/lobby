@@ -81,6 +81,10 @@ public class InteractionInventory extends CoreInventory {
                 LobbySettings settings = lc.getSettings();
 
                 if (settings.isStacking()) {
+                    if (!LobbyPlugin.getInstance().getOneHitManager().isFighting(p)
+                            || !LobbyPlugin.getInstance().getGungameManager().isFighting(p)
+                            || !LobbyPlugin.getInstance().getCatchManager().isCatching(p)
+                            || !LobbyPlugin.getInstance().getJumpNRunManager().isJumping(p)) {
                     p.setPassenger(lc.bukkit());
                     CoreSystem.getInstance().createActionBar()
                             .message("§f§oBenutze LSHIFT um abzusteigen")
@@ -89,6 +93,9 @@ public class InteractionInventory extends CoreInventory {
                     LobbyPlugin.getInstance().getMessenger().send(p, "§4Schleiche um §c" + lc.bukkit().getName() + "§4 fallen zu lassen");
 
                     stacking.put(p, clicked);
+                    } else {
+                        LobbyPlugin.getInstance().getMessenger().send(p, "§4Der §cSpieler §4spielt momentan ein Lobby-Game!");
+                    }
                 } else {
                     LobbyPlugin.getInstance().getMessenger().send(p, "§4Der §cSpieler §4hat diese §cFunktion§4 ausgeschaltet!");
                 }

@@ -67,7 +67,7 @@ public class GeneralPlayerListener implements Listener {
 
 
             InteractionInventory.stacking.remove(isStacked, p);
-            LobbyPlugin.getInstance().getMessenger().send(isStacked, "§c" + p.getName() + "§4 ist nun nicht mehr auf deimem Kopf");
+            LobbyPlugin.getInstance().getMessenger().send(isStacked, "§c" + p.getName() + "§4 ist nun nicht mehr auf deinem Kopf");
             LobbyPlugin.getInstance().getMessenger().send(p, "§c" + isStacked.getName() + " §4trägt dich nun nicht mehr!");
         }
     }

@@ -6,6 +6,7 @@
 package eu.mcone.lobby.scoreboard;
 
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.coresystem.api.bukkit.scoreboard.CoreSidebarObjectiveEntry;
 
 public class SidebarObjective extends LobbyObjective {
 
@@ -14,29 +15,28 @@ public class SidebarObjective extends LobbyObjective {
     }
 
     @Override
-    public void onRegister(CorePlayer player) {
+    protected void onRegister(CorePlayer corePlayer, CoreSidebarObjectiveEntry entry) {
         setDisplayName("§f§l§n"+player.bukkit().getName());
 
-        setScore(12, "");
-        setScore(11, "§8» §3§lMCONE.EU");
-        setScore(10, "§f§oDein Nummer 1");
-        setScore(9, "§f§oNetzwerk");
-        setScore(8, "");
-        setScore(7, "§8»§7 Coins:");
-        setScore(6, " §b§o"+ player.getFormattedCoins());
-        setScore(5, "");
-        setScore(4, "§8»§7 Emeralds:");
-        setScore(3, " §a§o"+ player.getEmeralds());
-        setScore(2, "");
-        setScore(1, "§8»§7 Teamspeak:");
-        setScore(0, " §f§ots.mcone.eu");
+        entry.setScore(12, "");
+        entry.setScore(11, "§8» §3§lMCONE.EU");
+        entry.setScore(10, "§f§oDein Nummer 1");
+        entry.setScore(9, "§f§oNetzwerk");
+        entry.setScore(8, "");
+        entry.setScore(7, "§8»§7 Coins:");
+        entry.setScore(6, " §b§o"+ player.getFormattedCoins());
+        entry.setScore(5, "");
+        entry.setScore(4, "§8»§7 Emeralds:");
+        entry.setScore(3, " §a§o"+ player.getEmeralds());
+        entry.setScore(2, "");
+        entry.setScore(1, "§8»§7 Teamspeak:");
+        entry.setScore(0, " §f§ots.mcone.eu");
     }
 
     @Override
-    public void onReload(CorePlayer player) {
+    protected void onReload(CorePlayer corePlayer, CoreSidebarObjectiveEntry coreSidebarObjectiveEntry) {
         setDisplayName("§f§l§n" + player.bukkit().getName());
-        setScore(6, " §b§o"+ player.getFormattedCoins());
-        setScore(3, " §a§o"+ player.getEmeralds());
+        coreSidebarObjectiveEntry.setScore(6, " §b§o"+ player.getFormattedCoins());
+        coreSidebarObjectiveEntry.setScore(3, " §a§o"+ player.getEmeralds());
     }
-
 }
