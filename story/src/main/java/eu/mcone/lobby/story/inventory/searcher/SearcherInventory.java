@@ -19,7 +19,6 @@ public class SearcherInventory extends CoreInventory {
     public SearcherInventory(Player p) {
         super("§8» §f§lForscher §8| §fFinanz Forschung", p, InventorySlot.ROW_6);
 
-
         setItem(1, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
         setItem(2, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
         setItem(3, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());

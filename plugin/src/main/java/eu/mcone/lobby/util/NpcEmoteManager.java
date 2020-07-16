@@ -18,15 +18,14 @@ public class NpcEmoteManager implements Runnable {
         }
     }
 
-    private static int getRandomNumberInRange(int min, int max) {
+    private static int getRandomNumberInRange() {
         Random r = new Random();
-        return r.nextInt((max - min) + 1) + min;
+        return r.nextInt((160) + 1);
     }
 
-    //TODO Npc dancing for all NPCs Chuck ERROrs
 
     public static void setEmote(Player players) {
-        int randomeEmote = getRandomNumberInRange(0, 160);
+        int randomeEmote = getRandomNumberInRange();
 
         for (Gamemode gm : Gamemode.values()) {
             NPC npc = LobbyWorld.ONE_ISLAND.getWorld().getNPC(gm.getName().toLowerCase());

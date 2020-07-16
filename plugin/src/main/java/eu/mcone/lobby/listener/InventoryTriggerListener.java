@@ -35,6 +35,7 @@ public class InventoryTriggerListener implements Listener {
                 return;
             }
 
+
             if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
                 e.setCancelled(true);
                 p.performCommand("profile");

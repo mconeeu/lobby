@@ -12,9 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.bukkit.entity.Player;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @NoArgsConstructor
 @Getter
@@ -22,7 +20,7 @@ import java.util.Map;
 public class LobbyPlayerProfile extends GameProfile {
 
     private int chests, progressId, bankprogressId, centralbankprogressId, tuturialStoryId, traderStoryProgressID;
-    private Date dailyReward;
+    private Date dailyReward = null;
     private LobbySettings settings = new LobbySettings();
     private Map<String, Long> secrets = new HashMap<>(), jumpnruns = new HashMap<>();
 

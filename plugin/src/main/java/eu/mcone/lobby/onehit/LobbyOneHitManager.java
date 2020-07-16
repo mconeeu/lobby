@@ -104,6 +104,8 @@ public class LobbyOneHitManager implements OneHitManager {
             p.setExp(0);
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(true);
 
+            p.setGameMode(GameMode.SURVIVAL);
+
             LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
             LobbySettings settings = lp.getSettings();
             if (settings.isRankBoots()) {

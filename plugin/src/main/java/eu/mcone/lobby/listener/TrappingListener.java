@@ -100,6 +100,7 @@ public class TrappingListener implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
+        p.setGameMode(GameMode.ADVENTURE);
 
         if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             ItemStack i = e.getItem();
@@ -209,6 +210,7 @@ public class TrappingListener implements Listener {
                         manager.setCatchItems(k);
 
                         p.setLevel(1);
+                        k.setGameMode(GameMode.ADVENTURE);
 
                         p.getLocation().getWorld().playSound(p.getLocation(), Sound.NOTE_BASS_DRUM, 1.0F, 1.0F);
                         p.removePotionEffect(PotionEffectType.SPEED);

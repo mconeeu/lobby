@@ -19,8 +19,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.GamePlayer<LobbyPlayerProfile> {
 
@@ -139,7 +141,7 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
     }
 
     public void setDailyReward() {
-        this.dailyReward = new Date(System.currentTimeMillis());
+        this.dailyReward = Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")).getTime();
         saveData();
     }
 

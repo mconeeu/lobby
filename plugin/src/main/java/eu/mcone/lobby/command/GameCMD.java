@@ -109,7 +109,7 @@ public class GameCMD extends CorePlayerCommand {
                     } else if (LobbyPlugin.getInstance().getJumpNRunManager().isJumping(player)) {
                         LobbyPlugin.getInstance().getMessenger().send(player, "§4In diesem Lobby Game kannst du keine Einladungen versenden!");
                     } else {
-                        LobbyPlugin.getInstance().getMessenger().send(player, "§4Du bist in keinem Lobby Game");
+                        LobbyPlugin.getInstance().getMessenger().send(player, "§4Du bist in keinem Lobby Game!");
                     }
                 } else {
                     Lobby.getSystem().getMessenger().send(player, "§4Bitte benutze; §c/game join [<Lobby-Game>]");

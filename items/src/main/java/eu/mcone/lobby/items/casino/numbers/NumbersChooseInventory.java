@@ -18,7 +18,6 @@ public class NumbersChooseInventory extends CoreInventory {
     public NumbersChooseInventory(Player player) {
         super("§8» §f§lWelche Zahl?", player, InventorySlot.ROW_5, InventoryOption.FILL_EMPTY_SLOTS);
 
-
         setItem(InventorySlot.ROW_2_SLOT_4, Skull.fromUrl("http://textures.minecraft.net/texture/71bc2bcfb2bd3759e6b1e86fc7a79585e1127dd357fc202893f9de241bc9e530", 1).toItemBuilder()
                 .displayName("§f1")
                 .create(), e -> {

@@ -68,7 +68,6 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
             p.setGameMode(GameMode.ADVENTURE);
             p.setExp(1);
             catching.add(p);
-            p.setGameMode(GameMode.ADVENTURE);
             p.setAllowFlight(false);
 
             if (catching.size() <= 1) {
@@ -139,7 +138,9 @@ public class TrapManager implements eu.mcone.lobby.api.trap.CatchManager {
             p.getActivePotionEffects().clear();
             p.setLevel(0);
             p.setExp(0);
+
             p.setGameMode(GameMode.SURVIVAL);
+
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(true);
 
             LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast das Spiel verlassen!");

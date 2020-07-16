@@ -42,11 +42,12 @@ public class LiveEventCMD extends CorePlayerCommand {
                     }
                 } else {
                     LobbyPlugin.getInstance().getMessenger().send(p, "§4Bitte benutze: §c/liveevent [<start>|<remove>] <name>");
+
                 }
             } else {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§4Bitte benutze: §c/liveevent [<start>|<remove>] <name>");
             }
-         } else {
+        } else {
             CoreSystem.getInstance().getMessenger().sendTransl(p, "system.command.noperm");
         }
         return false;

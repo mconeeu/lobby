@@ -112,6 +112,8 @@ public class LobbyGungameManager implements GungameManager {
                 LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
             }
 
+            p.setGameMode(GameMode.SURVIVAL);
+
             CoreSystem.getInstance().getLabyModAPI().setCurrentServer(p, "MCONE-Lobby");
 
             if (lp.getSettings().isScoreboard()) {

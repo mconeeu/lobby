@@ -258,6 +258,8 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
             lobbyPlayer.getCorePlayer().getScoreboard().setNewObjective(new SidebarObjective());
         }
 
+        p.setGameMode(GameMode.SURVIVAL);
+
         if (getCurrentlyPlaying() != null) {
             currentlyPlaying.remove(getCurrentlyPlaying(p));
         }
