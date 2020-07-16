@@ -1,11 +1,6 @@
 package eu.mcone.lobby.scoreboard;
 
-import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.scoreboard.CoreSidebarObjective;
-import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.player.LobbyPlayer;
-import org.bukkit.scoreboard.DisplaySlot;
 
 public abstract class LobbyObjective extends CoreSidebarObjective {
 
@@ -15,7 +10,7 @@ public abstract class LobbyObjective extends CoreSidebarObjective {
         super(name);
     }
 
-    public static void updateLines() {
+   /* public static void updateLines() {
         if (i >= 4) i = 0;
         i++;
 
@@ -48,6 +43,6 @@ public abstract class LobbyObjective extends CoreSidebarObjective {
                 }
             }
         }
-    }
+    }  */
 
 }
