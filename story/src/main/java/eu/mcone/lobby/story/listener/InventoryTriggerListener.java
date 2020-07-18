@@ -17,7 +17,6 @@ import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.bank.central.BankProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import eu.mcone.lobby.story.inventory.story.*;
 import eu.mcone.lobby.story.inventory.story.bank.BankInfosInventory1;
@@ -154,7 +153,7 @@ public class InventoryTriggerListener implements Listener {
                             if (lp.getBankprogressId() == BankRobberySmallProgress.BANK_ROBBERY_MIDDLE.getId()) {
                                 LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, false);
                                 JohnBankRobberyInventory.currentlyInBank = null;
-                                OfficeManager.joinOffice(p);
+                                LobbyPlugin.getInstance().getOfficeManager().joinOffice(p);
                                 lp.setBankProgress(BankRobberySmallProgress.BANK_ROBBERY_END);
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Wir haben es §fgeschafft§7 ich überlasse dir §f25.000 Coins §7und ein kleines Geschenk im Rucksack, wir sehen uns!");
                                 lp.getCorePlayer().addCoins(25000);

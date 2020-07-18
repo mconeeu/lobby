@@ -4,7 +4,6 @@ import eu.mcone.coresystem.api.bukkit.command.CorePlayerCommand;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.items.inventory.office.secretary.SecretaryInventory;
-import eu.mcone.lobby.items.manager.OfficeManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -22,7 +21,7 @@ public class OfficeCMD extends CorePlayerCommand {
 
             if (SecretaryInventory.isInviting.contains(target)) {
                 LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(player, "spawn");
-                OfficeManager.joinOtherOffice(target, player);
+                LobbyPlugin.getInstance().getOfficeManager().joinOtherOffice(target, player);
                 SecretaryInventory.isInviting.remove(target);
             } else {
                 LobbyPlugin.getInstance().getMessenger().send(player, "§4Der Einladungslink ist ungültig!");

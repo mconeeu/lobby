@@ -10,7 +10,7 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.items.manager.OfficeManager;
+import eu.mcone.lobby.items.manager.OfficeManagerManager;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -73,7 +73,7 @@ public class SecretaryInventory extends CoreInventory {
                 .lore("§fLade einen Spieler zu deinen Büro ein")
                 .create(), e -> {
 
-            if (OfficeManager.ISTOGETHEROFFICE.contains(p) || isInviting.contains(p)) {
+            if (OfficeManagerManager.ISTOGETHEROFFICE.contains(p) || isInviting.contains(p)) {
                 LobbyPlugin.getInstance().getMessenger().send(p, "§4Du kannst keine weiteren Spieler mehr zu diesem Büro einladen!");
                 p.closeInventory();
                 return;

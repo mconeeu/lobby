@@ -22,7 +22,6 @@ import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.*;
-import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.scoreboard.SidebarObjective;
 import eu.mcone.lobby.util.NpcEmoteManager;
 import eu.mcone.lobby.util.RealTimeUtil;
@@ -76,7 +75,7 @@ public class PlayerJoinListener implements Listener {
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
             LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(p);
             LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(p);
-            OfficeManager.updateOffice(p);
+            LobbyPlugin.getInstance().getOfficeManager().updateOffice(p);
 
         }, 1);
 
@@ -123,12 +122,12 @@ public class PlayerJoinListener implements Listener {
                     break;
                 }
                 case OFFICE: {
-                    OfficeManager.joinOffice(p);
+                    LobbyPlugin.getInstance().getOfficeManager().joinOffice(p);
                     break;
                 }
                 case LAST_LOCATION: {
                     if (lp.getCorePlayer().getWorld().equals(LobbyWorld.OFFICE.getWorld())) {
-                        OfficeManager.joinOffice(p);
+                        LobbyPlugin.getInstance().getOfficeManager().joinOffice(p);
                     }
                 }
             }

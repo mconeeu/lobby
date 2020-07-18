@@ -6,6 +6,7 @@
 package eu.mcone.lobby.story;
 
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
+import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.spawnable.ListMode;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -13,7 +14,6 @@ import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.StoryProgress;
 import eu.mcone.lobby.api.enums.TraderProgress;
 import eu.mcone.lobby.api.enums.TutorialStory;
-import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.story.listener.*;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -64,7 +64,7 @@ public class LobbyStory extends LobbyAddon {
         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
             for (Player all : Bukkit.getOnlinePlayers()) {
                 if (all.getWorld().getName().equalsIgnoreCase(LobbyWorld.OFFICE.getName())) {
-                    OfficeManager.joinOffice(all);
+                    LobbyPlugin.getInstance().getOfficeManager().joinOffice(all);
                 } else if (all.getWorld().getName().equalsIgnoreCase(LobbyWorld.GUNGAME.getName())) {
                     LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(all, "Spawn");
                 }
@@ -74,13 +74,13 @@ public class LobbyStory extends LobbyAddon {
 
         LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").togglePlayerVisibility(ListMode.WHITELIST);
 
-      //  ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("vendor")).playMotionCapture("capture-vendor");
-       /*((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-welcome")).playMotionCapture("capture-welcome");
-        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-start")).playMotionCapture("capture-start");
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("vendor")).playMotionCapture("capture-vendor");
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-cityhall")).playMotionCapture("capture-residents");
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-welcome")).playMotionCapture("capture-welcome");
+       /*        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-start")).playMotionCapture("capture-start");
         ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("duty")).playMotionCapture("capture-duty");
         ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("salia")).playMotionCapture("capture-salia");
-        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("robert")).playMotionCapture("capture-robert");
-        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-cityhall")).playMotionCapture("capture-cityhall"); */
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("robert")).playMotionCapture("capture-robert"); */
     }
 
     @Override

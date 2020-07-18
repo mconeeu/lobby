@@ -17,7 +17,6 @@ import eu.mcone.lobby.items.inventory.office.ChauffeurInventory;
 import eu.mcone.lobby.items.inventory.office.OfficeTraderInventory;
 import eu.mcone.lobby.items.inventory.office.secretary.SecretaryInventory;
 import eu.mcone.lobby.items.inventory.trader.TraderInventory;
-import eu.mcone.lobby.items.manager.OfficeManager;
 import lombok.Getter;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
 import org.bukkit.entity.EntityType;
@@ -47,7 +46,7 @@ public class NpcInteractListener implements Listener {
             } else if (npcName.equalsIgnoreCase(StoryNPC.OFFICE_SELLER.getNpcName())) {
                 new OfficeTraderInventory(p);
             } else if (npcName.equalsIgnoreCase(StoryNPC.OFFICE_PAGE.getNpcName())) {
-                OfficeManager.joinOffice(p);
+                LobbyPlugin.getInstance().getOfficeManager().joinOffice(p);
             } else if (npcName.equalsIgnoreCase(StoryNPC.ASSISTANT_1.getNpcName())
                     || npcName.equalsIgnoreCase(StoryNPC.ASSISTANT_2.getNpcName())
                     || npcName.equalsIgnoreCase(StoryNPC.ASSISTANT_3.getNpcName())) {

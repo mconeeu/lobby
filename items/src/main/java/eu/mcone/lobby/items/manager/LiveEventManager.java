@@ -17,7 +17,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Set;
 
-public class LiveEventManager implements Runnable {
+public class LiveEventManager implements Runnable, eu.mcone.lobby.api.liveevent.LiveEventManager {
 
     int event = 0;
     public static boolean liveEventAsteroid = false;
@@ -39,7 +39,7 @@ public class LiveEventManager implements Runnable {
                 if (System.currentTimeMillis() == calendar.getTimeInMillis()) {
                     if (liveEvents.getName().equalsIgnoreCase("asteroid")) {
                         event = 1;
-                        startLiveEvent_ASTEROID();
+                        startLiveEventAsteroid();
                     }
                 }
             }
@@ -47,7 +47,8 @@ public class LiveEventManager implements Runnable {
     }
 
 
-    public static void startLiveEvent_ASTEROID() {
+    @Override
+    public void startLiveEventAsteroid() {
 
         /*  PRE */
         //WEB
@@ -288,7 +289,8 @@ public class LiveEventManager implements Runnable {
     }
 
 
-    public static void removeLiveEventasteroid() {
+    @Override
+    public void removeLiveEventAsteroid() {
         /*  FINAL */
         //COBBLE
         Location block1 = CoreSystem.getInstance().getWorldManager().getWorld(LobbyWorld.ONE_ISLAND.getName()).getBlockLocation("liveevent-1");

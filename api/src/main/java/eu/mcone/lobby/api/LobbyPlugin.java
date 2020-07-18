@@ -11,6 +11,8 @@ import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.gameapi.api.Option;
 import eu.mcone.lobby.api.gungame.GungameManager;
 import eu.mcone.lobby.api.jumpnrun.JumpNRunManager;
+import eu.mcone.lobby.api.liveevent.LiveEventManager;
+import eu.mcone.lobby.api.office.OfficeManager;
 import eu.mcone.lobby.api.onehit.OneHitManager;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.PlayerHiderManager;
@@ -44,6 +46,10 @@ public abstract class LobbyPlugin extends GamePlugin {
     public abstract CoreWorld getLobbyWorld(LobbyWorld world);
 
     public abstract OneHitManager getOneHitManager();
+
+    public abstract LiveEventManager getLiveEventManager();
+
+    public abstract OfficeManager getOfficeManager();
 
     public abstract GungameManager getGungameManager();
 

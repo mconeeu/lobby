@@ -16,12 +16,13 @@ import java.util.List;
 import java.util.Set;
 
 
-public class OfficeManager {
+public class OfficeManagerManager implements eu.mcone.lobby.api.office.OfficeManager {
 
     private static final Set<Player> VANISHED = new HashSet<>();
     public static final List<Player> ISTOGETHEROFFICE = new ArrayList<>();
 
-    public static void getOffice(Player player) {
+    @Override
+    public void getOffice(Player player) {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
 
         if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE)) {
@@ -33,7 +34,8 @@ public class OfficeManager {
         }
     }
 
-    public static void getOfficeFromOther(Player player, Player other) {
+    @Override
+    public void getOfficeFromOther(Player player, Player other) {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
 
         if (lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE)) {
@@ -45,8 +47,8 @@ public class OfficeManager {
         }
     }
 
-
-    public static void joinOtherOffice(Player player, Player other) {
+    @Override
+    public void joinOtherOffice(Player player, Player other) {
         if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(player)) {
             LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(player);
             GameAPI.getInstance().getGamePlayer(player).setEffectsVisible(false);
@@ -99,7 +101,8 @@ public class OfficeManager {
 
     }
 
-    public static void joinOffice(Player player) {
+    @Override
+    public void joinOffice(Player player) {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player.getUniqueId());
         if (!lp.hasLobbyItem(LobbyItem.OFFICE_CARD_BRONZE) && !lp.hasLobbyItem(LobbyItem.OFFICE_CARD_SILVER) && !lp.hasLobbyItem(LobbyItem.OFFICE_CARD_GOLD)) {
             LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast kein Büro!");
@@ -133,8 +136,8 @@ public class OfficeManager {
 
     }
 
-
-    public static void quitOffice(Player player) {
+    @Override
+    public void quitOffice(Player player) {
         unVanishPlayer(player);
 
         player.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
@@ -152,7 +155,8 @@ public class OfficeManager {
         GameAPI.getInstance().getGamePlayer(player).setEffectsVisible(true);
     }
 
-    public static void vanishPlayer(Player player) {
+    @Override
+    public void vanishPlayer(Player player) {
         if (!VANISHED.contains(player)) {
             for (Player all : Bukkit.getOnlinePlayers()) {
                 player.hidePlayer(all);
@@ -162,7 +166,8 @@ public class OfficeManager {
         }
     }
 
-    public static void unVanishPlayer(Player player) {
+    @Override
+    public void unVanishPlayer(Player player) {
         if (VANISHED.contains(player)) {
             for (Player all : Bukkit.getOnlinePlayers()) {
                 player.showPlayer(all);
@@ -172,8 +177,8 @@ public class OfficeManager {
         }
     }
 
-
-    public static void updateOffice(Player player) {
+    @Override
+    public void updateOffice(Player player) {
         for (Player p : VANISHED) {
             p.hidePlayer(player);
         }

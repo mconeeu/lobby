@@ -12,7 +12,6 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.LobbySettings;
-import eu.mcone.lobby.items.manager.OfficeManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -70,7 +69,7 @@ public class NickListener implements Listener {
     private static void reloadManager(Player p) {
         LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(p);
         LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(p);
-        OfficeManager.updateOffice(p);
+        LobbyPlugin.getInstance().getOfficeManager().updateOffice(p);
     }
 
 }

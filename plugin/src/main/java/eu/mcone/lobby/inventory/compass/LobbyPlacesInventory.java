@@ -11,7 +11,6 @@ import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.StoryProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.SpawnVillage;
-import eu.mcone.lobby.items.manager.OfficeManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -220,7 +219,7 @@ public class LobbyPlacesInventory extends CoreInventory {
                                 e -> {
                                     if (e.getClick().equals(ClickType.RIGHT)) {
                                         player.closeInventory();
-                                        OfficeManager.joinOffice(p);
+                                        LobbyPlugin.getInstance().getOfficeManager().joinOffice(p);
                                     } else if (e.getClick().equals(ClickType.LEFT)) {
                                         player.closeInventory();
                                         LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("office-entrance");

@@ -4,7 +4,6 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.command.CorePlayerCommand;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.items.liveevents.LiveEvents;
-import eu.mcone.lobby.items.manager.LiveEventManager;
 import org.bukkit.entity.Player;
 
 public class LiveEventCMD extends CorePlayerCommand {
@@ -22,7 +21,7 @@ public class LiveEventCMD extends CorePlayerCommand {
                     for (LiveEvents liveEvents : LiveEvents.values()) {
                         if (liveEvents != null) {
                             if (liveEvents.getName().equalsIgnoreCase(eventName)) {
-                                LiveEventManager.startLiveEvent_ASTEROID();
+                                LobbyPlugin.getInstance().getLiveEventManager().startLiveEventAsteroid();
                             } else {
                                 LobbyPlugin.getInstance().getMessenger().send(p, "§4Dieses §cLiveEvent§4 existiert nicht!");
                             }
@@ -34,7 +33,7 @@ public class LiveEventCMD extends CorePlayerCommand {
                     for (LiveEvents liveEvents : LiveEvents.values()) {
                         if (liveEvents != null) {
                             if (liveEvents.getName().equalsIgnoreCase(eventName)) {
-                                LiveEventManager.removeLiveEventasteroid();
+                                LobbyPlugin.getInstance().getLiveEventManager().removeLiveEventAsteroid();
                             } else {
                                 LobbyPlugin.getInstance().getMessenger().send(p, "§4Dieses §cLiveEvent§4 existiert nicht!");
                             }

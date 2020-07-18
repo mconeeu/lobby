@@ -20,7 +20,6 @@ public class CompassListener implements Listener {
         if (e.hasItem() && e.getItem().equals(LobbyItem.COMPASS.getItemStack()) && (e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.LEFT_CLICK_AIR))) {
             Player p = e.getPlayer();
 
-
             p.sendMessage("§8[§7§l!§8] §cItem §8» §fKompass §8|§7 Hier müsste es lang gehen...");
 
             if (p.hasPermission("lobby.silenthub")) {

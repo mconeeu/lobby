@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.util.Vector;
 
 public class PlayerMoveListener implements Listener {
 
@@ -22,8 +21,8 @@ public class PlayerMoveListener implements Listener {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
         if (lp != null && lp.getBankprogressId() != BankRobberySmallProgress.BANK_ROBBERY_MIDDLE.getId()) {
             if (player.getWorld().equals(robbery_entrance.getWorld()) && player.getLocation().distance(robbery_entrance) <= 1) {
-                Vector v1 = player.getLocation().getDirection().multiply(0.8).setX(0.8);
-                player.setVelocity(v1);
+                LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(player, "bank");
+                LobbyPlugin.getInstance().getMessenger().send(player, "§4Du wurdest aus der Bank geworfen, weil du zu nahe an der Hinter Tür warst.");
             }
         }
     }

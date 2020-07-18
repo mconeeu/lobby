@@ -6,7 +6,7 @@ import eu.mcone.lobby.api.enums.StoryProgress;
 import eu.mcone.lobby.api.enums.TraderProgress;
 import eu.mcone.lobby.api.enums.TutorialStory;
 import eu.mcone.lobby.items.inventory.office.secretary.SecretaryInventory;
-import eu.mcone.lobby.items.manager.OfficeManager;
+import eu.mcone.lobby.items.manager.OfficeManagerManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -35,17 +35,17 @@ public class WorldChangeListener implements Listener {
 
 
         if (e.getFrom().getName().equalsIgnoreCase("Lobby-Office")) {
-            OfficeManager.quitOffice(player);
+            LobbyPlugin.getInstance().getOfficeManager().quitOffice(player);
 
             if (SecretaryInventory.isInviting.contains(player)) {
                 SecretaryInventory.isInviting.remove(player);
                 LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast das Büro verlassen dadurch wurde dein Einladungslink gelöscht!");
             }
 
-            if (OfficeManager.ISTOGETHEROFFICE.contains(player)) {
-                OfficeManager.ISTOGETHEROFFICE.remove(player);
+            if (OfficeManagerManager.ISTOGETHEROFFICE.contains(player)) {
+                OfficeManagerManager.ISTOGETHEROFFICE.remove(player);
 
-                for (Player all : OfficeManager.ISTOGETHEROFFICE) {
+                for (Player all : OfficeManagerManager.ISTOGETHEROFFICE) {
                     all.hidePlayer(player);
                 }
             }

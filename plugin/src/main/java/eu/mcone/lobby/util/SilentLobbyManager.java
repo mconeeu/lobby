@@ -9,7 +9,6 @@ import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
-import eu.mcone.lobby.items.manager.OfficeManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -36,7 +35,7 @@ public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobby
             }
         }
         LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(p);
-        OfficeManager.updateOffice(p);
+        LobbyPlugin.getInstance().getOfficeManager().updateOffice(p);
 
         LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist nun nicht mehr in der Privaten Lobby!");
 
