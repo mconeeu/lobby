@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.story;
 
+import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.spawnable.ListMode;
@@ -75,12 +76,35 @@ public class LobbyStory extends LobbyAddon {
         LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").togglePlayerVisibility(ListMode.WHITELIST);
 
         ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("vendor")).playMotionCapture("capture-vendor");
-        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-cityhall")).playMotionCapture("capture-residents");
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("citizens")).playMotionCapture("capture-residents");
         ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-welcome")).playMotionCapture("capture-welcome");
-       /*        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-start")).playMotionCapture("capture-start");
-        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("duty")).playMotionCapture("capture-duty");
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-start")).playMotionCapture("capture-start");
+
         ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("salia")).playMotionCapture("capture-salia");
-        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("robert")).playMotionCapture("capture-robert"); */
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-start")).playMotionCapture("capture-start");
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("robert")).playMotionCapture("capture-robert");
+
+
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank1")).playMotionCapture("capture-frank1");
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank2")).playMotionCapture("capture-frank2");
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank3")).playMotionCapture("capture-frank3");
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank4")).playMotionCapture("capture-frank4");
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank5")).playMotionCapture("capture-frank5");
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank6")).playMotionCapture("capture-frank6");
+
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank1"));
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank2"));
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank3"));
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank4"));
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank5"));
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank6"));
+
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("robert"));
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("salia"));
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-start"));
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("citizens"));
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("vendor"));
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-welcome"));
     }
 
     @Override

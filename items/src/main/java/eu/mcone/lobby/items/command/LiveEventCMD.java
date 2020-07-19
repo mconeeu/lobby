@@ -22,6 +22,7 @@ public class LiveEventCMD extends CorePlayerCommand {
                         if (liveEvents != null) {
                             if (liveEvents.getName().equalsIgnoreCase(eventName)) {
                                 LobbyPlugin.getInstance().getLiveEventManager().startLiveEventAsteroid();
+                                LobbyPlugin.getInstance().getMessenger().send(p, "§2Das §aLiveEvent§2 startet nun!");
                             } else {
                                 LobbyPlugin.getInstance().getMessenger().send(p, "§4Dieses §cLiveEvent§4 existiert nicht!");
                             }
@@ -34,6 +35,7 @@ public class LiveEventCMD extends CorePlayerCommand {
                         if (liveEvents != null) {
                             if (liveEvents.getName().equalsIgnoreCase(eventName)) {
                                 LobbyPlugin.getInstance().getLiveEventManager().removeLiveEventAsteroid();
+                                LobbyPlugin.getInstance().getMessenger().send(p, "§4Das §cLiveEvent§4 wurde gelöscht!");
                             } else {
                                 LobbyPlugin.getInstance().getMessenger().send(p, "§4Dieses §cLiveEvent§4 existiert nicht!");
                             }

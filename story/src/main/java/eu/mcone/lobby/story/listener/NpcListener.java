@@ -51,6 +51,10 @@ public class NpcListener implements Listener {
 
             if (w.equals(LobbyWorld.ONE_ISLAND.getWorld())) {
                 switch (npc.getData().getName()) {
+                    case "citizens": {
+                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fBewohner §8|§7 Ich schaue mir nur mal die Insel an!");
+                        break;
+                    }
                     case "roger": {
                         p.sendMessage("§8[§7§l!§8] §cNPC §8» §fRoger §8|§7 Ouh ähm hier ist betreten verboten und ich wohne nicht hier du bist warscheinlich " + p.getName() + " wusste ichs doch du willst dieses Hacker Gerät abholen hat John mir gesagt ich habe es irgendwo versteckt ich war aber nicht besoffen das ist klar!");
                         break;
