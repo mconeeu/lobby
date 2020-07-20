@@ -52,7 +52,7 @@ public class LobbyPlayerLoadedListener implements Listener {
         }
 
         /* Tutorial Story Show NPCs */
-        if (lp.getTutorialStoryProgressId() <= 6) {
+        if (lp.getTutorialStoryProgressId() <= 7) {
             if (lp.getTutorialStoryProgressId() > 0) {
                 TutorialStory.getTutorialStoryById(lp.getTutorialStoryProgressId()).getNpc().toggleVisibility(p, true);
             }

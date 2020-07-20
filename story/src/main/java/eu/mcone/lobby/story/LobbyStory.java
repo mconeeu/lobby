@@ -91,6 +91,8 @@ public class LobbyStory extends LobbyAddon {
         ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank4")).playMotionCapture("capture-frank4");
         ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank5")).playMotionCapture("capture-frank5");
         ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank6")).playMotionCapture("capture-frank6");
+        ((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank7")).playMotionCapture("capture-frankend");
+
 
         CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank1"));
         CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank2"));
@@ -98,6 +100,7 @@ public class LobbyStory extends LobbyAddon {
         CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank4"));
         CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank5"));
         CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank6"));
+        CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank7"));
 
         CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("robert"));
         CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc((PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("salia"));

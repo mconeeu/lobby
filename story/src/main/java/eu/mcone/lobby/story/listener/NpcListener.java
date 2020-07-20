@@ -29,12 +29,15 @@ import eu.mcone.lobby.story.inventory.story.CustomerInventory;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
+import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.Objects;
 
 public class NpcListener implements Listener {
 
@@ -391,10 +394,20 @@ public class NpcListener implements Listener {
                                 TutorialStory.getTutorialStoryById(tutorialStory.getId() - 1).getNpc().toggleVisibility(p, false);
                             }
 
+
+                            if (tutorialStory.getId() == 6) {
+                                p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 5);
+                                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 45, 4500, false, false));
+                                p.playSound(p.getLocation(), Sound.CAT_PURR, 1, 1);
+                                p.playEffect(p.getLocation(), Effect.CRIT, 4);
+                                Objects.requireNonNull(TutorialStory.getTutorialStoryById(tutorialStory.getId())).getNpc().toggleVisibility(p, false);
+                            }
+
                             TutorialStory future = TutorialStory.getTutorialStoryById(tutorialStory.getId() + 1);
                             if (future != null) {
                                 future.getNpc().toggleVisibility(p, true);
                             }
+
                         } else {
                             p.sendMessage("§8§l[§7§l!§8§l] §fLobby §8 » §7Du bist noch nicht so weit!");
                         }

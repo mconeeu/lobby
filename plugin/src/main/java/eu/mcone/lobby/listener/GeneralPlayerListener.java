@@ -62,13 +62,16 @@ public class GeneralPlayerListener implements Listener {
     @EventHandler
     public void on(EntityDismountEvent e) {
         Player p = (Player) e.getEntity();
-        Player isStacked = (Player) e.getDismounted();
-        if (InteractionInventory.stacking.containsValue(p)) {
 
-
-            InteractionInventory.stacking.remove(isStacked, p);
-            LobbyPlugin.getInstance().getMessenger().send(isStacked, "§c" + p.getName() + "§4 ist nun nicht mehr auf deinem Kopf");
-            LobbyPlugin.getInstance().getMessenger().send(p, "§c" + isStacked.getName() + " §4trägt dich nun nicht mehr!");
+        if (e.getDismounted() instanceof Player) {
+            Player isStacked = (Player) e.getDismounted();
+            if (isStacked != null) {
+                if (InteractionInventory.stacking.containsValue(p)) {
+                    InteractionInventory.stacking.remove(isStacked, p);
+                    LobbyPlugin.getInstance().getMessenger().send(isStacked, "§c" + p.getName() + "§4 ist nun nicht mehr auf deinem Kopf");
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§c" + isStacked.getName() + " §4trägt dich nun nicht mehr!");
+                }
+            }
         }
     }
 
