@@ -30,6 +30,7 @@ import eu.mcone.lobby.items.manager.OfficeManagerManager;
 import eu.mcone.lobby.jumpnrun.LobbyJumpNRunManager;
 import eu.mcone.lobby.listener.*;
 import eu.mcone.lobby.onehit.LobbyOneHitManager;
+import eu.mcone.lobby.scoreboard.LobbyObjective;
 import eu.mcone.lobby.story.LobbyStory;
 import eu.mcone.lobby.trap.TrapManager;
 import eu.mcone.lobby.util.NpcEmoteManager;
@@ -238,7 +239,7 @@ public class Lobby extends LobbyPlugin {
     }
 
     private void startScheduler() {
-//        Bukkit.getScheduler().runTaskTimer(this, LobbyObjective::updateLines, 50, 100);
+        Bukkit.getScheduler().runTaskTimer(this, LobbyObjective::updateLines, 50, 100);
         Bukkit.getScheduler().runTaskTimer(this, new RealTimeUtil(), 50, 20 * 60);
         Bukkit.getScheduler().runTaskTimer(this, new NpcEmoteManager(), 50, 20 * 5);
     }
