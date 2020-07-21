@@ -18,7 +18,8 @@ public enum StoryCaptures {
     FRANK3("capture-frank3", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank3")),
     FRANK4("capture-frank4", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank4")),
     FRANK5("capture-frank5", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank5")),
-    FRANK6("capture-frank6", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank6"));
+    FRANK6("capture-frank6", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank6")),
+    FRANK7("capture-frankend", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank7"));
 
     private final String capture;
     private final PlayerNpc npc;
