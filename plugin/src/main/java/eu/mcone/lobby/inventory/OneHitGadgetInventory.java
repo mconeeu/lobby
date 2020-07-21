@@ -32,7 +32,7 @@ public class OneHitGadgetInventory extends CoreInventory {
                         if (p.getLevel() >= 2) {
                             p.setLevel(p.getLevel() - 2);
 
-                            p.getInventory().setItem(6, HotbarItems.ONEHIT_ARROW);
+                            p.getInventory().setItem(5, HotbarItems.ONEHIT_ARROW);
                             LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast erfolgreich ein §fPfeil §7für eine §f2er Killstreak gekauft!");
                             p.closeInventory();
                         } else {

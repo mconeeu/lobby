@@ -25,7 +25,10 @@ public enum TutorialStory {
             "§8[§7§l!§8] §cNPC §8» §fFrank §8|§7 Hier ist unsere kleine Bank. Wenn du noch kein Konto hast kannst du dir es hier erstellen. Damit kannst du dir jeden Tag eine Belohnung abholen und auch Coins in wertvolle Emeralds umtauschen. Suche jetzt mal das Dorf Skyleck ich warte beim Dorf Eingang auf dich"),
 
     OTHER_ISLAND(6, "Andere Insel", new String[]{"§eFrank zeigt dir das andere Dorf"}, "frank6", LobbyWorld.ONE_ISLAND,
-            "§8[§7§l!§8] §cNPC §8» §fFrank §8|§7 Der Letzte Punkt in meiner kleinen OneIsland Tour. Auf der anderen Seite der Brücke befindet sich das Dorf Skyleck das musst du aber selber erkunden. Ich habe dir auch noch ein kleines Geschenk in deinen Rucksack gelegt und jetzt kaufe ich mir erstmal ein cooles Büro!");
+            "§8[§7§l!§8] §cNPC §8» §fFrank §8|§7 Der Letzte Punkt in meiner kleinen OneIsland Tour. Auf der anderen Seite der Brücke befindet sich das Dorf Skyleck das musst du aber selber erkunden. Ich habe dir auch noch ein kleines Geschenk in deinen Rucksack gelegt und jetzt kaufe ich mir erstmal ein cooles Büro!"),
+
+    MOVE(7, "Wiedersehen", new String[]{"§eDu triffst Frank wieder"}, "frank7", LobbyWorld.ONE_ISLAND,
+            "§8[§7§l!§8] §cNPC §8» §fFrank §8|§7 Ich habe dir doch schon alles gezeigt oder?");
 
 
     private final int id;
