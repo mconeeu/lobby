@@ -7,25 +7,29 @@ import lombok.Getter;
 @Getter
 public enum StoryCaptures {
 
-    VENDOR("capture-vendor", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("vendor")),
-    RESIDENTS("capture-residents", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("citizens")),
-    WELCOME("edward-welcome", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-welcome")),
-    START("capture-start", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("edward-start")),
-    SALIA("capture-salia", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("salia")),
-    ROBERT("capture-robert", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("robert")),
-    FRANK1("capture-frank1", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank1")),
-    FRANK2("capture-frank2", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank2")),
-    FRANK3("capture-frank3", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank3")),
-    FRANK4("capture-frank4", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank4")),
-    FRANK5("capture-frank5", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank5")),
-    FRANK6("capture-frank6", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank6")),
-    FRANK7("capture-frankend", (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC("frank7"));
+    VENDOR("capture-vendor", "vendor"),
+    RESIDENTS("capture-residents", "citizens"),
+    WELCOME("edward-welcome", "edward-welcome"),
+    START("capture-start", "edward-start"),
+    SALIA("capture-salia", "salia"),
+    ROBERT("capture-robert", "robert"),
+    FRANK1("capture-frank1", "frank1"),
+    FRANK2("capture-frank2", "frank2"),
+    FRANK3("capture-frank3", "frank3"),
+    FRANK4("capture-frank4", "frank4"),
+    FRANK5("capture-frank5", "frank5"),
+    FRANK6("capture-frank6", "frank6"),
+    FRANK7("capture-frankend", "frank7");
 
-    private final String capture;
-    private final PlayerNpc npc;
+    private final String capture, npcName;
 
-    StoryCaptures(String capture, PlayerNpc npc) {
+    StoryCaptures(String capture, String npcName) {
         this.capture = capture;
-        this.npc = npc;
+        this.npcName = npcName;
     }
+
+    public PlayerNpc getNpc() {
+        return (PlayerNpc) LobbyWorld.ONE_ISLAND.getWorld().getNPC(npcName);
+    }
+
 }

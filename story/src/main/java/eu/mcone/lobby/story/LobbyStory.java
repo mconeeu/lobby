@@ -68,27 +68,27 @@ public class LobbyStory extends LobbyAddon {
     private static void prepareNpcs() {
         /*  OneIsland Story */
         for (StoryProgress storyProgress : StoryProgress.values()) {
-            prepareNpc(storyProgress.getNpc());
+            prepareNpc(storyProgress.getNpcName(), storyProgress.getNpc());
         }
         /*  Tutorial Story */
         for (TutorialStory tutorialStory : TutorialStory.values()) {
-            prepareNpc(tutorialStory.getNpc());
+            prepareNpc(tutorialStory.getNpcName(), tutorialStory.getNpc());
         }
         /*  Trader Story */
         for (TraderProgress traderProgress : TraderProgress.values()) {
-            prepareNpc(traderProgress.getNpc());
+            prepareNpc(traderProgress.getNpcName(), traderProgress.getNpc());
         }
     }
 
-    private static void prepareNpc(NPC npc) {
+    private static void prepareNpc(String name, NPC npc) {
         try {
             npc.togglePlayerVisibility(ListMode.WHITELIST);
         } catch (NullPointerException e) {
             if (LobbyPlugin.getInstance().hasSentryClient()) {
-                LobbyPlugin.getInstance().getSentryClient().sendEvent(new EventBuilder().withLevel(Event.Level.ERROR).withMessage("Could not load npc "+npc.getData().getName()));
+                LobbyPlugin.getInstance().getSentryClient().sendEvent(new EventBuilder().withLevel(Event.Level.ERROR).withMessage("Could not load npc "+name));
             }
 
-            LobbyPlugin.getInstance().sendConsoleMessage("§cCould not load Npc "+npc.getData().getName());
+            LobbyPlugin.getInstance().sendConsoleMessage("§cCould not load Npc "+name);
         }
     }
 
@@ -103,6 +103,12 @@ public class LobbyStory extends LobbyAddon {
                 }
 
                 LobbyPlugin.getInstance().sendConsoleMessage("§cCould not load motion capture "+capture.getCapture());
+            } catch (NullPointerException e) {
+                if (LobbyPlugin.getInstance().hasSentryClient()) {
+                    LobbyPlugin.getInstance().getSentryClient().sendEvent(new EventBuilder().withLevel(Event.Level.ERROR).withMessage("Could not load npc "+capture.getNpcName()+" for story motion capture "+capture.name()));
+                }
+
+                LobbyPlugin.getInstance().sendConsoleMessage("§cCould not load npc "+capture.getNpcName()+" for story motion capture "+capture.name());
             }
         }
     }
