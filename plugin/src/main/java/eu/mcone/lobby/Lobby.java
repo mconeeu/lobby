@@ -80,7 +80,6 @@ public class Lobby extends LobbyPlugin {
 
     @Override
     public void onGameEnable() {
-
         system = this;
 
         worlds = new HashMap<>();

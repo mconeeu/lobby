@@ -22,10 +22,13 @@ public abstract class LobbyObjective extends CoreSidebarObjective {
         for (final CorePlayer p : CoreSystem.getInstance().getOnlineCorePlayers()) {
             LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
             if (lobbyPlayer.getSettings().isScoreboard()) {
+                final CoreSidebarObjective o = (CoreSidebarObjective) p.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
 
-                if (p.getScoreboard().getObjective(DisplaySlot.SIDEBAR) instanceof CoreSidebarObjective) {
-                    ((CoreSidebarObjective) p.getScoreboard().getObjective(DisplaySlot.SIDEBAR)).update(entry -> {
-                        entry.setTitle("§f§l§n" + p.bukkit().getName());
+                if (o != null) {
+                    o.update(entry -> {
+                        if (o instanceof SidebarObjective) {
+                            entry.setTitle("§f§l§n" + p.bukkit().getName());
+                        }
 
                         if (i == 1) {
                             entry.setScore(1, "§8»§7 Teamspeak:");

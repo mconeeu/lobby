@@ -7,8 +7,8 @@ package eu.mcone.lobby.story;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
-import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.spawnable.ListMode;
+import eu.mcone.coresystem.api.core.exception.MotionCaptureNotDefinedException;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -16,6 +16,8 @@ import eu.mcone.lobby.api.enums.StoryProgress;
 import eu.mcone.lobby.api.enums.TraderProgress;
 import eu.mcone.lobby.api.enums.TutorialStory;
 import eu.mcone.lobby.story.listener.*;
+import io.sentry.event.Event;
+import io.sentry.event.EventBuilder;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -44,23 +46,9 @@ public class LobbyStory extends LobbyAddon {
 
     @Override
     public void reload() {
-        /*  OneIsland Story */
-        for (StoryProgress storyProgress : StoryProgress.values()) {
-            NPC npc = storyProgress.getNpc();
-            npc.togglePlayerVisibility(ListMode.WHITELIST);
-        }
-        /*  Tutorial Story */
-        for (TutorialStory tutorialStory : TutorialStory.values()) {
-            NPC npc = tutorialStory.getNpc();
-            npc.togglePlayerVisibility(ListMode.WHITELIST);
-        }
-        /*  Trader Story */
-
-        for (TraderProgress traderProgress : TraderProgress.values()) {
-            NPC npc = traderProgress.getNpc();
-            npc.togglePlayerVisibility(ListMode.WHITELIST);
-        }
-
+        prepareNpcs();
+        loadStoryCaptures();
+        LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").togglePlayerVisibility(ListMode.WHITELIST);
 
         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
             for (Player all : Bukkit.getOnlinePlayers()) {
@@ -71,18 +59,52 @@ public class LobbyStory extends LobbyAddon {
                 }
             }
         }, 20);
-
-
-        LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").togglePlayerVisibility(ListMode.WHITELIST);
-
-        for (StoryCaptures capture : StoryCaptures.values()) {
-            capture.getNpc().playMotionCapture(capture.getCapture());
-            CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc(capture.getNpc());
-        }
     }
 
     @Override
     public void onDisable() {
+    }
+
+    private static void prepareNpcs() {
+        /*  OneIsland Story */
+        for (StoryProgress storyProgress : StoryProgress.values()) {
+            prepareNpc(storyProgress.getNpc());
+        }
+        /*  Tutorial Story */
+        for (TutorialStory tutorialStory : TutorialStory.values()) {
+            prepareNpc(tutorialStory.getNpc());
+        }
+        /*  Trader Story */
+        for (TraderProgress traderProgress : TraderProgress.values()) {
+            prepareNpc(traderProgress.getNpc());
+        }
+    }
+
+    private static void prepareNpc(NPC npc) {
+        try {
+            npc.togglePlayerVisibility(ListMode.WHITELIST);
+        } catch (NullPointerException e) {
+            if (LobbyPlugin.getInstance().hasSentryClient()) {
+                LobbyPlugin.getInstance().getSentryClient().sendEvent(new EventBuilder().withLevel(Event.Level.ERROR).withMessage("Could not load npc "+npc.getData().getName()));
+            }
+
+            LobbyPlugin.getInstance().sendConsoleMessage("§cCould not load Npc "+npc.getData().getName());
+        }
+    }
+
+    private static void loadStoryCaptures() {
+        for (StoryCaptures capture : StoryCaptures.values()) {
+            try {
+                capture.getNpc().playMotionCapture(capture.getCapture());
+                CoreSystem.getInstance().getNpcManager().getMotionCaptureHandler().getMotionCaptureScheduler().addNpc(capture.getNpc());
+            } catch (MotionCaptureNotDefinedException e) {
+                if (LobbyPlugin.getInstance().hasSentryClient()) {
+                    LobbyPlugin.getInstance().getSentryClient().sendEvent(new EventBuilder().withLevel(Event.Level.ERROR).withMessage("Could not load motion capture "+capture.getCapture()));
+                }
+
+                LobbyPlugin.getInstance().sendConsoleMessage("§cCould not load motion capture "+capture.getCapture());
+            }
+        }
     }
 
 }
