@@ -12,6 +12,7 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItems;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.LobbySettings;
+import eu.mcone.lobby.inventory.InteractionInventory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,6 +22,17 @@ public class NickListener implements Listener {
     @EventHandler
     public void onNick(NickEvent e) {
         Player p = e.getPlayer().bukkit();
+        if (InteractionInventory.stacking.containsKey(p)) {
+            Player isStacked = InteractionInventory.stacking.get(p);
+            InteractionInventory.stacking.remove(p, isStacked);
+            p.eject();
+
+            LobbyPlugin.getInstance().getMessenger().send(p, "§4" + isStacked.getName() + " ist nun nicht mehr auf deinem Kopf");
+            LobbyPlugin.getInstance().getMessenger().send(isStacked, "§4" + p.getName() + " hat dich fallen gelassen!");
+
+        }
+
+
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         if (lp != null) {
@@ -46,6 +58,16 @@ public class NickListener implements Listener {
     @EventHandler
     public void onUnnick(UnnickEvent e) {
         Player p = e.getPlayer().bukkit();
+        if (InteractionInventory.stacking.containsKey(p)) {
+            Player isStacked = InteractionInventory.stacking.get(p);
+            InteractionInventory.stacking.remove(p, isStacked);
+            p.eject();
+
+            LobbyPlugin.getInstance().getMessenger().send(p, "§4" + isStacked.getName() + " ist nun nicht mehr auf deinem Kopf");
+            LobbyPlugin.getInstance().getMessenger().send(isStacked, "§4" + p.getName() + " hat dich fallen gelassen!");
+
+        }
+
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
         LobbySettings settings = lp.getSettings();
 
