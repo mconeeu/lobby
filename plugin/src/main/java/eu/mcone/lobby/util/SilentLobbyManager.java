@@ -65,8 +65,9 @@ public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobby
         p.playSound(p.getLocation(), Sound.GLASS, 1, 1);
         p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
         p.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);
-        p.getInventory().setItem(Lobby.getSystem().getJumpNRunManager().isCurrentlyPlaying(p) ? 1 : 2, HotbarItems.LEAVE_PRIVATE_LOBBY);
-        p.getInventory().setItem(Lobby.getSystem().getJumpNRunManager().isCurrentlyPlaying(p) ? 2 : 3, null);
+        if (Lobby.getSystem().getJumpNRunManager().isCurrentlyPlaying(p)) {
+            p.getInventory().setItem(1, HotbarItems.LEAVE_PRIVATE_LOBBY);
+        }
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);

@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class OfficeManagerManager implements eu.mcone.lobby.api.office.OfficeManager {
 
-    private static final Set<Player> VANISHED = new HashSet<>();
+    public static final Set<Player> VANISHED = new HashSet<>();
     public static final List<Player> ISTOGETHEROFFICE = new ArrayList<>();
 
     @Override
@@ -77,7 +77,6 @@ public class OfficeManagerManager implements eu.mcone.lobby.api.office.OfficeMan
 
 
         if (other.hasPermission("lobby.silenthub")) {
-            other.getInventory().setItem(2, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE_SILENTHUB);
             other.getInventory().setItem(3, null);
         } else {
             other.getInventory().setItem(2, null);
