@@ -10,6 +10,8 @@ public interface OfficeManager {
 
     void joinOtherOffice(Player player, Player other);
 
+    boolean isVanished(Player player);
+
     void joinOffice(Player player);
 
     void quitOffice(Player player);

@@ -16,7 +16,7 @@ import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.inventory.InteractionInventory;
 import eu.mcone.lobby.items.inventory.office.secretary.SecretaryInventory;
-import eu.mcone.lobby.items.manager.OfficeManagerManager;
+import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -175,10 +175,10 @@ public class GeneralPlayerListener implements Listener {
             LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast das Büro verlassen dadurch wurde dein Einladungslink gelöscht!");
         }
 
-        if (OfficeManagerManager.ISTOGETHEROFFICE.contains(player)) {
-            OfficeManagerManager.ISTOGETHEROFFICE.remove(player);
+        if (OfficeManager.ISTOGETHEROFFICE.contains(player)) {
+            OfficeManager.ISTOGETHEROFFICE.remove(player);
 
-            for (Player all : OfficeManagerManager.ISTOGETHEROFFICE) {
+            for (Player all : OfficeManager.ISTOGETHEROFFICE) {
                 all.hidePlayer(player);
             }
 
