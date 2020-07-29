@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Set;
 
 
-public class OfficeManagerManager implements eu.mcone.lobby.api.office.OfficeManager {
+public class OfficeManager implements eu.mcone.lobby.api.office.OfficeManager {
 
-    public static final Set<Player> VANISHED = new HashSet<>();
+    private static final Set<Player> VANISHED = new HashSet<>();
     public static final List<Player> ISTOGETHEROFFICE = new ArrayList<>();
 
     @Override
@@ -98,6 +98,10 @@ public class OfficeManagerManager implements eu.mcone.lobby.api.office.OfficeMan
         player.showPlayer(other);
 
 
+    }
+
+    public boolean isVanished(Player player) {
+        return VANISHED.contains(player);
     }
 
     @Override

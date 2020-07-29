@@ -5,7 +5,6 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.items.manager.OfficeManagerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -19,7 +18,7 @@ public class LobbyInventory extends CoreInventory {
         super("§8» §3§lLobby wechseln", p, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
 
 
-        if (OfficeManagerManager.VANISHED.contains(p)) {
+        if (LobbyPlugin.getInstance().getOfficeManager().isVanished(p)) {
             LobbyPlugin.getInstance().getMessenger().send(p, "§4Du darfst im §cOffice §4keinen §cLobby §4wechsel machen!");
             p.closeInventory();
         }
