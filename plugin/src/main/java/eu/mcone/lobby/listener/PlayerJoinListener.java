@@ -87,9 +87,13 @@ public class PlayerJoinListener implements Listener {
         NpcEmoteManager.setEmote(p);
 
         if (e.getLoadReason().equals(CorePlayerLoadedEvent.Reason.JOIN)) {
-            if (p.hasPermission("lobby.silenthub") && lp.getSettings().getSpawnType().equals(SpawnType.SILENTLOBBY)) {
-                e.setHidden(true);
-                LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
+            if (p.hasPermission("lobby.silenthub")) {
+                if (lp.getSettings().getSpawnType().equals(SpawnType.SILENTLOBBY)) {
+                    e.setHidden(true);
+                    LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
+                } else {
+                    p.getInventory().setItem(2, HotbarItems.PRIVATE_LOBBY);
+                }
             } else if (lp.getSettings().getSpawnType().equals(SpawnType.PLAYERHIDER)) {
 
                 Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
@@ -129,6 +133,15 @@ public class PlayerJoinListener implements Listener {
                     if (lp.getCorePlayer().getWorld().equals(LobbyWorld.OFFICE.getWorld())) {
                         LobbyPlugin.getInstance().getOfficeManager().joinOffice(p);
                     }
+                }
+            }
+        } else if (e.getLoadReason().equals(CorePlayerLoadedEvent.Reason.RELOAD)) {
+            if (p.hasPermission("lobby.silenthub")) {
+                if (lp.getSettings().getSpawnType().equals(SpawnType.SILENTLOBBY)) {
+                    e.setHidden(true);
+                    LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
+                } else {
+                    p.getInventory().setItem(2, HotbarItems.PRIVATE_LOBBY);
                 }
             }
         }
@@ -208,10 +221,6 @@ public class PlayerJoinListener implements Listener {
         }
 
         p.getInventory().setItem(7, HotbarItems.BACKPACK);
-
-        if (p.hasPermission("lobby.silenthub")) {
-            p.getInventory().setItem(2, HotbarItems.PRIVATE_LOBBY);
-        }
 
         p.getInventory().setItem(
                 8,

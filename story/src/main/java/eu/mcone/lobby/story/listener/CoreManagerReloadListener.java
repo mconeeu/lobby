@@ -26,7 +26,7 @@ public class CoreManagerReloadListener implements Listener {
             NPC npc = storyProgress.getNpc();
             npc.togglePlayerVisibility(ListMode.WHITELIST);
         }
-        for (TutorialStory tutorialStory: TutorialStory.values()) {
+        for (TutorialStory tutorialStory : TutorialStory.values()) {
             NPC npc = tutorialStory.getNpc();
             npc.togglePlayerVisibility(ListMode.WHITELIST);
         }
@@ -39,6 +39,8 @@ public class CoreManagerReloadListener implements Listener {
         for (LobbyPlayer lp : LobbyPlugin.getInstance().getOnlineLobbyPlayers()) {
             LobbyPlayerLoadedListener.spawnStoryNpcs(lp);
             LobbyPlayerLoadedListener.spawnStoryNpcs(lp);
+
+
         }
     }
 

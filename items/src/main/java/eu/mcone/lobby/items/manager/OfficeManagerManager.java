@@ -143,7 +143,6 @@ public class OfficeManagerManager implements eu.mcone.lobby.api.office.OfficeMan
 
         if (player.hasPermission("lobby.silenthub")) {
             if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(player)) {
-                player.getInventory().setItem(2, HotbarItems.LEAVE_PRIVATE_LOBBY);
                 player.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);
             } else {
                 GameAPI.getInstance().getGamePlayer(player).setEffectsVisible(true);

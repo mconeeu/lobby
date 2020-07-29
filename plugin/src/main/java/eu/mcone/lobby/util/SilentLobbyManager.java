@@ -42,8 +42,9 @@ public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobby
         GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(true);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
+
         p.getInventory().setItem(Lobby.getSystem().getJumpNRunManager().isCurrentlyPlaying(p) ? 1 : 2, HotbarItems.PRIVATE_LOBBY);
-        p.getInventory().setItem(Lobby.getSystem().getJumpNRunManager().isCurrentlyPlaying(p) ? 2 : 3, null);
+
         p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
@@ -64,7 +65,11 @@ public class SilentLobbyManager implements eu.mcone.lobby.api.player.SilentLobby
         GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
         p.playSound(p.getLocation(), Sound.GLASS, 1, 1);
         p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
-        p.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);
+
+        /* MUST BE THERE FOR THE RELOAD SECTION */
+            p.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);
+
+        p.getInventory().setItem(2, null);
         if (Lobby.getSystem().getJumpNRunManager().isCurrentlyPlaying(p)) {
             p.getInventory().setItem(1, HotbarItems.LEAVE_PRIVATE_LOBBY);
         }

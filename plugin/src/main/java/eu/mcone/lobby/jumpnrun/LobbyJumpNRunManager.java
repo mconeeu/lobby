@@ -227,6 +227,7 @@ public class LobbyJumpNRunManager implements JumpNRunManager {
         }
 
         if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
+            p.getInventory().setItem(1, HotbarItems.LEAVE_PRIVATE_LOBBY);
             p.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);
         } else if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(p)) {
             p.getInventory().setItem(0, HotbarItems.SHOW_PLAYERS);
