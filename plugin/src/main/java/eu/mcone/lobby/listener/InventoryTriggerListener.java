@@ -61,7 +61,11 @@ public class InventoryTriggerListener implements Listener {
                     LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
                 }
             } else if (i.equals(HotbarItems.LOBBY_CHANGER)) {
-                new LobbyInventory(p);
+                if (!LobbyPlugin.getInstance().getOfficeManager().isVanished(p)) {
+                    new LobbyInventory(p);
+                } else {
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§4Der Lobby Wechsler ist im Büro deaktiviert!");
+                }
             } else if (i.equals(HotbarItems.NICK_ACTIVATED)) {
                 if (cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");

@@ -76,13 +76,11 @@ public class OfficeManager implements eu.mcone.lobby.api.office.OfficeManager {
         VANISHED.add(player);
 
 
-        if (other.hasPermission("lobby.silenthub")) {
-            other.getInventory().setItem(3, null);
-        } else {
-            other.getInventory().setItem(2, null);
-        }
         if (player.hasPermission("lobby.silenthub")) {
             player.getInventory().setItem(2, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE_SILENTHUB);
+            player.getInventory().setItem(3, null);
+        } else {
+            player.getInventory().setItem(2, null);
         }
 
         other.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE_OFFICE);
@@ -113,7 +111,7 @@ public class OfficeManager implements eu.mcone.lobby.api.office.OfficeManager {
             return;
         }
 
-        if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(player)) {
+    if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(player)) {
             LobbyPlugin.getInstance().getPlayerHiderManager().showPlayers(player);
         }
 
