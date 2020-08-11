@@ -25,7 +25,7 @@ import eu.mcone.lobby.gang.LobbyGang;
 import eu.mcone.lobby.gungame.LobbyGungameManager;
 import eu.mcone.lobby.inventory.LobbyProfileInventory;
 import eu.mcone.lobby.items.LobbyItems;
-import eu.mcone.lobby.items.manager.LiveEventManager;
+import eu.mcone.lobby.items.manager.LobbyLiveEventManager;
 import eu.mcone.lobby.items.manager.OfficeManager;
 import eu.mcone.lobby.jumpnrun.LobbyJumpNRunManager;
 import eu.mcone.lobby.listener.*;
@@ -58,7 +58,7 @@ public class Lobby extends LobbyPlugin {
     @Getter
     private TrapManager catchManager;
     @Getter
-    private LiveEventManager liveEventManager;
+    private LobbyLiveEventManager liveEventManager;
     @Getter
     private OfficeManager officeManager;
     @Getter
@@ -132,7 +132,7 @@ public class Lobby extends LobbyPlugin {
         jumpNRunManager = new LobbyJumpNRunManager(this);
 
         sendConsoleMessage("§aLoading LiveEventManager...");
-        liveEventManager = new LiveEventManager();
+        liveEventManager = new LobbyLiveEventManager();
 
         sendConsoleMessage("§aLoading OfficeManager...");
         officeManager = new OfficeManager();

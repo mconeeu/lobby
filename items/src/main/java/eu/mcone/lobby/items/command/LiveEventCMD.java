@@ -3,7 +3,8 @@ package eu.mcone.lobby.items.command;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.command.CorePlayerCommand;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.items.liveevents.LiveEvents;
+import eu.mcone.lobby.api.liveevent.LiveEvent;
+import eu.mcone.lobby.items.LobbyItems;
 import org.bukkit.entity.Player;
 
 public class LiveEventCMD extends CorePlayerCommand {
@@ -18,31 +19,35 @@ public class LiveEventCMD extends CorePlayerCommand {
             if (args.length == 2) {
                 String eventName = args[1];
                 if (args[0].equalsIgnoreCase("start")) {
-                    for (LiveEvents liveEvents : LiveEvents.values()) {
-                        if (liveEvents != null) {
-                            if (liveEvents.getName().equalsIgnoreCase(eventName)) {
-                                LobbyPlugin.getInstance().getLiveEventManager().startLiveEventAsteroid();
-                                LobbyPlugin.getInstance().getMessenger().send(p, "§2Das §aLiveEvent§2 startet nun!");
+                    for (LiveEvent event : LobbyItems.getInstance().getLiveEventManager().getEvents()) {
+                        if (event.getClass().getSimpleName().startsWith(eventName)) {
+                            if (LobbyItems.getInstance().getLiveEventManager().startEvent(event.getClass())) {
+                                LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Das ![LiveEvent] startet nun!");
                             } else {
-                                LobbyPlugin.getInstance().getMessenger().send(p, "§4Dieses §cLiveEvent§4 existiert nicht!");
+                                LobbyPlugin.getInstance().getMessenger().sendError(p, "Das ![LiveEvent] ist bereits gestartet!");
                             }
                         }
+
+                        break;
                     }
 
-
+                    LobbyPlugin.getInstance().getMessenger().send(p, "§4Dieses §cLiveEvent§4 existiert nicht!");
                 } else if (args[0].equalsIgnoreCase("remove")) {
-                    for (LiveEvents liveEvents : LiveEvents.values()) {
-                        if (liveEvents != null) {
-                            if (liveEvents.getName().equalsIgnoreCase(eventName)) {
-                                LobbyPlugin.getInstance().getLiveEventManager().removeLiveEventAsteroid();
-                                LobbyPlugin.getInstance().getMessenger().send(p, "§4Das §cLiveEvent§4 wurde gelöscht!");
+                    for (LiveEvent event : LobbyItems.getInstance().getLiveEventManager().getEvents()) {
+                        if (event.getClass().getSimpleName().startsWith(eventName)) {
+                            if (LobbyItems.getInstance().getLiveEventManager().startEvent(event.getClass())) {
+                                LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Das ![LiveEvent] wird gelöscht!");
                             } else {
-                                LobbyPlugin.getInstance().getMessenger().send(p, "§4Dieses §cLiveEvent§4 existiert nicht!");
+                                LobbyPlugin.getInstance().getMessenger().sendError(p, "Das ![LiveEvent] wurde noch nicht gestartet!");
                             }
                         }
+
+                        break;
                     }
+
+                    LobbyPlugin.getInstance().getMessenger().sendError(p, "Dieses ![LiveEvent] existiert nicht!");
                 } else {
-                    LobbyPlugin.getInstance().getMessenger().send(p, "§4Bitte benutze: §c/liveevent [<start>|<remove>] <name>");
+                    LobbyPlugin.getInstance().getMessenger().sendError(p, "§4Bitte benutze: §c/liveevent [<start>|<remove>] <name>");
 
                 }
             } else {

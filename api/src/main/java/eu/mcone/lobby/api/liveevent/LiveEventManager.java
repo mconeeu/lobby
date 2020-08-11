@@ -1,8 +1,13 @@
 package eu.mcone.lobby.api.liveevent;
 
+import java.util.Set;
+
 public interface LiveEventManager {
 
-    void startLiveEventAsteroid();
+    Set<LiveEvent> getEvents();
 
-    void removeLiveEventAsteroid();
+    boolean startEvent(Class<? extends LiveEvent> event);
+
+    boolean removeEvent(Class<? extends LiveEvent> event);
+
 }

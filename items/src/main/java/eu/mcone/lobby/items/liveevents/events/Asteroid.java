@@ -1,9 +1,9 @@
-package eu.mcone.lobby.items.manager;
+package eu.mcone.lobby.items.liveevents.events;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.items.liveevents.LiveEvents;
+import eu.mcone.lobby.api.liveevent.LiveEvent;
 import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.Material;
 import org.bukkit.*;
@@ -14,42 +14,17 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.Calendar;
-import java.util.Locale;
+import java.util.GregorianCalendar;
 import java.util.Set;
 
-public class LiveEventManager implements Runnable, eu.mcone.lobby.api.liveevent.LiveEventManager {
+public class Asteroid extends LiveEvent {
 
-    int event = 0;
-    public static boolean liveEventAsteroid = false;
-
-    public LiveEventManager() {
-        Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), this, 0, 20);
+    public Asteroid() {
+        super(new GregorianCalendar(2020, Calendar.OCTOBER, 1, 16, 0).getTime());
     }
 
-
     @Override
-    public void run() {
-        for (LiveEvents liveEvents : LiveEvents.values()) {
-            Calendar calendar = Calendar.getInstance(Locale.GERMANY);
-            calendar.set(Calendar.DATE, liveEvents.getDate());
-            calendar.set(Calendar.HOUR_OF_DAY, liveEvents.getHour_of_day());
-            calendar.set(Calendar.MINUTE, liveEvents.getMinute());
-
-            if (event == 0) {
-                if (System.currentTimeMillis() == calendar.getTimeInMillis()) {
-                    if (liveEvents.getName().equalsIgnoreCase("asteroid")) {
-                        event = 1;
-                        startLiveEventAsteroid();
-                    }
-                }
-            }
-        }
-    }
-
-
-    @Override
-    public void startLiveEventAsteroid() {
-
+    public void onStartEvent() {
         /*  PRE */
         //WEB
         Location pre_cobweb_1 = CoreSystem.getInstance().getWorldManager().getWorld(LobbyWorld.ONE_ISLAND.getName()).getBlockLocation("liveevent-pre-1");
@@ -120,7 +95,6 @@ public class LiveEventManager implements Runnable, eu.mcone.lobby.api.liveevent.
 
 
         for (Player all : Bukkit.getOnlinePlayers()) {
-            liveEventAsteroid = true;
             all.sendMessage("§8[§7§l!§8] §cNPC §8» §fUnbekannte Person §8|§7 Bei der Bank wird es passieren...");
             all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10, 1, false, false));
             all.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 60, 1, false, false));
@@ -273,7 +247,6 @@ public class LiveEventManager implements Runnable, eu.mcone.lobby.api.liveevent.
 
 
                                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                                        liveEventAsteroid = false;
                                         all.resetPlayerTime();
                                         all.setPlayerTime(1000, false);
                                         all.setFlying(false);
@@ -288,9 +261,8 @@ public class LiveEventManager implements Runnable, eu.mcone.lobby.api.liveevent.
         }
     }
 
-
     @Override
-    public void removeLiveEventAsteroid() {
+    public void onRemoveEvent() {
         /*  FINAL */
         //COBBLE
         Location block1 = CoreSystem.getInstance().getWorldManager().getWorld(LobbyWorld.ONE_ISLAND.getName()).getBlockLocation("liveevent-1");

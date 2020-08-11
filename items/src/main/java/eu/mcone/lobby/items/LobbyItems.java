@@ -22,7 +22,7 @@ import eu.mcone.lobby.items.listener.effects.CompassListener;
 import eu.mcone.lobby.items.listener.effects.MagicWandListener;
 import eu.mcone.lobby.items.listener.effects.OneHitSwordListener;
 import eu.mcone.lobby.items.manager.DailyShopManager;
-import eu.mcone.lobby.items.manager.LiveEventManager;
+import eu.mcone.lobby.items.manager.LobbyLiveEventManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
@@ -38,13 +38,13 @@ public class LobbyItems extends LobbyAddon {
     @Getter
     private DailyShopManager dailyShopManager;
     @Getter
-    private LiveEventManager liveEventManager;
+    private LobbyLiveEventManager liveEventManager;
 
     @Override
     public void onEnable() {
         instance = this;
         dailyShopManager = new DailyShopManager();
-        liveEventManager = new LiveEventManager();
+        liveEventManager = new LobbyLiveEventManager();
 
         for (LobbyCategory category : LobbyCategory.values()) {
             Set<BackpackItem> items = new HashSet<>();
