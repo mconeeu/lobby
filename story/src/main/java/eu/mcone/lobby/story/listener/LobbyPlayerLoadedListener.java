@@ -40,8 +40,8 @@ public class LobbyPlayerLoadedListener implements Listener {
                 if (lp.getProgressId() == StoryProgress.INFECTION.getId()) {
                     PlayerNpc infectionNpc = StoryProgress.INFECTION.getNpc();
 
-                    infectionNpc.setSkin(NpcListener.RUFI_HEADLED_SKIN, p);
-                    infectionNpc.changeDisplayname(NpcListener.RUFI_HEADLED_DISPLAY_NAME, p);
+                    infectionNpc.setSkin(NpcListener.RUFI_HEALED_SKIN, p);
+                    infectionNpc.changeDisplayname(NpcListener.RUFI_HEALED_DISPLAY_NAME, p);
                 }
             }
 

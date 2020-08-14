@@ -8,7 +8,7 @@ package eu.mcone.lobby.items.listener;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.LobbyCategory;
-import eu.mcone.lobby.api.player.HotbarItems;
+import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.items.inventory.chestopening.ChestOpeningInventory;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -43,7 +43,7 @@ public class InventoryTriggerListener implements Listener {
                 return;
             }
 
-            if (e.getItem().equals(HotbarItems.BACKPACK)) {
+            if (e.getItem().equals(HotbarItem.BACKPACK)) {
                 LobbyPlugin.getInstance().getBackpackManager().openBackpackInventory(LobbyCategory.STORY_ITEMS.name(), p);
             }
         }

@@ -13,7 +13,9 @@ import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
+import eu.mcone.lobby.api.games.LobbyGame;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.inventory.InteractionInventory;
 import eu.mcone.lobby.items.inventory.office.secretary.SecretaryInventory;
 import eu.mcone.lobby.items.manager.OfficeManager;
@@ -33,31 +35,6 @@ import org.bukkit.potion.PotionEffectType;
 import org.spigotmc.event.entity.EntityDismountEvent;
 
 public class GeneralPlayerListener implements Listener {
-
-    @EventHandler
-    public void onAFK(AfkEvent e) {
-        Player p = e.getPlayer();
-
-        if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getJumpNRunManager().isJumping(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p) || LobbyPlugin.getInstance().getGungameManager().isFighting(p)) {
-            if (e.getState().equals(PlayerState.AFK)) {
-                LobbyPlugin.getInstance().getJumpNRunManager().setCancel(p);
-                LobbyPlugin.getInstance().getOneHitManager().leave(p);
-                LobbyPlugin.getInstance().getCatchManager().leave(p);
-                LobbyPlugin.getInstance().getGungameManager().leave(p);
-                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du wurdest automatisch von deiner Lobby Aktivität gekickt!");
-            }
-        }
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().getUniqueId());
-        if (lp.getBankprogressId() == BankRobberySmallProgress.BANK_ROBBERY_MIDDLE.getId()) {
-            lp.setBankProgress(BankRobberySmallProgress.BANK_ROBBERY_START);
-            LobbyPlugin.getInstance().getMessenger().send(p, "§4Der Banküberfall ist gescheitert!");
-            LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "office-entrance");
-            JohnBankRobberyInventory.currentlyInBank = null;
-            if (lp.hasLobbyItem(LobbyItem.GOLD_BARDING)) {
-                lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
-            }
-        }
-    }
 
     @EventHandler
     public void on(EntityDismountEvent e) {

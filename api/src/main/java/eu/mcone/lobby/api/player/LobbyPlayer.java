@@ -11,13 +11,13 @@ import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.*;
 import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.bank.central.BankProgress;
-import eu.mcone.lobby.api.gang.Gang;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.DisplaySlot;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -29,9 +29,6 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
     @Getter
     private final GamePlayer gamePlayer;
 
-    @Getter
-    @Setter
-    private Gang gang;
     @Getter
     private int chests, progressId, bankprogressId, centralbankprogressId, tutorialStoryProgressId, traderStoryProgressID;
     @Getter
@@ -77,8 +74,14 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
         LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, bankprogressId, centralbankprogressId, tutorialStoryProgressId, traderStoryProgressID, dailyReward, settings, secrets, jumpnruns));
     }
 
-    public boolean isInGang() {
-        return gang != null;
+    public void reloadScoreboardIfEnabled() {
+        if (settings.isScoreboard() && getCorePlayer().getScoreboard().getObjective(DisplaySlot.SIDEBAR) != null) {
+            getCorePlayer().getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+        }
+    }
+
+    public void resetDataAndHotbarItems() {
+        LobbyPlugin.getInstance().resetPlayerDataAndHotbarItems(bukkit());
     }
 
     public void addChests(int amount) {

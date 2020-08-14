@@ -22,9 +22,9 @@ import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.*;
-import eu.mcone.lobby.scoreboard.SidebarObjective;
-import eu.mcone.lobby.util.NpcEmoteManager;
-import eu.mcone.lobby.util.RealTimeUtil;
+import eu.mcone.lobby.api.scoreboard.SidebarObjective;
+import eu.mcone.lobby.scheduler.NpcEmoteScheduler;
+import eu.mcone.lobby.scheduler.WorldRealTimeScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -42,11 +42,10 @@ public class PlayerJoinListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
 
-
         preloadLobbyPlayer(p);
-        p.getInventory().setItem(0, HotbarItems.LOADING);
-        p.getInventory().setItem(7, HotbarItems.LOADING);
-        p.getInventory().setItem(8, HotbarItems.LOADING);
+        p.getInventory().setItem(0, HotbarItem.LOADING);
+        p.getInventory().setItem(7, HotbarItem.LOADING);
+        p.getInventory().setItem(8, HotbarItem.LOADING);
     }
 
     @EventHandler
@@ -76,15 +75,13 @@ public class PlayerJoinListener implements Listener {
             LobbyPlugin.getInstance().getPlayerHiderManager().updateHider(p);
             LobbyPlugin.getInstance().getSilentLobbyManager().updateSilentLobby(p);
             LobbyPlugin.getInstance().getOfficeManager().updateOffice(p);
-
         }, 1);
-
     }
 
     public static void loadLobbyPlayer(Player p, LobbyPlayer lp, CorePlayerLoadedEvent e) {
         Bukkit.getPluginManager().callEvent(new LobbyPlayerLoadedEvent(lp, e.getLoadReason()));
-        RealTimeUtil.setCurrentRealTime(lp);
-        NpcEmoteManager.setEmote(p);
+        WorldRealTimeScheduler.setCurrentRealTime(lp);
+        NpcEmoteScheduler.setEmote(p);
 
         if (e.getLoadReason().equals(CorePlayerLoadedEvent.Reason.JOIN)) {
             if (p.hasPermission("lobby.silenthub")) {
@@ -104,7 +101,7 @@ public class PlayerJoinListener implements Listener {
             }
 
             if (p.hasPermission("system.bungee.nick")) {
-                p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItems.NICK_ACTIVATED : HotbarItems.NICK_DISABLED);
+                p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItem.NICK_ACTIVATED : HotbarItem.NICK_DISABLED);
             }
 
             switch (lp.getSettings().getSpawnPoint()) {
@@ -117,9 +114,9 @@ public class PlayerJoinListener implements Listener {
                             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
                         }
                     } else {
-                        if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                        if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.RAISEN)) {
                             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
-                        } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                        } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.SKYLECK)) {
                             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn2");
                         }
                     }
@@ -198,8 +195,8 @@ public class PlayerJoinListener implements Listener {
         p.setWalkSpeed(0.2F);
         p.setFlying(false);
 
-        p.getInventory().setItem(1, HotbarItems.LOBBY_CHANGER);
-        p.getInventory().setItem(4, HotbarItems.COMPASS);
+        p.getInventory().setItem(1, HotbarItem.LOBBY_CHANGER);
+        p.getInventory().setItem(4, HotbarItem.COMPASS);
     }
 
     private static void postloadLobbyPlayer(Player p) {
@@ -209,18 +206,22 @@ public class PlayerJoinListener implements Listener {
         if (p.hasPermission("mcone.premium")) p.setAllowFlight(true);
 
         if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
-            p.getInventory().setItem(0, HotbarItems.LOBBY_HIDER_UNAVAILABLE);
+            p.getInventory().setItem(0, HotbarItem.LOBBY_HIDER_UNAVAILABLE);
         } else if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(p)) {
-            p.getInventory().setItem(0, HotbarItems.SHOW_PLAYERS);
+            p.getInventory().setItem(0, HotbarItem.SHOW_PLAYERS);
         } else {
-            p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
+            p.getInventory().setItem(0, HotbarItem.HIDE_PLAYERS);
         }
 
         if (p.hasPermission("system.bungee.nick")) {
-            p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItems.NICK_ACTIVATED : HotbarItems.NICK_DISABLED);
+            p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItem.NICK_ACTIVATED : HotbarItem.NICK_DISABLED);
         }
 
-        p.getInventory().setItem(7, HotbarItems.BACKPACK);
+        p.getInventory().setItem(7, HotbarItem.BACKPACK);
+
+        if (p.hasPermission("lobby.silenthub")) {
+            p.getInventory().setItem(2, HotbarItem.PRIVATE_LOBBY);
+        }
 
         p.getInventory().setItem(
                 8,
@@ -232,7 +233,7 @@ public class PlayerJoinListener implements Listener {
 
     }
 
-    public static void setLobbyItems(Player p) {
+    public static void resetPlayerDataAndHotbarItems(Player p) {
         preloadLobbyPlayer(p);
         postloadLobbyPlayer(p);
     }

@@ -15,8 +15,8 @@ import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.player.*;
-import eu.mcone.lobby.scoreboard.SidebarObjective;
-import eu.mcone.lobby.util.RealTimeUtil;
+import eu.mcone.lobby.api.scoreboard.SidebarObjective;
+import eu.mcone.lobby.scheduler.WorldRealTimeScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -161,7 +161,7 @@ public class LobbySettingsInventory extends CoreInventory {
                 settings.setRealTime(true);
                 setSettings(p, lp);
 
-                RealTimeUtil.setCurrentRealTime(lp);
+                WorldRealTimeScheduler.setCurrentRealTime(lp);
             });
         }
 
@@ -200,16 +200,16 @@ public class LobbySettingsInventory extends CoreInventory {
             setItem(InventorySlot.ROW_3_SLOT_5, settings.getSpawnVillage().getItem().create(), e -> {
                 switch (settings.getSpawnVillage()) {
                     case RANDOM: {
-                        settings.setSpawnVillage(SpawnVillage.VILLAGE_1);
+                        settings.setSpawnVillage(SpawnVillage.RAISEN);
                         setSettings(p, lp);
                         break;
                     }
-                    case VILLAGE_1: {
-                        settings.setSpawnVillage(SpawnVillage.VILLAGE_2);
+                    case RAISEN: {
+                        settings.setSpawnVillage(SpawnVillage.SKYLECK);
                         setSettings(p, lp);
                         break;
                     }
-                    case VILLAGE_2: {
+                    case SKYLECK: {
                         settings.setSpawnVillage(SpawnVillage.RANDOM);
                         setSettings(p, lp);
                         break;

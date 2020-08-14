@@ -30,11 +30,6 @@ permissions:
             description: Schnee Trail
           lobby.trail.wasser:
             description: Wasser Trail
-      lobby.gang:
-        description: Manage all Nangs
-        children:
-          lobby.gang.reload:
-            description: Reload all Gang-Data
       lobby.chests:
         description: Manage all chests
       lobby.silenthub:
@@ -42,4 +37,3 @@ permissions:
 
 translations:
   # prefix
-  - lobby.prefix.gang

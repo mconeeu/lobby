@@ -26,9 +26,9 @@ public class ChestInfoInventory extends CoreInventory {
 
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.ENDER_PORTAL_FRAME).displayName("§f§lZum Chestopening teleportieren").create(), e -> {
             p.closeInventory();
-            if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+            if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.SKYLECK)) {
                 LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "chest-opening2");
-            } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+            } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.RAISEN)) {
                 LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "chest-opening");
             } else {
                 LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "chest-opening");
@@ -40,9 +40,9 @@ public class ChestInfoInventory extends CoreInventory {
         try {
             setItem(InventorySlot.ROW_2_SLOT_7, new Skull(CoreSystem.getInstance().getPlayerUtils().getSkinFromSkinDatabase("merchant"), 1).toItemBuilder().displayName("§f§lZum Händler teleportieren").create(), e -> {
                 p.closeInventory();
-                if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.SKYLECK)) {
                     LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "merchant2");
-                } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.RAISEN)) {
                     LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "merchant");
                 } else {
                     LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "merchant");

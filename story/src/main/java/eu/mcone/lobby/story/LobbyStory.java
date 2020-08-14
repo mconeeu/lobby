@@ -28,10 +28,11 @@ public class LobbyStory extends LobbyAddon {
     private static LobbyStory instance;
 
     @Override
-    public void onEnable() {
+    public void onEnable(LobbyPlugin plugin) {
         instance = this;
 
-        LobbyPlugin.getInstance().registerEvents(
+        plugin.registerEvents(
+                new AfkListener(),
                 new CoreManagerReloadListener(),
                 new LobbyPlayerLoadedListener(),
                 new NpcListener(),
@@ -41,28 +42,28 @@ public class LobbyStory extends LobbyAddon {
                 new PlayerMoveListener()
         );
 
-        reload();
+        reload(plugin);
     }
 
     @Override
-    public void reload() {
+    public void reload(LobbyPlugin plugin) {
         prepareNpcs();
         loadStoryCaptures();
         LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").togglePlayerVisibility(ListMode.WHITELIST);
 
-        Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
             for (Player all : Bukkit.getOnlinePlayers()) {
                 if (all.getWorld().getName().equalsIgnoreCase(LobbyWorld.OFFICE.getName())) {
-                    LobbyPlugin.getInstance().getOfficeManager().joinOffice(all);
+                    plugin.getOfficeManager().joinOffice(all);
                 } else if (all.getWorld().getName().equalsIgnoreCase(LobbyWorld.GUNGAME.getName())) {
-                    LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(all, "Spawn");
+                    plugin.getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(all, "Spawn");
                 }
             }
         }, 20);
     }
 
     @Override
-    public void onDisable() {
+    public void onDisable(LobbyPlugin plugin) {
     }
 
     private static void prepareNpcs() {

@@ -9,7 +9,7 @@ import eu.mcone.coresystem.api.bukkit.event.NickEvent;
 import eu.mcone.coresystem.api.bukkit.event.UnnickEvent;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.player.HotbarItems;
+import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.LobbySettings;
 import eu.mcone.lobby.inventory.InteractionInventory;
@@ -42,7 +42,7 @@ public class NickListener implements Listener {
             }
         }
 
-        p.getInventory().setItem(6, HotbarItems.NICK_ACTIVATED);
+        p.getInventory().setItem(6, HotbarItem.NICK_ACTIVATED);
 
         p.getInventory().setItem(
                 8,
@@ -71,7 +71,7 @@ public class NickListener implements Listener {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
         LobbySettings settings = lp.getSettings();
 
-        p.getInventory().setItem(6, HotbarItems.NICK_DISABLED);
+        p.getInventory().setItem(6, HotbarItem.NICK_DISABLED);
 
         p.getInventory().setItem(
                 8,

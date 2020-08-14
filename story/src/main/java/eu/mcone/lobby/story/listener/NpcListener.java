@@ -20,11 +20,11 @@ import eu.mcone.lobby.api.enums.TraderProgress;
 import eu.mcone.lobby.api.enums.TutorialStory;
 import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.items.inventory.smuggler.SmugglerInventory;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import eu.mcone.lobby.story.inventory.searcher.SearcherInventory;
 import eu.mcone.lobby.story.inventory.story.CaptainInventory;
-import eu.mcone.lobby.story.inventory.story.CorpseInventory;
 import eu.mcone.lobby.story.inventory.story.CustomerInventory;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
 import org.bukkit.Bukkit;
@@ -41,8 +41,8 @@ import java.util.Objects;
 
 public class NpcListener implements Listener {
 
-    static final String RUFI_HEADLED_DISPLAY_NAME = "§erufi";
-    static final SkinInfo RUFI_HEADLED_SKIN = CoreSystem.getInstance().getPlayerUtils().getSkinInfo("rufi");
+    static final String RUFI_HEALED_DISPLAY_NAME = "§erufi";
+    static final SkinInfo RUFI_HEALED_SKIN = CoreSystem.getInstance().getPlayerUtils().getSkinInfo("rufi");
 
     @EventHandler
     public void on(NpcInteractEvent e) {
@@ -66,9 +66,6 @@ public class NpcListener implements Listener {
                         new SearcherInventory(p);
                         break;
                     }
-                    case "Leiche": {
-                        new CorpseInventory(p);
-                    }
                     case "robert": {
                         npc.playLabymodEmote(LabyModEmote.SALUTE, p);
                         if (lp.getProgressId() >= StoryProgress.SALIA.getId() && !lp.hasLobbyItem(LobbyItem.MAGICWAND)) {
@@ -83,6 +80,7 @@ public class NpcListener implements Listener {
                     }
                     case "cutter": {
                         npc.playLabymodEmote(LabyModEmote.BOW_DOWN, p);
+
                         if (lp.getBankprogressId() == BankRobberySmallProgress.CUTTER.getId()) {
                             if (lp.hasLobbyItem(LobbyItem.WHITE_WOOL)) {
 
@@ -96,9 +94,9 @@ public class NpcListener implements Listener {
                             }
                             return;
                         }
-                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJoguloa §8|§7 Ich habe leider momentan viel zu tun komm später wieder!");
-                    }
 
+                        break;
+                    }
                     case "duty": {
                         if (!lp.hasLobbyItem(LobbyItem.PASS)) {
                             lp.addLobbyItem(LobbyItem.PASS);
@@ -118,8 +116,8 @@ public class NpcListener implements Listener {
                                 p.spigot().playEffect(npc.getData().getLocation().bukkit(), Effect.INSTANT_SPELL, 1, 1, 1, 1, 1, 5, 1000, 1);
 
                                 Bukkit.getScheduler().runTaskLaterAsynchronously(LobbyPlugin.getInstance(), () -> {
-                                    npc.setSkin(RUFI_HEADLED_SKIN, p);
-                                    npc.changeDisplayname(RUFI_HEADLED_DISPLAY_NAME, p);
+                                    npc.setSkin(RUFI_HEALED_SKIN, p);
+                                    npc.changeDisplayname(RUFI_HEALED_DISPLAY_NAME, p);
                                 }, 2);
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fRufi §8|§7 Danke Danke du hast mich gerretet du kannst dir die Belohnung in der Mitte von One-Island abholen, springe in ein großes Loch!");
                             } else {
@@ -147,7 +145,7 @@ public class NpcListener implements Listener {
                         break;
                     }
                     case "merchant-boatticket": {
-                        if (!LobbyPlugin.getInstance().getOneHitManager().isFighting(p)) {
+                        if (!LobbyGames.getInstance().isPlaying(p)) {
                             new CustomerInventory(p);
                         }
                         break;
@@ -230,6 +228,7 @@ public class NpcListener implements Listener {
                         if (!lp.hasLobbyItem(LobbyItem.COMPASS)) {
                             lp.addLobbyItem(LobbyItem.COMPASS);
                         }
+                        break;
                     }
                 }
             } else if (w.equals(LobbyWorld.PARADISE_ISLAND.getWorld())) {
@@ -289,8 +288,6 @@ public class NpcListener implements Listener {
                         }
                         break;
                     }
-
-
                 }
             } else if (w.equals(LobbyWorld.CAVE.getWorld())) {
                 if ("marvin-kill".equals(npc.getData().getName())) {
@@ -341,6 +338,8 @@ public class NpcListener implements Listener {
                     }
                 }
             }
+
+
             for (StoryProgress storyProgress : StoryProgress.values()) {
                 NPC progressNpc = storyProgress.getWorld().getWorld().getNPC(storyProgress.getNpcName());
 
@@ -373,7 +372,7 @@ public class NpcListener implements Listener {
                     } else {
                         p.sendMessage("§8§l[§7§l!§8§l] §fLobby§8 » §7Das hast du schon gemacht!");
                     }
-                    break;
+                    return;
                 }
             }
 
@@ -414,9 +413,11 @@ public class NpcListener implements Listener {
                     } else {
                         p.sendMessage("§8§l[§7§l!§8§l] §fLobby§8 » §7Das hast du schon gemacht!");
                     }
-                    break;
+                    return;
                 }
             }
+
+
             for (TraderProgress traderProgress : TraderProgress.values()) {
                 NPC tutorialProgressNpc = traderProgress.getWorld().getWorld().getNPC(traderProgress.getNpcName());
 

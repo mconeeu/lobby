@@ -18,8 +18,8 @@
         <module>plugin</module>
         <module>story</module>
         <module>items</module>
-        <module>gang</module>
         <module>api</module>
+        <module>games</module>
     </modules>
 
     <properties>
@@ -85,6 +85,14 @@
             <name>MC ONE Repo</name>
             <url>https://repo.onegaming.group/repository/mcone-systems/</url>
         </repository>
+        <repository>
+            <id>md_5-snapshots</id>
+            <url>https://repo.md-5.net/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>md_5-releases</id>
+            <url>https://repo.md-5.net/content/repositories/releases/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -116,6 +124,12 @@
             <groupId>io.sentry</groupId>
             <artifactId>sentry</artifactId>
             <version>1.7.30</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>fr.neatmonster</groupId>
+            <artifactId>nocheatplus</artifactId>
+            <version>3.16.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

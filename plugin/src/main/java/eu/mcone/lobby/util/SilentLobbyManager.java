@@ -8,7 +8,7 @@ package eu.mcone.lobby.util;
 import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.player.HotbarItems;
+import eu.mcone.lobby.api.player.HotbarItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Sound;

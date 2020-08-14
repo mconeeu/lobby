@@ -28,13 +28,19 @@
         <dependency>
             <groupId>eu.mcone.lobby</groupId>
             <artifactId>items</artifactId>
-         <version>5.0.3-SNAPSHOT</version>
+            <version>5.0.3-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>eu.mcone.lobby</groupId>
+            <artifactId>games</artifactId>
+            <version>5.0.3-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>eu.mcone.lobby</groupId>
             <artifactId>api</artifactId>
-         <version>5.0.3-SNAPSHOT</version>
+            <version>5.0.3-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

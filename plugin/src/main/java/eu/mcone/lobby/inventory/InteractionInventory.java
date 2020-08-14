@@ -15,6 +15,7 @@ import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.LobbySettings;
+import eu.mcone.lobby.games.LobbyGames;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -81,11 +82,7 @@ public class InteractionInventory extends CoreInventory {
                 LobbySettings settings = lc.getSettings();
 
                 if (settings.isStacking()) {
-                    if (!LobbyPlugin.getInstance().getOneHitManager().isFighting(clicked)
-                            && !LobbyPlugin.getInstance().getGungameManager().isFighting(clicked)
-                            && !LobbyPlugin.getInstance().getCatchManager().isCatching(clicked)
-                            && !LobbyPlugin.getInstance().getJumpNRunManager().isJumping(clicked)) {
-                        System.out.println(clicked.getName());
+                    if (!LobbyGames.getInstance().isPlaying(p)) {
                         p.setPassenger(lc.bukkit());
                         CoreSystem.getInstance().createActionBar()
                                 .message("§f§oBenutze LSHIFT um abzusteigen")

@@ -17,7 +17,6 @@ public class EventInventory extends CoreInventory {
         super("§8» §3§lEvent", player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
 
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.EMERALD, 1, 0)
                             .displayName("§fEvent §8| §fNEU")
                             .lore("§8» §f§nLinksklick§8 | §7§oBetreten")

@@ -7,7 +7,7 @@ package eu.mcone.lobby.util;
 
 import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.player.HotbarItems;
+import eu.mcone.lobby.api.player.HotbarItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -38,7 +38,7 @@ public class PlayerHiderManager implements eu.mcone.lobby.api.player.PlayerHider
                 return;
             }
         }
-
+*
         for (Player all : Bukkit.getOnlinePlayers()) {
             p.hidePlayer(all);
         }
@@ -49,7 +49,7 @@ public class PlayerHiderManager implements eu.mcone.lobby.api.player.PlayerHider
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
-        p.getInventory().setItem(0, HotbarItems.SHOW_PLAYERS);
+        p.getInventory().setItem(0, HotbarItem.SHOW_PLAYERS);
         LobbyPlugin.getInstance().getMessenger().send(p, "§7Du siehst nun §ckeine §7Spieler mehr.");
         time.put(p.getName(), System.currentTimeMillis());
     }
@@ -66,7 +66,7 @@ public class PlayerHiderManager implements eu.mcone.lobby.api.player.PlayerHider
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
         p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
         p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
-        p.getInventory().setItem(0, HotbarItems.HIDE_PLAYERS);
+        p.getInventory().setItem(0, HotbarItem.HIDE_PLAYERS);
         LobbyPlugin.getInstance().getMessenger().send(p, "§7Du siehst nun §aalle §7Spieler wieder.");
         time.put(p.getName(), System.currentTimeMillis());
     }

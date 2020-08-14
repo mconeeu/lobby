@@ -103,17 +103,17 @@ public class MinigamesInventory extends CoreInventory {
                                             LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
                                             if (e.getClick().isRightClick()) {
-                                                if (lobbyPlayer.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                                                if (lobbyPlayer.getSettings().getSpawnVillage().equals(SpawnVillage.RAISEN)) {
                                                     LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("spawn2");
-                                                } else if (lobbyPlayer.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                                                } else if (lobbyPlayer.getSettings().getSpawnVillage().equals(SpawnVillage.SKYLECK)) {
                                                     LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("spawn");
                                                 } else {
                                                     LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("spawn");
                                                 }
                                             } else if (e.getClick().isLeftClick()) {
-                                                if (lobbyPlayer.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                                                if (lobbyPlayer.getSettings().getSpawnVillage().equals(SpawnVillage.RAISEN)) {
                                                     LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("spawn");
-                                                } else if (lobbyPlayer.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                                                } else if (lobbyPlayer.getSettings().getSpawnVillage().equals(SpawnVillage.SKYLECK)) {
                                                     LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("spawn2");
                                                 } else {
                                                     int randomeSpawn = getRandomNumberInRange(1, 3);

@@ -7,10 +7,10 @@ package eu.mcone.lobby.api;
 
 public abstract class LobbyAddon {
 
-    public abstract void onEnable();
+    public abstract void onEnable(LobbyPlugin plugin);
 
-    public abstract void onDisable();
+    public abstract void onDisable(LobbyPlugin plugin);
 
-    public abstract void reload();
+    public abstract void reload(LobbyPlugin plugin);
 
 }

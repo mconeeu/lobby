@@ -12,7 +12,6 @@ import eu.mcone.gameapi.api.backpack.defaults.DefaultItem;
 import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.JumpNRun;
 import eu.mcone.lobby.api.enums.LobbyItem;
 import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.enums.bank.central.BankProgress;
@@ -110,22 +109,6 @@ public class InventoryTriggerListener implements Listener {
                             } else {
                                 LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Du hast dieses §cSecret §4bereits gefunden!");
                             }
-
-                            //JUMP AND RUNS
-                        } else if (sign.getLine(0).equals("§7»§c Jump'n'Run")) {
-                            for (JumpNRun jumpnrun : JumpNRun.values()) {
-                                if (sign.getLine(1).equals(jumpnrun.getJumpandrunname())) {
-                                    if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p) || LobbyPlugin.getInstance().getGungameManager().isFighting(p)) {
-                                        LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Du darfst im moment keine Jump and Runs spielen, weil du gerade ein Lobbygame spielst!");
-                                        return;
-                                    }
-                                    LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jumpnrun.getWarpLocation());
-                                    LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "Du hast dich zum §f" + jumpnrun.getJumpandrunname() + " §7Jump and Run telepotiert");
-                                    return;
-                                }
-                            }
-
-                            LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Das §c" + sign.getLine(1) + "§4 Jump and Run ist momentan in §oWartungen§4!");
                         }
                         return;
                     }

@@ -120,9 +120,9 @@ public class LobbyPlacesInventory extends CoreInventory {
                                 e -> {
                                     player.closeInventory();
                                     LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
-                                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.SKYLECK)) {
                                         LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("smuggler2");
-                                    } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                                    } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.RAISEN)) {
                                         LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("smuggler");
                                     } else {
                                         LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("smuggler");
@@ -151,9 +151,9 @@ public class LobbyPlacesInventory extends CoreInventory {
                                     player.closeInventory();
 
                                     LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
-                                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.SKYLECK)) {
                                         LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("merchant2");
-                                    } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                                    } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.RAISEN)) {
                                         LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("merchant");
                                     } else {
                                         LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("merchant");
@@ -184,9 +184,9 @@ public class LobbyPlacesInventory extends CoreInventory {
                                 e -> {
                                     player.closeInventory();
                                     LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
-                                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.SKYLECK)) {
                                         LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "chest-opening2");
-                                    } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                                    } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.RAISEN)) {
                                         LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "chest-opening");
                                     } else {
                                         LobbyWorld.ONE_ISLAND.getWorld().teleport(p, "chest-opening");
@@ -202,9 +202,9 @@ public class LobbyPlacesInventory extends CoreInventory {
                                 e -> {
                                     player.closeInventory();
                                     LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
-                                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_2)) {
+                                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.SKYLECK)) {
                                         LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("bank2");
-                                    } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.VILLAGE_1)) {
+                                    } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.RAISEN)) {
                                         LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("bank");
                                     } else {
                                         LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("bank2");

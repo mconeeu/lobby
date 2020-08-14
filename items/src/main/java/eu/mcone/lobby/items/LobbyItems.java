@@ -41,7 +41,7 @@ public class LobbyItems extends LobbyAddon {
     private LobbyLiveEventManager liveEventManager;
 
     @Override
-    public void onEnable() {
+    public void onEnable(LobbyPlugin plugin) {
         instance = this;
         dailyShopManager = new DailyShopManager();
         liveEventManager = new LobbyLiveEventManager();
@@ -65,7 +65,7 @@ public class LobbyItems extends LobbyAddon {
                 }
             }
 
-            LobbyPlugin.getInstance().getBackpackManager().registerCategory(
+            plugin.getBackpackManager().registerCategory(
                     new eu.mcone.gameapi.api.backpack.Category(
                             category.name(),
                             "",
@@ -81,7 +81,7 @@ public class LobbyItems extends LobbyAddon {
             );
         }
 
-        LobbyPlugin.getInstance().registerEvents(
+        plugin.registerEvents(
                 new OneHitSwordListener(),
                 new MagicWandListener(),
                 new CompassListener(),
@@ -89,7 +89,7 @@ public class LobbyItems extends LobbyAddon {
                 new NpcInteractListener()
         );
 
-        LobbyPlugin.getInstance().registerCommands(
+        plugin.registerCommands(
                 new ChestCMD(),
                 new OfficeCMD(),
                 new LiveEventCMD());
@@ -102,18 +102,13 @@ public class LobbyItems extends LobbyAddon {
                 Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock2, Effect.LAVA_POP, 20);
             }
         }, 24, 24);
-
-
-        reload();
     }
 
     @Override
-    public void onDisable() {
-    }
+    public void onDisable(LobbyPlugin plugin) { }
 
     @Override
-    public void reload() {
-    }
+    public void reload(LobbyPlugin plugin) { }
 
     private static BackpackInventoryListener getInventoryListener(LobbyCategory category) {
         switch (category) {
