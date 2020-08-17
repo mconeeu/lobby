@@ -86,7 +86,8 @@ public class PlayerJoinListener implements Listener {
         if (e.getLoadReason().equals(CorePlayerLoadedEvent.Reason.JOIN)) {
             if (p.hasPermission("lobby.silenthub")) {
                 if (lp.getSettings().getSpawnType().equals(SpawnType.SILENTLOBBY)) {
-                    e.setHidden(true);
+                    //TODO: Fix hidden
+//                    e.setHidden(true);
                     LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
                 } else {
                     p.getInventory().setItem(2, HotbarItems.PRIVATE_LOBBY);
@@ -135,7 +136,8 @@ public class PlayerJoinListener implements Listener {
         } else if (e.getLoadReason().equals(CorePlayerLoadedEvent.Reason.RELOAD)) {
             if (p.hasPermission("lobby.silenthub")) {
                 if (lp.getSettings().getSpawnType().equals(SpawnType.SILENTLOBBY)) {
-                    e.setHidden(true);
+                    //TODO: Fix hidden
+//                    e.setHidden(true);
                     LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
                 } else {
                     p.getInventory().setItem(2, HotbarItems.PRIVATE_LOBBY);
