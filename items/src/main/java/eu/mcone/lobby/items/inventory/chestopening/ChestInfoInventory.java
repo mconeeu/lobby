@@ -14,7 +14,7 @@ import eu.mcone.coresystem.api.core.exception.CoreException;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.api.player.SpawnVillage;
+import eu.mcone.lobby.api.player.settings.SpawnVillage;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 

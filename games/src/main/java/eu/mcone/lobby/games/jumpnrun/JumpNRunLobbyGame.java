@@ -10,6 +10,7 @@ import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.CoreTitle;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.games.jumpnrun.JumpNRun;
 import eu.mcone.lobby.api.games.jumpnrun.JumpNRunGame;
 import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -60,7 +61,7 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
     }
 
     @Override
-    public void startGame(Player p, eu.mcone.lobby.api.enums.JumpNRun jumpNRun) {
+    public void startGame(Player p, JumpNRun jumpNRun) {
         eu.mcone.lobby.api.games.LobbyGame game = LobbyGames.getInstance().getCurrentGame(p);
 
         if (game == null) {
@@ -136,7 +137,7 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
 
         if (isPlaying(p)) {
             JumpNRunPlayer jnrPlayer = getCurrentlyPlaying(p);
-            eu.mcone.lobby.api.enums.JumpNRun jumpNRun = jnrPlayer.getJumpNRun();
+            JumpNRun jumpNRun = jnrPlayer.getJumpNRun();
             int checkpoint = jnrPlayer.getCheckpoint();
             long bestTime = lp.getBestJumpNRunTime(jumpNRun);
             long time = System.currentTimeMillis() / 1000 - jnrPlayer.getTime();
@@ -197,21 +198,14 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
         p.setHealth(20);
         p.setFoodLevel(20);
 
+        p.getInventory().setItem(0, LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(p).getItem());
         if (p.hasPermission("lobby.silenthub")) {
-            p.getInventory().setItem(1, HotbarItem.PRIVATE_LOBBY);
-        } else if (!LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(p)) {
-            p.getInventory().setItem(0, HotbarItem.HIDE_PLAYERS);
-        } else {
-            p.getInventory().setItem(0, HotbarItem.SHOW_PLAYERS);
-        }
-
-        if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
-            p.getInventory().setItem(1, HotbarItems.LEAVE_PRIVATE_LOBBY);
-            p.getInventory().setItem(0, HotbarItem.LOBBY_HIDER_UNAVAILABLE);
-        } else if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(p)) {
-            p.getInventory().setItem(0, HotbarItem.SHOW_PLAYERS);
-        } else {
-            p.getInventory().setItem(0, HotbarItem.HIDE_PLAYERS);
+            if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
+                p.getInventory().setItem(1, HotbarItem.SILENT_LOBBY_QUIT);
+                p.getInventory().setItem(0, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
+            } else {
+                p.getInventory().setItem(1, HotbarItem.SILENT_LOBBY_JOIN);
+            }
         }
 
         p.getInventory().setItem(8, HotbarItem.LEAVE_JUMPNRUN);

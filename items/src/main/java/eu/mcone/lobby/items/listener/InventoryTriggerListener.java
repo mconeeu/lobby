@@ -7,7 +7,7 @@ package eu.mcone.lobby.items.listener;
 
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.LobbyCategory;
+import eu.mcone.lobby.api.items.LobbyCategory;
 import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.items.inventory.chestopening.ChestOpeningInventory;
 import org.bukkit.Material;

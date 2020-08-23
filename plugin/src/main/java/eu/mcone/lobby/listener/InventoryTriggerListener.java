@@ -6,15 +6,12 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItem;
-import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.api.player.LobbySettings;
-import eu.mcone.lobby.inventory.LobbyInventory;
+import eu.mcone.lobby.inventory.LobbySwitchInventory;
 import eu.mcone.lobby.inventory.compass.MinigamesInventory;
-import org.bukkit.Material;
+import eu.mcone.lobby.story.LobbyStory;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,67 +33,27 @@ public class InventoryTriggerListener implements Listener {
             }
 
 
-            if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
+            if (i.getItemMeta().getDisplayName().equalsIgnoreCase(HotbarItem.PROFILE_DISPLAY_NAME)) {
                 e.setCancelled(true);
                 p.performCommand("profile");
-            } else if (i.equals(HotbarItem.HIDE_PLAYERS)) {
-                e.setCancelled(true);
-                LobbyPlugin.getInstance().getPlayerHiderManager().hidePlayers(p);
-            } else if (i.equals(HotbarItem.SHOW_PLAYERS)) {
-                e.setCancelled(true);
-                LobbyPlugin.getInstance().getPlayerHiderManager().showPlayers(p);
-            } else if (i.equals(HotbarItem.SETTING_HIDER)) {
-                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast alle Spieler über eine Lobby Einstellung ausgeschaltet!");
-            } else if (i.equals(HotbarItem.COMPASS)) {
+            }else if (i.equals(HotbarItem.COMPASS)) {
                 e.setCancelled(true);
                 new MinigamesInventory(p);
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
-            } else if (i.equals(HotbarItem.PRIVATE_LOBBY) || i.equals(HotbarItem.LEAVE_PRIVATE_LOBBY)) {
-                if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
-                    return;
-
-                if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
-                    LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(p);
-                } else {
-                    LobbyPlugin.getInstance().getSilentLobbyManager().activateSilentLobby(p);
-                }
             } else if (i.equals(HotbarItem.LOBBY_CHANGER)) {
-                if (!LobbyPlugin.getInstance().getOfficeManager().isVanished(p)) {
-                    new LobbyInventory(p);
+                if (!LobbyStory.getInstance().getOfficeManager().isInOffice(p)) {
+                    new LobbySwitchInventory(p);
                 } else {
-                    LobbyPlugin.getInstance().getMessenger().send(p, "§4Der Lobby Wechsler ist im Büro deaktiviert!");
+                    LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Lobby Wechsler ist im Büro deaktiviert!");
                 }
-            } else if (i.equals(HotbarItem.NICK_ACTIVATED)) {
+            } else if (i.equals(HotbarItem.NICK_ENABLED)) {
                 if (cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
                 }
-                LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
-                LobbySettings settings = lp.getSettings();
-
-                if (settings.isRankBoots()) {
-                    LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
-                }
-
-                p.getInventory().setItem(
-                        6,
-                        new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§c§lNicken §8» §7§oDeaktiviert").lore("§7§oKlicke zum aktivieren").create()
-                );
             } else if (i.equals(HotbarItem.NICK_DISABLED)) {
                 if (!cp.isNicked()) {
                     CoreSystem.getInstance().getChannelHandler().createSetRequest(p, "CMD", "nick");
                 }
-
-                LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
-                LobbySettings settings = lp.getSettings();
-
-                if (settings.isRankBoots()) {
-                    p.getInventory().setBoots(null);
-                }
-
-                p.getInventory().setItem(
-                        6,
-                        new ItemBuilder(Material.NAME_TAG, 1, 0).displayName("§a§lNicken §8» §7§oAktiviert").lore("§7§oKlicke zum deaktivieren").create()
-                );
             }
         }
     }

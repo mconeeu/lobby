@@ -8,9 +8,10 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.StoryProgress;
+import eu.mcone.lobby.api.story.progress.StoryProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.api.player.SpawnVillage;
+import eu.mcone.lobby.api.player.settings.SpawnVillage;
+import eu.mcone.lobby.story.LobbyStory;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -25,7 +26,7 @@ public class LobbyPlacesInventory extends CoreInventory {
 
     public LobbyPlacesInventory(Player p) {
         super("§8» §3§lLobby-Orte", p, InventorySlot.ROW_5, InventoryOption.FILL_EMPTY_SLOTS);
-        if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
+        if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(getClass(), p.getUniqueId()))
             return;
 
         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
@@ -52,9 +53,6 @@ public class LobbyPlacesInventory extends CoreInventory {
         setItem(InventorySlot.ROW_4_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
         setItem(InventorySlot.ROW_4_SLOT_8, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
         setItem(InventorySlot.ROW_4_SLOT_9, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
-
-
-        openInventory();
 
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
             p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
@@ -219,7 +217,7 @@ public class LobbyPlacesInventory extends CoreInventory {
                                 e -> {
                                     if (e.getClick().equals(ClickType.RIGHT)) {
                                         player.closeInventory();
-                                        LobbyPlugin.getInstance().getOfficeManager().joinOffice(p);
+                                        LobbyStory.getInstance().getOfficeManager().joinOffice(p);
                                     } else if (e.getClick().equals(ClickType.LEFT)) {
                                         player.closeInventory();
                                         LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("office-entrance");
@@ -264,6 +262,8 @@ public class LobbyPlacesInventory extends CoreInventory {
                 }, 2L);
             }, 2L);
         }, 2L);
+
+        openInventory();
     }
 
 }

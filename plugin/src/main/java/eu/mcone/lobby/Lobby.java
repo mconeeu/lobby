@@ -19,20 +19,20 @@ import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.api.scoreboard.LobbyObjective;
+import eu.mcone.lobby.api.player.scoreboard.LobbyObjective;
 import eu.mcone.lobby.command.LobbyCMD;
 import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.games.command.GameCMD;
 import eu.mcone.lobby.inventory.LobbyProfileInventory;
 import eu.mcone.lobby.items.LobbyItems;
 import eu.mcone.lobby.items.manager.LobbyLiveEventManager;
-import eu.mcone.lobby.items.manager.OfficeManager;
+import eu.mcone.lobby.story.office.LobbyOfficeManager;
 import eu.mcone.lobby.listener.*;
 import eu.mcone.lobby.scheduler.NpcEmoteScheduler;
 import eu.mcone.lobby.scheduler.WorldRealTimeScheduler;
 import eu.mcone.lobby.story.LobbyStory;
-import eu.mcone.lobby.util.PlayerHiderManager;
-import eu.mcone.lobby.util.SilentLobbyManager;
+import eu.mcone.lobby.util.LobbyVanishManager;
+import eu.mcone.lobby.util.StackingManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -50,11 +50,9 @@ public class Lobby extends LobbyPlugin {
     @Getter
     private LobbyLiveEventManager liveEventManager;
     @Getter
-    private OfficeManager officeManager;
+    private LobbyVanishManager vanishManager;
     @Getter
-    private SilentLobbyManager silentLobbyManager;
-    @Getter
-    private PlayerHiderManager playerHiderManager;
+    private StackingManager stackingManager;
     @Getter
     private Map<LobbyWorld, CoreWorld> worlds;
 
@@ -109,12 +107,11 @@ public class Lobby extends LobbyPlugin {
         sendConsoleMessage("§aLoading LiveEventManager...");
         liveEventManager = new LobbyLiveEventManager();
 
-        sendConsoleMessage("§aLoading OfficeManager...");
-        officeManager = new OfficeManager();
+        sendConsoleMessage("§aLoading VanishManager...");
+        vanishManager = new LobbyVanishManager(this);
 
-        sendConsoleMessage("§aLoading HiderManagers...");
-        silentLobbyManager = new SilentLobbyManager();
-        playerHiderManager = new PlayerHiderManager();
+        sendConsoleMessage("§aLoading StackingManager...");
+        stackingManager = new StackingManager(this);
 
         getDamageLogger();
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");
@@ -154,8 +151,6 @@ public class Lobby extends LobbyPlugin {
                 new PlayerJoinListener(),
                 new PlayerUpdateListener(),
                 new WeatherChangeListener(),
-                new ItemHotbarChangeListener(),
-                new DropPickupListener(),
                 new NickListener()
         );
         registerCommands(

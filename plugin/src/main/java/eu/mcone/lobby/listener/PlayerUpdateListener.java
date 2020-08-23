@@ -11,10 +11,10 @@ import eu.mcone.coresystem.api.bukkit.event.PermissionChangeEvent;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.scoreboard.CoreObjective;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.LobbyItem;
+import eu.mcone.lobby.api.items.LobbyItem;
 import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.api.scoreboard.SidebarObjective;
+import eu.mcone.lobby.api.player.scoreboard.SidebarObjective;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -65,10 +65,10 @@ public class PlayerUpdateListener implements Listener {
         }
 
         if (p.hasPermission("lobby.silenthub")) {
-            p.bukkit().getInventory().setItem(2, HotbarItem.PRIVATE_LOBBY);
+            p.bukkit().getInventory().setItem(2, HotbarItem.SILENT_LOBBY_JOIN);
         }
         if (p.hasPermission("system.bungee.nick")) {
-            p.bukkit().getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p.bukkit()).isNicked() ? HotbarItem.NICK_ACTIVATED : HotbarItem.NICK_DISABLED);
+            p.bukkit().getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p.bukkit()).isNicked() ? HotbarItem.NICK_ENABLED : HotbarItem.NICK_DISABLED);
         }
 
         if (e.getType().equals(PermissionChangeEvent.Type.GROUP_CHANGE)) {

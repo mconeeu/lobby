@@ -6,6 +6,8 @@
 package eu.mcone.lobby.api.player;
 
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.coresystem.api.bukkit.item.Skull;
+import eu.mcone.coresystem.api.core.player.SkinInfo;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -23,7 +25,7 @@ public class HotbarItem {
             .displayName("§c§lNicken §8» §7§oDeaktiviert").lore("§7§oKlicke zum aktivieren")
             .create();
 
-    public static final ItemStack NICK_ACTIVATED = new ItemBuilder(Material.NAME_TAG, 1, 0)
+    public static final ItemStack NICK_ENABLED = new ItemBuilder(Material.NAME_TAG, 1, 0)
             .displayName("§a§lNicken §8» §7§oAktiviert").lore("§7§oKlicke zum deaktivieren")
             .create();
 
@@ -39,25 +41,24 @@ public class HotbarItem {
             .displayName("§c§lSpieler absetzen")
             .create();
 
+    public static final String PROFILE_DISPLAY_NAME = "§3§lProfil §8» §7§oEinstellungen / Stats / Freunde";
+    public static ItemStack getProfile(SkinInfo skin) {
+        return Skull.fromMojangValue(skin.getValue(), 1)
+                .toItemBuilder()
+                .displayName(PROFILE_DISPLAY_NAME)
+                .create();
+    }
 
     /*
      * LobbyHider
      */
 
-    public static final ItemStack SETTING_HIDER = new ItemBuilder(Material.INK_SACK, 1, 8)
+    public static final ItemStack LOBBY_HIDER_UNAVAILABLE_SETTING = new ItemBuilder(Material.INK_SACK, 1, 8)
             .displayName("§3§lSpieler Verstecken §8» §7§oAlle Spieler deaktivert")
             .create();
 
-    public static final ItemStack HIDE_PLAYERS = new ItemBuilder(Material.INK_SACK, 1, 10)
-            .displayName("§3§lSpieler Verstecken §8» §7§oBlende alle anderen Spieler aus")
-            .create();
-
-    public static final ItemStack LOBBY_HIDER_UNAVAILABLE = new ItemBuilder(Material.INK_SACK, 1, 8)
+    public static final ItemStack LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY = new ItemBuilder(Material.INK_SACK, 1, 8)
             .displayName("§7§lSpieler Verstecken §8» §7§oIn der Privaten Lobby deaktiviert")
-            .create();
-
-    public static final ItemStack SHOW_PLAYERS = new ItemBuilder(Material.INK_SACK, 1, 2)
-            .displayName("§3§lSpieler Anzeigen §8» §7§oZeigt alle Spieler wieder an")
             .create();
 
 
@@ -65,19 +66,20 @@ public class HotbarItem {
             .displayName("§7§lSpieler Verstecken §8» §7§oIm Büro deaktiviert")
             .create();
 
-    public static final ItemStack LOBBY_HIDER_UNAVAILABLE_OFFICE_SILENTHUB = new ItemBuilder(Material.INK_SACK, 1, 8)
-            .displayName("§7§lPrivate Lobby §8» §7§oIm Büro deaktiviert")
-            .create();
 
     /*
      * Private Lobby
      */
 
-    public static final ItemStack PRIVATE_LOBBY = new ItemBuilder(Material.TNT, 1, 0)
+    public static final ItemStack SILENT_LOBBY_UNAVAILABLE_OFFICE_SILENTHUB = new ItemBuilder(Material.INK_SACK, 1, 8)
+            .displayName("§7§lPrivate Lobby §8» §7§oIm Büro deaktiviert")
+            .create();
+
+    public static final ItemStack SILENT_LOBBY_JOIN = new ItemBuilder(Material.TNT, 1, 0)
             .displayName("§6§lPrivate Lobby §8» §7§oBetrete deine eigene Private Lobby")
             .create();
 
-    public static final ItemStack LEAVE_PRIVATE_LOBBY = new ItemBuilder(Material.TNT, 1, 0)
+    public static final ItemStack SILENT_LOBBY_QUIT = new ItemBuilder(Material.TNT, 1, 0)
             .displayName("§6§lPrivate Lobby §8» §7§oVerlasse die Private Lobby")
             .create();
 

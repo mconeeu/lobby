@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.games.jumpnrun;
 
-import eu.mcone.lobby.api.enums.JumpNRun;
+import eu.mcone.lobby.api.games.jumpnrun.JumpNRun;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 public interface JumpNRunGame extends LobbyGame {
 
-    void startGame(Player p, eu.mcone.lobby.api.enums.JumpNRun jumpNRun);
+    void startGame(Player p, JumpNRun jumpNRun);
 
     void setCheckpoint(Player p, int checkpoint);
 

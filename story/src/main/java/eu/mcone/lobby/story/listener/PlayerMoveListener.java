@@ -2,7 +2,7 @@ package eu.mcone.lobby.story.listener;
 
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
+import eu.mcone.lobby.api.story.progress.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

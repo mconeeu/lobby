@@ -7,7 +7,7 @@ package eu.mcone.lobby.games.scoreboard;
 
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.scoreboard.CoreSidebarObjectiveEntry;
-import eu.mcone.lobby.api.scoreboard.LobbyObjective;
+import eu.mcone.lobby.api.player.scoreboard.LobbyObjective;
 import eu.mcone.lobby.games.AbstractLobbyPvPGame;
 
 public class LobbyGameObjective extends LobbyObjective {

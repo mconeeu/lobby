@@ -4,8 +4,8 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.lobby.story.inventory.story.ProgressesInventory;
-import eu.mcone.lobby.story.inventory.story.SecretsInventory;
+import eu.mcone.lobby.story.inventory.story.StoryOverviewInventory;
+import eu.mcone.lobby.story.inventory.SecretsInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -24,7 +24,7 @@ public class LobbyProfileInventory extends CoreInventory {
         setItem(
                 InventorySlot.ROW_2_SLOT_5,
                 new ItemBuilder(Material.BOOK, 1, 0).displayName("§c§lStory Fortschritt").lore("§7§oHier siehst Du welche Kapitel", "§7§oDu bereits bestanden hast", "", "§8» §f§nLinksklick§8 | §7§oAnsehen").create(),
-                e -> new ProgressesInventory(player)
+                e -> new StoryOverviewInventory(player)
         );
 
         setItem(
@@ -33,7 +33,7 @@ public class LobbyProfileInventory extends CoreInventory {
                 e -> new SecretsInventory(player)
         );
 
-        setItem(InventorySlot.ROW_3_SLOT_9, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e -> Bukkit.dispatchCommand(player, "profile"));
+        setItem(InventorySlot.ROW_3_SLOT_9, BACK_ITEM, e -> Bukkit.dispatchCommand(player, "profile"));
 
         openInventory();
     }

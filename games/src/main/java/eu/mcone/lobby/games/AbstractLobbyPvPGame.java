@@ -12,7 +12,8 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.games.LobbyPvpGame;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.api.scoreboard.SidebarObjective;
+import eu.mcone.lobby.api.player.scoreboard.SidebarObjective;
+import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.games.scoreboard.LobbyGameObjective;
 import lombok.Getter;
 import org.bukkit.ChatColor;
@@ -49,12 +50,8 @@ public abstract class AbstractLobbyPvPGame extends AbstractLobbyGame implements 
             playing.add(p);
             LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
-            if (LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(p)) {
-                LobbyPlugin.getInstance().getPlayerHiderManager().showPlayers(p);
-            }
-            if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
-                LobbyPlugin.getInstance().getSilentLobbyManager().deactivateSilentLobby(p);
-            }
+            LobbyPlugin.getInstance().getVanishManager().setVanishPlayerVisibility(p, VanishPlayerVisibility.EVERYBODY);
+            LobbyPlugin.getInstance().getVanishManager().quitSilentLobby(p);
             LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
 

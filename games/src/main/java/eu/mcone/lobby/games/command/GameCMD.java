@@ -11,7 +11,7 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.games.LobbyGame;
 import eu.mcone.lobby.api.games.LobbyPvpGame;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.api.player.LobbySettings;
+import eu.mcone.lobby.api.player.settings.LobbySettings;
 import eu.mcone.lobby.games.LobbyGames;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;

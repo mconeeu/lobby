@@ -6,7 +6,8 @@
 package eu.mcone.lobby.api.player;
 
 import eu.mcone.coresystem.api.bukkit.player.profile.GameProfile;
-import eu.mcone.lobby.api.enums.JumpNRun;
+import eu.mcone.lobby.api.games.jumpnrun.JumpNRun;
+import eu.mcone.lobby.api.player.settings.LobbySettings;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -11,8 +11,8 @@ import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.games.jumpnrun.JumpNRun;
 import eu.mcone.lobby.api.player.HotbarItem;
-import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.games.inventory.CorpseInventory;
 import eu.mcone.lobby.games.jumpnrun.JumpNRunLobbyGame;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ public class JumpNRunListener implements Listener {
     private final JumpNRunLobbyGame game;
 
     @EventHandler
-    public void on(PlayerInteractEvent e) {
+    public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
         if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
@@ -43,7 +43,7 @@ public class JumpNRunListener implements Listener {
                     Sign sign = (Sign) e.getClickedBlock().getState();
 
                     if (sign.getLine(0).equals("§7»§c Jump'n'Run")) {
-                        for (eu.mcone.lobby.api.enums.JumpNRun jumpnrun : eu.mcone.lobby.api.enums.JumpNRun.values()) {
+                        for (JumpNRun jumpnrun : JumpNRun.values()) {
                             if (sign.getLine(1).equals(jumpnrun.getJumpandrunname())) {
                                 LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jumpnrun.getWarpLocation());
                                 LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "Du hast dich zum §f" + jumpnrun.getJumpandrunname() + " §7Jump and Run telepotiert");
@@ -56,15 +56,17 @@ public class JumpNRunListener implements Listener {
                 }
             }
 
-            ItemStack i = e.getItem();
-            if ((i == null) || (!i.hasItemMeta()) || (!i.getItemMeta().hasDisplayName())) {
-                return;
-            }
+            if (game.isPlaying(p)) {
+                ItemStack i = e.getItem();
+                if ((i == null) || (!i.hasItemMeta()) || (!i.getItemMeta().hasDisplayName())) {
+                    return;
+                }
 
-            if (i.equals(HotbarItem.LEAVE_JUMPNRUN)) {
-                game.quitGame(p);
-            } else if (i.equals(HotbarItem.TO_CHECKPOINT)) {
-                game.tpToCheckpoint(p);
+                if (i.equals(HotbarItem.LEAVE_JUMPNRUN)) {
+                    game.quitGame(p);
+                } else if (i.equals(HotbarItem.TO_CHECKPOINT)) {
+                    game.tpToCheckpoint(p);
+                }
             }
         } else if (e.getAction().equals(Action.PHYSICAL) && e.getClickedBlock() != null) {
             Material clicked = e.getClickedBlock().getType();
@@ -73,13 +75,13 @@ public class JumpNRunListener implements Listener {
                 case GOLD_PLATE: {
                     Location loc = e.getClickedBlock().getLocation();
 
-                    for (eu.mcone.lobby.api.enums.JumpNRun jumpnrun : eu.mcone.lobby.api.enums.JumpNRun.values()) {
+                    for (JumpNRun jumpnrun : JumpNRun.values()) {
                         Location start = jumpnrun.getStartPlateLocation();
                         Location end = jumpnrun.getEndPlateLocation();
 
                         if (start != null && loc.equals(jumpnrun.getStartPlateLocation())) {
                             game.startGame(p, jumpnrun);
-                        } else if (end != null && loc.equals(jumpnrun.getEndPlateLocation())) {
+                        } else if (end != null && game.isPlaying(p) && loc.equals(jumpnrun.getEndPlateLocation())) {
                             game.finishGame(p);
                         }
                     }
@@ -87,7 +89,7 @@ public class JumpNRunListener implements Listener {
                 }
                 case IRON_PLATE: {
                     if (game.isPlaying(p)) {
-                        for (eu.mcone.lobby.api.enums.JumpNRun jumpnrun : eu.mcone.lobby.api.enums.JumpNRun.values()) {
+                        for (JumpNRun jumpnrun : JumpNRun.values()) {
                             for (int i = 0; i < jumpnrun.getCheckpoints().length; i++) {
                                 if (jumpnrun.getCheckpoints()[i].equals(e.getClickedBlock().getLocation())) {
                                     game.setCheckpoint(p, i + 1);
@@ -103,11 +105,10 @@ public class JumpNRunListener implements Listener {
     }
 
     @EventHandler
-    public void on(NpcInteractEvent e) {
+    public void onNpcInteract(NpcInteractEvent e) {
         if (e.getNpc().getData().getType().equals(EntityType.PLAYER) && e.getAction().equals(PacketPlayInUseEntity.EnumEntityUseAction.INTERACT)) {
             Player p = e.getPlayer();
             PlayerNpc npc = (PlayerNpc) e.getNpc();
-            LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
             CoreWorld w = CoreSystem.getInstance().getWorldManager().getWorld(npc.getData().getLocation().getWorld());
 
             if (w.equals(LobbyWorld.ONE_ISLAND.getWorld()) && npc.getData().getName().equals("Leiche")) {

@@ -7,6 +7,7 @@ package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.player.HotbarItem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -42,7 +43,7 @@ public class EntitiyDamageListener implements Listener {
                 if (meta != null) {
                     if (((Player) e.getDamager()).getItemInHand().hasItemMeta()) {
                         if (meta.getDisplayName() != null) {
-                            if (meta.getDisplayName().equalsIgnoreCase("§3§lProfil §8» §7§oEinstellungen / Stats / Freunde")) {
+                            if (meta.getDisplayName().equalsIgnoreCase(HotbarItem.PROFILE_DISPLAY_NAME)) {
                                 CoreSystem.getInstance().getChannelHandler().sendPluginMessage(p, "CMD", "friend add " + p.getName());
                             }
                         }

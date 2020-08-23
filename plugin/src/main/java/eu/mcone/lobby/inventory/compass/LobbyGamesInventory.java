@@ -25,7 +25,7 @@ public class LobbyGamesInventory extends CoreInventory {
 
     public LobbyGamesInventory(Player p) {
         super("§8» §3§lLobby-Games", p, InventorySlot.ROW_5, InventoryOption.FILL_EMPTY_SLOTS);
-        if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
+        if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(getClass(), p.getUniqueId()))
             return;
 
         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);

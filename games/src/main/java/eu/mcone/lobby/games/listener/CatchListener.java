@@ -114,7 +114,7 @@ public class CatchListener implements Listener {
                 }
 
                 if (i.equals(CatchItem.CATCHER_TRACKER)) {
-                    if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
+                    if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(getClass(), p.getUniqueId()))
                         return;
 
                     if (game.getPlaying().size() > 1) {
@@ -125,7 +125,7 @@ public class CatchListener implements Listener {
                         LobbyPlugin.getInstance().getMessenger().send(p, "§cDu bist der einzigste der momentan Fangen spielt!");
                     }
                 } else if (i.equals(CatchItem.CATCH_RUN_TRACKER)) {
-                    if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(CoreSystem.getInstance(), this.getClass(), p.getUniqueId()))
+                    if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(getClass(), p.getUniqueId()))
                         return;
 
                     if (game.getPlaying().size() > 1) {

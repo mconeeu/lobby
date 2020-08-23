@@ -12,29 +12,34 @@ import eu.mcone.coresystem.api.core.exception.MotionCaptureNotDefinedException;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.StoryProgress;
-import eu.mcone.lobby.api.enums.TraderProgress;
-import eu.mcone.lobby.api.enums.TutorialStory;
+import eu.mcone.lobby.api.story.LobbyStoryManager;
+import eu.mcone.lobby.api.story.progress.StoryProgress;
+import eu.mcone.lobby.api.story.progress.TraderStoryProgress;
+import eu.mcone.lobby.api.story.progress.TutorialStoryProgress;
 import eu.mcone.lobby.story.listener.*;
+import eu.mcone.lobby.story.office.LobbyOfficeManager;
 import io.sentry.event.Event;
 import io.sentry.event.EventBuilder;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class LobbyStory extends LobbyAddon {
+public class LobbyStory extends LobbyAddon implements LobbyStoryManager {
 
     @Getter
     private static LobbyStory instance;
+    @Getter
+    private LobbyOfficeManager officeManager;
 
     @Override
     public void onEnable(LobbyPlugin plugin) {
         instance = this;
+        this.officeManager = new LobbyOfficeManager(plugin);
 
         plugin.registerEvents(
                 new AfkListener(),
                 new CoreManagerReloadListener(),
-                new LobbyPlayerLoadedListener(),
+                new GeneralPlayerListener(),
                 new NpcListener(),
                 new InventoryTriggerListener(),
                 new SignsListener(),
@@ -54,9 +59,9 @@ public class LobbyStory extends LobbyAddon {
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             for (Player all : Bukkit.getOnlinePlayers()) {
                 if (all.getWorld().getName().equalsIgnoreCase(LobbyWorld.OFFICE.getName())) {
-                    plugin.getOfficeManager().joinOffice(all);
+                    getOfficeManager().joinOffice(all);
                 } else if (all.getWorld().getName().equalsIgnoreCase(LobbyWorld.GUNGAME.getName())) {
-                    plugin.getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(all, "Spawn");
+                    plugin.getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(all, "spawn");
                 }
             }
         }, 20);
@@ -72,12 +77,12 @@ public class LobbyStory extends LobbyAddon {
             prepareNpc(storyProgress.getNpcName(), storyProgress.getNpc());
         }
         /*  Tutorial Story */
-        for (TutorialStory tutorialStory : TutorialStory.values()) {
-            prepareNpc(tutorialStory.getNpcName(), tutorialStory.getNpc());
+        for (TutorialStoryProgress tutorialStoryProgress : TutorialStoryProgress.values()) {
+            prepareNpc(tutorialStoryProgress.getNpcName(), tutorialStoryProgress.getNpc());
         }
         /*  Trader Story */
-        for (TraderProgress traderProgress : TraderProgress.values()) {
-            prepareNpc(traderProgress.getNpcName(), traderProgress.getNpc());
+        for (TraderStoryProgress traderStoryProgress : TraderStoryProgress.values()) {
+            prepareNpc(traderStoryProgress.getNpcName(), traderStoryProgress.getNpc());
         }
     }
 

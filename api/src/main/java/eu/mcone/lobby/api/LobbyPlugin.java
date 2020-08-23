@@ -10,10 +10,9 @@ import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.gameapi.api.Option;
 import eu.mcone.lobby.api.liveevent.LiveEventManager;
-import eu.mcone.lobby.api.office.OfficeManager;
+import eu.mcone.lobby.api.story.office.OfficeManager;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.api.player.PlayerHiderManager;
-import eu.mcone.lobby.api.player.SilentLobbyManager;
+import eu.mcone.lobby.api.player.vanish.VanishManager;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -51,11 +50,7 @@ public abstract class LobbyPlugin extends GamePlugin {
 
     public abstract LiveEventManager getLiveEventManager();
 
-    public abstract OfficeManager getOfficeManager();
-
-    public abstract SilentLobbyManager getSilentLobbyManager();
-
-    public abstract PlayerHiderManager getPlayerHiderManager();
+    public abstract VanishManager getVanishManager();
 
     public abstract LobbyPlayer getLobbyPlayer(CorePlayer cp);
 

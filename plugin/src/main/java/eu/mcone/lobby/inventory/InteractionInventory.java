@@ -12,9 +12,10 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
+import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.api.player.LobbySettings;
+import eu.mcone.lobby.api.player.settings.LobbySettings;
 import eu.mcone.lobby.games.LobbyGames;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -28,8 +29,6 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 
 public class InteractionInventory extends CoreInventory {
-
-    public static HashMap<Player, Player> stacking = new HashMap<>();
 
     public InteractionInventory(Player p, Player clicked) {
         super("§8» §3Interaktionsmenü", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
@@ -87,15 +86,15 @@ public class InteractionInventory extends CoreInventory {
                         CoreSystem.getInstance().createActionBar()
                                 .message("§f§oBenutze LSHIFT um abzusteigen")
                                 .send(lc.bukkit());
-                        LobbyPlugin.getInstance().getMessenger().send(lc.bukkit(), "§aDu wirst nun von §3" + p.getName() + "§a getragen.");
-                        LobbyPlugin.getInstance().getMessenger().send(p, "§4Schleiche um §c" + lc.bukkit().getName() + "§4 fallen zu lassen");
+                        LobbyPlugin.getInstance().getMessenger().sendSuccess(lc.bukkit(), "Du wirst nun von ![" + p.getName() + "] getragen.");
+                        LobbyPlugin.getInstance().getMessenger().sendError(p, "Schleiche um ![" + lc.bukkit().getName() + "] fallen zu lassen");
 
-                        stacking.put(p, clicked);
+                        Lobby.getSystem().getStackingManager().stack(p, clicked);
                     } else {
-                        LobbyPlugin.getInstance().getMessenger().send(p, "§4Der §cSpieler §4spielt momentan ein Lobby-Game!");
+                        LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Spieler spielt gerade ein Lobby-Game!");
                     }
                 } else {
-                    LobbyPlugin.getInstance().getMessenger().send(p, "§4Der §cSpieler §4hat diese §cFunktion§4 ausgeschaltet!");
+                    LobbyPlugin.getInstance().getMessenger().send(p, "Der Spieler hat diese Funktion ausgeschaltet!");
                 }
             });
 
