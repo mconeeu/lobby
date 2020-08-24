@@ -8,6 +8,7 @@ package eu.mcone.lobby.command;
 import eu.mcone.coresystem.api.bukkit.command.CoreCommand;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyAddon;
+import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.command.CommandSender;
 
@@ -24,7 +25,7 @@ public class LobbyCMD extends CoreCommand {
                 lp.reload();
             }
             for (LobbyAddon addon : Lobby.ADDONS) {
-                addon.reload();
+                addon.reload(LobbyPlugin.getInstance());
             }
 
             return true;
@@ -33,7 +34,7 @@ public class LobbyCMD extends CoreCommand {
 
             for (LobbyAddon addon : Lobby.ADDONS) {
                 if (addon.getClass().getSimpleName().equalsIgnoreCase(name)) {
-                    addon.reload();
+                    addon.reload(LobbyPlugin.getInstance());
                     return true;
                 }
             }

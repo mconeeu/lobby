@@ -10,14 +10,13 @@ import eu.mcone.gameapi.api.backpack.BackpackInventoryListener;
 import eu.mcone.gameapi.api.backpack.BackpackItem;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.LobbyCategory;
-import eu.mcone.lobby.api.enums.LobbyItem;
+import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.items.LobbyCategory;
+import eu.mcone.lobby.api.items.LobbyItem;
 import eu.mcone.lobby.items.backpack.StoryBackpackInventoryListener;
 import eu.mcone.lobby.items.command.ChestCMD;
 import eu.mcone.lobby.items.command.LiveEventCMD;
-import eu.mcone.lobby.items.command.OfficeCMD;
 import eu.mcone.lobby.items.listener.InventoryTriggerListener;
-import eu.mcone.lobby.items.listener.NpcInteractListener;
 import eu.mcone.lobby.items.listener.effects.CompassListener;
 import eu.mcone.lobby.items.listener.effects.MagicWandListener;
 import eu.mcone.lobby.items.listener.effects.OneHitSwordListener;
@@ -41,7 +40,7 @@ public class LobbyItems extends LobbyAddon {
     private LobbyLiveEventManager liveEventManager;
 
     @Override
-    public void onEnable() {
+    public void onEnable(LobbyPlugin plugin) {
         instance = this;
         dailyShopManager = new DailyShopManager();
         liveEventManager = new LobbyLiveEventManager();
@@ -65,12 +64,11 @@ public class LobbyItems extends LobbyAddon {
                 }
             }
 
-            LobbyPlugin.getInstance().getBackpackManager().registerCategory(
+            plugin.getBackpackManager().registerCategory(
                     new eu.mcone.gameapi.api.backpack.Category(
                             category.name(),
                             "",
                             false,
-                            //Dont show ECONOMY category in BackpackInventory
                             true,
                             category.getSorting(),
                             Gamemode.UNDEFINED,
@@ -81,39 +79,33 @@ public class LobbyItems extends LobbyAddon {
             );
         }
 
-        LobbyPlugin.getInstance().registerEvents(
+        plugin.registerEvents(
                 new OneHitSwordListener(),
                 new MagicWandListener(),
                 new CompassListener(),
-                new InventoryTriggerListener(),
-                new NpcInteractListener()
+                new InventoryTriggerListener()
         );
 
-        LobbyPlugin.getInstance().registerCommands(
+        plugin.registerCommands(
                 new ChestCMD(),
-                new OfficeCMD(),
-                new LiveEventCMD());
+                new LiveEventCMD()
+        );
 
-        final Location rewardBlock = new Location(Bukkit.getWorld("Lobby-OneIsland"), 46.5, 102D, -33.5);
-        final Location rewardBlock2 = new Location(Bukkit.getWorld("Lobby-OneIsland"), -25.5, 100.8D, -113.4);
+        final Location rewardBlock = new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), 46.5, 102D, -33.5);
+        final Location rewardBlock2 = new Location(LobbyWorld.ONE_ISLAND.getWorld().bukkit(), -25.5, 100.8D, -113.4);
         Bukkit.getScheduler().runTaskTimerAsynchronously(LobbyPlugin.getInstance(), () -> {
             for (int i = 0; i < 6; i++) {
-                Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock, Effect.LAVA_POP, 20);
-                Bukkit.getWorld("Lobby-OneIsland").playEffect(rewardBlock2, Effect.LAVA_POP, 20);
+                LobbyWorld.ONE_ISLAND.getWorld().bukkit().playEffect(rewardBlock, Effect.LAVA_POP, 20);
+                LobbyWorld.ONE_ISLAND.getWorld().bukkit().playEffect(rewardBlock2, Effect.LAVA_POP, 20);
             }
         }, 24, 24);
-
-
-        reload();
     }
 
     @Override
-    public void onDisable() {
-    }
+    public void onDisable(LobbyPlugin plugin) { }
 
     @Override
-    public void reload() {
-    }
+    public void reload(LobbyPlugin plugin) { }
 
     private static BackpackInventoryListener getInventoryListener(LobbyCategory category) {
         switch (category) {

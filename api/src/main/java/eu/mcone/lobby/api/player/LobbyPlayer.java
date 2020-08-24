@@ -8,16 +8,22 @@ package eu.mcone.lobby.api.player;
 import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.*;
-import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
-import eu.mcone.lobby.api.enums.bank.central.BankProgress;
-import eu.mcone.lobby.api.gang.Gang;
+import eu.mcone.lobby.api.games.jumpnrun.JumpNRun;
+import eu.mcone.lobby.api.items.LobbyItem;
+import eu.mcone.lobby.api.player.settings.LobbySettings;
+import eu.mcone.lobby.api.story.office.OfficeType;
+import eu.mcone.lobby.api.story.progress.bank.BankRobberySmallProgress;
+import eu.mcone.lobby.api.story.progress.bank.central.BankProgress;
+import eu.mcone.lobby.api.story.progress.StoryProgress;
+import eu.mcone.lobby.api.story.progress.TraderStoryProgress;
+import eu.mcone.lobby.api.story.progress.TutorialStoryProgress;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.DisplaySlot;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -30,16 +36,12 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
     private final GamePlayer gamePlayer;
 
     @Getter
-    @Setter
-    private Gang gang;
-    @Getter
     private int chests, progressId, bankprogressId, centralbankprogressId, tutorialStoryProgressId, traderStoryProgressID;
     @Getter
     private Date dailyReward;
     @Getter
     @Setter
     private LobbySettings settings;
-    @Getter
     @Setter
     private Map<String, Long> secrets;
     @Getter
@@ -77,8 +79,14 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
         LobbyPlugin.getInstance().saveGameProfile(new LobbyPlayerProfile(corePlayer.bukkit(), chests, progressId, bankprogressId, centralbankprogressId, tutorialStoryProgressId, traderStoryProgressID, dailyReward, settings, secrets, jumpnruns));
     }
 
-    public boolean isInGang() {
-        return gang != null;
+    public void reloadScoreboardIfEnabled() {
+        if (settings.isScoreboard() && getCorePlayer().getScoreboard().getObjective(DisplaySlot.SIDEBAR) != null) {
+            getCorePlayer().getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
+        }
+    }
+
+    public void resetDataAndHotbarItems() {
+        LobbyPlugin.getInstance().resetPlayerDataAndHotbarItems(bukkit());
     }
 
     public void addChests(int amount) {
@@ -130,12 +138,12 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
         saveData();
     }
 
-    public void setTutorialStoryProgress(TutorialStory tutorialStoryProgress) {
+    public void setTutorialStoryProgress(TutorialStoryProgress tutorialStoryProgress) {
         this.tutorialStoryProgressId = tutorialStoryProgress.getId();
         saveData();
     }
 
-    public void setTraderStoryProgress(TraderProgress traderStoryProgress) {
+    public void setTraderStoryProgress(TraderStoryProgress traderStoryProgress) {
         this.traderStoryProgressID = traderStoryProgress.getId();
         saveData();
     }
@@ -171,102 +179,7 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
     }
 
     public void teleportAnimation(Location location) {
-        Player player = corePlayer.bukkit();
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(player);
-        LobbySettings settings = lp.getSettings();
-
-        if (location != null) {
-            if (settings.isAllowAnimation() && !corePlayer.getWorld().equals(LobbyWorld.OFFICE.getWorld()) && !corePlayer.getWorld().equals(LobbyWorld.CAVE.getWorld())) {
-                for (Player all : Bukkit.getOnlinePlayers()) {
-                    all.spigot().playEffect(player.getLocation(), Effect.SMALL_SMOKE, 1, 1, 1, 1, 1, 3, 30, 15);
-                    all.hidePlayer(player);
-                }
-
-                player.setGameMode(GameMode.SPECTATOR);
-                player.playSound(player.getLocation(), Sound.GLASS, 3, 2);
-
-
-                player.playSound(player.getLocation(), Sound.CLICK, 3, 2);
-                player.removePotionEffect(PotionEffectType.CONFUSION);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, 1));
-
-                player.teleport(new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
-                        (float) (player.getLocation().getYaw() + 90.0)));
-
-                Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                    player.teleport(new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
-                            (float) (player.getLocation().getYaw() + 100.0)).add(0, 20, 0));
-                    player.playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 2);
-                    player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
-                    player.setExp(0);
-
-                    Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                        player.teleport(new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
-                                (float) (player.getLocation().getYaw() + 100.0)).add(0, 25, 0));
-                        player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
-
-                        Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                            player.teleport(new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
-                                    (float) (player.getLocation().getYaw() + 100.0)).add(0, 20, 0));
-                            player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
-
-
-                            ///////////////////
-                            //BACK
-
-                            Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                                player.teleport(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getPitch(),
-                                        (float) (location.getYaw() + 90.0)).add(0, 65, 0));
-
-                                player.teleport(new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
-                                        (float) (player.getLocation().getYaw() + 90.0)));
-                                player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 3);
-
-                                Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                                    player.teleport(new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
-                                            (float) (player.getLocation().getYaw() + 90.0)).subtract(0, 35, 0));
-                                    player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
-
-                                    player.teleport(new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
-                                            (float) (player.getLocation().getYaw() + 90.0)));
-                                    player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
-
-                                    Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                                        player.teleport(new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
-                                                (float) (player.getLocation().getYaw() + 90)).subtract(0, 18, 0));
-
-                                        player.teleport(new Location(player.getLocation().getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getPitch(),
-                                                (float) (player.getLocation().getYaw() + 90.0)));
-                                        player.playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
-
-
-                                        Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                                            player.setGameMode(GameMode.SURVIVAL);
-
-                                            for (Player all : Bukkit.getOnlinePlayers()) {
-                                                if ((!LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(all) && !LobbyPlugin.getInstance().getPlayerHiderManager().isHidden(player))
-                                                        && (!LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(all) && !LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(player))) {
-                                                    all.showPlayer(player);
-                                                }
-                                            }
-
-                                            player.teleport(location);
-                                            player.removePotionEffect(PotionEffectType.CONFUSION);
-                                            player.playSound(player.getLocation(), Sound.FIREWORK_TWINKLE, 3, 2);
-                                        }, 12);
-                                    }, 8);
-                                }, 7);
-                            }, 8);
-                        }, 13);
-                    }, 12);
-                }, 1);
-            } else {
-                player.teleport(location);
-                player.playSound(player.getLocation(), Sound.GLASS, 3, 2);
-            }
-        } else {
-            LobbyPlugin.getInstance().getMessenger().send(player, "§4Dieser Ort ist momentan nicht erreichbar!");
-        }
+        TeleportUtil.teleportWithAnimation(bukkit(), location);
     }
 
     public boolean hasJumpnrunMade(JumpNRun jumpnrun) {
@@ -283,8 +196,22 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
         }
     }
 
-    public int getSecrets() {
+    public int getSecretsCount() {
         return secrets.size();
+    }
+
+    public OfficeType getOffice() {
+        for (OfficeType office : OfficeType.values()) {
+            if (hasLobbyItem(office.getOfficeCard())) {
+                return office;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean hasOffice() {
+        return getOffice() != null;
     }
 
 }

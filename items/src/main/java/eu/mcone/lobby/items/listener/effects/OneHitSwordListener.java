@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.items.listener.effects;
 
-import eu.mcone.lobby.api.enums.LobbyItem;
+import eu.mcone.lobby.api.items.LobbyItem;
 import net.minecraft.server.v1_8_R3.EntityLightning;
 import net.minecraft.server.v1_8_R3.PacketPlayOutNamedSoundEffect;
 import net.minecraft.server.v1_8_R3.PacketPlayOutSpawnEntityWeather;

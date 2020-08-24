@@ -19,15 +19,15 @@ public class ChatListener implements Listener {
     public void onChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
 
-        if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(p)) {
+        if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
             e.setCancelled(true);
             LobbyPlugin.getInstance().getMessenger().send(p, "§cDu kannst in der Privaten Lobby keine Chat Nachrichten senden oder empfangen.");
             return;
         }
 
-        for (Player all : Bukkit.getOnlinePlayers()) {
-            if (LobbyPlugin.getInstance().getSilentLobbyManager().isActivatedSilentHub(all)) {
-                e.getRecipients().remove(all);
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(player)) {
+                e.getRecipients().remove(player);
             }
         }
     }

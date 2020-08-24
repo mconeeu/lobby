@@ -89,8 +89,9 @@ class BankChangeCoins extends CoreInventory {
                 }
         );
 
-        setItem(InventorySlot.ROW_3_SLOT_9,
-                new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7Zurück").create(),
+        setItem(
+                InventorySlot.ROW_3_SLOT_9,
+                BACK_ITEM,
                 e -> new BankMenInventory(p)
         );
 

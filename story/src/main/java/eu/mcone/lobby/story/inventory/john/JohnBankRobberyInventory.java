@@ -8,9 +8,9 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
-import eu.mcone.lobby.api.enums.LobbyItem;
-import eu.mcone.lobby.api.enums.StoryProgress;
+import eu.mcone.lobby.api.story.progress.bank.BankRobberySmallProgress;
+import eu.mcone.lobby.api.items.LobbyItem;
+import eu.mcone.lobby.api.story.progress.StoryProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -25,6 +25,10 @@ public class JohnBankRobberyInventory extends CoreInventory {
 
     public static UUID currentlyInBank = null;
     public static BukkitTask robberyTime;
+
+    /*
+     * TODO: make manager class for schedulers etc
+     */
 
     public JohnBankRobberyInventory(Player p) {
         super("§fJohn | Bank-Raub", p, InventorySlot.ROW_6, InventoryOption.FILL_EMPTY_SLOTS);

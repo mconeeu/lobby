@@ -2,7 +2,7 @@ package eu.mcone.lobby.items.listener.effects;
 
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.LobbyItem;
+import eu.mcone.lobby.api.items.LobbyItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Sound;

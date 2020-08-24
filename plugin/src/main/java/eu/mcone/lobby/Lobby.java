@@ -19,24 +19,20 @@ import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.command.GameCMD;
+import eu.mcone.lobby.api.player.scoreboard.LobbyObjective;
 import eu.mcone.lobby.command.LobbyCMD;
-import eu.mcone.lobby.gang.LobbyGang;
-import eu.mcone.lobby.gungame.LobbyGungameManager;
+import eu.mcone.lobby.games.LobbyGames;
+import eu.mcone.lobby.games.command.GameCMD;
 import eu.mcone.lobby.inventory.LobbyProfileInventory;
 import eu.mcone.lobby.items.LobbyItems;
 import eu.mcone.lobby.items.manager.LobbyLiveEventManager;
-import eu.mcone.lobby.items.manager.OfficeManager;
-import eu.mcone.lobby.jumpnrun.LobbyJumpNRunManager;
+import eu.mcone.lobby.story.office.LobbyOfficeManager;
 import eu.mcone.lobby.listener.*;
-import eu.mcone.lobby.onehit.LobbyOneHitManager;
-import eu.mcone.lobby.scoreboard.LobbyObjective;
+import eu.mcone.lobby.scheduler.NpcEmoteScheduler;
+import eu.mcone.lobby.scheduler.WorldRealTimeScheduler;
 import eu.mcone.lobby.story.LobbyStory;
-import eu.mcone.lobby.trap.TrapManager;
-import eu.mcone.lobby.util.NpcEmoteManager;
-import eu.mcone.lobby.util.PlayerHiderManager;
-import eu.mcone.lobby.util.RealTimeUtil;
-import eu.mcone.lobby.util.SilentLobbyManager;
+import eu.mcone.lobby.util.LobbyVanishManager;
+import eu.mcone.lobby.util.StackingManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -52,21 +48,11 @@ public class Lobby extends LobbyPlugin {
     @Getter
     private BuildSystem buildSystem;
     @Getter
-    private LobbyOneHitManager oneHitManager;
-    @Getter
-    private LobbyGungameManager gungameManager;
-    @Getter
-    private TrapManager catchManager;
-    @Getter
     private LobbyLiveEventManager liveEventManager;
     @Getter
-    private OfficeManager officeManager;
+    private LobbyVanishManager vanishManager;
     @Getter
-    private LobbyJumpNRunManager jumpNRunManager;
-    @Getter
-    private SilentLobbyManager silentLobbyManager;
-    @Getter
-    private PlayerHiderManager playerHiderManager;
+    private StackingManager stackingManager;
     @Getter
     private Map<LobbyWorld, CoreWorld> worlds;
 
@@ -74,9 +60,8 @@ public class Lobby extends LobbyPlugin {
     private List<LobbyPlayer> players;
 
     public final static List<LobbyAddon> ADDONS = new ArrayList<>(Arrays.asList(
-            new LobbyGang(), new LobbyItems(), new LobbyStory()
+            new LobbyItems(), new LobbyStory(), new LobbyGames()
     ));
-
 
     @Override
     public void onGameEnable() {
@@ -116,30 +101,17 @@ public class Lobby extends LobbyPlugin {
 
         sendConsoleMessage("§aActivating AddOns...");
         for (LobbyAddon addon : ADDONS) {
-            addon.onEnable();
+            addon.onEnable(this);
         }
-
-        sendConsoleMessage("§aLoading OneHitManager...");
-        oneHitManager = new LobbyOneHitManager(this);
-
-        sendConsoleMessage("§aLoading GungameManager...");
-        gungameManager = new LobbyGungameManager(this);
-
-        sendConsoleMessage("§aLoading CatchManager...");
-        catchManager = new TrapManager(this);
-
-        sendConsoleMessage("§aLoading JmpNRunManager...");
-        jumpNRunManager = new LobbyJumpNRunManager(this);
 
         sendConsoleMessage("§aLoading LiveEventManager...");
         liveEventManager = new LobbyLiveEventManager();
 
-        sendConsoleMessage("§aLoading OfficeManager...");
-        officeManager = new OfficeManager();
+        sendConsoleMessage("§aLoading VanishManager...");
+        vanishManager = new LobbyVanishManager(this);
 
-        sendConsoleMessage("§aLoading HiderManagers...");
-        silentLobbyManager = new SilentLobbyManager();
-        playerHiderManager = new PlayerHiderManager();
+        sendConsoleMessage("§aLoading StackingManager...");
+        stackingManager = new StackingManager(this);
 
         getDamageLogger();
         sendConsoleMessage("§aVersion §f" + this.getDescription().getVersion() + "§a enabled...");
@@ -159,7 +131,7 @@ public class Lobby extends LobbyPlugin {
     public void onGameDisable() {
         sendConsoleMessage("§cDeactivating AddOns...");
         for (LobbyAddon addon : ADDONS) {
-            addon.onDisable();
+            addon.onDisable(this);
         }
         for (LobbyPlayer lp : getOnlineLobbyPlayers()) {
             lp.saveData();
@@ -179,8 +151,6 @@ public class Lobby extends LobbyPlugin {
                 new PlayerJoinListener(),
                 new PlayerUpdateListener(),
                 new WeatherChangeListener(),
-                new ItemHotbarChangeListener(),
-                new DropPickupListener(),
                 new NickListener()
         );
         registerCommands(
@@ -192,6 +162,17 @@ public class Lobby extends LobbyPlugin {
     @Override
     public CoreWorld getLobbyWorld(LobbyWorld world) {
         return worlds.get(world);
+    }
+
+    @Override
+    public <T extends LobbyAddon> T getAddon(Class<? extends T> addonClass) {
+        for (LobbyAddon addon : ADDONS) {
+            if (addon.getClass().isAssignableFrom(addonClass)) {
+                return (T) addon;
+            }
+        }
+
+        return null;
     }
 
     @Override
@@ -237,9 +218,15 @@ public class Lobby extends LobbyPlugin {
         players.remove(lp);
     }
 
+    @Override
+    public void resetPlayerDataAndHotbarItems(Player p) {
+        PlayerJoinListener.resetPlayerDataAndHotbarItems(p);
+    }
+
     private void startScheduler() {
         Bukkit.getScheduler().runTaskTimer(this, LobbyObjective::updateLines, 50, 100);
-        Bukkit.getScheduler().runTaskTimer(this, new RealTimeUtil(), 50, 20 * 60);
-        Bukkit.getScheduler().runTaskTimer(this, new NpcEmoteManager(), 50, 20 * 5);
+        Bukkit.getScheduler().runTaskTimer(this, new WorldRealTimeScheduler(), 50, 20 * 60);
+        Bukkit.getScheduler().runTaskTimer(this, new NpcEmoteScheduler(), 50, 20 * 5);
     }
+
 }

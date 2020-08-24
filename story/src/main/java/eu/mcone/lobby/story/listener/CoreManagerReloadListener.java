@@ -11,9 +11,9 @@ import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.spawnable.ListMode;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.StoryProgress;
-import eu.mcone.lobby.api.enums.TraderProgress;
-import eu.mcone.lobby.api.enums.TutorialStory;
+import eu.mcone.lobby.api.story.progress.StoryProgress;
+import eu.mcone.lobby.api.story.progress.TraderStoryProgress;
+import eu.mcone.lobby.api.story.progress.TutorialStoryProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,21 +26,17 @@ public class CoreManagerReloadListener implements Listener {
             NPC npc = storyProgress.getNpc();
             npc.togglePlayerVisibility(ListMode.WHITELIST);
         }
-        for (TutorialStory tutorialStory : TutorialStory.values()) {
-            NPC npc = tutorialStory.getNpc();
+        for (TutorialStoryProgress tutorialStoryProgress : TutorialStoryProgress.values()) {
+            NPC npc = tutorialStoryProgress.getNpc();
             npc.togglePlayerVisibility(ListMode.WHITELIST);
         }
-        for (TraderProgress traderProgress : TraderProgress.values()) {
-            NPC npc = traderProgress.getNpc();
+        for (TraderStoryProgress traderStoryProgress : TraderStoryProgress.values()) {
+            NPC npc = traderStoryProgress.getNpc();
             npc.togglePlayerVisibility(ListMode.WHITELIST);
         }
-
 
         for (LobbyPlayer lp : LobbyPlugin.getInstance().getOnlineLobbyPlayers()) {
-            LobbyPlayerLoadedListener.spawnStoryNpcs(lp);
-            LobbyPlayerLoadedListener.spawnStoryNpcs(lp);
-
-
+            GeneralPlayerListener.spawnStoryNpcs(lp);
         }
     }
 
@@ -49,9 +45,7 @@ public class CoreManagerReloadListener implements Listener {
         LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").togglePlayerVisibility(ListMode.WHITELIST);
 
         for (LobbyPlayer lp : LobbyPlugin.getInstance().getOnlineLobbyPlayers()) {
-            if (lp.getProgressId() < 1) {
-                LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").toggleVisibility(lp.bukkit(), true);
-            }
+            GeneralPlayerListener.spawnStoryHolograms(lp.bukkit(), lp.getProgressId());
         }
     }
 

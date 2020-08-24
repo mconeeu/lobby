@@ -11,7 +11,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.StoryProgress;
+import eu.mcone.lobby.api.story.progress.StoryProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -39,7 +39,7 @@ public class StoryProgressInventory extends CoreInventory {
             i++;
         }
 
-        setItem(InventorySlot.ROW_3_SLOT_9, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e -> new ProgressesInventory(player));
+        setItem(InventorySlot.ROW_3_SLOT_9, BACK_ITEM, e -> new StoryOverviewInventory(player));
         openInventory();
     }
 }

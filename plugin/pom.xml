@@ -57,28 +57,11 @@
         </resources>
     </build>
 
-    <repositories>
-        <repository>
-            <id>md_5-snapshots</id>
-            <url>https://repo.md-5.net/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <id>md_5-releases</id>
-            <url>https://repo.md-5.net/content/repositories/releases/</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>eu.mcone.lobby</groupId>
             <artifactId>api</artifactId>
             <version>5.0.3-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>eu.mcone.lobby</groupId>
-            <artifactId>gang</artifactId>
-         <version>5.0.3-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -94,10 +77,10 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>fr.neatmonster</groupId>
-            <artifactId>nocheatplus</artifactId>
-            <version>3.16.1-SNAPSHOT</version>
-            <scope>provided</scope>
+            <groupId>eu.mcone.lobby</groupId>
+            <artifactId>games</artifactId>
+            <version>5.0.3-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

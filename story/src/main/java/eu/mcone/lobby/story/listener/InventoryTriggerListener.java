@@ -12,16 +12,18 @@ import eu.mcone.gameapi.api.backpack.defaults.DefaultItem;
 import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.JumpNRun;
-import eu.mcone.lobby.api.enums.LobbyItem;
-import eu.mcone.lobby.api.enums.bank.BankRobberySmallProgress;
-import eu.mcone.lobby.api.enums.bank.central.BankProgress;
+import eu.mcone.lobby.api.items.LobbyItem;
+import eu.mcone.lobby.api.story.progress.bank.BankRobberySmallProgress;
+import eu.mcone.lobby.api.story.progress.bank.central.BankProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.story.LobbyStory;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
-import eu.mcone.lobby.story.inventory.story.*;
-import eu.mcone.lobby.story.inventory.story.bank.BankInfosInventory1;
-import eu.mcone.lobby.story.inventory.story.bank.BankInfosInventory2;
-import eu.mcone.lobby.story.inventory.story.bank.BankInfosInventory3;
+import eu.mcone.lobby.story.inventory.story.bank.BankInfosInventory;
+import eu.mcone.lobby.story.inventory.story.bank.BankSafeInventory;
+import eu.mcone.lobby.story.inventory.story.bank.SwordInventory;
+import eu.mcone.lobby.story.inventory.story.bank.WoolInventory;
+import eu.mcone.lobby.story.inventory.story.chapter1.EndInventory;
+import eu.mcone.lobby.story.inventory.story.chapter1.WitchInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -34,7 +36,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class InventoryTriggerListener implements Listener {
-
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
@@ -75,16 +76,16 @@ public class InventoryTriggerListener implements Listener {
 
                         if (lp.getCentralbankprogressId() == BankProgress.SPY.getId()) {
                             if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-central-info1").equals(e.getClickedBlock().getLocation())) {
-                                new BankInfosInventory1(p);
+                                new BankInfosInventory(p, LobbyItem.NORMAL_FILES_1);
                             } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-central-info2").equals(e.getClickedBlock().getLocation())) {
-                                new BankInfosInventory2(p);
+                                new BankInfosInventory(p, LobbyItem.NORMAL_FILES_2);
                             } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-central-info3").equals(e.getClickedBlock().getLocation())) {
-                                new BankInfosInventory3(p);
+                                new BankInfosInventory(p, LobbyItem.NORMAL_FILES_3);
                             } else if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("bank-central-info4").equals(e.getClickedBlock().getLocation())) {
-                                new BankInfosInventory1(p);
+                                new BankInfosInventory(p, LobbyItem.NORMAL_FILES_1);
                             }
                         } else {
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§4Diese §cKiste §4wurde abgeschlossen!");
+                            LobbyPlugin.getInstance().getMessenger().sendError(p, "Diese ![Kiste] wurde abgeschlossen!");
                         }
                         return;
                     }
@@ -97,7 +98,7 @@ public class InventoryTriggerListener implements Listener {
                             String name = ChatColor.stripColor(sign.getLine(1)).replace("»", "").replace("«", "").trim();
 
                             if (lp.checkAndAddSecret(name, System.currentTimeMillis() / 1000)) {
-                                if (lp.getSecrets() >= 15) {
+                                if (lp.getSecretsCount() >= 15) {
                                     GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(p);
                                     if (!gamePlayer.hasDefaultItem(DefaultItem.HEAD_GIFT_SECRETS)) {
                                         gamePlayer.addOnePassXp(GamePlugin.getGamePlugin().getOnePassManager().getSecretAward());
@@ -110,22 +111,6 @@ public class InventoryTriggerListener implements Listener {
                             } else {
                                 LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Du hast dieses §cSecret §4bereits gefunden!");
                             }
-
-                            //JUMP AND RUNS
-                        } else if (sign.getLine(0).equals("§7»§c Jump'n'Run")) {
-                            for (JumpNRun jumpnrun : JumpNRun.values()) {
-                                if (sign.getLine(1).equals(jumpnrun.getJumpandrunname())) {
-                                    if (LobbyPlugin.getInstance().getOneHitManager().isFighting(p) || LobbyPlugin.getInstance().getCatchManager().isCatching(p) || LobbyPlugin.getInstance().getGungameManager().isFighting(p)) {
-                                        LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Du darfst im moment keine Jump and Runs spielen, weil du gerade ein Lobbygame spielst!");
-                                        return;
-                                    }
-                                    LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jumpnrun.getWarpLocation());
-                                    LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "Du hast dich zum §f" + jumpnrun.getJumpandrunname() + " §7Jump and Run telepotiert");
-                                    return;
-                                }
-                            }
-
-                            LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Das §c" + sign.getLine(1) + "§4 Jump and Run ist momentan in §oWartungen§4!");
                         }
                         return;
                     }
@@ -153,7 +138,7 @@ public class InventoryTriggerListener implements Listener {
                             if (lp.getBankprogressId() == BankRobberySmallProgress.BANK_ROBBERY_MIDDLE.getId()) {
                                 LobbyWorld.ONE_ISLAND.getWorld().getNPC("JohnEnd").toggleVisibility(p, false);
                                 JohnBankRobberyInventory.currentlyInBank = null;
-                                LobbyPlugin.getInstance().getOfficeManager().joinOffice(p);
+                                LobbyStory.getInstance().getOfficeManager().joinOffice(p);
                                 lp.setBankProgress(BankRobberySmallProgress.BANK_ROBBERY_END);
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Wir haben es §fgeschafft§7 ich überlasse dir §f25.000 Coins §7und ein kleines Geschenk im Rucksack, wir sehen uns!");
                                 lp.getCorePlayer().addCoins(25000);

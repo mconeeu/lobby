@@ -12,28 +12,34 @@ import eu.mcone.coresystem.api.core.exception.MotionCaptureNotDefinedException;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.enums.StoryProgress;
-import eu.mcone.lobby.api.enums.TraderProgress;
-import eu.mcone.lobby.api.enums.TutorialStory;
+import eu.mcone.lobby.api.story.LobbyStoryManager;
+import eu.mcone.lobby.api.story.progress.StoryProgress;
+import eu.mcone.lobby.api.story.progress.TraderStoryProgress;
+import eu.mcone.lobby.api.story.progress.TutorialStoryProgress;
 import eu.mcone.lobby.story.listener.*;
+import eu.mcone.lobby.story.office.LobbyOfficeManager;
 import io.sentry.event.Event;
 import io.sentry.event.EventBuilder;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class LobbyStory extends LobbyAddon {
+public class LobbyStory extends LobbyAddon implements LobbyStoryManager {
 
     @Getter
     private static LobbyStory instance;
+    @Getter
+    private LobbyOfficeManager officeManager;
 
     @Override
-    public void onEnable() {
+    public void onEnable(LobbyPlugin plugin) {
         instance = this;
+        this.officeManager = new LobbyOfficeManager(plugin);
 
-        LobbyPlugin.getInstance().registerEvents(
+        plugin.registerEvents(
+                new AfkListener(),
                 new CoreManagerReloadListener(),
-                new LobbyPlayerLoadedListener(),
+                new GeneralPlayerListener(),
                 new NpcListener(),
                 new InventoryTriggerListener(),
                 new SignsListener(),
@@ -41,28 +47,28 @@ public class LobbyStory extends LobbyAddon {
                 new PlayerMoveListener()
         );
 
-        reload();
+        reload(plugin);
     }
 
     @Override
-    public void reload() {
+    public void reload(LobbyPlugin plugin) {
         prepareNpcs();
         loadStoryCaptures();
         LobbyWorld.ONE_ISLAND.getWorld().getHologram("story-welcome").togglePlayerVisibility(ListMode.WHITELIST);
 
-        Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
             for (Player all : Bukkit.getOnlinePlayers()) {
                 if (all.getWorld().getName().equalsIgnoreCase(LobbyWorld.OFFICE.getName())) {
-                    LobbyPlugin.getInstance().getOfficeManager().joinOffice(all);
+                    getOfficeManager().joinOffice(all);
                 } else if (all.getWorld().getName().equalsIgnoreCase(LobbyWorld.GUNGAME.getName())) {
-                    LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(all, "Spawn");
+                    plugin.getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(all, "spawn");
                 }
             }
         }, 20);
     }
 
     @Override
-    public void onDisable() {
+    public void onDisable(LobbyPlugin plugin) {
     }
 
     private static void prepareNpcs() {
@@ -71,12 +77,12 @@ public class LobbyStory extends LobbyAddon {
             prepareNpc(storyProgress.getNpcName(), storyProgress.getNpc());
         }
         /*  Tutorial Story */
-        for (TutorialStory tutorialStory : TutorialStory.values()) {
-            prepareNpc(tutorialStory.getNpcName(), tutorialStory.getNpc());
+        for (TutorialStoryProgress tutorialStoryProgress : TutorialStoryProgress.values()) {
+            prepareNpc(tutorialStoryProgress.getNpcName(), tutorialStoryProgress.getNpc());
         }
         /*  Trader Story */
-        for (TraderProgress traderProgress : TraderProgress.values()) {
-            prepareNpc(traderProgress.getNpcName(), traderProgress.getNpc());
+        for (TraderStoryProgress traderStoryProgress : TraderStoryProgress.values()) {
+            prepareNpc(traderStoryProgress.getNpcName(), traderStoryProgress.getNpc());
         }
     }
 

@@ -13,10 +13,14 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.enums.LobbyItem;
+import eu.mcone.lobby.api.items.LobbyItem;
 import eu.mcone.lobby.api.player.*;
-import eu.mcone.lobby.scoreboard.SidebarObjective;
-import eu.mcone.lobby.util.RealTimeUtil;
+import eu.mcone.lobby.api.player.settings.JoinPlayerVisibility;
+import eu.mcone.lobby.api.player.settings.LobbySettings;
+import eu.mcone.lobby.api.player.settings.SpawnPoint;
+import eu.mcone.lobby.api.player.settings.SpawnVillage;
+import eu.mcone.lobby.api.player.scoreboard.SidebarObjective;
+import eu.mcone.lobby.scheduler.WorldRealTimeScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -31,34 +35,34 @@ public class LobbySettingsInventory extends CoreInventory {
         LobbySettings settings = lp.getSettings();
 
         setItem(InventorySlot.ROW_4_SLOT_2, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§f§lJoinTyp").create());
-        setItem(InventorySlot.ROW_5_SLOT_2, settings.getSpawnType().getItem().create(), e -> {
+        setItem(InventorySlot.ROW_5_SLOT_2, settings.getJoinPlayerVisibility().getItem().create(), e -> {
             if (p.hasPermission("lobby.silenthub.joinspawn")) {
-                switch (settings.getSpawnType()) {
-                    case NONE: {
-                        settings.setSpawnType(SpawnType.SILENTLOBBY);
+                switch (settings.getJoinPlayerVisibility()) {
+                    case NO_PREFERENCE: {
+                        settings.setJoinPlayerVisibility(JoinPlayerVisibility.SILENTLOBBY);
                         setSettings(p, lp);
                         break;
                     }
                     case SILENTLOBBY: {
-                        settings.setSpawnType(SpawnType.PLAYERHIDER);
+                        settings.setJoinPlayerVisibility(JoinPlayerVisibility.PLAYERHIDER);
                         setSettings(p, lp);
                         break;
                     }
                     case PLAYERHIDER: {
-                        settings.setSpawnType(SpawnType.NONE);
+                        settings.setJoinPlayerVisibility(JoinPlayerVisibility.NO_PREFERENCE);
                         setSettings(p, lp);
                         break;
                     }
                 }
             } else {
-                switch (settings.getSpawnType()) {
-                    case NONE: {
-                        settings.setSpawnType(SpawnType.PLAYERHIDER);
+                switch (settings.getJoinPlayerVisibility()) {
+                    case NO_PREFERENCE: {
+                        settings.setJoinPlayerVisibility(JoinPlayerVisibility.PLAYERHIDER);
                         setSettings(p, lp);
                         break;
                     }
                     case PLAYERHIDER: {
-                        settings.setSpawnType(SpawnType.NONE);
+                        settings.setJoinPlayerVisibility(JoinPlayerVisibility.NO_PREFERENCE);
                         setSettings(p, lp);
                         break;
                     }
@@ -161,7 +165,7 @@ public class LobbySettingsInventory extends CoreInventory {
                 settings.setRealTime(true);
                 setSettings(p, lp);
 
-                RealTimeUtil.setCurrentRealTime(lp);
+                WorldRealTimeScheduler.setCurrentRealTime(lp);
             });
         }
 
@@ -200,16 +204,16 @@ public class LobbySettingsInventory extends CoreInventory {
             setItem(InventorySlot.ROW_3_SLOT_5, settings.getSpawnVillage().getItem().create(), e -> {
                 switch (settings.getSpawnVillage()) {
                     case RANDOM: {
-                        settings.setSpawnVillage(SpawnVillage.VILLAGE_1);
+                        settings.setSpawnVillage(SpawnVillage.RAISEN);
                         setSettings(p, lp);
                         break;
                     }
-                    case VILLAGE_1: {
-                        settings.setSpawnVillage(SpawnVillage.VILLAGE_2);
+                    case RAISEN: {
+                        settings.setSpawnVillage(SpawnVillage.SKYLECK);
                         setSettings(p, lp);
                         break;
                     }
-                    case VILLAGE_2: {
+                    case SKYLECK: {
                         settings.setSpawnVillage(SpawnVillage.RANDOM);
                         setSettings(p, lp);
                         break;
@@ -280,7 +284,7 @@ public class LobbySettingsInventory extends CoreInventory {
         }
 
 
-        setItem(InventorySlot.ROW_6_SLOT_9, new ItemBuilder(Material.IRON_DOOR, 1, 0).displayName("§7§l↩ Zurück").create(), e ->
+        setItem(InventorySlot.ROW_6_SLOT_9, BACK_ITEM, e ->
                 Bukkit.dispatchCommand(p, "profile"));
 
         openInventory();
