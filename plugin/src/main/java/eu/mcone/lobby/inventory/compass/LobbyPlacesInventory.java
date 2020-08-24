@@ -18,7 +18,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
-public class LobbyPlacesInventory extends CoreInventory {
+public class LobbyPlacesInventory extends CompassInventory {
 
     static {
         CoreSystem.getInstance().getCooldownSystem().setCustomCooldownFor(LobbyPlacesInventory.class, 3);
@@ -31,84 +31,71 @@ public class LobbyPlacesInventory extends CoreInventory {
 
         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
 
-        setItem(InventorySlot.ROW_5_SLOT_1, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
-        setItem(InventorySlot.ROW_5_SLOT_2, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
+        setItem(InventorySlot.ROW_5_SLOT_1, SILVER_PLACEHOLDER);
+        setItem(InventorySlot.ROW_5_SLOT_2, SILVER_PLACEHOLDER);
 
-        setItem(InventorySlot.ROW_5_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
-        setItem(InventorySlot.ROW_5_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
-
-
-        setItem(InventorySlot.ROW_5_SLOT_8, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
-        setItem(InventorySlot.ROW_5_SLOT_9, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 8).displayName("§8//§oMCONE§8//").create());
+        setItem(InventorySlot.ROW_5_SLOT_4, SILVER_PLACEHOLDER);
+        setItem(InventorySlot.ROW_5_SLOT_6, SILVER_PLACEHOLDER);
 
 
-        setItem(InventorySlot.ROW_4_SLOT_1, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
+        setItem(InventorySlot.ROW_5_SLOT_8, SILVER_PLACEHOLDER);
+        setItem(InventorySlot.ROW_5_SLOT_9, SILVER_PLACEHOLDER);
 
-        setItem(InventorySlot.ROW_4_SLOT_2, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
-        setItem(InventorySlot.ROW_4_SLOT_3, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
-        setItem(InventorySlot.ROW_4_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
-        setItem(InventorySlot.ROW_4_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
 
-        setItem(InventorySlot.ROW_4_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
-        setItem(InventorySlot.ROW_4_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
-        setItem(InventorySlot.ROW_4_SLOT_8, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
-        setItem(InventorySlot.ROW_4_SLOT_9, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 7).displayName("§8//§oMCONE§8//").create());
+        setItem(InventorySlot.ROW_4_SLOT_1, PLACEHOLDER_ITEM);
+
+        setItem(InventorySlot.ROW_4_SLOT_2, PLACEHOLDER_ITEM);
+        setItem(InventorySlot.ROW_4_SLOT_3, PLACEHOLDER_ITEM);
+        setItem(InventorySlot.ROW_4_SLOT_4, PLACEHOLDER_ITEM);
+        setItem(InventorySlot.ROW_4_SLOT_5, PLACEHOLDER_ITEM);
+
+        setItem(InventorySlot.ROW_4_SLOT_6, PLACEHOLDER_ITEM);
+        setItem(InventorySlot.ROW_4_SLOT_7, PLACEHOLDER_ITEM);
+        setItem(InventorySlot.ROW_4_SLOT_8, PLACEHOLDER_ITEM);
+        setItem(InventorySlot.ROW_4_SLOT_9, PLACEHOLDER_ITEM);
 
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
             p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
 
-            setItem(InventorySlot.ROW_1_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 9).displayName("§8//§oMCONE§8//").create());
-            setItem(InventorySlot.ROW_1_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 9).displayName("§8//§oMCONE§8//").create());
-            setItem(InventorySlot.ROW_1_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 9).displayName("§8//§oMCONE§8//").create());
+            setItem(InventorySlot.ROW_1_SLOT_4, CYAN_PLACEHOLDER);
+            setItem(InventorySlot.ROW_1_SLOT_5, CYAN_PLACEHOLDER);
+            setItem(InventorySlot.ROW_1_SLOT_6, CYAN_PLACEHOLDER);
 
-            setItem(InventorySlot.ROW_3_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 9).displayName("§8//§oMCONE§8//").create());
-            setItem(InventorySlot.ROW_3_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 9).displayName("§8//§oMCONE§8//").create());
-            setItem(InventorySlot.ROW_3_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 9).displayName("§8//§oMCONE§8//").create());
+            setItem(InventorySlot.ROW_3_SLOT_4, CYAN_PLACEHOLDER);
+            setItem(InventorySlot.ROW_3_SLOT_5, CYAN_PLACEHOLDER);
+            setItem(InventorySlot.ROW_3_SLOT_6, CYAN_PLACEHOLDER);
 
-            setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 9).displayName("§8//§oMCONE§8//").create());
-            setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 9).displayName("§8//§oMCONE§8//").create());
+            setItem(InventorySlot.ROW_2_SLOT_4, CYAN_PLACEHOLDER);
+            setItem(InventorySlot.ROW_2_SLOT_6, CYAN_PLACEHOLDER);
 
-            setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
-            setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
+            setItem(InventorySlot.ROW_2_SLOT_2, LIGHT_BLUE_PLACEHOLDER);
+            setItem(InventorySlot.ROW_2_SLOT_8, LIGHT_BLUE_PLACEHOLDER);
 
             Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
                 p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
-                setItem(InventorySlot.ROW_1_SLOT_1, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 9).displayName("§8//§oMCONE§8//").create());
-                setItem(InventorySlot.ROW_3_SLOT_1, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 9).displayName("§8//§oMCONE§8//").create());
 
-                setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
+                setItem(InventorySlot.ROW_1_SLOT_1, CYAN_PLACEHOLDER);
+                setItem(InventorySlot.ROW_3_SLOT_1, CYAN_PLACEHOLDER);
 
-                setItem(InventorySlot.ROW_1_SLOT_9, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 9).displayName("§8//§oMCONE§8//").create());
-                setItem(InventorySlot.ROW_2_SLOT_9, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
+                setItem(InventorySlot.ROW_2_SLOT_1, LIGHT_BLUE_PLACEHOLDER);
 
-                setItem(InventorySlot.ROW_3_SLOT_9, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 9).displayName("§8//§oMCONE§8//").create());
+                setItem(InventorySlot.ROW_1_SLOT_9, CYAN_PLACEHOLDER);
+                setItem(InventorySlot.ROW_2_SLOT_9, LIGHT_BLUE_PLACEHOLDER);
+
+                setItem(InventorySlot.ROW_3_SLOT_9, CYAN_PLACEHOLDER);
 
                 Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
                     p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
-                    setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
-                    setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
-                    setItem(InventorySlot.ROW_1_SLOT_3, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
-                    setItem(InventorySlot.ROW_1_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
-                    setItem(InventorySlot.ROW_3_SLOT_3, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
-                    setItem(InventorySlot.ROW_3_SLOT_7, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§8//§oMCONE§8//").create());
+
+                    setItem(InventorySlot.ROW_2_SLOT_2, LIGHT_BLUE_PLACEHOLDER);
+                    setItem(InventorySlot.ROW_2_SLOT_8, LIGHT_BLUE_PLACEHOLDER);
+                    setItem(InventorySlot.ROW_1_SLOT_3, LIGHT_BLUE_PLACEHOLDER);
+                    setItem(InventorySlot.ROW_1_SLOT_7, LIGHT_BLUE_PLACEHOLDER);
+                    setItem(InventorySlot.ROW_3_SLOT_3, LIGHT_BLUE_PLACEHOLDER);
+                    setItem(InventorySlot.ROW_3_SLOT_7, LIGHT_BLUE_PLACEHOLDER);
 
                     Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
                         p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
-                        Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                            setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.BOOK, 1, 0).displayName("§3Die Story").lore("§7§oSpiele die Story und erhalte", "§7§ocoole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren").create(), e -> {
-                                LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
-
-                                if (lp.getProgressId() == 0) {
-                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("storyspawn");
-                                    p.closeInventory();
-                                } else {
-                                    LobbyPlugin.getInstance().getMessenger().send(p, "§2Du wurdest in der nähe des letzten Story-NPC teleportiert, mit dem du zuletzt interagiert hast!");
-                                    LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(StoryProgress.getProgressByID(lp.getProgressId()).getNpc().getData().getLocation().bukkit());
-                                }
-                            });
-
-                        }, 2L);
-
 
                         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.PUMPKIN, 1, 0)
                                         .displayName("§7§lSchmuggler")
@@ -128,7 +115,6 @@ public class LobbyPlacesInventory extends CoreInventory {
 
                                 });
 
-
                         setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.PAPER, 1, 0)
                                         .displayName("§f§lCasino")
                                         .lore("§7§oSpiele Glücksspiele", "§7§ound gewinne das 9x Fache", "§7§odeines Einsatzes", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
@@ -136,10 +122,8 @@ public class LobbyPlacesInventory extends CoreInventory {
 
                                 e -> {
                                     player.closeInventory();
-                                    LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
                                     LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("casino");
                                 });
-
 
                         setItem(InventorySlot.ROW_3_SLOT_2, new ItemBuilder(Material.EMERALD, 1, 0)
                                         .displayName("§eHändler")
@@ -209,6 +193,7 @@ public class LobbyPlacesInventory extends CoreInventory {
                                     }
 
                                 });
+
                         setItem(InventorySlot.ROW_1_SLOT_8, new ItemBuilder(Material.REDSTONE, 1, 0)
                                         .displayName("§dBüro")
                                         .lore("§7§oKaufe dir ein tolles Büro", "§7§ooder Besuche dein Büro", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren", "§8» §f§nRechtslick§8 | §7§oSchnellbeitritt")
@@ -225,7 +210,6 @@ public class LobbyPlacesInventory extends CoreInventory {
                                 });
 
                         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-
                             p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
 
                             setItem(InventorySlot.ROW_5_SLOT_3, new ItemBuilder(Material.IRON_SWORD, 1, 0)
@@ -256,6 +240,19 @@ public class LobbyPlacesInventory extends CoreInventory {
 
                                     });
 
+                            Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
+                                setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.BOOK, 1, 0).displayName("§3Die Story").lore("§7§oSpiele die Story und erhalte", "§7§ocoole Items und viele Coins!", "", "§7§oTeleportiere zum Story NPC", "§8» §f§nLinksklick§8 | §7§oTeleportieren").create(), e -> {
+                                    LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
+
+                                    if (lp.getProgressId() == 0) {
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("storyspawn");
+                                        p.closeInventory();
+                                    } else {
+                                        LobbyPlugin.getInstance().getMessenger().send(p, "§2Du wurdest in der nähe des letzten Story-NPC teleportiert, mit dem du zuletzt interagiert hast!");
+                                        LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(StoryProgress.getProgressByID(lp.getProgressId()).getNpc().getData().getLocation().bukkit());
+                                    }
+                                });
+                            }, 1L);
                         }, 1L);
 
                     }, 2L);

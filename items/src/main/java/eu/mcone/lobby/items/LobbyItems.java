@@ -69,7 +69,6 @@ public class LobbyItems extends LobbyAddon {
                             category.name(),
                             "",
                             false,
-                            //Dont show ECONOMY category in BackpackInventory
                             true,
                             category.getSorting(),
                             Gamemode.UNDEFINED,

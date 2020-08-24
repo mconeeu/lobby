@@ -105,6 +105,8 @@ public class PlayerJoinListener implements Listener {
                     }
                 }
             }
+        } else {
+            p.closeInventory();
         }
 
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);

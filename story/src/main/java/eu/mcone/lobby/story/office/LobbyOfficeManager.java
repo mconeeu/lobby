@@ -54,7 +54,7 @@ public class LobbyOfficeManager implements OfficeManager {
 
     private void joinOffice(Player p, Player owner, OfficeType office) {
         LobbyPlugin.getInstance().getVanishManager().quitSilentLobby(p);
-        LobbyPlugin.getInstance().getVanishManager().setVanishPlayerVisibility(p, VanishPlayerVisibility.EVERYBODY);
+        LobbyPlugin.getInstance().getVanishManager().setVanishPlayerVisibility(p, VanishPlayerVisibility.EVERYBODY, false);
 
         if (joinedPlayers.containsKey(owner)) {
             joinedPlayers.get(owner).add(p);
@@ -96,6 +96,7 @@ public class LobbyOfficeManager implements OfficeManager {
             CoreSystem.getInstance().getVanishManager().recalculateVanishes();
         }
 
+        LobbyPlugin.getInstance().getMessenger().sendInfo(player, "Du hast das Büro verlassen!");
         LobbyPlugin.getInstance().resetPlayerDataAndHotbarItems(player);
     }
 

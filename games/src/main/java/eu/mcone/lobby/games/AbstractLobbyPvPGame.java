@@ -10,6 +10,7 @@ import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.games.LobbyGame;
 import eu.mcone.lobby.api.games.LobbyPvpGame;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.scoreboard.SidebarObjective;
@@ -44,13 +45,13 @@ public abstract class AbstractLobbyPvPGame extends AbstractLobbyGame implements 
 
     @Override
     public void joinGame(Player p) {
-        eu.mcone.lobby.api.games.LobbyGame game = LobbyGames.getInstance().getCurrentGame(p);
+        LobbyGame game = LobbyGames.getInstance().getCurrentGame(p);
 
         if (game == null) {
             playing.add(p);
             LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
-            LobbyPlugin.getInstance().getVanishManager().setVanishPlayerVisibility(p, VanishPlayerVisibility.EVERYBODY);
+            LobbyPlugin.getInstance().getVanishManager().setVanishPlayerVisibility(p, VanishPlayerVisibility.EVERYBODY, false);
             LobbyPlugin.getInstance().getVanishManager().quitSilentLobby(p);
             LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
@@ -65,7 +66,7 @@ public abstract class AbstractLobbyPvPGame extends AbstractLobbyGame implements 
             }
 
             if (playing.size() <= 1) {
-                sendMessage(p, "Du bist gerade der §f§oeinzigste§7, der §fOneHit§7 spielt!");
+                sendMessage(p, "Du bist gerade der §f§oeinzigste§7, der §f"+name+"§7 spielt!");
             } else {
                 sendMessage(p, "Es spielen gerade §f§o" + playing.size() + " Spieler§f " + color + name + "§7!");
                 reloadPlayerScoreboards();

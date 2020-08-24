@@ -51,7 +51,7 @@ public class LobbyGames extends LobbyAddon implements LobbyGamesManager {
     @Override
     public <T extends eu.mcone.lobby.api.games.LobbyGame> T getGame(Class<T> gameClass) {
         for (AbstractLobbyGame game : games) {
-            if (game.getClass().isAssignableFrom(gameClass)) {
+            if (gameClass.isAssignableFrom(game.getClass())) {
                 return (T) game;
             }
         }

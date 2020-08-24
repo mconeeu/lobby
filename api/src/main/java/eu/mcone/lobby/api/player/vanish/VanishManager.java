@@ -6,6 +6,8 @@ public interface VanishManager {
 
     void setVanishPlayerVisibility(Player p, VanishPlayerVisibility target);
 
+    void setVanishPlayerVisibility(Player p, VanishPlayerVisibility target, boolean silent);
+
     VanishPlayerVisibility getVanishPlayerVisibility(Player p);
 
     void joinSilentLobby(Player p);

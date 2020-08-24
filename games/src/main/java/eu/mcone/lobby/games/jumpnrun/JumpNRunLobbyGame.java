@@ -45,6 +45,7 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
         super("Jump'n'Run", ChatColor.GREEN, "jumpnrun", "jumpandrun", "jump");
 
         plugin.registerEvents(new JumpNRunListener(this));
+        plugin.sendConsoleMessage("§aLoading LobbyGame JumpNRun");
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
             for (JumpNRunPlayer jnrPlayer : JumpNRunLobbyGame.this.getCurrentlyPlaying()) {
@@ -126,7 +127,7 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
 
             LobbyPlugin.getInstance().resetPlayerDataAndHotbarItems(p);
             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
-            LobbyPlugin.getInstance().getMessenger().send(p, "§cDu hast das Jump and Run §oerfolgreich §cbeendet!");
+            LobbyPlugin.getInstance().getMessenger().send(p, "§cDu hast das Jump and Run §oabgebrochen!");
         }
     }
 

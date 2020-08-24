@@ -17,20 +17,20 @@ import org.bukkit.entity.Player;
 public class SecretaryInventory extends CoreInventory {
 
     private static final CoreAnvilInventory ANVIL_INVENTORY = CoreSystem.getInstance().createAnvilInventory(event -> {
-        String name = event.getName();
+        if (event.getSlot().equals(AnvilSlot.OUTPUT)) {
+            String name = event.getName();
 
-        Player p = event.getPlayer();
-        Player t = Bukkit.getPlayer(name);
+            Player p = event.getPlayer();
+            Player t = Bukkit.getPlayer(name);
 
-        if (t != null && !t.equals(event.getPlayer())) {
-            if (event.getSlot().equals(AnvilSlot.OUTPUT)) {
+            if (t != null && !t.equals(event.getPlayer())) {
                 LobbyStory.getInstance().getOfficeManager().inviteToOffice(p, t);
-
                 p.playSound(p.getLocation(), Sound.NOTE_STICKS, 1, 1);
-                p.closeInventory();
+            } else {
+                LobbyPlugin.getInstance().getMessenger().sendError(p, "Dieser Spieler ![" + name + "] ist nicht online!");
             }
-        } else {
-            LobbyPlugin.getInstance().getMessenger().sendError(p, "Dieser Spieler !["+name+"] ist nicht online!");
+
+            p.closeInventory();
         }
     }).setItem(
             AnvilSlot.INPUT_LEFT,

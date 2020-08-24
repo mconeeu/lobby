@@ -52,20 +52,30 @@ public class LobbyVanishManager implements VanishManager {
 
     @Override
     public void setVanishPlayerVisibility(Player p, VanishPlayerVisibility target) {
+        setVanishPlayerVisibility(p, target, true);
+    }
+
+    @Override
+    public void setVanishPlayerVisibility(Player p, VanishPlayerVisibility target, boolean notify) {
         if (silentLobbyPlayers.contains(p)) {
             throw new IllegalStateException("Could not change VanishTarget from "+p.getName()+" to "+target.name()+". Player is in SilentLobby!");
         }
 
-        hiddenPlayers.put(p, target);
-        CoreSystem.getInstance().getVanishManager().recalculateVanishes();
+        if (!hiddenPlayers.containsKey(p) || !hiddenPlayers.get(p).equals(target)) {
+            hiddenPlayers.put(p, target);
+            CoreSystem.getInstance().getVanishManager().recalculateVanishes();
 
-        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
-        p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
-        p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
+            p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
+            p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
+            p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
 
-        GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(target.equals(VanishPlayerVisibility.EVERYBODY));
-        p.getInventory().setItem(0, target.getItem());
-        LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Du hast die Spielersichtbarkeit auf !["+target.getName()+"] geändert!");
+            GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(target.equals(VanishPlayerVisibility.EVERYBODY));
+            p.getInventory().setItem(0, target.getItem());
+
+            if (notify) {
+                LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Du hast die Spielersichtbarkeit auf !["+target.getName()+"] geändert!");
+            }
+        }
     }
 
     @Override
@@ -80,7 +90,7 @@ public class LobbyVanishManager implements VanishManager {
 
             CoreSystem.getInstance().getVanishManager().recalculateVanishes();
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
-            LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Du bist nun in der [Privaten Lobby]. Hier bist du vollkommen ungestört!");
+            LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Du bist nun in der ![Privaten Lobby]. Hier bist du vollkommen ungestört!");
 
 
             p.getInventory().setItem(0, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
@@ -105,6 +115,8 @@ public class LobbyVanishManager implements VanishManager {
                     HotbarItem.SILENT_LOBBY_JOIN
             );
             p.getInventory().setItem(0, VanishPlayerVisibility.EVERYBODY.getItem());
+
+            playSilentLobbyEffects(p);
         }
     }
 

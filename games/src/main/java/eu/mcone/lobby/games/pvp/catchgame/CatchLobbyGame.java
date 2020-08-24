@@ -44,7 +44,7 @@ public class CatchLobbyGame extends AbstractLobbyPvPGame implements Catch {
         this.catcher = new ArrayList<>();
 
         plugin.registerEvents(new CatchListener(this));
-        plugin.sendConsoleMessage("§aLoading LobbyGame OneHit");
+        plugin.sendConsoleMessage("§aLoading LobbyGame Catch");
     }
 
     @Override

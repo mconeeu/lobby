@@ -18,6 +18,7 @@ import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -54,7 +55,7 @@ public class GeneralPlayerListener implements Listener {
         spawnStoryHolograms(p, lp.getProgressId());
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onQuit(PlayerQuitEvent e) {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer());
 
