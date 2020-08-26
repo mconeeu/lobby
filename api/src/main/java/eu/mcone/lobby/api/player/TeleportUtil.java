@@ -4,7 +4,6 @@ import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.player.settings.LobbySettings;
-import io.netty.channel.local.LocalAddress;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -27,22 +26,22 @@ public class TeleportUtil {
                 p.teleport(makeFixedLocation(p.getLocation()));
 
                 p.setGameMode(GameMode.SPECTATOR);
-                p.playSound(p.getLocation(), Sound.GLASS, 3, 2);
-                p.playSound(p.getLocation(), Sound.CLICK, 3, 2);
+                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.GLASS);
+                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CLICK);
                 p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, 1));
 
                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                     p.teleport(makeFixedLocation(p.getLocation().add(0, 20, 0)));
-                    p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 2);
-                    p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
+                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ENDERDRAGON_WINGS);
+                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ENDERMAN_TELEPORT);
 
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                         p.teleport(makeFixedLocation(p.getLocation().add(0, 25, 0)));
-                        p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
+                        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ENDERMAN_TELEPORT);
 
                         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                             p.teleport(makeFixedLocation(p.getLocation().add(0, 20, 0)));
-                            p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
+                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ENDERMAN_TELEPORT);
 
                             /*
                              * BACK
@@ -50,22 +49,22 @@ public class TeleportUtil {
 
                             Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                                 p.teleport(makeFixedLocation(location).add(0, 65, 0));
-                                p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 3);
+                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ENDERMAN_TELEPORT);
 
                                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                                     p.teleport(makeFixedLocation(p.getLocation().subtract(0, 35, 0)));
-                                    p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
+                                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ENDERMAN_TELEPORT);
 
                                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                                         p.teleport(makeFixedLocation(p.getLocation().subtract(0, 18, 0)));
-                                        p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 3, 2);
+                                        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ENDERMAN_TELEPORT);
 
                                         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                                             p.teleport(location);
 
                                             p.setGameMode(GameMode.SURVIVAL);
                                             p.removePotionEffect(PotionEffectType.CONFUSION);
-                                            p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 3, 2);
+                                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.FIREWORK_TWINKLE);
                                         }, 12);
                                     }, 8);
                                 }, 7);
@@ -75,7 +74,7 @@ public class TeleportUtil {
                 }, 1);
             } else {
                 p.teleport(location);
-                p.playSound(p.getLocation(), Sound.GLASS, 3, 2);
+                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.GLASS);
             }
         } else {
             LobbyPlugin.getInstance().getMessenger().send(p, "§4Dieser Ort ist gerade nicht erreichbar!");

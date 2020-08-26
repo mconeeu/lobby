@@ -8,11 +8,12 @@ package eu.mcone.lobby.util;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.core.player.Group;
 import eu.mcone.gameapi.api.GameAPI;
+import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.api.games.jumpnrun.JumpNRunGame;
 import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.api.player.vanish.VanishManager;
+import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.listener.VanishListener;
 import org.bukkit.Effect;
@@ -21,7 +22,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class LobbyVanishManager implements VanishManager {
 
@@ -39,7 +43,9 @@ public class LobbyVanishManager implements VanishManager {
                 return;
             } else if (hiddenPlayers.containsKey(player) && !hiddenPlayers.get(player).equals(VanishPlayerVisibility.EVERYBODY)) {
                 switch (hiddenPlayers.get(player)) {
-                    case NOBODY: list.clear(); return;
+                    case NOBODY:
+                        list.clear();
+                        return;
                     case ONLY_VIPS: {
                         list.removeIf(p -> !CoreSystem.getInstance().getCorePlayer(p).getMainGroup().standsAbove(Group.PREMIUMPLUS));
                     }
@@ -58,7 +64,7 @@ public class LobbyVanishManager implements VanishManager {
     @Override
     public void setVanishPlayerVisibility(Player p, VanishPlayerVisibility target, boolean notify) {
         if (silentLobbyPlayers.contains(p)) {
-            throw new IllegalStateException("Could not change VanishTarget from "+p.getName()+" to "+target.name()+". Player is in SilentLobby!");
+            throw new IllegalStateException("Could not change VanishTarget from " + p.getName() + " to " + target.name() + ". Player is in SilentLobby!");
         }
 
         if (!hiddenPlayers.containsKey(p) || !hiddenPlayers.get(p).equals(target)) {
@@ -66,14 +72,14 @@ public class LobbyVanishManager implements VanishManager {
             CoreSystem.getInstance().getVanishManager().recalculateVanishes();
 
             p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
-            p.playSound(p.getLocation(), Sound.LAVA_POP, 1.0F, 1.0F);
+            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.LAVA_POP);
             p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
 
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(target.equals(VanishPlayerVisibility.EVERYBODY));
             p.getInventory().setItem(0, target.getItem());
 
             if (notify) {
-                LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Du hast die Spielersichtbarkeit auf !["+target.getName()+"] geändert!");
+                LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Du hast die Spielersichtbarkeit auf ![" + target.getName() + "] geändert!");
             }
         }
     }
@@ -97,6 +103,8 @@ public class LobbyVanishManager implements VanishManager {
             p.getInventory().setItem(2, null);
             if (LobbyGames.getInstance().getCurrentGame(p) instanceof JumpNRunGame) {
                 p.getInventory().setItem(1, HotbarItem.SILENT_LOBBY_QUIT);
+            } else {
+                p.getInventory().setItem(3, null);
             }
 
             playSilentLobbyEffects(p);
@@ -116,6 +124,9 @@ public class LobbyVanishManager implements VanishManager {
             );
             p.getInventory().setItem(0, VanishPlayerVisibility.EVERYBODY.getItem());
 
+            GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(p);
+            gamePlayer.setLastUsedBackPackItemInventar();
+
             playSilentLobbyEffects(p);
         }
     }
@@ -126,8 +137,8 @@ public class LobbyVanishManager implements VanishManager {
     }
 
     private static void playSilentLobbyEffects(Player p) {
-        p.playSound(p.getLocation(), Sound.GLASS, 1, 1);
-        p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
+        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.GLASS);
+        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.EXPLODE);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.VOID_FOG, 10);

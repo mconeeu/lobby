@@ -22,6 +22,7 @@ public class MoneyChooseInventory extends CoreInventory {
                 NumbersChooseInventory.chooseMoney.put(player, 500);
                 new NumbersChooseInventory(player);
             } else {
+                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
                 LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast nicht genügend Coins!");
             }
         });
@@ -33,6 +34,7 @@ public class MoneyChooseInventory extends CoreInventory {
                 NumbersChooseInventory.chooseMoney.put(player, 1000);
                 new NumbersChooseInventory(player);
             } else {
+                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
                 LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast nicht genügend Coins!");
             }
         });
@@ -44,6 +46,7 @@ public class MoneyChooseInventory extends CoreInventory {
                 NumbersChooseInventory.chooseMoney.put(player, 2000);
                 new NumbersChooseInventory(player);
             } else {
+                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
                 LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast nicht genügend Coins!");
             }
         });

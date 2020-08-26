@@ -4,16 +4,22 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.inventory.settings.LobbySettingsInventory;
 import eu.mcone.lobby.story.inventory.story.StoryOverviewInventory;
 import eu.mcone.lobby.story.inventory.SecretsInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class LobbyProfileInventory extends CoreInventory {
 
     public LobbyProfileInventory(Player player) {
         super("§8» §fWähle?", player, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
+
+
+        LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.CHICKEN_EGG_POP);
 
         setItem(
                 InventorySlot.ROW_2_SLOT_3,
@@ -34,6 +40,10 @@ public class LobbyProfileInventory extends CoreInventory {
         );
 
         setItem(InventorySlot.ROW_3_SLOT_9, BACK_ITEM, e -> Bukkit.dispatchCommand(player, "profile"));
+
+
+
+
 
         openInventory();
     }

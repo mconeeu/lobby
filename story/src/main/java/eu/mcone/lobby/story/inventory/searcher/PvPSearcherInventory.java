@@ -59,7 +59,7 @@ class PvPSearcherInventory extends CoreInventory {
         setItem(InventorySlot.ROW_1_SLOT_1, new ItemBuilder(Material.PRISMARINE_CRYSTALS, 1, 0).displayName("§c§lFinanzen Forschungen").lore("§7§oForsche hier im Finatz Thema.", "§7§oDie Items stehen dir danach in", "§7§odeinem Rucksack zur Verfügung.").create(),
                 e -> {
 
-                    p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+                  LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
                     new SearcherInventory(p);
                 });
 
@@ -67,7 +67,7 @@ class PvPSearcherInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.DIAMOND_SWORD, 1, 0).displayName("§c§lKampf Forschungen").lore("§7§oForsche hier im PvP Thema.", "§7§oDie Items stehen dir danach in", "§7§odeinem Rucksack zur Verfügung.").enchantment(Enchantment.DAMAGE_ALL, 5).unbreakable(true).itemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE).create(),
         e -> {
 
-            p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
+            LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
 
         });
 

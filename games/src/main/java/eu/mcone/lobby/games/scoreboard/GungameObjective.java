@@ -12,14 +12,16 @@ public class GungameObjective extends LobbyGameObjective {
 
     @Override
     protected void onRegister(CorePlayer corePlayer, CoreSidebarObjectiveEntry entry) {
+        super.onRegister(corePlayer, entry);
+
         entry.setScore(8, "");
         entry.setScore(7, "§8» §7Level:");
         entry.setScore(6, " §f" + player.bukkit().getLevel());
-
     }
 
     @Override
     protected void onReload(CorePlayer corePlayer, CoreSidebarObjectiveEntry entry) {
+        super.onReload(corePlayer, entry);
         entry.setScore(6, " §f" + player.bukkit().getLevel());
     }
 }

@@ -49,10 +49,8 @@ public class LobbyLiveEventManager implements Runnable, LiveEventManager {
     public boolean removeEvent(Class<? extends LiveEvent> event) {
         for (LiveEvent e : EVENTS) {
             if (event.equals(e.getClass())) {
-                if (e.isRunning()) {
                     e.removeEvent();
                     return true;
-                } else return false;
             }
         }
 

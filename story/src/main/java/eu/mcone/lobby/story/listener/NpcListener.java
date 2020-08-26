@@ -427,7 +427,7 @@ public class NpcListener implements Listener {
                                 if (tutorialStoryProgress.getId() == 6) {
                                     p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 5);
                                     p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 45, 4500, false, false));
-                                    p.playSound(p.getLocation(), Sound.CAT_PURR, 1, 1);
+                                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CAT_PURR);
                                     p.playEffect(p.getLocation(), Effect.CRIT, 4);
                                     Objects.requireNonNull(TutorialStoryProgress.getTutorialStoryById(tutorialStoryProgress.getId())).getNpc().toggleVisibility(p, false);
                                 }

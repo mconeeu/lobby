@@ -6,6 +6,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.Lobby;
+import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -28,7 +29,7 @@ public class EventInventory extends CoreInventory {
 
                     });
 
-            player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
+       LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_PLING);
         }, 2L);
 
         setItem(InventorySlot.ROW_3_SLOT_9, BACK_ITEM, e -> new MinigamesInventory(player));

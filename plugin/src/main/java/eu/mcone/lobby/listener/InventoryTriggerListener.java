@@ -39,7 +39,7 @@ public class InventoryTriggerListener implements Listener {
             }else if (i.equals(HotbarItem.COMPASS)) {
                 e.setCancelled(true);
                 new MinigamesInventory(p);
-                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+              LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
             } else if (i.equals(HotbarItem.LOBBY_CHANGER)) {
                 if (!LobbyStory.getInstance().getOfficeManager().isInOffice(p)) {
                     new LobbySwitchInventory(p);

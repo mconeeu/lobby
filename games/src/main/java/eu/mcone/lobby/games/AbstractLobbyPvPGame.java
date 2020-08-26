@@ -18,7 +18,6 @@ import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.games.scoreboard.LobbyGameObjective;
 import lombok.Getter;
 import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
@@ -51,8 +50,8 @@ public abstract class AbstractLobbyPvPGame extends AbstractLobbyGame implements 
             playing.add(p);
             LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
-            LobbyPlugin.getInstance().getVanishManager().setVanishPlayerVisibility(p, VanishPlayerVisibility.EVERYBODY, false);
             LobbyPlugin.getInstance().getVanishManager().quitSilentLobby(p);
+            LobbyPlugin.getInstance().getVanishManager().setVanishPlayerVisibility(p, VanishPlayerVisibility.EVERYBODY, false);
             LobbyPlugin.getInstance().getBackpackManager().getPetHandler().despawnPet(p);
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
 
@@ -86,7 +85,7 @@ public abstract class AbstractLobbyPvPGame extends AbstractLobbyGame implements 
             LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
             p.getInventory().clear();
-            p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
+            LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(p);
 
             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
             lp.resetDataAndHotbarItems();

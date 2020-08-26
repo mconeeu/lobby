@@ -22,16 +22,17 @@ public class NumbersFinishInventory extends CoreInventory {
 
         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
             setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 14).displayName("§fLaden..").create());
-            player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
+       LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_PLING);
+            LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_PLING);
 
             Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                 setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 4).displayName("§fLaden...").create());
-                player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
+           LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_PLING);
 
                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                     setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 3).displayName("§fLaden.").create());
-                    player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
-                    player.playSound(player.getLocation(), Sound.NOTE_STICKS, 1, 1);
+               LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_PLING);
+                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_STICKS);
 
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                         int win = getRandomNumberInRange(1, 9);
@@ -44,15 +45,15 @@ public class NumbersFinishInventory extends CoreInventory {
                                         .lore("§7Du hast die Zahl", "§f" + win + "§7 erfolgreich erraten")
                                         .create());
 
-                                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
+                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.LEVEL_UP);
 
                                 CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(player);
                                 corePlayer.addCoins(addMoney * 8);
 
                                 LobbyPlugin.getInstance().getMessenger().send(player, "§aDu hast §f" + addMoney * 8 + "§a gewonnen!");
                             } else {
-                                player.playSound(player.getLocation(), Sound.WITHER_DEATH, 1, 1);
-                                player.playSound(player.getLocation(), Sound.NOTE_STICKS, 1, 1);
+                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.WITHER_DEATH);
+                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_STICKS);
 
                                 CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(player);
                                 corePlayer.removeCoins(NumbersChooseInventory.chooseMoney.get(player));

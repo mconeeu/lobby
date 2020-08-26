@@ -7,10 +7,12 @@ import java.util.Date;
 @Getter
 public abstract class LiveEvent {
 
+    private final String name;
     private final Date date;
     private boolean isRunning;
 
-    public LiveEvent(Date date) {
+    public LiveEvent(String name, Date date) {
+        this.name = name;
         this.date = date;
     }
 

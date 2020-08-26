@@ -36,15 +36,15 @@ public class MagicWandListener implements Listener {
                 p.getInventory().setItem(2, null);
             }
 
-            p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+          LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
             Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
+                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CLICK);
 
                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                    p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
+                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CLICK);
 
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                        p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
+                         LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
                         if (p.hasPermission("lobby.silenthub")) {
                             p.getInventory().setItem(3, LobbyItem.MAGICWAND.getItemStack());
                         } else {

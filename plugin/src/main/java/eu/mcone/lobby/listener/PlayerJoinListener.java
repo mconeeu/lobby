@@ -13,19 +13,19 @@ import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
-import eu.mcone.lobby.api.player.*;
+import eu.mcone.lobby.api.player.HotbarItem;
+import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.api.player.scoreboard.SidebarObjective;
 import eu.mcone.lobby.api.player.settings.JoinPlayerVisibility;
 import eu.mcone.lobby.api.player.settings.LobbySettings;
 import eu.mcone.lobby.api.player.settings.SpawnVillage;
-import eu.mcone.lobby.api.player.scoreboard.SidebarObjective;
+import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.scheduler.NpcEmoteScheduler;
 import eu.mcone.lobby.scheduler.WorldRealTimeScheduler;
 import eu.mcone.lobby.story.LobbyStory;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -63,10 +63,12 @@ public class PlayerJoinListener implements Listener {
             LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
         }
 
+        gp.setLastUsedBackPackItemInventar();
+
         Lobby.getSystem().registerLobbyPlayer(lp);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
-        p.playSound(p.getLocation(), Sound.FIREWORK_TWINKLE, 2.0F, 5.0F);
+        //   LobbyPlugin.getInstance().getPlayerSounds().lateSounds(p, Sound.FIREWORK_TWINKLE);
 
         loadLobbyPlayer(p, lp, e.getCorePlayerLoadedEvent());
     }
@@ -107,6 +109,11 @@ public class PlayerJoinListener implements Listener {
             }
         } else {
             p.closeInventory();
+        }
+
+
+        if (lp.getSettings().getJoinPlayerVisibility().equals(JoinPlayerVisibility.SILENTLOBBY)) {
+            p.getInventory().setItem(3, null);
         }
 
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
@@ -159,6 +166,7 @@ public class PlayerJoinListener implements Listener {
         }
 
         p.getInventory().setItem(7, HotbarItem.BACKPACK);
+
 
         p.getInventory().setItem(
                 8,

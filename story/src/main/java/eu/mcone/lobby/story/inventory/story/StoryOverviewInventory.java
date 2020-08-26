@@ -4,10 +4,10 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.story.inventory.story.bank.BankSmallStoryProgressInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class StoryOverviewInventory extends CoreInventory {
@@ -42,7 +42,7 @@ public class StoryOverviewInventory extends CoreInventory {
                         .displayName("§fHändler-Story")
                         .lore("§cNicht Verfügbar")
                         .create(),
-                e -> player.playSound(player.getLocation(), Sound.NOTE_BASS,1,1)
+                e -> LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player)
         );
 
         setItem(InventorySlot.ROW_3_SLOT_9, BACK_ITEM, e -> Bukkit.dispatchCommand(player, "profile"));

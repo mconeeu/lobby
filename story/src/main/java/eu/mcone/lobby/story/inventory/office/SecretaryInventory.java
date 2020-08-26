@@ -25,7 +25,7 @@ public class SecretaryInventory extends CoreInventory {
 
             if (t != null && !t.equals(event.getPlayer())) {
                 LobbyStory.getInstance().getOfficeManager().inviteToOffice(p, t);
-                p.playSound(p.getLocation(), Sound.NOTE_STICKS, 1, 1);
+               LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.NOTE_STICKS);
             } else {
                 LobbyPlugin.getInstance().getMessenger().sendError(p, "Dieser Spieler ![" + name + "] ist nicht online!");
             }

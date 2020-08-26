@@ -85,12 +85,12 @@ public class BankMenInventory extends CoreInventory {
                             LobbyPlugin.getInstance().getMessenger().send(p, "§8[§a+100 Coins§8]");
 
                             p.closeInventory();
-                            p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 1);
+                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_PLING);
                         });
             } else {
                 setItem(InventorySlot.ROW_2_SLOT_6, Skull.fromUrl("http://textures.minecraft.net/texture/86d35a963d5987894b6bc214e328b39cd2382426ff9c8e082b0b6a6e044d3a3", 1).toItemBuilder().displayName("§4§lTägliche Belohnung").lore("§c§oAb Morgen Verfügbar").create(),
                         e -> {
-                            p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
+                            LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(p);
                             LobbyPlugin.getInstance().getMessenger().send(p, "§4Du kannst deine §cBelohnung §4erst am nächsten Tag abholen!");
                         });
             }

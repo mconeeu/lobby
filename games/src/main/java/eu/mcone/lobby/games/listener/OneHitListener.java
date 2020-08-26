@@ -81,7 +81,7 @@ public class OneHitListener implements Listener {
             vec = vec.setY(Math.max(0.4000000059604645D, vec.getY())).multiply(1.5F);
             p.setVelocity(vec);
 
-            p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 2.0F, 2.0F);
+            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ENDERMAN_TELEPORT);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 10);
         }
     }
@@ -122,7 +122,7 @@ public class OneHitListener implements Listener {
                 LobbyPlayer lpk = LobbyPlugin.getInstance().getLobbyPlayer(k);
                 lpk.reloadScoreboardIfEnabled();
                 lpk.getCorePlayer().addCoins(2);
-                k.playSound(k.getLocation(), Sound.LEVEL_UP, 1, 1);
+                LobbyPlugin.getInstance().getPlayerSounds().playSounds(k, Sound.LEVEL_UP);
                 k.getInventory().setItem(6, OneHitItem.ONEHIT_ARROW);
                 k.setLevel(k.getLevel() + 1);
                 k.setExp(1);

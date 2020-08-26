@@ -10,8 +10,8 @@ import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.gameapi.api.Option;
 import eu.mcone.lobby.api.liveevent.LiveEventManager;
-import eu.mcone.lobby.api.story.office.OfficeManager;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.api.player.sounds.SoundManager;
 import eu.mcone.lobby.api.player.vanish.VanishManager;
 import lombok.Getter;
 import org.bukkit.ChatColor;
@@ -49,6 +49,8 @@ public abstract class LobbyPlugin extends GamePlugin {
     public abstract <T extends LobbyAddon> T getAddon(Class<? extends T> addonClass);
 
     public abstract LiveEventManager getLiveEventManager();
+
+    public abstract SoundManager getPlayerSounds();
 
     public abstract VanishManager getVanishManager();
 

@@ -84,7 +84,7 @@ public class GunGameLobbyGame extends AbstractLobbyPvPGame implements GunGame {
             SAVE_PLAYER.remove(p);
 
             setFightItems(p);
-            p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 1);
+            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.NOTE_PLING);
             LobbyPlugin.getInstance().getMessenger().send(p, "§cDu kannst nun angreifen und angegriffen werden!");
         }, 60);
     }

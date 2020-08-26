@@ -31,6 +31,7 @@ class TicketBuyInventory extends CoreInventory {
                 lp.addLobbyItem(LobbyItem.BOAT_PASS);
                 p.sendMessage("§8[§7§l!§8] §fServer §8» §7Du hast ein Ticket bekommen");
             } else {
+                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
                 p.sendMessage( "§8[§7§l!§8] §fServer §8» §4Du besitzt diese Item bereits!");
             }
             p.closeInventory();

@@ -12,6 +12,8 @@ public class OneHitObjective extends LobbyGameObjective {
 
     @Override
     protected void onRegister(CorePlayer corePlayer, CoreSidebarObjectiveEntry entry) {
+        super.onRegister(corePlayer, entry);
+
         entry.setScore(8, "");
         entry.setScore(7, "§8» §7KillStreak:");
         entry.setScore(6, " §f" + player.bukkit().getLevel());
@@ -19,6 +21,7 @@ public class OneHitObjective extends LobbyGameObjective {
 
     @Override
     protected void onReload(CorePlayer corePlayer, CoreSidebarObjectiveEntry coreSidebarObjectiveEntry) {
+        super.onReload(corePlayer, coreSidebarObjectiveEntry);
         coreSidebarObjectiveEntry.setScore(6, " §f" + player.bukkit().getLevel());
     }
 }

@@ -21,7 +21,7 @@ public class LobbyGameObjective extends LobbyObjective {
 
     @Override
     protected void onRegister(CorePlayer corePlayer, CoreSidebarObjectiveEntry entry) {
-        entry.setTitle("§7§l⚔ "+game.getColor()+"§l§nFangen");
+        entry.setTitle("§7§l⚔ "+game.getColor()+"§l§n"+game.getName());
 
         entry.setScore(5, "");
         entry.setScore(4, "§8» §7Spieler:");

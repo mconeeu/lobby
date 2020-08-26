@@ -184,8 +184,8 @@ public class JohnBankRobberyInventory extends CoreInventory {
                                             }
 
                                             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "office-entrance");
-                                            p.playSound(p.getLocation(), Sound.NOTE_BASS, 1, 1);
-                                            p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
+                                            LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(p);
+                                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.EXPLODE);
                                             CoreSystem.getInstance().createTitle().fadeIn(1).stay(3).title("§cBank Raub").subTitle("§4gescheitert").fadeOut(1).send(p);
                                             p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 | §7Die §fMission §7ist gescheitert. Du hast zu §flange gebraucht§7!");
 

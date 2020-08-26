@@ -16,11 +16,13 @@ public class LiveEventCMD extends CorePlayerCommand {
     @Override
     public boolean onPlayerCommand(Player p, String[] args) {
         if (p.hasPermission("lobby.liveevent")) {
+
+
             if (args.length == 2) {
                 String eventName = args[1];
                 if (args[0].equalsIgnoreCase("start")) {
                     for (LiveEvent event : LobbyItems.getInstance().getLiveEventManager().getEvents()) {
-                        if (event.getClass().getSimpleName().startsWith(eventName)) {
+                        if (event.getName().equalsIgnoreCase(eventName)) {
                             if (LobbyItems.getInstance().getLiveEventManager().startEvent(event.getClass())) {
                                 LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Das ![LiveEvent] startet nun!");
                             } else {
@@ -34,8 +36,8 @@ public class LiveEventCMD extends CorePlayerCommand {
                     LobbyPlugin.getInstance().getMessenger().send(p, "§4Dieses §cLiveEvent§4 existiert nicht!");
                 } else if (args[0].equalsIgnoreCase("remove")) {
                     for (LiveEvent event : LobbyItems.getInstance().getLiveEventManager().getEvents()) {
-                        if (event.getClass().getSimpleName().startsWith(eventName)) {
-                            if (LobbyItems.getInstance().getLiveEventManager().startEvent(event.getClass())) {
+                        if (event.getName().equalsIgnoreCase(eventName)) {
+                            if (LobbyItems.getInstance().getLiveEventManager().removeEvent(event.getClass())) {
                                 LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Das ![LiveEvent] wird gelöscht!");
                             } else {
                                 LobbyPlugin.getInstance().getMessenger().sendError(p, "Das ![LiveEvent] wurde noch nicht gestartet!");

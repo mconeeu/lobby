@@ -143,8 +143,8 @@ public class InventoryTriggerListener implements Listener {
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Wir haben es §fgeschafft§7 ich überlasse dir §f25.000 Coins §7und ein kleines Geschenk im Rucksack, wir sehen uns!");
                                 lp.getCorePlayer().addCoins(25000);
 
-                                p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
-                                p.playSound(p.getLocation(), Sound.NOTE_PIANO, 1, 1);
+                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.LEVEL_UP);
+                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.NOTE_PIANO);
 
                                 JohnBankRobberyInventory.robberyTime.cancel();
 

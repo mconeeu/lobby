@@ -23,6 +23,7 @@ public class AfkListener implements Listener {
         Player p = e.getPlayer();
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer());
 
+
         if (lp.getBankprogressId() == BankRobberySmallProgress.BANK_ROBBERY_MIDDLE.getId()) {
             lp.setBankProgress(BankRobberySmallProgress.BANK_ROBBERY_START);
             LobbyPlugin.getInstance().getMessenger().send(p, "§4Der Banküberfall ist gescheitert!");

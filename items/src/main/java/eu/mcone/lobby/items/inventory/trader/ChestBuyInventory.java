@@ -33,6 +33,7 @@ class ChestBuyInventory extends CoreInventory {
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §aDu hast 1 Kiste gekauft!");
             } else {
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §4Du hast nicht genügend Emeralds!");
+                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
             }
             p.closeInventory();
         });
@@ -46,6 +47,7 @@ class ChestBuyInventory extends CoreInventory {
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §aDu hast 5 Kisten gekauft!");
             } else {
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §4Du hast nicht genügend Emeralds!");
+                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
             }
             p.closeInventory();
         });
@@ -59,6 +61,7 @@ class ChestBuyInventory extends CoreInventory {
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §aDu hast 10 Kisten gekauft!");
             } else {
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §4Du hast nicht genügend Emeralds");
+                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
             }
             p.closeInventory();
         });

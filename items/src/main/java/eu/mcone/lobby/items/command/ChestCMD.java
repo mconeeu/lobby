@@ -27,7 +27,7 @@ public class ChestCMD extends CoreCommand {
 
             LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast momentan §d" + LobbyPlugin.getInstance().getLobbyPlayer(p).getChests() + " Kisten§7!");
             new ChestInfoInventory(p);
-            p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+          LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
         } else if (sender.hasPermission("lobby.chests")) {
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("remove")) {

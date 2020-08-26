@@ -20,7 +20,7 @@ import java.util.Set;
 public class Asteroid extends LiveEvent {
 
     public Asteroid() {
-        super(new GregorianCalendar(2020, Calendar.OCTOBER, 1, 16, 0).getTime());
+        super("asteroid", new GregorianCalendar(2020, Calendar.OCTOBER, 1, 16, 0).getTime());
     }
 
     @Override
@@ -98,8 +98,8 @@ public class Asteroid extends LiveEvent {
             all.sendMessage("§8[§7§l!§8] §cNPC §8» §fUnbekannte Person §8|§7 Bei der Bank wird es passieren...");
             all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10, 1, false, false));
             all.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 60, 1, false, false));
-            all.playSound(all.getLocation(), Sound.WITHER_SPAWN, 3, 2);
-            all.playSound(all.getLocation(), Sound.WITHER_IDLE, 3, 2);
+            LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.WITHER_SPAWN);
+            LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.WITHER_IDLE);
 
             all.resetPlayerTime();
             all.setPlayerTime(14000, false);
@@ -111,15 +111,15 @@ public class Asteroid extends LiveEvent {
 
 
             Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                all.playSound(all.getLocation(), Sound.WITHER_SPAWN, 3, 2);
-                all.playSound(all.getLocation(), Sound.WITHER_IDLE, 3, 2);
+                LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.WITHER_SPAWN);
+                LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.WITHER_IDLE);
 
                 ((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(new EntityLightning(((CraftPlayer) all).getHandle().getWorld(), loc.getX(), loc.getY(), loc.getZ(), false, false)));
                 ((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect("ambient.weather.thunder", loc.getX(), loc.getY(), loc.getZ(), 10000.0F, 63));
 
                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                    all.playSound(all.getLocation(), Sound.WITHER_SPAWN, 3, 2);
-                    all.playSound(all.getLocation(), Sound.WITHER_IDLE, 3, 2);
+                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.WITHER_SPAWN);
+                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.WITHER_IDLE);
 
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                         all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 15, 1, false, false));
@@ -144,15 +144,15 @@ public class Asteroid extends LiveEvent {
 
                         all.spigot().playEffect(pre_bedrock_17, Effect.EXPLOSION_LARGE, 1, 1, 1, 1, 1, 3, 20, 42);
                         all.spigot().playEffect(pre_cobweb_5, Effect.EXPLOSION_LARGE, 1, 1, 1, 1, 1, 3, 20, 42);
-                        all.playSound(all.getLocation(), Sound.EXPLODE, 1, 1);
+                        LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.EXPLODE);
 
 
                         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
 
                             all.spigot().playEffect(pre_cobweb_5, Effect.SMALL_SMOKE, 1, 1, 1, 1, 1, 3, 20, 42);
                             all.spigot().playEffect(pre_cobweb_5, Effect.FLAME, 1, 1, 1, 1, 1, 3, 20, 42);
-                            all.playSound(all.getLocation(), Sound.FIRE, 1, 1);
-                            all.playSound(all.getLocation(), Sound.FIREWORK_BLAST, 1, 1);
+                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.FIRE);
+                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.FIREWORK_BLAST);
 
                             pre_cobweb_1.getBlock().setType(Material.WEB);
                             pre_cobweb_2.getBlock().setType(Material.WEB);
@@ -216,8 +216,8 @@ public class Asteroid extends LiveEvent {
 
                                 PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.MOB_APPEARANCE, false, 1, 1, 1, 1, 1, 1, 0, 1);
                                 ((CraftPlayer) all).getHandle().playerConnection.sendPacket(packet);
-                                all.playSound(all.getLocation(), Sound.FIREWORK_BLAST, 3, 2);
-                                all.playSound(all.getLocation(), Sound.ENDERDRAGON_DEATH, 3, 2);
+                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.FIREWORK_BLAST);
+                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.ENDERMAN_DEATH);
 
                                 all.spigot().playEffect(block1, Effect.EXPLOSION_LARGE, 1, 1, 1, 1, 1, 3, 20, 42);
                                 all.spigot().playEffect(endstone1, Effect.EXPLOSION_LARGE, 1, 1, 1, 1, 1, 3, 20, 10);
@@ -241,8 +241,9 @@ public class Asteroid extends LiveEvent {
                                 endstone5.getBlock().setType(Material.ENDER_STONE);
                                 block3.getBlock().setType(Material.OBSIDIAN);
 
-                                all.playSound(all.getLocation(), Sound.EXPLODE, 1, 1);
-                                all.playSound(all.getLocation(), Sound.FIREWORK_LAUNCH, 1, 2);
+                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.EXPLODE);
+                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.FIREWORK_LAUNCH);
+
                                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
 
 

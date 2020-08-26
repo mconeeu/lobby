@@ -62,7 +62,7 @@ public class CatchListener implements Listener {
                     lc.setY(lc.getY() + 0.5D);
                     p.teleport(lc);
 
-                    p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 3);
+                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ENDERDRAGON_WINGS);
                     double g = -0.07D;
                     double t = to.distance(lc);
                     double v_x = (1.0D + 0.07D * t) * (to.getX() - lc.getX()) / t;
@@ -79,15 +79,15 @@ public class CatchListener implements Listener {
 
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                         if (game.getCatcher().contains(p)) {
-                            p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
+                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CLICK);
 
                             Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                                 if (game.getCatcher().contains(p)) {
-                                    p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
+                                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CLICK);
 
                                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                                         if (game.getCatcher().contains(p)) {
-                                            p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
+                                             LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
                                             p.getInventory().setItem(2, CatchItem.CATCH_ROD);
                                         }
                                     }, 52);

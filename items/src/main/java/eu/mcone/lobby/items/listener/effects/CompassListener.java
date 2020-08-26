@@ -52,27 +52,27 @@ public class CompassListener implements Listener {
             p.setVelocity(v1);
         }
 
-        p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
+        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.EXPLODE);
 
         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
             p.setVelocity(v2);
-            p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
+            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.EXPLODE);
             Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                 p.setVelocity(v3);
-                p.playSound(p.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.FIRE_IGNITE);
                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                     p.setVelocity(v4);
-                    p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
+                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.EXPLODE);
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                         p.setVelocity(v5);
-                        p.playSound(p.getLocation(), Sound.EXPLODE, 1, 1);
+                        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.EXPLODE);
                         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                            p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
+                            LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
                             Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                                p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
+                                LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
                                 p.setVelocity(v6);
                                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                                    p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
+                                     LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
                                     if (p.hasPermission("lobby.silenthub")) {
                                         p.getInventory().setItem(3, LobbyItem.COMPASS.getItemStack());
                                     } else {

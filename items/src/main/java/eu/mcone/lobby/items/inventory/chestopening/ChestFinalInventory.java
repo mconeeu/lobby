@@ -76,6 +76,7 @@ class ChestFinalInventory extends CoreInventory {
             } else {
                 p.closeInventory();
                 p.sendMessage("§8[§7§l!§8] §eChestOpening §8»§7 Du hast nicht genügend Kisten!");
+                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
 
             }
         });
@@ -90,8 +91,8 @@ class ChestFinalInventory extends CoreInventory {
             );
         }
 
-        p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
-        p.playSound(p.getLocation(), Sound.ANVIL_BREAK, 1, 1);
+        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.LEVEL_UP);
+        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ANVIL_BREAK);
 
         openInventory();
     }

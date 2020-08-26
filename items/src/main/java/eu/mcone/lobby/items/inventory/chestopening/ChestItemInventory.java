@@ -103,7 +103,7 @@ class ChestItemInventory extends CoreInventory {
             getInventory().setItem(slot, items.get(item).getItem());
             items.remove(item);
 
-            p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+          LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
             changedItems.put(slot, backpackItem);
 
             if (!p.getOpenInventory().getTitle().equals(getInventory().getTitle())) {
@@ -130,7 +130,7 @@ class ChestItemInventory extends CoreInventory {
                             openInventory();
                         }
 
-                        p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
+                         LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
                         fadeSlots.remove(index);
                         getInventory().setItem(slotInt, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, wonItem.getValue().getLevel().getGlasSubId()).create());
                     }, 20, 1);

@@ -20,13 +20,13 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.scoreboard.LobbyObjective;
+import eu.mcone.lobby.api.player.sounds.PlayerSounds;
 import eu.mcone.lobby.command.LobbyCMD;
 import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.games.command.GameCMD;
 import eu.mcone.lobby.inventory.LobbyProfileInventory;
 import eu.mcone.lobby.items.LobbyItems;
 import eu.mcone.lobby.items.manager.LobbyLiveEventManager;
-import eu.mcone.lobby.story.office.LobbyOfficeManager;
 import eu.mcone.lobby.listener.*;
 import eu.mcone.lobby.scheduler.NpcEmoteScheduler;
 import eu.mcone.lobby.scheduler.WorldRealTimeScheduler;
@@ -49,6 +49,8 @@ public class Lobby extends LobbyPlugin {
     private BuildSystem buildSystem;
     @Getter
     private LobbyLiveEventManager liveEventManager;
+    @Getter
+    private PlayerSounds playerSounds;
     @Getter
     private LobbyVanishManager vanishManager;
     @Getter
@@ -106,6 +108,9 @@ public class Lobby extends LobbyPlugin {
 
         sendConsoleMessage("§aLoading LiveEventManager...");
         liveEventManager = new LobbyLiveEventManager();
+
+        sendConsoleMessage("§aLoading Player Sounds...");
+        playerSounds = new PlayerSounds();
 
         sendConsoleMessage("§aLoading VanishManager...");
         vanishManager = new LobbyVanishManager(this);

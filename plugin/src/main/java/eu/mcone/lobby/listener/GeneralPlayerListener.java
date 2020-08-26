@@ -7,14 +7,9 @@ package eu.mcone.lobby.listener;
 
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.items.LobbyItem;
-import eu.mcone.lobby.api.story.progress.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.inventory.InteractionInventory;
-import eu.mcone.lobby.story.inventory.office.SecretaryInventory;
-import eu.mcone.lobby.story.office.LobbyOfficeManager;
-import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -23,10 +18,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 
 public class GeneralPlayerListener implements Listener {
+
+    @EventHandler
+    public void onInventoryClickEvent(InventoryClickEvent e) {
+        e.setCancelled(!e.getWhoClicked().getGameMode().equals(GameMode.CREATIVE));
+    }
 
     @EventHandler
     public void onFoodLevelChange(FoodLevelChangeEvent e) {
@@ -87,7 +88,7 @@ public class GeneralPlayerListener implements Listener {
 
         if (lobbyPlayer != null) {
             if (lobbyPlayer.getSettings().isHotbarChangeSound()) {
-                player.playSound(e.getPlayer().getLocation(), Sound.ITEM_PICKUP, 0.5F, 1);
+                LobbyPlugin.getInstance().getPlayerSounds().playSound(player, player.getLocation(), Sound.ITEM_PICKUP, 1, 1);
             }
         }
     }

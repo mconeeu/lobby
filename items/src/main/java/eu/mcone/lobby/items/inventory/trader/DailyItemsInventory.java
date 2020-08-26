@@ -46,6 +46,7 @@ class DailyItemsInventory extends CoreInventory {
                     if (!lp.getGamePlayer().hasDefaultItem(item)) {
                         new DailyItemsBuyInventory(p, item);
                     } else {
+                        LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
                         player.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du besitzt das Item §e" + item.getName() + " §2bereits!");
                     }
                 });
@@ -63,6 +64,7 @@ class DailyItemsInventory extends CoreInventory {
                     if (!lp.getGamePlayer().hasDefaultItem(item)) {
                         new DailyItemsBuyInventory(p, item);
                     } else {
+                        LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
                         player.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du besitzt das Item §e" + item.getName() + " §2bereits!");
                     }
                 });

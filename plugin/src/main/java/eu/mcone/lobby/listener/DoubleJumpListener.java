@@ -50,7 +50,7 @@ public class DoubleJumpListener implements Listener {
             vec = vec.setY(Math.max(0.4000000059604645D, vec.getY())).multiply(1.5F);
             p.setVelocity(vec);
 
-            p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 2.0F, 2.0F);
+            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ENDERMAN_TELEPORT);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 10);
         } else {
             e.setCancelled(true);

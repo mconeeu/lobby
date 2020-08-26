@@ -12,8 +12,11 @@ public class CatchObjective extends LobbyGameObjective {
 
     @Override
     protected void onRegister(CorePlayer corePlayer, CoreSidebarObjectiveEntry entry) {
+        super.onRegister(corePlayer, entry);
+
         entry.setScore(8, "");
         entry.setScore(7, "§8» §7Rolle:");
+
         if (player.bukkit().getLevel() == 1) {
             entry.setScore(6, " §fFänger");
         } else {
@@ -23,6 +26,7 @@ public class CatchObjective extends LobbyGameObjective {
 
     @Override
     protected void onReload(CorePlayer corePlayer, CoreSidebarObjectiveEntry entry) {
+        super.onReload(corePlayer, entry);
         if (player.bukkit().getLevel() == 1) {
             entry.setScore(6, " §fFänger");
         } else {

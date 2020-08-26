@@ -26,6 +26,7 @@ public class CorpseInventory extends CoreInventory {
                 lp.addDefaultItem(DefaultItem.HEAD_SECRET_STRIPCLUB);
                 LobbyPlugin.getInstance().getMessenger().send(p, "§aDu hast den alten Kopf von §fKirpha aufgenommen!");
             } else {
+                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
                 LobbyPlugin.getInstance().getMessenger().send(p, "§cDu besitzt diese Item bereits!");
             }
 

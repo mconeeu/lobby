@@ -1,7 +1,6 @@
 package eu.mcone.lobby.inventory.compass;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
@@ -12,12 +11,10 @@ import eu.mcone.lobby.api.games.pvp.GunGame;
 import eu.mcone.lobby.api.games.pvp.OneHit;
 import eu.mcone.lobby.games.LobbyGames;
 import org.bukkit.Bukkit;
-import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.inventory.ItemStack;
 
 public class LobbyGamesInventory extends CompassInventory {
 
@@ -30,7 +27,7 @@ public class LobbyGamesInventory extends CompassInventory {
         if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(getClass(), p.getUniqueId()))
             return;
 
-        p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
+        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
 
         setItem(InventorySlot.ROW_5_SLOT_1, SILVER_PLACEHOLDER);
         setItem(InventorySlot.ROW_5_SLOT_2, SILVER_PLACEHOLDER);
@@ -56,7 +53,7 @@ public class LobbyGamesInventory extends CompassInventory {
         setItem(InventorySlot.ROW_4_SLOT_9, PLACEHOLDER_ITEM);
 
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-            p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1, 1);
+            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
 
             setItem(InventorySlot.ROW_1_SLOT_4, LIGHT_BLUE_PLACEHOLDER);
             setItem(InventorySlot.ROW_1_SLOT_5, LIGHT_BLUE_PLACEHOLDER);
@@ -72,7 +69,7 @@ public class LobbyGamesInventory extends CompassInventory {
             setItem(InventorySlot.ROW_2_SLOT_7, LIGHT_BLUE_PLACEHOLDER);
 
             Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
+                LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
 
                 setItem(InventorySlot.ROW_1_SLOT_1, CYAN_PLACEHOLDER);
                 setItem(InventorySlot.ROW_2_SLOT_1, CYAN_PLACEHOLDER);
@@ -83,7 +80,7 @@ public class LobbyGamesInventory extends CompassInventory {
                 setItem(InventorySlot.ROW_3_SLOT_9, CYAN_PLACEHOLDER);
 
                 Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                    p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
+                                    LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
 
                     setItem(InventorySlot.ROW_1_SLOT_2, CYAN_PLACEHOLDER);
                     setItem(InventorySlot.ROW_1_SLOT_3, CYAN_PLACEHOLDER);
@@ -96,7 +93,7 @@ public class LobbyGamesInventory extends CompassInventory {
                     setItem(InventorySlot.ROW_3_SLOT_8, CYAN_PLACEHOLDER);
 
                     Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                        p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
+                                        LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
 
                         setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.STICK, 1, 0)
                                         .displayName("§eFangen §8| §fLobbygame")
@@ -123,7 +120,7 @@ public class LobbyGamesInventory extends CompassInventory {
                                 });
 
                         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                            p.playSound(p.getLocation(), Sound.CLICK, 1, 1);
+                                            LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
 
                             setItem(InventorySlot.ROW_5_SLOT_3, new ItemBuilder(Material.NETHER_STAR, 1, 0)
                                             .displayName("§fMinigames")
@@ -131,7 +128,7 @@ public class LobbyGamesInventory extends CompassInventory {
                                             .create(),
                                     e -> {
                                         new MinigamesInventory(p);
-                                        player.playSound(p.getLocation(), Sound.NOTE_STICKS, 1, 1);
+                                        LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_STICKS);
                                     });
 
                             setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.EMERALD, 1, 0)
@@ -140,7 +137,7 @@ public class LobbyGamesInventory extends CompassInventory {
                                             .create(),
                                     e -> {
                                         new EventInventory(p);
-                                        player.playSound(p.getLocation(), Sound.NOTE_STICKS, 1, 1);
+                                        LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_STICKS);
                                     });
 
                             setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.BOOK, 1, 0)
@@ -148,7 +145,7 @@ public class LobbyGamesInventory extends CompassInventory {
                                             .lore("§7§oSchaue dir unsere Lobby-OneIsland genauer an", "§7§ound reise zu verschiedene Orten", "", "§8» §f§nLinksklick§8 | §7§oÖffnen")
                                             .create(),
                                     e -> {
-                                        player.playSound(p.getLocation(), Sound.NOTE_STICKS, 1, 1);
+                                        LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_STICKS);
                                         new LobbyPlacesInventory(p);
 
 
@@ -158,7 +155,7 @@ public class LobbyGamesInventory extends CompassInventory {
                         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
                             setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.IRON_SWORD, 1, 0)
                                             .displayName("§cOne-Hit §8| §fLobbygame")
-                                            .lore("§7§oSpiele ein bekannten Modi", "§7§omit deinen Freunden auf der Lobby", "", "§8» §f§nSpieler | §7§o"  +LobbyGames.getInstance().getGame(OneHit.class).getPlaying().size(), "§8» §f§nLinksklick§8 | §7§oSpielen")
+                                            .lore("§7§oSpiele ein bekannten Modi", "§7§omit deinen Freunden auf der Lobby", "", "§8» §f§nSpieler | §7§o" + LobbyGames.getInstance().getGame(OneHit.class).getPlaying().size(), "§8» §f§nLinksklick§8 | §7§oSpielen")
                                             .create(),
 
                                     e -> {
@@ -168,7 +165,7 @@ public class LobbyGamesInventory extends CompassInventory {
 
                             setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.WOOD_AXE, 1, 0)
                                             .displayName("§5Gungame §8| §fLobbygame")
-                                            .lore("§7§oSchlage deine Gegner ins Wasser", "§7§ound steige Level auf!", "", "§8» §f§nSpieler | §7§o"  + LobbyGames.getInstance().getGame(GunGame.class).getPlaying().size(), "§8» §f§nLinksklick§8 | §7§oSpielen")
+                                            .lore("§7§oSchlage deine Gegner ins Wasser", "§7§ound steige Level auf!", "", "§8» §f§nSpieler | §7§o" + LobbyGames.getInstance().getGame(GunGame.class).getPlaying().size(), "§8» §f§nLinksklick§8 | §7§oSpielen")
                                             .create(),
 
                                     e -> {

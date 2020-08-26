@@ -4,6 +4,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.lobby.Lobby;
+import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.games.jumpnrun.JumpNRun;
 import eu.mcone.lobby.api.games.jumpnrun.JumpNRunGame;
 import eu.mcone.lobby.games.LobbyGames;
@@ -22,7 +23,7 @@ public class JumpNRunInventory extends CoreInventory {
                 setItem(i, jumpNRun.getItemstack(), e -> LobbyGames.getInstance().getGame(JumpNRunGame.class).startGame(player, jumpNRun));
                 i++;
             }
-            player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
+       LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_PLING);
         }, 2L);
 
         setItem(InventorySlot.ROW_3_SLOT_9, BACK_ITEM, e -> new LobbyGamesInventory(player));

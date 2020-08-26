@@ -52,7 +52,7 @@ public class GungameListener implements Listener {
 
                 LobbyPlayer lk = LobbyPlugin.getInstance().getLobbyPlayer(k);
                 lk.getCorePlayer().addCoins(2);
-                k.playSound(k.getLocation(), Sound.LEVEL_UP, 1, 1);
+                LobbyPlugin.getInstance().getPlayerSounds().playSounds(k, Sound.LEVEL_UP);
                 k.setExp(1);
                 k.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 50, 3));
                 k.setLevel(k.getLevel() + 1);

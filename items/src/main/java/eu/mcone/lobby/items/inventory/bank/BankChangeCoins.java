@@ -41,6 +41,7 @@ class BankChangeCoins extends CoreInventory {
                     } else {
                         LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast nicht genügend §cCoins!");
                         player.closeInventory();
+                        LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
                     }
                 }
         );
@@ -63,6 +64,7 @@ class BankChangeCoins extends CoreInventory {
                     } else {
                         LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast nicht genügend §cCoins!");
                         player.closeInventory();
+                        LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
                     }
                 }
         );
@@ -85,6 +87,7 @@ class BankChangeCoins extends CoreInventory {
                     } else {
                         LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast nicht genügend §cCoins!");
                         player.closeInventory();
+                        LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
                     }
                 }
         );
