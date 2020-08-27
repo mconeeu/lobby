@@ -4,6 +4,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
+import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.story.LobbyStory;
 import org.bukkit.Bukkit;
@@ -48,7 +49,7 @@ public class LobbySwitchInventory extends CoreInventory {
 
                 setItem(
                         InventorySlot.ROW_2_SLOT_5,
-                        new ItemBuilder(Material.IRON_INGOT, Bukkit.getOnlinePlayers().size(), 0)
+                        new ItemBuilder(Material.IRON_INGOT, Bukkit.getOnlinePlayers().size() - Lobby.getSystem().getVanishManager().getSilentLobbyPlayers().size(), 0)
                                 .displayName("§fLobby-1")
                                 .create(),
                         e -> {

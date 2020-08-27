@@ -16,6 +16,7 @@ import eu.mcone.lobby.api.player.vanish.VanishManager;
 import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.listener.VanishListener;
+import lombok.Getter;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -29,6 +30,7 @@ import java.util.Set;
 
 public class LobbyVanishManager implements VanishManager {
 
+    @Getter
     private final Set<Player> silentLobbyPlayers;
     private final Map<Player, VanishPlayerVisibility> hiddenPlayers;
 
@@ -37,22 +39,22 @@ public class LobbyVanishManager implements VanishManager {
         this.hiddenPlayers = new HashMap<>();
 
         plugin.registerEvents(new VanishListener(this));
-        CoreSystem.getInstance().getVanishManager().registerVanishRule(5, (player, list) -> {
+        CoreSystem.getInstance().getVanishManager().registerVanishRule(5, (player, playerCanSee) -> {
             if (silentLobbyPlayers.contains(player)) {
-                list.clear();
+                playerCanSee.clear();
                 return;
             } else if (hiddenPlayers.containsKey(player) && !hiddenPlayers.get(player).equals(VanishPlayerVisibility.EVERYBODY)) {
                 switch (hiddenPlayers.get(player)) {
                     case NOBODY:
-                        list.clear();
+                        playerCanSee.clear();
                         return;
                     case ONLY_VIPS: {
-                        list.removeIf(p -> !CoreSystem.getInstance().getCorePlayer(p).getMainGroup().standsAbove(Group.PREMIUMPLUS));
+                        playerCanSee.removeIf(p -> !CoreSystem.getInstance().getCorePlayer(p).getMainGroup().standsAbove(Group.PREMIUMPLUS));
                     }
                 }
             }
 
-            list.removeAll(silentLobbyPlayers);
+            playerCanSee.removeAll(silentLobbyPlayers);
         });
     }
 
