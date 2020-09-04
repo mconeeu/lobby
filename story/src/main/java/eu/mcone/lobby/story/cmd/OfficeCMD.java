@@ -29,13 +29,15 @@ public class OfficeCMD extends CorePlayerCommand {
 
             return true;
         } else if (args.length == 2 && args[0].equalsIgnoreCase("kick")) {
-            Player target = Bukkit.getPlayer(args[0]);
+            Player target = Bukkit.getPlayer(args[1]);
 
             if (target != null) {
                 LobbyStory.getInstance().getOfficeManager().kickFromOffice(player, target);
             } else {
                 LobbyPlugin.getInstance().getMessenger().sendError(player, "Der Spieler !["+args[0]+"] ist nicht (mehr) online!");
             }
+
+            return true;
         }
 
         LobbyPlugin.getInstance().getMessenger().sendError(player, "Bitte benutze: ![/office <Spieler|clear>] oder ![/office kick <Spieler>]");

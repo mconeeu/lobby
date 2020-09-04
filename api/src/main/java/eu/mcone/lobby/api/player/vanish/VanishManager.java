@@ -2,6 +2,8 @@ package eu.mcone.lobby.api.player.vanish;
 
 import org.bukkit.entity.Player;
 
+import java.util.Set;
+
 public interface VanishManager {
 
     void setVanishPlayerVisibility(Player p, VanishPlayerVisibility target);
@@ -15,5 +17,7 @@ public interface VanishManager {
     void quitSilentLobby(Player p);
 
     boolean isInSilentLobby(Player p);
+
+    Set<Player> getSilentLobbyPlayers();
 
 }

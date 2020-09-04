@@ -1,5 +1,6 @@
 package eu.mcone.lobby.api.player;
 
+import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -9,7 +10,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class TeleportUtil {
+
+    private static final Set<Player> inAnimation = new HashSet<>();
+
+    static {
+        CoreSystem.getInstance().getVanishManager().registerVanishRule(20, (player, playerCanSee) -> {
+            playerCanSee.removeIf(inAnimation::contains);
+        });
+    }
 
     public static void teleportWithAnimation(Player p, Location location) {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
@@ -18,10 +30,11 @@ public class TeleportUtil {
 
         if (location != null) {
             if (settings.isAllowAnimation() && !cp.getWorld().equals(LobbyWorld.OFFICE.getWorld()) && !cp.getWorld().equals(LobbyWorld.CAVE.getWorld())) {
+                inAnimation.add(p);
                 for (Player all : p.getWorld().getPlayers()) {
                     all.spigot().playEffect(p.getLocation(), Effect.SMALL_SMOKE, 1, 1, 1, 1, 1, 3, 30, 15);
-                    all.hidePlayer(p);
                 }
+                CoreSystem.getInstance().getVanishManager().recalculateVanishes();
 
                 p.teleport(makeFixedLocation(p.getLocation()));
 
@@ -61,6 +74,9 @@ public class TeleportUtil {
 
                                         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                                             p.teleport(location);
+
+                                            inAnimation.remove(p);
+                                            CoreSystem.getInstance().getVanishManager().recalculateVanishes();
 
                                             p.setGameMode(GameMode.SURVIVAL);
                                             p.removePotionEffect(PotionEffectType.CONFUSION);

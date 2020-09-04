@@ -28,10 +28,10 @@ public class LobbyOfficeManager implements OfficeManager {
         this.joinedPlayers = new HashMap<>();
         this.invitedPlayers = new HashMap<>();
 
-        CoreSystem.getInstance().getVanishManager().registerVanishRule(10, (player, list) -> {
+        CoreSystem.getInstance().getVanishManager().registerVanishRule(10, (player, playerCanSee) -> {
             for (Map.Entry<Player, Set<Player>> joinedEntry : LobbyOfficeManager.this.joinedPlayers.entrySet()) {
                 if (!joinedEntry.getValue().contains(player)) {
-                    list.removeAll(joinedEntry.getValue());
+                    playerCanSee.removeAll(joinedEntry.getValue());
                 }
             }
         });
