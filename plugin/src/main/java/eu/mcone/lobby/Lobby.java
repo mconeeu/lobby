@@ -148,7 +148,6 @@ public class Lobby extends LobbyPlugin {
     private void registerEventsAndCommands() {
         registerEvents(
                 new ChatListener(),
-                new DoubleJumpListener(),
                 new EntitiyDamageListener(),
                 new GeneralPlayerListener(),
                 new InventoryTriggerListener(),
