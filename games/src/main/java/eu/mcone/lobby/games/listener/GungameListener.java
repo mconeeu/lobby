@@ -11,6 +11,7 @@ import eu.mcone.lobby.games.pvp.gungame.GunGameLobbyGame;
 import eu.mcone.lobby.games.pvp.gungame.GunGameItem;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -83,6 +84,10 @@ public class GungameListener implements Listener {
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
+
+        if (p.getGameMode().equals(GameMode.SURVIVAL)) {
+            return;
+        }
 
         if (game.isPlaying(p)) {
             if (p.getLocation().getBlock().getType().equals(Material.WATER) || p.getLocation().getBlock().getType().equals(Material.STATIONARY_WATER)) {

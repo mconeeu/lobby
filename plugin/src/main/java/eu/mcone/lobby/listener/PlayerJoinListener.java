@@ -40,6 +40,8 @@ public class PlayerJoinListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
 
+        p.setGameMode(GameMode.SURVIVAL);
+
         preloadLobbyPlayer(p);
         p.getInventory().setItem(0, HotbarItem.LOADING);
         p.getInventory().setItem(7, HotbarItem.LOADING);
@@ -126,7 +128,6 @@ public class PlayerJoinListener implements Listener {
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
 
-        p.setGameMode(GameMode.SURVIVAL);
         p.setMaxHealth(20);
         p.setHealth(20);
         p.setLevel(0);
@@ -134,6 +135,7 @@ public class PlayerJoinListener implements Listener {
         p.setFoodLevel(20);
         p.setWalkSpeed(0.2F);
         p.setFlying(false);
+        p.setAllowFlight(false);
 
         p.getInventory().setItem(1, HotbarItem.LOBBY_CHANGER);
         p.getInventory().setItem(4, HotbarItem.COMPASS);

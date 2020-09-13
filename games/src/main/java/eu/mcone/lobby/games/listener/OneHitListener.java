@@ -65,6 +65,12 @@ public class OneHitListener implements Listener {
     public void onToggleFlight(PlayerToggleFlightEvent e) {
         Player p = e.getPlayer();
 
+        if (p.getGameMode().equals(GameMode.SURVIVAL)) {
+            e.setCancelled(true);
+            return;
+        }
+
+
         if (game.isPlaying(p)) {
             e.setCancelled(true);
             DJ_PLAYERS.add(p.getUniqueId());
@@ -89,6 +95,10 @@ public class OneHitListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
+
+        if (p.getGameMode().equals(GameMode.SURVIVAL)) {
+            return;
+        }
 
         if (game.isPlaying(p) && DJ_PLAYERS.contains(p.getUniqueId()) && !p.getLocation().add(0, -1, 0).getBlock().getType().equals(Material.AIR)) {
             p.setFlying(false);

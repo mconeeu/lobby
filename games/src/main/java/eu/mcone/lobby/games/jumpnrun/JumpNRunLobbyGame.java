@@ -24,10 +24,7 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TimeZone;
+import java.util.*;
 
 public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame {
 
@@ -113,7 +110,7 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
 
         if (jnrPlayer != null) {
             if (jnrPlayer.getCheckpoint() == 0) {
-                LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jnrPlayer.getJumpNRun().getStartLocation());
+                LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, jnrPlayer.getJumpNRun().getStartLocation());
             } else {
                 p.teleport(jnrPlayer.getJumpNRun().getCheckpoints()[jnrPlayer.getCheckpoint() - 1]);
             }
@@ -138,7 +135,7 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
 
         if (isPlaying(p)) {
             JumpNRunPlayer jnrPlayer = getCurrentlyPlaying(p);
-            JumpNRun jumpNRun = jnrPlayer.getJumpNRun();
+            JumpNRun jumpNRun = Objects.requireNonNull(jnrPlayer).getJumpNRun();
             int checkpoint = jnrPlayer.getCheckpoint();
             long bestTime = lp.getBestJumpNRunTime(jumpNRun);
             long time = System.currentTimeMillis() / 1000 - jnrPlayer.getTime();

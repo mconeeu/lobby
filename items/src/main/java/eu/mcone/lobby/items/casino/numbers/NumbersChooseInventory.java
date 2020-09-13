@@ -35,7 +35,7 @@ public class NumbersChooseInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_6, Skull.fromUrl("http://textures.minecraft.net/texture/1d4eae13933860a6df5e8e955693b95a8c3b15c36b8b587532ac0996bc37e5", 1).toItemBuilder()
                 .displayName("§f3")
                 .create(), e -> {
-            Game.put(player, 1);
+            Game.put(player, 3);
             new NumbersFinishInventory(player);
         });
 

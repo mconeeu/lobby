@@ -7,7 +7,6 @@ package eu.mcone.lobby.util;
 
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.inventory.InteractionInventory;
 import eu.mcone.lobby.listener.StackingListener;
 import org.bukkit.entity.Player;
 
@@ -32,8 +31,10 @@ public class StackingManager {
 
     public boolean unstack(Player carrier) {
         if (stacking.containsKey(carrier)) {
+            stacking.remove(carrier);
             Player stacked = getStackedPlayer(carrier);
             carrier.eject();
+
 
             LobbyPlugin.getInstance().getMessenger().sendInfo(stacked, "![" + carrier.getName() + "] ist nun nicht mehr auf deinem Kopf!");
             LobbyPlugin.getInstance().getMessenger().send(carrier, "![" + stacked.getName() + "] trägt dich nicht mehr!");
