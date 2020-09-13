@@ -147,10 +147,10 @@ class ChestItemInventory extends CoreInventory {
 
     private static BackpackItem getRandomizedEmeraldsItem(Level level) {
         switch (level) {
-            case USUAL: return new BackpackItem(-1, "10+ Emeralds", Level.USUAL, new ItemBuilder(Material.GOLD_NUGGET, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §7Gewöhnlich").create(), true, false, true, 0, eu.mcone.coresystem.api.core.util.Random.randomInt(10, 20));
-            case UNUSUAL: return new BackpackItem(-1, "20+ Emeralds", Level.USUAL, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §3Ungewöhnlich").create(), true, false, true, 0,  eu.mcone.coresystem.api.core.util.Random.randomInt(20, 35));
-            case LEGENDARY: return new BackpackItem(-1, "50+ Emeralds", Level.USUAL, new ItemBuilder(Material.GOLD_BLOCK, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §5Episch").create(), true, false, true, 0,  eu.mcone.coresystem.api.core.util.Random.randomInt(50, 75));
-            case EPIC: return new BackpackItem(-1, "100+ Emeralds", Level.USUAL, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §6Legendär").create(), true, false, true, 0,  eu.mcone.coresystem.api.core.util.Random.randomInt(100, 150));
+            case USUAL: return new BackpackItem(-1, "10+ Emeralds", Level.USUAL, new ItemBuilder(Material.GOLD_NUGGET, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §7Gewöhnlich").create(), true, false, true, 0, group.onegaming.networkmanager.core.api.util.Random.randomInt(10, 20));
+            case UNUSUAL: return new BackpackItem(-1, "20+ Emeralds", Level.USUAL, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §3Ungewöhnlich").create(), true, false, true, 0,  group.onegaming.networkmanager.core.api.util.Random.randomInt(20, 35));
+            case LEGENDARY: return new BackpackItem(-1, "50+ Emeralds", Level.USUAL, new ItemBuilder(Material.GOLD_BLOCK, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §5Episch").create(), true, false, true, 0,  group.onegaming.networkmanager.core.api.util.Random.randomInt(50, 75));
+            case EPIC: return new BackpackItem(-1, "100+ Emeralds", Level.USUAL, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §6Legendär").create(), true, false, true, 0,  group.onegaming.networkmanager.core.api.util.Random.randomInt(100, 150));
             default: return null;
         }
     }
