@@ -78,7 +78,7 @@ public class LobbyVanishManager implements VanishManager {
             p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
 
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(target.equals(VanishPlayerVisibility.EVERYBODY));
-            p.getInventory().setItem(0, target.getItem());
+            p.getInventory().setItem(7, target.getItem());
 
             if (notify) {
                 LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Du hast die Spielersichtbarkeit auf ![" + target.getName() + "] geändert!");
@@ -101,7 +101,7 @@ public class LobbyVanishManager implements VanishManager {
             LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Du bist nun in der ![Privaten Lobby]. Hier bist du vollkommen ungestört!");
 
 
-            p.getInventory().setItem(0, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
+            p.getInventory().setItem(7, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
             p.getInventory().setItem(2, null);
             if (LobbyGames.getInstance().getCurrentGame(p) instanceof JumpNRunGame) {
                 p.getInventory().setItem(1, HotbarItem.SILENT_LOBBY_QUIT);
@@ -124,7 +124,7 @@ public class LobbyVanishManager implements VanishManager {
                     LobbyGames.getInstance().getCurrentGame(p) instanceof JumpNRunGame ? 1 : 2,
                     HotbarItem.SILENT_LOBBY_JOIN
             );
-            p.getInventory().setItem(0, VanishPlayerVisibility.EVERYBODY.getItem());
+            p.getInventory().setItem(7, VanishPlayerVisibility.EVERYBODY.getItem());
 
             GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(p);
             gamePlayer.setLastUsedBackPackItemInventar();

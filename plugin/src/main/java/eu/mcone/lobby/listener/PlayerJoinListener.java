@@ -43,7 +43,6 @@ public class PlayerJoinListener implements Listener {
         p.setGameMode(GameMode.SURVIVAL);
 
         preloadLobbyPlayer(p);
-        p.getInventory().setItem(0, HotbarItem.LOADING);
         p.getInventory().setItem(7, HotbarItem.LOADING);
         p.getInventory().setItem(8, HotbarItem.LOADING);
     }
@@ -138,14 +137,12 @@ public class PlayerJoinListener implements Listener {
         p.setAllowFlight(false);
 
         p.getInventory().setItem(1, HotbarItem.LOBBY_CHANGER);
-        p.getInventory().setItem(4, HotbarItem.COMPASS);
+        p.getInventory().setItem(0, HotbarItem.COMPASS);
     }
 
     private static void postloadLobbyPlayer(Player p, LobbyPlayer lp) {
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         p.getActivePotionEffects().clear();
-
-        if (p.hasPermission("mcone.premium")) p.setAllowFlight(true);
 
         if (p.hasPermission("lobby.silenthub")) {
             if (lp.getSettings().getJoinPlayerVisibility().equals(JoinPlayerVisibility.SILENTLOBBY)) {
@@ -158,16 +155,16 @@ public class PlayerJoinListener implements Listener {
         }
 
         if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
-            p.getInventory().setItem(0, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
+            p.getInventory().setItem(7, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
         } else {
-            p.getInventory().setItem(0, LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(p).getItem());
+            p.getInventory().setItem(7, LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(p).getItem());
         }
 
         if (p.hasPermission("system.bungee.nick")) {
             p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItem.NICK_ENABLED : HotbarItem.NICK_DISABLED);
         }
 
-        p.getInventory().setItem(7, HotbarItem.BACKPACK);
+        p.getInventory().setItem(4, HotbarItem.BACKPACK);
 
 
         p.getInventory().setItem(

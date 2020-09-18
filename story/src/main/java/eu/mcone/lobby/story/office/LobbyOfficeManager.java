@@ -70,7 +70,7 @@ public class LobbyOfficeManager implements OfficeManager {
         } else {
             p.getInventory().setItem(2, null);
         }
-        p.getInventory().setItem(0, HotbarItem.LOBBY_HIDER_UNAVAILABLE_OFFICE);
+        p.getInventory().setItem(6, HotbarItem.LOBBY_HIDER_UNAVAILABLE_OFFICE);
 
         office.teleport(p);
     }

@@ -200,7 +200,7 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
         if (p.hasPermission("lobby.silenthub")) {
             if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
                 p.getInventory().setItem(1, HotbarItem.SILENT_LOBBY_QUIT);
-                p.getInventory().setItem(0, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
+                p.getInventory().setItem(7, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
             } else {
                 p.getInventory().setItem(1, HotbarItem.SILENT_LOBBY_JOIN);
             }

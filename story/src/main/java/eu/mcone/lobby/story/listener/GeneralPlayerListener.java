@@ -22,6 +22,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.Objects;
+
 public class GeneralPlayerListener implements Listener {
 
     @EventHandler
@@ -91,7 +93,7 @@ public class GeneralPlayerListener implements Listener {
         /* Tutorial Story Show NPCs */
         if (lp.getTutorialStoryProgressId() <= 7) {
             if (lp.getTutorialStoryProgressId() > 0) {
-                TutorialStoryProgress.getTutorialStoryById(lp.getTutorialStoryProgressId()).getNpc().toggleVisibility(p, true);
+                Objects.requireNonNull(TutorialStoryProgress.getTutorialStoryById(lp.getTutorialStoryProgressId())).getNpc().toggleVisibility(p, true);
             }
 
             TutorialStoryProgress futureTutorial = TutorialStoryProgress.getTutorialStoryById(lp.getTutorialStoryProgressId() + 1);
