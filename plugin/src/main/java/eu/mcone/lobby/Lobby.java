@@ -20,6 +20,7 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.scoreboard.LobbyObjective;
+import eu.mcone.lobby.api.player.settings.HotbarSettingsHandler;
 import eu.mcone.lobby.api.player.sounds.PlayerSounds;
 import eu.mcone.lobby.command.LobbyCMD;
 import eu.mcone.lobby.games.LobbyGames;
@@ -52,6 +53,8 @@ public class Lobby extends LobbyPlugin {
     @Getter
     private PlayerSounds playerSounds;
     @Getter
+    private HotbarSettingsHandler hotbarSettings;
+    @Getter
     private LobbyVanishManager vanishManager;
     @Getter
     private StackingManager stackingManager;
@@ -74,6 +77,7 @@ public class Lobby extends LobbyPlugin {
 
         for (LobbyWorld w : LobbyWorld.values())
             worlds.put(w, CoreSystem.getInstance().getWorldManager().getWorld(w.getName()));
+
 
         sendConsoleMessage("§aStarting Scoreboard-Scheduler...");
         startScheduler();
@@ -111,6 +115,9 @@ public class Lobby extends LobbyPlugin {
 
         sendConsoleMessage("§aLoading Player Sounds...");
         playerSounds = new PlayerSounds();
+
+        sendConsoleMessage("§aLoading Lobby Hotbar...");
+        hotbarSettings = new HotbarSettingsHandler();
 
         sendConsoleMessage("§aLoading VanishManager...");
         vanishManager = new LobbyVanishManager(this);

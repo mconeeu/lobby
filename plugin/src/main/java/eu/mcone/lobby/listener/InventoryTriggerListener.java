@@ -36,11 +36,11 @@ public class InventoryTriggerListener implements Listener {
             if (i.getItemMeta().getDisplayName().equalsIgnoreCase(HotbarItem.PROFILE_DISPLAY_NAME)) {
                 e.setCancelled(true);
                 p.performCommand("profile");
-            }else if (i.equals(HotbarItem.COMPASS)) {
+            } else if (i.getItemMeta().getDisplayName().equals(HotbarItem.COMPASS.getItemMeta().getDisplayName())) {
                 e.setCancelled(true);
                 new MinigamesInventory(p);
               LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
-            } else if (i.equals(HotbarItem.LOBBY_CHANGER)) {
+            } else if (i.getItemMeta().getDisplayName().equals(HotbarItem.LOBBY_CHANGER.getItemMeta().getDisplayName())) {
                 if (!LobbyStory.getInstance().getOfficeManager().isInOffice(p)) {
                     new LobbySwitchInventory(p);
                 } else {

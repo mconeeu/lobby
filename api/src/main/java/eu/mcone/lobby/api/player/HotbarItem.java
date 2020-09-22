@@ -8,9 +8,11 @@ package eu.mcone.lobby.api.player;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.core.player.SkinInfo;
+import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+@Getter
 public class HotbarItem {
 
     public static final ItemStack LOBBY_CHANGER = new ItemBuilder(Material.NETHER_STAR)
@@ -37,9 +39,6 @@ public class HotbarItem {
             .displayName("§7§oLädt...")
             .create();
 
-    public static final ItemStack STACKING_REMOVE = new ItemBuilder(Material.BARRIER, 1, 0)
-            .displayName("§c§lSpieler absetzen")
-            .create();
 
     public static final String PROFILE_DISPLAY_NAME = "§3§lProfil §8» §7§oEinstellungen / Stats / Freunde";
     public static ItemStack getProfile(SkinInfo skin) {
@@ -48,6 +47,11 @@ public class HotbarItem {
                 .displayName(PROFILE_DISPLAY_NAME)
                 .create();
     }
+
+    public static ItemStack getUknowProfile = Skull.fromMojangValue("rufi", 1)
+                .toItemBuilder()
+                .displayName(PROFILE_DISPLAY_NAME)
+                .create();
 
     /*
      * LobbyHider
@@ -96,53 +100,5 @@ public class HotbarItem {
     public static final ItemStack TO_CHECKPOINT = new ItemBuilder(Material.INK_SACK, 1, 1)
             .displayName("§c§lZurück zum Checkpoint")
             .create();
-
-    /*
-     * Lobby-PVP ITEMS
-     */
-
-    /*public static final ItemStack SWORD_BLUE = new ItemBuilder(Material.STONE_SWORD, 1, 0)
-            .unbreakable(true)
-            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
-            .displayName("§fBlaues-Schwert")
-            .enchantment(Enchantment.DAMAGE_ALL, 1)
-            .create();
-
-    public static final ItemStack SWORD_RED = new ItemBuilder(Material.STONE_SWORD, 1, 0)
-            .unbreakable(true)
-            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
-            .displayName("§fRotes-Schwert")
-            .enchantment(Enchantment.DAMAGE_ALL, 1)
-            .create();
-
-    public static final ItemStack ROD_RED = new ItemBuilder(Material.FISHING_ROD, 1, 0)
-            .unbreakable(true)
-            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
-            .displayName("§fRotes-ANgel")
-            .create();
-
-    public static final ItemStack ROD_BLUE = new ItemBuilder(Material.FISHING_ROD, 1, 0)
-            .unbreakable(true)
-            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
-            .displayName("§fBlaue-Angel")
-            .create();
-
-    public static final ItemStack BOW_BLUE = new ItemBuilder(Material.BOW, 1, 0)
-            .unbreakable(true)
-            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
-            .displayName("§fBlauer-Bogen")
-            .create();
-
-    public static final ItemStack BOW_RED = new ItemBuilder(Material.BOW, 1, 0)
-            .unbreakable(true)
-            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
-            .displayName("§fRoter-Bogen")
-            .create();
-
-    public static final ItemStack ARROWS = new ItemBuilder(Material.ARROW, 11, 0)
-            .unbreakable(true)
-            .itemFlags(ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_ENCHANTS)
-            .displayName("§fPfeile")
-            .create();*/
 
 }

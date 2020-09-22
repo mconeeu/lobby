@@ -28,12 +28,10 @@ public class InventoryTriggerListener implements Listener {
             if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                 Material clicked = e.getClickedBlock().getType();
 
-                switch (clicked) {
-                    case ENDER_PORTAL_FRAME: {
-                        if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("chestopening").equals(e.getClickedBlock().getLocation()) || LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("chestopening2").equals(e.getClickedBlock().getLocation())) {
-                            new ChestOpeningInventory(p);
-                            return;
-                        }
+                if (clicked == Material.ENDER_PORTAL_FRAME) {
+                    if (LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("chestopening").equals(e.getClickedBlock().getLocation()) || LobbyWorld.ONE_ISLAND.getWorld().getBlockLocation("chestopening2").equals(e.getClickedBlock().getLocation())) {
+                        new ChestOpeningInventory(p);
+                        return;
                     }
                 }
             }
@@ -43,7 +41,8 @@ public class InventoryTriggerListener implements Listener {
                 return;
             }
 
-            if (e.getItem().equals(HotbarItem.BACKPACK)) {
+            if (e.getItem().getItemMeta().getDisplayName().equals(HotbarItem.BACKPACK.getItemMeta().getDisplayName())) {
+                e.setCancelled(true);
                 LobbyPlugin.getInstance().getBackpackManager().openBackpackInventory(LobbyCategory.STORY_ITEMS.name(), p);
             }
         }

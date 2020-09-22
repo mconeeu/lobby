@@ -55,6 +55,9 @@ public class GeneralLobbyGameListener implements Listener {
                     ((AbstractLobbyGame) game).quitGame(p);
                 }
             }
+        } else if (e.getMessage().equalsIgnoreCase("/profil")) {
+            e.setCancelled(true);
+            LobbyPlugin.getInstance().getMessenger().sendError(p, "Du darfst diesen Befehl nicht in einem Lobby Game ausführen!");
         }
     }
 

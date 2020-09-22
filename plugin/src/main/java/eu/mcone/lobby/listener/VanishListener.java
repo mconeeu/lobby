@@ -4,6 +4,7 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.api.player.HotbarItem;
+import eu.mcone.lobby.inventory.playerhider.PlayerHiderInventory;
 import eu.mcone.lobby.util.LobbyVanishManager;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;
@@ -18,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 public class VanishListener implements Listener {
 
     private final LobbyVanishManager manager;
+
 
     @EventHandler
     public void on(PlayerInteractEvent e) {
@@ -46,14 +48,9 @@ public class VanishListener implements Listener {
 
                 manager.quitSilentLobby(p);
             } else {
-                if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(getClass(), p.getUniqueId())) {
-                    LobbyPlugin.getInstance().getMessenger().sendError(p, "§4Bitte warte kurz, bevor du erneut die Sichbarkeit von Spielern veränderst!");
-                    return;
-                }
-
                 for (VanishPlayerVisibility target : VanishPlayerVisibility.values()) {
                     if (i.equals(target.getItem())) {
-                        manager.setVanishPlayerVisibility(p, target.getNextVanishPlayerVisibility());
+                        new PlayerHiderInventory(p, manager);
                         break;
                     }
                 }
