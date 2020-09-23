@@ -64,12 +64,11 @@ public class PlayerUpdateListener implements Listener {
             }
         }
 
-        if (p.hasPermission("lobby.silenthub")) {
-            p.bukkit().getInventory().setItem(2, HotbarItem.SILENT_LOBBY_JOIN);
-        }
         if (p.hasPermission("system.bungee.nick")) {
             p.bukkit().getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p.bukkit()).isNicked() ? HotbarItem.NICK_ENABLED : HotbarItem.NICK_DISABLED);
         }
+
+        LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p.bukkit(), lp);
 
         if (e.getType().equals(PermissionChangeEvent.Type.GROUP_CHANGE)) {
             p.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();

@@ -8,7 +8,6 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.hotbar.HotbarGeneralCategorys;
 import eu.mcone.lobby.api.player.hotbar.items.enums.SlotAmountEnum;
-import eu.mcone.lobby.inventory.settings.LobbySettingsInventory;
 import eu.mcone.lobby.inventory.settings.hotbar.LobbyHotbarSettingsInventory;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -45,7 +44,7 @@ public class LobbyHotbarSlotInventory extends CoreInventory {
         }
 
         setItem(InventorySlot.ROW_2_SLOT_9, BACK_ITEM, e ->
-                new LobbySettingsInventory(p));
+                new LobbyHotbarSettingsInventory(p));
 
         LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_PLING);
         openInventory();

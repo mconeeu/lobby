@@ -90,7 +90,18 @@ public class LobbySwitchInventory extends CoreInventory {
                         e -> p.sendMessage("§8[§7§l!§8] §fServer §8» §cDu befindest dich bereits auf diesem Server")
                 );
             }
+        } else {
+            setItem(
+                    InventorySlot.ROW_2_SLOT_5,
+                    new ItemBuilder(Material.IRON_INGOT, Bukkit.getOnlinePlayers().size() - Lobby.getSystem().getVanishManager().getSilentLobbyPlayers().size(), 0)
+                            .displayName("§fLobby-1")
+                            .create(),
+                    e -> {
+                        p.sendMessage("§8[§7§l!§8] §fServer §8» §cDu befindest dich bereits auf diesem Server");
+                    }
+            );
         }
+
 
         setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§f§lPremium Lobby-1").create());
         setItem(InventorySlot.ROW_2_SLOT_3, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§f§lPremium Lobby-2").create());
