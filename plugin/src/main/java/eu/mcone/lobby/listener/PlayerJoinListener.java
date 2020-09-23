@@ -20,7 +20,6 @@ import eu.mcone.lobby.api.player.scoreboard.SidebarObjective;
 import eu.mcone.lobby.api.player.settings.JoinPlayerVisibility;
 import eu.mcone.lobby.api.player.settings.LobbySettings;
 import eu.mcone.lobby.api.player.settings.SpawnVillage;
-import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.scheduler.NpcEmoteScheduler;
 import eu.mcone.lobby.scheduler.WorldRealTimeScheduler;
 import eu.mcone.lobby.story.LobbyStory;
@@ -45,6 +44,7 @@ public class PlayerJoinListener implements Listener {
 
         p.getInventory().setItem(0, HotbarItem.LOADING);
         p.getInventory().setItem(7, HotbarItem.LOADING);
+        p.getInventory().setItem(5, null);
     }
 
     @EventHandler
@@ -64,11 +64,7 @@ public class PlayerJoinListener implements Listener {
             LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
         }
 
-        if (lp.getSettings().isHotbarSilentHub()) {
-            gp.setLastUsedBackPackItemInventar(3, 2);
-        } else {
-            gp.setLastUsedBackPackItemInventar(2, 2);
-        }
+            gp.setLastUsedBackPackItemInventar();
 
         Lobby.getSystem().registerLobbyPlayer(lp);
 
@@ -143,35 +139,8 @@ public class PlayerJoinListener implements Listener {
     }
 
     private static void postloadLobbyPlayer(Player p, LobbyPlayer lp) {
-        CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
         p.getActivePotionEffects().clear();
-
-        if (p.hasPermission("lobby.silenthub")) {
-            if (lp.getSettings().getJoinPlayerVisibility().equals(JoinPlayerVisibility.SILENTLOBBY)) {
-                LobbyPlugin.getInstance().getVanishManager().joinSilentLobby(p);
-            } else {
-                if (lp.getSettings().isHotbarSilentHub()) {
-                    p.getInventory().setItem(2, HotbarItem.SILENT_LOBBY_JOIN);
-                }
-            }
-        } else if (lp.getSettings().getJoinPlayerVisibility().equals(JoinPlayerVisibility.PLAYERHIDER)) {
-            LobbyPlugin.getInstance().getVanishManager().setVanishPlayerVisibility(p, VanishPlayerVisibility.NOBODY);
-        }
-
-        if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
-            p.getInventory().setItem(7, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
-        } else {
-            p.getInventory().setItem(7, LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(p).getItem());
-        }
-
-        if (p.hasPermission("system.bungee.nick")) {
-            p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItem.NICK_ENABLED : HotbarItem.NICK_DISABLED);
-        }
-
-
         LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, lp);
-
-
     }
 
     public static void resetPlayerDataAndHotbarItems(Player p) {

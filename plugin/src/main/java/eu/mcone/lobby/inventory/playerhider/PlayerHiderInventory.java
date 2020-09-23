@@ -5,8 +5,11 @@ import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.games.jumpnrun.JumpNRunGame;
+import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
+import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.util.LobbyVanishManager;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -66,7 +69,17 @@ public class PlayerHiderInventory extends CoreInventory {
         }
 
         manager.setVanishPlayerVisibility(player, vanishPlayerVisibility);
-        LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, lobbyPlayer);
-        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
+
+        if (LobbyGames.getInstance().getCurrentGame(p) instanceof JumpNRunGame) {
+                int slot = 0;
+                if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
+                    p.getInventory().setItem(slot, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
+                } else {
+                    p.getInventory().setItem(slot, LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(p).getItem());
+                }
+        } else {
+            LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, lobbyPlayer);
+            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
+        }
     }
 }

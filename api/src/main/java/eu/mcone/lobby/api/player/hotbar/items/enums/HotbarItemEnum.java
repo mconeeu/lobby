@@ -1,7 +1,6 @@
-package eu.mcone.lobby.api.player.hotbar.items;
+package eu.mcone.lobby.api.player.hotbar.items.enums;
 
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.api.player.hotbar.HotbarGeneralCategorys;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -24,17 +23,17 @@ public enum HotbarItemEnum {
     IRON_SWORD(new ItemBuilder(Material.IRON_SWORD), HotbarGeneralCategorys.NAVIGATOR, false),
 
     /*   CHOOSER     */
-    NETHER_STAR(new ItemBuilder(Material.NETHER_STAR), HotbarGeneralCategorys.LOBBY_CHOOSER, true),
-    STRING(new ItemBuilder(Material.STRING), HotbarGeneralCategorys.LOBBY_CHOOSER, false),
-    BLAZE_ROD(new ItemBuilder(Material.BLAZE_ROD), HotbarGeneralCategorys.LOBBY_CHOOSER, false),
-    FISH(new ItemBuilder(Material.INK_SACK), HotbarGeneralCategorys.LOBBY_CHOOSER, false),
-    GOLDEN_NUGGET(new ItemBuilder(Material.GOLD_NUGGET), HotbarGeneralCategorys.LOBBY_CHOOSER, false),
-    RABBIT_HIDE(new ItemBuilder(Material.RABBIT_HIDE), HotbarGeneralCategorys.LOBBY_CHOOSER, false),
-    ANVIL(new ItemBuilder(Material.ANVIL), HotbarGeneralCategorys.LOBBY_CHOOSER, false),
-    COOKIE(new ItemBuilder(Material.COOKIE), HotbarGeneralCategorys.LOBBY_CHOOSER, false),
-    POTION(new ItemBuilder(Material.POTION), HotbarGeneralCategorys.LOBBY_CHOOSER, false),
-    REDSTONE_COMPERATOR(new ItemBuilder(Material.REDSTONE_COMPARATOR), HotbarGeneralCategorys.LOBBY_CHOOSER, false),
-    COOKED_RABBIT(new ItemBuilder(Material.COOKED_RABBIT), HotbarGeneralCategorys.LOBBY_CHOOSER, false),
+    NETHER_STAR(new ItemBuilder(Material.NETHER_STAR), HotbarGeneralCategorys.LOBBY_CHANGER, true),
+    STRING(new ItemBuilder(Material.STRING), HotbarGeneralCategorys.LOBBY_CHANGER, false),
+    BLAZE_ROD(new ItemBuilder(Material.BLAZE_ROD), HotbarGeneralCategorys.LOBBY_CHANGER, false),
+    FISH(new ItemBuilder(Material.INK_SACK), HotbarGeneralCategorys.LOBBY_CHANGER, false),
+    GOLDEN_NUGGET(new ItemBuilder(Material.GOLD_NUGGET), HotbarGeneralCategorys.LOBBY_CHANGER, false),
+    RABBIT_HIDE(new ItemBuilder(Material.RABBIT_HIDE), HotbarGeneralCategorys.LOBBY_CHANGER, false),
+    ANVIL(new ItemBuilder(Material.ANVIL), HotbarGeneralCategorys.LOBBY_CHANGER, false),
+    COOKIE(new ItemBuilder(Material.COOKIE), HotbarGeneralCategorys.LOBBY_CHANGER, false),
+    POTION(new ItemBuilder(Material.POTION), HotbarGeneralCategorys.LOBBY_CHANGER, false),
+    REDSTONE_COMPERATOR(new ItemBuilder(Material.REDSTONE_COMPARATOR), HotbarGeneralCategorys.LOBBY_CHANGER, false),
+    COOKED_RABBIT(new ItemBuilder(Material.COOKED_RABBIT), HotbarGeneralCategorys.LOBBY_CHANGER, false),
 
     /*   BACKPACK     */
     MINECART_CHEST(new ItemBuilder(Material.STORAGE_MINECART), HotbarGeneralCategorys.BACKPACK, true),
@@ -52,6 +51,7 @@ public enum HotbarItemEnum {
     MINECART(new ItemBuilder(Material.MINECART), HotbarGeneralCategorys.BACKPACK, false),
     ENDER_CHEST(new ItemBuilder(Material.ENDER_CHEST), HotbarGeneralCategorys.BACKPACK, false),
 
+    /* PROFILE */
     SKULL(new ItemBuilder(Material.SKULL_ITEM), HotbarGeneralCategorys.PROFILE, true),
     BOOK(new ItemBuilder(Material.BOOK_AND_QUILL), HotbarGeneralCategorys.PROFILE, false),
     PAPER(new ItemBuilder(Material.PAPER), HotbarGeneralCategorys.PROFILE, false),
@@ -61,10 +61,8 @@ public enum HotbarItemEnum {
 
     private final ItemBuilder item;
     private final HotbarGeneralCategorys categorys;
-    private final Boolean mainItem;
+    private final boolean mainItem;
 
-
-    private final String compassDisplayName = HotbarItem.COMPASS.getItemMeta().getDisplayName();
 
     HotbarItemEnum(ItemBuilder itemBuilder, HotbarGeneralCategorys categorys, Boolean mainItem) {
         this.item = itemBuilder;

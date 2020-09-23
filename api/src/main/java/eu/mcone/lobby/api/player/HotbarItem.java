@@ -15,14 +15,6 @@ import org.bukkit.inventory.ItemStack;
 @Getter
 public class HotbarItem {
 
-    public static final ItemStack LOBBY_CHANGER = new ItemBuilder(Material.NETHER_STAR)
-            .displayName("§3§lLobby-Wechsler §8» §7§oWähle deine Lobby")
-            .create();
-
-    public static final ItemStack COMPASS = new ItemBuilder(Material.COMPASS)
-            .displayName("§3§lNavigator §8» §7§oWähle einen Spielmodus")
-            .create();
-
     public static final ItemStack NICK_DISABLED = new ItemBuilder(Material.NAME_TAG, 1, 0)
             .displayName("§c§lNicken §8» §7§oDeaktiviert").lore("§7§oKlicke zum aktivieren")
             .create();
@@ -41,11 +33,10 @@ public class HotbarItem {
 
 
     public static final String PROFILE_DISPLAY_NAME = "§3§lProfil §8» §7§oEinstellungen / Stats / Freunde";
-    public static ItemStack getProfile(SkinInfo skin) {
+    public static ItemBuilder getProfile(SkinInfo skin) {
         return Skull.fromMojangValue(skin.getValue(), 1)
                 .toItemBuilder()
-                .displayName(PROFILE_DISPLAY_NAME)
-                .create();
+                .displayName(PROFILE_DISPLAY_NAME);
     }
 
     public static ItemStack getUknowProfile = Skull.fromMojangValue("rufi", 1)

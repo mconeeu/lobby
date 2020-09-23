@@ -1,30 +1,57 @@
 package eu.mcone.lobby.api.player.hotbar;
 
+import eu.mcone.lobby.api.player.HotbarItem;
+import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.api.player.hotbar.items.enums.HotbarItemEnum;
+import eu.mcone.lobby.api.player.hotbar.items.enums.SlotAmountEnum;
 import lombok.Getter;
 
 @Getter
 public enum HotbarGeneralCategorys {
 
-    NAVIGATOR("Navigator", 0, 0),
-    LOBBY_CHOOSER("Lobby-Chooser", 1, 0),
-    SILENTLOBBY("SilentHub",2, 0),
+    NAVIGATOR("Navigator", "§3§lNavigator §8» §7§oWähle einen Spielmodus", SlotAmountEnum.FIRST, true),
+    LOBBY_CHANGER("Lobby-Chooser", "§3§lLobby-Wechsler §8» §7§oWähle deine Lobby", SlotAmountEnum.SECOND, true),
 
-    //TODO: SPECIAL ITEM 2 / 3
-    //FALLBACK WHEN SILENTLOBBY
-    GADGET("Gadgets",2, 3),
+    BACKPACK("Story-Items", "§3§lRucksack §8» §7§oZeige deine gesammelten Items an", SlotAmountEnum.FIVE, true),
 
-    BACKPACK("Story-Items", 4, 0),
-    NICK("Nick", 6, 0),
-    PLAYER_HIDER("PlayerHider",7, 0),
-    PROFILE("Profile", 8, 0);
+    PLAYER_HIDER("PlayerHider", null, SlotAmountEnum.EIGHT, false),
+    PROFILE("Profil", HotbarItem.PROFILE_DISPLAY_NAME, SlotAmountEnum.NINE, true);
 
-    private final int slot;
-    private final int fallback;
-    private final String name;
+    private final String name, displayName;
+    private final SlotAmountEnum defaultSlot;
+    private final boolean canBeModified;
 
-    HotbarGeneralCategorys(String name, int slot, int fallback) {
+    HotbarGeneralCategorys(String name, String displayName, SlotAmountEnum defaultSlot, boolean canBeModified) {
         this.name = name;
-        this.slot = slot;
-        this.fallback = fallback;
+        this.displayName = displayName;
+        this.defaultSlot = defaultSlot;
+        this.canBeModified = canBeModified;
     }
+
+    public static HotbarGeneralCategorys getById(SlotAmountEnum slot) {
+        for (HotbarGeneralCategorys cat : values()) {
+            if (cat.defaultSlot.equals(slot)) {
+                return cat;
+            }
+        }
+
+        return null;
+    }
+
+    public HotbarItemEnum getDefaultItem() {
+        for (HotbarItemEnum item : HotbarItemEnum.values()) {
+            if (item.getCategorys().equals(this) && item.isMainItem()) {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    public HotbarItemEnum getItem(LobbyPlayer player) {
+        if (canBeModified) {
+            return player.getSettings().calculateItems().get(this);
+        } else return null;
+    }
+
 }

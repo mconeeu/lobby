@@ -8,7 +8,6 @@ package eu.mcone.lobby.util;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.core.player.Group;
 import eu.mcone.gameapi.api.GameAPI;
-import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.games.jumpnrun.JumpNRunGame;
 import eu.mcone.lobby.api.player.HotbarItem;
@@ -108,7 +107,6 @@ public class LobbyVanishManager implements VanishManager {
             LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Du bist nun in der ![Privaten Lobby]. Hier bist du vollkommen ungestört!");
 
 
-            p.getInventory().setItem(2, null);
             if (LobbyGames.getInstance().getCurrentGame(p) instanceof JumpNRunGame) {
                 p.getInventory().setItem(1, HotbarItem.SILENT_LOBBY_QUIT);
                 p.getInventory().setItem(0, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
@@ -129,22 +127,9 @@ public class LobbyVanishManager implements VanishManager {
             LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist nun nicht mehr in der Privaten Lobby!");
             LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
-            if (lobbyPlayer.getSettings().isHotbarSilentHub()) {
-                p.getInventory().setItem(2,
-                        HotbarItem.SILENT_LOBBY_JOIN
-                );
-            }
-
-
-            GamePlayer gamePlayer = LobbyPlugin.getInstance().getGamePlayer(p);
             lobbyPlayer.getCorePlayer().getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
             if (!(LobbyGames.getInstance().getCurrentGame(p) instanceof JumpNRunGame)) {
-                if (lobbyPlayer.getSettings().isHotbarSilentHub()) {
-                    gamePlayer.setLastUsedBackPackItemInventar(3, 2);
-                } else {
-                    gamePlayer.setLastUsedBackPackItemInventar(2, 2);
-                }
                 p.getInventory().setItem(7, VanishPlayerVisibility.EVERYBODY.getItem());
             } else {
                 p.getInventory().setItem(1,
@@ -167,6 +152,7 @@ public class LobbyVanishManager implements VanishManager {
         LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.GLASS);
         LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.EXPLODE);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
+        p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.VOID_FOG, 10);
     }

@@ -9,6 +9,7 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItem;
+import eu.mcone.lobby.api.player.hotbar.HotbarGeneralCategorys;
 import eu.mcone.lobby.inventory.LobbySwitchInventory;
 import eu.mcone.lobby.inventory.compass.MinigamesInventory;
 import eu.mcone.lobby.story.LobbyStory;
@@ -36,11 +37,11 @@ public class InventoryTriggerListener implements Listener {
             if (i.getItemMeta().getDisplayName().equalsIgnoreCase(HotbarItem.PROFILE_DISPLAY_NAME)) {
                 e.setCancelled(true);
                 p.performCommand("profile");
-            } else if (i.getItemMeta().getDisplayName().equals(HotbarItem.COMPASS.getItemMeta().getDisplayName())) {
+            } else if (i.getItemMeta().getDisplayName().equals(HotbarGeneralCategorys.NAVIGATOR.getDisplayName())) {
                 e.setCancelled(true);
                 new MinigamesInventory(p);
               LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
-            } else if (i.getItemMeta().getDisplayName().equals(HotbarItem.LOBBY_CHANGER.getItemMeta().getDisplayName())) {
+            } else if (i.getItemMeta().getDisplayName().equals(HotbarGeneralCategorys.LOBBY_CHANGER.getDisplayName())) {
                 if (!LobbyStory.getInstance().getOfficeManager().isInOffice(p)) {
                     new LobbySwitchInventory(p);
                 } else {

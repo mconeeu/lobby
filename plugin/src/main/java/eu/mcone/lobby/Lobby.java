@@ -15,6 +15,7 @@ import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.world.BuildSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
 import eu.mcone.coresystem.api.core.labymod.LabyModEmote;
+import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.lobby.api.LobbyAddon;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -78,6 +79,8 @@ public class Lobby extends LobbyPlugin {
         for (LobbyWorld w : LobbyWorld.values())
             worlds.put(w, CoreSystem.getInstance().getWorldManager().getWorld(w.getName()));
 
+        GamePlugin.getGamePlugin().getBackpackManager().setItemSlot(2);
+        GamePlugin.getGamePlugin().getBackpackManager().setFallbackSlot(2);
 
         sendConsoleMessage("§aStarting Scoreboard-Scheduler...");
         startScheduler();

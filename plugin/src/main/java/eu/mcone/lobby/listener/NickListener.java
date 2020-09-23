@@ -27,7 +27,7 @@ public class NickListener implements Listener {
         p.getInventory().setItem(6, HotbarItem.NICK_ENABLED);
         p.getInventory().setItem(
                 8,
-                HotbarItem.getProfile(e.getNick().getSkinInfo())
+                HotbarItem.getProfile(e.getNick().getSkinInfo()).create()
         );
     }
 
@@ -44,7 +44,7 @@ public class NickListener implements Listener {
         p.getInventory().setItem(6, HotbarItem.NICK_DISABLED);
         p.getInventory().setItem(
                 8,
-                HotbarItem.getProfile(e.getPlayer().getSkin())
+                HotbarItem.getProfile(e.getPlayer().getSkin()).create()
         );
     }
 

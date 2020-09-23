@@ -128,23 +128,6 @@ public class LobbyPersonalSettingsInventory extends CoreInventory {
             });
         }
 
-        if (p.hasPermission("lobby.silenthub")) {
-            setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.TNT, 1, 0).displayName("§f§lSilenthub anzeigen").create());
-            if (settings.isHotbarSilentHub()) {
-                setItem(InventorySlot.ROW_3_SLOT_8, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lAktiviert").lore("§7§oKlicke um nicht mehr das Item", "§7§oin der Hotbar zu haben").create(), e -> {
-                    settings.setHotbarSilentHub(false);
-                    setSettings(p, lp);
-                    LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, lp);
-                });
-            } else {
-                setItem(InventorySlot.ROW_3_SLOT_8, new ItemBuilder(Material.INK_SACK, 1, 1).displayName("§c§lDeaktiviert").lore("§7§oKlicke um das Item in", "§7§oder Hotbar zu haben").create(), e -> {
-                    settings.setHotbarSilentHub(true);
-                    setSettings(p, lp);
-                    LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, lp);
-                });
-            }
-        }
-
         setItem(InventorySlot.ROW_4_SLOT_8, RIGHT_ITEM, e ->
                 new LobbyPersonalExtendedInventory(p));
 
