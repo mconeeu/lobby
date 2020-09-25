@@ -63,7 +63,7 @@ public class LobbyHotbarSettingsInventory extends CoreInventory {
 
             LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, lp);
             p.closeInventory();
-            LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Deine ![Itmes und Slots] wurden erfolgreich zurückgesetzt");
+            LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Deine ![Items und Slots] wurden erfolgreich zurückgesetzt");
         });
 
         setItem(InventorySlot.ROW_5_SLOT_9, BACK_ITEM, e ->
