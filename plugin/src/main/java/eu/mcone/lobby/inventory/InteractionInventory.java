@@ -81,7 +81,7 @@ public class InteractionInventory extends CoreInventory {
 
                 if (settings.isStacking()) {
                     if (!LobbyGames.getInstance().isPlaying(p)) {
-                        if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(lc.bukkit())) {
+                        if (!LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(lc.bukkit())) {
                             if (LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(lc.bukkit()).equals(VanishPlayerVisibility.NOBODY) || LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(lc.bukkit()).equals(VanishPlayerVisibility.ONLY_VIPS)) {
 
 
@@ -95,7 +95,7 @@ public class InteractionInventory extends CoreInventory {
                             Lobby.getSystem().getStackingManager().stack(p, clicked);
 
                             } else {
-                                LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Spieler hat seine Spielersichtbarkeit ![nicht auf alle] geschaltet");
+                                LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Spieler hat seine Spielersichtbarkeit ![nicht auf alle] geschaltet!");
                             }
                         } else {
                             LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Spieler ist nicht mehr auf deiner Lobby!");
