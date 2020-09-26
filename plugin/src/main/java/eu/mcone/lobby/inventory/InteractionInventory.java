@@ -16,6 +16,7 @@ import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.settings.LobbySettings;
+import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.games.LobbyGames;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -25,8 +26,6 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-
-import java.util.HashMap;
 
 public class InteractionInventory extends CoreInventory {
 
@@ -82,14 +81,25 @@ public class InteractionInventory extends CoreInventory {
 
                 if (settings.isStacking()) {
                     if (!LobbyGames.getInstance().isPlaying(p)) {
-                        p.setPassenger(lc.bukkit());
-                        CoreSystem.getInstance().createActionBar()
-                                .message("§f§oBenutze LSHIFT um abzusteigen")
-                                .send(lc.bukkit());
-                        LobbyPlugin.getInstance().getMessenger().sendSuccess(lc.bukkit(), "Du wirst nun von ![" + p.getName() + "] getragen.");
-                        LobbyPlugin.getInstance().getMessenger().sendError(p, "Schleiche um ![" + lc.bukkit().getName() + "] fallen zu lassen");
+                        if (!LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(lc.bukkit())) {
+                            if (LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(lc.bukkit()).equals(VanishPlayerVisibility.NOBODY) || LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(lc.bukkit()).equals(VanishPlayerVisibility.ONLY_VIPS)) {
 
-                        Lobby.getSystem().getStackingManager().stack(p, clicked);
+
+                            p.setPassenger(lc.bukkit());
+                            CoreSystem.getInstance().createActionBar()
+                                    .message("§f§oBenutze LSHIFT um abzusteigen")
+                                    .send(lc.bukkit());
+                            LobbyPlugin.getInstance().getMessenger().sendSuccess(lc.bukkit(), "Du wirst nun von ![" + p.getName() + "] getragen.");
+                            LobbyPlugin.getInstance().getMessenger().sendError(p, "Schleiche um ![" + lc.bukkit().getName() + "] fallen zu lassen");
+
+                            Lobby.getSystem().getStackingManager().stack(p, clicked);
+
+                            } else {
+                                LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Spieler hat seine Spielersichtbarkeit ![nicht auf alle] geschaltet!");
+                            }
+                        } else {
+                            LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Spieler ist nicht mehr auf deiner Lobby!");
+                        }
                     } else {
                         LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Spieler spielt gerade ein Lobby-Game!");
                     }

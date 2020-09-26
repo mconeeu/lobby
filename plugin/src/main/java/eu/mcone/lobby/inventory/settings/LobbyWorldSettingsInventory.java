@@ -22,11 +22,7 @@ public class LobbyWorldSettingsInventory extends CoreInventory {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
         LobbySettings settings = lp.getSettings();
 
-        setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.WATCH, 1, 0).
-
-                displayName("§f§lTag-Nacht Zyklus").
-
-                create());
+        setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.WATCH, 1, 0).displayName("§f§lTag-Nacht Zyklus").create());
         if (settings.isRealTime()) {
             setItem(InventorySlot.ROW_3_SLOT_2, new ItemBuilder(Material.INK_SACK, 1, 10).displayName("§a§lEchtzeit").lore("§7§oKlicke um in der Lobby", "§7§oimmer Tag zu haben").create(), e -> {
                 settings.setRealTime(false);
