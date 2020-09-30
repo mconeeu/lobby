@@ -5,8 +5,8 @@
 
 package eu.mcone.lobby.listener;
 
-import eu.mcone.coresystem.api.bukkit.event.NickEvent;
-import eu.mcone.coresystem.api.bukkit.event.UnnickEvent;
+import eu.mcone.coresystem.api.bukkit.event.nick.NickEvent;
+import eu.mcone.coresystem.api.bukkit.event.nick.UnnickEvent;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;

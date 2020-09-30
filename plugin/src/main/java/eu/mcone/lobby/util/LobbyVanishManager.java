@@ -112,7 +112,7 @@ public class LobbyVanishManager implements VanishManager {
                 p.getInventory().setItem(0, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
             } else {
                 p.getInventory().setItem(7, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
-                p.getInventory().setItem(3, null);
+                p.getInventory().setItem(2, null);
             }
 
             playSilentLobbyEffects(p);

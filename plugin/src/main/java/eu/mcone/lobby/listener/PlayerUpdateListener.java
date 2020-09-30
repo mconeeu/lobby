@@ -6,8 +6,8 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.event.MoneyChangeEvent;
-import eu.mcone.coresystem.api.bukkit.event.PermissionChangeEvent;
+import eu.mcone.coresystem.api.bukkit.event.player.MoneyChangeEvent;
+import eu.mcone.coresystem.api.bukkit.event.player.PermissionChangeEvent;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.scoreboard.CoreObjective;
 import eu.mcone.lobby.api.LobbyPlugin;

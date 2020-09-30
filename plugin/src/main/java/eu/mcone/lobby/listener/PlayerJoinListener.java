@@ -6,7 +6,7 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.event.CorePlayerLoadedEvent;
+import eu.mcone.coresystem.api.bukkit.event.player.CorePlayerLoadedEvent;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.gameapi.api.event.player.GamePlayerLoadedEvent;
 import eu.mcone.gameapi.api.player.GamePlayer;
@@ -64,8 +64,6 @@ public class PlayerJoinListener implements Listener {
             LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
         }
 
-            gp.setLastUsedBackPackItemInventar();
-
         Lobby.getSystem().registerLobbyPlayer(lp);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
@@ -114,7 +112,7 @@ public class PlayerJoinListener implements Listener {
 
 
         if (lp.getSettings().getJoinPlayerVisibility().equals(JoinPlayerVisibility.SILENTLOBBY)) {
-            p.getInventory().setItem(3, null);
+            p.getInventory().setItem(2, null);
         }
 
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);

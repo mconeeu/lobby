@@ -80,7 +80,7 @@ public class LobbyGamesInventory extends CompassInventory {
                 setItem(InventorySlot.ROW_3_SLOT_9, CYAN_PLACEHOLDER);
 
                 Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                                    LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
+                    LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
 
                     setItem(InventorySlot.ROW_1_SLOT_2, CYAN_PLACEHOLDER);
                     setItem(InventorySlot.ROW_1_SLOT_3, CYAN_PLACEHOLDER);
@@ -93,7 +93,7 @@ public class LobbyGamesInventory extends CompassInventory {
                     setItem(InventorySlot.ROW_3_SLOT_8, CYAN_PLACEHOLDER);
 
                     Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                                        LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
+                        LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
 
                         setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.STICK, 1, 0)
                                         .displayName("§eFangen §8| §fLobbygame")
@@ -120,7 +120,7 @@ public class LobbyGamesInventory extends CompassInventory {
                                 });
 
                         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                                            LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
+                            LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
 
                             setItem(InventorySlot.ROW_5_SLOT_3, new ItemBuilder(Material.NETHER_STAR, 1, 0)
                                             .displayName("§fMinigames")
@@ -150,31 +150,29 @@ public class LobbyGamesInventory extends CompassInventory {
 
 
                                     });
+
+                            Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
+                                setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.IRON_SWORD, 1, 0)
+                                                .displayName("§cOne-Hit §8| §fLobbygame")
+                                                .lore("§7§oSpiele ein bekannten Modi", "§7§omit deinen Freunden auf der Lobby", "", "§8» §f§nSpieler | §7§o" + LobbyGames.getInstance().getGame(OneHit.class).getPlaying().size(), "§8» §f§nLinksklick§8 | §7§oSpielen")
+                                                .create(),
+                                        e -> {
+                                            p.closeInventory();
+                                            LobbyGames.getInstance().getGame(OneHit.class).joinGame(p);
+                                        });
+
+                                setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.WOOD_AXE, 1, 0)
+                                                .displayName("§5Gungame §8| §fLobbygame")
+                                                .lore("§7§oSchlage deine Gegner ins Wasser", "§7§ound steige Level auf!", "", "§8» §f§nSpieler | §7§o" + LobbyGames.getInstance().getGame(GunGame.class).getPlaying().size(), "§8» §f§nLinksklick§8 | §7§oSpielen")
+                                                .create(),
+                                        e -> {
+                                            p.closeInventory();
+                                            LobbyGames.getInstance().getGame(GunGame.class).joinGame(p);
+                                        });
+
+                                setItem(InventorySlot.ROW_2_SLOT_5, LIGHT_BLUE_PLACEHOLDER);
+                            }, 1L);
                         }, 1L);
-
-                        Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                            setItem(InventorySlot.ROW_2_SLOT_4, new ItemBuilder(Material.IRON_SWORD, 1, 0)
-                                            .displayName("§cOne-Hit §8| §fLobbygame")
-                                            .lore("§7§oSpiele ein bekannten Modi", "§7§omit deinen Freunden auf der Lobby", "", "§8» §f§nSpieler | §7§o" + LobbyGames.getInstance().getGame(OneHit.class).getPlaying().size(), "§8» §f§nLinksklick§8 | §7§oSpielen")
-                                            .create(),
-
-                                    e -> {
-                                        p.closeInventory();
-                                        LobbyGames.getInstance().getGame(OneHit.class).joinGame(p);
-                                    });
-
-                            setItem(InventorySlot.ROW_2_SLOT_6, new ItemBuilder(Material.WOOD_AXE, 1, 0)
-                                            .displayName("§5Gungame §8| §fLobbygame")
-                                            .lore("§7§oSchlage deine Gegner ins Wasser", "§7§ound steige Level auf!", "", "§8» §f§nSpieler | §7§o" + LobbyGames.getInstance().getGame(GunGame.class).getPlaying().size(), "§8» §f§nLinksklick§8 | §7§oSpielen")
-                                            .create(),
-
-                                    e -> {
-                                        p.closeInventory();
-                                        LobbyGames.getInstance().getGame(GunGame.class).joinGame(p);
-                                    });
-
-                            setItem(InventorySlot.ROW_2_SLOT_5, LIGHT_BLUE_PLACEHOLDER);
-                        }, 2L);
                     }, 2L);
                 }, 2L);
             }, 2L);

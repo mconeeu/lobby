@@ -63,13 +63,7 @@ public class LobbyOfficeManager implements OfficeManager {
         }
 
         CoreSystem.getInstance().getVanishManager().recalculateVanishes();
-
-        if (p.hasPermission("lobby.silenthub")) {
-            p.getInventory().setItem(2, HotbarItem.SILENT_LOBBY_UNAVAILABLE_OFFICE_SILENTHUB);
-            p.getInventory().setItem(3, null);
-        } else {
-            p.getInventory().setItem(2, null);
-        }
+        p.getInventory().setItem(2, null);
         p.getInventory().setItem(6, HotbarItem.LOBBY_HIDER_UNAVAILABLE_OFFICE);
 
         office.teleport(p);

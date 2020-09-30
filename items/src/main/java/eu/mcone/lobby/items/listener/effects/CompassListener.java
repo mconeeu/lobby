@@ -22,11 +22,7 @@ public class CompassListener implements Listener {
 
             p.sendMessage("§8[§7§l!§8] §cItem §8» §fKompass §8|§7 Hier müsste es lang gehen...");
 
-            if (p.hasPermission("lobby.silenthub")) {
-                p.getInventory().setItem(3, null);
-            } else {
-                p.getInventory().setItem(2, null);
-            }
+            p.getInventory().setItem(2, null);
 
             if (p.getLocation().add(0, 5, 0).getBlock().getType() != Material.AIR || p.getLocation().add(0, 4, 0).getBlock().getType() != Material.AIR || (p.getLocation().add(0, 3, 0).getBlock().getType() != Material.AIR)) {
                 p.teleport(LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).getLocation("island-middle"));
@@ -73,11 +69,7 @@ public class CompassListener implements Listener {
                                 p.setVelocity(v6);
                                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                                      LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
-                                    if (p.hasPermission("lobby.silenthub")) {
-                                        p.getInventory().setItem(3, LobbyItem.COMPASS.getItemStack());
-                                    } else {
-                                        p.getInventory().setItem(2, LobbyItem.COMPASS.getItemStack());
-                                    }
+                                     p.getInventory().setItem(2, LobbyItem.COMPASS.getItemStack());
                                 }, 32);
                             }, 20);
                         }, 45);

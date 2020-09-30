@@ -79,8 +79,7 @@ public class Lobby extends LobbyPlugin {
         for (LobbyWorld w : LobbyWorld.values())
             worlds.put(w, CoreSystem.getInstance().getWorldManager().getWorld(w.getName()));
 
-        GamePlugin.getGamePlugin().getBackpackManager().setItemSlot(2);
-        GamePlugin.getGamePlugin().getBackpackManager().setFallbackSlot(2);
+        GamePlugin.getGamePlugin().getBackpackManager().setGadgetSlotProvider(p -> 2);
 
         sendConsoleMessage("§aStarting Scoreboard-Scheduler...");
         startScheduler();

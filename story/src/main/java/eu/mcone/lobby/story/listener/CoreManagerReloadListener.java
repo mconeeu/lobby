@@ -5,16 +5,16 @@
 
 package eu.mcone.lobby.story.listener;
 
-import eu.mcone.coresystem.api.bukkit.event.HologramManagerReloadedEvent;
+import eu.mcone.coresystem.api.bukkit.event.hologram.HologramManagerReloadedEvent;
 import eu.mcone.coresystem.api.bukkit.event.npc.NpcManagerReloadedEvent;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.spawnable.ListMode;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.story.progress.StoryProgress;
 import eu.mcone.lobby.api.story.progress.TraderStoryProgress;
 import eu.mcone.lobby.api.story.progress.TutorialStoryProgress;
-import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 

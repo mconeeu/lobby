@@ -14,6 +14,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class EntitiyDamageListener implements Listener {
@@ -53,6 +54,11 @@ public class EntitiyDamageListener implements Listener {
         }
 
         e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void on(EntityExplodeEvent e) {
+        e.blockList().clear();
     }
 
 }

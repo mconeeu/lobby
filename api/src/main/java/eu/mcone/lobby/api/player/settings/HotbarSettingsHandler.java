@@ -2,7 +2,6 @@ package eu.mcone.lobby.api.player.settings;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -14,7 +13,6 @@ public class HotbarSettingsHandler implements HotbarSettings {
 
     @Override
     public void updateInventory(Player p, LobbyPlayer lp) {
-
         for (HotbarGeneralCategorys cat : HotbarGeneralCategorys.values()) {
             int slot = lp.getSettings().calculateSlots().get(cat).getSlot();
 
@@ -39,12 +37,7 @@ public class HotbarSettingsHandler implements HotbarSettings {
         p.getInventory().setItem(2, null);
         p.getActivePotionEffects().clear();
 
-
-        //GADGETS
-        GamePlayer gp = LobbyPlugin.getInstance().getGamePlayer(p);
-        gp.setLastUsedBackPackItemInventar();
-
+        LobbyPlugin.getInstance().getBackpackManager().setCurrentBackpackItem(LobbyPlugin.getInstance().getGamePlayer(p));
     }
 
 }
-

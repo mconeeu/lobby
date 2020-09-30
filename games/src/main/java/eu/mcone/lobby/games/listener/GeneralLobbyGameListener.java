@@ -5,8 +5,8 @@
 
 package eu.mcone.lobby.games.listener;
 
-import eu.mcone.coresystem.api.bukkit.event.AfkEvent;
 import eu.mcone.coresystem.api.bukkit.event.BuildModeChangeEvent;
+import eu.mcone.coresystem.api.bukkit.event.player.AfkEvent;
 import eu.mcone.coresystem.api.core.player.PlayerState;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.games.LobbyGame;

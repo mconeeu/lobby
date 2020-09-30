@@ -57,8 +57,7 @@ public class GunGameLobbyGame extends AbstractLobbyPvPGame implements GunGame {
     }
 
     @Override
-    public void onQuit(Player p, LobbyPlayer lp) {
-    }
+    public void onQuit(Player p, LobbyPlayer lp) {}
 
     public Location getRandomSpawn() {
         List<Location> locations = new ArrayList<>();
@@ -77,16 +76,18 @@ public class GunGameLobbyGame extends AbstractLobbyPvPGame implements GunGame {
 
     @Override
     public void setSaveMode(Player p) {
-        setGungameSaveItems(p);
-        SAVE_PLAYER.add(p);
+        if (isPlaying(p)) {
+            setGungameSaveItems(p);
+            SAVE_PLAYER.add(p);
 
-        Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-            SAVE_PLAYER.remove(p);
+            Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
+                SAVE_PLAYER.remove(p);
 
-            setFightItems(p);
-            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.NOTE_PLING);
-            LobbyPlugin.getInstance().getMessenger().send(p, "§cDu kannst nun angreifen und angegriffen werden!");
-        }, 60);
+                setFightItems(p);
+                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.NOTE_PLING);
+                LobbyPlugin.getInstance().getMessenger().send(p, "§cDu kannst nun angreifen und angegriffen werden!");
+            }, 60);
+        }
     }
 
     @Override

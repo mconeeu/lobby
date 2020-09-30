@@ -157,11 +157,7 @@ public class InventoryTriggerListener implements Listener {
 
                                 lp.addLobbyItem(LobbyItem.GOLD_NUGGET);
 
-                                if (p.hasPermission("lobby.silenthub")) {
-                                    p.getInventory().setItem(3, null);
-                                } else {
-                                    p.getInventory().setItem(2, null);
-                                }
+                                p.getInventory().setItem(2, null);
 
                                 p.getInventory().setLeggings(null);
                                 p.getInventory().setBoots(null);
