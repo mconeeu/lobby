@@ -5,7 +5,7 @@
 
 package eu.mcone.lobby.api.event;
 
-import eu.mcone.coresystem.api.bukkit.event.CorePlayerLoadedEvent;
+import eu.mcone.coresystem.api.bukkit.event.player.CorePlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -5,8 +5,8 @@
 
 package eu.mcone.lobby.games.listener;
 
-import eu.mcone.coresystem.api.bukkit.event.AfkEvent;
 import eu.mcone.coresystem.api.bukkit.event.BuildModeChangeEvent;
+import eu.mcone.coresystem.api.bukkit.event.player.AfkEvent;
 import eu.mcone.coresystem.api.core.player.PlayerState;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.games.LobbyGame;
@@ -54,6 +54,11 @@ public class GeneralLobbyGameListener implements Listener {
                 if (game.isPlaying(p)) {
                     ((AbstractLobbyGame) game).quitGame(p);
                 }
+            }
+        } else if (e.getMessage().equalsIgnoreCase("/profil") || e.getMessage().equalsIgnoreCase("/profile")) {
+            if (manager.isPlaying(p)) {
+                e.setCancelled(true);
+                LobbyPlugin.getInstance().getMessenger().sendError(p, "Du darfst diesen Befehl nicht in einem Lobby Game ausführen!");
             }
         }
     }

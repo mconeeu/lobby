@@ -31,7 +31,7 @@ public class ChestCMD extends CoreCommand {
         } else if (sender.hasPermission("lobby.chests")) {
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("remove")) {
-                    CoreSystem.getInstance().getMessenger().send(sender, "§4Bitte benutze: §c/chest <add | remove> <name> <amount> §4oder §c/chests <name>");
+                    CoreSystem.getInstance().getMessenger().sendSender(sender, "§4Bitte benutze: §c/chest <add | remove> <name> <amount> §4oder §c/chests <name>");
                     return true;
                 } else {
                     Player t = Bukkit.getPlayer(args[0]);
@@ -74,7 +74,7 @@ public class ChestCMD extends CoreCommand {
                 }
             }
 
-            CoreSystem.getInstance().getMessenger().send(sender, "§4Bitte benutze: §c/chest <add | remove> <name> <amount> §4oder §c/chests <name>");
+            CoreSystem.getInstance().getMessenger().sendSender(sender, "§4Bitte benutze: §c/chest <add | remove> <name> <amount> §4oder §c/chests <name>");
         } else if (sender instanceof Player) {
             CoreSystem.getInstance().getMessenger().sendTransl((Player) sender, "system.command.noperm");
         }

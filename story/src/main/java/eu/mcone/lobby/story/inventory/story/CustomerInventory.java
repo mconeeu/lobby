@@ -27,11 +27,7 @@ public class CustomerInventory extends CoreInventory {
                     lp.addLobbyItem(LobbyItem.BOAT_PASS);
 
                     if (!LobbyGames.getInstance().isPlaying(p)) {
-                        if (p.hasPermission("lobby.silenthub")) {
-                            p.getInventory().setItem(3, LobbyItem.BOAT_PASS.getItemStack());
-                        } else {
-                            p.getInventory().setItem(2, LobbyItem.BOAT_PASS.getItemStack());
-                        }
+                        p.getInventory().setItem(2, LobbyItem.BOAT_PASS.getItemStack());
                     }
 
                     p.sendMessage("§8[§7§l!§8] §cNPC §8» §fVerkäufer §8|§7 Bitte sehr ihr Ticket");

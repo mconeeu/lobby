@@ -6,8 +6,8 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.coresystem.api.bukkit.event.MoneyChangeEvent;
-import eu.mcone.coresystem.api.bukkit.event.PermissionChangeEvent;
+import eu.mcone.coresystem.api.bukkit.event.player.MoneyChangeEvent;
+import eu.mcone.coresystem.api.bukkit.event.player.PermissionChangeEvent;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.scoreboard.CoreObjective;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -64,12 +64,11 @@ public class PlayerUpdateListener implements Listener {
             }
         }
 
-        if (p.hasPermission("lobby.silenthub")) {
-            p.bukkit().getInventory().setItem(2, HotbarItem.SILENT_LOBBY_JOIN);
-        }
         if (p.hasPermission("system.bungee.nick")) {
             p.bukkit().getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p.bukkit()).isNicked() ? HotbarItem.NICK_ENABLED : HotbarItem.NICK_DISABLED);
         }
+
+        LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p.bukkit(), lp);
 
         if (e.getType().equals(PermissionChangeEvent.Type.GROUP_CHANGE)) {
             p.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();

@@ -177,11 +177,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
                                                 lp.removeLobbyItem(LobbyItem.GOLD_BARDING);
                                             }
 
-                                            if (p.hasPermission("lobby.silenthub")) {
-                                                p.getInventory().setItem(3, null);
-                                            } else {
-                                                p.getInventory().setItem(2, null);
-                                            }
+                                            p.getInventory().setItem(2, null);
 
                                             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "office-entrance");
                                             LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(p);
