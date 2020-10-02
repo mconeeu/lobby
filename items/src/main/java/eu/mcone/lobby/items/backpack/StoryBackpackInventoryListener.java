@@ -19,6 +19,10 @@ import java.util.Set;
 
 public class StoryBackpackInventoryListener extends BackpackInventoryListener {
 
+    public StoryBackpackInventoryListener() {
+        super("Story Item");
+    }
+
     @Override
     public void setBackpackItems(CategoryInventory inv, Category category, Set<BackpackItem> categoryItems, GamePlayer gp, Player p) {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
@@ -31,7 +35,6 @@ public class StoryBackpackInventoryListener extends BackpackInventoryListener {
                     lp.removeLobbyItem(LobbyItem.BANKCARD);
                     lp.addLobbyItem(LobbyItem.BANKCARD_PREMIUM);
                 }
-
             } else {
                 if (lp.hasLobbyItem(LobbyItem.BANKCARD_PREMIUM)) {
                     lp.removeLobbyItem(LobbyItem.BANKCARD_PREMIUM);
