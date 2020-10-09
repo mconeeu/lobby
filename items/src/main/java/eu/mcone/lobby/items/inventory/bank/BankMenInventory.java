@@ -50,6 +50,29 @@ public class BankMenInventory extends CoreInventory {
             setItem(InventorySlot.ROW_2_SLOT_8, new ItemBuilder(Material.SIGN, 1, 0).displayName("§f§lUmwandler").create(),
                     e -> new BankChangeCoins(p));
 
+            Calendar lastDailyRewardPlusOneDay = Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin"));
+            lastDailyRewardPlusOneDay.setTime(lp.getLastDailyRewardDate());
+            lastDailyRewardPlusOneDay.add(Calendar.DAY_OF_MONTH, 1);
+
+            if (lp.getDailyReward() == null || new Date().after(lastDailyRewardPlusOneDay.getTime())) {
+                setItem(InventorySlot.ROW_2_SLOT_6, Skull.fromUrl("http://textures.minecraft.net/texture/f5612dc7b86d71afc1197301c15fd979e9f39e7b1f41d8f1ebdf8115576e2e", 1).toItemBuilder().displayName("§4§lTägliche Belohnung").lore("§8» §f§nRechtsklick§8 | §7§oAbholen").create(),
+                        e -> {
+                            lp.getCorePlayer().addCoins(100);
+                            lp.setDailyReward();
+
+                            LobbyPlugin.getInstance().getMessenger().send(p, "§2Du hast dir deine §a§oTägliche Belohnung §2abgeholt!");
+                            LobbyPlugin.getInstance().getMessenger().send(p, "§8[§a+50 Coins§8]");
+
+                            p.closeInventory();
+                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_PLING);
+                        });
+            } else {
+                setItem(InventorySlot.ROW_2_SLOT_6, Skull.fromUrl("http://textures.minecraft.net/texture/86d35a963d5987894b6bc214e328b39cd2382426ff9c8e082b0b6a6e044d3a3", 1).toItemBuilder().displayName("§4§lTägliche Belohnung").lore("§c§oAb Morgen Verfügbar").create(),
+                        e -> {
+                            LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(p);
+                            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du kannst deine §cBelohnung §4erst am nächsten Tag abholen!");
+                        });
+            }
 
         } else if (lp.hasLobbyItem(LobbyItem.BANKCARD_PREMIUM)) {
 

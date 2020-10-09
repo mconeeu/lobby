@@ -20,4 +20,5 @@ public interface VanishManager {
 
     Set<Player> getSilentLobbyPlayers();
 
+    boolean isInOffice(Player p);
 }

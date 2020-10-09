@@ -16,6 +16,7 @@ import eu.mcone.lobby.api.player.vanish.VanishManager;
 import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.listener.VanishListener;
+import eu.mcone.lobby.story.LobbyStory;
 import lombok.Getter;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
@@ -111,8 +112,7 @@ public class LobbyVanishManager implements VanishManager {
                 p.getInventory().setItem(1, HotbarItem.SILENT_LOBBY_QUIT);
                 p.getInventory().setItem(0, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
             } else {
-                p.getInventory().setItem(7, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
-                p.getInventory().setItem(2, null);
+                LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, LobbyPlugin.getInstance().getLobbyPlayer(p));
             }
 
             playSilentLobbyEffects(p);
@@ -131,6 +131,9 @@ public class LobbyVanishManager implements VanishManager {
 
             if (!(LobbyGames.getInstance().getCurrentGame(p) instanceof JumpNRunGame)) {
                 p.getInventory().setItem(7, VanishPlayerVisibility.EVERYBODY.getItem());
+
+                LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, lobbyPlayer);
+
             } else {
                 p.getInventory().setItem(1,
                         HotbarItem.SILENT_LOBBY_JOIN
@@ -146,6 +149,11 @@ public class LobbyVanishManager implements VanishManager {
     @Override
     public boolean isInSilentLobby(Player p) {
         return silentLobbyPlayers.contains(p);
+    }
+
+    @Override
+    public boolean isInOffice(Player p) {
+        return LobbyStory.getInstance().getOfficeManager().isInOffice(p);
     }
 
     private static void playSilentLobbyEffects(Player p) {

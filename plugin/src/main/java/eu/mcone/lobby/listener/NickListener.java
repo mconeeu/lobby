@@ -17,6 +17,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
+import java.util.Objects;
+
 public class NickListener implements Listener {
 
     @EventHandler
@@ -53,13 +55,13 @@ public class NickListener implements Listener {
             }
 
             if (!cat.equals(HotbarGeneralCategorys.PLAYER_HIDER)) {
-                ItemBuilder item = cat.equals(HotbarGeneralCategorys.PROFILE) && cat.getItem(lp).isMainItem() ? HotbarItem.getProfile(lp.getCorePlayer().getSkin()) : cat.getItem(lp).getItem();
+                ItemBuilder item = cat.equals(HotbarGeneralCategorys.PROFILE) && Objects.requireNonNull(cat.getItem(lp)).isMainItem() ? HotbarItem.getProfile(lp.getCorePlayer().getSkin()) : Objects.requireNonNull(cat.getItem(lp)).getItem();
                 item.displayName(cat.getDisplayName());
 
                 p.getInventory().setItem(slot, item.create());
 
                 if (cat.equals(HotbarGeneralCategorys.PROFILE)) {
-                    if (cat.getItem(lp).isMainItem()) {
+                    if (Objects.requireNonNull(cat.getItem(lp)).isMainItem()) {
                         if (nickEvent != null) {
                             p.getInventory().setItem(
                                     slot,
@@ -68,14 +70,13 @@ public class NickListener implements Listener {
                         }
                     }
                 }
+            } else if (LobbyPlugin.getInstance().getVanishManager().isInOffice(p)) {
+                p.getInventory().setItem(slot, HotbarItem.SILENT_LOBBY_UNAVAILABLE_OFFICE_SILENTHUB);
+            } else if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
+                p.getInventory().setItem(slot, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
             } else {
-                if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
-                    p.getInventory().setItem(slot, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
-                } else {
-                    p.getInventory().setItem(slot, LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(p).getItem());
-                }
+                p.getInventory().setItem(slot, LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(p).getItem());
             }
         }
     }
-
 }

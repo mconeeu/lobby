@@ -3,11 +3,10 @@ package eu.mcone.lobby.story.office;
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.story.office.OfficeType;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.api.story.office.OfficeManager;
-import eu.mcone.lobby.api.player.HotbarItem;
-import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.api.story.office.OfficeType;
 import eu.mcone.lobby.story.cmd.OfficeCMD;
 import eu.mcone.lobby.story.listener.OfficeListener;
 import net.md_5.bungee.api.ChatColor;
@@ -63,8 +62,11 @@ public class LobbyOfficeManager implements OfficeManager {
         }
 
         CoreSystem.getInstance().getVanishManager().recalculateVanishes();
+
+        LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, LobbyPlugin.getInstance().getLobbyPlayer(p));
+
+        p.getInventory().setItem(3, null);
         p.getInventory().setItem(2, null);
-        p.getInventory().setItem(6, HotbarItem.LOBBY_HIDER_UNAVAILABLE_OFFICE);
 
         office.teleport(p);
     }
@@ -142,7 +144,7 @@ public class LobbyOfficeManager implements OfficeManager {
             if (office != null) {
                 joinOffice(p, owner, office);
             } else {
-                LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Spieler !["+owner.getName()+"] hat kein Büro!");
+                LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Spieler ![" + owner.getName() + "] hat kein Büro!");
             }
         } else {
             LobbyPlugin.getInstance().getMessenger().sendError(p, "Diese Einladung ist ungültig!");
@@ -153,9 +155,9 @@ public class LobbyOfficeManager implements OfficeManager {
     public void kickFromOffice(Player owner, Player visitor) {
         if (joinedPlayers.containsKey(owner) && joinedPlayers.get(owner).contains(visitor)) {
             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(visitor, "spawn");
-            LobbyPlugin.getInstance().getMessenger().sendInfo(visitor, "Du wurdest von !["+owner.getName()+"] aus dem Büro gekickt!");
+            LobbyPlugin.getInstance().getMessenger().sendInfo(visitor, "Du wurdest von ![" + owner.getName() + "] aus dem Büro gekickt!");
         } else {
-            LobbyPlugin.getInstance().getMessenger().sendError(visitor, "!["+visitor.getName()+"] ist nicht in deinem Büro!");
+            LobbyPlugin.getInstance().getMessenger().sendError(visitor, "![" + visitor.getName() + "] ist nicht in deinem Büro!");
         }
     }
 
@@ -173,7 +175,7 @@ public class LobbyOfficeManager implements OfficeManager {
             for (Player visitor : kick) {
                 if (!visitor.equals(player)) {
                     LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(visitor, "spawn");
-                    LobbyPlugin.getInstance().getMessenger().sendInfo(visitor, "Du wurdest von !["+player.getName()+"] aus dem Büro gekickt!");
+                    LobbyPlugin.getInstance().getMessenger().sendInfo(visitor, "Du wurdest von ![" + player.getName() + "] aus dem Büro gekickt!");
                 }
             }
         }

@@ -16,6 +16,8 @@ public class HotbarSettingsHandler implements HotbarSettings {
         for (HotbarGeneralCategorys cat : HotbarGeneralCategorys.values()) {
             int slot = lp.getSettings().calculateSlots().get(cat).getSlot();
 
+            p.getInventory().setItem(2, null);
+
             if (!cat.equals(HotbarGeneralCategorys.PLAYER_HIDER)) {
                 ItemBuilder item = cat.equals(HotbarGeneralCategorys.PROFILE) && cat.getItem(lp).isMainItem() ? HotbarItem.getProfile(lp.getCorePlayer().getSkin()) : cat.getItem(lp).getItem();
                 item.displayName(cat.getDisplayName());
@@ -24,6 +26,8 @@ public class HotbarSettingsHandler implements HotbarSettings {
             } else {
                 if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
                     p.getInventory().setItem(slot, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
+                } else if (LobbyPlugin.getInstance().getVanishManager().isInOffice(p)) {
+                    p.getInventory().setItem(slot, HotbarItem.LOBBY_HIDER_UNAVAILABLE_OFFICE);
                 } else {
                     p.getInventory().setItem(slot, LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(p).getItem());
                 }
@@ -34,10 +38,12 @@ public class HotbarSettingsHandler implements HotbarSettings {
             p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItem.NICK_ENABLED : HotbarItem.NICK_DISABLED);
         }
 
-        p.getInventory().setItem(2, null);
+        if (!LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p) && !LobbyPlugin.getInstance().getVanishManager().isInOffice(p)) {
+            LobbyPlugin.getInstance().getBackpackManager().setCurrentBackpackItem(LobbyPlugin.getInstance().getGamePlayer(p));
+        }
+
         p.getActivePotionEffects().clear();
 
-        LobbyPlugin.getInstance().getBackpackManager().setCurrentBackpackItem(LobbyPlugin.getInstance().getGamePlayer(p));
     }
 
 }

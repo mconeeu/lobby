@@ -40,6 +40,8 @@ public class PlayerJoinListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
 
+        p.getInventory().clear();
+
         p.setGameMode(GameMode.SURVIVAL);
 
         p.getInventory().setItem(0, HotbarItem.LOADING);
