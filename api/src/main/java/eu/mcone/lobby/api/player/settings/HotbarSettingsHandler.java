@@ -7,6 +7,7 @@ import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.hotbar.HotbarGeneralCategorys;
 import eu.mcone.lobby.api.player.hotbar.HotbarSettings;
+import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import org.bukkit.entity.Player;
 
 public class HotbarSettingsHandler implements HotbarSettings {
@@ -38,7 +39,7 @@ public class HotbarSettingsHandler implements HotbarSettings {
             p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItem.NICK_ENABLED : HotbarItem.NICK_DISABLED);
         }
 
-        if (!LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p) && !LobbyPlugin.getInstance().getVanishManager().isInOffice(p)) {
+        if (!LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p) && !LobbyPlugin.getInstance().getVanishManager().isInOffice(p) && LobbyPlugin.getInstance().getVanishManager().equals(VanishPlayerVisibility.EVERYBODY)) {
             LobbyPlugin.getInstance().getBackpackManager().setCurrentBackpackItem(LobbyPlugin.getInstance().getGamePlayer(p));
         }
 

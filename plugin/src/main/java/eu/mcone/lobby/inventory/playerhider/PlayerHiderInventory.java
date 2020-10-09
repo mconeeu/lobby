@@ -21,22 +21,19 @@ public class PlayerHiderInventory extends CoreInventory {
         LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(player);
 
         if (manager.isInSilentLobby(player)) {
-            setItem(InventorySlot.ROW_2_SLOT_2, VanishPlayerVisibility.SILENT.getItem(), e -> {
-                player.closeInventory();
-                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
-            });
-            setItem(InventorySlot.ROW_2_SLOT_4, VanishPlayerVisibility.EVERYBODY.getItem(), e -> {
+            setItem(InventorySlot.ROW_2_SLOT_3, VanishPlayerVisibility.EVERYBODY.getItem(), e -> {
                 manager.quitSilentLobby(player);
+                updateHiderSystem(player, lobbyPlayer, VanishPlayerVisibility.EVERYBODY, manager);
                 player.closeInventory();
             });
 
-            setItem(InventorySlot.ROW_2_SLOT_6, VanishPlayerVisibility.ONLY_VIPS.getItem(), e -> {
+            setItem(InventorySlot.ROW_2_SLOT_5, VanishPlayerVisibility.ONLY_VIPS.getItem(), e -> {
                 manager.quitSilentLobby(player);
                 updateHiderSystem(player, lobbyPlayer, VanishPlayerVisibility.ONLY_VIPS, manager);
                 player.closeInventory();
             });
 
-            setItem(InventorySlot.ROW_2_SLOT_8, VanishPlayerVisibility.NOBODY.getItem(), e -> {
+            setItem(InventorySlot.ROW_2_SLOT_7, VanishPlayerVisibility.NOBODY.getItem(), e -> {
                 manager.quitSilentLobby(player);
                 updateHiderSystem(player, lobbyPlayer, VanishPlayerVisibility.NOBODY, manager);
                 player.closeInventory();
@@ -71,15 +68,20 @@ public class PlayerHiderInventory extends CoreInventory {
         manager.setVanishPlayerVisibility(player, vanishPlayerVisibility);
 
         if (LobbyGames.getInstance().getCurrentGame(p) instanceof JumpNRunGame) {
-                int slot = 0;
-                if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
-                    p.getInventory().setItem(slot, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
-                } else {
-                    p.getInventory().setItem(slot, LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(p).getItem());
-                }
+            int slot = 0;
+            if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
+                p.getInventory().setItem(slot, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
+            } else {
+                p.getInventory().setItem(slot, LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(p).getItem());
+            }
         } else {
             LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, lobbyPlayer);
             LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
         }
+
+        if (vanishPlayerVisibility.equals(VanishPlayerVisibility.EVERYBODY)) {
+            LobbyPlugin.getInstance().getBackpackManager().setCurrentBackpackItem(LobbyPlugin.getInstance().getGamePlayer(player));
+        }
+
     }
 }
