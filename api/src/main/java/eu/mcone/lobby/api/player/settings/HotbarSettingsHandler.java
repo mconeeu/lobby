@@ -39,7 +39,7 @@ public class HotbarSettingsHandler implements HotbarSettings {
             p.getInventory().setItem(6, CoreSystem.getInstance().getCorePlayer(p).isNicked() ? HotbarItem.NICK_ENABLED : HotbarItem.NICK_DISABLED);
         }
 
-        if (!LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p) && !LobbyPlugin.getInstance().getVanishManager().isInOffice(p) && LobbyPlugin.getInstance().getVanishManager().equals(VanishPlayerVisibility.EVERYBODY)) {
+        if (!LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p) && !LobbyPlugin.getInstance().getVanishManager().isInOffice(p) && LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(p).equals(VanishPlayerVisibility.EVERYBODY)) {
             LobbyPlugin.getInstance().getBackpackManager().setCurrentBackpackItem(LobbyPlugin.getInstance().getGamePlayer(p));
         }
 
