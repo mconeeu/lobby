@@ -6,9 +6,9 @@ import java.util.Set;
 
 public interface VanishManager {
 
-    void setVanishPlayerVisibility(Player p, VanishPlayerVisibility target);
+    boolean setVanishPlayerVisibility(Player p, VanishPlayerVisibility target);
 
-    void setVanishPlayerVisibility(Player p, VanishPlayerVisibility target, boolean silent);
+    boolean setVanishPlayerVisibility(Player p, VanishPlayerVisibility target, boolean notify);
 
     VanishPlayerVisibility getVanishPlayerVisibility(Player p);
 

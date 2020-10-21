@@ -75,7 +75,11 @@ public class NpcListener implements Listener {
             } else if (npc.equals(GeneralStoryNpc.OFFICE_PAGE.getNpc())) {
                 LobbyStory.getInstance().getOfficeManager().joinOffice(p);
             } else if (npc.equals(GeneralStoryNpc.ASSISTANT_1.getNpc()) || npc.equals(GeneralStoryNpc.ASSISTANT_2.getNpc()) || npc.equals(GeneralStoryNpc.ASSISTANT_3.getNpc())) {
-                new SecretaryInventory(p);
+                if (LobbyStory.getInstance().getOfficeManager().isInOwnOffice(p)) {
+                    new SecretaryInventory(p);
+                } else {
+                    LobbyPlugin.getInstance().getMessenger().sendError(p, "Du kannst nicht mit der Sekretärin von anderen Büros sprechen!");
+                }
             } else if (npc.equals(GeneralStoryNpc.CHAUFFEUR_1.getNpc()) || npc.equals(GeneralStoryNpc.CHAUFFEUR_2.getNpc()) || npc.equals(GeneralStoryNpc.CHAUFFEUR_3.getNpc())) {
                 new ChauffeurInventory(p);
             } else if (npc.equals(GeneralStoryNpc.VENDOR.getNpc())) {
