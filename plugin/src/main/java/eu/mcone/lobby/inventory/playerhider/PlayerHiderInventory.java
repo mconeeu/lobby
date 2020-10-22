@@ -77,11 +77,10 @@ public class PlayerHiderInventory extends CoreInventory {
         } else {
             LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, lobbyPlayer);
             LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
-        }
 
-        if (vanishPlayerVisibility.equals(VanishPlayerVisibility.EVERYBODY)) {
-            LobbyPlugin.getInstance().getBackpackManager().setCurrentBackpackItem(LobbyPlugin.getInstance().getGamePlayer(player));
+            if (vanishPlayerVisibility.equals(VanishPlayerVisibility.EVERYBODY)) {
+                LobbyPlugin.getInstance().getBackpackManager().setCurrentBackpackItem(LobbyPlugin.getInstance().getGamePlayer(player));
+            }
         }
-
     }
 }
