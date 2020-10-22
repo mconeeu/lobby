@@ -16,6 +16,7 @@ import eu.mcone.lobby.api.story.progress.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -53,8 +54,10 @@ public class GeneralPlayerListener implements Listener {
             }
         }
 
-        spawnStoryNpcs(lp);
-        spawnStoryHolograms(p, lp.getProgressId());
+        Bukkit.getScheduler().runTask(LobbyPlugin.getInstance(), () -> {
+            spawnStoryNpcs(lp);
+            spawnStoryHolograms(p, lp.getProgressId());
+        });
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

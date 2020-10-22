@@ -8,6 +8,8 @@ import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.api.story.office.OfficeManager;
 import eu.mcone.lobby.api.story.office.OfficeType;
 import eu.mcone.lobby.story.cmd.OfficeCMD;
+import eu.mcone.lobby.story.inventory.office.ConfirmCurrentOfficeQuitInventory;
+import eu.mcone.lobby.story.inventory.office.ConfirmSilentLobbyQuitInventory;
 import eu.mcone.lobby.story.listener.OfficeListener;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -28,9 +30,10 @@ public class LobbyOfficeManager implements OfficeManager {
         this.invitedPlayers = new HashMap<>();
 
         CoreSystem.getInstance().getVanishManager().registerVanishRule(10, (player, playerCanSee) -> {
-            for (Map.Entry<Player, Set<Player>> joinedEntry : LobbyOfficeManager.this.joinedPlayers.entrySet()) {
-                if (!joinedEntry.getValue().contains(player)) {
-                    playerCanSee.removeAll(joinedEntry.getValue());
+            for (Map.Entry<Player, Set<Player>> office : joinedPlayers.entrySet()) {
+                if (office.getKey().equals(player) || office.getValue().contains(player)) {
+                    playerCanSee.removeIf(p -> !office.getValue().contains(p));
+                    return;
                 }
             }
         });
@@ -52,8 +55,11 @@ public class LobbyOfficeManager implements OfficeManager {
     }
 
     private void joinOffice(Player p, Player owner, OfficeType office) {
-        LobbyPlugin.getInstance().getVanishManager().quitSilentLobby(p);
-        LobbyPlugin.getInstance().getVanishManager().setVanishPlayerVisibility(p, VanishPlayerVisibility.EVERYBODY, false);
+        if (!LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
+            if (LobbyPlugin.getInstance().getVanishManager().setVanishPlayerVisibility(p, VanishPlayerVisibility.EVERYBODY, false)) {
+                LobbyPlugin.getInstance().getMessenger().sendInfo(p, "Deine Spielersichtbarkeit wurde auf ![Alle Sichtbar] gestellt, da du einem Büro beigetreten bist!");
+            }
+        }
 
         if (joinedPlayers.containsKey(owner)) {
             joinedPlayers.get(owner).add(p);
@@ -99,35 +105,39 @@ public class LobbyOfficeManager implements OfficeManager {
     @Override
     public void inviteToOffice(Player owner, Player invited) {
         if (LobbyPlugin.getInstance().getLobbyPlayer(owner).hasOffice()) {
-            if (invitedPlayers.containsKey(owner)) {
-                invitedPlayers.get(owner).add(invited);
-            } else {
-                invitedPlayers.put(owner, new HashSet<>(Collections.singleton(invited)));
-            }
+            if (!LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(owner)) {
+                if (invitedPlayers.containsKey(owner)) {
+                    invitedPlayers.get(owner).add(invited);
+                } else {
+                    invitedPlayers.put(owner, new HashSet<>(Collections.singleton(invited)));
+                }
 
-            LobbyPlugin.getInstance().getMessenger().sendSuccess(owner, "Du hast ![" + invited.getName() + "] zu deinem Büro eingeladen!");
-            LobbyPlugin.getInstance().getMessenger().send(
-                    invited,
-                    new ComponentBuilder("Der Spieler ")
-                            .color(ChatColor.WHITE)
-                            .append(owner.getName())
-                            .color(ChatColor.WHITE).bold(true)
-                            .append(" hat dich zu seinem Büro eingeladen")
-                            .color(ChatColor.WHITE)
-                            .append("\n")
-                            .append("[Zum Büro telepotieren]")
-                            .color(ChatColor.GREEN)
-                            .bold(true)
-                            .event(new HoverEvent(
-                                    HoverEvent.Action.SHOW_TEXT,
-                                    new ComponentBuilder("§7§oKlicke hier, um dich zum Büro zu teleportieren").create()
-                            ))
-                            .event(new ClickEvent(
-                                    ClickEvent.Action.RUN_COMMAND,
-                                    "/office " + owner.getName()
-                            ))
-                            .create()
-            );
+                LobbyPlugin.getInstance().getMessenger().sendSuccess(owner, "Du hast ![" + invited.getName() + "] zu deinem Büro eingeladen!");
+                LobbyPlugin.getInstance().getMessenger().send(
+                        invited,
+                        new ComponentBuilder("Der Spieler ")
+                                .color(ChatColor.WHITE)
+                                .append(owner.getName())
+                                .color(ChatColor.WHITE).underlined(true)
+                                .append(" hat dich zu seinem Büro eingeladen").underlined(false)
+                                .color(ChatColor.WHITE)
+                                .append("\n")
+                                .append("[Zum Büro telepotieren]")
+                                .color(ChatColor.GREEN)
+                                .bold(true)
+                                .event(new HoverEvent(
+                                        HoverEvent.Action.SHOW_TEXT,
+                                        new ComponentBuilder("§7§oKlicke hier, um dich zum Büro zu teleportieren").create()
+                                ))
+                                .event(new ClickEvent(
+                                        ClickEvent.Action.RUN_COMMAND,
+                                        "/office " + owner.getName()
+                                ))
+                                .create()
+                );
+            } else {
+                LobbyPlugin.getInstance().getMessenger().sendError(owner, "§4Du kannst keine Spieler in dein Büro einladen, da du in der SilentLobby bist!");
+            }
         } else {
             LobbyPlugin.getInstance().getMessenger().sendError(owner, "Du hast kein Büro, in das du jemand einladen kannst!");
         }
@@ -142,7 +152,29 @@ public class LobbyOfficeManager implements OfficeManager {
             invitedPlayers.get(owner).remove(p);
 
             if (office != null) {
-                joinOffice(p, owner, office);
+                if (!LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(owner)) {
+                    Runnable checkSilentLobby = () -> {
+                        if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
+                            new ConfirmSilentLobbyQuitInventory(owner, p, ConfirmSilentLobbyQuitInventory.Target.GUEST, () -> {
+                                LobbyPlugin.getInstance().getVanishManager().quitSilentLobby(p);
+                                joinOffice(p, owner, office);
+                            });
+                        } else {
+                            joinOffice(p, owner, office);
+                        }
+                    };
+
+                    if (isInOffice(p)) {
+                        new ConfirmCurrentOfficeQuitInventory(p, owner, () -> {
+                            quitOffice(p);
+                            checkSilentLobby.run();
+                        });
+                    } else {
+                        checkSilentLobby.run();
+                    }
+                } else {
+                    LobbyPlugin.getInstance().getMessenger().sendError(p, "Du kannst die Büro Einladung von !["+owner.getName()+"] nicht annehmen, da er in der SilentLobby ist!");
+                }
             } else {
                 LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Spieler ![" + owner.getName() + "] hat kein Büro!");
             }
@@ -167,17 +199,13 @@ public class LobbyOfficeManager implements OfficeManager {
             Set<Player> kick = joinedPlayers.get(player);
             for (Player visitor : kick) {
                 if (!visitor.equals(player)) {
-                    joinedPlayers.remove(visitor);
-                }
-            }
-            CoreSystem.getInstance().getVanishManager().recalculateVanishes();
-
-            for (Player visitor : kick) {
-                if (!visitor.equals(player)) {
                     LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(visitor, "spawn");
                     LobbyPlugin.getInstance().getMessenger().sendInfo(visitor, "Du wurdest von ![" + player.getName() + "] aus dem Büro gekickt!");
                 }
             }
+
+            kick.clear();
+            CoreSystem.getInstance().getVanishManager().recalculateVanishes();
         }
     }
 
@@ -210,12 +238,11 @@ public class LobbyOfficeManager implements OfficeManager {
     public void playerLeaved(Player player) {
         invitedPlayers.remove(player);
 
-        for (Map.Entry<Player, Set<Player>> office : joinedPlayers.entrySet()) {
-            if (office.getKey().equals(player)) {
-                clearOffice(player);
-                joinedPlayers.remove(player);
-                return;
-            } else {
+        if (joinedPlayers.containsKey(player)) {
+            clearOffice(player);
+            joinedPlayers.remove(player);
+        } else {
+            for (Map.Entry<Player, Set<Player>> office : joinedPlayers.entrySet()) {
                 office.getValue().remove(player);
             }
         }

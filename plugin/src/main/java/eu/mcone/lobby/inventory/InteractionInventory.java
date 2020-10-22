@@ -82,17 +82,17 @@ public class InteractionInventory extends CoreInventory {
                 if (settings.isStacking()) {
                     if (!LobbyGames.getInstance().isPlaying(p)) {
                         if (!LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(lc.bukkit())) {
-                            if (LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(lc.bukkit()).equals(VanishPlayerVisibility.NOBODY) || LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(lc.bukkit()).equals(VanishPlayerVisibility.ONLY_VIPS)) {
+                            if (!LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(lc.bukkit()).equals(VanishPlayerVisibility.NOBODY)
+                                    || !LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(lc.bukkit()).equals(VanishPlayerVisibility.ONLY_VIPS)
+                            ) {
+                                p.setPassenger(lc.bukkit());
+                                CoreSystem.getInstance().createActionBar()
+                                        .message("§f§oBenutze LSHIFT um abzusteigen")
+                                        .send(lc.bukkit());
+                                LobbyPlugin.getInstance().getMessenger().sendSuccess(lc.bukkit(), "Du wirst nun von ![" + p.getName() + "] getragen.");
+                                LobbyPlugin.getInstance().getMessenger().sendError(p, "Schleiche um ![" + lc.bukkit().getName() + "] fallen zu lassen");
 
-
-                            p.setPassenger(lc.bukkit());
-                            CoreSystem.getInstance().createActionBar()
-                                    .message("§f§oBenutze LSHIFT um abzusteigen")
-                                    .send(lc.bukkit());
-                            LobbyPlugin.getInstance().getMessenger().sendSuccess(lc.bukkit(), "Du wirst nun von ![" + p.getName() + "] getragen.");
-                            LobbyPlugin.getInstance().getMessenger().sendError(p, "Schleiche um ![" + lc.bukkit().getName() + "] fallen zu lassen");
-
-                            Lobby.getSystem().getStackingManager().stack(p, clicked);
+                                Lobby.getSystem().getStackingManager().stack(p, clicked);
 
                             } else {
                                 LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Spieler hat seine Spielersichtbarkeit ![nicht auf alle] geschaltet!");

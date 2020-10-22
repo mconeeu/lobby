@@ -61,12 +61,12 @@ public class LobbyVanishManager implements VanishManager {
     }
 
     @Override
-    public void setVanishPlayerVisibility(Player p, VanishPlayerVisibility target) {
-        setVanishPlayerVisibility(p, target, true);
+    public boolean setVanishPlayerVisibility(Player p, VanishPlayerVisibility target) {
+        return setVanishPlayerVisibility(p, target, true);
     }
 
     @Override
-    public void setVanishPlayerVisibility(Player p, VanishPlayerVisibility target, boolean notify) {
+    public boolean setVanishPlayerVisibility(Player p, VanishPlayerVisibility target, boolean notify) {
         if (silentLobbyPlayers.contains(p)) {
             throw new IllegalStateException("Could not change VanishTarget from " + p.getName() + " to " + target.name() + ". Player is in SilentLobby!");
         }
@@ -90,7 +90,11 @@ public class LobbyVanishManager implements VanishManager {
             if (notify) {
                 LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Du hast die Spielersichtbarkeit auf ![" + target.getName() + "] geändert!");
             }
+
+            return true;
         }
+
+        return false;
     }
 
     @Override

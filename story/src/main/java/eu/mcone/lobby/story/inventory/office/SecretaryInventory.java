@@ -18,35 +18,46 @@ public class SecretaryInventory extends CoreInventory {
 
     private static final CoreAnvilInventory ANVIL_INVENTORY = CoreSystem.getInstance().createAnvilInventory(event -> {
         if (event.getSlot().equals(AnvilSlot.OUTPUT)) {
-            String name = event.getName();
+            String name = event.getName().replace(" ", "");
 
             Player p = event.getPlayer();
             Player t = Bukkit.getPlayer(name);
 
             if (t != null && !t.equals(event.getPlayer())) {
-                LobbyStory.getInstance().getOfficeManager().inviteToOffice(p, t);
-               LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.NOTE_STICKS);
+                if (!LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
+                    LobbyStory.getInstance().getOfficeManager().inviteToOffice(p, t);
+                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.NOTE_STICKS);
+                    p.closeInventory();
+                } else {
+                    new ConfirmSilentLobbyQuitInventory(p, t, ConfirmSilentLobbyQuitInventory.Target.OWNER, () -> {
+                        LobbyPlugin.getInstance().getVanishManager().quitSilentLobby(p);
+
+                        LobbyStory.getInstance().getOfficeManager().inviteToOffice(p, t);
+                        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.NOTE_STICKS);
+                        p.closeInventory();
+                    });
+                }
             } else {
                 LobbyPlugin.getInstance().getMessenger().sendError(p, "Dieser Spieler ![" + name + "] ist nicht online!");
             }
-
-            p.closeInventory();
         }
     }).setItem(
             AnvilSlot.INPUT_LEFT,
             new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 13)
-                    .displayName("?")
+                    .displayName(" ")
                     .create()
     );
 
     public SecretaryInventory(Player p) {
         super("§8» §b§lSekretärin §8| §fMenü", p, InventorySlot.ROW_3, InventoryOption.FILL_EMPTY_SLOTS);
 
-        setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§fZum Büro einladen")
-                .lore("§fLade einen Spieler zu deinen Büro ein")
-                .create(), e -> {
-            ANVIL_INVENTORY.open(p);
-        });
+        setItem(
+                InventorySlot.ROW_2_SLOT_5,
+                new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§fZum Büro einladen")
+                        .lore("§fLade einen Spieler zu deinen Büro ein")
+                        .create(),
+                e -> ANVIL_INVENTORY.open(p)
+        );
 
         openInventory();
     }
