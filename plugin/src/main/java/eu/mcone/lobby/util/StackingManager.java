@@ -36,7 +36,9 @@ public class StackingManager {
             carrier.eject();
 
 
-            LobbyPlugin.getInstance().getMessenger().sendInfo(stacked, "![" + carrier.getName() + "] ist nun nicht mehr auf deinem Kopf!");
+            if (stacked.isOnline()) {
+                LobbyPlugin.getInstance().getMessenger().sendInfo(stacked, "![" + carrier.getName() + "] ist nun nicht mehr auf deinem Kopf!");
+            }
             LobbyPlugin.getInstance().getMessenger().send(carrier, "![" + stacked.getName() + "] trägt dich nicht mehr!");
             return true;
         } else return false;
