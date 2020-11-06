@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 @Getter
 public enum JumpNRun {
+
     STIPCLUB_KIRPHA(
             0,
             new ItemBuilder(Material.LEATHER_BOOTS, 1, 0).displayName("§fStripclub").lore("§8» §f§nLinksklick§8 | §7§oBetreten").create(),

@@ -35,7 +35,7 @@ public class InteractionInventory extends CoreInventory {
         double onlinetime = Math.floor(((double) (clickedCorePlayer.isNicked() ? clickedCorePlayer.getNick().getOnlineTime() : clickedCorePlayer.getOnlinetime()) / 60 / 60) * 100) / 100;
 
         setItem(InventorySlot.ROW_1_SLOT_5, new Skull((clickedCorePlayer.isNicked() ? clickedCorePlayer.getNick().getName() : clicked.getName()), 1).toItemBuilder().displayName("§f§l" + clicked.getName()).lore(
-                CoreSystem.getInstance().getCorePlayer(clicked).getMainGroup().getLabel(),
+               clickedCorePlayer.isNicked() ? CoreSystem.getInstance().getCorePlayer(clicked).getNick().getGroup().getLabel() : CoreSystem.getInstance().getCorePlayer(clicked).getMainGroup().getLabel(),
                 "",
                 "§7Coins: §f" + (clickedCorePlayer.isNicked() ? clickedCorePlayer.getNick().getCoins() : clickedCorePlayer.getCoins()),
                 "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + clickedCorePlayer.getState().getName()
