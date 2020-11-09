@@ -61,7 +61,9 @@ public class PlayerJoinListener implements Listener {
         postloadLobbyPlayer(p, lp);
 
         if (settings.isRankBoots()) {
-            LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
+            if (!e.getCorePlayer().isNicked()) {
+                LobbyPlugin.getInstance().getBackpackManager().setRankBoots(p);
+            }
         }
 
         Lobby.getSystem().registerLobbyPlayer(lp);
