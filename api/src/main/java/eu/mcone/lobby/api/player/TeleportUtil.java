@@ -18,9 +18,7 @@ public class TeleportUtil {
     private static final Set<Player> inAnimation = new HashSet<>();
 
     static {
-        CoreSystem.getInstance().getVanishManager().registerVanishRule(20, (player, playerCanSee) -> {
-            playerCanSee.removeIf(inAnimation::contains);
-        });
+        CoreSystem.getInstance().getVanishManager().registerVanishRule(20, (player, playerCanSee) -> playerCanSee.removeIf(inAnimation::contains));
     }
 
     public static void teleportWithAnimation(Player p, Location location) {

@@ -52,7 +52,6 @@ public class ConfirmSilentLobbyQuitInventory extends CoreInventory {
         );
 
         openInventory();
-        System.out.println("opened inventory");
     }
 
 }
