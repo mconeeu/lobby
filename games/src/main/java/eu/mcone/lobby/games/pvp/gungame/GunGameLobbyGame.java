@@ -110,7 +110,6 @@ public class GunGameLobbyGame extends AbstractLobbyPvPGame implements GunGame {
     public void setFightItems(Player p) {
         Map<Integer, ItemBuilder> items = GungameArmor.getItemsForStreak(p.getLevel());
 
-        p.getActivePotionEffects().clear();
         p.getInventory().setArmorContents(null);
         p.getInventory().clear();
 

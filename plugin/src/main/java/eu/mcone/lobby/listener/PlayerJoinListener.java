@@ -17,9 +17,9 @@ import eu.mcone.lobby.api.event.LobbyPlayerLoadedEvent;
 import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.scoreboard.SidebarObjective;
-import eu.mcone.lobby.api.player.settings.JoinPlayerVisibility;
 import eu.mcone.lobby.api.player.settings.LobbySettings;
 import eu.mcone.lobby.api.player.settings.SpawnVillage;
+import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.scheduler.NpcEmoteScheduler;
 import eu.mcone.lobby.scheduler.WorldRealTimeScheduler;
 import eu.mcone.lobby.story.LobbyStory;
@@ -31,16 +31,19 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.potion.PotionEffect;
 
 import java.util.Random;
 
 public class PlayerJoinListener implements Listener {
 
+    private static final Random SPAWN_RANDOM = new Random();
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
 
-        p.setGameMode(GameMode.SURVIVAL);
+        preloadLobbyPlayer(p);
 
         p.getInventory().setItem(0, HotbarItem.LOADING);
         p.getInventory().setItem(7, HotbarItem.LOADING);
@@ -80,19 +83,13 @@ public class PlayerJoinListener implements Listener {
         if (e.getLoadReason().equals(CorePlayerLoadedEvent.Reason.JOIN)) {
             switch (lp.getSettings().getSpawnPoint()) {
                 case SPAWN: {
-                    if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.RANDOM)) {
-                        int spawnlocation = getRandomNumberInRange(1, 3);
-                        if (spawnlocation == 1) {
-                            LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn2");
-                        } else {
-                            LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
-                        }
+                    if (lp.getSettings().getSpawnVillage() == SpawnVillage.RANDOM) {
+                        LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, SPAWN_RANDOM.nextBoolean() ? "spawn" : "spawn2");
                     } else {
-                        if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.RAISEN)) {
-                            LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
-                        } else if (lp.getSettings().getSpawnVillage().equals(SpawnVillage.SKYLECK)) {
-                            LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn2");
-                        }
+                        LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(
+                                p,
+                                lp.getSettings().getSpawnVillage().equals(SpawnVillage.RAISEN) ? "spawn" : "spawn2"
+                        );
                     }
                     break;
                 }
@@ -110,9 +107,14 @@ public class PlayerJoinListener implements Listener {
             p.closeInventory();
         }
 
-
-        if (lp.getSettings().getJoinPlayerVisibility().equals(JoinPlayerVisibility.SILENTLOBBY)) {
-            p.getInventory().setItem(2, null);
+        switch (lp.getSettings().getJoinPlayerVisibility()) {
+            case PLAYERHIDER: {
+                LobbyPlugin.getInstance().getVanishManager().setVanishPlayerVisibility(p, VanishPlayerVisibility.NOBODY);
+                break;
+            }
+            case SILENTLOBBY: {
+                LobbyPlugin.getInstance().getVanishManager().joinSilentLobby(p);
+            }
         }
 
         CorePlayer cp = CoreSystem.getInstance().getCorePlayer(p);
@@ -125,6 +127,7 @@ public class PlayerJoinListener implements Listener {
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
 
+        p.setGameMode(GameMode.SURVIVAL);
         p.setMaxHealth(20);
         p.setHealth(20);
         p.setLevel(0);
@@ -133,23 +136,19 @@ public class PlayerJoinListener implements Listener {
         p.setWalkSpeed(0.2F);
         p.setFlying(false);
         p.setAllowFlight(false);
-
     }
 
     private static void postloadLobbyPlayer(Player p, LobbyPlayer lp) {
-        p.getActivePotionEffects().clear();
+        for (PotionEffect effect : p.getActivePotionEffects()) {
+            p.removePotionEffect(effect.getType());
+        }
+
         LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, lp);
     }
 
     public static void resetPlayerDataAndHotbarItems(Player p) {
         preloadLobbyPlayer(p);
         postloadLobbyPlayer(p, LobbyPlugin.getInstance().getLobbyPlayer(p));
-    }
-
-
-    private static int getRandomNumberInRange(int min, int max) {
-        Random r = new Random();
-        return r.nextInt((max - min) + 1) + min;
     }
 
 }

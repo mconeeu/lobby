@@ -6,6 +6,7 @@
 package eu.mcone.lobby.util;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.inventory.PlayerInventorySlot;
 import eu.mcone.coresystem.api.core.player.Group;
 import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -111,10 +112,9 @@ public class LobbyVanishManager implements VanishManager {
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
             LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Du bist nun in der ![Privaten Lobby]. Hier bist du vollkommen ungestört!");
 
-
             if (LobbyGames.getInstance().getCurrentGame(p) instanceof JumpNRunGame) {
-                p.getInventory().setItem(1, HotbarItem.SILENT_LOBBY_QUIT);
-                p.getInventory().setItem(0, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
+                p.getInventory().setItem(PlayerInventorySlot.HOTBAR_SLOT_1, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
+                p.getInventory().setItem(PlayerInventorySlot.HOTBAR_SLOT_2, HotbarItem.SILENT_LOBBY_QUIT);
             } else {
                 LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, LobbyPlugin.getInstance().getLobbyPlayer(p));
             }

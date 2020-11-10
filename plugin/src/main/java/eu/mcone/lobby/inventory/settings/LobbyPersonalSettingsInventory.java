@@ -26,7 +26,7 @@ public class LobbyPersonalSettingsInventory extends CoreInventory {
 
         setItem(InventorySlot.ROW_2_SLOT_2, new ItemBuilder(Material.TRIPWIRE_HOOK, 1, 0).displayName("§f§lJoinTyp").create());
         setItem(InventorySlot.ROW_3_SLOT_2, settings.getJoinPlayerVisibility().getItem().create(), e -> {
-            if (p.hasPermission("lobby.silenthub.joinspawn")) {
+            if (p.hasPermission("lobby.silenthub")) {
                 switch (settings.getJoinPlayerVisibility()) {
                     case NO_PREFERENCE: {
                         settings.setJoinPlayerVisibility(JoinPlayerVisibility.SILENTLOBBY);

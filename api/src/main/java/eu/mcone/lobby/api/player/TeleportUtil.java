@@ -39,7 +39,7 @@ public class TeleportUtil {
                 p.setGameMode(GameMode.SPECTATOR);
                 LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.GLASS);
                 LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CLICK);
-                p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, 1));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 61, 1));
 
                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                     p.teleport(makeFixedLocation(p.getLocation().add(0, 20, 0)));

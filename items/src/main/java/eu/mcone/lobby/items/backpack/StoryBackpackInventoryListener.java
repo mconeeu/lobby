@@ -6,11 +6,13 @@
 package eu.mcone.lobby.items.backpack;
 
 import eu.mcone.coresystem.api.bukkit.inventory.category.CategoryInventory;
+import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.gameapi.api.backpack.BackpackInventoryListener;
 import eu.mcone.gameapi.api.backpack.BackpackItem;
 import eu.mcone.gameapi.api.backpack.Category;
 import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.lobby.api.items.LobbyCategory;
 import eu.mcone.lobby.api.items.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.entity.Player;
@@ -20,7 +22,7 @@ import java.util.Set;
 public class StoryBackpackInventoryListener extends BackpackInventoryListener {
 
     public StoryBackpackInventoryListener() {
-        super("Story Item");
+        super(GamePlugin.getGamePlugin().getBackpackManager().getCategory(LobbyCategory.STORY_ITEMS.name()));
     }
 
     @Override

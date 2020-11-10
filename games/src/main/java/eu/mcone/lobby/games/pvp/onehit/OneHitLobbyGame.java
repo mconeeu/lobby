@@ -9,8 +9,8 @@ import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.world.CoreLocation;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.items.LobbyItem;
 import eu.mcone.lobby.api.games.pvp.OneHit;
+import eu.mcone.lobby.api.items.LobbyItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.games.AbstractLobbyPvPGame;
 import eu.mcone.lobby.games.listener.OneHitListener;
@@ -78,7 +78,6 @@ public class OneHitLobbyGame extends AbstractLobbyPvPGame implements OneHit {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
         p.getInventory().clear();
-        p.getActivePotionEffects().clear();
         p.setMaxHealth(2);
         p.setHealth(2);
 

@@ -91,15 +91,15 @@ public class LobbyPlayer extends eu.mcone.coresystem.api.bukkit.player.plugin.Ga
         saveData();
     }
 
-    public void removeChests(int preAmount) {
-        if (chests - preAmount < 0) {
-            preAmount = chests;
-            LobbyPlugin.getInstance().sendConsoleMessage("§7Tried to remove more coins than Player §f" + corePlayer.getName() + "§7 has! (" + chests + "-" + preAmount + ")");
+    public int removeChests(int amount) {
+        if ((chests - amount) < 0) {
+            amount = chests;
         }
 
-        final int amount = preAmount;
         this.chests -= amount;
         saveData();
+
+        return amount;
     }
 
     public boolean hasLobbyItem(LobbyItem item) {

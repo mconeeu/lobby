@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.listener;
 
+import eu.mcone.gameapi.api.event.backpack.BackpackItemRemoveEvent;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -23,6 +24,12 @@ import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 
 public class GeneralPlayerListener implements Listener {
+
+    @EventHandler
+    public void on(BackpackItemRemoveEvent e) {
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().bukkit());
+        e.setApplyRankBoots(lp.getSettings().isRankBoots());
+    }
 
     @EventHandler
     public void onInventoryClickEvent(InventoryClickEvent e) {

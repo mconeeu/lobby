@@ -11,29 +11,12 @@ permissions:
     children:
       lobby.admin:
         description: Allows to use the /lobbyplugin command
-      lobby.trail:
-        description: Use all Trails
-        children:
-          lobby.trail.cookie:
-            description: Cookie Trail
-          lobby.trail.glow:
-            description: Glow Trail
-          lobby.trail.ender:
-            description: Ender Trail
-          lobby.trail.musik:
-            description: Musik Trail
-          lobby.trail.herzen:
-            description: Herzen Trail
-          lobby.trail.lava:
-            description: Lava Trail
-          lobby.trail.schnee:
-            description: Schnee Trail
-          lobby.trail.wasser:
-            description: Wasser Trail
       lobby.chests:
         description: Manage all chests
       lobby.silenthub:
         description: Allows to join to the SilenLobby
+      lobby.game:
+        description: Access to game functions
 
 translations:
   # prefix

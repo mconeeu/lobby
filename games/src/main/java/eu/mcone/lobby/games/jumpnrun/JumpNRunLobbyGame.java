@@ -189,7 +189,6 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
         p.getInventory().clear();
 
         p.setGameMode(GameMode.ADVENTURE);
-        p.getActivePotionEffects().clear();
         p.removePotionEffect(PotionEffectType.INVISIBILITY);
 
         p.setMaxHealth(20);

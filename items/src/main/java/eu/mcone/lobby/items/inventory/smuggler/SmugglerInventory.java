@@ -53,9 +53,9 @@ public class SmugglerInventory extends CoreInventory {
                     e -> new ChestBuyInventorySmuggler(p));
         }
 
-
         openInventory();
     }
+
 }
 
 
