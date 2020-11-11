@@ -35,7 +35,7 @@ public class InteractionInventory extends CoreInventory {
         double onlinetime = Math.floor(((double) (clickedCorePlayer.isNicked() ? clickedCorePlayer.getNick().getOnlineTime() : clickedCorePlayer.getOnlinetime()) / 60 / 60) * 100) / 100;
 
         setItem(InventorySlot.ROW_1_SLOT_5, new Skull((clickedCorePlayer.isNicked() ? clickedCorePlayer.getNick().getName() : clicked.getName()), 1).toItemBuilder().displayName("§f§l" + clicked.getName()).lore(
-               clickedCorePlayer.isNicked() ? CoreSystem.getInstance().getCorePlayer(clicked).getNick().getGroup().getLabel() : CoreSystem.getInstance().getCorePlayer(clicked).getMainGroup().getLabel(),
+                clickedCorePlayer.isNicked() ? CoreSystem.getInstance().getCorePlayer(clicked).getNick().getGroup().getLabel() : CoreSystem.getInstance().getCorePlayer(clicked).getMainGroup().getLabel(),
                 "",
                 "§7Coins: §f" + (clickedCorePlayer.isNicked() ? clickedCorePlayer.getNick().getCoins() : clickedCorePlayer.getCoins()),
                 "§7Onlinetime: §f" + onlinetime + " Stunden", "§7Status: " + clickedCorePlayer.getState().getName()
@@ -85,14 +85,20 @@ public class InteractionInventory extends CoreInventory {
                             if (!LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(lc.bukkit()).equals(VanishPlayerVisibility.NOBODY)
                                     || !LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(lc.bukkit()).equals(VanishPlayerVisibility.ONLY_VIPS)
                             ) {
-                                p.setPassenger(lc.bukkit());
-                                CoreSystem.getInstance().createActionBar()
-                                        .message("§f§oBenutze LSHIFT um abzusteigen")
-                                        .send(lc.bukkit());
-                                LobbyPlugin.getInstance().getMessenger().sendSuccess(lc.bukkit(), "Du wirst nun von ![" + p.getName() + "] getragen.");
-                                LobbyPlugin.getInstance().getMessenger().sendError(p, "Schleiche um ![" + lc.bukkit().getName() + "] fallen zu lassen");
+                                if (p.getLocation().distance(clicked.getLocation()) < 8) {
 
-                                Lobby.getSystem().getStackingManager().stack(p, clicked);
+                                    p.setPassenger(lc.bukkit());
+                                    CoreSystem.getInstance().createActionBar()
+                                            .message("§f§oBenutze LSHIFT um abzusteigen")
+                                            .send(lc.bukkit());
+                                    LobbyPlugin.getInstance().getMessenger().sendSuccess(lc.bukkit(), "Du wirst nun von ![" + p.getName() + "] getragen.");
+                                    LobbyPlugin.getInstance().getMessenger().sendError(p, "Schleiche um ![" + lc.bukkit().getName() + "] fallen zu lassen");
+
+                                    Lobby.getSystem().getStackingManager().stack(p, clicked);
+                                } else {
+                                    p.closeInventory();
+                                    LobbyPlugin.getInstance().getMessenger().send(p, "§4Du bist zu weit weg um den Spieler zu tragen!");
+                                }
 
                             } else {
                                 LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Spieler hat seine Spielersichtbarkeit ![nicht auf alle] geschaltet!");

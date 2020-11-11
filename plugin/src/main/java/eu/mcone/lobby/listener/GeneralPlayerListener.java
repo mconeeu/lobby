@@ -11,6 +11,7 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.inventory.InteractionInventory;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -27,8 +28,11 @@ public class GeneralPlayerListener implements Listener {
 
     @EventHandler
     public void on(BackpackItemRemoveEvent e) {
-        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().bukkit());
-        e.setApplyRankBoots(lp.getSettings().isRankBoots());
+
+        Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
+            LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().bukkit());
+            e.setApplyRankBoots(lp.getSettings().isRankBoots());
+        },20);
     }
 
     @EventHandler

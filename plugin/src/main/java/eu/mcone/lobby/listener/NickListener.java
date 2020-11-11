@@ -15,6 +15,7 @@ import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.hotbar.HotbarGeneralCategorys;
 import eu.mcone.lobby.api.player.hotbar.items.enums.HotbarItemEnum;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -48,7 +49,12 @@ public class NickListener implements Listener {
 
     private void onNickChange(Player p, LobbyPlayer lp, Nick nick) {
         Lobby.getSystem().getStackingManager().unstack(p);
-        Lobby.getSystem().getBackpackManager().setRankBoots(p);
+
+        Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
+            if (lp.getSettings().isRankBoots()) {
+                Lobby.getSystem().getBackpackManager().setRankBoots(p);
+            }
+        }, 5);
 
         HotbarItemEnum hotbarItem = Objects.requireNonNull(HotbarGeneralCategorys.PROFILE.getItem(lp));
         ItemBuilder item = hotbarItem.isMainItem()
