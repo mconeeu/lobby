@@ -6,6 +6,7 @@
 package eu.mcone.lobby.inventory;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -24,7 +25,6 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class InteractionInventory extends CoreInventory {
@@ -120,7 +120,7 @@ public class InteractionInventory extends CoreInventory {
             });
 
             openInventory();
-            getPlayer().playSound(getPlayer().getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
+            Sound.success(p);
         }, "FRIENDS");
     }
 

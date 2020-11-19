@@ -1,15 +1,14 @@
 package eu.mcone.lobby.inventory.compass;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.lobby.Lobby;
-import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.games.jumpnrun.JumpNRun;
 import eu.mcone.lobby.api.games.jumpnrun.JumpNRunGame;
 import eu.mcone.lobby.games.LobbyGames;
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class JumpNRunInventory extends CoreInventory {
@@ -23,7 +22,7 @@ public class JumpNRunInventory extends CoreInventory {
                 setItem(i, jumpNRun.getItemstack(), e -> LobbyGames.getInstance().getGame(JumpNRunGame.class).startGame(player, jumpNRun));
                 i++;
             }
-       LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_PLING);
+            Sound.done(player);
         }, 2L);
 
         setItem(InventorySlot.ROW_3_SLOT_9, BACK_ITEM, e -> new LobbyGamesInventory(player));

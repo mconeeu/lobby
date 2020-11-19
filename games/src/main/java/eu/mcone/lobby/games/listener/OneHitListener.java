@@ -5,15 +5,19 @@
 
 package eu.mcone.lobby.games.listener;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.games.inventory.OneHitGadgetInventory;
-import eu.mcone.lobby.games.pvp.onehit.OneHitLobbyGame;
 import eu.mcone.lobby.games.pvp.onehit.OneHitItem;
+import eu.mcone.lobby.games.pvp.onehit.OneHitLobbyGame;
 import fr.neatmonster.nocheatplus.checks.CheckType;
 import fr.neatmonster.nocheatplus.hooks.NCPExemptionManager;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Effect;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
@@ -50,7 +54,7 @@ public class OneHitListener implements Listener {
                     LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
                     lp.reloadScoreboardIfEnabled();
 
-                    player.getLocation().getWorld().playSound(p.getLocation(), Sound.LEVEL_UP, 1.0F, 1.0F);
+                    Sound.success(player);
                     if (player != p) {
                         LobbyPlugin.getInstance().getMessenger().send(player, "§7Der Spieler §f" + p.getName() + " §7hat eine §e" + e.getNewLevel() + "§7er Killstreak!");
                     } else {
@@ -87,7 +91,7 @@ public class OneHitListener implements Listener {
             vec = vec.setY(Math.max(0.4000000059604645D, vec.getY())).multiply(1.5F);
             p.setVelocity(vec);
 
-            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ENDERMAN_TELEPORT);
+            Sound.teleport(p);
             p.playEffect(p.getLocation(), Effect.BLAZE_SHOOT, 10);
         }
     }
@@ -132,7 +136,7 @@ public class OneHitListener implements Listener {
                 LobbyPlayer lpk = LobbyPlugin.getInstance().getLobbyPlayer(k);
                 lpk.reloadScoreboardIfEnabled();
                 lpk.getCorePlayer().addCoins(2);
-                LobbyPlugin.getInstance().getPlayerSounds().playSounds(k, Sound.LEVEL_UP);
+                Sound.done(p);
                 k.getInventory().setItem(6, OneHitItem.ONEHIT_ARROW);
                 k.setLevel(k.getLevel() + 1);
                 k.setExp(1);

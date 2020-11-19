@@ -6,6 +6,7 @@
 package eu.mcone.lobby.items.inventory.chestopening;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
@@ -19,7 +20,6 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 class ChestFinalInventory extends CoreInventory {
@@ -76,7 +76,7 @@ class ChestFinalInventory extends CoreInventory {
             } else {
                 p.closeInventory();
                 p.sendMessage("§8[§7§l!§8] §eChestOpening §8»§7 Du hast nicht genügend Kisten!");
-                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+                Sound.error(player);
 
             }
         });
@@ -91,8 +91,8 @@ class ChestFinalInventory extends CoreInventory {
             );
         }
 
-        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.LEVEL_UP);
-        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ANVIL_BREAK);
+        Sound.play(p, org.bukkit.Sound.LEVEL_UP);
+        Sound.play(p, org.bukkit.Sound.ANVIL_BREAK);
 
         openInventory();
     }

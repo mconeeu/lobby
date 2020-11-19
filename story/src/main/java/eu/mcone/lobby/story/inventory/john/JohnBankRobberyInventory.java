@@ -1,6 +1,7 @@
 package eu.mcone.lobby.story.inventory.john;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -8,14 +9,13 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
-import eu.mcone.lobby.api.story.progress.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.items.LobbyItem;
-import eu.mcone.lobby.api.story.progress.StoryProgress;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.api.story.progress.StoryProgress;
+import eu.mcone.lobby.api.story.progress.bank.BankRobberySmallProgress;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -180,8 +180,8 @@ public class JohnBankRobberyInventory extends CoreInventory {
                                             p.getInventory().setItem(2, null);
 
                                             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "office-entrance");
-                                            LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(p);
-                                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.EXPLODE);
+                                            Sound.error(player);
+                                            Sound.play(p, org.bukkit.Sound.EXPLODE);
                                             CoreSystem.getInstance().createTitle().fadeIn(1).stay(3).title("§cBank Raub").subTitle("§4gescheitert").fadeOut(1).send(p);
                                             p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 | §7Die §fMission §7ist gescheitert. Du hast zu §flange gebraucht§7!");
 

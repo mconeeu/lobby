@@ -1,5 +1,6 @@
 package eu.mcone.lobby.inventory.settings.hotbar;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -8,7 +9,6 @@ import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.hotbar.HotbarGeneralCategorys;
 import eu.mcone.lobby.api.player.hotbar.items.enums.HotbarItemEnum;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class HotbarItemsInventory extends CoreInventory {
@@ -26,7 +26,7 @@ public class HotbarItemsInventory extends CoreInventory {
                     lp.saveData();
 
                     LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, lp);
-                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
+                    Sound.click(p);
 
                     new LobbyHotbarSettingsInventory(p);
                 });
@@ -37,7 +37,7 @@ public class HotbarItemsInventory extends CoreInventory {
         setItem(InventorySlot.ROW_4_SLOT_9, BACK_ITEM, e ->
                 new LobbyHotbarSettingsInventory(p));
 
-        LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_PLING);
+        Sound.done(p);
         openInventory();
     }
 }

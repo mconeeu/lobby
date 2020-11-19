@@ -6,6 +6,7 @@
 package eu.mcone.lobby.util;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.PlayerInventorySlot;
 import eu.mcone.coresystem.api.core.player.Group;
 import eu.mcone.gameapi.api.GameAPI;
@@ -20,7 +21,6 @@ import eu.mcone.lobby.listener.VanishListener;
 import eu.mcone.lobby.story.LobbyStory;
 import lombok.Getter;
 import org.bukkit.Effect;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -77,7 +77,7 @@ public class LobbyVanishManager implements VanishManager {
             CoreSystem.getInstance().getVanishManager().recalculateVanishes();
 
             p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
-            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.LAVA_POP);
+            Sound.play(p, org.bukkit.Sound.LAVA_POP);
             p.playEffect(p.getLocation(), Effect.FIREWORKS_SPARK, 1);
 
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(target.equals(VanishPlayerVisibility.EVERYBODY));
@@ -161,8 +161,8 @@ public class LobbyVanishManager implements VanishManager {
     }
 
     private static void playSilentLobbyEffects(Player p) {
-        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.GLASS);
-        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.EXPLODE);
+        Sound.play(p, org.bukkit.Sound.GLASS);
+        Sound.play(p, org.bukkit.Sound.EXPLODE);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_HUGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);
         p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 10);

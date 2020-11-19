@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.items.inventory.trader;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -31,7 +32,7 @@ class TicketBuyInventory extends CoreInventory {
                 lp.addLobbyItem(LobbyItem.BOAT_PASS);
                 p.sendMessage("§8[§7§l!§8] §fServer §8» §7Du hast ein Ticket bekommen");
             } else {
-                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+                Sound.error(player);
                 p.sendMessage( "§8[§7§l!§8] §fServer §8» §4Du besitzt diese Item bereits!");
             }
             p.closeInventory();

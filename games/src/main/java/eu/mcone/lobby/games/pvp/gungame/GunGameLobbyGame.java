@@ -6,6 +6,7 @@
 package eu.mcone.lobby.games.pvp.gungame;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.world.CoreLocation;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -15,7 +16,10 @@ import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.games.AbstractLobbyPvPGame;
 import eu.mcone.lobby.games.listener.GungameListener;
 import eu.mcone.lobby.games.scoreboard.GungameObjective;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -84,7 +88,7 @@ public class GunGameLobbyGame extends AbstractLobbyPvPGame implements GunGame {
                 SAVE_PLAYER.remove(p);
 
                 setFightItems(p);
-                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.NOTE_PLING);
+                Sound.play(p, org.bukkit.Sound.NOTE_PLING);
                 LobbyPlugin.getInstance().getMessenger().send(p, "§cDu kannst nun angreifen und angegriffen werden!");
             }, 60);
         }

@@ -6,6 +6,7 @@
 package eu.mcone.lobby.items.inventory.trader;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -33,7 +34,7 @@ class ChestBuyInventory extends CoreInventory {
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §aDu hast 1 Kiste gekauft!");
             } else {
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §4Du hast nicht genügend Emeralds!");
-                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+                Sound.error(player);
             }
             p.closeInventory();
         });
@@ -47,7 +48,7 @@ class ChestBuyInventory extends CoreInventory {
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §aDu hast 5 Kisten gekauft!");
             } else {
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §4Du hast nicht genügend Emeralds!");
-                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+                Sound.error(player);
             }
             p.closeInventory();
         });
@@ -61,7 +62,7 @@ class ChestBuyInventory extends CoreInventory {
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §aDu hast 10 Kisten gekauft!");
             } else {
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §4Du hast nicht genügend Emeralds");
-                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+                Sound.error(player);
             }
             p.closeInventory();
         });

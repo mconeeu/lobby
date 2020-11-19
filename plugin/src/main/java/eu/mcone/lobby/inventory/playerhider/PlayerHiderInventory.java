@@ -1,6 +1,7 @@
 package eu.mcone.lobby.inventory.playerhider;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -11,7 +12,6 @@ import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.util.LobbyVanishManager;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class PlayerHiderInventory extends CoreInventory {
@@ -76,10 +76,10 @@ public class PlayerHiderInventory extends CoreInventory {
             }
         } else {
             LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, lobbyPlayer);
-            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
+            Sound.click(p);
 
             if (vanishPlayerVisibility.equals(VanishPlayerVisibility.EVERYBODY)) {
-                LobbyPlugin.getInstance().getBackpackManager().setCurrentBackpackItem(LobbyPlugin.getInstance().getGamePlayer(player));
+                LobbyPlugin.getInstance().getBackpackManager().setCurrentBackpackItem(LobbyPlugin.getInstance().getGamePlayer(player), true);
             }
         }
     }

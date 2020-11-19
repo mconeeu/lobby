@@ -1,5 +1,6 @@
 package eu.mcone.lobby.inventory.settings;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -12,7 +13,6 @@ import eu.mcone.lobby.api.player.settings.SpawnPoint;
 import eu.mcone.lobby.api.player.settings.SpawnVillage;
 import eu.mcone.lobby.scheduler.WorldRealTimeScheduler;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class LobbyWorldSettingsInventory extends CoreInventory {
@@ -101,7 +101,7 @@ public class LobbyWorldSettingsInventory extends CoreInventory {
 
     private void setSettings(Player p, LobbyPlayer lp) {
         lp.saveData();
-      LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
+      Sound.click(p);
         new LobbyWorldSettingsInventory(p);
     }
 }

@@ -7,6 +7,7 @@ package eu.mcone.lobby.story.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.npc.NpcInteractEvent;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
@@ -16,12 +17,12 @@ import eu.mcone.gameapi.api.backpack.defaults.DefaultCategory;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.items.LobbyItem;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.story.GeneralStoryNpc;
 import eu.mcone.lobby.api.story.progress.StoryProgress;
 import eu.mcone.lobby.api.story.progress.TraderStoryProgress;
 import eu.mcone.lobby.api.story.progress.TutorialStoryProgress;
 import eu.mcone.lobby.api.story.progress.bank.BankRobberySmallProgress;
-import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.items.casino.CasinoMainInventory;
 import eu.mcone.lobby.items.inventory.bank.BankCreateCardInventory;
@@ -39,7 +40,6 @@ import eu.mcone.lobby.story.inventory.story.CustomerInventory;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
-import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -431,7 +431,7 @@ public class NpcListener implements Listener {
                                 if (tutorialStoryProgress.getId() == 6) {
                                     p.playEffect(p.getLocation(), Effect.EXPLOSION_LARGE, 5);
                                     p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 45, 4500, false, false));
-                                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CAT_PURR);
+                                    Sound.play(p, org.bukkit.Sound.CAT_PURR);
                                     p.playEffect(p.getLocation(), Effect.CRIT, 4);
                                     Objects.requireNonNull(TutorialStoryProgress.getTutorialStoryById(tutorialStoryProgress.getId())).getNpc().toggleVisibility(p, false);
                                 }

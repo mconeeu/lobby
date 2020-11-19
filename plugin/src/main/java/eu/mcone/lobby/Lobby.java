@@ -22,7 +22,6 @@ import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.scoreboard.LobbyObjective;
 import eu.mcone.lobby.api.player.settings.HotbarSettingsHandler;
-import eu.mcone.lobby.api.player.sounds.PlayerSounds;
 import eu.mcone.lobby.command.LobbyCMD;
 import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.games.command.GameCMD;
@@ -51,8 +50,6 @@ public class Lobby extends LobbyPlugin {
     private BuildSystem buildSystem;
     @Getter
     private LobbyLiveEventManager liveEventManager;
-    @Getter
-    private PlayerSounds playerSounds;
     @Getter
     private HotbarSettingsHandler hotbarSettings;
     @Getter
@@ -114,9 +111,6 @@ public class Lobby extends LobbyPlugin {
 
         sendConsoleMessage("§aLoading LiveEventManager...");
         liveEventManager = new LobbyLiveEventManager();
-
-        sendConsoleMessage("§aLoading Player Sounds...");
-        playerSounds = new PlayerSounds();
 
         sendConsoleMessage("§aLoading Lobby Hotbar...");
         hotbarSettings = new HotbarSettingsHandler();

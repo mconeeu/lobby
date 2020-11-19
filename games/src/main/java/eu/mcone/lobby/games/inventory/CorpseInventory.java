@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.games.inventory;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -26,7 +27,7 @@ public class CorpseInventory extends CoreInventory {
                 lp.addDefaultItem(DefaultItem.HEAD_SECRET_STRIPCLUB);
                 LobbyPlugin.getInstance().getMessenger().send(p, "§aDu hast den alten Kopf von §fKirpha aufgenommen!");
             } else {
-                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+                Sound.error(player);
                 LobbyPlugin.getInstance().getMessenger().send(p, "§cDu besitzt diese Item bereits!");
             }
 

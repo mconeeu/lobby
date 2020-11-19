@@ -1,6 +1,7 @@
 package eu.mcone.lobby.inventory.settings.scoreboard;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -8,12 +9,11 @@ import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.api.player.scoreboard.widgets.ScoreboardWidgets;
 import eu.mcone.lobby.api.player.scoreboard.SidebarObjective;
+import eu.mcone.lobby.api.player.scoreboard.widgets.ScoreboardWidgets;
 import eu.mcone.lobby.api.player.settings.LobbySettings;
 import eu.mcone.lobby.inventory.settings.LobbySettingsInventory;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 
@@ -91,7 +91,7 @@ public class ScoreboardWidgetsInventory extends CoreInventory {
 
     private void setSettings(Player p, LobbyPlayer lp) {
         lp.saveData();
-        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
+        Sound.click(p);
         new ScoreboardWidgetsInventory(p);
         lp.getCorePlayer().getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
     }

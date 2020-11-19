@@ -1,6 +1,7 @@
 package eu.mcone.lobby.story.inventory.office;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -11,7 +12,6 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.story.LobbyStory;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class SecretaryInventory extends CoreInventory {
@@ -26,14 +26,14 @@ public class SecretaryInventory extends CoreInventory {
             if (t != null && !t.equals(event.getPlayer())) {
                 if (!LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
                     LobbyStory.getInstance().getOfficeManager().inviteToOffice(p, t);
-                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.NOTE_STICKS);
+                    Sound.click(p);
                     p.closeInventory();
                 } else {
                     new ConfirmSilentLobbyQuitInventory(p, t, ConfirmSilentLobbyQuitInventory.Target.OWNER, () -> {
                         LobbyPlugin.getInstance().getVanishManager().quitSilentLobby(p);
 
                         LobbyStory.getInstance().getOfficeManager().inviteToOffice(p, t);
-                        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.NOTE_STICKS);
+                        Sound.click(p);
                         p.closeInventory();
                     });
                 }

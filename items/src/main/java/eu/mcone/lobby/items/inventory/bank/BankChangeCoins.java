@@ -1,6 +1,7 @@
 package eu.mcone.lobby.items.inventory.bank;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -41,7 +42,7 @@ class BankChangeCoins extends CoreInventory {
                     } else {
                         LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast nicht genügend §cCoins!");
                         player.closeInventory();
-                        LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+                        Sound.error(player);
                     }
                 }
         );
@@ -64,7 +65,7 @@ class BankChangeCoins extends CoreInventory {
                     } else {
                         LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast nicht genügend §cCoins!");
                         player.closeInventory();
-                        LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+                        Sound.error(player);
                     }
                 }
         );
@@ -87,7 +88,7 @@ class BankChangeCoins extends CoreInventory {
                     } else {
                         LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast nicht genügend §cCoins!");
                         player.closeInventory();
-                        LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+                        Sound.error(player);
                     }
                 }
         );

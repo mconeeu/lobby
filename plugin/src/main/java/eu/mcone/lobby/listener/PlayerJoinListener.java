@@ -7,6 +7,7 @@ package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.player.CorePlayerLoadedEvent;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.gameapi.api.event.player.GamePlayerLoadedEvent;
 import eu.mcone.gameapi.api.player.GamePlayer;
@@ -25,7 +26,6 @@ import eu.mcone.lobby.scheduler.WorldRealTimeScheduler;
 import eu.mcone.lobby.story.LobbyStory;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -70,7 +70,7 @@ public class PlayerJoinListener implements Listener {
         Lobby.getSystem().registerLobbyPlayer(lp);
 
         p.playEffect(p.getLocation(), org.bukkit.Effect.HAPPY_VILLAGER, 5);
-        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.FIREWORK_TWINKLE);
+        Sound.play(p, org.bukkit.Sound.FIREWORK_TWINKLE);
 
         loadLobbyPlayer(p, lp, e.getCorePlayerLoadedEvent());
     }

@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.items.inventory.bank;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -55,7 +56,7 @@ public class BankCreateCardInventory extends CoreInventory {
                             p.sendMessage("§8[§7§l!§8] §cNPC §8» §fBänker §8|§7 Du hast doch schon ein Konto bei mir");
                         }
                     } else {
-                        LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+                        Sound.error(player);
                         p.sendMessage("§8[§7§l!§8] §cNPC §8» §fBänker §8|§7 Du hast leider zu wening Coins");
                     }
 

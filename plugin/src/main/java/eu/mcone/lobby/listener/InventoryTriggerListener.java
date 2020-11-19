@@ -6,6 +6,7 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItem;
@@ -13,7 +14,6 @@ import eu.mcone.lobby.api.player.hotbar.HotbarGeneralCategorys;
 import eu.mcone.lobby.inventory.LobbySwitchInventory;
 import eu.mcone.lobby.inventory.compass.MinigamesInventory;
 import eu.mcone.lobby.story.LobbyStory;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -40,7 +40,7 @@ public class InventoryTriggerListener implements Listener {
             } else if (i.getItemMeta().getDisplayName().equals(HotbarGeneralCategorys.NAVIGATOR.getDisplayName())) {
                 e.setCancelled(true);
                 new MinigamesInventory(p);
-              LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
+              Sound.click(p);
             } else if (i.getItemMeta().getDisplayName().equals(HotbarGeneralCategorys.LOBBY_CHANGER.getDisplayName())) {
                 if (!LobbyStory.getInstance().getOfficeManager().isInOffice(p)) {
                     new LobbySwitchInventory(p);

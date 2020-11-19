@@ -6,6 +6,7 @@
 package eu.mcone.lobby.story.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.gameapi.api.GamePlugin;
 import eu.mcone.gameapi.api.backpack.defaults.DefaultItem;
@@ -13,9 +14,9 @@ import eu.mcone.gameapi.api.player.GamePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.items.LobbyItem;
+import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.story.progress.bank.BankRobberySmallProgress;
 import eu.mcone.lobby.api.story.progress.bank.central.BankProgress;
-import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.story.LobbyStory;
 import eu.mcone.lobby.story.inventory.john.JohnBankRobberyInventory;
 import eu.mcone.lobby.story.inventory.story.bank.BankInfosInventory;
@@ -27,7 +28,6 @@ import eu.mcone.lobby.story.inventory.story.chapter1.WitchInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -143,8 +143,9 @@ public class InventoryTriggerListener implements Listener {
                                 p.sendMessage("§8[§7§l!§8] §cNPC §8» §fJohn §8|§7 Wir haben es §fgeschafft§7 ich überlasse dir §f25.000 Coins §7und ein kleines Geschenk im Rucksack, wir sehen uns!");
                                 lp.getCorePlayer().addCoins(25000);
 
-                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.LEVEL_UP);
-                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.NOTE_PIANO);
+                                Sound.done(p);
+                                Sound.play(p, org.bukkit.Sound.LEVEL_UP);
+                                Sound.play(p, org.bukkit.Sound.NOTE_PIANO);
 
                                 JohnBankRobberyInventory.robberyTime.cancel();
 

@@ -1,6 +1,7 @@
 package eu.mcone.lobby.inventory.compass;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.gamemode.Gamemode;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -13,7 +14,6 @@ import eu.mcone.lobby.api.player.settings.SpawnVillage;
 import eu.mcone.lobby.inventory.ServerInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -32,7 +32,7 @@ public class MinigamesInventory extends CompassInventory {
         if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(getClass(), p.getUniqueId()))
             return;
 
-         LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
+         Sound.done(p);
 
         setItem(InventorySlot.ROW_5_SLOT_1, SILVER_PLACEHOLDER);
         setItem(InventorySlot.ROW_5_SLOT_2, SILVER_PLACEHOLDER);
@@ -58,13 +58,13 @@ public class MinigamesInventory extends CompassInventory {
         setItem(InventorySlot.ROW_4_SLOT_9, PLACEHOLDER_ITEM);
 
         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-             LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
+             Sound.done(p);
 
             setItem(InventorySlot.ROW_1_SLOT_4, SILVER_PLACEHOLDER);
             setItem(InventorySlot.ROW_1_SLOT_6, SILVER_PLACEHOLDER);
 
             Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                                LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
+                Sound.done(p);
 
                 setItem(InventorySlot.ROW_1_SLOT_5, CYAN_PLACEHOLDER);
                 setItem(InventorySlot.ROW_2_SLOT_4, CYAN_PLACEHOLDER);
@@ -72,7 +72,7 @@ public class MinigamesInventory extends CompassInventory {
                 setItem(InventorySlot.ROW_3_SLOT_5, CYAN_PLACEHOLDER);
 
                 Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                                    LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
+                    Sound.done(p);
 
                     setItem(InventorySlot.ROW_1_SLOT_3, LIGHT_BLUE_PLACEHOLDER);
                     setItem(InventorySlot.ROW_3_SLOT_3, LIGHT_BLUE_PLACEHOLDER);
@@ -85,7 +85,7 @@ public class MinigamesInventory extends CompassInventory {
                     setItem(InventorySlot.ROW_3_SLOT_8, CYAN_PLACEHOLDER);
 
                     Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                         LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
+                         Sound.done(p);
 
                         setItem(InventorySlot.ROW_1_SLOT_1, LIGHT_BLUE_PLACEHOLDER);
                         setItem(InventorySlot.ROW_3_SLOT_1, LIGHT_BLUE_PLACEHOLDER);
@@ -93,7 +93,7 @@ public class MinigamesInventory extends CompassInventory {
                         setItem(InventorySlot.ROW_3_SLOT_9, LIGHT_BLUE_PLACEHOLDER);
 
                         Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                                            LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
+                            Sound.done(p);
 
                             setItem(InventorySlot.ROW_2_SLOT_9, new ItemBuilder(Gamemode.SKYPVP.getItem(), 1, 0)
                                             .displayName(Gamemode.SKYPVP.getLabel())
@@ -203,7 +203,7 @@ public class MinigamesInventory extends CompassInventory {
                                     });
 
                             Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-                                                LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
+                                Sound.done(p);
 
                                 setItem(InventorySlot.ROW_5_SLOT_3, new ItemBuilder(Material.IRON_SWORD, 1, 0)
                                                 .displayName("§fLobby-Games")
@@ -211,7 +211,7 @@ public class MinigamesInventory extends CompassInventory {
                                                 .create(),
                                         e -> {
                                             new LobbyGamesInventory(p);
-                                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_STICKS);
+                                            Sound.click(p);
                                         });
 
                                 setItem(InventorySlot.ROW_5_SLOT_5, new ItemBuilder(Material.EMERALD, 1, 0)
@@ -220,7 +220,7 @@ public class MinigamesInventory extends CompassInventory {
                                                 .create(),
                                         e -> {
                                             new EventInventory(p);
-                                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_STICKS);
+                                            Sound.click(p);
                                         });
 
                                 setItem(InventorySlot.ROW_5_SLOT_7, new ItemBuilder(Material.BOOK, 1, 0)
@@ -228,7 +228,7 @@ public class MinigamesInventory extends CompassInventory {
                                                 .lore("§7§oSchaue dir unsere Lobby-OneIsland genauer an", "§7§ound reise zu verschiedene Orten", "", "§8» §f§nLinksklick§8 | §7§oÖffnen")
                                                 .create(),
                                         e -> {
-                                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_STICKS);
+                                            Sound.click(p);
                                             new LobbyPlacesInventory(p);
                                         });
 

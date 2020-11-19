@@ -5,13 +5,13 @@
 
 package eu.mcone.lobby.story.inventory.searcher;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -59,7 +59,7 @@ class PvPSearcherInventory extends CoreInventory {
         setItem(InventorySlot.ROW_1_SLOT_1, new ItemBuilder(Material.PRISMARINE_CRYSTALS, 1, 0).displayName("§c§lFinanzen Forschungen").lore("§7§oForsche hier im Finatz Thema.", "§7§oDie Items stehen dir danach in", "§7§odeinem Rucksack zur Verfügung.").create(),
                 e -> {
 
-                  LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
+                  Sound.click(p);
                     new SearcherInventory(p);
                 });
 
@@ -67,7 +67,7 @@ class PvPSearcherInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_1, new ItemBuilder(Material.DIAMOND_SWORD, 1, 0).displayName("§c§lKampf Forschungen").lore("§7§oForsche hier im PvP Thema.", "§7§oDie Items stehen dir danach in", "§7§odeinem Rucksack zur Verfügung.").enchantment(Enchantment.DAMAGE_ALL, 5).unbreakable(true).itemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE).create(),
         e -> {
 
-            LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+            Sound.error(player);
 
         });
 

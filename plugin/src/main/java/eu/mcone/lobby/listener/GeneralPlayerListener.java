@@ -5,16 +5,15 @@
 
 package eu.mcone.lobby.listener;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.gameapi.api.event.backpack.BackpackItemRemoveEvent;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.games.LobbyGames;
 import eu.mcone.lobby.inventory.InteractionInventory;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -28,11 +27,11 @@ public class GeneralPlayerListener implements Listener {
 
     @EventHandler
     public void on(BackpackItemRemoveEvent e) {
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().bukkit());
 
-        Bukkit.getScheduler().runTaskLater(Lobby.getSystem(), () -> {
-            LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().bukkit());
+        if (lp != null) {
             e.setApplyRankBoots(lp.getSettings().isRankBoots());
-        },20);
+        }
     }
 
     @EventHandler
@@ -99,7 +98,7 @@ public class GeneralPlayerListener implements Listener {
 
         if (lobbyPlayer != null) {
             if (lobbyPlayer.getSettings().isHotbarChangeSound()) {
-                LobbyPlugin.getInstance().getPlayerSounds().playSound(player, player.getLocation(), Sound.ITEM_PICKUP, 1, 1);
+                Sound.play(player, org.bukkit.Sound.ITEM_PICKUP);
             }
         }
     }

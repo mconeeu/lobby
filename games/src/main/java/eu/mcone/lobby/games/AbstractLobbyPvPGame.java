@@ -6,6 +6,7 @@
 package eu.mcone.lobby.games;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -85,7 +86,7 @@ public abstract class AbstractLobbyPvPGame extends AbstractLobbyGame implements 
             LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
             p.getInventory().clear();
-            LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(p);
+            Sound.error(p);
 
             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
             lp.resetDataAndHotbarItems();

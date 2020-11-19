@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.games.listener;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.games.pvp.gungame.GunGameItem;
@@ -12,7 +13,6 @@ import eu.mcone.lobby.games.pvp.gungame.GunGameLobbyGame;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -52,7 +52,7 @@ public class GungameListener implements Listener {
 
                 LobbyPlayer lk = LobbyPlugin.getInstance().getLobbyPlayer(k);
                 lk.getCorePlayer().addCoins(2);
-                LobbyPlugin.getInstance().getPlayerSounds().playSounds(k, Sound.LEVEL_UP);
+                Sound.done(p);
                 k.setExp(1);
                 k.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 50, 3));
                 k.setLevel(k.getLevel() + 1);

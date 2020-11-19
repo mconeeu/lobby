@@ -1,5 +1,6 @@
 package eu.mcone.lobby.inventory.settings;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -11,7 +12,6 @@ import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.settings.LobbySettings;
 import eu.mcone.lobby.api.player.settings.SoundManager;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -153,13 +153,13 @@ public class LobbyPersonalExtendedInventory extends CoreInventory {
         if (!settings.isDoNotDisturb()) {
             setItem(InventorySlot.ROW_4_SLOT_5, new ItemBuilder(Material.INK_SACK, 1, 7).displayName("§aError Sound testen...").create(), e -> {
                 for (int i = 0; i <= 4; i++) {
-                    LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(p);
+                    Sound.error(player);
                 }
             });
 
             setItem(InventorySlot.ROW_4_SLOT_4, new ItemBuilder(Material.INK_SACK, 1, 7).displayName("§aNavigator Sound testen...").create(), e -> {
                 for (int i = 0; i <= 4; i++) {
-                    LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
+                    Sound.done(p);
                 }
             });
         } else {
@@ -193,7 +193,7 @@ public class LobbyPersonalExtendedInventory extends CoreInventory {
 
     private void setSettings(Player p, LobbyPlayer lp) {
         lp.saveData();
-        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
+        Sound.click(p);
         new LobbyPersonalExtendedInventory(p);
     }
 }

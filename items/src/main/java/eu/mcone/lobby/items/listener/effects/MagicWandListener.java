@@ -1,11 +1,11 @@
 package eu.mcone.lobby.items.listener.effects;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.items.LobbyItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
-import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -31,16 +31,16 @@ public class MagicWandListener implements Listener {
             p.getWorld().playEffect(arrow.getLocation(), Effect.WITCH_MAGIC, 10);
             p.getInventory().setItem(2, null);
 
-          LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
+            Sound.click(p);
             Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CLICK);
+                Sound.tick(p);
 
                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CLICK);
+                    Sound.tick(p);
 
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                         LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
-                         p.getInventory().setItem(2, LobbyItem.MAGICWAND.getItemStack());
+                        Sound.done(p);
+                        p.getInventory().setItem(2, LobbyItem.MAGICWAND.getItemStack());
 
                     }, 21);
                 }, 10);

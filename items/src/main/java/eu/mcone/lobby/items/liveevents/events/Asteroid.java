@@ -1,12 +1,15 @@
 package eu.mcone.lobby.items.liveevents.events;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.liveevent.LiveEvent;
 import net.minecraft.server.v1_8_R3.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -94,65 +97,65 @@ public class Asteroid extends LiveEvent {
         Location podzol5 = CoreSystem.getInstance().getWorldManager().getWorld(LobbyWorld.ONE_ISLAND.getName()).getBlockLocation("liveevent-5");
 
 
-        for (Player all : Bukkit.getOnlinePlayers()) {
-            all.sendMessage("§8[§7§l!§8] §cNPC §8» §fUnbekannte Person §8|§7 Bei der Bank wird es passieren...");
-            all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10, 1, false, false));
-            all.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 60, 1, false, false));
-            LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.WITHER_SPAWN);
-            LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.WITHER_IDLE);
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            p.sendMessage("§8[§7§l!§8] §cNPC §8» §fUnbekannte Person §8|§7 Bei der Bank wird es passieren...");
+            p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10, 1, false, false));
+            p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 60, 1, false, false));
+            Sound.play(p, org.bukkit.Sound.WITHER_SPAWN);
+            Sound.play(p, org.bukkit.Sound.WITHER_IDLE);
 
-            all.resetPlayerTime();
-            all.setPlayerTime(14000, false);
+            p.resetPlayerTime();
+            p.setPlayerTime(14000, false);
 
-            Location loc = all.getTargetBlock((Set<Material>) null, 50).getLocation();
+            Location loc = p.getTargetBlock((Set<Material>) null, 50).getLocation();
 
-            ((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(new EntityLightning(((CraftPlayer) all).getHandle().getWorld(), loc.getX(), loc.getY(), loc.getZ(), false, false)));
-            ((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect("ambient.weather.thunder", loc.getX(), loc.getY(), loc.getZ(), 10000.0F, 63));
+            ((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(new EntityLightning(((CraftPlayer) p).getHandle().getWorld(), loc.getX(), loc.getY(), loc.getZ(), false, false)));
+            ((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect("ambient.weather.thunder", loc.getX(), loc.getY(), loc.getZ(), 10000.0F, 63));
 
 
             Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.WITHER_SPAWN);
-                LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.WITHER_IDLE);
+                Sound.play(p, org.bukkit.Sound.WITHER_SPAWN);
+                Sound.play(p, org.bukkit.Sound.WITHER_IDLE);
 
-                ((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(new EntityLightning(((CraftPlayer) all).getHandle().getWorld(), loc.getX(), loc.getY(), loc.getZ(), false, false)));
-                ((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect("ambient.weather.thunder", loc.getX(), loc.getY(), loc.getZ(), 10000.0F, 63));
+                ((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(new EntityLightning(((CraftPlayer) p).getHandle().getWorld(), loc.getX(), loc.getY(), loc.getZ(), false, false)));
+                ((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect("ambient.weather.thunder", loc.getX(), loc.getY(), loc.getZ(), 10000.0F, 63));
 
                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.WITHER_SPAWN);
-                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.WITHER_IDLE);
+                    Sound.play(p, org.bukkit.Sound.WITHER_SPAWN);
+                    Sound.play(p, org.bukkit.Sound.WITHER_IDLE);
 
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                        all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 15, 1, false, false));
-                        all.setPlayerTime(14000, false);
-                        all.sendMessage("§8[§7§l!§8] §cNPC §8» §fUnbekannte Person §8|§7 Hahaha die Insel wird nicht lange so schön bleiben....");
+                        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 15, 1, false, false));
+                        p.setPlayerTime(14000, false);
+                        p.sendMessage("§8[§7§l!§8] §cNPC §8» §fUnbekannte Person §8|§7 Hahaha die Insel wird nicht lange so schön bleiben....");
 
-                        all.setAllowFlight(true);
-                        all.setFlying(true);
-
-
-                        Vector v = all.getLocation().getDirection().multiply(2).setY(2);
-                        all.setVelocity(v);
+                        p.setAllowFlight(true);
+                        p.setFlying(true);
 
 
-                        ((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(new EntityLightning(((CraftPlayer) all).getHandle().getWorld(), loc.getX(), loc.getY(), loc.getZ(), false, false)));
-                        ((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect("ambient.weather.thunder", loc.getX(), loc.getY(), loc.getZ(), 10000.0F, 63));
+                        Vector v = p.getLocation().getDirection().multiply(2).setY(2);
+                        p.setVelocity(v);
+
+
+                        ((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(new EntityLightning(((CraftPlayer) p).getHandle().getWorld(), loc.getX(), loc.getY(), loc.getZ(), false, false)));
+                        ((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect("ambient.weather.thunder", loc.getX(), loc.getY(), loc.getZ(), 10000.0F, 63));
 
                         Location loc1 = bedrock1.getBlock().getLocation();
-                        ((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(new EntityLightning(((CraftPlayer) all).getHandle().getWorld(), loc1.getX(), loc1.getY(), loc1.getZ(), false, false)));
-                        ((CraftPlayer) all).getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect("ambient.weather.thunder", loc1.getX(), loc1.getY(), loc1.getZ(), 10000.0F, 63));
+                        ((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutSpawnEntityWeather(new EntityLightning(((CraftPlayer) p).getHandle().getWorld(), loc1.getX(), loc1.getY(), loc1.getZ(), false, false)));
+                        ((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect("ambient.weather.thunder", loc1.getX(), loc1.getY(), loc1.getZ(), 10000.0F, 63));
 
 
-                        all.spigot().playEffect(pre_bedrock_17, Effect.EXPLOSION_LARGE, 1, 1, 1, 1, 1, 3, 20, 42);
-                        all.spigot().playEffect(pre_cobweb_5, Effect.EXPLOSION_LARGE, 1, 1, 1, 1, 1, 3, 20, 42);
-                        LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.EXPLODE);
+                        p.spigot().playEffect(pre_bedrock_17, Effect.EXPLOSION_LARGE, 1, 1, 1, 1, 1, 3, 20, 42);
+                        p.spigot().playEffect(pre_cobweb_5, Effect.EXPLOSION_LARGE, 1, 1, 1, 1, 1, 3, 20, 42);
+                        Sound.play(p, org.bukkit.Sound.EXPLODE);
 
 
                         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
 
-                            all.spigot().playEffect(pre_cobweb_5, Effect.SMALL_SMOKE, 1, 1, 1, 1, 1, 3, 20, 42);
-                            all.spigot().playEffect(pre_cobweb_5, Effect.FLAME, 1, 1, 1, 1, 1, 3, 20, 42);
-                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.FIRE);
-                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.FIREWORK_BLAST);
+                            p.spigot().playEffect(pre_cobweb_5, Effect.SMALL_SMOKE, 1, 1, 1, 1, 1, 3, 20, 42);
+                            p.spigot().playEffect(pre_cobweb_5, Effect.FLAME, 1, 1, 1, 1, 1, 3, 20, 42);
+                            Sound.play(p, org.bukkit.Sound.FIRE);
+                            Sound.play(p, org.bukkit.Sound.FIREWORK_BLAST);
 
                             pre_cobweb_1.getBlock().setType(Material.WEB);
                             pre_cobweb_2.getBlock().setType(Material.WEB);
@@ -215,12 +218,12 @@ public class Asteroid extends LiveEvent {
 
 
                                 PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.MOB_APPEARANCE, false, 1, 1, 1, 1, 1, 1, 0, 1);
-                                ((CraftPlayer) all).getHandle().playerConnection.sendPacket(packet);
-                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.FIREWORK_BLAST);
-                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.ENDERMAN_DEATH);
+                                ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
+                                Sound.play(p, org.bukkit.Sound.FIREWORK_BLAST);
+                                Sound.play(p, org.bukkit.Sound.ENDERMAN_DEATH);
 
-                                all.spigot().playEffect(block1, Effect.EXPLOSION_LARGE, 1, 1, 1, 1, 1, 3, 20, 42);
-                                all.spigot().playEffect(endstone1, Effect.EXPLOSION_LARGE, 1, 1, 1, 1, 1, 3, 20, 10);
+                                p.spigot().playEffect(block1, Effect.EXPLOSION_LARGE, 1, 1, 1, 1, 1, 3, 20, 42);
+                                p.spigot().playEffect(endstone1, Effect.EXPLOSION_LARGE, 1, 1, 1, 1, 1, 3, 20, 10);
 
                                 block1.getBlock().setType(Material.COBBLESTONE);
                                 block2.getBlock().setType(Material.COBBLESTONE);
@@ -241,17 +244,17 @@ public class Asteroid extends LiveEvent {
                                 endstone5.getBlock().setType(Material.ENDER_STONE);
                                 block3.getBlock().setType(Material.OBSIDIAN);
 
-                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.EXPLODE);
-                                LobbyPlugin.getInstance().getPlayerSounds().playSounds(all, Sound.FIREWORK_LAUNCH);
+                                Sound.play(p, org.bukkit.Sound.EXPLODE);
+                                Sound.play(p, org.bukkit.Sound.FIREWORK_LAUNCH);
 
                                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
 
 
                                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                                        all.resetPlayerTime();
-                                        all.setPlayerTime(1000, false);
-                                        all.setFlying(false);
-                                        if (!all.hasPermission("mcone.premium")) all.setAllowFlight(false);
+                                        p.resetPlayerTime();
+                                        p.setPlayerTime(1000, false);
+                                        p.setFlying(false);
+                                        if (!p.hasPermission("mcone.premium")) p.setAllowFlight(false);
                                     }, 30);
                                 }, 30);
                             }, 90);

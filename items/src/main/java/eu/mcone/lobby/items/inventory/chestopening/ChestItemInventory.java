@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.items.inventory.chestopening;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
@@ -17,7 +18,6 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -104,7 +104,7 @@ class ChestItemInventory extends CoreInventory {
             getInventory().setItem(slot, items.get(item).getItem());
             items.remove(item);
 
-          LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CHICKEN_EGG_POP);
+            Sound.click(p);
             changedItems.put(slot, backpackItem);
 
             if (!p.getOpenInventory().getTitle().equals(getInventory().getTitle())) {
@@ -131,7 +131,7 @@ class ChestItemInventory extends CoreInventory {
                             openInventory();
                         }
 
-                         LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
+                        Sound.done(p);
                         fadeSlots.remove(index);
                         getInventory().setItem(slotInt, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, wonItem.getValue().getLevel().getGlasSubId()).create());
                     }, 20, 1);
@@ -148,11 +148,16 @@ class ChestItemInventory extends CoreInventory {
 
     private static BackpackItem getRandomizedEmeraldsItem(Level level) {
         switch (level) {
-            case USUAL: return new BackpackItem(-1, "10+ Emeralds", Level.USUAL, new ItemBuilder(Material.GOLD_NUGGET, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §7Gewöhnlich").create(), true, false, true, 0, CHEST_ITEM_RANDOM.nextInt(10) + 10);
-            case UNUSUAL: return new BackpackItem(-1, "20+ Emeralds", Level.USUAL, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §3Ungewöhnlich").create(), true, false, true, 0,  CHEST_ITEM_RANDOM.nextInt(15) + 20);
-            case LEGENDARY: return new BackpackItem(-1, "50+ Emeralds", Level.USUAL, new ItemBuilder(Material.GOLD_BLOCK, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §5Episch").create(), true, false, true, 0,  CHEST_ITEM_RANDOM.nextInt(25) + 50);
-            case EPIC: return new BackpackItem(-1, "100+ Emeralds", Level.USUAL, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §6Legendär").create(), true, false, true, 0,  CHEST_ITEM_RANDOM.nextInt(50) + 100);
-            default: return null;
+            case USUAL:
+                return new BackpackItem(-1, "10+ Emeralds", Level.USUAL, new ItemBuilder(Material.GOLD_NUGGET, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §7Gewöhnlich").create(), true, false, true, 0, CHEST_ITEM_RANDOM.nextInt(10) + 10);
+            case UNUSUAL:
+                return new BackpackItem(-1, "20+ Emeralds", Level.USUAL, new ItemBuilder(Material.GOLD_INGOT, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §3Ungewöhnlich").create(), true, false, true, 0, CHEST_ITEM_RANDOM.nextInt(15) + 20);
+            case LEGENDARY:
+                return new BackpackItem(-1, "50+ Emeralds", Level.USUAL, new ItemBuilder(Material.GOLD_BLOCK, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §5Episch").create(), true, false, true, 0, CHEST_ITEM_RANDOM.nextInt(25) + 50);
+            case EPIC:
+                return new BackpackItem(-1, "100+ Emeralds", Level.USUAL, new ItemBuilder(Material.DIAMOND_BLOCK, 1, 0).displayName("§7§lEmerald-Loot ").lore("§7Kategorie: §bEmeralds", "§7Seltenheit: §6Legendär").create(), true, false, true, 0, CHEST_ITEM_RANDOM.nextInt(50) + 100);
+            default:
+                return null;
         }
     }
 

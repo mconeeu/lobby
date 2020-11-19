@@ -1,6 +1,7 @@
 package eu.mcone.lobby.items.casino.numbers;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -22,7 +23,7 @@ public class MoneyChooseInventory extends CoreInventory {
                 NumbersChooseInventory.chooseMoney.put(player, 500);
                 new NumbersChooseInventory(player);
             } else {
-                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+                Sound.error(player);
                 LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast nicht genügend Coins!");
             }
         });
@@ -34,7 +35,7 @@ public class MoneyChooseInventory extends CoreInventory {
                 NumbersChooseInventory.chooseMoney.put(player, 1000);
                 new NumbersChooseInventory(player);
             } else {
-                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+                Sound.error(player);
                 LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast nicht genügend Coins!");
             }
         });
@@ -46,7 +47,7 @@ public class MoneyChooseInventory extends CoreInventory {
                 NumbersChooseInventory.chooseMoney.put(player, 2000);
                 new NumbersChooseInventory(player);
             } else {
-                LobbyPlugin.getInstance().getPlayerSounds().playErrorSound(player);
+                Sound.error(player);
                 LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast nicht genügend Coins!");
             }
         });

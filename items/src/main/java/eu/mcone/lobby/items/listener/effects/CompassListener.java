@@ -1,11 +1,11 @@
 package eu.mcone.lobby.items.listener.effects;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.items.LobbyItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -48,27 +48,27 @@ public class CompassListener implements Listener {
             p.setVelocity(v1);
         }
 
-        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.EXPLODE);
+        Sound.play(p, org.bukkit.Sound.EXPLODE);
 
         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
             p.setVelocity(v2);
-            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.EXPLODE);
+            Sound.play(p, org.bukkit.Sound.EXPLODE);
             Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                 p.setVelocity(v3);
-                LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.FIRE_IGNITE);
+                Sound.play(p, org.bukkit.Sound.FIRE_IGNITE);
                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                     p.setVelocity(v4);
-                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.EXPLODE);
+                    Sound.play(p, org.bukkit.Sound.EXPLODE);
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                         p.setVelocity(v5);
-                        LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.EXPLODE);
+                        Sound.play(p, org.bukkit.Sound.EXPLODE);
                         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                            LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
+                            Sound.done(p);
                             Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                                LobbyPlugin.getInstance().getPlayerSounds().playNavigatorAnimationSound(p);
+                                Sound.done(p);
                                 p.setVelocity(v6);
                                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
-                                     LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
+                                     Sound.done(p);
                                      p.getInventory().setItem(2, LobbyItem.COMPASS.getItemStack());
                                 }, 32);
                             }, 20);

@@ -1,15 +1,14 @@
 package eu.mcone.lobby.inventory.compass;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.Lobby;
-import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class EventInventory extends CoreInventory {
@@ -29,7 +28,7 @@ public class EventInventory extends CoreInventory {
 
                     });
 
-       LobbyPlugin.getInstance().getPlayerSounds().playSounds(player, Sound.NOTE_PLING);
+            Sound.done(player);
         }, 2L);
 
         setItem(InventorySlot.ROW_3_SLOT_9, BACK_ITEM, e -> new MinigamesInventory(player));

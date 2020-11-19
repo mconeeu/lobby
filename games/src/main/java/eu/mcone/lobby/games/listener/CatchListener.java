@@ -6,14 +6,14 @@
 package eu.mcone.lobby.games.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.games.pvp.catchgame.CatchLobbyGame;
 import eu.mcone.lobby.games.pvp.catchgame.CatchItem;
+import eu.mcone.lobby.games.pvp.catchgame.CatchLobbyGame;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Fish;
 import org.bukkit.entity.Player;
@@ -62,7 +62,7 @@ public class CatchListener implements Listener {
                     lc.setY(lc.getY() + 0.5D);
                     p.teleport(lc);
 
-                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ENDERDRAGON_WINGS);
+                    Sound.play(p, org.bukkit.Sound.ENDERDRAGON_WINGS);
                     double g = -0.07D;
                     double t = to.distance(lc);
                     double v_x = (1.0D + 0.07D * t) * (to.getX() - lc.getX()) / t;
@@ -79,15 +79,15 @@ public class CatchListener implements Listener {
 
                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                         if (game.getCatcher().contains(p)) {
-                            LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CLICK);
+                            Sound.tick(p);
 
                             Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                                 if (game.getCatcher().contains(p)) {
-                                    LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.CLICK);
+                                    Sound.tick(p);
 
                                     Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                                         if (game.getCatcher().contains(p)) {
-                                             LobbyPlugin.getInstance().getPlayerSounds().playSounds(p, Sound.ORB_PICKUP);
+                                             Sound.done(p);
                                             p.getInventory().setItem(2, CatchItem.CATCH_ROD);
                                         }
                                     }, 52);
@@ -160,12 +160,12 @@ public class CatchListener implements Listener {
                             LobbyPlugin.getInstance().getLobbyPlayer(p).reloadScoreboardIfEnabled();
                             LobbyPlugin.getInstance().getMessenger().send(p, "§7Du wurdest von §c" + d.getName() + "§7 gefangen.");
                             LobbyPlugin.getInstance().getMessenger().send(p, "§7Fange nun §fSpieler §7mit einem §fGrünen Hut§7!");
-                            p.getLocation().getWorld().playSound(p.getLocation(), Sound.NOTE_BASS_DRUM, 1.0F, 1.0F);
+                            p.getLocation().getWorld().playSound(p.getLocation(), org.bukkit.Sound.NOTE_BASS_DRUM, 1.0F, 1.0F);
 
                             d.setLevel(0);
                             d.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
-                            d.getLocation().getWorld().playSound(d.getLocation(), Sound.NOTE_PIANO, 1.0F, 1.0F);
-                            d.getLocation().getWorld().playSound(d.getLocation(), Sound.NOTE_PIANO, 1.0F, 1.0F);
+                            d.getLocation().getWorld().playSound(d.getLocation(), org.bukkit.Sound.NOTE_PIANO, 1.0F, 1.0F);
+                            d.getLocation().getWorld().playSound(d.getLocation(), org.bukkit.Sound.NOTE_PIANO, 1.0F, 1.0F);
                             game.getCatcher().remove(d);
                             game.setRunnerItems(d);
                             LobbyPlugin.getInstance().getLobbyPlayer(d).reloadScoreboardIfEnabled();
