@@ -1,4 +1,9 @@
-package eu.mcone.lobby.inventory.settings.hotbar.slot;
+/*
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
+ * You are not allowed to decompile the code
+ */
+
+package eu.mcone.lobby.inventory.settings.hotbar;
 
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
@@ -9,7 +14,6 @@ import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.hotbar.HotbarGeneralCategorys;
 import eu.mcone.lobby.api.player.hotbar.items.enums.SlotAmountEnum;
-import eu.mcone.lobby.inventory.settings.hotbar.LobbyHotbarSettingsInventory;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 

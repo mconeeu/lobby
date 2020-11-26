@@ -8,7 +8,7 @@ package eu.mcone.lobby.api.player.settings;
 import eu.mcone.lobby.api.player.hotbar.HotbarGeneralCategorys;
 import eu.mcone.lobby.api.player.hotbar.items.enums.HotbarItemEnum;
 import eu.mcone.lobby.api.player.hotbar.items.enums.SlotAmountEnum;
-import eu.mcone.lobby.api.player.scoreboard.widgets.ScoreboardWidgets;
+import eu.mcone.lobby.api.player.scoreboard.ScoreboardWidget;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -33,8 +33,8 @@ public class LobbySettings {
     private Map<String, HotbarItemEnum> items = new HashMap<>();
     private Map<String, SlotAmountEnum> slots = new HashMap<>();
 
-    private ScoreboardWidgets scoreboardWidgetsFirstLine = ScoreboardWidgets.COINS;
-    private ScoreboardWidgets scoreboardWidgetsSecondLine = ScoreboardWidgets.EMERALD;
+    private ScoreboardWidget scoreboardWidgetFirstLine = ScoreboardWidget.getWidgets(1)[0];
+    private ScoreboardWidget scoreboardWidgetSecondLine = ScoreboardWidget.getWidgets(2)[0];
 
     private transient Map<HotbarGeneralCategorys, HotbarItemEnum> itemsMap;
     private transient Map<HotbarGeneralCategorys, SlotAmountEnum> slotsMap;

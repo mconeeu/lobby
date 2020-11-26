@@ -37,7 +37,6 @@ public class HotbarItemsInventory extends CoreInventory {
         setItem(InventorySlot.ROW_4_SLOT_9, BACK_ITEM, e ->
                 new LobbyHotbarSettingsInventory(p));
 
-        Sound.done(p);
         openInventory();
     }
 }

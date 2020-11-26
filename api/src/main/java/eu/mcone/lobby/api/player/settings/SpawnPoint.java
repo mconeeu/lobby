@@ -5,20 +5,22 @@
 
 package eu.mcone.lobby.api.player.settings;
 
+import eu.mcone.coresystem.api.bukkit.inventory.settings.Option;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import lombok.Getter;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 @Getter
-public enum SpawnPoint {
+public enum SpawnPoint implements Option {
 
-    SPAWN(new ItemBuilder(Material.GRASS).displayName("§f§lSpawn").lore("§7§oSpawne am Lobby Spawn")),
-    LAST_LOCATION(new ItemBuilder(Material.ENDER_PEARL).displayName("§a§lLetzter Ort").lore("§7§oSpawne bei deinem","§7§oletzten Logout Ort")),
-    OFFICE(new ItemBuilder(Material.BOOK_AND_QUILL).displayName("§c§lBüro").lore("§7§oSpawne in deinem Büro"));
+    SPAWN(new ItemBuilder(Material.GRASS).displayName("§f§lSpawn").lore("§7§oSpawne am Lobby Spawn").create()),
+    LAST_LOCATION(new ItemBuilder(Material.ENDER_PEARL).displayName("§a§lLetzter Ort").lore("§7§oSpawne bei deinem","§7§oletzten Logout Ort").create()),
+    OFFICE(new ItemBuilder(Material.BOOK_AND_QUILL).displayName("§c§lBüro").lore("§7§oSpawne in deinem Büro").create());
 
-    private final ItemBuilder item;
+    private final ItemStack item;
 
-    SpawnPoint(ItemBuilder item) {
+    SpawnPoint(ItemStack item) {
         this.item = item;
     }
 

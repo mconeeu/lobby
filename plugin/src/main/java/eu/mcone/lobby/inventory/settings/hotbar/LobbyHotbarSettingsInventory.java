@@ -1,5 +1,6 @@
 package eu.mcone.lobby.inventory.settings.hotbar;
 
+import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -12,7 +13,6 @@ import eu.mcone.lobby.api.player.LobbyPlayer;
 import eu.mcone.lobby.api.player.hotbar.HotbarGeneralCategorys;
 import eu.mcone.lobby.api.player.hotbar.items.enums.SlotAmountEnum;
 import eu.mcone.lobby.inventory.settings.LobbySettingsInventory;
-import eu.mcone.lobby.inventory.settings.hotbar.slot.LobbyHotbarSlotInventory;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -22,7 +22,7 @@ import java.util.Map;
 public class LobbyHotbarSettingsInventory extends CoreInventory {
 
     public LobbyHotbarSettingsInventory(Player p) {
-        super("§8» §c§lHotbar Items", p, InventorySlot.ROW_5, InventoryOption.FILL_EMPTY_SLOTS);
+        super("§8» §c§lHotbar Items", p, InventorySlot.ROW_6, InventoryOption.FILL_EMPTY_SLOTS);
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
         CorePlayer cp = lp.getCorePlayer();
 
@@ -57,7 +57,7 @@ public class LobbyHotbarSettingsInventory extends CoreInventory {
             }
         }
 
-        setItem(InventorySlot.ROW_5_SLOT_1, ItemBuilder.wrap(CategoryInventory.REFRESH_ITEM).displayName("§cZurücksetzen").lore("§7§oSetze alle Hotbar", "§7§oSettings zurück!").create(), e -> {
+        setItem(InventorySlot.ROW_6_SLOT_4, ItemBuilder.wrap(CategoryInventory.REFRESH_ITEM).displayName("§cZurücksetzen").lore("§7§oSetze alle Hotbar", "§7§oSettings zurück!").create(), e -> {
             lp.getSettings().resetSlotsAndItems();
             lp.saveData();
 
@@ -66,8 +66,10 @@ public class LobbyHotbarSettingsInventory extends CoreInventory {
             LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Deine ![Items und Slots] wurden erfolgreich zurückgesetzt");
         });
 
-        setItem(InventorySlot.ROW_5_SLOT_9, BACK_ITEM, e ->
-                new LobbySettingsInventory(p));
+        setItem(InventorySlot.ROW_6_SLOT_6, BACK_ITEM, e -> {
+            Sound.error(p);
+            new LobbySettingsInventory(p);
+        });
 
         openInventory();
     }

@@ -39,11 +39,11 @@ public class LobbyCMD extends CoreCommand {
                 }
             }
 
-            Lobby.getSystem().getMessenger().sendSender(sender, "§4Ein Addon mit dem Name §c" + name + "§4 ist nicht geladen!");
+            Lobby.getSystem().getMessenger().send(sender, "§4Ein Addon mit dem Name §c" + name + "§4 ist nicht geladen!");
             return false;
         }
 
-        Lobby.getSystem().getMessenger().sendSender(sender, "§4Bitte benutze; §c/lobby reload [<addon>]");
+        Lobby.getSystem().getMessenger().send(sender, "§4Bitte benutze; §c/lobby reload [<addon>]");
         return false;
     }
 
