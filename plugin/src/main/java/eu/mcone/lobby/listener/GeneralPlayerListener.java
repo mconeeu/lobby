@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.listener;
 
+import eu.mcone.coresystem.api.bukkit.event.player.LanguageChangeEvent;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.gameapi.api.event.backpack.BackpackItemRemoveEvent;
 import eu.mcone.lobby.Lobby;
@@ -101,6 +102,12 @@ public class GeneralPlayerListener implements Listener {
                 Sound.play(player, org.bukkit.Sound.ITEM_PICKUP);
             }
         }
+    }
+
+    @EventHandler
+    public void on(LanguageChangeEvent e) {
+        LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(e.getPlayer().bukkit());
+        LobbyPlugin.getInstance().getHotbarSettings().updateInventory(e.getPlayer().bukkit(), lp);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

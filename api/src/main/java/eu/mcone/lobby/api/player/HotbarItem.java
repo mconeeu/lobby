@@ -39,7 +39,7 @@ public class HotbarItem {
                 .displayName(PROFILE_DISPLAY_NAME);
     }
 
-    public static ItemStack getUknowProfile = Skull.fromMojangValue("rufi", 1)
+    public static ItemStack getUknowProfile = Skull.fromMojangValue("Marvio", 1)
                 .toItemBuilder()
                 .displayName(PROFILE_DISPLAY_NAME)
                 .create();

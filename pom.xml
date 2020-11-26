@@ -92,7 +92,6 @@
             <url>https://gitlab.onegaming.group/api/v4/projects/17/packages/maven</url>
         </repository>
     </distributionManagement>
-
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
