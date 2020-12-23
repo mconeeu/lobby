@@ -25,8 +25,10 @@ public class LobbyLiveEventManager implements Runnable, LiveEventManager {
     public void run() {
         for (LiveEvent event : EVENTS) {
             if (event.getDate().before(new Date())) {
-                LobbyPlugin.getInstance().sendConsoleMessage("§fStarting LobbyEvent "+event.getClass().getSimpleName());
-                event.startEvent();
+                if (!event.isRunning()) {
+                    LobbyPlugin.getInstance().sendConsoleMessage("§fStarting LobbyEvent " + event.getClass().getSimpleName());
+                    event.startEvent();
+                }
             }
         }
     }
@@ -49,8 +51,8 @@ public class LobbyLiveEventManager implements Runnable, LiveEventManager {
     public boolean removeEvent(Class<? extends LiveEvent> event) {
         for (LiveEvent e : EVENTS) {
             if (event.equals(e.getClass())) {
-                    e.removeEvent();
-                    return true;
+                e.removeEvent();
+                return true;
             }
         }
 

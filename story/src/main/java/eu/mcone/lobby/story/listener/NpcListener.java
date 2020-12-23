@@ -52,7 +52,7 @@ import java.util.Objects;
 public class NpcListener implements Listener {
 
     static final String RUFI_HEALED_DISPLAY_NAME = "§erufi";
-    static final SkinInfo RUFI_HEALED_SKIN = CoreSystem.getInstance().getPlayerUtils().getSkinInfo("rufi");
+    static final SkinInfo RUFI_HEALED_SKIN = CoreSystem.getInstance().getPlayerUtils().getSkinInfo("rufusmai");
 
     @EventHandler
     public void on(NpcInteractEvent e) {
