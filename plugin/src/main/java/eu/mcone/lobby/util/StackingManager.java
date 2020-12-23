@@ -33,14 +33,16 @@ public class StackingManager {
         if (stacking.containsKey(carrier)) {
             stacking.remove(carrier);
             Player stacked = getStackedPlayer(carrier);
-            carrier.eject();
+            if (stacked != null) {
+                carrier.eject();
 
 
-            if (stacked.isOnline()) {
-                LobbyPlugin.getInstance().getMessenger().sendInfo(stacked, "![" + carrier.getName() + "] ist nun nicht mehr auf deinem Kopf!");
-            }
-            LobbyPlugin.getInstance().getMessenger().send(carrier, "![" + stacked.getName() + "] trägt dich nicht mehr!");
-            return true;
+                if (stacked.isOnline()) {
+                    LobbyPlugin.getInstance().getMessenger().sendInfo(stacked, "![" + carrier.getName() + "] ist nun nicht mehr auf deinem Kopf!");
+                }
+                LobbyPlugin.getInstance().getMessenger().send(carrier, "![" + stacked.getName() + "] trägt dich nicht mehr!");
+                return true;
+            } else return false;
         } else return false;
     }
 

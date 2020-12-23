@@ -23,7 +23,7 @@ import java.util.Set;
 public class Asteroid extends LiveEvent {
 
     public Asteroid() {
-        super("asteroid", new GregorianCalendar(2020, Calendar.DECEMBER, 1, 16, 0).getTime());
+        super("asteroid", new GregorianCalendar(2022, Calendar.DECEMBER, 1, 16, 0).getTime());
     }
 
     @Override

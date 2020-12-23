@@ -28,7 +28,7 @@ class ChestBuyInventorySmuggler extends CoreInventory {
 
         setItem(11 - 1, new ItemBuilder(Material.PAPER, 1, 0).displayName("§8» §7Du besitzt §f" + lp.getChests() + "§7 Kisten").create());
 
-        setItem(13 - 1, new ItemBuilder(Material.CHEST, 3, 0).displayName("§c§l3 Kiste").lore("§7Kosten: §f§o129 Emeralds", "§cDu kannst aber auch weniger", "§c§lKisten§c erhalten", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
+        setItem(13 - 1, new ItemBuilder(Material.CHEST, 3, 0).displayName("§c§l3 Kisten").lore("§7Kosten: §f§o129 Emeralds", "§cDu kannst aber auch weniger", "§c§lKisten§c erhalten", "", "§8» §f§nLinksklick§8 | §7§oKaufen").create(), e -> {
             if ((lp.getCorePlayer().getEmeralds() - 129) >= 0) {
                 lp.getCorePlayer().removeEmeralds(129);
 

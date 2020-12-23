@@ -7,6 +7,7 @@ import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
+import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -193,7 +194,8 @@ public class MinigamesInventory extends CompassInventory {
                                         }
                                     });
 
-                            setItem(InventorySlot.ROW_3_SLOT_6, new Skull(p.getName(), 1).toItemBuilder()
+                            CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
+                            setItem(InventorySlot.ROW_3_SLOT_6, new Skull(corePlayer.bukkit().getName(), 1).toItemBuilder()
                                             .displayName("§5Festival / Community")
                                             .lore("§7§oTreffe dich mit Freunden auf dem ", "§7§oFestival/Community und", "§7§oreise mit einem gültigen Ticket hin!", "", "§8» §f§nLinksklick§8 | §7§oTeleportieren")
                                             .create(),
