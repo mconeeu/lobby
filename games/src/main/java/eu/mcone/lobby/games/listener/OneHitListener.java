@@ -124,22 +124,26 @@ public class OneHitListener implements Listener {
             p.spigot().respawn();
 
             LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
-            lp.reloadScoreboardIfEnabled();
             p.setGameMode(GameMode.ADVENTURE);
             p.setLevel(0);
             p.setExp(1);
             p.setVelocity(new Vector(0, 0, 0));
 
+            lp.reloadScoreboardIfEnabled();
+
             if (k != null && game.isPlaying(k)) {
                 LobbyPlugin.getInstance().getMessenger().send(k, "§7Du hast §f" + p.getName() + " §7getötet §8[§a+2 Coins§8]");
 
                 LobbyPlayer lpk = LobbyPlugin.getInstance().getLobbyPlayer(k);
-                lpk.reloadScoreboardIfEnabled();
                 lpk.getCorePlayer().addCoins(2);
+
                 Sound.done(p);
+
                 k.getInventory().setItem(6, OneHitItem.ONEHIT_ARROW);
                 k.setLevel(k.getLevel() + 1);
                 k.setExp(1);
+
+                lpk.reloadScoreboardIfEnabled();
 
                 LobbyPlugin.getInstance().getMessenger().send(p, "§7Du wurdest von §f" + k.getName() + " §7getötet!");
             } else {

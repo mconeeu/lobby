@@ -6,6 +6,7 @@
 package eu.mcone.lobby.games.pvp.onehit;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.world.CoreLocation;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -46,6 +47,8 @@ public class OneHitLobbyGame extends AbstractLobbyPvPGame implements OneHit {
     protected void onJoin(Player p, LobbyPlayer lp) {
         CoreSystem.getInstance().createActionBar().message("§cTeaming verboten!").send(p);
 
+        npcVisibility(p, false);
+
         p.setExp(1);
         p.setLevel(0);
         setOneHitFightItems(p);
@@ -57,7 +60,15 @@ public class OneHitLobbyGame extends AbstractLobbyPvPGame implements OneHit {
     }
 
     @Override
-    protected void onQuit(Player p, LobbyPlayer lp) {}
+    protected void onQuit(Player p, LobbyPlayer lp) {
+       npcVisibility(p, true);
+    }
+
+    private void npcVisibility(Player p, Boolean b) {
+        for (NPC npc : CoreSystem.getInstance().getNpcManager().getNpcs()) {
+            npc.toggleVisibility(p, b);
+        }
+    }
 
     public Location getRandomSpawn() {
         List<Location> locations = new ArrayList<>();
