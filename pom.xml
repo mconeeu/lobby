@@ -73,8 +73,8 @@
 
     <repositories>
         <repository>
-            <id>onegaming-gitlab-systems</id>
-            <url>https://gitlab.onegaming.group/api/v4/groups/systems/-/packages/maven</url>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/mconeeu/artifacts</url>
         </repository>
         <repository>
             <id>md_5-snapshots</id>
@@ -88,8 +88,8 @@
 
     <distributionManagement>
         <repository>
-            <id>onegaming-gitlab</id>
-            <url>https://gitlab.onegaming.group/api/v4/projects/17/packages/maven</url>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/mconeeu/lobby</url>
         </repository>
     </distributionManagement>
     <dependencies>
