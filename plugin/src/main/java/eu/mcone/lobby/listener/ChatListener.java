@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.listener;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -21,7 +22,7 @@ public class ChatListener implements Listener {
 
         if (LobbyPlugin.getInstance().getVanishManager().isInSilentLobby(p)) {
             e.setCancelled(true);
-            LobbyPlugin.getInstance().getMessenger().send(p, "§cDu kannst in der Privaten Lobby keine Chat Nachrichten senden oder empfangen.");
+            Msg.send(p, "§cDu kannst in der Privaten Lobby keine Chat Nachrichten senden oder empfangen.");
             return;
         }
 

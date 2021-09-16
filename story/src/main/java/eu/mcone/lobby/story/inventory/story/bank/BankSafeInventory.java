@@ -1,5 +1,6 @@
 package eu.mcone.lobby.story.inventory.story.bank;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -23,7 +24,7 @@ public class BankSafeInventory extends CoreInventory {
                 }, 30L);
 
             } else {
-                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du besitzt diese Item bereits!");
+                Msg.send(p, "§4Du besitzt diese Item bereits!");
             }
             p.closeInventory();
         });

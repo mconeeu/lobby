@@ -1,5 +1,6 @@
 package eu.mcone.lobby.inventory.settings.hotbar;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
@@ -10,8 +11,8 @@ import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItem;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.api.player.hotbar.HotbarGeneralCategorys;
-import eu.mcone.lobby.api.player.hotbar.items.enums.SlotAmountEnum;
+import eu.mcone.lobby.api.player.hotbar.HotbarCategory;
+import eu.mcone.lobby.api.player.hotbar.items.HotbarSlot;
 import eu.mcone.lobby.inventory.settings.LobbySettingsInventory;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -28,14 +29,14 @@ public class LobbyHotbarSettingsInventory extends CoreInventory {
 
         int i = InventorySlot.ROW_1_SLOT_2;
 
-        for (SlotAmountEnum slot : SlotAmountEnum.values()) {
-            HotbarGeneralCategorys category = getCategory(slot, lp);
+        for (HotbarSlot slot : HotbarSlot.values()) {
+            HotbarCategory category = getCategory(slot, lp);
 
-            if (category.equals(HotbarGeneralCategorys.PLAYER_HIDER)) {
+            if (category.equals(HotbarCategory.PLAYER_HIDER)) {
                 setItem(i, LobbyPlugin.getInstance().getVanishManager().getVanishPlayerVisibility(p).getItem());
             } else {
                 setItem(
-                        i, (category.equals(HotbarGeneralCategorys.PROFILE)
+                        i, (category.equals(HotbarCategory.PROFILE)
                                 ? HotbarItem.getProfile(cp.getSkin())
                                 : category.getDefaultItem().getItem()
                         ).displayName(category.getDisplayName()).create()
@@ -47,7 +48,7 @@ public class LobbyHotbarSettingsInventory extends CoreInventory {
             setItem(
                     i + 9 + 9 + 9,
                     getModifyItem(category, p, cp, lp),
-                    !category.equals(HotbarGeneralCategorys.PLAYER_HIDER) ? e -> new HotbarItemsInventory(p, category) : null
+                    !category.equals(HotbarCategory.PLAYER_HIDER) ? e -> new HotbarItemsInventory(p, category) : null
             );
 
             if (i == InventorySlot.ROW_1_SLOT_3 || i == InventorySlot.ROW_1_SLOT_5) {
@@ -63,7 +64,7 @@ public class LobbyHotbarSettingsInventory extends CoreInventory {
 
             LobbyPlugin.getInstance().getHotbarSettings().updateInventory(p, lp);
             p.closeInventory();
-            LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Deine ![Items und Slots] wurden erfolgreich zurückgesetzt");
+            Msg.sendSuccess(p, "Deine ![Items und Slots] wurden erfolgreich zurückgesetzt");
         });
 
         setItem(InventorySlot.ROW_6_SLOT_6, BACK_ITEM, e -> {
@@ -74,8 +75,8 @@ public class LobbyHotbarSettingsInventory extends CoreInventory {
         openInventory();
     }
 
-    private HotbarGeneralCategorys getCategory(SlotAmountEnum slot, LobbyPlayer lp) {
-        for (Map.Entry<HotbarGeneralCategorys, SlotAmountEnum> entry : lp.getSettings().calculateSlots().entrySet()) {
+    private HotbarCategory getCategory(HotbarSlot slot, LobbyPlayer lp) {
+        for (Map.Entry<HotbarCategory, HotbarSlot> entry : lp.getSettings().calculateSlots().entrySet()) {
             if (entry.getValue().equals(slot)) {
                 return entry.getKey();
             }
@@ -84,10 +85,10 @@ public class LobbyHotbarSettingsInventory extends CoreInventory {
         return null;
     }
 
-    private ItemStack getModifyItem(HotbarGeneralCategorys category, Player p, CorePlayer cp, LobbyPlayer lp) {
-        if (category.equals(HotbarGeneralCategorys.PROFILE) && category.getItem(lp).isMainItem()) {
+    private ItemStack getModifyItem(HotbarCategory category, Player p, CorePlayer cp, LobbyPlayer lp) {
+        if (category.equals(HotbarCategory.PROFILE) && category.getItem(lp).isMainItem()) {
             return HotbarItem.getProfile(cp.getSkin()).displayName(category.getDisplayName()).create();
-        } else if (category.equals(HotbarGeneralCategorys.PLAYER_HIDER)) {
+        } else if (category.equals(HotbarCategory.PLAYER_HIDER)) {
             return new ItemBuilder(Material.BARRIER).displayName("§c✗").lore("§7§oDu kannst dieses Item", "§7§onicht modifizieren!", "§7§oDu kannst nur", "§7§oDen Slot wechseln!").create();
         } else {
             return category.getItem(lp).getItem().displayName(category.getDisplayName()).create();

@@ -1,13 +1,13 @@
 package eu.mcone.lobby.items.casino.numbers;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.entity.Player;
 
 public class MoneyChooseInventory extends CoreInventory {
@@ -24,7 +24,7 @@ public class MoneyChooseInventory extends CoreInventory {
                 new NumbersChooseInventory(player);
             } else {
                 Sound.error(player);
-                LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast nicht genügend Coins!");
+                Msg.send(player, "§4Du hast nicht genügend Coins!");
             }
         });
 
@@ -36,7 +36,7 @@ public class MoneyChooseInventory extends CoreInventory {
                 new NumbersChooseInventory(player);
             } else {
                 Sound.error(player);
-                LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast nicht genügend Coins!");
+                Msg.send(player, "§4Du hast nicht genügend Coins!");
             }
         });
 
@@ -48,7 +48,7 @@ public class MoneyChooseInventory extends CoreInventory {
                 new NumbersChooseInventory(player);
             } else {
                 Sound.error(player);
-                LobbyPlugin.getInstance().getMessenger().send(player, "§4Du hast nicht genügend Coins!");
+                Msg.send(player, "§4Du hast nicht genügend Coins!");
             }
         });
 

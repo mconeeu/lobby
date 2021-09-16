@@ -1,5 +1,6 @@
 package eu.mcone.lobby.inventory;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -19,7 +20,7 @@ public class LobbySwitchInventory extends CoreInventory {
         super("§8» §3§lLobby wechseln", p, InventorySlot.ROW_4, InventoryOption.FILL_EMPTY_SLOTS);
 
         if (LobbyStory.getInstance().getOfficeManager().isInOffice(p)) {
-            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du darfst im §cOffice §4keinen §cLobby §4wechsel machen!");
+            Msg.send(p, "§4Du darfst im §cOffice §4keinen §cLobby §4wechsel machen!");
             p.closeInventory();
             return;
         }

@@ -1,6 +1,7 @@
 package eu.mcone.lobby.items.casino.numbers;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
@@ -50,7 +51,7 @@ public class NumbersFinishInventory extends CoreInventory {
                                 CorePlayer corePlayer = CoreSystem.getInstance().getCorePlayer(p);
                                 corePlayer.addCoins(addMoney * 8);
 
-                                LobbyPlugin.getInstance().getMessenger().send(p, "§aDu hast §f" + addMoney * 8 + "§a gewonnen!");
+                                Msg.send(p, "§aDu hast §f" + addMoney * 8 + "§a gewonnen!");
                             } else {
                                 Sound.epic(p);
 
@@ -59,7 +60,7 @@ public class NumbersFinishInventory extends CoreInventory {
 
                                 setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, 14).displayName("§cVerloren").lore("§7Die Zahl die gewonnen ", " §7hat war: §f" + win).create());
 
-                                LobbyPlugin.getInstance().getMessenger().send(p, "§8[§a-" + NumbersChooseInventory.chooseMoney.get(p) + " Coins§8]");
+                                Msg.send(p, "§8[§a-" + NumbersChooseInventory.chooseMoney.get(p) + " Coins§8]");
                             }
 
                             NumbersChooseInventory.isInGame.remove(p);

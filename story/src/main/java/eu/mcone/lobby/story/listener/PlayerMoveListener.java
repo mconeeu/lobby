@@ -1,5 +1,6 @@
 package eu.mcone.lobby.story.listener;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -22,7 +23,7 @@ public class PlayerMoveListener implements Listener {
         if (lp != null && lp.getBankprogressId() != BankRobberySmallProgress.BANK_ROBBERY_MIDDLE.getId()) {
             if (player.getWorld().equals(robbery_entrance.getWorld()) && player.getLocation().distance(robbery_entrance) <= 1) {
                 LobbyPlugin.getInstance().getLobbyWorld(LobbyWorld.ONE_ISLAND).teleportSilently(player, "bank");
-                LobbyPlugin.getInstance().getMessenger().send(player, "§4Du wurdest aus der Bank geworfen, weil du zu nahe an der Hinter Tür warst.");
+                Msg.send(player, "§4Du wurdest aus der Bank geworfen, weil du zu nahe an der Hinter Tür warst.");
             }
         }
     }

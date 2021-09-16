@@ -1,9 +1,9 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
-import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.lobby.api.player.HotbarItem;
+import eu.mcone.lobby.api.player.vanish.VanishPlayerVisibility;
 import eu.mcone.lobby.inventory.playerhider.PlayerHiderInventory;
 import eu.mcone.lobby.util.LobbyVanishManager;
 import lombok.RequiredArgsConstructor;
@@ -32,17 +32,17 @@ public class VanishListener implements Listener {
             }
 
             if (i.equals(HotbarItem.LOBBY_HIDER_UNAVAILABLE_SETTING)) {
-                LobbyPlugin.getInstance().getMessenger().sendError(p, "Du hast alle Spieler über eine Lobby Einstellung ausgeschaltet!");
+                Msg.sendError(p, "Du hast alle Spieler über eine Lobby Einstellung ausgeschaltet!");
             } else if (i.equals(HotbarItem.SILENT_LOBBY_JOIN)) {
                 if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(getClass(), p.getUniqueId())) {
-                    LobbyPlugin.getInstance().getMessenger().sendError(p, "§4Bitte warte kurz, bevor du erneut die Sichbarkeit von Spielern veränderst!");
+                    Msg.sendError(p, "§4Bitte warte kurz, bevor du erneut die Sichbarkeit von Spielern veränderst!");
                     return;
                 }
 
                 manager.joinSilentLobby(p);
             } else if (i.equals(HotbarItem.SILENT_LOBBY_QUIT)) {
                 if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(getClass(), p.getUniqueId())) {
-                    LobbyPlugin.getInstance().getMessenger().sendError(p, "§4Bitte warte kurz, bevor du erneut die Sichbarkeit von Spielern veränderst!");
+                    Msg.sendError(p, "§4Bitte warte kurz, bevor du erneut die Sichbarkeit von Spielern veränderst!");
                     return;
                 }
 

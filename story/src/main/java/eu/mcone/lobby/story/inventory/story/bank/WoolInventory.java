@@ -1,5 +1,6 @@
 package eu.mcone.lobby.story.inventory.story.bank;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -22,7 +23,7 @@ public class WoolInventory extends CoreInventory {
                     p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Wieso hast du denn jetzt Wolle? Besorg das Bank Outfit!");
                 }, 15L);
             } else {
-                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du besitzt diese Item bereits!");
+                Msg.send(p, "§4Du besitzt diese Item bereits!");
             }
             p.closeInventory();
         });

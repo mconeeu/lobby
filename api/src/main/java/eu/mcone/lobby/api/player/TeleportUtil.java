@@ -1,6 +1,7 @@
 package eu.mcone.lobby.api.player;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -19,26 +20,30 @@ import java.util.Set;
 
 public class TeleportUtil {
 
-    private static final Set<Player> inAnimation = new HashSet<>();
+    private static final Set<Player> IN_ANIMATION = new HashSet<>();
 
     static {
-        CoreSystem.getInstance().getVanishManager().registerVanishRule(20, (player, playerCanSee) -> playerCanSee.removeIf(inAnimation::contains));
+        CoreSystem.getInstance().getVanishManager().registerVanishRule(20, (player, playerCanSee) -> playerCanSee.removeIf(IN_ANIMATION::contains));
     }
 
     public static void teleportWithAnimation(Player p, Location location) {
         LobbyPlayer lp = LobbyPlugin.getInstance().getLobbyPlayer(p);
         CorePlayer cp = lp.getCorePlayer();
         LobbySettings settings = lp.getSettings();
+        boolean isLabyModPlayer = cp.isLabyModPlayer();
 
         if (location != null) {
             if (settings.isAllowAnimation() && !cp.getWorld().equals(LobbyWorld.OFFICE.getWorld()) && !cp.getWorld().equals(LobbyWorld.CAVE.getWorld())) {
-                inAnimation.add(p);
+                IN_ANIMATION.add(p);
                 for (Player all : p.getWorld().getPlayers()) {
                     all.spigot().playEffect(p.getLocation(), Effect.SMALL_SMOKE, 1, 1, 1, 1, 1, 3, 30, 15);
                 }
                 CoreSystem.getInstance().getVanishManager().recalculateVanishes();
 
                 p.teleport(makeFixedLocation(p.getLocation()));
+                if (isLabyModPlayer) {
+                    CoreSystem.getInstance().getLabyModAPI().setCineScopes(p, 20, 3);
+                }
 
                 p.setGameMode(GameMode.SPECTATOR);
                 Sound.play(p, org.bukkit.Sound.GLASS);
@@ -77,12 +82,16 @@ public class TeleportUtil {
                                         Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                                             p.teleport(location);
 
-                                            inAnimation.remove(p);
+                                            IN_ANIMATION.remove(p);
                                             CoreSystem.getInstance().getVanishManager().recalculateVanishes();
 
                                             p.setGameMode(GameMode.SURVIVAL);
                                             p.removePotionEffect(PotionEffectType.CONFUSION);
                                             Sound.play(p, org.bukkit.Sound.FIREWORK_TWINKLE);
+
+                                            if (isLabyModPlayer) {
+                                                CoreSystem.getInstance().getLabyModAPI().unsetCineScopes(p);
+                                            }
                                         }, 12);
                                     }, 8);
                                 }, 7);
@@ -95,8 +104,12 @@ public class TeleportUtil {
                 Sound.play(p, org.bukkit.Sound.GLASS);
             }
         } else {
-            LobbyPlugin.getInstance().getMessenger().send(p, "§4Dieser Ort ist gerade nicht erreichbar!");
+            Msg.send(p, "§4Dieser Ort ist gerade nicht erreichbar!");
         }
+    }
+
+    public static boolean isInAnimation(Player p) {
+        return IN_ANIMATION.contains(p);
     }
 
     private static Location makeFixedLocation(Location location) {

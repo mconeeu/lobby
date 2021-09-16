@@ -7,6 +7,7 @@ package eu.mcone.lobby.games.command;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.command.CorePlayerCommand;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.games.LobbyGame;
 import eu.mcone.lobby.api.games.LobbyPvpGame;
@@ -60,13 +61,13 @@ public class GameCMD extends CorePlayerCommand {
                                     );
                                 }
                             } else {
-                                LobbyPlugin.getInstance().getMessenger().send(player, "§aDu hast eine Einladung gesendet!");
+                                Msg.send(player, "§aDu hast eine Einladung gesendet!");
                             }
                         }
                     } else if (game != null) {
-                        LobbyPlugin.getInstance().getMessenger().send(player, "§4In diesem Lobby Game kannst du keine Einladungen versenden!");
+                        Msg.send(player, "§4In diesem Lobby Game kannst du keine Einladungen versenden!");
                     } else {
-                        LobbyPlugin.getInstance().getMessenger().send(player, "§4Du bist in keinem Lobby Game!");
+                        Msg.send(player, "§4Du bist in keinem Lobby Game!");
                     }
 
                     return true;
@@ -85,15 +86,15 @@ public class GameCMD extends CorePlayerCommand {
                     }
                 }
 
-                LobbyPlugin.getInstance().getMessenger().send(player, "§4Dieses LobbyGame existiert nicht:§c OneHit, Fangen, GunGame");
+                Msg.send(player, "§4Dieses LobbyGame existiert nicht:§c OneHit, Fangen, GunGame");
                 return true;
             }
         }
 
         if (player.hasPermission("lobby.game.joinme")) {
-            LobbyPlugin.getInstance().getMessenger().send(player, "§4Bitte benutze; §c/game joinme §4oder§c /game join [<Lobby-Game>]");
+            Msg.send(player, "§4Bitte benutze; §c/game joinme §4oder§c /game join [<Lobby-Game>]");
         } else {
-            LobbyPlugin.getInstance().getMessenger().send(player, "§4Bitte benutze; §c/game join [<Lobby-Game>]");
+            Msg.send(player, "§4Bitte benutze; §c/game join [<Lobby-Game>]");
         }
         return false;
     }

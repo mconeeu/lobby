@@ -1,5 +1,6 @@
 package eu.mcone.lobby.items.inventory.trader;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
@@ -34,7 +35,7 @@ public class DailyItemsBuyInventory extends CoreInventory {
                 p.sendMessage("§8[§7§l!§8] §eHändler §8» §2Du hast das Item §a" + toBuy.getName() + " §2für §f" + toBuy.getBuyemeralds() + " Emeralds §2erfolgreich gekauft!");
             } else {
                 Sound.error(player);
-                LobbyPlugin.getInstance().getMessenger().send(p, "Du hast nicht genügen §a§lEmeralds!");
+                Msg.send(p, "Du hast nicht genügen §a§lEmeralds!");
             }
             p.closeInventory();
         });

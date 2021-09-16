@@ -6,11 +6,11 @@
 package eu.mcone.lobby.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.HotbarItem;
-import eu.mcone.lobby.api.player.hotbar.HotbarGeneralCategorys;
+import eu.mcone.lobby.api.player.hotbar.HotbarCategory;
 import eu.mcone.lobby.inventory.LobbySwitchInventory;
 import eu.mcone.lobby.inventory.compass.MinigamesInventory;
 import eu.mcone.lobby.story.LobbyStory;
@@ -37,15 +37,15 @@ public class InventoryTriggerListener implements Listener {
             if (i.getItemMeta().getDisplayName().equalsIgnoreCase(HotbarItem.PROFILE_DISPLAY_NAME)) {
                 e.setCancelled(true);
                 p.performCommand("profile");
-            } else if (i.getItemMeta().getDisplayName().equals(HotbarGeneralCategorys.NAVIGATOR.getDisplayName())) {
+            } else if (i.getItemMeta().getDisplayName().equals(HotbarCategory.NAVIGATOR.getDisplayName())) {
                 e.setCancelled(true);
                 new MinigamesInventory(p);
               Sound.click(p);
-            } else if (i.getItemMeta().getDisplayName().equals(HotbarGeneralCategorys.LOBBY_CHANGER.getDisplayName())) {
+            } else if (i.getItemMeta().getDisplayName().equals(HotbarCategory.LOBBY_CHANGER.getDisplayName())) {
                 if (!LobbyStory.getInstance().getOfficeManager().isInOffice(p)) {
                     new LobbySwitchInventory(p);
                 } else {
-                    LobbyPlugin.getInstance().getMessenger().sendError(p, "Der Lobby Wechsler ist im Büro deaktiviert!");
+                    Msg.sendError(p, "Der Lobby Wechsler ist im Büro deaktiviert!");
                 }
             } else if (i.equals(HotbarItem.NICK_ENABLED)) {
                 if (cp.isNicked()) {

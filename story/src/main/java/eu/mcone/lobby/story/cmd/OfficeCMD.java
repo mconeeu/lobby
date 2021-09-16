@@ -1,7 +1,7 @@
 package eu.mcone.lobby.story.cmd;
 
 import eu.mcone.coresystem.api.bukkit.command.CorePlayerCommand;
-import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.lobby.story.LobbyStory;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -23,7 +23,7 @@ public class OfficeCMD extends CorePlayerCommand {
                 if (target != null) {
                     LobbyStory.getInstance().getOfficeManager().acceptInvite(player, target);
                 } else {
-                    LobbyPlugin.getInstance().getMessenger().sendError(player, "Der Spieler !["+args[0]+"] ist nicht (mehr) online!");
+                    Msg.sendError(player, "Der Spieler !["+args[0]+"] ist nicht (mehr) online!");
                 }
             }
 
@@ -34,13 +34,13 @@ public class OfficeCMD extends CorePlayerCommand {
             if (target != null) {
                 LobbyStory.getInstance().getOfficeManager().kickFromOffice(player, target);
             } else {
-                LobbyPlugin.getInstance().getMessenger().sendError(player, "Der Spieler !["+args[0]+"] ist nicht (mehr) online!");
+                Msg.sendError(player, "Der Spieler !["+args[0]+"] ist nicht (mehr) online!");
             }
 
             return true;
         }
 
-        LobbyPlugin.getInstance().getMessenger().sendError(player, "Bitte benutze: ![/office <Spieler|clear>] oder ![/office kick <Spieler>]");
+        Msg.sendError(player, "Bitte benutze: ![/office <Spieler|clear>] oder ![/office kick <Spieler>]");
         return false;
     }
 }

@@ -6,6 +6,7 @@
 package eu.mcone.lobby.games.pvp.gungame;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.world.CoreLocation;
@@ -57,7 +58,7 @@ public class GunGameLobbyGame extends AbstractLobbyPvPGame implements GunGame {
         lp.teleportAnimation(getRandomSpawn());
         setSaveMode(p);
 
-        LobbyPlugin.getInstance().getMessenger().send(p, "§7Töte alle §fSpieler §7mit einem §fBlauen Hut§7!");
+        Msg.send(p, "§7Töte alle §fSpieler §7mit einem §fBlauen Hut§7!");
     }
 
     @Override
@@ -89,7 +90,7 @@ public class GunGameLobbyGame extends AbstractLobbyPvPGame implements GunGame {
 
                 setFightItems(p);
                 Sound.play(p, org.bukkit.Sound.NOTE_PLING);
-                LobbyPlugin.getInstance().getMessenger().send(p, "§cDu kannst nun angreifen und angegriffen werden!");
+                Msg.send(p, "§cDu kannst nun angreifen und angegriffen werden!");
             }, 60);
         }
     }

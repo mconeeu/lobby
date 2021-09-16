@@ -5,8 +5,8 @@
 
 package eu.mcone.lobby.util;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.lobby.Lobby;
-import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.listener.StackingListener;
 import org.bukkit.entity.Player;
 
@@ -31,18 +31,17 @@ public class StackingManager {
 
     public boolean unstack(Player carrier) {
         if (stacking.containsKey(carrier)) {
-            stacking.remove(carrier);
-            Player stacked = getStackedPlayer(carrier);
+            Player stacked = stacking.remove(carrier);
+            carrier.eject();
+            
             if (stacked != null) {
-                carrier.eject();
+                Msg.sendInfo(stacked, "![" + carrier.getName() + "] ist nun nicht mehr auf deinem Kopf!");
+                Msg.sendInfo(carrier, "![" + stacked.getName() + "] trägt dich nicht mehr!");
+            } else {
+                Msg.sendInfo(carrier, "Du trägst nun niemand mehr!");
+            }
 
-
-                if (stacked.isOnline()) {
-                    LobbyPlugin.getInstance().getMessenger().sendInfo(stacked, "![" + carrier.getName() + "] ist nun nicht mehr auf deinem Kopf!");
-                }
-                LobbyPlugin.getInstance().getMessenger().send(carrier, "![" + stacked.getName() + "] trägt dich nicht mehr!");
-                return true;
-            } else return false;
+            return true;
         } else return false;
     }
 
@@ -73,13 +72,13 @@ public class StackingManager {
             Player stacked = getStackedPlayer(player);
 
             stacking.remove(player);
-            LobbyPlugin.getInstance().getMessenger().sendError(stacked, "![" + player.getName() + "] ist nun nicht mehr auf deinem Kopf!");
+            Msg.sendError(stacked, "![" + player.getName() + "] ist nun nicht mehr auf deinem Kopf!");
         } else {
             Player carrying = getCarryingPlayer(player);
 
             if (carrying != null) {
                 stacking.remove(carrying);
-                LobbyPlugin.getInstance().getMessenger().send(player, "![" + carrying.getName() + "] hat dich fallen gelassen!");
+                Msg.send(player, "![" + carrying.getName() + "] hat dich fallen gelassen!");
             }
         }
     }

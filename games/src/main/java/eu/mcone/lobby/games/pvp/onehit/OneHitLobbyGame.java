@@ -7,6 +7,7 @@ package eu.mcone.lobby.games.pvp.onehit;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.world.CoreLocation;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -56,7 +57,7 @@ public class OneHitLobbyGame extends AbstractLobbyPvPGame implements OneHit {
         p.setAllowFlight(false);
         lp.teleportAnimation(getRandomSpawn());
 
-        LobbyPlugin.getInstance().getMessenger().send(p, "§7Töte alle §fSpieler §7mit einem §fRoten Hut§7!");
+        Msg.send(p, "§7Töte alle §fSpieler §7mit einem §fRoten Hut§7!");
     }
 
     @Override

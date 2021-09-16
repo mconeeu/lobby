@@ -1,11 +1,16 @@
-package eu.mcone.lobby.api.player.hotbar.items.enums;
+/*
+ * Copyright (c) 2017 - 2019 Rufus Maiwald, Marvin Hülsmann, Dominik Lippl and the MC ONE Minecraftnetwork. All rights reserved
+ * You are not allowed to decompile the code
+ */
+
+package eu.mcone.lobby.api.player.hotbar.items;
 
 import eu.mcone.coresystem.api.bukkit.item.Skull;
 import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
 
 @Getter
-public enum SlotAmountEnum {
+public enum HotbarSlot {
 
     FIRST(0, Skull.fromUrl(
             "http://textures.minecraft.net/texture/71bc2bcfb2bd3759e6b1e86fc7a79585e1127dd357fc202893f9de241bc9e530"
@@ -30,13 +35,13 @@ public enum SlotAmountEnum {
     private final int slot;
     private final ItemStack itemStack;
 
-    SlotAmountEnum(int slot, ItemStack itemStack) {
+    HotbarSlot(int slot, ItemStack itemStack) {
         this.slot = slot;
         this.itemStack = itemStack;
     }
 
-    public static SlotAmountEnum getBySlotInt(int slot) {
-        for (SlotAmountEnum value : values()) {
+    public static HotbarSlot getBySlotInt(int slot) {
+        for (HotbarSlot value : values()) {
             if (value.slot == slot) {
                 return value;
             }

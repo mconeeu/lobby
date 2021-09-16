@@ -1,6 +1,7 @@
 package eu.mcone.lobby.story.inventory.office;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
@@ -38,7 +39,7 @@ public class SecretaryInventory extends CoreInventory {
                     });
                 }
             } else {
-                LobbyPlugin.getInstance().getMessenger().sendError(p, "Dieser Spieler ![" + name + "] ist nicht online!");
+                Msg.sendError(p, "Dieser Spieler ![" + name + "] ist nicht online!");
             }
         }
     }).setItem(

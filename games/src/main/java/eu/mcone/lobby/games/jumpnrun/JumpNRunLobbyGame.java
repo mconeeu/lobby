@@ -6,6 +6,7 @@
 package eu.mcone.lobby.games.jumpnrun;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.coresystem.api.bukkit.util.CoreTitle;
 import eu.mcone.lobby.api.LobbyPlugin;
@@ -90,10 +91,10 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
             if (checkpoint <= jnrPlayer.getCheckpoint() + 1) {
                 if (checkpoint == jnrPlayer.getCheckpoint() + 1) {
                     jnrPlayer.setCheckpoint(checkpoint);
-                    LobbyPlugin.getInstance().getMessenger().send(p, "§2Du hast den §a" + checkpoint + ". Checkpoint§2 erreicht!");
+                    Msg.send(p, "§2Du hast den §a" + checkpoint + ". Checkpoint§2 erreicht!");
                 }
             } else {
-                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast einen Checkpoint übersprungen und wurdest zu deinem letzten Checkpoint telepotiert!");
+                Msg.send(p, "§4Du hast einen Checkpoint übersprungen und wurdest zu deinem letzten Checkpoint telepotiert!");
                 SKIP_WARN_TITLE.send(p);
                 if (jnrPlayer.getCheckpoint() <= 1) {
                     LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jnrPlayer.getJumpNRun().getStartLocation());
@@ -124,7 +125,7 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
 
             LobbyPlugin.getInstance().resetPlayerDataAndHotbarItems(p);
             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "spawn");
-            LobbyPlugin.getInstance().getMessenger().send(p, "§cDu hast das Jump and Run §oabgebrochen!");
+            Msg.sendError(p, "Du hast das Jump and Run §oabgebrochen§4!");
         }
     }
 
@@ -145,7 +146,7 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
 
             if (checkpoint == jumpNRun.getCheckpoints().length) {
                 if (lp.hasJumpnrunMade(jumpNRun)) {
-                    LobbyPlugin.getInstance().getMessenger().send(p,
+                    Msg.send(p,
                             "§2Du hast das Jump and Run §aerfolgreich§2 wiederholt! " +
                                     "Du hast §f" + getTimeString(calendarTime) + "§2 gebraucht!"
                     );
@@ -154,16 +155,16 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
                     calendarBestTime.setTimeInMillis(bestTime * 1000);
 
                     if (time < bestTime && bestTime != -1) {
-                        LobbyPlugin.getInstance().getMessenger().send(p,
+                        Msg.send(p,
                                 "§aDu hast deinen alten Rekord von §7§o" + getTimeString(calendarBestTime) + "§a geknackt! " +
                                         "§oHerzlichen Glückwunsch"
                         );
                     } else if (bestTime != -1) {
-                        LobbyPlugin.getInstance().getMessenger().send(p, "§7Dein Rekord ist weiterhin §f§o" + getTimeString(calendarBestTime) + "§7!");
+                        Msg.send(p, "§7Dein Rekord ist weiterhin §f§o" + getTimeString(calendarBestTime) + "§7!");
                     }
                 } else {
                     corePlayer.addCoins(100);
-                    LobbyPlugin.getInstance().getMessenger().send(p,
+                    Msg.send(p,
                             "§2Du hast das Jump and Run §aerfolgreich §2zum erten Mal fertig gespielt! " +
                                     "Du hast §f" + getTimeString(calendarTime) + "§2 gebraucht! §8[§a+100 Coins§8]"
                     );
@@ -174,7 +175,7 @@ public class JumpNRunLobbyGame extends AbstractLobbyGame implements JumpNRunGame
                 lp.setJumpnrunBestTime(jumpNRun, time < bestTime || bestTime == -1 ? time : bestTime);
                 removePlaying(p);
             } else {
-                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast einen Checkpoint übersprungen und wurdest zu deinem letzten Checkpoint telepotiert!");
+                Msg.send(p, "§4Du hast einen Checkpoint übersprungen und wurdest zu deinem letzten Checkpoint telepotiert!");
 
                 if (checkpoint == 0) {
                     p.teleport(jumpNRun.getStartPlateLocation());

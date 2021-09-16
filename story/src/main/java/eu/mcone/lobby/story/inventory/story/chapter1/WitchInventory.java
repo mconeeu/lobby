@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.story.inventory.story.chapter1;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -22,9 +23,9 @@ public class WitchInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_5, LobbyItem.MAGICDRINK.getItemStack(), e -> {
             if (!lp.hasLobbyItem(LobbyItem.MAGICDRINK)) {
                 lp.addLobbyItem(LobbyItem.MAGICDRINK);
-                LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast den Zaubertrank aufgenommen!");
+                Msg.send(p, "§7Du hast den Zaubertrank aufgenommen!");
             } else {
-                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du besitzt diese Item bereits!");
+                Msg.send(p, "§4Du besitzt diese Item bereits!");
             }
 
             p.closeInventory();

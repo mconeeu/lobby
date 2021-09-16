@@ -1,13 +1,13 @@
 package eu.mcone.lobby.items.inventory.bank;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
-import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -37,10 +37,10 @@ class BankChangeCoins extends CoreInventory {
                         cp.addEmeralds(100);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
-                        LobbyPlugin.getInstance().getMessenger().send(p, "Du has erfolgreich §f25.000 Coins§7 in §f100 Emeralds §fumgetauscht");
+                        Msg.send(p, "Du has erfolgreich §f25.000 Coins§7 in §f100 Emeralds §fumgetauscht");
                         new BankMenInventory(p);
                     } else {
-                        LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast nicht genügend §cCoins!");
+                        Msg.send(p, "§4Du hast nicht genügend §cCoins!");
                         player.closeInventory();
                         Sound.error(player);
                     }
@@ -60,10 +60,10 @@ class BankChangeCoins extends CoreInventory {
                         cp.addEmeralds(280);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
-                        LobbyPlugin.getInstance().getMessenger().send(p, "Du has erfolgreich §f75.000 Coins§7 in §f280 Emeralds §fumgetauscht");
+                        Msg.send(p, "Du has erfolgreich §f75.000 Coins§7 in §f280 Emeralds §fumgetauscht");
                         new BankMenInventory(p);
                     } else {
-                        LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast nicht genügend §cCoins!");
+                        Msg.send(p, "§4Du hast nicht genügend §cCoins!");
                         player.closeInventory();
                         Sound.error(player);
                     }
@@ -83,10 +83,10 @@ class BankChangeCoins extends CoreInventory {
                         cp.addEmeralds(450);
                         cp.getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();
 
-                        LobbyPlugin.getInstance().getMessenger().send(p, "Du has erfolgreich §f165.000 Coins§7 in §f450 Emeralds §fumgetauscht");
+                        Msg.send(p, "Du has erfolgreich §f165.000 Coins§7 in §f450 Emeralds §fumgetauscht");
                         new BankMenInventory(p);
                     } else {
-                        LobbyPlugin.getInstance().getMessenger().send(p, "§4Du hast nicht genügend §cCoins!");
+                        Msg.send(p, "§4Du hast nicht genügend §cCoins!");
                         player.closeInventory();
                         Sound.error(player);
                     }

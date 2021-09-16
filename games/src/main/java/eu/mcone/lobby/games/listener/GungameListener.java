@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.games.listener;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -48,7 +49,7 @@ public class GungameListener implements Listener {
             p.setVelocity(new Vector(0, 0, 0));
 
             if (k != null && game.isPlaying(k)) {
-                LobbyPlugin.getInstance().getMessenger().send(k, "§7Du hast §f" + p.getName() + " §7getötet §8[§a+2 Coins§8]");
+                Msg.send(k, "§7Du hast §f" + p.getName() + " §7getötet §8[§a+2 Coins§8]");
 
                 LobbyPlayer lk = LobbyPlugin.getInstance().getLobbyPlayer(k);
                 lk.getCorePlayer().addCoins(2);
@@ -59,9 +60,9 @@ public class GungameListener implements Listener {
                 game.setFightItems(k);
                 LobbyPlugin.getInstance().getLobbyPlayer(k).reloadScoreboardIfEnabled();
 
-                LobbyPlugin.getInstance().getMessenger().send(p, "§7Du wurdest von §f" + k.getName() + " §7getötet!");
+                Msg.send(p, "§7Du wurdest von §f" + k.getName() + " §7getötet!");
             } else {
-                LobbyPlugin.getInstance().getMessenger().send(p, "§cDu bist gestorben");
+                Msg.send(p, "§cDu bist gestorben");
             }
         }
     }
@@ -121,12 +122,12 @@ public class GungameListener implements Listener {
 
                     if (game.isPlaying(k)) {
                         if (game.isInSaveMode(k)) {
-                            LobbyPlugin.getInstance().getMessenger().send(k, "§cDu darfst noch keine Spieler angreifen!");
+                            Msg.send(k, "§cDu darfst noch keine Spieler angreifen!");
                             e.setCancelled(true);
                             return;
                         }
                         if (game.isInSaveMode(p)) {
-                            LobbyPlugin.getInstance().getMessenger().send(k, "§cDu darfst diesen Spieler noch nicht angreifen!");
+                            Msg.send(k, "§cDu darfst diesen Spieler noch nicht angreifen!");
                             e.setCancelled(true);
                             return;
                         }

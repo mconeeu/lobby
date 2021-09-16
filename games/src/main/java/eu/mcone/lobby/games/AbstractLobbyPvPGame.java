@@ -6,6 +6,7 @@
 package eu.mcone.lobby.games;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.player.CorePlayer;
 import eu.mcone.gameapi.api.GameAPI;
@@ -105,7 +106,7 @@ public abstract class AbstractLobbyPvPGame extends AbstractLobbyGame implements 
             }
 
             onQuit(p, lp);
-            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast das Spiel verlassen!");
+            Msg.send(p, "§7Du hast das Spiel verlassen!");
         }
     }
 

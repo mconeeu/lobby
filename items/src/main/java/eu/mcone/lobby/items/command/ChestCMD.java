@@ -7,6 +7,7 @@ package eu.mcone.lobby.items.command;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.command.CoreCommand;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.items.inventory.chestopening.ChestInfoInventory;
@@ -25,7 +26,7 @@ public class ChestCMD extends CoreCommand {
         if (args.length == 0 && sender instanceof Player) {
             Player p = (Player) sender;
 
-            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast momentan §d" + LobbyPlugin.getInstance().getLobbyPlayer(p).getChests() + " Kisten§7!");
+            Msg.send(p, "§7Du hast momentan §d" + LobbyPlugin.getInstance().getLobbyPlayer(p).getChests() + " Kisten§7!");
             new ChestInfoInventory(p);
             Sound.click(p);
         } else if (sender.hasPermission("lobby.chests")) {

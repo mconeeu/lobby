@@ -5,14 +5,16 @@
 
 package eu.mcone.lobby.listener;
 
+import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.player.LanguageChangeEvent;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.gameapi.api.event.backpack.BackpackItemRemoveEvent;
 import eu.mcone.lobby.Lobby;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
+import eu.mcone.lobby.api.player.TeleportUtil;
 import eu.mcone.lobby.games.LobbyGames;
-import eu.mcone.lobby.inventory.InteractionInventory;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -69,7 +71,7 @@ public class GeneralPlayerListener implements Listener {
     public void onBedEnter(PlayerBedEnterEvent e) {
         Player p = e.getPlayer();
 
-        LobbyPlugin.getInstance().getMessenger().sendError(p, "Du darfst in diesem ![Bett] nicht schlafen!");
+        Msg.sendError(p, "Du darfst in diesem ![Bett] nicht schlafen!");
         p.setSleepingIgnored(false);
         e.setCancelled(true);
     }
@@ -118,8 +120,15 @@ public class GeneralPlayerListener implements Listener {
             Player clicked = (Player) e.getRightClicked();
 
             if (!LobbyGames.getInstance().isPlaying(p)) {
-                new InteractionInventory(p, clicked);
+                CoreSystem.getInstance().openProfileInventory(p, clicked);
             }
+        }
+    }
+
+    @EventHandler
+    public void onMove(PlayerMoveEvent e) {
+        if (TeleportUtil.isInAnimation(e.getPlayer())) {
+            e.setCancelled(true);
         }
     }
 

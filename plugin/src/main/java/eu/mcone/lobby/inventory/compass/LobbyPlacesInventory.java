@@ -1,6 +1,7 @@
 package eu.mcone.lobby.inventory.compass;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -247,7 +248,7 @@ public class LobbyPlacesInventory extends CompassInventory {
                                         LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation("storyspawn");
                                         p.closeInventory();
                                     } else {
-                                        LobbyPlugin.getInstance().getMessenger().send(p, "§2Du wurdest in der nähe des letzten Story-NPC teleportiert, mit dem du zuletzt interagiert hast!");
+                                        Msg.send(p, "§2Du wurdest in der nähe des letzten Story-NPC teleportiert, mit dem du zuletzt interagiert hast!");
                                         LobbyPlugin.getInstance().getLobbyPlayer(p).teleportAnimation(StoryProgress.getProgressByID(lp.getProgressId()).getNpc().getData().getLocation().bukkit());
                                     }
                                 });

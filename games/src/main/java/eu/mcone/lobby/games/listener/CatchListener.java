@@ -6,6 +6,7 @@
 package eu.mcone.lobby.games.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.games.pvp.catchgame.CatchItem;
@@ -120,9 +121,9 @@ public class CatchListener implements Listener {
                     if (game.getPlaying().size() > 1) {
                         Location nearest = getNearestCatchPlayerLocation(p);
                         p.setCompassTarget(nearest);
-                        LobbyPlugin.getInstance().getMessenger().send(p, "§7Der Fänger ist §f" + ((int) p.getLocation().distance(nearest)) + " Blöcke §7entfernt!");
+                        Msg.send(p, "§7Der Fänger ist §f" + ((int) p.getLocation().distance(nearest)) + " Blöcke §7entfernt!");
                     } else {
-                        LobbyPlugin.getInstance().getMessenger().send(p, "§cDu bist der einzigste der momentan Fangen spielt!");
+                        Msg.send(p, "§cDu bist der einzigste der momentan Fangen spielt!");
                     }
                 } else if (i.equals(CatchItem.CATCH_RUN_TRACKER)) {
                     if (!CoreSystem.getInstance().getCooldownSystem().addAndCheck(getClass(), p.getUniqueId()))
@@ -131,7 +132,7 @@ public class CatchListener implements Listener {
                     if (game.getPlaying().size() > 1) {
                         Location nearest = getNearestCatchPlayerLocation(p);
                         p.setCompassTarget(nearest);
-                        LobbyPlugin.getInstance().getMessenger().send(p, "§7Der nächste Läufer ist §f" + ((int) p.getLocation().distance(nearest)) + " Blöcke §7entfernt!");
+                        Msg.send(p, "§7Der nächste Läufer ist §f" + ((int) p.getLocation().distance(nearest)) + " Blöcke §7entfernt!");
                     }
                 } else if (i.equals(CatchItem.LEAVE_CATCH_FIGHTING)) {
                     game.quitGame(p);
@@ -158,8 +159,8 @@ public class CatchListener implements Listener {
                             game.getCatcher().add(p);
                             game.setCatcherItems(p);
                             LobbyPlugin.getInstance().getLobbyPlayer(p).reloadScoreboardIfEnabled();
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du wurdest von §c" + d.getName() + "§7 gefangen.");
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§7Fange nun §fSpieler §7mit einem §fGrünen Hut§7!");
+                            Msg.send(p, "§7Du wurdest von §c" + d.getName() + "§7 gefangen.");
+                            Msg.send(p, "§7Fange nun §fSpieler §7mit einem §fGrünen Hut§7!");
                             p.getLocation().getWorld().playSound(p.getLocation(), org.bukkit.Sound.NOTE_BASS_DRUM, 1.0F, 1.0F);
 
                             d.setLevel(0);
@@ -169,7 +170,7 @@ public class CatchListener implements Listener {
                             game.getCatcher().remove(d);
                             game.setRunnerItems(d);
                             LobbyPlugin.getInstance().getLobbyPlayer(d).reloadScoreboardIfEnabled();
-                            LobbyPlugin.getInstance().getMessenger().send(d, "§7Du hast §c" + p.getName() + "§7 gefangen!");
+                            Msg.send(d, "§7Du hast §c" + p.getName() + "§7 gefangen!");
 
                             e.setCancelled(true);
                         }

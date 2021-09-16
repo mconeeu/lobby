@@ -6,6 +6,7 @@
 package eu.mcone.lobby.util;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.PlayerInventorySlot;
 import eu.mcone.coresystem.api.core.player.Group;
@@ -89,7 +90,7 @@ public class LobbyVanishManager implements VanishManager {
             }
 
             if (notify) {
-                LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Du hast die Spielersichtbarkeit auf ![" + target.getName() + "] geändert!");
+                Msg.sendSuccess(p, "Du hast die Spielersichtbarkeit auf ![" + target.getName() + "] geändert!");
             }
 
             return true;
@@ -110,7 +111,7 @@ public class LobbyVanishManager implements VanishManager {
 
             CoreSystem.getInstance().getVanishManager().recalculateVanishes();
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(false);
-            LobbyPlugin.getInstance().getMessenger().sendSuccess(p, "Du bist nun in der ![Privaten Lobby]. Hier bist du vollkommen ungestört!");
+            Msg.sendSuccess(p, "Du bist nun in der ![Privaten Lobby]. Hier bist du vollkommen ungestört!");
 
             if (LobbyGames.getInstance().getCurrentGame(p) instanceof JumpNRunGame) {
                 p.getInventory().setItem(PlayerInventorySlot.HOTBAR_SLOT_1, HotbarItem.LOBBY_HIDER_UNAVAILABLE_SILENT_LOBBY);
@@ -128,7 +129,7 @@ public class LobbyVanishManager implements VanishManager {
         if (silentLobbyPlayers.remove(p)) {
             CoreSystem.getInstance().getVanishManager().recalculateVanishes();
             GameAPI.getInstance().getGamePlayer(p).setEffectsVisible(true);
-            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist nun nicht mehr in der Privaten Lobby!");
+            Msg.send(p, "§7Du bist nun nicht mehr in der Privaten Lobby!");
             LobbyPlayer lobbyPlayer = LobbyPlugin.getInstance().getLobbyPlayer(p);
 
             lobbyPlayer.getCorePlayer().getScoreboard().getObjective(DisplaySlot.SIDEBAR).reload();

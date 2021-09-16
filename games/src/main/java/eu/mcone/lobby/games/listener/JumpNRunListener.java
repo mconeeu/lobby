@@ -7,9 +7,9 @@ package eu.mcone.lobby.games.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.npc.NpcInteractEvent;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
 import eu.mcone.coresystem.api.bukkit.world.CoreWorld;
-import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.games.jumpnrun.JumpNRun;
 import eu.mcone.lobby.api.player.HotbarItem;
@@ -46,12 +46,12 @@ public class JumpNRunListener implements Listener {
                         for (JumpNRun jumpnrun : JumpNRun.values()) {
                             if (sign.getLine(1).equals(jumpnrun.getJumpandrunname())) {
                                 LobbyWorld.ONE_ISLAND.getWorld().teleport(p, jumpnrun.getWarpLocation());
-                                LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "Du hast dich zum §f" + jumpnrun.getJumpandrunname() + " §7Jump and Run telepotiert");
+                                Msg.send(e.getPlayer(), "Du hast dich zum §f" + jumpnrun.getJumpandrunname() + " §7Jump and Run telepotiert");
                                 return;
                             }
                         }
 
-                        LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Das §c" + sign.getLine(1) + "§4 Jump and Run ist momentan in §oWartungen§4!");
+                        Msg.send(e.getPlayer(), "§4Das §c" + sign.getLine(1) + "§4 Jump and Run ist momentan in §oWartungen§4!");
                     }
                 }
             }

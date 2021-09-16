@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.story.inventory.story.chapter1;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
@@ -22,9 +23,9 @@ public class EndInventory extends CoreInventory {
         setItem(InventorySlot.ROW_2_SLOT_5, LobbyItem.ONE_HIT_SWORD.getItemStack(), e -> {
             if (!lp.hasLobbyItem(LobbyItem.ONE_HIT_SWORD)) {
                 lp.addLobbyItem(LobbyItem.ONE_HIT_SWORD);
-                LobbyPlugin.getInstance().getMessenger().send(p, "Du hast das One Hit Schwert aufgenommen!");
+                Msg.send(p, "Du hast das One Hit Schwert aufgenommen!");
             } else {
-                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du besitzt diese Item bereits!");
+                Msg.send(p, "§4Du besitzt diese Item bereits!");
             }
             p.closeInventory();
         });

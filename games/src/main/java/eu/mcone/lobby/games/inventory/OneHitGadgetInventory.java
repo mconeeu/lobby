@@ -6,14 +6,15 @@
 package eu.mcone.lobby.games.inventory;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
-import eu.mcone.lobby.games.pvp.onehit.OneHitLobbyGame;
 import eu.mcone.lobby.games.pvp.onehit.OneHitItem;
+import eu.mcone.lobby.games.pvp.onehit.OneHitLobbyGame;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -36,11 +37,11 @@ public class OneHitGadgetInventory extends CoreInventory {
                             p.setLevel(p.getLevel() - 2);
 
                             p.getInventory().setItem(5, OneHitItem.ONEHIT_ARROW);
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast erfolgreich ein §fPfeil §7für eine §f2er Killstreak gekauft!");
+                            Msg.send(p, "§7Du hast erfolgreich ein §fPfeil §7für eine §f2er Killstreak gekauft!");
                             p.closeInventory();
                         } else {
                             p.closeInventory();
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du benötigst eine 2er Killstreak!");
+                            Msg.send(p, "§4Du benötigst eine 2er Killstreak!");
                         }
                     }
                 }
@@ -56,11 +57,11 @@ public class OneHitGadgetInventory extends CoreInventory {
                             p.setLevel(p.getLevel() - 1);
 
                             p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 220, 2));
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast erfolgreich den §fJumpboost §7für eine §f1er Killstreak gekauft!");
+                            Msg.send(p, "§7Du hast erfolgreich den §fJumpboost §7für eine §f1er Killstreak gekauft!");
                             p.closeInventory();
                         } else {
                             p.closeInventory();
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du benötigst eine 1er Killstreak!");
+                            Msg.send(p, "§4Du benötigst eine 1er Killstreak!");
                         }
                     }
 
@@ -77,11 +78,11 @@ public class OneHitGadgetInventory extends CoreInventory {
                             p.setLevel(p.getLevel() - 1);
 
                             p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 220, 1));
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast erfolgreich den §fSpeedboost §7für eine §f1er Killstreak gekauft!");
+                            Msg.send(p, "§7Du hast erfolgreich den §fSpeedboost §7für eine §f1er Killstreak gekauft!");
                             p.closeInventory();
                         } else {
                             p.closeInventory();
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du benötigst eine 1er Killstreak!");
+                            Msg.send(p, "§4Du benötigst eine 1er Killstreak!");
                         }
                     }
                 }
@@ -102,11 +103,11 @@ public class OneHitGadgetInventory extends CoreInventory {
                             }
 
                             p.getInventory().setItem(2, OneHitItem.ONEHIT_SNOWBALL);
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast erfolgreich den §fSchneball §7für eine §f3er Killstreak gekauft!");
+                            Msg.send(p, "§7Du hast erfolgreich den §fSchneball §7für eine §f3er Killstreak gekauft!");
                             p.closeInventory();
                         } else {
                             p.closeInventory();
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du benötigst eine 3er Killstreak!");
+                            Msg.send(p, "§4Du benötigst eine 3er Killstreak!");
                         }
                     }
                 }
@@ -130,11 +131,11 @@ public class OneHitGadgetInventory extends CoreInventory {
 
                             CoreSystem.getInstance().createActionBar().message("§fDoppelsprung bereit").send(p);
 
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du hast erfolgreich den §fDoppel Sprung §7für eine §f2 Killstreak gekauft!");
+                            Msg.send(p, "§7Du hast erfolgreich den §fDoppel Sprung §7für eine §f2 Killstreak gekauft!");
                             p.closeInventory();
                         } else {
                             p.closeInventory();
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du benötigst eine 2er Killstreak!");
+                            Msg.send(p, "§4Du benötigst eine 2er Killstreak!");
                         }
                     }
                 }

@@ -1,6 +1,7 @@
 package eu.mcone.lobby.story.inventory.john;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
@@ -121,7 +122,7 @@ public class JohnBankRobberyInventory extends CoreInventory {
                 if (lp.getProgressId() < StoryProgress.MARVIN_KILL.getId() || lp.getProgressId() >= StoryProgress.EDWARD_LABOR_START.getId()) {
                     p.sendMessage("§8[§7§l!§8] §cKnopf im Ohr §8» §fJohn§8 |§7 Okay jetzt musst du zur Paradise Island reisen und da in die Waffenkammer der Polizei einbrechen um das Sicherheits Schwert zu klauen!");
                 } else {
-                    LobbyPlugin.getInstance().getMessenger().send(p, "§4Du musst zuerst die One-Island Story weiterführen um die Mission starten zu können!");
+                    Msg.send(p, "§4Du musst zuerst die One-Island Story weiterführen um die Mission starten zu können!");
                 }
             });
 

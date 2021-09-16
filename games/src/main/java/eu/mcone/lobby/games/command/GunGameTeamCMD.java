@@ -6,7 +6,7 @@
 package eu.mcone.lobby.games.command;
 
 import eu.mcone.coresystem.api.bukkit.command.CorePlayerCommand;
-import eu.mcone.lobby.api.LobbyPlugin;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.lobby.api.games.pvp.GunGame;
 import eu.mcone.lobby.games.LobbyGames;
 import net.md_5.bungee.api.ChatColor;
@@ -39,7 +39,7 @@ public class GunGameTeamCMD extends CorePlayerCommand {
                             if (!target.getName().equalsIgnoreCase(player.getName())) {
                                 if (LobbyGames.getInstance().getCurrentGame(target) instanceof GunGame) {
                                     if (!Team.containsValue(target) && !Team.containsKey(target)) {
-                                        LobbyPlugin.getInstance().getMessenger().send(player, "§7Du hast §f" + target.getName() + "§7 zu deinem Team eingeladen");
+                                        Msg.send(player, "§7Du hast §f" + target.getName() + "§7 zu deinem Team eingeladen");
 
                                         isInviting.add(player);
 
@@ -62,16 +62,16 @@ public class GunGameTeamCMD extends CorePlayerCommand {
                                         );
 
                                     } else {
-                                        LobbyPlugin.getInstance().getMessenger().send(player, "§4Der Spieler ist bereits in einem anderen Team");
+                                        Msg.send(player, "§4Der Spieler ist bereits in einem anderen Team");
                                     }
                                 } else {
-                                    LobbyPlugin.getInstance().getMessenger().send(player, "§4Der Spieler spielt nicht Gungame!");
+                                    Msg.send(player, "§4Der Spieler spielt nicht Gungame!");
                                 }
                             } else {
-                                LobbyPlugin.getInstance().getMessenger().send(player, "§4Du kannst dich nicht selbst einladen!");
+                                Msg.send(player, "§4Du kannst dich nicht selbst einladen!");
                             }
                         } else {
-                            LobbyPlugin.getInstance().getMessenger().send(player, "§4Der Spieler ist nicht Online!");
+                            Msg.send(player, "§4Der Spieler ist nicht Online!");
                         }
                     } else if (args[0].equalsIgnoreCase("remove")) {
 
@@ -85,35 +85,35 @@ public class GunGameTeamCMD extends CorePlayerCommand {
                                             isInviting.remove(target);
 
                                             Team.put(target, player);
-                                            LobbyPlugin.getInstance().getMessenger().send(player, "§7Du hast das Team von §f" + target.getName() + "§7 betreten!");
-                                            LobbyPlugin.getInstance().getMessenger().send(target, "§7Der Spieler §f" + player.getName() + "§7 hat dein Team betreten!");
+                                            Msg.send(player, "§7Du hast das Team von §f" + target.getName() + "§7 betreten!");
+                                            Msg.send(target, "§7Der Spieler §f" + player.getName() + "§7 hat dein Team betreten!");
 
                                         } else {
-                                            LobbyPlugin.getInstance().getMessenger().send(player, "§4Der Spieler hat dich nicht eingeladen!");
+                                            Msg.send(player, "§4Der Spieler hat dich nicht eingeladen!");
                                         }
                                     } else {
-                                        LobbyPlugin.getInstance().getMessenger().send(player, "§4Der Spieler ist bereits in einem anderen Team");
+                                        Msg.send(player, "§4Der Spieler ist bereits in einem anderen Team");
                                     }
                                 } else {
-                                    LobbyPlugin.getInstance().getMessenger().send(player, "§4Der Spieler spielt nicht Gungame!");
+                                    Msg.send(player, "§4Der Spieler spielt nicht Gungame!");
                                 }
                             } else {
-                                LobbyPlugin.getInstance().getMessenger().send(player, "§4Du kannst dich nicht selbst annehmen!");
+                                Msg.send(player, "§4Du kannst dich nicht selbst annehmen!");
                             }
                         } else {
-                            LobbyPlugin.getInstance().getMessenger().send(player, "§4Der Spieler ist nicht Online!");
+                            Msg.send(player, "§4Der Spieler ist nicht Online!");
                         }
                     } else {
-                        LobbyPlugin.getInstance().getMessenger().send(player, "§cBitte benutze:§4 /team");
+                        Msg.send(player, "§cBitte benutze:§4 /team");
                     }
                 } else {
-                    LobbyPlugin.getInstance().getMessenger().send(player, "§cBitte benutze:§4 /team");
+                    Msg.send(player, "§cBitte benutze:§4 /team");
                 }
             } else {
-                LobbyPlugin.getInstance().getMessenger().send(player, "§4Du kannst diesen Command nur in Gungame nutzen!");
+                Msg.send(player, "§4Du kannst diesen Command nur in Gungame nutzen!");
             }
         } else {
-            LobbyPlugin.getInstance().getMessenger().send(player, "§cDu bist bereits in einem Team!");
+            Msg.send(player, "§cDu bist bereits in einem Team!");
         }
 
         return false;

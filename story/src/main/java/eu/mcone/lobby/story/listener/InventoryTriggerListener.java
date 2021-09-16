@@ -6,6 +6,7 @@
 package eu.mcone.lobby.story.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.gameapi.api.GameAPI;
 import eu.mcone.gameapi.api.GamePlugin;
@@ -85,7 +86,7 @@ public class InventoryTriggerListener implements Listener {
                                 new BankInfosInventory(p, LobbyItem.NORMAL_FILES_1);
                             }
                         } else {
-                            LobbyPlugin.getInstance().getMessenger().sendError(p, "Diese ![Kiste] wurde abgeschlossen!");
+                            Msg.sendError(p, "Diese ![Kiste] wurde abgeschlossen!");
                         }
                         return;
                     }
@@ -106,10 +107,10 @@ public class InventoryTriggerListener implements Listener {
                                         GameAPI.getInstance().getMessenger().send(p, "§2Du hast alle §315 Secrets§2 entdeckt dafür hast du §3" + GamePlugin.getGamePlugin().getOnePassManager().getSecretAward() + " Xp §2im OnePass erhalten!");
                                     }
                                 }
-                                LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§7Du hast das Secret §f" + name + "§7 entdeckt! §8[§a+35 Coins§8]");
+                                Msg.send(e.getPlayer(), "§7Du hast das Secret §f" + name + "§7 entdeckt! §8[§a+35 Coins§8]");
                                 lp.getCorePlayer().addCoins(35);
                             } else {
-                                LobbyPlugin.getInstance().getMessenger().send(e.getPlayer(), "§4Du hast dieses §cSecret §4bereits gefunden!");
+                                Msg.send(e.getPlayer(), "§4Du hast dieses §cSecret §4bereits gefunden!");
                             }
                         }
                         return;

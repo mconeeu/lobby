@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.games.listener;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.player.LobbyPlayer;
@@ -56,9 +57,9 @@ public class OneHitListener implements Listener {
 
                     Sound.success(player);
                     if (player != p) {
-                        LobbyPlugin.getInstance().getMessenger().send(player, "§7Der Spieler §f" + p.getName() + " §7hat eine §e" + e.getNewLevel() + "§7er Killstreak!");
+                        Msg.send(player, "§7Der Spieler §f" + p.getName() + " §7hat eine §e" + e.getNewLevel() + "§7er Killstreak!");
                     } else {
-                        LobbyPlugin.getInstance().getMessenger().send(player, "§7Du hast eine §e" + e.getNewLevel() + "er Killstreak!");
+                        Msg.send(player, "§7Du hast eine §e" + e.getNewLevel() + "er Killstreak!");
                     }
                 }
             }
@@ -132,7 +133,7 @@ public class OneHitListener implements Listener {
             lp.reloadScoreboardIfEnabled();
 
             if (k != null && game.isPlaying(k)) {
-                LobbyPlugin.getInstance().getMessenger().send(k, "§7Du hast §f" + p.getName() + " §7getötet §8[§a+2 Coins§8]");
+                Msg.send(k, "§7Du hast §f" + p.getName() + " §7getötet §8[§a+2 Coins§8]");
 
                 LobbyPlayer lpk = LobbyPlugin.getInstance().getLobbyPlayer(k);
                 lpk.getCorePlayer().addCoins(2);
@@ -145,9 +146,9 @@ public class OneHitListener implements Listener {
 
                 lpk.reloadScoreboardIfEnabled();
 
-                LobbyPlugin.getInstance().getMessenger().send(p, "§7Du wurdest von §f" + k.getName() + " §7getötet!");
+                Msg.send(p, "§7Du wurdest von §f" + k.getName() + " §7getötet!");
             } else {
-                LobbyPlugin.getInstance().getMessenger().send(p, "§cDu bist gestorben");
+                Msg.send(p, "§cDu bist gestorben");
             }
         }
     }

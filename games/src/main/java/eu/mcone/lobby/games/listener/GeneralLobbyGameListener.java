@@ -7,8 +7,8 @@ package eu.mcone.lobby.games.listener;
 
 import eu.mcone.coresystem.api.bukkit.event.BuildModeChangeEvent;
 import eu.mcone.coresystem.api.bukkit.event.player.AfkEvent;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.core.player.PlayerState;
-import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.games.LobbyGame;
 import eu.mcone.lobby.games.AbstractLobbyGame;
 import eu.mcone.lobby.games.LobbyGames;
@@ -33,7 +33,7 @@ public class GeneralLobbyGameListener implements Listener {
         if (LobbyGames.getInstance().isPlaying(p)) {
             if (e.getState().equals(PlayerState.AFK)) {
                 LobbyGames.getInstance().getCurrentGame(p).quitGame(p);
-                LobbyPlugin.getInstance().getMessenger().send(p, "§4Du wurdest automatisch von deiner Lobby Aktivität gekickt!");
+                Msg.send(p, "§4Du wurdest automatisch von deiner Lobby Aktivität gekickt!");
             }
         }
     }
@@ -58,7 +58,7 @@ public class GeneralLobbyGameListener implements Listener {
         } else if (e.getMessage().equalsIgnoreCase("/profil") || e.getMessage().equalsIgnoreCase("/profile")) {
             if (manager.isPlaying(p)) {
                 e.setCancelled(true);
-                LobbyPlugin.getInstance().getMessenger().sendError(p, "Du darfst diesen Befehl nicht in einem Lobby Game ausführen!");
+                Msg.sendError(p, "Du darfst diesen Befehl nicht in einem Lobby Game ausführen!");
             }
         }
     }

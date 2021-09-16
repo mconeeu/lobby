@@ -6,6 +6,7 @@
 package eu.mcone.lobby.story.listener;
 
 import eu.mcone.coresystem.api.bukkit.event.player.AfkEvent;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
 import eu.mcone.lobby.api.items.LobbyItem;
@@ -25,7 +26,7 @@ public class AfkListener implements Listener {
 
         if (lp != null && lp.getBankprogressId() == BankRobberySmallProgress.BANK_ROBBERY_MIDDLE.getId()) {
             lp.setBankProgress(BankRobberySmallProgress.BANK_ROBBERY_START);
-            LobbyPlugin.getInstance().getMessenger().send(p, "§4Der Banküberfall ist gescheitert!");
+            Msg.send(p, "§4Der Banküberfall ist gescheitert!");
             LobbyWorld.ONE_ISLAND.getWorld().teleportSilently(p, "office-entrance");
 
             JohnBankRobberyInventory.currentlyInBank = null;

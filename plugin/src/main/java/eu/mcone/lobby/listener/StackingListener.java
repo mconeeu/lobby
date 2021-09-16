@@ -1,11 +1,7 @@
 package eu.mcone.lobby.listener;
 
-import eu.mcone.lobby.Lobby;
-import eu.mcone.lobby.api.LobbyPlugin;
-import eu.mcone.lobby.inventory.InteractionInventory;
 import eu.mcone.lobby.util.StackingManager;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

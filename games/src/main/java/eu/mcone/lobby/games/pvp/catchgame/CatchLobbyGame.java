@@ -5,6 +5,7 @@
 
 package eu.mcone.lobby.games.pvp.catchgame;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.world.CoreLocation;
 import eu.mcone.lobby.api.LobbyPlugin;
 import eu.mcone.lobby.api.LobbyWorld;
@@ -58,10 +59,10 @@ public class CatchLobbyGame extends AbstractLobbyPvPGame implements Catch {
         if (catcher.isEmpty()) {
             p.setLevel(1);
             catcher.add(p);
-            LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist ein §fFänger§7, warte bis ein §fandere Spieler §7beitritt und §ffange§7 ihn!");
+            Msg.send(p, "§7Du bist ein §fFänger§7, warte bis ein §fandere Spieler §7beitritt und §ffange§7 ihn!");
         }
 
-        LobbyPlugin.getInstance().getMessenger().send(p, "§7Fange einen §fSpieler §7mit einem §fGrünen Hut§7!");
+        Msg.send(p, "§7Fange einen §fSpieler §7mit einem §fGrünen Hut§7!");
     }
 
     @Override
@@ -128,7 +129,7 @@ public class CatchLobbyGame extends AbstractLobbyPvPGame implements Catch {
     }
 
     private void sendCatcherMessage(Player p) {
-        LobbyPlugin.getInstance().getMessenger().send(p, "§7Du bist nun §fFänger§7 ,weil der §fvorherige Fänger §7das Spiel §fverlassen§7 hat.");
+        Msg.send(p, "§7Du bist nun §fFänger§7 ,weil der §fvorherige Fänger §7das Spiel §fverlassen§7 hat.");
     }
 
 }

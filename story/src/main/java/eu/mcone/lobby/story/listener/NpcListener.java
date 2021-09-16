@@ -7,6 +7,7 @@ package eu.mcone.lobby.story.listener;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
 import eu.mcone.coresystem.api.bukkit.event.npc.NpcInteractEvent;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.npc.NPC;
 import eu.mcone.coresystem.api.bukkit.npc.entity.PlayerNpc;
@@ -48,11 +49,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class NpcListener implements Listener {
 
     static final String RUFI_HEALED_DISPLAY_NAME = "§erufi";
-    static final SkinInfo RUFI_HEALED_SKIN = CoreSystem.getInstance().getPlayerUtils().getSkinInfo("rufusmai");
+    static final SkinInfo RUFI_HEALED_SKIN = CoreSystem.getInstance().getPlayerUtils().getSkinInfo(UUID.fromString("44b8a5d6-c2c3-4576-997f-71b94f5eb7e0"));
 
     @EventHandler
     public void on(NpcInteractEvent e) {
@@ -78,7 +80,7 @@ public class NpcListener implements Listener {
                 if (LobbyStory.getInstance().getOfficeManager().isInOwnOffice(p)) {
                     new SecretaryInventory(p);
                 } else {
-                    LobbyPlugin.getInstance().getMessenger().sendError(p, "Du kannst nicht mit der Sekretärin von anderen Büros sprechen!");
+                    Msg.sendError(p, "Du kannst nicht mit der Sekretärin von anderen Büros sprechen!");
                 }
             } else if (npc.equals(GeneralStoryNpc.CHAUFFEUR_1.getNpc()) || npc.equals(GeneralStoryNpc.CHAUFFEUR_2.getNpc()) || npc.equals(GeneralStoryNpc.CHAUFFEUR_3.getNpc())) {
                 new ChauffeurInventory(p);

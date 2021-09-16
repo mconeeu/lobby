@@ -21,10 +21,7 @@ import java.util.List;
 public enum ScoreboardWidget implements Option {
 
     COINS("COINS", 1, "§8»§7 Coins:", new ItemBuilder(Material.COMPASS).displayName("§b§lCoins"), lp -> " §b§o" + lp.getCorePlayer().getFormattedCoins()),
-    ONLINE_TIME("ONLINE_TIME", 1, "§8»§7 Online Zeit:", new ItemBuilder(Material.WATCH).displayName("§f§lOnline Zeit"), lp -> {
-        double onlinetime = Math.floor(((double) lp.getCorePlayer().getOnlinetime() / 60 / 60) * 100) / 100;
-        return " §d§o" + onlinetime + "h";
-    }),
+    ONLINE_TIME("ONLINE_TIME", 1, "§8»§7 Online Zeit:", new ItemBuilder(Material.WATCH).displayName("§f§lOnline Zeit"), lp -> " §d§o" + lp.getCorePlayer().getFormattedOnlinetime()),
     RANK("RANK", 1, "§8»§7 Rang:", new ItemBuilder(Material.GOLD_HELMET).displayName("§f§lRang"), lp -> " "+lp.getCorePlayer().getMainGroup().getLabel()),
     SECRETS("SECRETS", 2, "§8»§7 Secrets:", new ItemBuilder(Material.SIGN).displayName("§f§lSecrets"), lp -> "§f§o " + lp.getSecretsCount()),
     EMERALD("EMERALDS", 2, "§8»§7 Emeralds:", new ItemBuilder(Material.EMERALD).displayName("§a§lEmeralds"), lp -> "§a§o " + lp.getCorePlayer().getFormattedEmeralds()),

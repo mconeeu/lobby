@@ -1,10 +1,10 @@
 package eu.mcone.lobby.items.casino;
 
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
 import eu.mcone.coresystem.api.bukkit.inventory.InventorySlot;
 import eu.mcone.coresystem.api.bukkit.item.ItemBuilder;
-import eu.mcone.lobby.api.LobbyPlugin;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -21,7 +21,7 @@ public class CasinoMainInventory extends CoreInventory {
 
                 Bukkit.getScheduler().runTaskLater(LobbyPlugin.getInstance(), () -> {
                     if (NumbersChooseInventory.isInGame.contains(p)) {
-                        LobbyPlugin.getInstance().getMessenger().send(p, "§4Dein Casino Spiel wurde abgebrochen, weil du zu lange gebraucht hast deine Coins wurden nicht abgebucht!");
+                        Msg.send(p, "§4Dein Casino Spiel wurde abgebrochen, weil du zu lange gebraucht hast deine Coins wurden nicht abgebucht!");
                         player.closeInventory();
                     }
                     NumbersChooseInventory.isInGame.remove(p);
@@ -31,14 +31,14 @@ public class CasinoMainInventory extends CoreInventory {
 
                 new MoneyChooseInventory(p);
             } else {
-                LobbyPlugin.getInstance().getMessenger().send(p, "§4Bitte warte kurz..");
+                Msg.send(p, "§4Bitte warte kurz..");
             }
         });
         */
 
         setItem(InventorySlot.ROW_2_SLOT_5, new ItemBuilder(Material.BARRIER, 1).displayName("§cWartungen...").create(), e -> {
             p.closeInventory();
-            LobbyPlugin.getInstance().getMessenger().send(p, "§4Diese Funktion befindet sich momentan in §cWartungen§4!");
+            Msg.send(p, "§4Diese Funktion befindet sich momentan in §cWartungen§4!");
         });
 
         openInventory();

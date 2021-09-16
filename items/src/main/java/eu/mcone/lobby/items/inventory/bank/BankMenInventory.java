@@ -6,6 +6,7 @@
 package eu.mcone.lobby.items.inventory.bank;
 
 import eu.mcone.coresystem.api.bukkit.CoreSystem;
+import eu.mcone.coresystem.api.bukkit.facades.Msg;
 import eu.mcone.coresystem.api.bukkit.facades.Sound;
 import eu.mcone.coresystem.api.bukkit.inventory.CoreInventory;
 import eu.mcone.coresystem.api.bukkit.inventory.InventoryOption;
@@ -60,8 +61,8 @@ public class BankMenInventory extends CoreInventory {
                             lp.getCorePlayer().addCoins(100);
                             lp.setDailyReward();
 
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§2Du hast dir deine §a§oTägliche Belohnung §2abgeholt!");
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§8[§a+50 Coins§8]");
+                            Msg.send(p, "§2Du hast dir deine §a§oTägliche Belohnung §2abgeholt!");
+                            Msg.send(p, "§8[§a+50 Coins§8]");
 
                             p.closeInventory();
                             Sound.done(p);
@@ -70,7 +71,7 @@ public class BankMenInventory extends CoreInventory {
                 setItem(InventorySlot.ROW_2_SLOT_6, Skull.fromUrl("http://textures.minecraft.net/texture/86d35a963d5987894b6bc214e328b39cd2382426ff9c8e082b0b6a6e044d3a3", 1).toItemBuilder().displayName("§4§lTägliche Belohnung").lore("§c§oAb Morgen Verfügbar").create(),
                         e -> {
                             Sound.error(p);
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du kannst deine §cBelohnung §4erst am nächsten Tag abholen!");
+                            Msg.send(p, "§4Du kannst deine §cBelohnung §4erst am nächsten Tag abholen!");
                         });
             }
 
@@ -104,8 +105,8 @@ public class BankMenInventory extends CoreInventory {
                             lp.getCorePlayer().addCoins(100);
                             lp.setDailyReward();
 
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§2Du hast dir deine §a§oTägliche Belohnung §2abgeholt!");
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§8[§a+100 Coins§8]");
+                            Msg.send(p, "§2Du hast dir deine §a§oTägliche Belohnung §2abgeholt!");
+                            Msg.send(p, "§8[§a+100 Coins§8]");
 
                             p.closeInventory();
                             Sound.done(p);
@@ -114,7 +115,7 @@ public class BankMenInventory extends CoreInventory {
                 setItem(InventorySlot.ROW_2_SLOT_6, Skull.fromUrl("http://textures.minecraft.net/texture/86d35a963d5987894b6bc214e328b39cd2382426ff9c8e082b0b6a6e044d3a3", 1).toItemBuilder().displayName("§4§lTägliche Belohnung").lore("§c§oAb Morgen Verfügbar").create(),
                         e -> {
                             Sound.error(player);
-                            LobbyPlugin.getInstance().getMessenger().send(p, "§4Du kannst deine §cBelohnung §4erst am nächsten Tag abholen!");
+                            Msg.send(p, "§4Du kannst deine §cBelohnung §4erst am nächsten Tag abholen!");
                         });
             }
 
